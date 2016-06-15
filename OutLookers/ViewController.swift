@@ -2,17 +2,26 @@
 //  ViewController.swift
 //  OutLookers
 //
-//  Created by EThank on 16/6/15.
+//  Created by Youngkook on 16/6/15.
 //  Copyright © 2016年 youngkook. All rights reserved.
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "\n\n     asdfafsadfaf".noWhiteSpace().noChangeLine()
+        view.addSubview(label)
+        
+        label.snp.makeConstraints { (make) in
+            make.left.right.equalTo(label.superview!)
+            make.centerY.equalTo(label.superview!)
+        }
     }
 
     override func didReceiveMemoryWarning() {

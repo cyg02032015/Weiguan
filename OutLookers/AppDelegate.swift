@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  OutLookers
 //
-//  Created by EThank on 16/6/15.
+//  Created by Youngkook on 16/6/15.
 //  Copyright © 2016年 youngkook. All rights reserved.
 //
 

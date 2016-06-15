@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import Alamofire
+
+public class Server {
+    func get(url: String) -> Void {
+        Alamofire.request(.GET, url).responseJSON { (response) in
+            
+        }
+    }
+}
