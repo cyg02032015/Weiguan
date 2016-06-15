@@ -15,4 +15,8 @@ public class Server {
             
         }
     }
+    
+    func post(url: String, paramters: Dictionary<String,AnyObject>) -> Void {
+        
+    }
 }
