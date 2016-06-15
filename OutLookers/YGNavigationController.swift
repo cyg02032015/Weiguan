@@ -8,11 +8,15 @@
 
 import UIKit
 
+private extension Selector {
+    static let removeSystemTabbar = #selector(YGNavigationController.removeSystemTabbar)
+}
+
 public class YGNavigationController: UINavigationController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeSystemTabbar", name: "removeMoreUITabbar", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: .removeSystemTabbar, name: "removeMoreUITabbar", object: nil)
     }
 
     // popToRootViewController时tabbar重复bug的修正

@@ -12,5 +12,11 @@ class HomeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        debugPrint("woca")
+        print("nima")
+        Server.post("", parameters: ["":""]) { 
+            print("xi")
+            debugPrint("bar")
+        }
     }
 }

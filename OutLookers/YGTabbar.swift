@@ -8,6 +8,10 @@
 
 import UIKit
 
+private extension Selector {
+    static let tabbarClick = #selector(YGTabbar.tabbarClick(_:))
+}
+
 public protocol YGTabbarDelegate {
     func tabbarDidSelect(tabbar: YGTabbar, didSelectedfrom: Int, to: Int)
 }
@@ -45,7 +49,7 @@ public class YGTabbar: UIView {
         let btnX = btnW * CGFloat(tabbarButtonCount)
         let btnH = self.height
         btn.frame = CGRect(x: btnX, y: btnY, width: btnW, height: btnH)
-        btn.addTarget(self, action: #selector(YGTabbar.tabbarClick(_:)), forControlEvents: UIControlEvents.TouchDown)
+        btn.addTarget(self, action: .tabbarClick, forControlEvents: UIControlEvents.TouchDown)
         btn.tag = tabbarButtonCount
         if tabbarButtonCount == 0 {
             self.tabbarClick(btn)
