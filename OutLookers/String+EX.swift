@@ -21,4 +21,14 @@ extension String {
             result[8], result[9], result[10], result[11],
             result[12], result[13], result[14], result[15])
     }
+    
+    func noWhiteSpace() -> String {
+        let noWhiteSpace = self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return noWhiteSpace
+    }
+    
+    func noChangeLine() -> String {
+        let noChangLine = self.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        return noChangLine
+    }
 }

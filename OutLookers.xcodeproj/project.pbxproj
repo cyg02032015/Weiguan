@@ -15,10 +15,8 @@
 		D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44FB1D118D43004D9192 /* NSString+EX.swift */; };
 		D81F45071D118D43004D9192 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44FC1D118D43004D9192 /* Regex.swift */; };
 		D81F45081D118D43004D9192 /* String+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44FD1D118D43004D9192 /* String+EX.swift */; };
-		D81F45091D118D43004D9192 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44FE1D118D43004D9192 /* String+Extension.swift */; };
 		D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44FF1D118D43004D9192 /* TimeObject.swift */; };
 		D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45001D118D43004D9192 /* UIColor+EX.swift */; };
-		D81F450C1D118D43004D9192 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45011D118D43004D9192 /* UIColor+Extension.swift */; };
 		D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45021D118D43004D9192 /* UIImage+EX.swift */; };
 		D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45031D118D43004D9192 /* UIView+EX.swift */; };
 		D81F45101D118D50004D9192 /* HttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F450F1D118D50004D9192 /* HttpTool.swift */; };
@@ -33,6 +31,9 @@
 		D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45231D118F48004D9192 /* IssueViewController.swift */; };
 		D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45251D118F50004D9192 /* FollowViewController.swift */; };
 		D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45271D118F5E004D9192 /* MineViewController.swift */; };
+		D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45291D1198B3004D9192 /* GlobleDefine.swift */; };
+		D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452A1D1198B3004D9192 /* Reachability.swift */; };
+		D81F452E1D11A2E4004D9192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452D1D11A2E4004D9192 /* API.swift */; };
 		E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22D81D113B9500F58250 /* AppDelegate.swift */; };
 		E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E41C22DF1D113B9500F58250 /* Assets.xcassets */; };
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
@@ -68,10 +69,8 @@
 		D81F44FB1D118D43004D9192 /* NSString+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+EX.swift"; path = "OutLookers/NSString+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D81F44FC1D118D43004D9192 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Regex.swift; path = OutLookers/Regex.swift; sourceTree = SOURCE_ROOT; };
 		D81F44FD1D118D43004D9192 /* String+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+EX.swift"; path = "OutLookers/String+EX.swift"; sourceTree = SOURCE_ROOT; };
-		D81F44FE1D118D43004D9192 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "OutLookers/String+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		D81F44FF1D118D43004D9192 /* TimeObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeObject.swift; path = OutLookers/TimeObject.swift; sourceTree = SOURCE_ROOT; };
 		D81F45001D118D43004D9192 /* UIColor+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+EX.swift"; path = "OutLookers/UIColor+EX.swift"; sourceTree = SOURCE_ROOT; };
-		D81F45011D118D43004D9192 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Extension.swift"; path = "OutLookers/UIColor+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		D81F45021D118D43004D9192 /* UIImage+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+EX.swift"; path = "OutLookers/UIImage+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D81F45031D118D43004D9192 /* UIView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+EX.swift"; path = "OutLookers/UIView+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D81F450F1D118D50004D9192 /* HttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpTool.swift; path = OutLookers/HttpTool.swift; sourceTree = SOURCE_ROOT; };
@@ -86,6 +85,9 @@
 		D81F45231D118F48004D9192 /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IssueViewController.swift; path = OutLookers/IssueViewController.swift; sourceTree = SOURCE_ROOT; };
 		D81F45251D118F50004D9192 /* FollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowViewController.swift; path = OutLookers/FollowViewController.swift; sourceTree = SOURCE_ROOT; };
 		D81F45271D118F5E004D9192 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineViewController.swift; path = OutLookers/MineViewController.swift; sourceTree = SOURCE_ROOT; };
+		D81F45291D1198B3004D9192 /* GlobleDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefine.swift; path = OutLookers/GlobleDefine.swift; sourceTree = SOURCE_ROOT; };
+		D81F452A1D1198B3004D9192 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = OutLookers/Reachability.swift; sourceTree = SOURCE_ROOT; };
+		D81F452D1D11A2E4004D9192 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = OutLookers/API.swift; sourceTree = SOURCE_ROOT; };
 		E41C22D51D113B9500F58250 /* OutLookers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutLookers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41C22D81D113B9500F58250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E41C22DF1D113B9500F58250 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -223,10 +225,8 @@
 				D81F44FB1D118D43004D9192 /* NSString+EX.swift */,
 				D81F44FC1D118D43004D9192 /* Regex.swift */,
 				D81F44FD1D118D43004D9192 /* String+EX.swift */,
-				D81F44FE1D118D43004D9192 /* String+Extension.swift */,
 				D81F44FF1D118D43004D9192 /* TimeObject.swift */,
 				D81F45001D118D43004D9192 /* UIColor+EX.swift */,
-				D81F45011D118D43004D9192 /* UIColor+Extension.swift */,
 				D81F45021D118D43004D9192 /* UIImage+EX.swift */,
 				D81F45031D118D43004D9192 /* UIView+EX.swift */,
 			);
@@ -261,6 +261,7 @@
 		E41C6C5F1D113F350013031D /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				D81F452A1D1198B3004D9192 /* Reachability.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -277,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				D81F450F1D118D50004D9192 /* HttpTool.swift */,
+				D81F452D1D11A2E4004D9192 /* API.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -292,6 +294,7 @@
 		E41C6C631D113F510013031D /* OtherSource */ = {
 			isa = PBXGroup;
 			children = (
+				D81F45291D1198B3004D9192 /* GlobleDefine.swift */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
 				D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */,
@@ -482,27 +485,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
+				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D81F45181D118D63004D9192 /* YGBaseViewController.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
 				D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */,
 				D81F45051D118D43004D9192 /* InterfaceBuiderEX.swift in Sources */,
 				D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
-				D81F450C1D118D43004D9192 /* UIColor+Extension.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
-				D81F45091D118D43004D9192 /* String+Extension.swift in Sources */,
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
 				D81F45221D118F3C004D9192 /* SquareViewController.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
+				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
 				D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */,
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
 				D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */,
 				D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */,
+				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

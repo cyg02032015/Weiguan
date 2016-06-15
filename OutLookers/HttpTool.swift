@@ -16,7 +16,13 @@ public class Server {
         }
     }
     
-    func post(url: String, paramters: Dictionary<String,AnyObject>) -> Void {
-        
+    func post(url: String, parameters: [String:AnyObject]?, complete:()->Void) -> Void {
+        Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers: nil).responseJSON { (response) in
+            if let data = response.result.value {
+                
+            } else {
+                
+            }
+        }
     }
 }

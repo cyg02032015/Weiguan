@@ -12,6 +12,5 @@ class HomeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }
