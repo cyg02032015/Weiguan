@@ -1,0 +1,2 @@
+/Users/YG/Library/Developer/Xcode/DerivedData/OutLookers-hgyheobjvpxmaccpjxqodffssaap/Build/Products/Debug-iphonesimulator/OutLookers.app
+
