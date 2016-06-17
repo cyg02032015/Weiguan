@@ -47,9 +47,10 @@ class YGTabbarController: UITabBarController {
         let squareVC = SquareViewController()
         self.addChildViewController(squareVC, title: "广场", image: "tab_order", selectedImg: "tab_order_selected")
         // 发布
-        let issueVC = IssueViewController()
-        self.addChildViewController(issueVC, title: "订单", image: "tab_list", selectedImg: "tab_list_selected")
+//        let issueVC = IssueViewController()
+//        self.addChildViewController(issueVC, title: "订单", image: "tab_list", selectedImg: "tab_list_selected")
         
+        // 关注
         let followVC = FollowViewController()
         self.addChildViewController(followVC, title: "关注", image: "", selectedImg: "")
         
@@ -85,6 +86,7 @@ extension YGTabbarController: YGTabbarDelegate {
 //            presentViewController(navi, animated: true, completion: nil)
 //            return
 //        }
+        debugPrint(to)
         self.selectedIndex = to
     }
 }

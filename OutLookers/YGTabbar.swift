@@ -10,6 +10,7 @@ import UIKit
 
 private extension Selector {
     static let tabbarClick = #selector(YGTabbar.tabbarClick(_:))
+    static let centerClick = #selector(YGTabbar.centerTapped(_:))
 }
 
 public protocol YGTabbarDelegate {
@@ -23,7 +24,7 @@ public class YGTabbar: UIView {
     
     public var delegate: YGTabbarDelegate!
     
-    private var lastButton: YGTabbarButton?
+    private var lastButton: UIButton?
     private var tabbarButtonCount: Int = 0
     private lazy var selectButton: YGTabbarButton = {
         let btn = YGTabbarButton()
@@ -42,18 +43,35 @@ public class YGTabbar: UIView {
 
     public func addTabBarButtonWithItem(item: UITabBarItem) {
         if tabbarButtonCount > MaxTabButtonCount { return }
+        if tabbarButtonCount == 2 {
+            let centerBtn = UIButton()
+            centerBtn.addTarget(self, action: .centerClick, forControlEvents: .TouchUpInside)
+            addSubview(centerBtn)
+            centerBtn.snp.makeConstraints { make in
+                make.left.equalTo(lastButton!.snp.right)
+                make.width.equalTo(centerBtn.superview!).multipliedBy(1.0/CGFloat(MaxTabButtonCount))
+                make.top.bottom.equalTo(centerBtn.superview!)
+            }
+            tabbarButtonCount += 1
+            lastButton = centerBtn
+        }
         let btn = YGTabbarButton()
-        self.addSubview(btn)
+        addSubview(btn)
         btn.snp.makeConstraints { make in
             make.left.equalTo(lastButton == nil ? btn.superview! : lastButton!.snp.right)
             make.top.bottom.equalTo(btn.superview!)
             make.width.equalTo(btn.superview!).multipliedBy(1.0/CGFloat(MaxTabButtonCount))
-            if tabbarButtonCount == MaxTabButtonCount - 1 {
+            if tabbarButtonCount == MaxTabButtonCount {
                 make.right.equalTo(btn.superview!)
             }
         }
         btn.addTarget(self, action: .tabbarClick, forControlEvents: UIControlEvents.TouchDown)
-        btn.tag = tabbarButtonCount
+        if tabbarButtonCount == 3 {
+            let t = tabbarButtonCount - 1
+            btn.tag = t
+        } else {
+            btn.tag = tabbarButtonCount == 4 ? 3 : tabbarButtonCount
+        }
         if tabbarButtonCount == 0 {
             self.tabbarClick(btn)
         }
@@ -64,11 +82,13 @@ public class YGTabbar: UIView {
     
     func tabbarClick(btn: YGTabbarButton) {
         delegate.tabbarDidSelect(self, didSelectedfrom: selectButton.tag, to: btn.tag)
-//        if btn.tag == 2 && UserSingleton.shareManager.cookie == nil {
-//            return
-//        }
+        // TODO
         selectButton.selected = false
         btn.selected = true
         selectButton = btn
+    }
+    
+    func centerTapped(sender: UIButton) {
+        debugPrint(sender)
     }
 }
