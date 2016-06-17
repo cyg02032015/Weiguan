@@ -16,14 +16,14 @@ public protocol YGTabbarDelegate {
     func tabbarDidSelect(tabbar: YGTabbar, didSelectedfrom: Int, to: Int)
 }
 
-let MaxTabButtonCount: CGFloat = 5
+let MaxTabButtonCount: Int = 5
 
 public class YGTabbar: UIView {
 
     
     public var delegate: YGTabbarDelegate!
     
-    
+    private var lastButton: YGTabbarButton?
     private var tabbarButtonCount: Int = 0
     private lazy var selectButton: YGTabbarButton = {
         let btn = YGTabbarButton()
@@ -41,21 +41,24 @@ public class YGTabbar: UIView {
     }
 
     public func addTabBarButtonWithItem(item: UITabBarItem) {
-        
-        if tabbarButtonCount > Int(MaxTabButtonCount) { return }
+        if tabbarButtonCount > MaxTabButtonCount { return }
         let btn = YGTabbarButton()
-        let btnY = 0 as CGFloat
-        let btnW = self.width / MaxTabButtonCount
-        let btnX = btnW * CGFloat(tabbarButtonCount)
-        let btnH = self.height
-        btn.frame = CGRect(x: btnX, y: btnY, width: btnW, height: btnH)
+        self.addSubview(btn)
+        btn.snp.makeConstraints { make in
+            make.left.equalTo(lastButton == nil ? btn.superview! : lastButton!.snp.right)
+            make.top.bottom.equalTo(btn.superview!)
+            make.width.equalTo(btn.superview!).multipliedBy(1.0/CGFloat(MaxTabButtonCount))
+            if tabbarButtonCount == MaxTabButtonCount - 1 {
+                make.right.equalTo(btn.superview!)
+            }
+        }
         btn.addTarget(self, action: .tabbarClick, forControlEvents: UIControlEvents.TouchDown)
         btn.tag = tabbarButtonCount
         if tabbarButtonCount == 0 {
             self.tabbarClick(btn)
         }
+        lastButton = btn
         btn.item = item
-        self.addSubview(btn)
         tabbarButtonCount += 1
     }
     

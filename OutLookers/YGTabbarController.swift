@@ -29,9 +29,12 @@ class YGTabbarController: UITabBarController {
     }
 
     func addTabbar() {
-        let tabbar = YGTabbar(frame: self.tabBar.bounds)
+        let tabbar = YGTabbar()
         tabbar.delegate = self
         self.tabBar.addSubview(tabbar)
+        tabbar.snp.makeConstraints { make in
+            make.edges.equalTo(self.tabBar)
+        }
         customTabbar = tabbar
     }
     

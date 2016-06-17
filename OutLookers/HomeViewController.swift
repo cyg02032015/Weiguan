@@ -17,23 +17,26 @@ class HomeViewController: YGBaseViewController {
     var urls = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bannerView = YKBannerView(frame: CGRectZero)
+        automaticallyAdjustsScrollViewInsets = false
+        bannerView = YKBannerView()
+        bannerView.placeHolderImage = UIImage(named: "ip5_1")
         view.addSubview(bannerView)
-        bannerView.snp.makeConstraints { make in
+        
+        bannerView.snp.makeConstraints { (make) in
             make.left.right.equalTo(bannerView.superview!)
-            make.top.equalTo(bannerView.superview!)
-            make.height.equalTo(150)
+            make.top.equalTo(self.snp.topLayoutGuideBottom)
+            make.height.equalTo(250)
         }
         bannerView.startTapActionClosure { (index) in
-            
+            print(index)
         }
+        
         
         Alamofire.request(.GET, "http://demosjz.ethank.com.cn/api/ad/get_ad_list").responseJSON { (response) in
             switch response.result {
             case .Success(let value):
                 let json = JSON(value)
-                print(json)
+                print(value)
                 let data = json["data"].arrayObject
                 data?.forEach({ (json) in
                     let item = BannerInfo(json: JSON(json))
@@ -57,11 +60,12 @@ class HomeViewController: YGBaseViewController {
         view.addSubview(button)
         button.snp.makeConstraints { make in
             make.left.right.equalTo(button.superview!)
-            make.centerY.equalTo(button.superview!)
+            make.centerY.equalTo(button.superview!).offset(100)
             make.height.equalTo(30)
         }
         
     }
+    
     
     func buttonTapped() {
         let browse = BrowsePhotoViewController()

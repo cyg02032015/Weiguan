@@ -26,8 +26,12 @@ public class YKBannerView: UIView {
     private var currentPage: Int = 0
     private var scrollView: UIScrollView!
     private var pageControl: UIPageControl!
-    private lazy var timer = NSTimer()
-    public lazy var dataArray = [String]()  // 图片资源总数
+    private var timer: NSTimer?
+    public var dataArray: [String]? = [String]() {
+        didSet {
+            downLoadImage()
+        }
+    }// 图片资源总数
     
     public var placeHolderImage: UIImage?
     
@@ -60,13 +64,6 @@ public class YKBannerView: UIView {
         }
         set {
             duration = newValue
-            timer.invalidate()
-            if newValue <= 0 {
-                return
-            }
-            timer = NSTimer.scheduledTimerWithTimeInterval(newValue, target: self, selector: #selector(YKBannerView.animationTimerDidFired), userInfo: nil, repeats: true)
-            NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
-            timer.fire()
         }
     }
     
@@ -78,18 +75,30 @@ public class YKBannerView: UIView {
         set {
             self.pageControl.hidden = false
             pageAlign = newValue
-            let size = CGSize(width: CGFloat(dataArray.count) * 10 * 1.2, height: 10)
+            let size = CGSize(width: CGFloat(dataArray!.count) * 10 * 1.2, height: 10)
             switch newValue {
             case .Left:
-                let x = CGFloat(20)
-                let y = scrollView.frame.size.height - size.height - 10
-                self.pageControl.frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                pageControl.snp.remakeConstraints { make in
+                    make.left.equalTo(50)
+                    make.bottom.equalTo(pageControl.superview!).offset(-size.height - 10)
+                    make.size.equalTo(size)
+                }
             case .Right:
                 let x = scrollView.frame.size.width - size.width - 20
                 let y = scrollView.frame.size.height - size.height - 10
                 self.pageControl.frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                pageControl.snp.remakeConstraints { make in
+                    make.right.equalTo(pageControl.superview!).offset(-size.width - 20)
+                    make.bottom.equalTo(pageControl.superview!).offset(-size.height - 10)
+                    make.size.equalTo(size)
+                }
             case .Center:
-                self.pageControl.frame = CGRect(x: 0, y: CGRectGetHeight(self.scrollView.frame) - 20, width: CGRectGetWidth(self.scrollView.frame), height: 10)
+                pageControl.snp.remakeConstraints { make in
+                    make.centerX.equalTo(pageControl.superview!)
+                    make.height.equalTo(10)
+                    make.width.equalTo(pageControl.superview!)
+                    make.bottom.equalTo(pageControl.superview!).offset(-20)
+                }
             case .None:
                 self.pageControl.hidden = true
             }
@@ -98,18 +107,20 @@ public class YKBannerView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        userInteractionEnabled = true
+        self.scrollView = UIScrollView()
+        self.addSubview(self.scrollView)
         
-        self.autoresizesSubviews = true
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(scrollView.superview!)
+        }
         
-        self.scrollView = UIScrollView(frame: self.bounds)
         self.scrollView.contentMode = .Center
-        self.scrollView.contentSize = CGSize(width: CGFloat(3) * self.bounds.width, height: self.bounds.height)
         self.scrollView.delegate = self
         self.scrollView.contentOffset = CGPoint(x: self.bounds.width, y: 0)
         self.scrollView.pagingEnabled = true
         self.scrollView.showsHorizontalScrollIndicator = false
         self.scrollView.showsVerticalScrollIndicator = false
-        self.addSubview(self.scrollView)
         
         self.pageControl = UIPageControl()
         self.pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
@@ -117,7 +128,7 @@ public class YKBannerView: UIView {
         self.addSubview(self.pageControl)
         
         // 默认动画时间
-        self.animationDuration = 5
+        self.animationDuration = 2
         // 默认居中
         self.pageControlAlignment = .Center
         
@@ -126,15 +137,18 @@ public class YKBannerView: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(YKBannerView.tap))
         self.addGestureRecognizer(tap)
     }
-    
     public func animationTimerDidFired() {
-        let offset = CGPoint(x:self.scrollView.contentOffset.x + CGRectGetWidth(scrollView.frame), y: scrollView.contentOffset.y)
+        let offset = CGPoint(x:self.scrollView.contentOffset.x + CGRectGetWidth(scrollView.frame), y: 0)
         scrollView.setContentOffset(offset, animated: true)
     }
     
     private func downLoadImage() {
-        if self.dataArray.count > 0 {
-            for (_, url) in dataArray.enumerate() {
+        guard let dataA = dataArray else {
+            fatalError("dataArray nil")
+        }
+        if dataA.count > 0 {
+            addTimer()
+            for (_, url) in dataA.enumerate() {
                 let imageView = UIImageView(frame: self.scrollView.frame)
                 imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: placeHolderImage)
                 self.imageArray.append(imageView)
@@ -143,7 +157,7 @@ public class YKBannerView: UIView {
             self.configContentViews()
         }
     }
-    
+
     private func configContentViews() {
         for obj in self.scrollView.subviews {
             obj.removeFromSuperview()
@@ -168,24 +182,32 @@ public class YKBannerView: UIView {
         
         for (index, obj) in currentArray.enumerate() {
             obj.userInteractionEnabled = true
-            obj.frame = CGRect(origin: CGPoint(x: CGRectGetWidth(scrollView.frame) * CGFloat(index), y: 0), size: obj.frame.size)
             self.scrollView.addSubview(obj)
+            obj.snp.makeConstraints { make in
+                make.left.equalTo(obj.superview!).offset(CGRectGetWidth(scrollView.frame) * CGFloat(index))
+                make.top.equalTo(obj.superview!)
+                make.size.equalTo(obj.frame.size)
+                if index == currentArray.count - 1 {
+                    make.right.equalTo(obj.superview!)
+                }
+            }
         }
         self.scrollView.setContentOffset(CGPoint(x: self.frame.width, y: 0), animated: false)
     }
     
     public func getImageFromArray(imageView: UIImageView) {
-        autoreleasepool { () -> () in
             let tempImg = UIImageView(frame: imageView.frame)
             tempImg.image = imageView.image
             self.currentArray.append(tempImg)
-        }
     }
     
     private func getNextPageIndex(currentPageIndex: Int) -> Int {
-        if currentPageIndex == -1 {
-            return dataArray.count - 1
-        } else if currentPageIndex == dataArray.count {
+        guard let dataA = dataArray where dataArray?.count > 0 else {
+            return 0
+        }
+        if currentPageIndex < 0 {
+            return dataA.count - 1
+        } else if currentPageIndex == dataA.count {
             return 0
         } else {
             return currentPageIndex
@@ -197,9 +219,23 @@ public class YKBannerView: UIView {
     }
     
     func startTapActionClosure(closure: TapClosure) {
-        self.timer.fireDate = NSDate()
         downLoadImage()
         self.tapClosure = closure
+    }
+    
+    private func addTimer () {
+        if self.timer == nil {
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(duration, target: self, selector: #selector(YKBannerView.animationTimerDidFired), userInfo: nil, repeats: true)
+            NSRunLoop.mainRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
+        }
+    }
+    
+    private func removeTimer() {
+        guard let timer = self.timer else {
+            return
+        }
+        timer.invalidate()
+        self.timer = nil
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -209,16 +245,16 @@ public class YKBannerView: UIView {
 
 extension YKBannerView: UIScrollViewDelegate {
     public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        timer.fireDate = NSDate.distantFuture()
+        removeTimer()
     }
     
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        timer.fireDate = NSDate.distantPast()
+        addTimer()
     }
     
     public func scrollViewDidScroll(scrollView: UIScrollView) {
-        let contentOffsetX = Int(scrollView.contentOffset.x)
-        if CGFloat(contentOffsetX) >= 2 * CGRectGetWidth(scrollView.frame) {
+        let contentOffsetX = scrollView.contentOffset.x
+        if contentOffsetX >= 2 * CGRectGetWidth(scrollView.frame) {
             self.currentPage = getNextPageIndex(currentPage + 1)
             pageControl.currentPage = currentPage
             self.configContentViews()
