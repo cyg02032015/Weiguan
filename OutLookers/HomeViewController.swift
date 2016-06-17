@@ -17,11 +17,10 @@ class HomeViewController: YGBaseViewController {
     var urls = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        automaticallyAdjustsScrollViewInsets = false
+        automaticallyAdjustsScrollViewInsets = false // 防止banner偏移64
         bannerView = YKBannerView()
         bannerView.placeHolderImage = UIImage(named: "ip5_1")
         view.addSubview(bannerView)
-        
         bannerView.snp.makeConstraints { (make) in
             make.left.right.equalTo(bannerView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
@@ -49,9 +48,6 @@ class HomeViewController: YGBaseViewController {
                 print(error)
             }
         }
-        
-        
-        
         
         let button = UIButton()
         button.addTarget(self, action: #selector(HomeViewController.buttonTapped), forControlEvents: .TouchUpInside)

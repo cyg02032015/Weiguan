@@ -21,6 +21,7 @@ public class YKBannerView: UIView {
     typealias TapClosure = (index: Int) -> Void
     internal var tapClosure: TapClosure!
     
+    public var isLoop: Bool = true
     private lazy var imageArray = [UIImageView]()  // 总imageView数
     private lazy var currentArray = [UIImageView]()  // 每次添加3张图片
     private var currentPage: Int = 0
@@ -147,7 +148,9 @@ public class YKBannerView: UIView {
             fatalError("dataArray nil")
         }
         if dataA.count > 0 {
-            addTimer()
+            if isLoop {
+                addTimer()
+            }
             for (_, url) in dataA.enumerate() {
                 let imageView = UIImageView(frame: self.scrollView.frame)
                 imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: placeHolderImage)
@@ -219,7 +222,6 @@ public class YKBannerView: UIView {
     }
     
     func startTapActionClosure(closure: TapClosure) {
-        downLoadImage()
         self.tapClosure = closure
     }
     
@@ -245,11 +247,15 @@ public class YKBannerView: UIView {
 
 extension YKBannerView: UIScrollViewDelegate {
     public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        removeTimer()
+        if isLoop {
+            removeTimer()
+        }
     }
     
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        addTimer()
+        if isLoop {
+            addTimer()
+        }
     }
     
     public func scrollViewDidScroll(scrollView: UIScrollView) {
