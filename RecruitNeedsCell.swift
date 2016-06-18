@@ -9,11 +9,17 @@
 import UIKit
 
 private extension Selector {
-    static let tapAdd = #selector(RecruitNeesCell.tapAdd(_:))
+    static let tapAdd = #selector(RecruitNeedsCell.tapAdd(_:))
 }
 
-class RecruitNeesCell: UITableViewCell {
+protocol RecruitNeedsCellDelegate: class {
+    func recruitNeedsAddRecruite(sender: UIButton)
+}
 
+class RecruitNeedsCell: UITableViewCell {
+
+    weak var delegate: RecruitNeedsCellDelegate!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .None
@@ -55,7 +61,7 @@ class RecruitNeesCell: UITableViewCell {
     }
     
     func tapAdd(sender: UIButton) {
-        debugPrint("添加招募需求")
+        delegate.recruitNeedsAddRecruite(sender)
     }
     
     

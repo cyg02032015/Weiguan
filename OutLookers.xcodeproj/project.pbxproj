@@ -48,10 +48,12 @@
 		D8F526BA1D159274000C8F91 /* ReleaseNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526B91D159274000C8F91 /* ReleaseNoticeViewController.swift */; };
 		D8F526BE1D159C5A000C8F91 /* NoArrowEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526BD1D159C5A000C8F91 /* NoArrowEditCell.swift */; };
 		D8F526C01D15A005000C8F91 /* ArrowEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526BF1D15A005000C8F91 /* ArrowEditCell.swift */; };
-		D8F526C21D15A6B8000C8F91 /* RecruitNeesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526C11D15A6B8000C8F91 /* RecruitNeesCell.swift */; };
+		D8F526C21D15A6B8000C8F91 /* RecruitNeedsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526C11D15A6B8000C8F91 /* RecruitNeedsCell.swift */; };
 		D8F526C41D15ABFD000C8F91 /* WorkDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526C31D15ABFD000C8F91 /* WorkDetailCell.swift */; };
 		D8F526C61D15B052000C8F91 /* ColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526C51D15B052000C8F91 /* ColorDefine.swift */; };
 		D8F526C81D15B38B000C8F91 /* SelectPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526C71D15B38B000C8F91 /* SelectPhotoCell.swift */; };
+		D8F526CA1D15B7F8000C8F91 /* RecruitInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526C91D15B7F8000C8F91 /* RecruitInformationViewController.swift */; };
+		D8F526CC1D15BEDF000C8F91 /* SelectSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526CB1D15BEDF000C8F91 /* SelectSkillViewController.swift */; };
 		E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22D81D113B9500F58250 /* AppDelegate.swift */; };
 		E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E41C22DF1D113B9500F58250 /* Assets.xcassets */; };
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
@@ -125,10 +127,12 @@
 		D8F526B91D159274000C8F91 /* ReleaseNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseNoticeViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8F526BD1D159C5A000C8F91 /* NoArrowEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoArrowEditCell.swift; sourceTree = SOURCE_ROOT; };
 		D8F526BF1D15A005000C8F91 /* ArrowEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowEditCell.swift; sourceTree = SOURCE_ROOT; };
-		D8F526C11D15A6B8000C8F91 /* RecruitNeesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecruitNeesCell.swift; sourceTree = SOURCE_ROOT; };
+		D8F526C11D15A6B8000C8F91 /* RecruitNeedsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecruitNeedsCell.swift; sourceTree = SOURCE_ROOT; };
 		D8F526C31D15ABFD000C8F91 /* WorkDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkDetailCell.swift; sourceTree = SOURCE_ROOT; };
 		D8F526C51D15B052000C8F91 /* ColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorDefine.swift; sourceTree = SOURCE_ROOT; };
 		D8F526C71D15B38B000C8F91 /* SelectPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPhotoCell.swift; sourceTree = SOURCE_ROOT; };
+		D8F526C91D15B7F8000C8F91 /* RecruitInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecruitInformationViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8F526CB1D15BEDF000C8F91 /* SelectSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSkillViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41C22D51D113B9500F58250 /* OutLookers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutLookers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41C22D81D113B9500F58250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E41C22DF1D113B9500F58250 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			children = (
 				D81F45231D118F48004D9192 /* IssueViewController.swift */,
 				D8F526B91D159274000C8F91 /* ReleaseNoticeViewController.swift */,
+				D8F526C91D15B7F8000C8F91 /* RecruitInformationViewController.swift */,
+				D8F526CB1D15BEDF000C8F91 /* SelectSkillViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -216,7 +222,7 @@
 			children = (
 				D8F526BD1D159C5A000C8F91 /* NoArrowEditCell.swift */,
 				D8F526BF1D15A005000C8F91 /* ArrowEditCell.swift */,
-				D8F526C11D15A6B8000C8F91 /* RecruitNeesCell.swift */,
+				D8F526C11D15A6B8000C8F91 /* RecruitNeedsCell.swift */,
 				D8F526C31D15ABFD000C8F91 /* WorkDetailCell.swift */,
 				D8F526C71D15B38B000C8F91 /* SelectPhotoCell.swift */,
 			);
@@ -389,13 +395,13 @@
 				D81F45391D143934004D9192 /* YKBannerView.swift */,
 				D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */,
 				D81F45291D1198B3004D9192 /* GlobleDefine.swift */,
+				D8F526A81D1566B7000C8F91 /* StringDefine.swift */,
+				D8F526C51D15B052000C8F91 /* ColorDefine.swift */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
 				D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */,
 				D8F526AE1D1569D3000C8F91 /* Localizable.strings */,
-				D8F526A81D1566B7000C8F91 /* StringDefine.swift */,
 				D8F526AA1D15691F000C8F91 /* InfoPlist.strings */,
-				D8F526C51D15B052000C8F91 /* ColorDefine.swift */,
 			);
 			path = OtherSource;
 			sourceTree = "<group>";
@@ -673,6 +679,8 @@
 				D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */,
 				D8F526C61D15B052000C8F91 /* ColorDefine.swift in Sources */,
 				D8F526C41D15ABFD000C8F91 /* WorkDetailCell.swift in Sources */,
+				D8F526CA1D15B7F8000C8F91 /* RecruitInformationViewController.swift in Sources */,
+				D8F526CC1D15BEDF000C8F91 /* SelectSkillViewController.swift in Sources */,
 				D8F526C01D15A005000C8F91 /* ArrowEditCell.swift in Sources */,
 				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
@@ -686,7 +694,7 @@
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
 				D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */,
 				D81F45221D118F3C004D9192 /* SquareViewController.swift in Sources */,
-				D8F526C21D15A6B8000C8F91 /* RecruitNeesCell.swift in Sources */,
+				D8F526C21D15A6B8000C8F91 /* RecruitNeedsCell.swift in Sources */,
 				D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,

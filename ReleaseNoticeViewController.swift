@@ -42,7 +42,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
         tableView.tableFooterView = UIView()
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowIdentifier)
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowIdentifier)
-        tableView.registerClass(RecruitNeesCell.self, forCellReuseIdentifier: recruiteIdentifier)
+        tableView.registerClass(RecruitNeedsCell.self, forCellReuseIdentifier: recruiteIdentifier)
         tableView.registerClass(WorkDetailCell.self, forCellReuseIdentifier: workDetailIdentifier)
         tableView.registerClass(SelectPhotoCell.self, forCellReuseIdentifier: selectImgIdentifier)
         
@@ -94,7 +94,8 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             cell.setTextInCell("工作主题", placeholder: "请输入工作主题")
             return cell
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(recruiteIdentifier, forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(recruiteIdentifier, forIndexPath: indexPath) as! RecruitNeedsCell
+            cell.delegate = self
             return cell
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(arrowIdentifier, forIndexPath: indexPath) as! ArrowEditCell
@@ -115,10 +116,10 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
                 return cell
             }
         } else if indexPath.section == 5 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(workDetailIdentifier, forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(workDetailIdentifier, forIndexPath: indexPath) as! WorkDetailCell
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(selectImgIdentifier, forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(selectImgIdentifier, forIndexPath: indexPath) as! SelectPhotoCell
             return cell
         }
     }
@@ -143,9 +144,14 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 // MARK: -点击按钮
-extension ReleaseNoticeViewController {
+extension ReleaseNoticeViewController: RecruitNeedsCellDelegate {
     
     func tapRelease(sender: UIButton) {
         debugPrint("发布")
+    }
+    
+    func recruitNeedsAddRecruite(sender: UIButton) {
+        let recruitInfomation = RecruitInformationViewController()
+        navigationController?.pushViewController(recruitInfomation, animated: true)
     }
 }

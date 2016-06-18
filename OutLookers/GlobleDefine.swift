@@ -21,6 +21,6 @@ let DeviceId   = "1234567891"// 设备代码
 // 颜色
 
 
-let kMobileNumberReg: String      = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$"
+let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
 

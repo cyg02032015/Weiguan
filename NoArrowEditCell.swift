@@ -34,6 +34,21 @@ class NoArrowEditCell: UITableViewCell {
         }
     }
     
+    var _textFieldEnable: Bool = true
+    var textFieldEnable: Bool {
+        get {
+            return _textFieldEnable
+        }
+        set {
+            _textFieldEnable = newValue
+            if _textFieldEnable {
+                tf.userInteractionEnabled = true
+            } else {
+                tf.userInteractionEnabled = false
+            }
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .None

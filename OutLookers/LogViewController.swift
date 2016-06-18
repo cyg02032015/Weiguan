@@ -232,7 +232,7 @@ extension LogViewController {
         if !submitButton.selected {
             YKToast.makeText("请选择用户协议")
         }
-        if mobileTF.text! ~= kMobileNumberReg {
+        if mobileTF.text! =~ kMobileNumberReg {
             
         } else {
             YKToast.makeText("手机号格式错误")
