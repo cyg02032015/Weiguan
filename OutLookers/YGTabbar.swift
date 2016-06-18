@@ -10,7 +10,6 @@ import UIKit
 
 private extension Selector {
     static let tabbarClick = #selector(YGTabbar.tabbarClick(_:))
-    static let centerClick = #selector(YGTabbar.centerTapped(_:))
 }
 
 public protocol YGTabbarDelegate {
@@ -45,7 +44,8 @@ public class YGTabbar: UIView {
         if tabbarButtonCount > MaxTabButtonCount { return }
         if tabbarButtonCount == 2 {
             let centerBtn = UIButton()
-            centerBtn.addTarget(self, action: .centerClick, forControlEvents: .TouchUpInside)
+            centerBtn.addTarget(self, action: .tabbarClick, forControlEvents: .TouchUpInside)
+            centerBtn.tag = 5
             addSubview(centerBtn)
             centerBtn.snp.makeConstraints { make in
                 make.left.equalTo(lastButton!.snp.right)
@@ -82,13 +82,12 @@ public class YGTabbar: UIView {
     
     func tabbarClick(btn: YGTabbarButton) {
         delegate.tabbarDidSelect(self, didSelectedfrom: selectButton.tag, to: btn.tag)
+        if btn.tag == 5 {
+            return
+        }
         // TODO
         selectButton.selected = false
         btn.selected = true
         selectButton = btn
-    }
-    
-    func centerTapped(sender: UIButton) {
-        debugPrint(sender)
     }
 }

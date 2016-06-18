@@ -46,9 +46,6 @@ class YGTabbarController: UITabBarController {
         // 广场
         let squareVC = SquareViewController()
         self.addChildViewController(squareVC, title: "广场", image: "tab_order", selectedImg: "tab_order_selected")
-        // 发布
-//        let issueVC = IssueViewController()
-//        self.addChildViewController(issueVC, title: "订单", image: "tab_list", selectedImg: "tab_list_selected")
         
         // 关注
         let followVC = FollowViewController()
@@ -78,6 +75,10 @@ class YGTabbarController: UITabBarController {
 
 extension YGTabbarController: YGTabbarDelegate {
     func tabbarDidSelect(tabbar: YGTabbar, didSelectedfrom: Int, to: Int) {
+        if to == 5 {
+            let navi = YGNavigationController(rootViewController: IssueViewController())
+            presentViewController(navi, animated: true, completion: nil)
+        }
 //        if to == 2 && UserSingleton.shareManager.cookie == nil {
 //            self.selectedIndex = didSelectedfrom
 //            let logVC = SBQuick.loadStoryBoard(Identifier.Main, identifier: Identifier.LogRegSegue) as! LogIn_RegistViewController

@@ -14,7 +14,7 @@ class MineViewController: YGBaseViewController {
         super.viewDidLoad()
         
         let btn = UIButton()
-        btn.setTitle("登录", forState: .Normal)
+        btn.setTitle(LocalizedString("log"), forState: .Normal)
         btn.addTarget(self, action: #selector(MineViewController.logClick(_:)), forControlEvents: .TouchUpInside)
         btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         view.addSubview(btn)

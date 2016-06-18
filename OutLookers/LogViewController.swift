@@ -9,17 +9,30 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Toast_Swift
 
 let disposeBag = DisposeBag()
+
+private extension Selector {
+    static let tapSubmit = #selector(LogViewController.submitButtonClick(_:))
+    static let tapCorner = #selector(LogViewController.protocolButtonClick(_:))
+    static let tapVerify = #selector(LogViewController.tapVerifyButton(_:))
+    static let countDownTimer = #selector(LogViewController.countDownTimer)
+    static let tapProtocolButton = #selector(LogViewController.tapProtocolButton(_:))
+    static let tapArroundMore = #selector(LogViewController.tapArroundMore(_:))
+}
 
 class LogViewController: YGBaseViewController {
     
     var mobileTF: UITextField!
     var verifyTF: UITextField!
     var submitButton: UIButton!
+    var verifyButton: UIButton!
+    var timer: NSTimer!
+    var countDown: Int = 60
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "账号认证"
+        title = LocalizedString("accountCheck")
         
         setupSubViews()
         
@@ -31,15 +44,17 @@ class LogViewController: YGBaseViewController {
             $0.characters.count == 6
         }.shareReplay(1)
         
-        let everthingValid = Observable.combineLatest(mobileValid, verifyValid) { (mobile, verify) -> Bool in
+        let everthingValid = Observable.combineLatest(mobileValid, verifyValid) { mobile, verify in
             return mobile && verify
         }.shareReplay(1)
         
-        everthingValid.subscribe { (event) in
+        everthingValid.bindTo(submitButton.rx_enabled).addDisposableTo(disposeBag)
+        everthingValid.subscribe { [weak self](event) in
+            guard let weakSelf = self else { return }
             if let _ = event.element where event.element == true {
-                self.submitButton.backgroundColor = UIColor.redColor()
+                weakSelf.submitButton.backgroundColor = kRedColor
             } else {
-                self.submitButton.backgroundColor = UIColor.greenColor()
+                weakSelf.submitButton.backgroundColor = kGrayColor
             }
         }.addDisposableTo(disposeBag)
         
@@ -64,10 +79,12 @@ class LogViewController: YGBaseViewController {
         mobileTF = getTextField("请输入手机号")
         mobileContainer.addSubview(mobileTF)
         
-        let verifyButton = UIButton()
+        verifyButton = UIButton()
         verifyButton.setTitle("获取验证码", forState: .Normal)
+        verifyButton.titleLabel?.font = UIFont.systemFontOfSize(12)
         verifyButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        verifyButton.backgroundColor = UIColor(hex: 0xF7595B)
+        verifyButton.backgroundColor = kRedColor
+        verifyButton.addTarget(self, action: .tapVerify, forControlEvents: .TouchUpInside)
         mobileContainer.addSubview(verifyButton)
         
         // 验证码
@@ -81,25 +98,29 @@ class LogViewController: YGBaseViewController {
         let cornerButton = UIButton()
         cornerButton.setImage(UIImage(named: "disagree"), forState: .Normal)
         cornerButton.setImage(UIImage(named: "agree"), forState: .Selected)
-        cornerButton.addTarget(self, action: #selector(LogViewController.protocolButtonClick(_:)), forControlEvents: .TouchUpInside)
+        cornerButton.addTarget(self, action: .tapCorner, forControlEvents: .TouchUpInside)
         container.addSubview(cornerButton)
         
-        let protocleLabel = UILabel()
-        protocleLabel.font = UIFont.systemFontOfSize(12)
-        protocleLabel.text = "我同意围观平台的用户协议"
-        container.addSubview(protocleLabel)
+        let protocleButton = UIButton()
+        protocleButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        protocleButton.setTitle("我同意围观平台的用户协议", forState: .Normal)
+        protocleButton.setTitleColor(kGrayColor, forState: .Normal)
+        protocleButton.addTarget(self, action: .tapProtocolButton, forControlEvents: .TouchUpInside)
+        container.addSubview(protocleButton)
         
         // 提交按钮
         submitButton = UIButton()
         submitButton.layer.cornerRadius = 23
         submitButton.setTitle("提交", forState: .Normal)
-        submitButton.backgroundColor = UIColor.greenColor()
+        submitButton.backgroundColor = kGrayColor
+        submitButton.addTarget(self, action: .tapSubmit, forControlEvents: .TouchUpInside)
         container.addSubview(submitButton)
         
         // 再去逛逛
         let aroundButton = UIButton()
         aroundButton.setTitle("再去逛逛", forState: .Normal)
-        aroundButton.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        aroundButton.setTitleColor(kGrayColor, forState: .Normal)
+        aroundButton.addTarget(self, action: .tapArroundMore, forControlEvents: .TouchUpInside)
         container.addSubview(aroundButton)
         
         container.snp.makeConstraints { make in
@@ -131,7 +152,7 @@ class LogViewController: YGBaseViewController {
             make.left.equalTo(22)
             make.centerY.equalTo(mobileTF.superview!)
             make.right.equalTo(verifyButton.snp.left)
-            make.height.equalTo(16)
+            make.height.equalTo(30)
         }
         
         verifyContainer.snp.makeConstraints { (make) in
@@ -151,7 +172,7 @@ class LogViewController: YGBaseViewController {
             make.size.equalTo(CGSize(width: 14, height: 14))
         }
         
-        protocleLabel.snp.makeConstraints { (make) in
+        protocleButton.snp.makeConstraints { (make) in
             make.left.equalTo(cornerButton.snp.right).offset(5)
             make.centerY.equalTo(cornerButton)
             make.height.equalTo(12)
@@ -159,7 +180,7 @@ class LogViewController: YGBaseViewController {
         
         submitButton.snp.makeConstraints { (make) in
             make.left.right.equalTo(mobileContainer)
-            make.top.equalTo(protocleLabel.snp.bottom).offset(20)
+            make.top.equalTo(protocleButton.snp.bottom).offset(20)
             make.height.equalTo(46)
         }
         
@@ -171,15 +192,10 @@ class LogViewController: YGBaseViewController {
         }
     }
     
-    func protocolButtonClick(sender: UIButton) {
-        sender.selected = !sender.selected
-        
-    }
-    
     func textFieldContainer() -> UIView {
         let c = UIView()
         c.layer.borderWidth = 1
-        c.layer.borderColor = UIColor.grayColor().CGColor
+        c.layer.borderColor = kGrayColor.CGColor
         c.layer.cornerRadius = 23
         c.clipsToBounds = true
         return c
@@ -188,11 +204,81 @@ class LogViewController: YGBaseViewController {
     func getTextField(placeHolder: String) -> UITextField {
         let tf = UITextField()
         tf.placeholder = placeHolder
+        tf.delegate = self
+        tf.keyboardType = .NumberPad
         tf.font = UIFont.systemFontOfSize(16)
         return tf
     }
+}
+
+// MARK: -按钮点击方法
+extension LogViewController {
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }}
+    func protocolButtonClick(sender: UIButton) {
+        sender.selected = !sender.selected
+        submitButton.selected = sender.selected
+        
+    }
+    
+    func submitButtonClick(sender: UIButton) {
+        /*
+            手机号格式错误
+            验证码已发送
+            验证码无效,请重新获取
+            验证码输入错误
+            绑定成功
+         */
+        view.endEditing(true)
+        if !submitButton.selected {
+            YKToast.makeText("请选择用户协议")
+        }
+        if mobileTF.text! ~= kMobileNumberReg {
+            
+        } else {
+            YKToast.makeText("手机号格式错误")
+        }
+    }
+    
+    func tapVerifyButton(sender: UIButton) {
+        verifyButton.userInteractionEnabled = false
+        countDownTimer()
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: .countDownTimer, userInfo: nil, repeats: true)
+        
+    }
+    
+    func countDownTimer() {
+        if countDown == 0 {
+            timer.invalidate()
+            verifyButton.userInteractionEnabled = true
+            verifyButton.setTitle("获取验证码", forState: .Normal)
+            verifyButton.backgroundColor = kRedColor
+        } else {
+            verifyButton.setTitle("\(countDown)s", forState: .Normal)
+            verifyButton.backgroundColor = kGrayColor
+        }
+        countDown -= 1
+    }
+    
+    func tapProtocolButton(sender: UIButton) {
+        let protocolVC = ProtocolViewController()
+        navigationController?.pushViewController(protocolVC, animated: true)
+    }
+    
+    func tapArroundMore(sender: UIButton) {
+        
+    }
+}
+
+// MARK: -TextFieldDelegate
+extension LogViewController: UITextFieldDelegate {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let str = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        if textField == mobileTF {
+            return str.characters.count <= 11
+        } else {
+            return str.characters.count <= 6
+        }
+    }
+}
+

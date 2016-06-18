@@ -9,9 +9,11 @@ pod 'Alamofire', '~> 3.4.1'
 pod 'SwiftyJSON', '~> 2.3.2'
 pod 'SnapKit', '~> 0.30.0.beta1'
 pod 'Kingfisher', '~> 2.4.1'
-pod 'RxSwift', '~> 2.5.0'
-pod 'RxCocoa', '~> 2.5.0'
 pod 'IQKeyboardManagerSwift', '~> 4.0.3'
+pod 'RxSwift', '~> 2.5.0'
+pod 'RxCocoa'
+pod 'JLToast', '~> 1.4'
+pod 'Toast-Swift', '~> 1.3.0'
 end
 
 target 'OutLookersTests' do
