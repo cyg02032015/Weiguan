@@ -40,37 +40,14 @@ class HomeViewController: YGBaseViewController {
                 data?.forEach({ (json) in
                     let item = BannerInfo(json: JSON(json))
                     self.urls.append(item.cover!)
+                    self.urls.append(item.cover!)
                 })
-                
                 self.bannerView.dataArray = self.urls
-                
             case .Failure(let error):
                 print(error)
             }
         }
         
-        let button = UIButton()
-        button.addTarget(self, action: #selector(HomeViewController.buttonTapped), forControlEvents: .TouchUpInside)
-        button.setTitle("跳转", forState: .Normal)
-        button.backgroundColor = UIColor.redColor()
-        view.addSubview(button)
-        button.snp.makeConstraints { make in
-            make.left.right.equalTo(button.superview!)
-            make.centerY.equalTo(button.superview!).offset(100)
-            make.height.equalTo(30)
-        }
-        
-    }
-    
-    
-    func buttonTapped() {
-        let browse = BrowsePhotoViewController()
-        browse.photos.append(UIImage(named: "2.0闪屏")!)
-        browse.photos.append(UIImage(named: "2.0闪屏")!)
-        browse.photos.append(UIImage(named: "ip5_1")!)
-        browse.photos.append(UIImage(named: "ip5_1")!)
-        browse.photos.append(UIImage(named: "ip5_1")!)
-        navigationController?.pushViewController(browse, animated: true)
     }
 }
 

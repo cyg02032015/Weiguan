@@ -34,8 +34,9 @@
 		D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45291D1198B3004D9192 /* GlobleDefine.swift */; };
 		D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452A1D1198B3004D9192 /* Reachability.swift */; };
 		D81F452E1D11A2E4004D9192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452D1D11A2E4004D9192 /* API.swift */; };
-		D81F45311D12CFA1004D9192 /* BrowsePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45301D12CFA1004D9192 /* BrowsePhotoViewController.swift */; };
-		D81F45381D1303CB004D9192 /* YKBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45371D1303CB004D9192 /* YKBannerView.swift */; };
+		D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45391D143934004D9192 /* YKBannerView.swift */; };
+		D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */; };
+		D81F453F1D145B60004D9192 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453E1D145B60004D9192 /* LogViewController.swift */; };
 		E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22D81D113B9500F58250 /* AppDelegate.swift */; };
 		E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E41C22DF1D113B9500F58250 /* Assets.xcassets */; };
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
@@ -90,8 +91,9 @@
 		D81F45291D1198B3004D9192 /* GlobleDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefine.swift; path = OutLookers/GlobleDefine.swift; sourceTree = SOURCE_ROOT; };
 		D81F452A1D1198B3004D9192 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = OutLookers/Reachability.swift; sourceTree = SOURCE_ROOT; };
 		D81F452D1D11A2E4004D9192 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = OutLookers/API.swift; sourceTree = SOURCE_ROOT; };
-		D81F45301D12CFA1004D9192 /* BrowsePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowsePhotoViewController.swift; sourceTree = "<group>"; };
-		D81F45371D1303CB004D9192 /* YKBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YKBannerView.swift; sourceTree = "<group>"; };
+		D81F45391D143934004D9192 /* YKBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKBannerView.swift; path = OutLookers/YKBannerView.swift; sourceTree = SOURCE_ROOT; };
+		D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowsePhotoViewController.swift; path = OutLookers/BrowsePhotoViewController.swift; sourceTree = SOURCE_ROOT; };
+		D81F453E1D145B60004D9192 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41C22D51D113B9500F58250 /* OutLookers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutLookers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41C22D81D113B9500F58250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E41C22DF1D113B9500F58250 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -148,6 +150,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		D81F453D1D145B3D004D9192 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D81F45271D118F5E004D9192 /* MineViewController.swift */,
+				D81F453E1D145B60004D9192 /* LogViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		E082FD6645859458CEA4EF04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,8 +206,6 @@
 				E41C6C631D113F510013031D /* OtherSource */,
 				E41C22DF1D113B9500F58250 /* Assets.xcassets */,
 				E41C22E41D113B9500F58250 /* Info.plist */,
-				D81F45301D12CFA1004D9192 /* BrowsePhotoViewController.swift */,
-				D81F45371D1303CB004D9192 /* YKBannerView.swift */,
 			);
 			path = OutLookers;
 			sourceTree = "<group>";
@@ -283,7 +292,7 @@
 		E41C6C601D113F350013031D /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				D81F45271D118F5E004D9192 /* MineViewController.swift */,
+				D81F453D1D145B3D004D9192 /* Controller */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -308,6 +317,8 @@
 		E41C6C631D113F510013031D /* OtherSource */ = {
 			isa = PBXGroup;
 			children = (
+				D81F45391D143934004D9192 /* YKBannerView.swift */,
+				D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */,
 				D81F45291D1198B3004D9192 /* GlobleDefine.swift */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
@@ -501,7 +512,8 @@
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D81F45181D118D63004D9192 /* YGBaseViewController.swift in Sources */,
-				D81F45381D1303CB004D9192 /* YKBannerView.swift in Sources */,
+				D81F453F1D145B60004D9192 /* LogViewController.swift in Sources */,
+				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
 				D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */,
 				D81F45051D118D43004D9192 /* InterfaceBuiderEX.swift in Sources */,
@@ -510,10 +522,10 @@
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
+				D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */,
 				D81F45221D118F3C004D9192 /* SquareViewController.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
-				D81F45311D12CFA1004D9192 /* BrowsePhotoViewController.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
