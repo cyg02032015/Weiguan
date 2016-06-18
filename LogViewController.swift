@@ -7,17 +7,44 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+
+let disposeBag = DisposeBag()
 
 class LogViewController: YGBaseViewController {
     
     var mobileTF: UITextField!
     var verifyTF: UITextField!
-    
+    var submitButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "账号认证"
         
         setupSubViews()
+        
+        let mobileValid = mobileTF.rx_text.map {
+            $0.characters.count == 11
+        }.shareReplay(1)
+        
+        let verifyValid = verifyTF.rx_text.map {
+            $0.characters.count == 6
+        }.shareReplay(1)
+        
+        let everthingValid = Observable.combineLatest(mobileValid, verifyValid) { (mobile, verify) -> Bool in
+            return mobile && verify
+        }.shareReplay(1)
+        
+        everthingValid.subscribe { (event) in
+            if let _ = event.element where event.element == true {
+                self.submitButton.backgroundColor = UIColor.redColor()
+            } else {
+                self.submitButton.backgroundColor = UIColor.greenColor()
+            }
+        }.addDisposableTo(disposeBag)
+        
+        
+        
     }
 
     func setupSubViews() {
@@ -63,10 +90,10 @@ class LogViewController: YGBaseViewController {
         container.addSubview(protocleLabel)
         
         // 提交按钮
-        let submitButton = UIButton()
+        submitButton = UIButton()
         submitButton.layer.cornerRadius = 23
         submitButton.setTitle("提交", forState: .Normal)
-        submitButton.backgroundColor = UIColor.grayColor()
+        submitButton.backgroundColor = UIColor.greenColor()
         container.addSubview(submitButton)
         
         // 再去逛逛
@@ -146,11 +173,12 @@ class LogViewController: YGBaseViewController {
     
     func protocolButtonClick(sender: UIButton) {
         sender.selected = !sender.selected
+        
     }
     
     func textFieldContainer() -> UIView {
         let c = UIView()
-        c.layer.borderWidth = 2
+        c.layer.borderWidth = 1
         c.layer.borderColor = UIColor.grayColor().CGColor
         c.layer.cornerRadius = 23
         c.clipsToBounds = true
