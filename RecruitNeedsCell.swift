@@ -30,7 +30,7 @@ class RecruitNeedsCell: UITableViewCell {
         
         let recruitLabel = UILabel()
         recruitLabel.text = "招募需求"
-        recruitLabel.font = UIFont.systemFontOfSize(15)
+        recruitLabel.font = UIFont.systemFontOfSize(16)
         contentView.addSubview(recruitLabel)
         
         
@@ -49,13 +49,13 @@ class RecruitNeedsCell: UITableViewCell {
         
         recruitLabel.snp.makeConstraints { (make) in
             make.left.equalTo(recruitLabel.superview!).offset(15)
-            make.top.equalTo(recruitLabel.superview!).offset(10)
-            make.height.equalTo(15)
+            make.top.equalTo(recruitLabel.superview!).offset(12)
+            make.height.equalTo(16)
         }
         
         addButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 60, height: 30))
-            make.top.equalTo(recruitLabel.snp.bottom).offset(15)
+            make.top.equalTo(recruitLabel.snp.bottom).offset(8)
             make.left.equalTo(recruitLabel)
         }
     }

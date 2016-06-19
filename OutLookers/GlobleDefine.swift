@@ -24,3 +24,5 @@ let DeviceId   = "1234567891"// 设备代码
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
 
+// 字体大小
+

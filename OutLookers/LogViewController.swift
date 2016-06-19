@@ -81,7 +81,7 @@ class LogViewController: YGBaseViewController {
         
         verifyButton = UIButton()
         verifyButton.setTitle("获取验证码", forState: .Normal)
-        verifyButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        verifyButton.titleLabel?.font = UIFont.systemFontOfSize(13)
         verifyButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         verifyButton.backgroundColor = kRedColor
         verifyButton.addTarget(self, action: .tapVerify, forControlEvents: .TouchUpInside)
@@ -119,7 +119,8 @@ class LogViewController: YGBaseViewController {
         // 再去逛逛
         let aroundButton = UIButton()
         aroundButton.setTitle("再去逛逛", forState: .Normal)
-        aroundButton.setTitleColor(kGrayColor, forState: .Normal)
+        aroundButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        aroundButton.setTitleColor(UIColor(hex: 0x777777), forState: .Normal)
         aroundButton.addTarget(self, action: .tapArroundMore, forControlEvents: .TouchUpInside)
         container.addSubview(aroundButton)
         
@@ -130,7 +131,7 @@ class LogViewController: YGBaseViewController {
         }
         
         topLabel.snp.makeConstraints { make in
-            make.top.equalTo(72)
+            make.top.equalTo(80)
             make.left.right.equalTo(topLabel.superview!)
             make.height.equalTo(16)
         }
@@ -157,7 +158,7 @@ class LogViewController: YGBaseViewController {
         
         verifyContainer.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(mobileContainer)
-            make.top.equalTo(mobileContainer.snp.bottom).offset(20)
+            make.top.equalTo(mobileContainer.snp.bottom).offset(15)
         }
         
         verifyTF.snp.makeConstraints { make in
@@ -167,28 +168,28 @@ class LogViewController: YGBaseViewController {
         }
         
         cornerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(66)
+            make.left.equalTo(68)
             make.top.equalTo(verifyContainer.snp.bottom).offset(10)
-            make.size.equalTo(CGSize(width: 14, height: 14))
+            make.size.equalTo(CGSize(width: 12, height: 12))
         }
         
         protocleButton.snp.makeConstraints { (make) in
-            make.left.equalTo(cornerButton.snp.right).offset(5)
+            make.left.equalTo(cornerButton.snp.right).offset(3)
             make.centerY.equalTo(cornerButton)
             make.height.equalTo(12)
         }
         
         submitButton.snp.makeConstraints { (make) in
             make.left.right.equalTo(mobileContainer)
-            make.top.equalTo(protocleButton.snp.bottom).offset(20)
+            make.top.equalTo(protocleButton.snp.bottom).offset(32)
             make.height.equalTo(46)
         }
         
         aroundButton.snp.makeConstraints { (make) in
-            make.right.equalTo(aroundButton.superview!).offset(-60)
-            make.height.equalTo(17)
-            make.width.equalTo(100)
-            make.top.equalTo(submitButton.snp.bottom).offset(20)
+            make.right.equalTo(aroundButton.superview!).offset(-59)
+            make.height.equalTo(14)
+            make.width.equalTo(56)
+            make.top.equalTo(submitButton.snp.bottom).offset(10)
         }
     }
     

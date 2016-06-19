@@ -28,18 +28,20 @@ class RecruitInformationViewController: YGBaseViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowIdentifier)
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowIdentifier)
         
         sureButton = UIButton()
         sureButton.setTitle("确定", forState: .Normal)
+        sureButton.titleLabel?.font = UIFont.systemFontOfSize(20)
         sureButton.addTarget(self, action: .tapSure, forControlEvents: .TouchUpInside)
         sureButton.backgroundColor = kGrayColor
         view.addSubview(sureButton)
         
         sureButton.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(sureButton.superview!)
-            make.height.equalTo(49)
+            make.height.equalTo(50)
         }
         
         tableView.snp.makeConstraints { (make) in
@@ -81,6 +83,10 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
             let selectSkill = SelectSkillViewController()
             navigationController?.pushViewController(selectSkill, animated: true)
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 56
     }
 }
 

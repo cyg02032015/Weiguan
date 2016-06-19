@@ -22,7 +22,7 @@ class WorkDetailCell: UITableViewCell {
     func setupSubViews() {
         let label = UILabel()
         label.text = "工作详情"
-        label.font = UIFont.systemFontOfSize(15)
+        label.font = UIFont.systemFontOfSize(16)
         contentView.addSubview(label)
         
         tv = UITextView()
@@ -38,20 +38,21 @@ class WorkDetailCell: UITableViewCell {
         label.snp.makeConstraints { (make) in
             make.left.equalTo(label.superview!).offset(15)
             make.top.equalTo(label.superview!).offset(15)
-            make.height.equalTo(15)
+            make.height.equalTo(16)
         }
         
         tv.snp.makeConstraints { (make) in
             make.left.equalTo(tv.superview!).offset(15)
             make.right.equalTo(tv.superview!).offset(-15)
-            make.top.equalTo(label.snp.bottom).offset(15)
+            make.top.equalTo(label.snp.bottom).offset(6)
             make.bottom.equalTo(tv.superview!).offset(-10)
         }
         
         placeholderLabel.snp.makeConstraints { (make) in
-            make.left.right.equalTo(tv)
+            make.right.equalTo(tv)
+            make.left.equalTo(tv).offset(4)
             make.height.equalTo(14)
-            make.top.equalTo(tv)
+            make.top.equalTo(tv).offset(8)
         }
     }
 

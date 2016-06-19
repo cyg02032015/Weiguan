@@ -22,10 +22,17 @@ class ReleaseNoticeViewController: YGBaseViewController {
 
     var tableView: UITableView!
     var releaseButton: UIButton!
+    var selectDatePicker: YGSelectDateView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        selectDatePicker.removeFromSuperview()
+        selectDatePicker = nil
     }
     
     override func viewDidLoad() {
@@ -48,13 +55,18 @@ class ReleaseNoticeViewController: YGBaseViewController {
         
         releaseButton = UIButton()
         releaseButton.setTitle("发布", forState: .Normal)
+        releaseButton.titleLabel?.font = UIFont.systemFontOfSize(16)
         releaseButton.addTarget(self, action: .tapRelease, forControlEvents: .TouchUpInside)
         releaseButton.backgroundColor = kGrayColor
         view.addSubview(releaseButton)
         
+        selectDatePicker = YGSelectDateView()
+        UIApplication.sharedApplication().keyWindow!.addSubview(selectDatePicker)
+        selectDatePicker.hidden = true
+        
         releaseButton.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(releaseButton.superview!)
-            make.height.equalTo(49)
+            make.height.equalTo(50)
         }
         
         tableView.snp.makeConstraints { (make) in
@@ -63,7 +75,9 @@ class ReleaseNoticeViewController: YGBaseViewController {
             make.bottom.equalTo(releaseButton.snp.top)
         }
         
-        
+        selectDatePicker.snp.makeConstraints { (make) in
+            make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -72,21 +86,6 @@ class ReleaseNoticeViewController: YGBaseViewController {
 }
 
 extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0, 1: return 1
-        case 2: return 2
-        case 3: return 1
-        case 4: return 2
-        case 5, 6: return 1
-        default: return 1
-        }
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 7
-    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
@@ -124,12 +123,57 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 2 {
+            if indexPath.row == 0 { // 工作开始时间
+                let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! ArrowEditCell
+                selectDatePicker.animation()
+                selectDatePicker.tapSureClosure({ (date) in
+                    debugPrint(date)
+                    cell.tf.text = "\(date)"
+                })
+                
+            } else { // 工作结束时间
+                let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)) as! ArrowEditCell
+                selectDatePicker.animation()
+                selectDatePicker.tapSureClosure({ (date) in
+                    debugPrint(date)
+                    cell.tf.text = "\(date)"
+                })
+            }
+        }
+        
+        if indexPath.section == 3 { // 报名截止日期
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! ArrowEditCell
+            selectDatePicker.animation()
+            selectDatePicker.tapSureClosure({ (date) in
+                debugPrint(date)
+                cell.tf.text = "\(date)"
+            })
+        }
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0, 1: return 1
+        case 2: return 2
+        case 3: return 1
+        case 4: return 2
+        case 5, 6: return 1
+        default: return 1
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 7
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 1: return 100 // 招募需求
-        case 0, 2, 3, 4: return 50
-        case 5: return 150 // 工作详情
-        case 6: return 150 // 宣传图片
+        case 1: return 160 // 招募需求
+        case 0, 2, 3, 4: return 56
+        case 5: return 155 // 工作详情
+        case 6: return 230 // 宣传图片
         default:
             return 0
         }
@@ -140,6 +184,10 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             return 0
         }
         return 10
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
     }
 }
 
