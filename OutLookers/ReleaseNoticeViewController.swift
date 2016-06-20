@@ -23,16 +23,38 @@ class ReleaseNoticeViewController: YGBaseViewController {
     var tableView: UITableView!
     var releaseButton: UIButton!
     var selectDatePicker: YGSelectDateView!
+    var pickerView: YGPickerView!
+    lazy var recruits: [Recruit] = [Recruit]()
+    lazy var provinceTitles = NSArray()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        selectDatePicker = YGSelectDateView()
+        UIApplication.sharedApplication().keyWindow!.addSubview(selectDatePicker)
+        selectDatePicker.hidden = true
+        selectDatePicker.snp.makeConstraints { (make) in
+            make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
+        }
+        
+        provinceTitles = CitiesData.sharedInstance().provinceTitle()
+        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
+        pickerView.delegate = self
+        UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
+        pickerView.hidden = true
+        pickerView.snp.makeConstraints { (make) in
+            make.left.right.top.bottom.equalTo(pickerView.superview!)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         selectDatePicker.removeFromSuperview()
         selectDatePicker = nil
+        
+        
+        pickerView.removeFromSuperview()
+        pickerView = nil
     }
     
     override func viewDidLoad() {
@@ -60,10 +82,6 @@ class ReleaseNoticeViewController: YGBaseViewController {
         releaseButton.backgroundColor = kGrayColor
         view.addSubview(releaseButton)
         
-        selectDatePicker = YGSelectDateView()
-        UIApplication.sharedApplication().keyWindow!.addSubview(selectDatePicker)
-        selectDatePicker.hidden = true
-        
         releaseButton.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(releaseButton.superview!)
             make.height.equalTo(50)
@@ -75,9 +93,6 @@ class ReleaseNoticeViewController: YGBaseViewController {
             make.bottom.equalTo(releaseButton.snp.top)
         }
         
-        selectDatePicker.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
-        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -90,10 +105,13 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+            cell.delegate = self
             cell.setTextInCell("工作主题", placeholder: "请输入工作主题")
             return cell
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 1 { // 招募需求
             let cell = tableView.dequeueReusableCellWithIdentifier(recruiteIdentifier, forIndexPath: indexPath) as! RecruitNeedsCell
+            cell.addRecuitNeedsButton(recruits)
+            debugPrint("indexPath = \(indexPath.section) = 1")
             cell.delegate = self
             return cell
         } else if indexPath.section == 2 {
@@ -111,6 +129,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+                cell.delegate = self
                 cell.setTextInCell("", placeholder: "指定详细地址 (选填)")
                 return cell
             }
@@ -150,6 +169,10 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
                 debugPrint(date)
                 cell.tf.text = "\(date)"
             })
+        }
+        
+        if indexPath.section == 4 && indexPath.row == 0 {
+            pickerView.animation()
         }
     }
     
@@ -192,7 +215,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 // MARK: -点击按钮
-extension ReleaseNoticeViewController: RecruitNeedsCellDelegate {
+extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate {
     
     func tapRelease(sender: UIButton) {
         debugPrint("发布")
@@ -200,6 +223,56 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate {
     
     func recruitNeedsAddRecruite(sender: UIButton) {
         let recruitInfomation = RecruitInformationViewController()
+        recruitInfomation.delegate = self
         navigationController?.pushViewController(recruitInfomation, animated: true)
+    }
+    
+    func recruitInformationSureWithParams(recruit: Recruit) {
+        recruits.append(recruit)
+        let range = NSMakeRange(1, 1)
+        tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
+    }
+    
+    func pickerViewSelectedSure(sender: UIButton) {
+        let city = pickerView.pickerView.delegate!.pickerView!(pickerView!.pickerView!, titleForRow: pickerView.pickerView.selectedRowInComponent(1), forComponent: 1)
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
+        cell.tf.text = city
+    }
+    
+    func noArrowEditCellCheckText(text: String?) {
+        
+    }
+    
+}
+
+extension ReleaseNoticeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return provinceTitles.count
+        } else {
+            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
+            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
+            return cities.count > 0 ? cities.count : 0
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return (provinceTitles[row] as! String)
+        } else {
+            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
+            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
+            return cities.count > row ? (cities[row] as! String) : ""
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            pickerView.reloadComponent(1)
+        }
     }
 }

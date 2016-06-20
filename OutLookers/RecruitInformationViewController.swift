@@ -15,10 +15,34 @@ private extension Selector {
     static let tapSure = #selector(RecruitInformationViewController.tapSure(_:))
 }
 
+protocol RecruitInformationDelegate: class {
+    func recruitInformationSureWithParams(recruit: Recruit)
+}
+
 class RecruitInformationViewController: YGBaseViewController {
 
     var tableView: UITableView!
     var sureButton : UIButton!
+    var pickerView: YGPickerView!
+    weak var delegate: RecruitInformationDelegate!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
+        pickerView.titleLabel.text = "才艺标价单位"
+        UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
+        pickerView.hidden = true
+        pickerView.snp.makeConstraints { (make) in
+            make.left.right.top.bottom.equalTo(pickerView.superview!)
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        pickerView.removeFromSuperview()
+        pickerView = nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +59,7 @@ class RecruitInformationViewController: YGBaseViewController {
         sureButton = UIButton()
         sureButton.setTitle("确定", forState: .Normal)
         sureButton.titleLabel?.font = UIFont.systemFontOfSize(20)
+        sureButton.userInteractionEnabled = false
         sureButton.addTarget(self, action: .tapSure, forControlEvents: .TouchUpInside)
         sureButton.backgroundColor = kGrayColor
         view.addSubview(sureButton)
@@ -48,6 +73,18 @@ class RecruitInformationViewController: YGBaseViewController {
             make.left.right.equalTo(tableView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
             make.bottom.equalTo(sureButton.snp.top)
+        }
+    }
+    
+    func checkParmas() {
+        let cell0 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! ArrowEditCell
+        let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as! NoArrowEditCell
+        if cell0.tf.text?.characters.count > 0 && cell1.tf.text?.characters.count > 0 {
+            sureButton.userInteractionEnabled = true
+            sureButton.backgroundColor = kRedColor
+        } else {
+            sureButton.userInteractionEnabled = false
+            sureButton.backgroundColor = kGrayColor
         }
     }
     
@@ -68,10 +105,12 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+            cell.delegate = self
             cell.setTextInCell("才艺标价", placeholder: "请输入整数")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+            cell.delegate = self
             cell.setTextInCell("服务地区 (选填)", placeholder: "请输入整数 元/人")
             cell.textFieldEnable = false
             return cell
@@ -81,7 +120,16 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 {
             let selectSkill = SelectSkillViewController()
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
+            selectSkill.tapItemInCollection({ [unowned self](text) in
+                cell.tf.text = text
+                self.checkParmas()
+            })
             navigationController?.pushViewController(selectSkill, animated: true)
+        }
+        
+        if indexPath.row == 2 {
+            pickerView.animation()
         }
     }
     
@@ -90,10 +138,29 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
     }
 }
 
-// MARK: -点击按钮
-extension RecruitInformationViewController {
+// MARK: -点击按钮 & NoArrowEditCellDelegate
+extension RecruitInformationViewController: NoArrowEditCellDelegate {
     
     func tapSure(sender: UIButton) {
-        debugPrint("确定")
+        let cell0 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! ArrowEditCell
+        let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as! NoArrowEditCell
+        let cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! NoArrowEditCell
+        let recruit = Recruit(skill: cell0.tf.text!, skillPrice: cell1.tf.text!, service: cell2.tf.text)
+        delegate.recruitInformationSureWithParams(recruit)
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func noArrowEditCellCheckText(text: String?) {
+        self.checkParmas()
+    }
+}
+
+extension RecruitInformationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 0
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 0
     }
 }

@@ -9,11 +9,11 @@
 import UIKit
 
 extension NSString {
-//    func sizeWithFonts(textFont: CGFloat) -> CGSize {
-//        return self.boundingRectWithSize(CGSize(width: ScreenWidth, height: CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFont)], context: nil).size
-//    }
+    func sizeWithFonts(textFont: CGFloat) -> CGSize {
+        return self.boundingRectWithSize(CGSize(width: ScreenWidth, height: CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFont)], context: nil).size
+    }
     
-//    func sizeWithFonts(textFont: CGFloat, maxX: CGFloat) -> CGSize {
-//        return self.boundingRectWithSize(CGSize(width: maxX, height: CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFont)], context: nil).size
-//    }
+    func sizeWithFonts(textFont: CGFloat, maxX: CGFloat) -> CGSize {
+        return self.boundingRectWithSize(CGSize(width: maxX, height: CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFont)], context: nil).size
+    }
 }
