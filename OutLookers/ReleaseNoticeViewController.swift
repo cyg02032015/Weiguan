@@ -148,16 +148,14 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
                 let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! ArrowEditCell
                 selectDatePicker.animation()
                 selectDatePicker.tapSureClosure({ (date) in
-                    debugPrint(date)
-                    cell.tf.text = "\(date)"
+                    cell.tf.text = date.stringFromDate()
                 })
                 
             } else { // 工作结束时间
                 let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)) as! ArrowEditCell
                 selectDatePicker.animation()
                 selectDatePicker.tapSureClosure({ (date) in
-                    debugPrint(date)
-                    cell.tf.text = "\(date)"
+                    cell.tf.text = date.stringFromDate()
                 })
             }
         }
@@ -166,8 +164,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! ArrowEditCell
             selectDatePicker.animation()
             selectDatePicker.tapSureClosure({ (date) in
-                debugPrint(date)
-                cell.tf.text = "\(date)"
+                cell.tf.text = date.stringFromDate()
             })
         }
         

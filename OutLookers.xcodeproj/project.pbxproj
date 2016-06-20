@@ -38,6 +38,10 @@
 		D81F452E1D11A2E4004D9192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452D1D11A2E4004D9192 /* API.swift */; };
 		D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45391D143934004D9192 /* YKBannerView.swift */; };
 		D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */; };
+		D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED21D183C3700A00AA7 /* SkillCell.swift */; };
+		D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */; };
+		D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED61D183C4800A00AA7 /* Recruit.swift */; };
+		D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */; };
 		D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A41D154CEB000C8F91 /* LogViewController.swift */; };
 		D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A81D1566B7000C8F91 /* StringDefine.swift */; };
 		D8F526AB1D15691F000C8F91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F526AA1D15691F000C8F91 /* InfoPlist.strings */; };
@@ -63,9 +67,6 @@
 		E4E5DED51D179BFD00CB8535 /* YKToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED41D179BFD00CB8535 /* YKToast.swift */; };
 		E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED61D179C0700CB8535 /* ColorDefine.swift */; };
 		E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED81D179E1000CB8535 /* YGPickerView.swift */; };
-		E4E5DEDC1D17AB4400CB8535 /* SkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEDB1D17AB4400CB8535 /* SkillCell.swift */; };
-		E4E5DEDE1D17B1B600CB8535 /* SkillHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEDD1D17B1B600CB8535 /* SkillHeaderReusableView.swift */; };
-		E4E5DEE11D17C3C200CB8535 /* Recruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEE01D17C3C200CB8535 /* Recruit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,10 @@
 		D81F452D1D11A2E4004D9192 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = OutLookers/API.swift; sourceTree = SOURCE_ROOT; };
 		D81F45391D143934004D9192 /* YKBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKBannerView.swift; path = OutLookers/YKBannerView.swift; sourceTree = SOURCE_ROOT; };
 		D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowsePhotoViewController.swift; path = OutLookers/BrowsePhotoViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8D81ED21D183C3700A00AA7 /* SkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillCell.swift; path = OutLookers/SkillCell.swift; sourceTree = SOURCE_ROOT; };
+		D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillHeaderReusableView.swift; path = OutLookers/SkillHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
+		D8D81ED61D183C4800A00AA7 /* Recruit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recruit.swift; path = OutLookers/Recruit.swift; sourceTree = SOURCE_ROOT; };
+		D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate-EX.swift"; path = "OutLookers/NSDate-EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8F526A41D154CEB000C8F91 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogViewController.swift; path = OutLookers/LogViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A81D1566B7000C8F91 /* StringDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDefine.swift; path = OutLookers/StringDefine.swift; sourceTree = SOURCE_ROOT; };
 		D8F526AA1D15691F000C8F91 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = OutLookers/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
@@ -157,9 +162,6 @@
 		E4E5DED41D179BFD00CB8535 /* YKToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKToast.swift; path = OutLookers/YKToast.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DED61D179C0700CB8535 /* ColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorDefine.swift; path = OutLookers/ColorDefine.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DED81D179E1000CB8535 /* YGPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPickerView.swift; path = OutLookers/YGPickerView.swift; sourceTree = SOURCE_ROOT; };
-		E4E5DEDB1D17AB4400CB8535 /* SkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCell.swift; sourceTree = SOURCE_ROOT; };
-		E4E5DEDD1D17B1B600CB8535 /* SkillHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
-		E4E5DEE01D17C3C200CB8535 /* Recruit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recruit.swift; sourceTree = SOURCE_ROOT; };
 		E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -236,13 +238,13 @@
 		D8F526BC1D159C1C000C8F91 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
+				D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */,
 				E4E5DEC71D179BD200CB8535 /* NoArrowEditCell.swift */,
 				E4E5DEC81D179BD200CB8535 /* RecruitNeedsCell.swift */,
 				E4E5DEC61D179BD200CB8535 /* ArrowEditCell.swift */,
-				E4E5DEDB1D17AB4400CB8535 /* SkillCell.swift */,
 				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
 				E4E5DECA1D179BD200CB8535 /* WorkDetailCell.swift */,
-				E4E5DEDD1D17B1B600CB8535 /* SkillHeaderReusableView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -359,6 +361,7 @@
 				D81F45021D118D43004D9192 /* UIImage+EX.swift */,
 				D81F45031D118D43004D9192 /* UIView+EX.swift */,
 				D8F526B31D156B58000C8F91 /* GlobleFunc.swift */,
+				D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -452,7 +455,7 @@
 		E4E5DEDF1D17C3A700CB8535 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4E5DEE01D17C3C200CB8535 /* Recruit.swift */,
+				D8D81ED61D183C4800A00AA7 /* Recruit.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
 				D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */,
+				D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */,
 				D81F45051D118D43004D9192 /* InterfaceBuiderEX.swift in Sources */,
 				D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
@@ -761,10 +765,12 @@
 				E4E5DECF1D179BD200CB8535 /* WorkDetailCell.swift in Sources */,
 				D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */,
 				D81F45221D118F3C004D9192 /* SquareViewController.swift in Sources */,
+				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
 				D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
+				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
@@ -772,20 +778,18 @@
 				E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
+				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
 				E4272DDF1D17F27400BE4053 /* CityData.swift in Sources */,
-				E4E5DEDC1D17AB4400CB8535 /* SkillCell.swift in Sources */,
 				E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */,
 				D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */,
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
 				E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */,
 				E4E5DED31D179BEF00CB8535 /* YGSelectDateView.swift in Sources */,
-				E4E5DEDE1D17B1B600CB8535 /* SkillHeaderReusableView.swift in Sources */,
 				D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */,
 				D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,
-				E4E5DEE11D17C3C200CB8535 /* Recruit.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

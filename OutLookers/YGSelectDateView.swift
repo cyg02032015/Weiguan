@@ -72,7 +72,7 @@ class YGSelectDateView: UIView {
         topContainer.addSubview(lineV)
         
         datePicker = UIDatePicker()
-        datePicker.datePickerMode = .Date
+        datePicker.datePickerMode = .DateAndTime
         container.addSubview(datePicker)
         datePicker.locale = NSLocale(localeIdentifier: "zh_Hans")
         
