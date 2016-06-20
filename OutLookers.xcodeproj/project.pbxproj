@@ -42,6 +42,8 @@
 		D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */; };
 		D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED61D183C4800A00AA7 /* Recruit.swift */; };
 		D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */; };
+		D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */; };
+		D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */; };
 		D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A41D154CEB000C8F91 /* LogViewController.swift */; };
 		D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A81D1566B7000C8F91 /* StringDefine.swift */; };
 		D8F526AB1D15691F000C8F91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F526AA1D15691F000C8F91 /* InfoPlist.strings */; };
@@ -128,6 +130,8 @@
 		D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillHeaderReusableView.swift; path = OutLookers/SkillHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED61D183C4800A00AA7 /* Recruit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recruit.swift; path = OutLookers/Recruit.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate-EX.swift"; path = "OutLookers/NSDate-EX.swift"; sourceTree = SOURCE_ROOT; };
+		D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImagePickerController+EX.swift"; path = "OutLookers/UIImagePickerController+EX.swift"; sourceTree = SOURCE_ROOT; };
+		D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPhotoKitController.swift; path = OutLookers/YGPhotoKitController.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A41D154CEB000C8F91 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogViewController.swift; path = OutLookers/LogViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A81D1566B7000C8F91 /* StringDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDefine.swift; path = OutLookers/StringDefine.swift; sourceTree = SOURCE_ROOT; };
 		D8F526AA1D15691F000C8F91 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = OutLookers/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
@@ -254,6 +258,7 @@
 			children = (
 				E4E5DED21D179BEF00CB8535 /* YGSelectDateView.swift */,
 				E4E5DED81D179E1000CB8535 /* YGPickerView.swift */,
+				D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -362,6 +367,7 @@
 				D81F45031D118D43004D9192 /* UIView+EX.swift */,
 				D8F526B31D156B58000C8F91 /* GlobleFunc.swift */,
 				D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */,
+				D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -744,6 +750,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
+				D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */,
 				E4E5DED51D179BFD00CB8535 /* YKToast.swift in Sources */,
@@ -771,6 +778,7 @@
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
+				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,

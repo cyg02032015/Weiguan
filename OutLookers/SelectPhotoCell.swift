@@ -12,9 +12,14 @@ private extension Selector {
     static let tapSelectImg = #selector(SelectPhotoCell.tapSelectImg(_:))
 }
 
+protocol SelectPhotoCellDelegate: class {
+    func selectPhoto(sender: UIButton)
+}
+
 class SelectPhotoCell: UITableViewCell {
 
     var selectImgButton: UIButton!
+    weak var delegate: SelectPhotoCellDelegate!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,7 +52,7 @@ class SelectPhotoCell: UITableViewCell {
     }
     
     func tapSelectImg(sender: UIButton) {
-        debugPrint("添加图片")
+        delegate.selectPhoto(sender)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -49,12 +49,15 @@ class ReleaseNoticeViewController: YGBaseViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        selectDatePicker.removeFromSuperview()
-        selectDatePicker = nil
+        if selectDatePicker != nil {
+            selectDatePicker.removeFromSuperview()
+            selectDatePicker = nil
+        }
         
-        
-        pickerView.removeFromSuperview()
-        pickerView = nil
+        if pickerView != nil {
+            pickerView.removeFromSuperview()
+            pickerView = nil
+        }
     }
     
     override func viewDidLoad() {
@@ -138,6 +141,8 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(selectImgIdentifier, forIndexPath: indexPath) as! SelectPhotoCell
+            cell.delegate = self
+            
             return cell
         }
     }
@@ -208,6 +213,12 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
+    }
+}
+
+extension ReleaseNoticeViewController: SelectPhotoCellDelegate {
+    func selectPhoto(sender: UIButton) {
+        
     }
 }
 
