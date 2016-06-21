@@ -4,7 +4,7 @@
 //
 //  Created by Youngkook on 16/6/20.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//
+//  SelectSkillViewController 里的cell
 
 import UIKit
 
@@ -21,7 +21,6 @@ class SkillCell: UICollectionViewCell {
     func setupSubViews() {
         skill = UIButton()
         skill.setTitle("商业演出", forState: .Normal)
-//        skill.setTitleColor(UIColor.yellowColor(), forState: .Normal)
         skill.backgroundColor = UIColor(hex: 0xC8C8C8)
         skill.layer.cornerRadius = kSizeScale(24) / 2
         skill.titleLabel?.font = UIFont.systemFontOfSize(14)

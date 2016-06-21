@@ -65,11 +65,12 @@ class ReleaseNoticeViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑通告"
-        photoArray = [UIImage(named: "release_announcement_Addpictures")!]
+        
         setupSubViews()
     }
 
     func setupSubViews() {
+        photoArray = [UIImage(named: "release_announcement_Addpictures")!]
         tableView = UITableView()
         view.addSubview(tableView)
         tableView.delegate = self

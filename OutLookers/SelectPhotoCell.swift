@@ -4,7 +4,7 @@
 //
 //  Created by C on 16/6/19.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//
+//  发布通告里的宣传图片
 
 import UIKit
 

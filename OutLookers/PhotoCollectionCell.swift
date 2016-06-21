@@ -4,7 +4,7 @@
 //
 //  Created by Youngkook on 16/6/21.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//
+//  发布通告里的collectionViewCell
 
 import UIKit
 
@@ -35,6 +35,7 @@ class PhotoCollectionCell: UICollectionViewCell {
     func setupSubViews() {
         imgView = UIImageView()
         imgView.userInteractionEnabled = true
+        imgView.clipsToBounds = true
         imgView.contentMode = .ScaleAspectFill
         contentView.addSubview(imgView)
         

@@ -268,8 +268,8 @@
 				E4E5DEC81D179BD200CB8535 /* RecruitNeedsCell.swift */,
 				E4E5DEC61D179BD200CB8535 /* ArrowEditCell.swift */,
 				E4E5DECA1D179BD200CB8535 /* WorkDetailCell.swift */,
-				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
 				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
+				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
 				D8CC558E1D1990660059118F /* SkillSetCell.swift */,
 			);
 			name = View;
@@ -577,7 +577,7 @@
 				TargetAttributes = {
 					E41C22D41D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 8PC7326ELF;
+						DevelopmentTeam = ZJBC9RYT5Z;
 					};
 					E41C22E81D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 private let noArrowIdentifier = "noArrowId"
 private let arrowIdentifier = "arrowId"
@@ -21,7 +22,6 @@ class EditSkillViewController: YGBaseViewController {
 
     var tableView: UITableView!
     var releaseButton: UIButton!
-    var selectDatePicker: YGSelectDateView!
     var pickerView: YGPickerView!
     lazy var recruits: [Recruit] = [Recruit]()
     lazy var provinceTitles = NSArray()
@@ -30,13 +30,6 @@ class EditSkillViewController: YGBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-        selectDatePicker = YGSelectDateView()
-        UIApplication.sharedApplication().keyWindow!.addSubview(selectDatePicker)
-        selectDatePicker.hidden = true
-        selectDatePicker.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
-        }
-        
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
@@ -49,11 +42,7 @@ class EditSkillViewController: YGBaseViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        if selectDatePicker != nil {
-            selectDatePicker.removeFromSuperview()
-            selectDatePicker = nil
-        }
-        
+
         if pickerView != nil {
             pickerView.removeFromSuperview()
             pickerView = nil
@@ -67,6 +56,7 @@ class EditSkillViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
+        photoArray = [UIImage(named: "release_announcement_Add pictures")!]
         tableView = UITableView()
         view.addSubview(tableView)
         tableView.delegate = self
@@ -132,6 +122,7 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(skillSetIdentifier, forIndexPath: indexPath) as! SkillSetCell
+            cell.collectionViewSetDelegate(self, indexPath: indexPath)
             return cell
         }
     }
@@ -183,6 +174,103 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
+    }
+}
+
+extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.photoArray.count > 9 ? self.photoArray.count - 1 : self.photoArray.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoCollectionIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
+        cell.delegate = self
+        cell.img = photoArray[indexPath.item]
+        return cell
+    }
+}
+
+extension EditSkillViewController: PhotoCollectionCellDelegate {
+    func photoCellTapImage(sender: UITapGestureRecognizer) {
+        let img = sender.view as! UIImageView
+        if img.image == photoArray[photoArray.count - 1] {
+            let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
+            actionSheet.showInView(view)
+        } else {
+            debugPrint("another img")
+        }
+    }
+}
+
+extension EditSkillViewController: UIActionSheetDelegate {
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        switch buttonIndex {
+        case 1:// 拍照
+            if UIImagePickerController.isAvailableCamera() && UIImagePickerController.isSupportTakingPhotos(){
+                let controller = UIImagePickerController()
+                controller.sourceType = .Camera
+                if UIImagePickerController.isAvailableCameraDeviceFront() {
+                    controller.cameraDevice = .Front
+                }
+                var mediaTypes = [String]()
+                mediaTypes.append(kUTTypeImage as String)
+                controller.mediaTypes = mediaTypes
+                controller.delegate = self
+                presentViewController(controller, animated: true, completion: {
+                    debugPrint("picker view cotroller is presented")
+                })
+            }
+            break
+        case 2:// 相册
+            if UIImagePickerController.isAvailablePhotoLibrary() {
+                let controller = UIImagePickerController()
+                controller.sourceType = .PhotoLibrary
+                var mediaTypes = [String]()
+                mediaTypes.append(kUTTypeImage as String)
+                controller.mediaTypes = mediaTypes
+                controller.delegate = self
+                presentViewController(controller, animated: true, completion: {
+                    debugPrint("picker view cotroller is presented")
+                })
+            }
+            break
+        default: debugPrint("default switch")
+        }
+        
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        picker.dismissViewControllerAnimated(true) {
+            let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - (ScreenWidth * 9/16)/2, width: ScreenWidth, height: ScreenWidth * 9/16), limitScaleRatio: 3)
+            imgCropper.delegate = self
+            self.presentViewController(imgCropper, animated: true, completion: {
+                //TODO
+            })
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true) { }//TODO
+    }
+}
+
+// MARK: - VPImageCropperDelegate
+extension EditSkillViewController: VPImageCropperDelegate {
+    func imageCropperDidCancel(cropperViewController: VPImageCropperViewController!) {
+        dismissViewControllerAnimated(true) { }//TODO
+    }
+    
+    func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
+        debugPrint("orignal imageData = \(UIImageJPEGRepresentation(editedImage, 1.0)?.length)")
+        debugPrint("压缩 \(editedImage.resetSizeOfImageData(editedImage, maxSize: 100).length)")
+        self.photoArray.insert(editedImage, atIndex: photoArray.count - 1)
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
+        cell.collectionView.reloadData()
+        dismissViewControllerAnimated(true) { }//TODO
     }
 }
 
