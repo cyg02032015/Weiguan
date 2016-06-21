@@ -75,7 +75,8 @@ class SkillSetCell: UITableViewCell {
         contentView.addSubview(addPictureLabel)
 
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (ScreenWidth - 30 - 20) / 5, height: kSizeScale(70))
+        let scaleSize = (ScreenWidth - 30 - 20) / 5
+        layout.itemSize = CGSize(width: scaleSize, height: scaleSize)
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 5
         layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 59, right: 15)
@@ -98,55 +99,55 @@ class SkillSetCell: UITableViewCell {
             make.right.equalTo(line1.superview!)
         }
         
-//        setCoverLabel.snp.makeConstraints { (make) in
-//            make.top.equalTo(line1.snp.bottom).offset(20)
-//            make.left.equalTo(label)
-//            make.height.equalTo(16)
-//        }
-//        
-//        photoButton.snp.makeConstraints { (make) in
-//            make.top.equalTo(setCoverLabel.snp.bottom).offset(15)
-//            make.left.equalTo(label)
-//            make.size.equalTo(CGSize(width: 70, height: 70))
-//        }
-//        
-//        line2.snp.makeConstraints { (make) in
-//            make.height.equalTo(line1)
-//            make.left.equalTo(label)
-//            make.top.equalTo(photoButton.snp.bottom).offset(20)
-//            make.right.equalTo(line1.superview!)
-//        }
-//        
-//        addVideoLabel.snp.makeConstraints { (make) in
-//            make.height.equalTo(16)
-//            make.left.equalTo(label)
-//            make.top.equalTo(line2.snp.bottom).offset(20)
-//        }
+        setCoverLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(line1.snp.bottom).offset(20)
+            make.left.equalTo(label)
+            make.height.equalTo(16)
+        }
         
-//        videoButton.snp.makeConstraints { (make) in
-//            make.left.equalTo(label)
-//            make.top.equalTo(addVideoLabel.snp.bottom).offset(15)
-//            make.size.equalTo(CGSize(width: 70, height: 70))
-//        }
-//        
-//        line3.snp.makeConstraints { (make) in
-//            make.left.equalTo(label)
-//            make.top.equalTo(videoButton.snp.bottom).offset(20)
-//            make.height.equalTo(line1)
-//            make.right.equalTo(line1.superview!)
-//        }
-//        
-//        addPictureLabel.snp.makeConstraints { (make) in
-//            make.top.equalTo(line3.snp.bottom).offset(20)
-//            make.height.equalTo(16)
-//            make.left.equalTo(label)
-//        }
+        photoButton.snp.makeConstraints { (make) in
+            make.top.equalTo(setCoverLabel.snp.bottom).offset(15)
+            make.left.equalTo(label)
+            make.size.equalTo(CGSize(width: 70, height: 70))
+        }
         
-//        collectionView.snp.makeConstraints { (make) in
-//            make.top.equalTo(addPictureLabel.snp.bottom).offset(15)
-//            make.left.right.equalTo(collectionView.superview!)
-//            make.height.equalTo(80)
-//        }
+        line2.snp.makeConstraints { (make) in
+            make.height.equalTo(line1)
+            make.left.equalTo(label)
+            make.top.equalTo(photoButton.snp.bottom).offset(20)
+            make.right.equalTo(line1.superview!)
+        }
+        
+        addVideoLabel.snp.makeConstraints { (make) in
+            make.height.equalTo(16)
+            make.left.equalTo(label)
+            make.top.equalTo(line2.snp.bottom).offset(20)
+        }
+        
+        videoButton.snp.makeConstraints { (make) in
+            make.left.equalTo(label)
+            make.top.equalTo(addVideoLabel.snp.bottom).offset(15)
+            make.size.equalTo(CGSize(width: 70, height: 70))
+        }
+        
+        line3.snp.makeConstraints { (make) in
+            make.left.equalTo(label)
+            make.top.equalTo(videoButton.snp.bottom).offset(20)
+            make.height.equalTo(line1)
+            make.right.equalTo(line1.superview!)
+        }
+        
+        addPictureLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(line3.snp.bottom).offset(20)
+            make.height.equalTo(16)
+            make.left.equalTo(label)
+        }
+        
+        collectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(addPictureLabel.snp.bottom).offset(15)
+            make.left.right.equalTo(collectionView.superview!)
+            make.height.equalTo(80)
+        }
     }
     
     func tapSetCover(sender: UIButton) {

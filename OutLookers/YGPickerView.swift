@@ -26,6 +26,10 @@ class YGPickerView: UIView {
     var pickerView: UIPickerView!
     var titleLabel: UILabel!
     var container: UIView!
+    var cancel: UIButton!
+    var sure: UIButton!
+    var topContainer: UIView!
+    var lineV: UIView!
     weak var delegate: YGPickerViewDelegate!
     
     convenience init(frame: CGRect, delegate: protocol<UIPickerViewDataSource, UIPickerViewDelegate>) {
@@ -47,10 +51,10 @@ class YGPickerView: UIView {
         container.backgroundColor = UIColor.whiteColor()
         addSubview(container)
         
-        let topContainer = UIView()
+        topContainer = UIView()
         container.addSubview(topContainer)
         
-        let cancel = UIButton()
+        cancel = UIButton()
         cancel.setTitle("取消", forState: .Normal)
         cancel.setTitleColor(kRedColor, forState: .Normal)
         cancel.titleLabel?.font = UIFont.systemFontOfSize(16)
@@ -60,7 +64,7 @@ class YGPickerView: UIView {
         cancel.addTarget(self, action: .tapCancel, forControlEvents: .TouchUpInside)
         topContainer.addSubview(cancel)
         
-        let sure = UIButton()
+        sure = UIButton()
         sure.setTitle("确定", forState: .Normal)
         sure.titleLabel?.font = UIFont.systemFontOfSize(16)
         sure.layer.cornerRadius = 5
@@ -74,7 +78,7 @@ class YGPickerView: UIView {
         titleLabel.font = UIFont.systemFontOfSize(16)
         topContainer.addSubview(titleLabel)
         
-        let lineV = UIView()
+        lineV = UIView()
         lineV.backgroundColor = UIColor(hex: 0xE4E4E4)
         topContainer.addSubview(lineV)
         
@@ -82,7 +86,9 @@ class YGPickerView: UIView {
         pickerView.delegate = delegate
         pickerView.dataSource = delegate
         container.addSubview(pickerView)
-        
+    }
+    
+    override func layoutSubviews() {
         container.frame = CGRect(x: 0, y: ScreenHeight, width: ScreenWidth, height: kSelectDateHeight)
         
         topContainer.frame = CGRect(x: 0, y: 0, width: ScreenWidth, height: 50.5)
@@ -96,7 +102,7 @@ class YGPickerView: UIView {
         lineV.frame = CGRect(x: 0, y: CGRectGetMaxY(topContainer.frame) - 1, width: ScreenWidth, height: 1)
         
         pickerView.frame = CGRect(x: 0, y: CGRectGetMaxY(topContainer.frame), width: ScreenWidth, height: CGRectGetHeight(container.frame) - CGRectGetHeight(topContainer.frame))
-
+        super.layoutSubviews()
     }
     
     func animation() {
