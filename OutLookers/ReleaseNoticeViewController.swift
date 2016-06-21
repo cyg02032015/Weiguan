@@ -142,6 +142,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             }
         } else if indexPath.section == 5 {
             let cell = tableView.dequeueReusableCellWithIdentifier(workDetailIdentifier, forIndexPath: indexPath) as! WorkDetailCell
+            cell.setTextInCell("工作详情", placeholder: "请输入工作内容")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(selectImgIdentifier, forIndexPath: indexPath) as! SelectPhotoCell
@@ -293,7 +294,7 @@ extension ReleaseNoticeViewController: UIActionSheetDelegate {
 extension ReleaseNoticeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
-        picker.dismissViewControllerAnimated(true) { 
+        picker.dismissViewControllerAnimated(true) {
             let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - (ScreenWidth * 9/16)/2, width: ScreenWidth, height: ScreenWidth * 9/16), limitScaleRatio: 3)
             imgCropper.delegate = self
             self.presentViewController(imgCropper, animated: true, completion: {
@@ -314,6 +315,8 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
     }
     
     func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
+        debugPrint("orignal imageData = \(UIImageJPEGRepresentation(editedImage, 1.0)?.length)")
+        debugPrint("压缩 \(editedImage.resetSizeOfImageData(editedImage, maxSize: 100).length)")
         self.photoArray.insert(editedImage, atIndex: photoArray.count - 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 6)) as! SelectPhotoCell
         cell.collectionView.reloadData()

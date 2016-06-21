@@ -11,15 +11,56 @@ import UIKit
 private let SkillIdentifier = "skillId"
 private let SkillHeaderIdentifier = "skillHeaderId"
 
+enum SelectSkillType: Int {
+    case Back = 0, Tovc, View
+}
+
 class SelectSkillViewController: YGBaseViewController {
 
     
     typealias TapItemClosure = (text: String) -> Void
     var tapItem: TapItemClosure!
     var collectionView: UICollectionView!
-    
+    var type: SelectSkillType!
     lazy var imgStrings = ["help", "teach ", "accompany"]
     lazy var titleStrings = ["帮帮我", "教教我", "陪陪我"]
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if type == SelectSkillType.Tovc {
+             navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
+       
+//        selectDatePicker = YGSelectDateView()
+//        UIApplication.sharedApplication().keyWindow!.addSubview(selectDatePicker)
+//        selectDatePicker.hidden = true
+//        selectDatePicker.snp.makeConstraints { (make) in
+//            make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
+//        }
+//        
+//        provinceTitles = CitiesData.sharedInstance().provinceTitle()
+//        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
+//        pickerView.delegate = self
+//        UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
+//        pickerView.hidden = true
+//        pickerView.snp.makeConstraints { (make) in
+//            make.left.right.top.bottom.equalTo(pickerView.superview!)
+//        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+//        if selectDatePicker != nil {
+//            selectDatePicker.removeFromSuperview()
+//            selectDatePicker = nil
+//        }
+//        
+//        if pickerView != nil {
+//            pickerView.removeFromSuperview()
+//            pickerView = nil
+//        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,15 +107,28 @@ extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewD
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        // 单选
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SkillCell
+        cell.skill.backgroundColor = UIColor(hex: 0xC8C8C8)
+    }
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SkillCell
         cell.skill.backgroundColor = kRedColor
-        if tapItem != nil {
-            guard let t = cell.skill.titleLabel?.text else { fatalError("text nil") }
-            self.tapItem(text: t)
-        }
-        delay (0.3) {
-            self.navigationController?.popViewControllerAnimated(true)
+        if type == SelectSkillType.Back {
+            if tapItem != nil {
+                guard let t = cell.skill.titleLabel?.text else { fatalError("text nil") }
+                self.tapItem(text: t)
+            }
+            delay (0.3) {
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+        } else if type == SelectSkillType.Tovc {
+            let vc = EditSkillViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            
         }
     }
     

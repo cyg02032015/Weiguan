@@ -38,6 +38,10 @@
 		D81F452E1D11A2E4004D9192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452D1D11A2E4004D9192 /* API.swift */; };
 		D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45391D143934004D9192 /* YKBannerView.swift */; };
 		D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */; };
+		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
+		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
+		D8686C1B1D1987E000B3982A /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C1A1D1987E000B3982A /* EditSkillViewController.swift */; };
+		D8CC558F1D1990660059118F /* SkillSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC558E1D1990660059118F /* SkillSetCell.swift */; };
 		D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED21D183C3700A00AA7 /* SkillCell.swift */; };
 		D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */; };
 		D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED61D183C4800A00AA7 /* Recruit.swift */; };
@@ -57,7 +61,6 @@
 		E4272DDF1D17F27400BE4053 /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4272DDE1D17F27400BE4053 /* CityData.swift */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
-		E47ADF4F1D194A9A00A2F4BD /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF4E1D194A9A00A2F4BD /* PhotoCollectionCell.swift */; };
 		E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */; };
 		E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */; };
 		E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */; };
@@ -128,6 +131,10 @@
 		D81F452D1D11A2E4004D9192 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = OutLookers/API.swift; sourceTree = SOURCE_ROOT; };
 		D81F45391D143934004D9192 /* YKBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKBannerView.swift; path = OutLookers/YKBannerView.swift; sourceTree = SOURCE_ROOT; };
 		D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowsePhotoViewController.swift; path = OutLookers/BrowsePhotoViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
+		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
+		D8686C1A1D1987E000B3982A /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8CC558E1D1990660059118F /* SkillSetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillSetCell.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED21D183C3700A00AA7 /* SkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillCell.swift; path = OutLookers/SkillCell.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillHeaderReusableView.swift; path = OutLookers/SkillHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED61D183C4800A00AA7 /* Recruit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recruit.swift; path = OutLookers/Recruit.swift; sourceTree = SOURCE_ROOT; };
@@ -157,7 +164,6 @@
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
 		E4272E061D19328D00BE4053 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = OutLookers/VPImageCropper/VPImageCropperViewController.h; sourceTree = SOURCE_ROOT; };
 		E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPImageCropperViewController.m; path = OutLookers/VPImageCropper/VPImageCropperViewController.m; sourceTree = SOURCE_ROOT; };
-		E47ADF4E1D194A9A00A2F4BD /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecruitInformationViewController.swift; path = OutLookers/RecruitInformationViewController.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseNoticeViewController.swift; path = OutLookers/ReleaseNoticeViewController.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectSkillViewController.swift; path = OutLookers/SelectSkillViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -234,11 +240,20 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		D8686C191D19840800B3982A /* Skill */ = {
+			isa = PBXGroup;
+			children = (
+				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
+				D8686C1A1D1987E000B3982A /* EditSkillViewController.swift */,
+			);
+			name = Skill;
+			sourceTree = "<group>";
+		};
 		D8F526BB1D159289000C8F91 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D8686C191D19840800B3982A /* Skill */,
 				E4E5DEDA1D17A8BB00CB8535 /* Notice */,
-				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
 				D81F45231D118F48004D9192 /* IssueViewController.swift */,
 			);
 			name = Controller;
@@ -247,6 +262,7 @@
 		D8F526BC1D159C1C000C8F91 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */,
 				D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */,
 				E4E5DEC71D179BD200CB8535 /* NoArrowEditCell.swift */,
 				E4E5DEC81D179BD200CB8535 /* RecruitNeedsCell.swift */,
@@ -254,7 +270,7 @@
 				E4E5DECA1D179BD200CB8535 /* WorkDetailCell.swift */,
 				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
 				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
-				E47ADF4E1D194A9A00A2F4BD /* PhotoCollectionCell.swift */,
+				D8CC558E1D1990660059118F /* SkillSetCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -374,6 +390,7 @@
 				D8F526B31D156B58000C8F91 /* GlobleFunc.swift */,
 				D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */,
 				D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */,
+				D8686C171D19752300B3982A /* UIScrollView+EX.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -784,7 +801,6 @@
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
-				E47ADF4F1D194A9A00A2F4BD /* PhotoCollectionCell.swift in Sources */,
 				E4E5DECB1D179BD200CB8535 /* ArrowEditCell.swift in Sources */,
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
 				E4E5DECF1D179BD200CB8535 /* WorkDetailCell.swift in Sources */,
@@ -796,6 +812,7 @@
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
+				D8CC558F1D1990660059118F /* SkillSetCell.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
@@ -807,6 +824,7 @@
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
 				E4272DDF1D17F27400BE4053 /* CityData.swift in Sources */,
 				E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */,
+				D8686C1B1D1987E000B3982A /* EditSkillViewController.swift in Sources */,
 				D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */,
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
@@ -817,7 +835,9 @@
 				E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,
+				D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
+				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

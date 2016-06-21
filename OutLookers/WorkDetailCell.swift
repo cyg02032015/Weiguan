@@ -12,6 +12,7 @@ class WorkDetailCell: UITableViewCell {
 
     var placeholderLabel: UILabel!
     var tv: UITextView!
+    var label: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,7 +21,7 @@ class WorkDetailCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        let label = UILabel()
+        label = UILabel()
         label.text = "工作详情"
         label.font = UIFont.systemFontOfSize(16)
         contentView.addSubview(label)
@@ -56,7 +57,10 @@ class WorkDetailCell: UITableViewCell {
         }
     }
 
-    
+    func setTextInCell(text: String, placeholder: String) {
+        label.text = text
+        placeholderLabel.text = placeholder
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

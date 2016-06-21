@@ -125,7 +125,9 @@ extension IssueViewController {
         case BtnType.Picture.rawValue:
             debugPrint("图片")
         case BtnType.Skill.rawValue:
-            debugPrint("才艺")
+            let skill = SelectSkillViewController()
+            skill.type = SelectSkillType.Tovc
+            navigationController?.pushViewController(skill, animated: true)
         case BtnType.Notice.rawValue:
             let notice = ReleaseNoticeViewController()
             navigationController?.pushViewController(notice, animated: true)

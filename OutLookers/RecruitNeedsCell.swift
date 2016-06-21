@@ -12,8 +12,8 @@ private extension Selector {
     static let tapAdd = #selector(RecruitNeedsCell.tapAdd(_:))
 }
 
-protocol RecruitNeedsCellDelegate: class {
-    func recruitNeedsAddRecruite(sender: UIButton)
+@objc protocol RecruitNeedsCellDelegate: class {
+    optional func recruitNeedsAddRecruite(sender: UIButton)
 }
 
 class RecruitNeedsCell: UITableViewCell {
@@ -104,7 +104,7 @@ class RecruitNeedsCell: UITableViewCell {
         })
     }
     func tapAdd(sender: UIButton) {
-        delegate.recruitNeedsAddRecruite(sender)
+        delegate.recruitNeedsAddRecruite!(sender)
     }
     
     
