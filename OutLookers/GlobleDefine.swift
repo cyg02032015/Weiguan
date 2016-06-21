@@ -24,5 +24,7 @@ let DeviceId   = "1234567891"// 设备代码
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
 
-// 字体大小
+func kSizeScale(a: CGFloat) -> CGFloat {
+    return a * UIScreen.mainScreen().bounds.width / 375.0
+}
 

@@ -23,6 +23,7 @@
 @property (nonatomic, assign) CGRect oldFrame;
 @property (nonatomic, assign) CGRect largeFrame;
 @property (nonatomic, assign) CGFloat limitRatio;
+@property (nonatomic, assign) CGRect smallFrame;
 
 @property (nonatomic, assign) CGRect latestFrame;
 
@@ -62,7 +63,7 @@
 - (void)initView {
     self.view.backgroundColor = [UIColor blackColor];
     
-    self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
     [self.showImgView setMultipleTouchEnabled:YES];
     [self.showImgView setUserInteractionEnabled:YES];
     [self.showImgView setImage:self.originalImage];
@@ -79,12 +80,13 @@
     self.showImgView.frame = self.oldFrame;
     
     self.largeFrame = CGRectMake(0, 0, self.limitRatio * self.oldFrame.size.width, self.limitRatio * self.oldFrame.size.height);
+    self.smallFrame = CGRectMake(0, 0, self.oldFrame.size.width / self.limitRatio, self.oldFrame.size.height / self.limitRatio);
     
     [self addGestureRecognizers];
     [self.view addSubview:self.showImgView];
     
     self.overlayView = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.overlayView.alpha = .5f;
+    self.overlayView.alpha = .7f;
     self.overlayView.backgroundColor = [UIColor blackColor];
     self.overlayView.userInteractionEnabled = NO;
     self.overlayView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -226,6 +228,9 @@
 - (CGRect)handleScaleOverflow:(CGRect)newFrame {
     // bounce to original frame
     CGPoint oriCenter = CGPointMake(newFrame.origin.x + newFrame.size.width/2, newFrame.origin.y + newFrame.size.height/2);
+    if (newFrame.size.width < self.smallFrame.size.width) {
+        newFrame = self.smallFrame;
+    }
     if (newFrame.size.width < self.oldFrame.size.width) {
         newFrame = self.oldFrame;
     }

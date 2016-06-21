@@ -23,7 +23,7 @@ class SkillCell: UICollectionViewCell {
         skill.setTitle("商业演出", forState: .Normal)
 //        skill.setTitleColor(UIColor.yellowColor(), forState: .Normal)
         skill.backgroundColor = UIColor(hex: 0xC8C8C8)
-        skill.layer.cornerRadius = 13
+        skill.layer.cornerRadius = kSizeScale(24) / 2
         skill.titleLabel?.font = UIFont.systemFontOfSize(14)
         skill.userInteractionEnabled = false
         contentView.addSubview(skill)

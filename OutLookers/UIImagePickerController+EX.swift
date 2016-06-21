@@ -13,31 +13,31 @@ import MobileCoreServices
 extension UIImagePickerController {
     
     /// 相册是否可用
-    func isAvailablePhotoLibrary() -> Bool {
+    class func isAvailablePhotoLibrary() -> Bool {
         return UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary)
     }
     /// 相机是否可用
-    func isAvailableCamera() -> Bool {
+    class func isAvailableCamera() -> Bool {
         return UIImagePickerController.isSourceTypeAvailable(.Camera)
     }
     
     /// 是否可以保存相册可用
-    func isAvailableSavedPhotosAlbum() -> Bool {
+    class func isAvailableSavedPhotosAlbum() -> Bool {
         return UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum)
     }
     
     /// 是否后置摄像头可用
-    func isAvailableCameraDeviceRear() -> Bool {
+    class func isAvailableCameraDeviceRear() -> Bool {
         return UIImagePickerController.isCameraDeviceAvailable(.Rear)
     }
     
     /// 是否前置摄像头可用
-    func isAvailableCameraDeviceFront() -> Bool {
+    class func isAvailableCameraDeviceFront() -> Bool {
         return UIImagePickerController.isCameraDeviceAvailable(.Front)
     }
     
     /// 是否支持拍照权限
-    func isSupportTakingPhotos() -> Bool {
+    class func isSupportTakingPhotos() -> Bool {
         let mediaType = AVMediaTypeVideo
         let authStatus = AVCaptureDevice.authorizationStatusForMediaType(mediaType)
         if authStatus == .Restricted || authStatus == .Denied {

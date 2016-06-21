@@ -8,18 +8,10 @@
 
 import UIKit
 
-private extension Selector {
-    static let tapSelectImg = #selector(SelectPhotoCell.tapSelectImg(_:))
-}
-
-protocol SelectPhotoCellDelegate: class {
-    func selectPhoto(sender: UIButton)
-}
+public let photoCollectionIdentifier = "photoCollectionId"
 
 class SelectPhotoCell: UITableViewCell {
-
-    var selectImgButton: UIButton!
-    weak var delegate: SelectPhotoCellDelegate!
+    var collectionView: UICollectionView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,10 +25,16 @@ class SelectPhotoCell: UITableViewCell {
         label.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(label)
         
-        selectImgButton = UIButton()
-        selectImgButton.setImage(UIImage(named: "release_announcement_Addpictures"), forState: .Normal)
-        selectImgButton.addTarget(self, action: .tapSelectImg, forControlEvents: .TouchUpInside)
-        contentView.addSubview(selectImgButton)
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: (ScreenWidth - 30 - 15) / 3, height: kSizeScale(63))
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 28, right: 15)
+        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.scrollEnabled = false
+        contentView.addSubview(collectionView)
+        collectionView.registerClass(PhotoCollectionCell.self, forCellWithReuseIdentifier: photoCollectionIdentifier)
         
         label.snp.makeConstraints { (make) in
             make.left.equalTo(label.superview!).offset(15)
@@ -44,15 +42,16 @@ class SelectPhotoCell: UITableViewCell {
             make.height.equalTo(15)
         }
         
-        selectImgButton.snp.makeConstraints { (make) in
-            make.left.equalTo(label)
+        collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(label.snp.bottom).offset(10)
-            make.size.equalTo(CGSize(width: 112, height: 63))
+            make.left.right.bottom.equalTo(collectionView.superview!)
         }
     }
     
-    func tapSelectImg(sender: UIButton) {
-        delegate.selectPhoto(sender)
+    func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) {
+        collectionView.delegate = delegate
+        collectionView.dataSource = delegate
+        collectionView.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {

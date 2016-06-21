@@ -5,3 +5,4 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import <ifaddrs.h>
 #import "CitiesData.h"
+#import "VPImageCropperViewController.h"

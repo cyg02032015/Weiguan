@@ -7,6 +7,7 @@
 //  发布通告
 
 import UIKit
+import MobileCoreServices
 
 private let noArrowIdentifier = "noArrowId"
 private let arrowIdentifier = "arrowId"
@@ -26,6 +27,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     var pickerView: YGPickerView!
     lazy var recruits: [Recruit] = [Recruit]()
     lazy var provinceTitles = NSArray()
+    var photoArray: [UIImage]!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,6 +65,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑通告"
+        photoArray = [UIImage(named: "release_announcement_Addpictures")!]
         setupSubViews()
     }
 
@@ -103,6 +106,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -141,7 +145,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(selectImgIdentifier, forIndexPath: indexPath) as! SelectPhotoCell
-            cell.delegate = self
+            cell.collectionViewSetDelegate(self, indexPath: indexPath)
             
             return cell
         }
@@ -216,13 +220,108 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-extension ReleaseNoticeViewController: SelectPhotoCellDelegate {
-    func selectPhoto(sender: UIButton) {
-        
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+extension ReleaseNoticeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.photoArray.count > 9 ? self.photoArray.count - 1 : self.photoArray.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoCollectionIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
+        cell.delegate = self
+        cell.img = photoArray[indexPath.item]
+        return cell
     }
 }
 
-// MARK: -点击按钮
+// MARK: - PhotoCollectionCellDelegate
+extension ReleaseNoticeViewController: PhotoCollectionCellDelegate {
+    func photoCellTapImage(sender: UITapGestureRecognizer) {
+        let img = sender.view as! UIImageView
+        if img.image == photoArray[photoArray.count - 1] {
+            let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
+            actionSheet.showInView(view)
+        } else {
+            debugPrint("another img")
+        }
+    }
+}
+
+extension ReleaseNoticeViewController: UIActionSheetDelegate {
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        switch buttonIndex {
+        case 1:// 拍照
+            if UIImagePickerController.isAvailableCamera() && UIImagePickerController.isSupportTakingPhotos(){
+                let controller = UIImagePickerController()
+                controller.sourceType = .Camera
+                if UIImagePickerController.isAvailableCameraDeviceFront() {
+                    controller.cameraDevice = .Front
+                }
+                var mediaTypes = [String]()
+                mediaTypes.append(kUTTypeImage as String)
+                controller.mediaTypes = mediaTypes
+                controller.delegate = self
+                presentViewController(controller, animated: true, completion: {
+                    debugPrint("picker view cotroller is presented")
+                })
+            }
+            break
+        case 2:// 相册
+            if UIImagePickerController.isAvailablePhotoLibrary() {
+                let controller = UIImagePickerController()
+                controller.sourceType = .PhotoLibrary
+                var mediaTypes = [String]()
+                mediaTypes.append(kUTTypeImage as String)
+                controller.mediaTypes = mediaTypes
+                controller.delegate = self
+                presentViewController(controller, animated: true, completion: {
+                    debugPrint("picker view cotroller is presented")
+                })
+            }
+            break
+        default: debugPrint("default switch")
+        }
+
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate 
+extension ReleaseNoticeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        picker.dismissViewControllerAnimated(true) { 
+            let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - (ScreenWidth * 9/16)/2, width: ScreenWidth, height: ScreenWidth * 9/16), limitScaleRatio: 3)
+            imgCropper.delegate = self
+            self.presentViewController(imgCropper, animated: true, completion: {
+                //TODO
+            })
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true) { }//TODO
+    }
+}
+
+// MARK: - VPImageCropperDelegate
+extension ReleaseNoticeViewController: VPImageCropperDelegate {
+    func imageCropperDidCancel(cropperViewController: VPImageCropperViewController!) {
+        dismissViewControllerAnimated(true) { }//TODO
+    }
+    
+    func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
+        self.photoArray.insert(editedImage, atIndex: photoArray.count - 1)
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 6)) as! SelectPhotoCell
+        cell.collectionView.reloadData()
+        dismissViewControllerAnimated(true) { }//TODO
+    }
+}
+
+// MARK: - RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate
 extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate {
     
     func tapRelease(sender: UIButton) {
@@ -253,6 +352,7 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     
 }
 
+// MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension ReleaseNoticeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2

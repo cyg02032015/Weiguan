@@ -24,7 +24,7 @@ class HomeViewController: YGBaseViewController {
         bannerView.snp.makeConstraints { (make) in
             make.left.right.equalTo(bannerView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
-            make.height.equalTo(250)
+            make.height.equalTo(kSizeScale(250))
         }
         bannerView.startTapActionClosure { (index) in
             print(index)

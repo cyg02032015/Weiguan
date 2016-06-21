@@ -20,6 +20,4 @@ extension NSDate {
     func stringFromDate() -> String {
         return stringFromDateWith("yyyy-MM-dd HH:mm")
     }
-    
-    
 }
