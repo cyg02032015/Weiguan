@@ -12,6 +12,7 @@ public let photoCollectionIdentifier = "photoCollectionId"
 
 class SelectPhotoCell: UITableViewCell {
     var collectionView: UICollectionView!
+    var label: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,7 +21,7 @@ class SelectPhotoCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        let label = UILabel()
+        label = UILabel()
         label.text = "工作详情"
         label.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(label)
@@ -35,7 +36,9 @@ class SelectPhotoCell: UITableViewCell {
         collectionView.scrollEnabled = false
         contentView.addSubview(collectionView)
         collectionView.registerClass(PhotoCollectionCell.self, forCellWithReuseIdentifier: photoCollectionIdentifier)
-        
+    }
+    
+    override func layoutSubviews() {
         label.snp.makeConstraints { (make) in
             make.left.equalTo(label.superview!).offset(15)
             make.top.equalTo(label.superview!).offset(15)
@@ -46,6 +49,7 @@ class SelectPhotoCell: UITableViewCell {
             make.top.equalTo(label.snp.bottom).offset(10)
             make.left.right.bottom.equalTo(collectionView.superview!)
         }
+        super.layoutSubviews()
     }
     
     func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) {

@@ -8,15 +8,9 @@
 
 import UIKit
 
-
-protocol PhotoCollectionCellDelegate: class {
-    func photoCellTapImage(sender: UITapGestureRecognizer)
-}
-
 class PhotoCollectionCell: UICollectionViewCell {
     
     var imgView: UIImageView!
-    weak var delegate: PhotoCollectionCellDelegate!
     var img: UIImage? {
         didSet {
             imgView.image = img

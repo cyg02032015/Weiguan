@@ -24,14 +24,16 @@ class RecruitInformationViewController: YGBaseViewController {
     var tableView: UITableView!
     var sureButton : UIButton!
     var pickerView: YGPickerView!
+    lazy var skillUnitPickerArray = [String]()
     weak var delegate: RecruitInformationDelegate!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.titleLabel.text = "才艺标价单位"
         UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
+        pickerView.delegate = self
         pickerView.hidden = true
         pickerView.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalTo(pickerView.superview!)
@@ -140,7 +142,7 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
 }
 
 // MARK: -点击按钮 & NoArrowEditCellDelegate
-extension RecruitInformationViewController: NoArrowEditCellDelegate {
+extension RecruitInformationViewController: NoArrowEditCellDelegate, YGPickerViewDelegate {
     
     func tapSure(sender: UIButton) {
         let cell0 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! ArrowEditCell
@@ -154,14 +156,25 @@ extension RecruitInformationViewController: NoArrowEditCellDelegate {
     func noArrowEditCellCheckText(text: String?) {
         self.checkParmas()
     }
+    
+    func pickerViewSelectedSure(sender: UIButton) {
+        let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! NoArrowEditCell
+        cell.tf.text = skillUnit
+    }
 }
 
 extension RecruitInformationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 0
+        return skillUnitPickerArray.count
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 0
+        return 1
     }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return skillUnitPickerArray[row]
+    }
+    
 }

@@ -121,9 +121,11 @@ extension IssueViewController {
     func tapCircle(sender: UIButton) {
         switch sender.tag {
         case BtnType.Video.rawValue:
-            debugPrint("视频")
+            let video = ReleaseVideoViewController()
+            navigationController?.pushViewController(video, animated: true)
         case BtnType.Picture.rawValue:
-            debugPrint("图片")
+            let picture = ReleasePictureViewController()
+            navigationController?.pushViewController(picture, animated: true)
         case BtnType.Skill.rawValue:
             let skill = SelectSkillViewController()
             skill.type = SelectSkillType.Tovc

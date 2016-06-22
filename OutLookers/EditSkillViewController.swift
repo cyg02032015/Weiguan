@@ -96,7 +96,6 @@ class EditSkillViewController: YGBaseViewController {
             make.top.equalTo(self.snp.topLayoutGuideBottom)
             make.bottom.equalTo(releaseButton.snp.top)
         }
-        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

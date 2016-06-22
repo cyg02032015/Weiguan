@@ -7,6 +7,7 @@
 // 招募需求
 
 import UIKit
+import SnapKit
 
 private extension Selector {
     static let tapAdd = #selector(RecruitNeedsCell.tapAdd(_:))
@@ -21,7 +22,6 @@ class RecruitNeedsCell: UITableViewCell {
     weak var delegate: RecruitNeedsCellDelegate!
     var recruitLabel: UILabel!
     var addButton: UIButton!
-    var hei: Int = 43
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,23 +55,16 @@ class RecruitNeedsCell: UITableViewCell {
             })
             last = button
             if index == recruit.count - 1 {
-                hei = 43 + 46 * recruit.count
+                addButton.snp.updateConstraints(closure: { (make) in
+                    make.top.greaterThanOrEqualTo(last!.snp.bottom).offset(8).priorityHigh()
+                })
                 setNeedsUpdateConstraints()
-                updateConstraintsIfNeeded()
+                updateConstraints()
                 UIView.animateWithDuration(0.1, animations: {
                     self.layoutIfNeeded()
                 })
             }
         }
-    }
-    
-    override func updateConstraints() {
-            addButton.snp.updateConstraints { (make) in
-                make.size.equalTo(CGSize(width: 60, height: 30))
-                make.left.equalTo(recruitLabel)
-                make.top.equalTo(hei)
-            }
-        super.updateConstraints()
     }
     
     override class func requiresConstraintBasedLayout() -> Bool {
@@ -99,7 +92,7 @@ class RecruitNeedsCell: UITableViewCell {
         
         addButton.snp.makeConstraints(closure: { (make) in
             make.size.equalTo(CGSize(width: 60, height: 30))
-            make.top.equalTo(43)
+            make.top.equalTo(recruitLabel.snp.bottom).offset(15).priorityLow()
             make.left.equalTo(recruitLabel)
         })
     }

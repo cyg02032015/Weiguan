@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import SnapKit
 
 private let kSelectDateHeight: CGFloat = 197
 
@@ -89,33 +90,70 @@ class YGPickerView: UIView {
     }
     
     override func layoutSubviews() {
-        container.frame = CGRect(x: 0, y: ScreenHeight, width: ScreenWidth, height: kSelectDateHeight)
+        container.snp.makeConstraints { (make) in
+            make.left.right.equalTo(container.superview!)
+            make.height.equalTo(kSelectDateHeight)
+            make.bottom.equalTo(container.superview!).offset(kSelectDateHeight).priorityLow()
+        }
         
-        topContainer.frame = CGRect(x: 0, y: 0, width: ScreenWidth, height: 50.5)
+        topContainer.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(topContainer.superview!)
+            make.height.equalTo(50.5)
+        }
         
-        cancel.frame = CGRect(x: 20, y: topContainer.center.y - 15, width: 60, height: 30)
+        cancel.snp.makeConstraints { (make) in
+            make.left.equalTo(cancel.superview!).offset(20)
+            make.size.equalTo(CGSize(width: 60, height: 30))
+            make.centerY.equalTo(cancel.superview!)
+        }
         
-        sure.frame = CGRect(x: ScreenWidth - 20 - 60, y: topContainer.center.y - 15, width: 60, height: 30)
+        sure.snp.makeConstraints { (make) in
+            make.right.equalTo(sure.superview!).offset(-20)
+            make.size.equalTo(CGSize(width: 60, height: 30))
+            make.centerY.equalTo(sure.superview!)
+        }
         
-        titleLabel.frame = CGRect(x: CGRectGetMaxX(cancel.frame) + 10, y: topContainer.center.y - 15, width: ScreenWidth - CGRectGetMaxX(cancel.frame) - CGRectGetMinX(sure.frame), height: 30)
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(cancel.snp.right).offset(10)
+            make.right.equalTo(sure.snp.left).offset(-10)
+            make.centerY.equalTo(titleLabel.superview!)
+            make.height.equalTo(20)
+        }
         
-        lineV.frame = CGRect(x: 0, y: CGRectGetMaxY(topContainer.frame) - 1, width: ScreenWidth, height: 1)
+        lineV.snp.makeConstraints { (make) in
+            make.left.right.equalTo(lineV.superview!)
+            make.bottom.equalTo(lineV.superview!)
+            make.height.equalTo(0.5)
+        }
         
-        picker.frame = CGRect(x: 0, y: CGRectGetMaxY(topContainer.frame), width: ScreenWidth, height: CGRectGetHeight(container.frame) - CGRectGetHeight(topContainer.frame))
-        super.layoutSubviews()
+        picker.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalTo(picker.superview!)
+            make.top.equalTo(topContainer.snp.bottom)
+        }
     }
     
     func animation() {
+        
+        container.snp.updateConstraints { (make) in
+            make.bottom.equalTo(container.superview!)
+        }
+        setNeedsUpdateConstraints()
+        updateConstraints()
         self.hidden = false
         UIView.animateWithDuration(0.3) {
-            self.container.frame.origin.y = ScreenHeight - kSelectDateHeight
+            self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
         }
     }
     
     func tapCancel(sender: UIButton) {
+        container.snp.updateConstraints { (make) in
+            make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
+        }
+        setNeedsUpdateConstraints()
+        updateConstraints()
         UIView.animateWithDuration(0.3, animations: {
-            self.container.frame.origin.y = ScreenHeight
+            self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
             self.hidden = true
@@ -123,9 +161,14 @@ class YGPickerView: UIView {
     }
     
     func tapSure(sender: UIButton) {
+        container.snp.updateConstraints { (make) in
+            make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
+        }
+        setNeedsUpdateConstraints()
+        updateConstraints()
         delegate.pickerViewSelectedSure(sender)
         UIView.animateWithDuration(0.3, animations: {
-            self.container.frame.origin.y = ScreenHeight
+            self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
             self.hidden = true
@@ -133,8 +176,13 @@ class YGPickerView: UIView {
     }
     
     func tapView(sender: UITapGestureRecognizer) {
+        container.snp.updateConstraints { (make) in
+            make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
+        }
+        setNeedsUpdateConstraints()
+        updateConstraints()
         UIView.animateWithDuration(0.3, animations: {
-            self.container.frame.origin.y = ScreenHeight
+            self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
             self.hidden = true

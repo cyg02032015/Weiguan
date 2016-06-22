@@ -65,12 +65,12 @@ class ReleaseNoticeViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑通告"
-        
         setupSubViews()
     }
 
     func setupSubViews() {
         photoArray = [UIImage(named: "release_announcement_Addpictures")!]
+        debugPrint("\(photoArray.count % 3 * 65)")
         tableView = UITableView()
         view.addSubview(tableView)
         tableView.delegate = self
@@ -119,7 +119,6 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 1 { // 招募需求
             let cell = tableView.dequeueReusableCellWithIdentifier(recruiteIdentifier, forIndexPath: indexPath) as! RecruitNeedsCell
             cell.addRecuitNeedsButton(recruits)
-            debugPrint("indexPath = \(indexPath.section) = 1")
             cell.delegate = self
             return cell
         } else if indexPath.section == 2 {
@@ -201,10 +200,12 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 1: return 160 // 招募需求
+        case 1: return 90 + CGFloat(recruits.count * 38) // 招募需求
         case 0, 2, 3, 4: return 56
         case 5: return 155 // 工作详情
-        case 6: return 230 // 宣传图片
+        case 6:
+            debugPrint("height = \(177 + CGFloat((photoArray.count - 1) / 3 * 65))")
+            return 177 + CGFloat((photoArray.count - 1) / 3 * 65) // 宣传图片
         default:
             return 0
         }
@@ -234,21 +235,16 @@ extension ReleaseNoticeViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoCollectionIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
-        cell.delegate = self
         cell.img = photoArray[indexPath.item]
         return cell
     }
-}
-
-// MARK: - PhotoCollectionCellDelegate
-extension ReleaseNoticeViewController: PhotoCollectionCellDelegate {
-    func photoCellTapImage(sender: UITapGestureRecognizer) {
-        let img = sender.view as! UIImageView
-        if img.image == photoArray[photoArray.count - 1] {
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionCell
+        guard let image = cell.imgView.image else { return }
+        if image == photoArray[photoArray.count - 1] {
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(view)
-        } else {
-            debugPrint("another img")
         }
     }
 }
@@ -316,10 +312,16 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
     }
     
     func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
-        self.photoArray.insert(editedImage, atIndex: photoArray.count - 1)
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 6)) as! SelectPhotoCell
-        cell.collectionView.reloadData()
-        dismissViewControllerAnimated(true) { }//TODO
+        editedImage.resetSizeOfImageData(editedImage, maxSize: 300) { (data) in
+            self.photoArray.insert(editedImage, atIndex: self.photoArray.count - 1)
+            let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 6)) as! SelectPhotoCell
+            cell.collectionView.reloadData()
+            if self.photoArray.count / 3 >= 1 {
+                let range = NSMakeRange(6, 1)
+                self.tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
+            }
+            self.dismissViewControllerAnimated(true) { }//TODO
+        }
     }
 }
 

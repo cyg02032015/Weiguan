@@ -40,8 +40,10 @@
 		D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
-		D8686C1B1D1987E000B3982A /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C1A1D1987E000B3982A /* EditSkillViewController.swift */; };
-		D8CC558F1D1990660059118F /* SkillSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC558E1D1990660059118F /* SkillSetCell.swift */; };
+		D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */; };
+		D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */; };
+		D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */; };
+		D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167381D1AFCF100C50EB7 /* SkillSetCell.swift */; };
 		D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED21D183C3700A00AA7 /* SkillCell.swift */; };
 		D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */; };
 		D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED61D183C4800A00AA7 /* Recruit.swift */; };
@@ -133,8 +135,10 @@
 		D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowsePhotoViewController.swift; path = OutLookers/BrowsePhotoViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
-		D8686C1A1D1987E000B3982A /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
-		D8CC558E1D1990660059118F /* SkillSetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillSetCell.swift; sourceTree = SOURCE_ROOT; };
+		D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseVideoViewController.swift; path = OutLookers/ReleaseVideoViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleasePictureViewController.swift; path = OutLookers/ReleasePictureViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditSkillViewController.swift; path = OutLookers/EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8C167381D1AFCF100C50EB7 /* SkillSetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillSetCell.swift; path = OutLookers/SkillSetCell.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED21D183C3700A00AA7 /* SkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillCell.swift; path = OutLookers/SkillCell.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillHeaderReusableView.swift; path = OutLookers/SkillHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED61D183C4800A00AA7 /* Recruit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recruit.swift; path = OutLookers/Recruit.swift; sourceTree = SOURCE_ROOT; };
@@ -243,16 +247,34 @@
 		D8686C191D19840800B3982A /* Skill */ = {
 			isa = PBXGroup;
 			children = (
+				D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */,
 				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
-				D8686C1A1D1987E000B3982A /* EditSkillViewController.swift */,
 				D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */,
 			);
 			name = Skill;
 			sourceTree = "<group>";
 		};
+		D8C1672F1D1AD67400C50EB7 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */,
+			);
+			name = Video;
+			sourceTree = "<group>";
+		};
+		D8CC55931D1AD1E00059118F /* Picture */ = {
+			isa = PBXGroup;
+			children = (
+				D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */,
+			);
+			name = Picture;
+			sourceTree = "<group>";
+		};
 		D8F526BB1D159289000C8F91 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D8C1672F1D1AD67400C50EB7 /* Video */,
+				D8CC55931D1AD1E00059118F /* Picture */,
 				D8686C191D19840800B3982A /* Skill */,
 				E4E5DEDA1D17A8BB00CB8535 /* Notice */,
 				D81F45231D118F48004D9192 /* IssueViewController.swift */,
@@ -269,7 +291,7 @@
 				E4E5DEC61D179BD200CB8535 /* ArrowEditCell.swift */,
 				E4E5DECA1D179BD200CB8535 /* WorkDetailCell.swift */,
 				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
-				D8CC558E1D1990660059118F /* SkillSetCell.swift */,
+				D8C167381D1AFCF100C50EB7 /* SkillSetCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -820,11 +842,11 @@
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
-				D8CC558F1D1990660059118F /* SkillSetCell.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
+				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
 				E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
@@ -832,7 +854,6 @@
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
 				E4272DDF1D17F27400BE4053 /* CityData.swift in Sources */,
 				E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */,
-				D8686C1B1D1987E000B3982A /* EditSkillViewController.swift in Sources */,
 				D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */,
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
@@ -841,11 +862,14 @@
 				D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */,
 				D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */,
 				E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */,
+				D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,
 				D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
+				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
+				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
