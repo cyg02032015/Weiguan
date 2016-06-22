@@ -161,6 +161,7 @@ class SkillSetCell: UITableViewCell {
     func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) {
         collectionView.delegate = delegate
         collectionView.dataSource = delegate
+        collectionView.tag = indexPath.section
         collectionView.reloadData()
     }
     

@@ -23,7 +23,7 @@ protocol YGPickerViewDelegate: class {
 
 
 class YGPickerView: UIView {
-    var pickerView: UIPickerView!
+    var picker: UIPickerView!
     var titleLabel: UILabel!
     var container: UIView!
     var cancel: UIButton!
@@ -82,10 +82,10 @@ class YGPickerView: UIView {
         lineV.backgroundColor = UIColor(hex: 0xE4E4E4)
         topContainer.addSubview(lineV)
         
-        pickerView = UIPickerView()
-        pickerView.delegate = delegate
-        pickerView.dataSource = delegate
-        container.addSubview(pickerView)
+        picker = UIPickerView()
+        picker.delegate = delegate
+        picker.dataSource = delegate
+        container.addSubview(picker)
     }
     
     override func layoutSubviews() {
@@ -101,7 +101,7 @@ class YGPickerView: UIView {
         
         lineV.frame = CGRect(x: 0, y: CGRectGetMaxY(topContainer.frame) - 1, width: ScreenWidth, height: 1)
         
-        pickerView.frame = CGRect(x: 0, y: CGRectGetMaxY(topContainer.frame), width: ScreenWidth, height: CGRectGetHeight(container.frame) - CGRectGetHeight(topContainer.frame))
+        picker.frame = CGRect(x: 0, y: CGRectGetMaxY(topContainer.frame), width: ScreenWidth, height: CGRectGetHeight(container.frame) - CGRectGetHeight(topContainer.frame))
         super.layoutSubviews()
     }
     

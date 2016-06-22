@@ -316,8 +316,6 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
     }
     
     func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
-        debugPrint("orignal imageData = \(UIImageJPEGRepresentation(editedImage, 1.0)?.length)")
-        debugPrint("压缩 \(editedImage.resetSizeOfImageData(editedImage, maxSize: 100).length)")
         self.photoArray.insert(editedImage, atIndex: photoArray.count - 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 6)) as! SelectPhotoCell
         cell.collectionView.reloadData()
@@ -345,7 +343,7 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     }
     
     func pickerViewSelectedSure(sender: UIButton) {
-        let city = pickerView.pickerView.delegate!.pickerView!(pickerView!.pickerView!, titleForRow: pickerView.pickerView.selectedRowInComponent(1), forComponent: 1)
+        let city = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
         cell.tf.text = city
     }

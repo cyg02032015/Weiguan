@@ -245,6 +245,7 @@
 			children = (
 				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
 				D8686C1A1D1987E000B3982A /* EditSkillViewController.swift */,
+				D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */,
 			);
 			name = Skill;
 			sourceTree = "<group>";
@@ -262,13 +263,11 @@
 		D8F526BC1D159C1C000C8F91 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */,
-				D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */,
+				E47ADF531D1A64E700A2F4BD /* CollectionCell */,
 				E4E5DEC71D179BD200CB8535 /* NoArrowEditCell.swift */,
 				E4E5DEC81D179BD200CB8535 /* RecruitNeedsCell.swift */,
 				E4E5DEC61D179BD200CB8535 /* ArrowEditCell.swift */,
 				E4E5DECA1D179BD200CB8535 /* WorkDetailCell.swift */,
-				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
 				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
 				D8CC558E1D1990660059118F /* SkillSetCell.swift */,
 			);
@@ -334,7 +333,6 @@
 				E41C6C5B1D113F350013031D /* Extension */,
 				E41C6C5F1D113F350013031D /* Lib */,
 				E41C6C631D113F510013031D /* OtherSource */,
-				D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */,
 				E41C22DF1D113B9500F58250 /* Assets.xcassets */,
 				E41C22E41D113B9500F58250 /* Info.plist */,
 			);
@@ -481,6 +479,16 @@
 			);
 			name = VPImageCropper;
 			path = "../../../../Downloads/VPImageCropper-master/VPImageCropperDemo/VPImageCropper";
+			sourceTree = "<group>";
+		};
+		E47ADF531D1A64E700A2F4BD /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */,
+				D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */,
+				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
+			);
+			name = CollectionCell;
 			sourceTree = "<group>";
 		};
 		E4E5DEDA1D17A8BB00CB8535 /* Notice */ = {

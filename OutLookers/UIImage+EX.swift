@@ -19,7 +19,7 @@ extension UIImage {
     }
     
     // MARK: - 降低质量
-    func resetSizeOfImageData(source_image: UIImage, maxSize: Int) -> NSData {
+    func resetSizeOfImageData(source_image: UIImage, maxSize: Int, compeleted:(data: NSData)->Void) {
         //先调整分辨率
         var newSize = CGSize(width: source_image.size.width, height: source_image.size.height)
         
@@ -43,7 +43,8 @@ extension UIImage {
         let sizeOrigin      = Int64((finallImageData?.length)!)
         let sizeOriginKB    = Int(sizeOrigin / 1024)
         if sizeOriginKB <= maxSize {
-            return finallImageData!
+            compeleted(data: finallImageData!)
+            return
         }
         
         //保存压缩系数
@@ -93,7 +94,8 @@ extension UIImage {
                 }
             }
         }
-        return finallImageData!
+        compeleted(data: finallImageData!)
+        return 
     }
 }
 

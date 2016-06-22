@@ -14,6 +14,12 @@ private let arrowIdentifier = "arrowId"
 private let workDetailIdentifier = "workDetailId"
 private let skillSetIdentifier = "skillSetId"
 
+enum PhotoSelectType: String {
+    case SetCover = "SetCover"
+    case AddVideo = "AddVideo"
+    case AddPictrue = "AddPicture"
+}
+
 private extension Selector {
     static let tapRelease = #selector(ReleaseNoticeViewController.tapRelease(_:))
 }
@@ -25,12 +31,18 @@ class EditSkillViewController: YGBaseViewController {
     var pickerView: YGPickerView!
     lazy var recruits: [Recruit] = [Recruit]()
     lazy var provinceTitles = NSArray()
+    lazy var skillUnitPickerArray = [String]()
+    var isProvincePicker = false  // 区分PickerView数据源
     var photoArray: [UIImage]!
+    var photoType: PhotoSelectType!
+    var setCoverButton: UIButton!
+    var addVideoButton: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
+        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
         UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
@@ -123,6 +135,7 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(skillSetIdentifier, forIndexPath: indexPath) as! SkillSetCell
             cell.collectionViewSetDelegate(self, indexPath: indexPath)
+            cell.delegate = self
             return cell
         }
     }
@@ -130,13 +143,13 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 2 { // 才艺标价
-//                let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! ArrowEditCell
-//                selectDatePicker.animation()
-//                selectDatePicker.tapSureClosure({ (date) in
-//                    cell.tf.text = date.stringFromDate()
-//                })
+                isProvincePicker = false
+                pickerView.picker.reloadAllComponents()
+                pickerView.animation()
             }
             if indexPath.row == 3 {
+                isProvincePicker = true
+                pickerView.picker.reloadAllComponents()
                 pickerView.animation()
             }
         }
@@ -177,6 +190,7 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.photoArray.count > 9 ? self.photoArray.count - 1 : self.photoArray.count
@@ -184,21 +198,39 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoCollectionIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
-        cell.delegate = self
         cell.img = photoArray[indexPath.item]
         return cell
     }
-}
-
-extension EditSkillViewController: PhotoCollectionCellDelegate {
-    func photoCellTapImage(sender: UITapGestureRecognizer) {
-        let img = sender.view as! UIImageView
-        if img.image == photoArray[photoArray.count - 1] {
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        photoType = .Some(.AddPictrue)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionCell
+        guard let image = cell.imgView.image else { return }
+        if image == photoArray[photoArray.count - 1] {
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(view)
         } else {
-            debugPrint("another img")
+            let browse = BrowsePhotoViewController()
+            browse.photos = photoArray
+            navigationController?.pushViewController(browse, animated: true)
         }
+    }
+}
+
+// MARK: - PhotoCollectionCellDelegate
+extension EditSkillViewController: SkillSetCellDelegate {
+    // 设置封面
+    func skillSetTapSetCover(sender: UIButton) {
+        photoType = .Some(.SetCover)
+        setCoverButton = sender
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
+        actionSheet.showInView(view)
+    }
+    
+    // 添加视频
+    func skillSetTapAddVideo(sender: UIButton) {
+        photoType = .Some(.AddVideo)
+        addVideoButton = sender
     }
 }
 
@@ -245,7 +277,7 @@ extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
         picker.dismissViewControllerAnimated(true) {
-            let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - (ScreenWidth * 9/16)/2, width: ScreenWidth, height: ScreenWidth * 9/16), limitScaleRatio: 3)
+            let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - ScreenWidth/2, width: ScreenWidth, height: ScreenWidth), limitScaleRatio: 3)
             imgCropper.delegate = self
             self.presentViewController(imgCropper, animated: true, completion: {
                 //TODO
@@ -265,20 +297,38 @@ extension EditSkillViewController: VPImageCropperDelegate {
     }
     
     func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
-        debugPrint("orignal imageData = \(UIImageJPEGRepresentation(editedImage, 1.0)?.length)")
-        debugPrint("压缩 \(editedImage.resetSizeOfImageData(editedImage, maxSize: 100).length)")
-        self.photoArray.insert(editedImage, atIndex: photoArray.count - 1)
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
-        cell.collectionView.reloadData()
-        dismissViewControllerAnimated(true) { }//TODO
+        if photoType == .Some(.AddPictrue) {
+            editedImage.resetSizeOfImageData(editedImage, maxSize: 300, compeleted: { [weak self](data) in
+                guard let s = self else { return }
+                s.photoArray.insert(UIImage(data: data)!, atIndex: s.photoArray.count - 1)
+                let cell = s.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
+                cell.collectionView.reloadData()
+                s.dismissViewControllerAnimated(true) { }//TODO
+            })
+        } else if photoType == .Some(.SetCover) {
+            editedImage.resetSizeOfImageData(editedImage, maxSize: 300, compeleted: { [weak self](data) in
+                guard let s = self else { return }
+                s.setCoverButton.setImage(UIImage(data: data)!, forState: .Normal)
+                s.dismissViewControllerAnimated(true) { }
+            })
+        } else {
+            
+        }
+        
     }
 }
 
 extension EditSkillViewController: YGPickerViewDelegate, NoArrowEditCellDelegate {
     func pickerViewSelectedSure(sender: UIButton) {
-        let city = pickerView.pickerView.delegate!.pickerView!(pickerView!.pickerView!, titleForRow: pickerView.pickerView.selectedRowInComponent(1), forComponent: 1)
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! ArrowEditCell
-        cell.tf.text = city
+        if isProvincePicker {
+            let city = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! ArrowEditCell
+            cell.tf.text = city
+        } else {
+            let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! ArrowEditCell
+            cell.tf.text = skillUnit
+        }
     }
     
     func noArrowEditCellCheckText(text: String?) {
@@ -289,32 +339,46 @@ extension EditSkillViewController: YGPickerViewDelegate, NoArrowEditCellDelegate
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension EditSkillViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 2
+        if isProvincePicker {
+            return 2
+        } else {
+            return 1
+        }
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return provinceTitles.count
+        if isProvincePicker {
+            if component == 0 {
+                return provinceTitles.count
+            } else {
+                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
+                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
+                return cities.count > 0 ? cities.count : 0
+            }
         } else {
-            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-            return cities.count > 0 ? cities.count : 0
+            return skillUnitPickerArray.count
         }
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return (provinceTitles[row] as! String)
+        if isProvincePicker {
+            if component == 0 {
+                return (provinceTitles[row] as! String)
+            } else {
+                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
+                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
+                return cities.count > row ? (cities[row] as! String) : ""
+            }
         } else {
-            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-            return cities.count > row ? (cities[row] as! String) : ""
+            return skillUnitPickerArray[row]
         }
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 0 {
-            pickerView.reloadComponent(1)
+        if isProvincePicker {
+            if component == 0 {
+                pickerView.reloadComponent(1)
+            }
         }
     }
 }
