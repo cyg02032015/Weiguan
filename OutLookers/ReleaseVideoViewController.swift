@@ -8,6 +8,9 @@
 
 import UIKit
 
+private let videoCoverIdentifier = "videoCoverId"
+private let editTextViewIdentifier = "editTextViewId"
+
 private extension Selector {
     static let tapRelease = #selector(ReleaseVideoViewController.tapRelease(_:))
 }
@@ -34,6 +37,9 @@ class ReleaseVideoViewController: YGBaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .None
+        tableView.registerClass(VideoCoverCell.self, forCellReuseIdentifier: videoCoverIdentifier)
+        tableView.registerClass(EditTextViewCell.self, forCellReuseIdentifier: editTextViewIdentifier)
         
         releaseButton = UIButton()
         releaseButton.setTitle("发布", forState: .Normal)
@@ -72,6 +78,16 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(videoCoverIdentifier, forIndexPath: indexPath) as! VideoCoverCell
+                cell.delegate = self
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier(editTextViewIdentifier, forIndexPath: indexPath) as! EditTextViewCell
+                return cell
+            }
+        }
         return UITableViewCell()
     }
     
@@ -95,9 +111,13 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 // MARK: - 按钮点击&响应
-extension ReleaseVideoViewController {
+extension ReleaseVideoViewController: VideoCoverCellDelegate {
     
     func tapRelease(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func videoCoverImageViewTap(sender: UITapGestureRecognizer) {
+        debugPrint("tap image")
     }
 }

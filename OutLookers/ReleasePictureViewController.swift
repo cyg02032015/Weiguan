@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let pictureSelectIdentifier = "pictureSelectIdentifier"
+private let editTextViewIdentifier = "editTextViewIdentifier"
 private extension Selector {
     static let tapRelease = #selector(ReleasePictureViewController.tapRelease(_:))
 }
@@ -34,6 +36,9 @@ class ReleasePictureViewController: YGBaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .None
+        tableView.registerClass(PictureSelectCell.self, forCellReuseIdentifier: pictureSelectIdentifier)
+        tableView.registerClass(EditTextViewCell.self, forCellReuseIdentifier: editTextViewIdentifier)
         
         releaseButton = UIButton()
         releaseButton.setTitle("发布", forState: .Normal)
@@ -72,6 +77,15 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(pictureSelectIdentifier, forIndexPath: indexPath) as! PictureSelectCell
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier(editTextViewIdentifier, forIndexPath: indexPath) as! EditTextViewCell
+                return cell
+            }
+        }
         return UITableViewCell()
     }
     

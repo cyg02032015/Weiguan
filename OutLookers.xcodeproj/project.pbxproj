@@ -63,6 +63,9 @@
 		E4272DDF1D17F27400BE4053 /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4272DDE1D17F27400BE4053 /* CityData.swift */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
+		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
+		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
+		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
 		E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */; };
 		E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */; };
 		E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */; };
@@ -168,6 +171,9 @@
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
 		E4272E061D19328D00BE4053 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = OutLookers/VPImageCropper/VPImageCropperViewController.h; sourceTree = SOURCE_ROOT; };
 		E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPImageCropperViewController.m; path = OutLookers/VPImageCropper/VPImageCropperViewController.m; sourceTree = SOURCE_ROOT; };
+		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
+		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
+		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecruitInformationViewController.swift; path = OutLookers/RecruitInformationViewController.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseNoticeViewController.swift; path = OutLookers/ReleaseNoticeViewController.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectSkillViewController.swift; path = OutLookers/SelectSkillViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -247,6 +253,7 @@
 		D8686C191D19840800B3982A /* Skill */ = {
 			isa = PBXGroup;
 			children = (
+				E47ADF601D1BEE1600A2F4BD /* View */,
 				D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */,
 				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
 				D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */,
@@ -258,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */,
+				E47ADF621D1BEE7A00A2F4BD /* View */,
 			);
 			name = Video;
 			sourceTree = "<group>";
@@ -266,34 +274,9 @@
 			isa = PBXGroup;
 			children = (
 				D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */,
+				E47ADF611D1BEE6D00A2F4BD /* View */,
 			);
 			name = Picture;
-			sourceTree = "<group>";
-		};
-		D8F526BB1D159289000C8F91 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				D8C1672F1D1AD67400C50EB7 /* Video */,
-				D8CC55931D1AD1E00059118F /* Picture */,
-				D8686C191D19840800B3982A /* Skill */,
-				E4E5DEDA1D17A8BB00CB8535 /* Notice */,
-				D81F45231D118F48004D9192 /* IssueViewController.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		D8F526BC1D159C1C000C8F91 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E47ADF531D1A64E700A2F4BD /* CollectionCell */,
-				E4E5DEC71D179BD200CB8535 /* NoArrowEditCell.swift */,
-				E4E5DEC81D179BD200CB8535 /* RecruitNeedsCell.swift */,
-				E4E5DEC61D179BD200CB8535 /* ArrowEditCell.swift */,
-				E4E5DECA1D179BD200CB8535 /* WorkDetailCell.swift */,
-				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
-				D8C167381D1AFCF100C50EB7 /* SkillSetCell.swift */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		D8F526CD1D16CAD1000C8F91 /* YKLib */ = {
@@ -435,9 +418,12 @@
 		E41C6C5E1D113F350013031D /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				D81F45231D118F48004D9192 /* IssueViewController.swift */,
+				D8C1672F1D1AD67400C50EB7 /* Video */,
+				D8CC55931D1AD1E00059118F /* Picture */,
+				D8686C191D19840800B3982A /* Skill */,
+				E4E5DEDA1D17A8BB00CB8535 /* Notice */,
 				E4E5DEDF1D17C3A700CB8535 /* Model */,
-				D8F526BB1D159289000C8F91 /* Controller */,
-				D8F526BC1D159C1C000C8F91 /* View */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -503,14 +489,44 @@
 			path = "../../../../Downloads/VPImageCropper-master/VPImageCropperDemo/VPImageCropper";
 			sourceTree = "<group>";
 		};
-		E47ADF531D1A64E700A2F4BD /* CollectionCell */ = {
+		E47ADF5F1D1BEDE600A2F4BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E4E5DEC71D179BD200CB8535 /* NoArrowEditCell.swift */,
+				E4E5DEC61D179BD200CB8535 /* ArrowEditCell.swift */,
+				E4E5DEC81D179BD200CB8535 /* RecruitNeedsCell.swift */,
+				E4E5DECA1D179BD200CB8535 /* WorkDetailCell.swift */,
+				E4E5DEC91D179BD200CB8535 /* SelectPhotoCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E47ADF601D1BEE1600A2F4BD /* View */ = {
 			isa = PBXGroup;
 			children = (
 				D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */,
 				D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */,
+				D8C167381D1AFCF100C50EB7 /* SkillSetCell.swift */,
 				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
 			);
-			name = CollectionCell;
+			name = View;
+			sourceTree = "<group>";
+		};
+		E47ADF611D1BEE6D00A2F4BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E47ADF621D1BEE7A00A2F4BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */,
+				E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		E4E5DEDA1D17A8BB00CB8535 /* Notice */ = {
@@ -518,6 +534,7 @@
 			children = (
 				E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */,
 				E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */,
+				E47ADF5F1D1BEDE600A2F4BD /* View */,
 			);
 			name = Notice;
 			sourceTree = "<group>";
@@ -821,6 +838,7 @@
 				D81F45181D118D63004D9192 /* YGBaseViewController.swift in Sources */,
 				D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */,
 				E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */,
+				E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */,
 				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
 				D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */,
@@ -844,6 +862,7 @@
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
+				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
@@ -862,6 +881,7 @@
 				D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */,
 				D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */,
 				E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */,
+				E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */,
 				D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,
