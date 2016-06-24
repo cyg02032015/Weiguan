@@ -17,7 +17,6 @@ class ReleasePictureViewController: YGBaseViewController {
     var tableView: UITableView!
     var releaseButton: UIButton!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
-    lazy var marks = [String]()
     lazy var pictures = [UIImage]()
     
     override func viewWillAppear(animated: Bool) {
@@ -115,7 +114,7 @@ extension ReleasePictureViewController: ShareCellDelegate {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func shareCellReturnsMarks(marks: [String]) {
-        self.marks = marks
+    func shareCellReturnsShareTitle(text: String) {
+        LogInfo("分享 \(text)")
     }
 }

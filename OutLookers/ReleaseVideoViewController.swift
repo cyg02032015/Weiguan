@@ -18,7 +18,6 @@ class ReleaseVideoViewController: YGBaseViewController {
     var releaseButton: UIButton!
 
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
-    lazy var marks = [String]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -120,22 +119,8 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate 
         debugPrint("tap image")
     }
     
-    func shareCellReturnsMarks(marks: [String]) {
-        self.marks = marks
-        
-        for (_, text) in marks.enumerate() {
-            if text == kTitleTimeline {
-                
-            } else if text == kTitleWechat {
-                
-            } else if text == kTitleSina {
-                
-            } else if text == kTitleQzone {
-                
-            } else {
-                
-            }
-        }
+    func shareCellReturnsShareTitle(text: String) {
+        LogInfo("分享 \(text)")
     }
 }
 

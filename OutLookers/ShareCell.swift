@@ -11,7 +11,7 @@ import UIKit
 let shareCollectionIdentifier = "shareCollectionId"
 
 protocol ShareCellDelegate: class {
-    func shareCellReturnsMarks(marks: [String])
+    func shareCellReturnsShareTitle(text: String)
 }
 
 class ShareCell: UITableViewCell {
@@ -22,8 +22,8 @@ class ShareCell: UITableViewCell {
             collectionView.reloadData()
         }
     }
-    weak var delegate: ShareCellDelegate!
     lazy var marks = [String]()
+    weak var delegate: ShareCellDelegate!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -88,18 +88,16 @@ extension ShareCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ShareCollectionCell
-        guard let title = cell.label.text else { fatalError("share button title is nil") }
-        if cell.shareButton.selected {
-            cell.shareButton.selected = false
-            for (i, obj) in marks.enumerate() {
-                if obj == title {
-                    marks.removeAtIndex(i)
-                }
-            }
-        } else {
-            cell.shareButton.selected = true
-            marks.append(title)
+        guard let title = cell.label.text else { LogError("获取分享按钮title nil") ; return }
+        for cell in collectionView.visibleCells() {
+            let c = cell as! ShareCollectionCell
+            c.shareButton.selected = false
         }
-        delegate.shareCellReturnsMarks(marks)
+        cell.shareButton.selected = true
+        delegate.shareCellReturnsShareTitle(title)
+    }
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ShareCollectionCell
+        cell.shareButton.selected = false
     }
 }

@@ -33,7 +33,7 @@ class YGShareHandler {
      - returns: 返回一个元组 (选中的图片， 没选中的图片， 标题)
      */
     class func handleShareInstalled() -> (images: [UIImage], unSelectedImages: [UIImage], titles: [String]) {
-        if WXApi.isWXAppInstalled() && QQApi.isQQAppInstalled() {
+        if YGWXApi.isWXAppInstalled() && QQApi.isQQAppInstalled() {
             let images = [UIImage(named: kSelectedTimeline)!,
                           UIImage(named: kSelectedWechat)!,
                           UIImage(named: kSelectedSina)!,
@@ -46,7 +46,7 @@ class YGShareHandler {
                                     UIImage(named: kUnSelectedQQ)!]
             let titles = [kTitleTimeline, kTitleWechat, kTitleSina, kTitleQzone, kTitleQQ]
             return (images, unSelectedImages, titles)
-        } else if WXApi.isWXAppInstalled() && !QQApi.isQQAppInstalled() {
+        } else if YGWXApi.isWXAppInstalled() && !QQApi.isQQAppInstalled() {
             let images = [UIImage(named: kSelectedTimeline)!,
                           UIImage(named: kSelectedWechat)!,
                           UIImage(named: kSelectedSina)!]
@@ -55,7 +55,7 @@ class YGShareHandler {
                                     UIImage(named: kUnSelectedSina)!]
             let titles = [kTitleTimeline, kTitleWechat, kTitleSina]
             return (images, unSelectedImages, titles)
-        } else if !WXApi.isWXAppInstalled() && QQApi.isQQAppInstalled() {
+        } else if !YGWXApi.isWXAppInstalled() && QQApi.isQQAppInstalled() {
             let images = [UIImage(named: kSelectedSina)!,
                           UIImage(named: kSelectedQzone)!,
                           UIImage(named: kSelectedQQ)!]
@@ -79,6 +79,18 @@ class QQApi {
         if UIApplication.sharedApplication().canOpenURL(NSURL(string: "mqq://")!) {
             return true
         } else {
+            LogWarn("QQapp 安装返回失败")
+            return false
+        }
+    }
+}
+
+class YGWXApi {
+    class func isWXAppInstalled() -> Bool {
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "weixin://")!) {
+            return true
+        } else {
+            LogWarn("微信app 安装返回失败")
             return false
         }
     }
