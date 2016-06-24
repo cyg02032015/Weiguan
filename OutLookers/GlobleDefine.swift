@@ -15,16 +15,24 @@ let NaviHeight: CGFloat    = 64
 let TabbarHeight: CGFloat  = 49
 let NavibarHeight: CGFloat = 44
 
-// 网络参数
-let DeviceType = "2"// 设备类型
-let DeviceId   = "1234567891"// 设备代码
-// 颜色
+/// 各种key
+let kUmengAppkey = "576c94eee0f55a2551000538"
 
+let kWechatAppId = "wxd930ea5d5a258f4f"
+let kWechatSecret = "db426a9829e4b49a0dcac7b4162da6b6"
+let kWechatUrl = "http://www.umeng.com/social" // 分享地址
 
+let kQQAppId = "100424468"
+let kQQAppSecret = "c7394704798a158208a74ab60104f0ba"
+let kQQUrl = "http://www.umeng.com/social" // 分享地址
+
+let kSinaAppkey = "126663232"
+let kSinaAppSecret = "d39969613faa5fcc75859cf8406649eb"
+let kSinaRedirectUrl = "http://sns.whalecloud.com/sina2/callback" // 分享回调地址
+
+// 正则表达
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
 
-func kSizeScale(a: CGFloat) -> CGFloat {
-    return a * UIScreen.mainScreen().bounds.width / 375.0
-}
+
 

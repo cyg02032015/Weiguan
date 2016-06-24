@@ -10,6 +10,7 @@ import UIKit
 
 private let videoCoverIdentifier = "videoCoverId"
 private let editTextViewIdentifier = "editTextViewId"
+private let shareCellIdentifier = "shareCellId"
 
 private extension Selector {
     static let tapRelease = #selector(ReleaseVideoViewController.tapRelease(_:))
@@ -19,6 +20,9 @@ class ReleaseVideoViewController: YGBaseViewController {
 
     var tableView: UITableView!
     var releaseButton: UIButton!
+
+    lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
+    lazy var marks = [String]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,7 +32,9 @@ class ReleaseVideoViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑才艺"
+        self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
+        
     }
     
     func setupSubViews() {
@@ -40,6 +46,8 @@ class ReleaseVideoViewController: YGBaseViewController {
         tableView.separatorStyle = .None
         tableView.registerClass(VideoCoverCell.self, forCellReuseIdentifier: videoCoverIdentifier)
         tableView.registerClass(EditTextViewCell.self, forCellReuseIdentifier: editTextViewIdentifier)
+        
+        tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
         releaseButton = UIButton()
         releaseButton.setTitle("发布", forState: .Normal)
@@ -87,8 +95,14 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
                 let cell = tableView.dequeueReusableCellWithIdentifier(editTextViewIdentifier, forIndexPath: indexPath) as! EditTextViewCell
                 return cell
             }
+        } else if indexPath.section == 1 {
+             return UITableViewCell()
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(shareCellIdentifier, forIndexPath: indexPath) as! ShareCell
+            cell.tuple = shareTuple
+            cell.delegate = self
+            return cell
         }
-        return UITableViewCell()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -111,7 +125,7 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 // MARK: - 按钮点击&响应
-extension ReleaseVideoViewController: VideoCoverCellDelegate {
+extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate {
     
     func tapRelease(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -120,4 +134,23 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate {
     func videoCoverImageViewTap(sender: UITapGestureRecognizer) {
         debugPrint("tap image")
     }
+    
+    func shareCellReturnsMarks(marks: [String]) {
+        self.marks = marks
+        
+        for (_, text) in marks.enumerate() {
+            if text == kTitleTimeline {
+                
+            } else if text == kTitleWechat {
+                
+            } else if text == kTitleSina {
+                
+            } else if text == kTitleQzone {
+                
+            } else {
+                
+            }
+        }
+    }
 }
+

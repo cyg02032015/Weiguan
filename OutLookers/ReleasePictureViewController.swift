@@ -10,6 +10,8 @@ import UIKit
 
 private let pictureSelectIdentifier = "pictureSelectIdentifier"
 private let editTextViewIdentifier = "editTextViewIdentifier"
+private let shareCellIdentifier = "shareCellId"
+
 private extension Selector {
     static let tapRelease = #selector(ReleasePictureViewController.tapRelease(_:))
 }
@@ -18,6 +20,8 @@ class ReleasePictureViewController: YGBaseViewController {
 
     var tableView: UITableView!
     var releaseButton: UIButton!
+    lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
+    lazy var marks = [String]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,6 +31,7 @@ class ReleasePictureViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑才艺"
+        self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
     }
     
@@ -39,6 +44,8 @@ class ReleasePictureViewController: YGBaseViewController {
         tableView.separatorStyle = .None
         tableView.registerClass(PictureSelectCell.self, forCellReuseIdentifier: pictureSelectIdentifier)
         tableView.registerClass(EditTextViewCell.self, forCellReuseIdentifier: editTextViewIdentifier)
+        
+        tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
         releaseButton = UIButton()
         releaseButton.setTitle("发布", forState: .Normal)
@@ -85,8 +92,14 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
                 let cell = tableView.dequeueReusableCellWithIdentifier(editTextViewIdentifier, forIndexPath: indexPath) as! EditTextViewCell
                 return cell
             }
+        } else if indexPath.section == 1 {
+            return UITableViewCell()
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(shareCellIdentifier, forIndexPath: indexPath) as! ShareCell
+            cell.tuple = shareTuple
+            cell.delegate = self
+            return cell
         }
-        return UITableViewCell()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -109,9 +122,13 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 // MARK: - 按钮点击&响应
-extension ReleasePictureViewController {
+extension ReleasePictureViewController: ShareCellDelegate {
     
     func tapRelease(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func shareCellReturnsMarks(marks: [String]) {
+        self.marks = marks
     }
 }

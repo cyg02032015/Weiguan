@@ -14,6 +14,8 @@ pod 'RxSwift', '~> 2.5.0'
 pod 'RxCocoa'
 pod 'JLToast', '~> 1.4'
 pod 'Toast-Swift', '~> 1.3.0'
+pod 'UMengSocialCOM', '~> 5.2.1'
+pod 'CocoaLumberjack/Swift'
 end
 
 target 'OutLookersTests' do
