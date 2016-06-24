@@ -146,7 +146,7 @@ class SkillSetCell: UITableViewCell {
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(addPictureLabel.snp.bottom).offset(15)
             make.left.right.equalTo(collectionView.superview!)
-            make.height.equalTo(80)
+            make.bottom.equalTo(collectionView.superview!)
         }
     }
     

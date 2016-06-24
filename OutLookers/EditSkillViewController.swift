@@ -13,6 +13,7 @@ private let noArrowIdentifier = "noArrowId"
 private let arrowIdentifier = "arrowId"
 private let workDetailIdentifier = "workDetailId"
 private let skillSetIdentifier = "skillSetId"
+private let budgetCellIdentifier = "budgetCellId"
 
 enum PhotoSelectType: String {
     case SetCover = "SetCover"
@@ -74,6 +75,7 @@ class EditSkillViewController: YGBaseViewController {
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowIdentifier)
         tableView.registerClass(WorkDetailCell.self, forCellReuseIdentifier: workDetailIdentifier)
         tableView.registerClass(SkillSetCell.self, forCellReuseIdentifier: skillSetIdentifier)
+        tableView.registerClass(BudgetPriceCell.self, forCellReuseIdentifier: budgetCellIdentifier)
         
         createNaviRightButton("发布")
         
@@ -100,12 +102,12 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             } else if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
-                cell.delegate = self
                 cell.setTextInCell("才艺名称", placeholder: "请输入才艺名称")
                 return cell
             } else if indexPath.row == 2 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(arrowIdentifier, forIndexPath: indexPath) as! ArrowEditCell
-                cell.setTextInCell("才艺标价", placeholder: "请输入才艺标价  元/小时")
+                let cell = tableView.dequeueReusableCellWithIdentifier(budgetCellIdentifier, forIndexPath: indexPath) as! BudgetPriceCell
+                cell.delegate = self
+                cell.setTextInCell("才艺标价", placeholder: "请输入才艺标价", buttonText: "元/小时")
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(arrowIdentifier, forIndexPath: indexPath) as! ArrowEditCell
@@ -126,11 +128,6 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
-            if indexPath.row == 2 { // 才艺标价
-                isProvincePicker = false
-                pickerView.picker.reloadAllComponents()
-                pickerView.animation()
-            }
             if indexPath.row == 3 {
                 isProvincePicker = true
                 pickerView.picker.reloadAllComponents()
@@ -156,7 +153,7 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 1: return 193 // 才艺详情
         case 0: return 56
-        case 2: return 514
+        case 2: return 514 + (CGFloat(self.photoArray.count - 1) / 5 * (ScreenWidth - 30 - 20) / 5) + 5
         default:
             return 0
         }
@@ -201,6 +198,18 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 }
 
+extension EditSkillViewController: BudgetPriceCellDelegate {
+    override func tapRightButton(sender: UIButton) {
+        
+    }
+    
+    func budgetPriceButtonTap(sender: UIButton) {
+        isProvincePicker = false
+        pickerView.picker.reloadAllComponents()
+        pickerView.animation()
+    }
+}
+
 // MARK: - PhotoCollectionCellDelegate
 extension EditSkillViewController: SkillSetCellDelegate {
     // 设置封面
@@ -232,9 +241,7 @@ extension EditSkillViewController: UIActionSheetDelegate {
                 mediaTypes.append(kUTTypeImage as String)
                 controller.mediaTypes = mediaTypes
                 controller.delegate = self
-                presentViewController(controller, animated: true, completion: {
-                    debugPrint("picker view cotroller is presented")
-                })
+                presentViewController(controller, animated: true, completion: {})
             }
             break
         case 2:// 相册
@@ -245,12 +252,10 @@ extension EditSkillViewController: UIActionSheetDelegate {
                 mediaTypes.append(kUTTypeImage as String)
                 controller.mediaTypes = mediaTypes
                 controller.delegate = self
-                presentViewController(controller, animated: true, completion: {
-                    debugPrint("picker view cotroller is presented")
-                })
+                presentViewController(controller, animated: true, completion: {})
             }
             break
-        default: debugPrint("default switch")
+        default: LogWarn("switch default")
         }
         
     }
@@ -287,6 +292,10 @@ extension EditSkillViewController: VPImageCropperDelegate {
                 s.photoArray.insert(UIImage(data: data)!, atIndex: s.photoArray.count - 1)
                 let cell = s.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
                 cell.collectionView.reloadData()
+                if s.photoArray.count / 3 >= 1 {
+                    let range = NSMakeRange(2, 1)
+                    s.tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
+                }
                 s.dismissViewControllerAnimated(true) { }//TODO
             })
         } else if photoType == .Some(.SetCover) {
@@ -302,7 +311,7 @@ extension EditSkillViewController: VPImageCropperDelegate {
     }
 }
 
-extension EditSkillViewController: YGPickerViewDelegate, NoArrowEditCellDelegate {
+extension EditSkillViewController: YGPickerViewDelegate {
     func pickerViewSelectedSure(sender: UIButton) {
         if isProvincePicker {
             let city = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
@@ -310,13 +319,10 @@ extension EditSkillViewController: YGPickerViewDelegate, NoArrowEditCellDelegate
             cell.tf.text = city
         } else {
             let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
-            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! ArrowEditCell
-            cell.tf.text = skillUnit
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
+            cell.button.selected = true
+            cell.setButtonText(skillUnit!)
         }
-    }
-    
-    func noArrowEditCellCheckText(text: String?) {
-        
     }
 }
 

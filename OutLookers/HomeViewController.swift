@@ -29,11 +29,6 @@ class HomeViewController: YGBaseViewController {
         bannerView.startTapActionClosure { (index) in
             print(index)
         }
-        LogDebug("32")
-        LogInfo("33")
-        LogWarn("34")
-        LogError("35")
-        LogVerbose("36")
         Alamofire.request(.GET, "http://demosjz.ethank.com.cn/api/ad/get_ad_list").responseJSON { (response) in
             switch response.result {
             case .Success(let value):
@@ -49,7 +44,6 @@ class HomeViewController: YGBaseViewController {
                 LogError(error)
             }
         }
-        LogError("52")
     }
 }
 

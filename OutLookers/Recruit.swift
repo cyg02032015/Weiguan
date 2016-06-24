@@ -10,12 +10,12 @@ import Foundation
 
 struct Recruit {
     var skill: String!
-    var skillPrice: String!
-    var service: String?
+    var recruitCount: String!
+    var budgetPrice: String?
     
-    init (skill: String, skillPrice: String, service: String?) {
+    init (skill: String, recruitCount: String, budgetPrice: String?) {
         self.skill = skill
-        self.skillPrice = skillPrice
-        self.service = service
+        self.recruitCount = recruitCount
+        self.budgetPrice = budgetPrice
     }
 }

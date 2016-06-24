@@ -9,7 +9,7 @@
 import UIKit
 
 extension Selector {
-    static let tapRelease = #selector(YGBaseViewController.tapRelease(_:))
+    static let tapRightButton = #selector(YGBaseViewController.tapRightButton(_:))
 }
 
 class YGBaseViewController: UIViewController {
@@ -21,18 +21,19 @@ class YGBaseViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
     }
     
-    func createNaviRightButton(title: String) {
+    func createNaviRightButton(title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, forState: .Normal)
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        button.addTarget(self, action: .tapRelease, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .tapRightButton, forControlEvents: .TouchUpInside)
         let rightBarButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = rightBarButton
+        return button
     }
     
-    func tapRelease(sender: UIButton) {
-        debugPrint("release father")
+    func tapRightButton(sender: UIButton) {
+        LogVerbose("baseviewcontroller tap right")
     }
     
     override func viewWillAppear(animated: Bool) {

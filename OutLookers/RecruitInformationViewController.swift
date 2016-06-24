@@ -10,10 +10,7 @@ import UIKit
 
 private let noArrowIdentifier = "noArrowId"
 private let arrowIdentifier = "arrowId"
-
-private extension Selector {
-    static let tapSure = #selector(RecruitInformationViewController.tapSure(_:))
-}
+private let budgetPriceIdentifier = "budgetPriceId"
 
 protocol RecruitInformationDelegate: class {
     func recruitInformationSureWithParams(recruit: Recruit)
@@ -22,10 +19,10 @@ protocol RecruitInformationDelegate: class {
 class RecruitInformationViewController: YGBaseViewController {
 
     var tableView: UITableView!
-    var sureButton : UIButton!
     var pickerView: YGPickerView!
     lazy var skillUnitPickerArray = [String]()
     weak var delegate: RecruitInformationDelegate!
+    var rightButton: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,36 +54,13 @@ class RecruitInformationViewController: YGBaseViewController {
         tableView.tableFooterView = UIView()
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowIdentifier)
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowIdentifier)
+        tableView.registerClass(BudgetPriceCell.self, forCellReuseIdentifier: budgetPriceIdentifier)
         
-        sureButton = UIButton()
-        sureButton.setTitle("确定", forState: .Normal)
-        sureButton.titleLabel?.font = UIFont.systemFontOfSize(20)
-        sureButton.userInteractionEnabled = false
-        sureButton.addTarget(self, action: .tapSure, forControlEvents: .TouchUpInside)
-        sureButton.backgroundColor = kGrayColor
-        view.addSubview(sureButton)
-        
-        sureButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(sureButton.superview!)
-            make.height.equalTo(50)
-        }
+        rightButton = createNaviRightButton("确定")
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(tableView.superview!)
+            make.left.right.bottom.equalTo(tableView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
-            make.bottom.equalTo(sureButton.snp.top)
-        }
-    }
-    
-    func checkParmas() {
-        let cell0 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! ArrowEditCell
-        let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as! NoArrowEditCell
-        if cell0.tf.text?.characters.count > 0 && cell1.tf.text?.characters.count > 0 {
-            sureButton.userInteractionEnabled = true
-            sureButton.backgroundColor = kRedColor
-        } else {
-            sureButton.userInteractionEnabled = false
-            sureButton.backgroundColor = kGrayColor
         }
     }
     
@@ -103,18 +77,18 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(arrowIdentifier, forIndexPath: indexPath) as! ArrowEditCell
-            cell.setTextInCell("艺人类型", placeholder: "点击选择类型")
+            cell.setTextInCell("才艺类型", placeholder: "点击选择类型")
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
-            cell.delegate = self
-            cell.setTextInCell("才艺标价", placeholder: "请输入整数")
+            cell.tf.keyboardType = .NumberPad
+            cell.setTextInCell("招募数量", placeholder: "请输入整数")
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(budgetPriceIdentifier, forIndexPath: indexPath) as! BudgetPriceCell
+            cell.tf.keyboardType = .NumberPad
             cell.delegate = self
-            cell.setTextInCell("服务地区 (选填)", placeholder: "请输入整数 元/人")
-            cell.textFieldEnable = false
+            cell.setTextInCell("预算价格 (选填)", placeholder: "请输入整数", buttonText: "元/人")
             return cell
         }
     }
@@ -124,15 +98,10 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
             let selectSkill = SelectSkillViewController()
             selectSkill.type = SelectSkillType.Back
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
-            selectSkill.tapItemInCollection({ [unowned self](text) in
+            selectSkill.tapItemInCollection({ (text) in
                 cell.tf.text = text
-                self.checkParmas()
             })
             navigationController?.pushViewController(selectSkill, animated: true)
-        }
-        
-        if indexPath.row == 2 {
-            pickerView.animation()
         }
     }
     
@@ -142,25 +111,34 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
 }
 
 // MARK: -点击按钮 & NoArrowEditCellDelegate
-extension RecruitInformationViewController: NoArrowEditCellDelegate, YGPickerViewDelegate {
-    
-    func tapSure(sender: UIButton) {
+extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCellDelegate {
+
+    override func tapRightButton(sender: UIButton) {
         let cell0 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! ArrowEditCell
         let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as! NoArrowEditCell
-        let cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! NoArrowEditCell
-        let recruit = Recruit(skill: cell0.tf.text!, skillPrice: cell1.tf.text!, service: cell2.tf.text)
+        let cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
+        if cell0.tf.text?.characters.count <= 0 {
+            YKToast.makeText("请选择才艺类型")
+            return
+        } else if cell1.tf.text?.characters.count <= 0 {
+            YKToast.makeText("请选择招募数量")
+            return
+        }
+        let recruit = Recruit(skill: cell0.tf.text!, recruitCount: cell1.tf.text!, budgetPrice: cell2.tf.text)
         delegate.recruitInformationSureWithParams(recruit)
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func noArrowEditCellCheckText(text: String?) {
-        self.checkParmas()
+    func budgetPriceButtonTap(sender: UIButton) {
+        pickerView.animation()
     }
     
     func pickerViewSelectedSure(sender: UIButton) {
         let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! NoArrowEditCell
-        cell.tf.text = skillUnit
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
+        cell.button.selected = true
+        guard let unit = skillUnit else { fatalError("picker skill unit nil") }
+        cell.setButtonText(unit)
     }
 }
 

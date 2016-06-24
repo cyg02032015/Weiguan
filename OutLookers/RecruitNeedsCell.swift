@@ -34,10 +34,15 @@ class RecruitNeedsCell: UITableViewCell {
         if recruit.count <= 0 {
             return
         }
-        debugPrint("add = \(recruit.count)")
         for (index,r) in recruit.enumerate() {
+            var price: String!
+            if let p = r.budgetPrice {
+                price = "\(p)元"
+            } else {
+                price = "价格待定"
+            }
             let button = UIButton()
-            let title = "\(r.skill)-\(r.service == nil ? "1" : r.service)人-\(r.skillPrice)元"
+            let title = "\(r.skill)-\(r.recruitCount)人-\(price)"
             let size = (title as NSString).sizeWithFonts(16)
             button.setTitle(title, forState: .Normal)
             button.setTitleColor(kGrayColor, forState: .Normal)
@@ -46,11 +51,10 @@ class RecruitNeedsCell: UITableViewCell {
             button.layer.borderColor = kGrayColor.CGColor
             button.layer.borderWidth = 1
             contentView.addSubview(button)
-            debugPrint("index = \(index)")
             
             button.snp.makeConstraints(closure: { (make) in
                 make.top.equalTo(last == nil ? recruitLabel.snp.bottom : last!.snp.bottom).offset(last == nil ? 15 : 8)
-                make.size.equalTo(CGSize(width: size.width + 10, height: 30))
+                make.size.equalTo(CGSize(width: size.width + 15, height: 30))
                 make.left.equalTo(15)
             })
             last = button

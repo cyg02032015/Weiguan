@@ -18,7 +18,6 @@ private let selectImgIdentifier = "selectImgId"
 class ReleaseNoticeViewController: YGBaseViewController {
 
     var tableView: UITableView!
-    var releaseButton: UIButton!
     var selectDatePicker: YGSelectDateView!
     var pickerView: YGPickerView!
     lazy var recruits: [Recruit] = [Recruit]()
@@ -66,7 +65,6 @@ class ReleaseNoticeViewController: YGBaseViewController {
 
     func setupSubViews() {
         photoArray = [UIImage(named: "release_announcement_Addpictures")!]
-        debugPrint("\(photoArray.count % 3 * 65)")
         tableView = UITableView()
         view.addSubview(tableView)
         tableView.delegate = self
@@ -98,7 +96,6 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
-            cell.delegate = self
             cell.setTextInCell("工作主题", placeholder: "请输入工作主题")
             return cell
         } else if indexPath.section == 1 { // 招募需求
@@ -121,7 +118,6 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
-                cell.delegate = self
                 cell.setTextInCell("", placeholder: "指定详细地址 (选填)")
                 return cell
             }
@@ -189,7 +185,6 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         case 0, 2, 3, 4: return 56
         case 5: return 155 // 工作详情
         case 6:
-            debugPrint("height = \(177 + CGFloat((photoArray.count - 1) / 3 * 65))")
             return 177 + CGFloat((photoArray.count - 1) / 3 * 65) // 宣传图片
         default:
             return 0
@@ -248,9 +243,7 @@ extension ReleaseNoticeViewController: UIActionSheetDelegate {
                 mediaTypes.append(kUTTypeImage as String)
                 controller.mediaTypes = mediaTypes
                 controller.delegate = self
-                presentViewController(controller, animated: true, completion: {
-                    debugPrint("picker view cotroller is presented")
-                })
+                presentViewController(controller, animated: true, completion: {})
             }
             break
         case 2:// 相册
@@ -261,12 +254,10 @@ extension ReleaseNoticeViewController: UIActionSheetDelegate {
                 mediaTypes.append(kUTTypeImage as String)
                 controller.mediaTypes = mediaTypes
                 controller.delegate = self
-                presentViewController(controller, animated: true, completion: {
-                    debugPrint("picker view cotroller is presented")
-                })
+                presentViewController(controller, animated: true, completion: {})
             }
             break
-        default: debugPrint("default switch")
+        default: LogWarn("switch default")
         }
 
     }
@@ -311,10 +302,10 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
 }
 
 // MARK: - RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate
-extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate {
+extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate {
     
-    override func tapRelease(sender: UIButton) {
-        debugPrint("发布")
+    override func tapRightButton(sender: UIButton) {
+        LogInfo("发布")
     }
     
     func recruitNeedsAddRecruite(sender: UIButton) {
@@ -334,11 +325,6 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
         cell.tf.text = city
     }
-    
-    func noArrowEditCellCheckText(text: String?) {
-        
-    }
-    
 }
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource

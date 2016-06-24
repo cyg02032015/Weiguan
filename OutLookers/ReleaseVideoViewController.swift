@@ -15,7 +15,6 @@ private let shareCellIdentifier = "shareCellId"
 class ReleaseVideoViewController: YGBaseViewController {
 
     var tableView: UITableView!
-    var releaseButton: UIButton!
 
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     
@@ -111,12 +110,12 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
 // MARK: - 按钮点击&响应
 extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate {
     
-    override func tapRelease(sender: UIButton) {
+    override func tapRightButton(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func videoCoverImageViewTap(sender: UITapGestureRecognizer) {
-        debugPrint("tap image")
+        LogInfo("tap image")
     }
     
     func shareCellReturnsShareTitle(text: String) {

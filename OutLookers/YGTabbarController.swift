@@ -87,7 +87,6 @@ extension YGTabbarController: YGTabbarDelegate {
 //            presentViewController(navi, animated: true, completion: nil)
 //            return
 //        }
-        debugPrint(to)
         self.selectedIndex = to
     }
 }

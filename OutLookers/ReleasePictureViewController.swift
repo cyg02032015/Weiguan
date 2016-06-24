@@ -15,7 +15,6 @@ private let shareCellIdentifier = "shareCellId"
 class ReleasePictureViewController: YGBaseViewController {
 
     var tableView: UITableView!
-    var releaseButton: UIButton!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     lazy var pictures = [UIImage]()
     
@@ -110,7 +109,7 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
 // MARK: - 按钮点击&响应
 extension ReleasePictureViewController: ShareCellDelegate {
     
-    override func tapRelease(sender: UIButton) {
+    override func tapRightButton(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     

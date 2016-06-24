@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol NoArrowEditCellDelegate: class {
-    func noArrowEditCellCheckText(text: String?)
-}
-
 class NoArrowEditCell: UITableViewCell {
 
     var label: UILabel!
@@ -52,7 +48,6 @@ class NoArrowEditCell: UITableViewCell {
             }
         }
     }
-    weak var delegate: NoArrowEditCellDelegate!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -97,7 +92,5 @@ class NoArrowEditCell: UITableViewCell {
 }
 
 extension NoArrowEditCell: UITextFieldDelegate {
-    func textFieldDidEndEditing(textField: UITextField) {
-        delegate.noArrowEditCellCheckText(textField.text)
-    }
+
 }

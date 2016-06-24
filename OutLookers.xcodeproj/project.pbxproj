@@ -41,6 +41,7 @@
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
 		D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */; };
+		D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */; };
 		D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */; };
 		D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */; };
 		D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */; };
@@ -142,6 +143,7 @@
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogFormatter.swift; path = OutLookers/LogFormatter.swift; sourceTree = SOURCE_ROOT; };
+		D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BudgetPriceCell.swift; path = OutLookers/BudgetPriceCell.swift; sourceTree = SOURCE_ROOT; };
 		D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseVideoViewController.swift; path = OutLookers/ReleaseVideoViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleasePictureViewController.swift; path = OutLookers/ReleasePictureViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditSkillViewController.swift; path = OutLookers/EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -550,6 +552,7 @@
 				E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */,
 				E47ADF6F1D1D101C00A2F4BD /* ShareCell.swift */,
 				E47ADF731D1D161C00A2F4BD /* ShareCollectionCell.swift */,
+				D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */,
 			);
 			name = issuePublicView;
 			sourceTree = "<group>";
@@ -917,6 +920,7 @@
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
+				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
