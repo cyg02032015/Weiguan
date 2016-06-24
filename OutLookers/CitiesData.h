@@ -9,13 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface CitiesData : NSObject
-//+ (instancetype)sharedInstance;
-//- (NSArray *)provincesForAlphabet:(NSString *)alphabet;
-//- (NSArray *)allProvinces;
-//- (NSArray *)citiesForProvince:(NSString *)province;
-//- (NSArray *)districtsForCity:(NSString *)city province:(NSString *)province;
-
-
 + (instancetype)sharedInstance;
 
 - (NSArray *)allProvince;

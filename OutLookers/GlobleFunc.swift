@@ -9,27 +9,33 @@
 import UIKit
 import CocoaLumberjack
 
-func LogInfo(message: String) {
+func LogInfo<T>(message: T) {
     #if DEBUG
-    DDLogInfo(message)
+    DDLogInfo("\(message)")
     #endif
 }
 
-func LogVerbose(message: String) {
+func LogVerbose<T>(message: T) {
     #if DEBUG
-        DDLogVerbose(message)
+        DDLogVerbose("\(message)")
     #endif
 }
 
-func LogError(message: String) {
+func LogError<T>(message: T) {
     #if DEBUG
-        DDLogError(message)
+        DDLogError("\(message)")
     #endif
 }
 
-func LogWarn(message: String) {
+func LogWarn<T>(message: T) {
     #if DEBUG
-        DDLogWarn(message)
+        DDLogWarn("\(message)")
+    #endif
+}
+
+func LogDebug<T>(message: T) {
+    #if DEBUG
+        DDLogDebug("\(message)")
     #endif
 }
 
@@ -37,6 +43,9 @@ func configCocoaLumberjack() {
     DDLog.addLogger(DDTTYLogger.sharedInstance())
     setenv("XcodeColors", "YES", 0)
     DDTTYLogger.sharedInstance().colorsEnabled = true
+    DDTTYLogger.sharedInstance().setForegroundColor(UIColor.yellowColor(), backgroundColor: nil, forFlag: .Info)
+    DDTTYLogger.sharedInstance().setForegroundColor(UIColor.whiteColor(), backgroundColor: nil, forFlag: .Debug)
+    DDTTYLogger.sharedInstance().logFormatter = LogFormatter()
 }
 
 func LocalizedString(text: String) -> String {

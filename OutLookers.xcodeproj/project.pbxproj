@@ -40,6 +40,7 @@
 		D81F453C1D143934004D9192 /* BrowsePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
+		D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */; };
 		D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */; };
 		D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */; };
 		D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */; };
@@ -60,7 +61,6 @@
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
 		E41C22F91D113B9500F58250 /* OutLookersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22F81D113B9500F58250 /* OutLookersUITests.swift */; };
 		E4272DDD1D17F25B00BE4053 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4272DDC1D17F25B00BE4053 /* area.plist */; };
-		E4272DDF1D17F27400BE4053 /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4272DDE1D17F27400BE4053 /* CityData.swift */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
@@ -141,6 +141,7 @@
 		D81F453A1D143934004D9192 /* BrowsePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowsePhotoViewController.swift; path = OutLookers/BrowsePhotoViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
+		D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogFormatter.swift; path = OutLookers/LogFormatter.swift; sourceTree = SOURCE_ROOT; };
 		D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseVideoViewController.swift; path = OutLookers/ReleaseVideoViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleasePictureViewController.swift; path = OutLookers/ReleasePictureViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditSkillViewController.swift; path = OutLookers/EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -169,7 +170,6 @@
 		E41C22F81D113B9500F58250 /* OutLookersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutLookersUITests.swift; sourceTree = "<group>"; };
 		E41C22FA1D113B9500F58250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4272DDC1D17F25B00BE4053 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = area.plist; path = OutLookers/area.plist; sourceTree = SOURCE_ROOT; };
-		E4272DDE1D17F27400BE4053 /* CityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityData.swift; path = OutLookers/CityData.swift; sourceTree = SOURCE_ROOT; };
 		E4272DE61D17F60100BE4053 /* CitiesData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesData.h; path = OutLookers/CitiesData.h; sourceTree = SOURCE_ROOT; };
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
 		E4272E061D19328D00BE4053 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = OutLookers/VPImageCropper/VPImageCropperViewController.h; sourceTree = SOURCE_ROOT; };
@@ -276,6 +276,15 @@
 			name = Video;
 			sourceTree = "<group>";
 		};
+		D8C167411D1D783C00C50EB7 /* OCFile */ = {
+			isa = PBXGroup;
+			children = (
+				E4272DE61D17F60100BE4053 /* CitiesData.h */,
+				E4272DE71D17F60100BE4053 /* CitiesData.m */,
+			);
+			name = OCFile;
+			sourceTree = "<group>";
+		};
 		D8CC55931D1AD1E00059118F /* Picture */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +342,7 @@
 		E41C22D71D113B9500F58250 /* OutLookers */ = {
 			isa = PBXGroup;
 			children = (
+				D8C167411D1D783C00C50EB7 /* OCFile */,
 				E41C22D81D113B9500F58250 /* AppDelegate.swift */,
 				E41C6C5A1D113F350013031D /* BaseClass */,
 				E41C6C5D1D113F350013031D /* Home */,
@@ -372,14 +382,11 @@
 		E41C6C5A1D113F350013031D /* BaseClass */ = {
 			isa = PBXGroup;
 			children = (
-				E4272DE61D17F60100BE4053 /* CitiesData.h */,
-				E4272DE71D17F60100BE4053 /* CitiesData.m */,
 				D81F45121D118D63004D9192 /* YGBaseViewController.swift */,
 				D81F45131D118D63004D9192 /* YGNavigationController.swift */,
 				D81F45141D118D63004D9192 /* YGTabbar.swift */,
 				D81F45151D118D63004D9192 /* YGTabbarButton.swift */,
 				D81F45161D118D63004D9192 /* YGTabbarController.swift */,
-				E4272DDE1D17F27400BE4053 /* CityData.swift */,
 			);
 			path = BaseClass;
 			sourceTree = "<group>";
@@ -477,6 +484,7 @@
 				D81F45391D143934004D9192 /* YKBannerView.swift */,
 				D81F45291D1198B3004D9192 /* GlobleDefine.swift */,
 				D8F526B31D156B58000C8F91 /* GlobleFunc.swift */,
+				D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */,
 				D8F526A81D1566B7000C8F91 /* StringDefine.swift */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
@@ -850,6 +858,7 @@
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
 				D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
+				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
 				D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */,
 				E4E5DED51D179BFD00CB8535 /* YKToast.swift in Sources */,
 				D81F45181D118D63004D9192 /* YGBaseViewController.swift in Sources */,
@@ -890,7 +899,6 @@
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
-				E4272DDF1D17F27400BE4053 /* CityData.swift in Sources */,
 				E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */,
 				D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */,
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,

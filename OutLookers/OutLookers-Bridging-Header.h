@@ -6,7 +6,6 @@
 #import <ifaddrs.h>  // 获取ip c库
 #import "CitiesData.h"
 #import "VPImageCropperViewController.h"
-
 // 友盟头文件桥接
 #import "UMSocial.h"
 #import "WXApi.h"

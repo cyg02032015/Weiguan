@@ -29,13 +29,15 @@ class HomeViewController: YGBaseViewController {
         bannerView.startTapActionClosure { (index) in
             print(index)
         }
-        
-        
+        LogDebug("32")
+        LogInfo("33")
+        LogWarn("34")
+        LogError("35")
+        LogVerbose("36")
         Alamofire.request(.GET, "http://demosjz.ethank.com.cn/api/ad/get_ad_list").responseJSON { (response) in
             switch response.result {
             case .Success(let value):
                 let json = JSON(value)
-                print(value)
                 let data = json["data"].arrayObject
                 data?.forEach({ (json) in
                     let item = BannerInfo(json: JSON(json))
@@ -44,10 +46,10 @@ class HomeViewController: YGBaseViewController {
                 })
                 self.bannerView.dataArray = self.urls
             case .Failure(let error):
-                print(error)
+                LogError(error)
             }
         }
-        
+        LogError("52")
     }
 }
 
@@ -57,7 +59,6 @@ struct BannerInfo {
     var url: String?
     
     init (json: JSON) {
-        print("json \(json)")
         self.cover = json["cover"].string
         self.identifier = json["id"].string
         self.url = json["url"].string
