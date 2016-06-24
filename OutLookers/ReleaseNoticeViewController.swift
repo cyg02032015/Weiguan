@@ -15,10 +15,6 @@ private let recruiteIdentifier = "recruiteId"
 private let workDetailIdentifier = "workDetailId"
 private let selectImgIdentifier = "selectImgId"
 
-private extension Selector {
-    static let tapRelease = #selector(ReleaseNoticeViewController.tapRelease(_:))
-}
-
 class ReleaseNoticeViewController: YGBaseViewController {
 
     var tableView: UITableView!
@@ -82,22 +78,11 @@ class ReleaseNoticeViewController: YGBaseViewController {
         tableView.registerClass(WorkDetailCell.self, forCellReuseIdentifier: workDetailIdentifier)
         tableView.registerClass(SelectPhotoCell.self, forCellReuseIdentifier: selectImgIdentifier)
         
-        releaseButton = UIButton()
-        releaseButton.setTitle("发布", forState: .Normal)
-        releaseButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        releaseButton.addTarget(self, action: .tapRelease, forControlEvents: .TouchUpInside)
-        releaseButton.backgroundColor = kGrayColor
-        view.addSubview(releaseButton)
-        
-        releaseButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(releaseButton.superview!)
-            make.height.equalTo(50)
-        }
+        createNaviRightButton("发布")
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(tableView.superview!)
+            make.left.right.bottom.equalTo(tableView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
-            make.bottom.equalTo(releaseButton.snp.top)
         }
         
     }
@@ -328,7 +313,7 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
 // MARK: - RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate
 extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate {
     
-    func tapRelease(sender: UIButton) {
+    override func tapRelease(sender: UIButton) {
         debugPrint("发布")
     }
     

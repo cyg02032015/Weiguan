@@ -37,7 +37,7 @@ class VideoCoverCell: UITableViewCell {
         imgView.addGestureRecognizer(tap)
         
         let v = UIView()
-        v.backgroundColor = UIColor(hex: 0xB3FE4E4E)
+        v.backgroundColor = UIColor(r: 254, g: 78, b: 78, a: 0.7)
         imgView.addSubview(v)
         
         let smlImg = UIImageView(image: UIImage(named: "Set cover"))

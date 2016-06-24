@@ -12,16 +12,13 @@ private let pictureSelectIdentifier = "pictureSelectIdentifier"
 private let editTextViewIdentifier = "editTextViewIdentifier"
 private let shareCellIdentifier = "shareCellId"
 
-private extension Selector {
-    static let tapRelease = #selector(ReleasePictureViewController.tapRelease(_:))
-}
-
 class ReleasePictureViewController: YGBaseViewController {
 
     var tableView: UITableView!
     var releaseButton: UIButton!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     lazy var marks = [String]()
+    lazy var pictures = [UIImage]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -31,6 +28,7 @@ class ReleasePictureViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑才艺"
+        pictures = [UIImage(named: "release_announcement_Add pictures")!]
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
     }
@@ -47,22 +45,11 @@ class ReleasePictureViewController: YGBaseViewController {
         
         tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
-        releaseButton = UIButton()
-        releaseButton.setTitle("发布", forState: .Normal)
-        releaseButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        releaseButton.addTarget(self, action: .tapRelease, forControlEvents: .TouchUpInside)
-        releaseButton.backgroundColor = kGrayColor
-        view.addSubview(releaseButton)
-        
-        releaseButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(releaseButton.superview!)
-            make.height.equalTo(50)
-        }
+        createNaviRightButton("发布")
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(tableView.superview!)
+            make.left.right.bottom.equalTo(tableView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
-            make.bottom.equalTo(releaseButton.snp.top)
         }
     }
 
@@ -124,7 +111,7 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
 // MARK: - 按钮点击&响应
 extension ReleasePictureViewController: ShareCellDelegate {
     
-    func tapRelease(sender: UIButton) {
+    override func tapRelease(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     

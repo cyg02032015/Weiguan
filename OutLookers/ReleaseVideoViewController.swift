@@ -12,10 +12,6 @@ private let videoCoverIdentifier = "videoCoverId"
 private let editTextViewIdentifier = "editTextViewId"
 private let shareCellIdentifier = "shareCellId"
 
-private extension Selector {
-    static let tapRelease = #selector(ReleaseVideoViewController.tapRelease(_:))
-}
-
 class ReleaseVideoViewController: YGBaseViewController {
 
     var tableView: UITableView!
@@ -49,22 +45,11 @@ class ReleaseVideoViewController: YGBaseViewController {
         
         tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
-        releaseButton = UIButton()
-        releaseButton.setTitle("发布", forState: .Normal)
-        releaseButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        releaseButton.addTarget(self, action: .tapRelease, forControlEvents: .TouchUpInside)
-        releaseButton.backgroundColor = kGrayColor
-        view.addSubview(releaseButton)
-        
-        releaseButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(releaseButton.superview!)
-            make.height.equalTo(50)
-        }
+        createNaviRightButton("发布")
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(tableView.superview!)
+            make.left.right.bottom.equalTo(tableView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
-            make.bottom.equalTo(releaseButton.snp.top)
         }
     }
     
@@ -127,7 +112,7 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
 // MARK: - 按钮点击&响应
 extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate {
     
-    func tapRelease(sender: UIButton) {
+    override func tapRelease(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     

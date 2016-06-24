@@ -20,10 +20,6 @@ enum PhotoSelectType: String {
     case AddPictrue = "AddPicture"
 }
 
-private extension Selector {
-    static let tapRelease = #selector(ReleaseNoticeViewController.tapRelease(_:))
-}
-
 class EditSkillViewController: YGBaseViewController {
 
     var tableView: UITableView!
@@ -79,22 +75,11 @@ class EditSkillViewController: YGBaseViewController {
         tableView.registerClass(WorkDetailCell.self, forCellReuseIdentifier: workDetailIdentifier)
         tableView.registerClass(SkillSetCell.self, forCellReuseIdentifier: skillSetIdentifier)
         
-        releaseButton = UIButton()
-        releaseButton.setTitle("发布", forState: .Normal)
-        releaseButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        releaseButton.addTarget(self, action: .tapRelease, forControlEvents: .TouchUpInside)
-        releaseButton.backgroundColor = kGrayColor
-        view.addSubview(releaseButton)
-        
-        releaseButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(releaseButton.superview!)
-            make.height.equalTo(50)
-        }
+        createNaviRightButton("发布")
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(tableView.superview!)
+            make.left.right.bottom.equalTo(tableView.superview!)
             make.top.equalTo(self.snp.topLayoutGuideBottom)
-            make.bottom.equalTo(releaseButton.snp.top)
         }
     }
     

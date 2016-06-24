@@ -31,35 +31,10 @@ class SelectSkillViewController: YGBaseViewController {
         if type == SelectSkillType.Tovc {
              navigationController?.setNavigationBarHidden(false, animated: animated)
         }
-       
-//        selectDatePicker = YGSelectDateView()
-//        UIApplication.sharedApplication().keyWindow!.addSubview(selectDatePicker)
-//        selectDatePicker.hidden = true
-//        selectDatePicker.snp.makeConstraints { (make) in
-//            make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
-//        }
-//        
-//        provinceTitles = CitiesData.sharedInstance().provinceTitle()
-//        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
-//        pickerView.delegate = self
-//        UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
-//        pickerView.hidden = true
-//        pickerView.snp.makeConstraints { (make) in
-//            make.left.right.top.bottom.equalTo(pickerView.superview!)
-//        }
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-//        if selectDatePicker != nil {
-//            selectDatePicker.removeFromSuperview()
-//            selectDatePicker = nil
-//        }
-//        
-//        if pickerView != nil {
-//            pickerView.removeFromSuperview()
-//            pickerView = nil
-//        }
     }
     
     override func viewDidLoad() {
