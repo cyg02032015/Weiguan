@@ -22,6 +22,7 @@
     UIView *_naviBar;
     UIButton *_backButton;
     UIButton *_selectButton;
+    UILabel *_titleLabel;
     
     UIView *_toolBar;
     UIButton *_okButton;
@@ -76,14 +77,19 @@
     [_backButton setImage:[UIImage imageNamedFromMyBundle:@"navi_back.png"] forState:UIControlStateNormal];
     [_backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [_naviBar addSubview:_backButton];
     
     _selectButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.tz_width - 54, 10, 42, 42)];
     [_selectButton setImage:[UIImage imageNamedFromMyBundle:@"photo_def_photoPickerVc.png"] forState:UIControlStateNormal];
     [_selectButton setImage:[UIImage imageNamedFromMyBundle:@"photo_sel_photoPickerVc.png"] forState:UIControlStateSelected];
     [_selectButton addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
-    
     [_naviBar addSubview:_selectButton];
-    [_naviBar addSubview:_backButton];
+    
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(_backButton.tz_right, 0, self.view.tz_width - 104, _naviBar.tz_height)];
+    _titleLabel.text = [NSString stringWithFormat:@"%ld/%ld", _currentIndex + 1, _models.count];
+    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_naviBar addSubview:_titleLabel];
     [self.view addSubview:_naviBar];
 }
 
@@ -247,6 +253,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint offSet = scrollView.contentOffset;
     _currentIndex = (offSet.x + (self.view.tz_width * 0.5)) / self.view.tz_width;
+    _titleLabel.text = [NSString stringWithFormat:@"%ld/%ld", _currentIndex + 1, _models.count];
     [self refreshNaviBarAndBottomBarState];
 }
 

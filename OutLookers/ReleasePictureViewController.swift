@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 private let pictureSelectIdentifier = "pictureSelectIdentifier"
 private let editTextViewIdentifier = "editTextViewIdentifier"
@@ -17,6 +18,8 @@ class ReleasePictureViewController: YGBaseViewController {
     var tableView: UITableView!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     lazy var pictures = [UIImage]()
+    lazy var photos = NSMutableArray()
+    lazy var originPhotos = NSMutableArray()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -72,6 +75,7 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(pictureSelectIdentifier, forIndexPath: indexPath) as! PictureSelectCell
+                cell.collectionViewSetDelegate(self, indexPath: indexPath)
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(editTextViewIdentifier, forIndexPath: indexPath) as! EditTextViewCell
@@ -103,6 +107,92 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
         } else {
             return 10
         }
+    }
+}
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count + 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(releasePictureCollectionCellIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
+        if photos.count == indexPath.item {
+            cell.img = UIImage(named: "release_picture_Add pictures")!
+        } else {
+            cell.img = (photos[indexPath.item] as! UIImage)
+        }
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PictureSelectCell
+        if indexPath.item == photos.count {
+            let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
+            actionSheet.showInView(view)
+        } else {
+            let tz = TZImagePickerController(selectedAssets: originPhotos, selectedPhotos: photos, index: indexPath.item)
+            tz.didFinishPickingPhotosHandle = { [unowned self](photos, assets, isSelectedOrigin) in
+                self.originPhotos.setArray(assets)
+                self.photos.setArray(photos)
+                cell.collectionView.reloadData()
+                self.tableView.reloadData()
+            }
+            presentViewController(tz, animated: true, completion: nil)
+        }
+    }
+}
+
+extension ReleasePictureViewController: UIActionSheetDelegate {
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        switch buttonIndex {
+        case 1:// 拍照
+            if UIImagePickerController.isAvailableCamera() && UIImagePickerController.isSupportTakingPhotos(){
+                let controller = UIImagePickerController()
+                controller.sourceType = .Camera
+                if UIImagePickerController.isAvailableCameraDeviceFront() {
+                    controller.cameraDevice = .Front
+                }
+                var mediaTypes = [String]()
+                mediaTypes.append(kUTTypeImage as String)
+                controller.mediaTypes = mediaTypes
+                controller.delegate = self
+                presentViewController(controller, animated: true, completion: {})
+            }
+            break
+        case 2:// 相册
+                let tz = TZImagePickerController(maxImagesCount: 9, delegate: self)
+                tz.allowTakePicture = false
+                tz.allowPickingVideo = false
+                tz.selectedAssets = originPhotos
+                presentViewController(tz, animated: true, completion: nil)
+            break
+        default: LogWarn("switch default")
+        }
+    }
+}
+
+extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, TZImagePickerControllerDelegate {
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        picker.dismissViewControllerAnimated(true) {}
+    }
+        
+    func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PictureSelectCell
+        self.photos.setArray(photos)
+        self.originPhotos.setArray(assets)
+        cell.collectionView.reloadData()
+        if self.photos.count/4 >= 1 {
+            let range = NSMakeRange(0, 0)
+            tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true) { }//TODO
     }
 }
 

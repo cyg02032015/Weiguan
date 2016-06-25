@@ -281,7 +281,6 @@ extension EditSkillViewController: UIActionSheetDelegate {
             break
         default: LogWarn("switch default")
         }
-        
     }
 }
 
@@ -297,8 +296,8 @@ extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigation
     }
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
-        self.photoArray.addObjectsFromArray(photos)
-        self.originPhotoArray.addObjectsFromArray(assets)
+        self.photoArray.setArray(photos)
+        self.originPhotoArray.setArray(assets)
         cell.collectionView.reloadData()
         if self.photoArray.count/5 >= 1 {
             let range = NSMakeRange(2, 0)

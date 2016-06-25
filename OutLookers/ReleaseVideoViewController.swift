@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MobileCoreServices
+import MediaPlayer
 
 private let videoCoverIdentifier = "videoCoverId"
 private let editTextViewIdentifier = "editTextViewId"
@@ -25,7 +27,7 @@ class ReleaseVideoViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "编辑才艺"
+        title = "编辑动态"
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
         
@@ -115,7 +117,15 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate 
     }
     
     func videoCoverImageViewTap(sender: UITapGestureRecognizer) {
-        LogInfo("tap image")
+        if UIImagePickerController.isAvailablePhotoLibrary() {
+            let controller = UIImagePickerController()
+            controller.sourceType = .PhotoLibrary
+            var mediaTypes = [String]()
+            mediaTypes.append(kUTTypeMovie as String)
+            controller.mediaTypes = mediaTypes
+            controller.delegate = self
+            presentViewController(controller, animated: true, completion: {})
+        }
     }
     
     func shareCellReturnsShareTitle(text: String) {
@@ -123,3 +133,21 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate 
     }
 }
 
+extension ReleaseVideoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! VideoCoverCell
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        if mediaType == kUTTypeMovie as String {
+            LogInfo(info[UIImagePickerControllerMediaType])
+            guard let url = info[UIImagePickerControllerMediaURL] as? NSURL else { fatalError("获取视频 URL 失败")}
+            let thumbleImg = VideoTool.getThumbleImage(url)
+            cell.imgView.image = thumbleImg
+            
+            dismissViewControllerAnimated(true, completion: {})
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+}

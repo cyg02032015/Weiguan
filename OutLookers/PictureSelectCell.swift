@@ -33,8 +33,17 @@ class PictureSelectCell: UITableViewCell {
         contentView.addSubview(collectionView)
         collectionView.registerClass(PhotoCollectionCell.self, forCellWithReuseIdentifier: releasePictureCollectionCellIdentifier)
         
+        let lineV = UIView()
+        lineV.backgroundColor = UIColor(hex: 0xE4E4E4)
+        contentView.addSubview(lineV)
+        
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(collectionView.superview!)
+        }
+        
+        lineV.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalTo(lineV.superview!)
+            make.height.equalTo(1)
         }
     }
     

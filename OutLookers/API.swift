@@ -9,5 +9,6 @@
 import Foundation
 
 struct API {
-    static let baseURL = ""
+    static let baseURL = "http://139.129.106.27/"
+    
 }
