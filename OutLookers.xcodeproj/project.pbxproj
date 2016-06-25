@@ -545,9 +545,9 @@
 				D8F526B31D156B58000C8F91 /* GlobleFunc.swift */,
 				D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */,
 				D8F526A81D1566B7000C8F91 /* StringDefine.swift */,
+				D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
-				D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */,
 				D8F526AE1D1569D3000C8F91 /* Localizable.strings */,
 				D8F526AA1D15691F000C8F91 /* InfoPlist.strings */,
 			);

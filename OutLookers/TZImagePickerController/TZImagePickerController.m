@@ -336,7 +336,7 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
     if ([imagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerControllerDidCancel:)]) {
-        [imagePickerVc.pickerDelegate imagePickerControllerDidCancel:imagePickerVc];
+        [imagePickerVc.pickerDelegate tz_imagePickerControllerDidCancel:imagePickerVc];
     }
     if (imagePickerVc.imagePickerControllerDidCancelHandle) {
         imagePickerVc.imagePickerControllerDidCancelHandle();

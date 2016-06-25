@@ -30,10 +30,12 @@ class EditSkillViewController: YGBaseViewController {
     lazy var provinceTitles = NSArray()
     lazy var skillUnitPickerArray = [String]()
     var isProvincePicker = false  // 区分PickerView数据源
-    var photoArray: [UIImage]!
+    lazy var photoArray = NSMutableArray()
+    lazy var originPhotoArray = NSMutableArray()
     var photoType: PhotoSelectType!
     var setCoverButton: UIButton!
     var addVideoButton: UIButton!
+    var isSelectPhotos: Bool = false // 是否选取多张
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,7 +67,6 @@ class EditSkillViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        photoArray = [UIImage(named: "release_announcement_Add pictures")!]
         tableView = UITableView()
         view.addSubview(tableView)
         tableView.delegate = self
@@ -153,7 +154,7 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 1: return 193 // 才艺详情
         case 0: return 56
-        case 2: return 514 + (CGFloat(self.photoArray.count - 1) / 5 * (ScreenWidth - 30 - 20) / 5) + 5
+        case 2: return 514 + (CGFloat(self.photoArray.count) / 5 * (ScreenWidth - 30 - 20) / 5) + 5
         default:
             return 0
         }
@@ -174,33 +175,45 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.photoArray.count > 9 ? self.photoArray.count - 1 : self.photoArray.count
+        return self.photoArray.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoCollectionIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
-        cell.img = photoArray[indexPath.item]
+        if indexPath.item == photoArray.count {
+            cell.img = UIImage(named: "release_announcement_Add pictures")!
+        } else {
+            cell.img = (photoArray[indexPath.item] as! UIImage)
+        }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
         photoType = .Some(.AddPictrue)
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionCell
-        guard let image = cell.imgView.image else { return }
-        if image == photoArray[photoArray.count - 1] {
+        if indexPath.item == photoArray.count {
+            isSelectPhotos = true
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(view)
         } else {
-            let browse = BrowsePhotoViewController()
-            browse.photos = photoArray
-            navigationController?.pushViewController(browse, animated: true)
+            let tz = TZImagePickerController(selectedAssets: originPhotoArray, selectedPhotos: photoArray, index: indexPath.item)
+            tz.didFinishPickingPhotosHandle = { [unowned self](photos, assets, isSelectedOrigin) in
+                self.originPhotoArray.setArray(assets)
+                self.photoArray.setArray(photos)
+                cell.collectionView.reloadData()
+                self.tableView.reloadData()
+            }
+            
+            presentViewController(tz, animated: true, completion: nil)
         }
     }
 }
 
 extension EditSkillViewController: BudgetPriceCellDelegate {
     override func tapRightButton(sender: UIButton) {
-        
+        dismissViewControllerAnimated(true) { [unowned self] in
+            self.photoArray.removeAllObjects()
+        }
     }
     
     func budgetPriceButtonTap(sender: UIButton) {
@@ -214,6 +227,7 @@ extension EditSkillViewController: BudgetPriceCellDelegate {
 extension EditSkillViewController: SkillSetCellDelegate {
     // 设置封面
     func skillSetTapSetCover(sender: UIButton) {
+        isSelectPhotos = false
         photoType = .Some(.SetCover)
         setCoverButton = sender
         let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
@@ -227,6 +241,7 @@ extension EditSkillViewController: SkillSetCellDelegate {
     }
 }
 
+// MARK: - UIActionSheetDelegate
 extension EditSkillViewController: UIActionSheetDelegate {
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         switch buttonIndex {
@@ -245,15 +260,24 @@ extension EditSkillViewController: UIActionSheetDelegate {
             }
             break
         case 2:// 相册
-            if UIImagePickerController.isAvailablePhotoLibrary() {
-                let controller = UIImagePickerController()
-                controller.sourceType = .PhotoLibrary
-                var mediaTypes = [String]()
-                mediaTypes.append(kUTTypeImage as String)
-                controller.mediaTypes = mediaTypes
-                controller.delegate = self
-                presentViewController(controller, animated: true, completion: {})
+            if isSelectPhotos {
+                let tz = TZImagePickerController(maxImagesCount: 9, delegate: self)
+                tz.allowTakePicture = false
+                tz.allowPickingVideo = false
+                tz.selectedAssets = originPhotoArray
+                presentViewController(tz, animated: true, completion: nil)
+            } else {
+                if UIImagePickerController.isAvailablePhotoLibrary() {
+                    let controller = UIImagePickerController()
+                    controller.sourceType = .PhotoLibrary
+                    var mediaTypes = [String]()
+                    mediaTypes.append(kUTTypeImage as String)
+                    controller.mediaTypes = mediaTypes
+                    controller.delegate = self
+                    presentViewController(controller, animated: true, completion: {})
+                }
             }
+            
             break
         default: LogWarn("switch default")
         }
@@ -262,15 +286,23 @@ extension EditSkillViewController: UIActionSheetDelegate {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate,TZImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
         picker.dismissViewControllerAnimated(true) {
             let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - ScreenWidth/2, width: ScreenWidth, height: ScreenWidth), limitScaleRatio: 3)
             imgCropper.delegate = self
-            self.presentViewController(imgCropper, animated: true, completion: {
-                //TODO
-            })
+            self.presentViewController(imgCropper, animated: true, completion: {})
+        }
+    }
+    func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
+        self.photoArray.addObjectsFromArray(photos)
+        self.originPhotoArray.addObjectsFromArray(assets)
+        cell.collectionView.reloadData()
+        if self.photoArray.count/5 >= 1 {
+            let range = NSMakeRange(2, 0)
+            tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
         }
     }
     
@@ -286,28 +318,13 @@ extension EditSkillViewController: VPImageCropperDelegate {
     }
     
     func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
-        if photoType == .Some(.AddPictrue) {
-            editedImage.resetSizeOfImageData(editedImage, maxSize: 300, compeleted: { [weak self](data) in
-                guard let s = self else { return }
-                s.photoArray.insert(UIImage(data: data)!, atIndex: s.photoArray.count - 1)
-                let cell = s.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
-                cell.collectionView.reloadData()
-                if s.photoArray.count / 3 >= 1 {
-                    let range = NSMakeRange(2, 1)
-                    s.tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
-                }
-                s.dismissViewControllerAnimated(true) { }//TODO
-            })
-        } else if photoType == .Some(.SetCover) {
+        if photoType == .Some(.SetCover) {
             editedImage.resetSizeOfImageData(editedImage, maxSize: 300, compeleted: { [weak self](data) in
                 guard let s = self else { return }
                 s.setCoverButton.setImage(UIImage(data: data)!, forState: .Normal)
                 s.dismissViewControllerAnimated(true) { }
             })
-        } else {
-            
         }
-        
     }
 }
 

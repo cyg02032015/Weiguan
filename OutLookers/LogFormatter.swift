@@ -21,6 +21,6 @@ class LogFormatter: DDDispatchQueueLogFormatter {
         case DDLogFlag.Verbose: logLevel = "VERBOSE"
         default: logLevel = "DEBUG"
         }
-        return "[\(logLevel)] [LINE:\(logMessage.line) \(logMessage.message)]"
+        return "[\(logLevel)] [LINE:\(logMessage.line)] \(logMessage.message)"
     }
 }
