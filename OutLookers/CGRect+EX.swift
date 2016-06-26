@@ -92,4 +92,26 @@ extension UIView {
             return self.y + self.height / 2
         }
     }
+    
+    var origin: CGPoint {
+        get {
+            return self.frame.origin
+        }
+        set {
+            var frame = self.frame
+            frame.origin = newValue
+            self.frame = frame
+        }
+    }
+    
+    var size: CGSize {
+        get {
+            return self.frame.size
+        }
+        set {
+            var frame = self.frame
+            frame.size = newValue
+            self.frame = frame
+        }
+    }
 }
