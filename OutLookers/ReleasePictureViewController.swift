@@ -132,14 +132,24 @@ extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionVi
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(view)
         } else {
-            let tz = TZImagePickerController(selectedAssets: originPhotos, selectedPhotos: photos, index: indexPath.item)
-            tz.didFinishPickingPhotosHandle = { [unowned self](photos, assets, isSelectedOrigin) in
-                self.originPhotos.setArray(assets)
-                self.photos.setArray(photos)
+//            let tz = TZImagePickerController(selectedAssets: originPhotos, selectedPhotos: photos, index: indexPath.item)
+//            tz.didFinishPickingPhotosHandle = { [unowned self](photos, assets, isSelectedOrigin) in
+//                self.originPhotos.setArray(assets)
+//                self.photos.setArray(photos)
+//                cell.collectionView.reloadData()
+//                self.tableView.reloadData()
+//            }
+            let vc = YKPhotoPreviewController()
+            vc.currentIndex = indexPath.item
+            vc.photos = self.photos
+            vc.originPhotos = self.originPhotos
+            vc.didFinishPickingPhotos({ (photos, originPhotos) in
+                self.originPhotos.setArray(originPhotos as [AnyObject])
+                self.photos.setArray(photos as [AnyObject])
                 cell.collectionView.reloadData()
                 self.tableView.reloadData()
-            }
-            presentViewController(tz, animated: true, completion: nil)
+            })
+            presentViewController(vc, animated: true, completion: nil)
         }
     }
 }
