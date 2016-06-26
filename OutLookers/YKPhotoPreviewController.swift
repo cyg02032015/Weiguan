@@ -145,29 +145,9 @@ extension YKPhotoPreviewController: YKPhotoPreviewCellDelegate {
     }
     
     func tapDeletButton(sender: UIButton) {
-        if photos.count > 0 {
-            LogInfo("current index = \(currentIndex)")
-            photos.removeObjectAtIndex(currentIndex)
-            originPhotos.removeObjectAtIndex(currentIndex)
-            if currentIndex >= 1 {
-                currentIndex = currentIndex - 1
-                LogDebug("current index >= 1     \(currentIndex)")
-            } else {
-                LogVerbose("current index < 1 \(currentIndex)")
-                currentIndex = 0
-                titleLabel.text = "\(currentIndex + 1)/\(photos.count)"
-            }
-            if photos.count == 0 {
-                if didFinishPickClousure != nil {
-                    didFinishPickClousure(photos: photos, originPhotos: originPhotos)
-                }
-                dismissViewControllerAnimated(true, completion: nil)
-                return
-            }
-            collectionView.reloadData()
-            collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: currentIndex, inSection: 0), atScrollPosition: .None, animated: true)
-        }
-        
+        let alert = UIAlertView(title: "", message: "确定删除该图片吗?", delegate: self, cancelButtonTitle: "确定", otherButtonTitles: "点错了")
+        alert.show()
+
     }
     
     func photoPreviewSingleTap(sender: UITapGestureRecognizer) {
@@ -175,3 +155,35 @@ extension YKPhotoPreviewController: YKPhotoPreviewCellDelegate {
     }
 }
 
+extension YKPhotoPreviewController: UIAlertViewDelegate {
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        LogDebug(buttonIndex)
+        switch buttonIndex {
+        case 0:
+            if photos.count > 0 {
+                photos.removeObjectAtIndex(currentIndex)
+                originPhotos.removeObjectAtIndex(currentIndex)
+                if currentIndex >= 1 {
+                    currentIndex = currentIndex - 1
+                } else {
+                    currentIndex = 0
+                    titleLabel.text = "\(currentIndex + 1)/\(photos.count)"
+                }
+                if photos.count == 0 {
+                    if didFinishPickClousure != nil {
+                        didFinishPickClousure(photos: photos, originPhotos: originPhotos)
+                    }
+                    dismissViewControllerAnimated(true, completion: nil)
+                    return
+                }
+                collectionView.reloadData()
+                collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: currentIndex, inSection: 0), atScrollPosition: .None, animated: true)
+            }
+            break
+        case 1:
+            LogDebug("点错了")
+            break
+        default: LogWarn("switch default")
+        }
+    }
+}

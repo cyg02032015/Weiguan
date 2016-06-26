@@ -196,15 +196,17 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(view)
         } else {
-            let tz = TZImagePickerController(selectedAssets: originPhotoArray, selectedPhotos: photoArray, index: indexPath.item)
-            tz.didFinishPickingPhotosHandle = { [unowned self](photos, assets, isSelectedOrigin) in
-                self.originPhotoArray.setArray(assets)
-                self.photoArray.setArray(photos)
+            let vc = YKPhotoPreviewController()
+            vc.currentIndex = indexPath.item
+            vc.photos = self.photoArray
+            vc.originPhotos = self.originPhotoArray
+            vc.didFinishPickingPhotos({ (photos, originPhotos) in
+                self.originPhotoArray.setArray(originPhotos as [AnyObject])
+                self.photoArray.setArray(photos as [AnyObject])
                 cell.collectionView.reloadData()
                 self.tableView.reloadData()
-            }
-            
-            presentViewController(tz, animated: true, completion: nil)
+            })
+            presentViewController(vc, animated: true, completion: nil)
         }
     }
 }

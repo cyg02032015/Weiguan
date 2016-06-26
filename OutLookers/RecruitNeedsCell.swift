@@ -36,7 +36,7 @@ class RecruitNeedsCell: UITableViewCell {
         }
         for (index,r) in recruit.enumerate() {
             var price: String!
-            if let p = r.budgetPrice {
+            if let p = r.budgetPrice where r.budgetPrice?.characters.count > 0 {
                 price = "\(p)元"
             } else {
                 price = "价格待定"

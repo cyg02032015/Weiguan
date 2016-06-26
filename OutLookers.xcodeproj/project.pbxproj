@@ -296,8 +296,6 @@
 			children = (
 				D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */,
 				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
-				D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */,
-				D87049411D1FBE5A008FB780 /* YKPhotoPreviewCell.swift */,
 				E47ADF601D1BEE1600A2F4BD /* View */,
 			);
 			name = Skill;
@@ -361,6 +359,8 @@
 		D8F526CD1D16CAD1000C8F91 /* YKLib */ = {
 			isa = PBXGroup;
 			children = (
+				D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */,
+				D87049411D1FBE5A008FB780 /* YKPhotoPreviewCell.swift */,
 				E4E5DED21D179BEF00CB8535 /* YGSelectDateView.swift */,
 				E4E5DED81D179E1000CB8535 /* YGPickerView.swift */,
 				D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */,
@@ -715,7 +715,7 @@
 				TargetAttributes = {
 					E41C22D41D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = ZJBC9RYT5Z;
+						DevelopmentTeam = 4F542L7GM6;
 					};
 					E41C22E81D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
