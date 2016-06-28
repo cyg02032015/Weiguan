@@ -40,7 +40,6 @@
 		D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
-		D87049421D1FBE5A008FB780 /* YKPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87049411D1FBE5A008FB780 /* YKPhotoPreviewCell.swift */; };
 		D87049441D2152A7008FB780 /* VideoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87049431D2152A7008FB780 /* VideoTool.swift */; };
 		D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */; };
 		D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */; };
@@ -76,6 +75,7 @@
 		E4272DDD1D17F25B00BE4053 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4272DDC1D17F25B00BE4053 /* area.plist */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
+		E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -154,7 +154,6 @@
 		D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewController.swift; path = OutLookers/YKPhotoPreviewController.swift; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
-		D87049411D1FBE5A008FB780 /* YKPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewCell.swift; path = iOSInjectionProject/YKPhotoPreviewCell.swift; sourceTree = SOURCE_ROOT; };
 		D87049431D2152A7008FB780 /* VideoTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoTool.swift; path = OutLookers/VideoTool.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogFormatter.swift; path = OutLookers/LogFormatter.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BudgetPriceCell.swift; path = OutLookers/BudgetPriceCell.swift; sourceTree = SOURCE_ROOT; };
@@ -209,6 +208,7 @@
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
 		E4272E061D19328D00BE4053 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = OutLookers/VPImageCropper/VPImageCropperViewController.h; sourceTree = SOURCE_ROOT; };
 		E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPImageCropperViewController.m; path = OutLookers/VPImageCropper/VPImageCropperViewController.m; sourceTree = SOURCE_ROOT; };
+		E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewCell.swift; path = OutLookers/YKPhotoPreviewCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -358,8 +358,8 @@
 		D8F526CD1D16CAD1000C8F91 /* YKLib */ = {
 			isa = PBXGroup;
 			children = (
+				E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */,
 				D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */,
-				D87049411D1FBE5A008FB780 /* YKPhotoPreviewCell.swift */,
 				E4E5DED21D179BEF00CB8535 /* YGSelectDateView.swift */,
 				E4E5DED81D179E1000CB8535 /* YGPickerView.swift */,
 				D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */,
@@ -715,7 +715,7 @@
 				TargetAttributes = {
 					E41C22D41D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 4F542L7GM6;
+						DevelopmentTeam = 8PC7326ELF;
 					};
 					E41C22E81D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -929,6 +929,7 @@
 				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
 				D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */,
 				E4E5DED51D179BFD00CB8535 /* YKToast.swift in Sources */,
+				E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */,
 				D81F45181D118D63004D9192 /* YGBaseViewController.swift in Sources */,
 				D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */,
 				E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */,
@@ -952,7 +953,6 @@
 				D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */,
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
 				D81F45221D118F3C004D9192 /* SquareViewController.swift in Sources */,
-				D87049421D1FBE5A008FB780 /* YKPhotoPreviewCell.swift in Sources */,
 				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
 				D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
