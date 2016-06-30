@@ -76,6 +76,7 @@
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
 		E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */; };
+		E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -209,6 +210,7 @@
 		E4272E061D19328D00BE4053 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = OutLookers/VPImageCropper/VPImageCropperViewController.h; sourceTree = SOURCE_ROOT; };
 		E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPImageCropperViewController.m; path = OutLookers/VPImageCropper/VPImageCropperViewController.m; sourceTree = SOURCE_ROOT; };
 		E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewCell.swift; path = OutLookers/YKPhotoPreviewCell.swift; sourceTree = SOURCE_ROOT; };
+		E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowPeopleViewController.swift; path = OutLookers/FollowPeopleViewController.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -294,8 +296,7 @@
 		D8686C191D19840800B3982A /* Skill */ = {
 			isa = PBXGroup;
 			children = (
-				D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */,
-				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
+				E446F9F81D24ED31003DFC1E /* Controller */,
 				E47ADF601D1BEE1600A2F4BD /* View */,
 			);
 			name = Skill;
@@ -331,7 +332,7 @@
 		D8C1672F1D1AD67400C50EB7 /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */,
+				E446F9F61D24ED1A003DFC1E /* Controller */,
 				E47ADF621D1BEE7A00A2F4BD /* View */,
 			);
 			name = Video;
@@ -349,7 +350,7 @@
 		D8CC55931D1AD1E00059118F /* Picture */ = {
 			isa = PBXGroup;
 			children = (
-				D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */,
+				E446F9F71D24ED26003DFC1E /* Controller */,
 				E47ADF611D1BEE6D00A2F4BD /* View */,
 			);
 			name = Picture;
@@ -486,7 +487,9 @@
 		E41C6C5D1D113F350013031D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E446F9FE1D24EE76003DFC1E /* View */,
 				D81F452F1D12CF45004D9192 /* Controller */,
+				E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -570,6 +573,47 @@
 			path = "../../../../Downloads/VPImageCropper-master/VPImageCropperDemo/VPImageCropper";
 			sourceTree = "<group>";
 		};
+		E446F9F61D24ED1A003DFC1E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E446F9F71D24ED26003DFC1E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E446F9F81D24ED31003DFC1E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */,
+				E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E446F9F91D24ED40003DFC1E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */,
+				E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E446F9FE1D24EE76003DFC1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		E47ADF5F1D1BEDE600A2F4BD /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,8 +667,7 @@
 		E4E5DEDA1D17A8BB00CB8535 /* Notice */ = {
 			isa = PBXGroup;
 			children = (
-				E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */,
-				E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */,
+				E446F9F91D24ED40003DFC1E /* Controller */,
 				E47ADF5F1D1BEDE600A2F4BD /* View */,
 			);
 			name = Notice;
@@ -994,6 +1037,7 @@
 				E47ADF741D1D161C00A2F4BD /* ShareCollectionCell.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
+				E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */,
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
