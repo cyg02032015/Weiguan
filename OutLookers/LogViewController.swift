@@ -69,7 +69,7 @@ class LogViewController: YGBaseViewController {
         let topLabel = UILabel()
         topLabel.textAlignment = .Center
         topLabel.text = "为保证你的账户安全, 请先绑定手机"
-        topLabel.font = UIFont.systemFontOfSize(16)
+        topLabel.font = UIFont.customFontOfSize(16)
         container.addSubview(topLabel)
         
         // 手机号
@@ -81,7 +81,7 @@ class LogViewController: YGBaseViewController {
         
         verifyButton = UIButton()
         verifyButton.setTitle("获取验证码", forState: .Normal)
-        verifyButton.titleLabel?.font = UIFont.systemFontOfSize(13)
+        verifyButton.titleLabel?.font = UIFont.customFontOfSize(13)
         verifyButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         verifyButton.backgroundColor = kRedColor
         verifyButton.addTarget(self, action: .tapVerify, forControlEvents: .TouchUpInside)
@@ -102,7 +102,7 @@ class LogViewController: YGBaseViewController {
         container.addSubview(cornerButton)
         
         let protocleButton = UIButton()
-        protocleButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        protocleButton.titleLabel?.font = UIFont.customFontOfSize(12)
         protocleButton.setTitle("我同意围观平台的用户协议", forState: .Normal)
         protocleButton.setTitleColor(kGrayColor, forState: .Normal)
         protocleButton.addTarget(self, action: .tapProtocolButton, forControlEvents: .TouchUpInside)
@@ -119,7 +119,7 @@ class LogViewController: YGBaseViewController {
         // 再去逛逛
         let aroundButton = UIButton()
         aroundButton.setTitle("再去逛逛", forState: .Normal)
-        aroundButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        aroundButton.titleLabel?.font = UIFont.customFontOfSize(14)
         aroundButton.setTitleColor(UIColor(hex: 0x777777), forState: .Normal)
         aroundButton.addTarget(self, action: .tapArroundMore, forControlEvents: .TouchUpInside)
         container.addSubview(aroundButton)
@@ -207,7 +207,7 @@ class LogViewController: YGBaseViewController {
         tf.placeholder = placeHolder
         tf.delegate = self
         tf.keyboardType = .NumberPad
-        tf.font = UIFont.systemFontOfSize(16)
+        tf.font = UIFont.customFontOfSize(16)
         return tf
     }
 }

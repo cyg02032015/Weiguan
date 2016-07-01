@@ -45,7 +45,7 @@ class VideoCoverCell: UITableViewCell {
         
         let label = UILabel()
         label.textAlignment = .Center
-        label.font = UIFont.systemFontOfSize(12)
+        label.font = UIFont.customFontOfSize(12)
         label.text = "设置封面";
         label.textColor = UIColor.whiteColor()
         v.addSubview(label)
@@ -55,26 +55,26 @@ class VideoCoverCell: UITableViewCell {
         contentView.addSubview(lineV)
         
         imgView.snp.makeConstraints { (make) in
-            make.top.equalTo(16)
+            make.top.equalTo(kScale(16))
             make.centerX.equalTo(imgView.superview!);
-            make.size.equalTo(CGSize(width: 82, height: 82))
+            make.size.equalTo(kSize(82, height: 82))
         }
         
         v.snp.makeConstraints { (make) in
             make.bottom.left.right.equalTo(v.superview!);
-            make.height.equalTo(20)
+            make.height.equalTo(kScale(20))
         }
         
         smlImg.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 20, height: 12.4))
-            make.left.equalTo(smlImg.superview!).offset(6)
+            make.size.equalTo(kSize(20, height: 12.4))
+            make.left.equalTo(smlImg.superview!).offset(kScale(6))
             make.centerY.equalTo(smlImg.superview!)
         }
         
         label.snp.makeConstraints { (make) in
-            make.left.equalTo(smlImg.snp.right).offset(3)
+            make.left.equalTo(smlImg.snp.right).offset(kScale(3))
             make.centerY.equalTo(label.superview!)
-            make.height.equalTo(12)
+            make.height.equalTo(kScale(12))
         }
         
         lineV.snp.makeConstraints { (make) in

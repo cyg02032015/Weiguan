@@ -46,21 +46,21 @@ class RecruitNeedsCell: UITableViewCell {
             let size = (title as NSString).sizeWithFonts(16)
             button.setTitle(title, forState: .Normal)
             button.setTitleColor(kGrayColor, forState: .Normal)
-            button.titleLabel?.font = UIFont.systemFontOfSize(16)
-            button.layer.cornerRadius = 15
+            button.titleLabel?.font = UIFont.customFontOfSize(16)
+            button.layer.cornerRadius = kScale(15)
             button.layer.borderColor = kGrayColor.CGColor
             button.layer.borderWidth = 1
             contentView.addSubview(button)
             
             button.snp.makeConstraints(closure: { (make) in
-                make.top.equalTo(last == nil ? recruitLabel.snp.bottom : last!.snp.bottom).offset(last == nil ? 15 : 8)
-                make.size.equalTo(CGSize(width: size.width + 15, height: 30))
-                make.left.equalTo(15)
+                make.top.equalTo(last == nil ? recruitLabel.snp.bottom : last!.snp.bottom).offset(last == nil ? kScale(15) : kScale(8))
+                make.size.equalTo(kSize(size.width + 15, height: 30))
+                make.left.equalTo(kScale(15))
             })
             last = button
             if index == recruit.count - 1 {
                 addButton.snp.updateConstraints(closure: { (make) in
-                    make.top.greaterThanOrEqualTo(last!.snp.bottom).offset(8).priorityHigh()
+                    make.top.greaterThanOrEqualTo(last!.snp.bottom).offset(kScale(8)).priorityHigh()
                 })
                 setNeedsUpdateConstraints()
                 updateConstraints()
@@ -79,7 +79,7 @@ class RecruitNeedsCell: UITableViewCell {
         
         recruitLabel = UILabel()
         recruitLabel.text = "招募需求"
-        recruitLabel.font = UIFont.systemFontOfSize(16)
+        recruitLabel.font = UIFont.customFontOfSize(16)
         contentView.addSubview(recruitLabel)
         
         
@@ -89,14 +89,14 @@ class RecruitNeedsCell: UITableViewCell {
         contentView.addSubview(addButton)
         
         recruitLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(recruitLabel.superview!).offset(15)
-            make.top.equalTo(recruitLabel.superview!).offset(12)
-            make.height.equalTo(16)
+            make.left.equalTo(recruitLabel.superview!).offset(kScale(15))
+            make.top.equalTo(recruitLabel.superview!).offset(kScale(12))
+            make.height.equalTo(kScale(16))
         }
         
         addButton.snp.makeConstraints(closure: { (make) in
-            make.size.equalTo(CGSize(width: 60, height: 30))
-            make.top.equalTo(recruitLabel.snp.bottom).offset(15).priorityLow()
+            make.size.equalTo(kSize(60, height: 30))
+            make.top.equalTo(recruitLabel.snp.bottom).offset(kScale(15)).priorityLow()
             make.left.equalTo(recruitLabel)
         })
     }

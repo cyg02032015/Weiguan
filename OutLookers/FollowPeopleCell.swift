@@ -25,16 +25,16 @@ class FollowPeopleCell: UITableViewCell {
     func setupSubViews() {
         
         header = IconHeaderView()
-        header.layer.cornerRadius = 50/2
+        header.layer.cornerRadius = kScale(50/2)
         header.clipsToBounds = true
         contentView.addSubview(header)
         
         nameLabel = UILabel()
-        nameLabel.font = UIFont.systemFontOfSize(16)
+        nameLabel.font = UIFont.customFontOfSize(16)
         contentView.addSubview(nameLabel)
         
         followContainer = UIView()
-        followContainer.layer.cornerRadius = kSizeScale(24) / 2
+        followContainer.layer.cornerRadius = kScale(24/2)
         followContainer.layer.borderColor = kRedColor.CGColor
         followContainer.layer.borderWidth = 1
         contentView.addSubview(followContainer)
@@ -43,7 +43,7 @@ class FollowPeopleCell: UITableViewCell {
         followContainer.addSubview(plusImageView)
         
         followLabel = UILabel()
-        followLabel.font = UIFont.systemFontOfSize(12)
+        followLabel.font = UIFont.customFontOfSize(12)
         followLabel.textColor = kRedColor
         followContainer.addSubview(followLabel)
         
@@ -52,32 +52,32 @@ class FollowPeopleCell: UITableViewCell {
         followLabel.text = "关注"
         
         header.snp.makeConstraints { (make) in
-            make.left.equalTo(header.superview!).offset(15)
+            make.left.equalTo(header.superview!).offset(kScale(15))
             make.centerY.equalTo(header.superview!)
-            make.size.equalTo(50)
+            make.size.equalTo(kSize(50, height: 50))
         }
         
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(header.snp.right).offset(15)
+            make.left.equalTo(header.snp.right).offset(kScale(15))
             make.centerY.equalTo(nameLabel.superview!)
         }
         
         followContainer.snp.makeConstraints { (make) in
-            make.right.equalTo(followContainer.superview!).offset(-15)
+            make.right.equalTo(followContainer.superview!).offset(kScale(-15))
             make.centerY.equalTo(followContainer.superview!)
-            make.size.equalTo(CGSize(width: 60, height: 24))
+            make.size.equalTo(kSize(60, height: 24))
         }
         
         plusImageView.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 12, height: 12))
+            make.size.equalTo(kSize(12, height: 12))
             make.centerY.equalTo(plusImageView.superview!)
-            make.left.equalTo(plusImageView.superview!).offset(9)
+            make.left.equalTo(plusImageView.superview!).offset(kScale(9))
         }
         
         followLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(plusImageView.snp.right).offset(5)
+            make.left.equalTo(plusImageView.snp.right).offset(kScale(5))
             make.centerY.equalTo(followLabel.superview!)
-            make.right.equalTo(followLabel.superview!).offset(-5)
+            make.right.equalTo(followLabel.superview!).offset(kScale(-5))
         }
     }
     

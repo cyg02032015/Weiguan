@@ -181,11 +181,11 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 1: return 90 + CGFloat(recruits.count * 38) // 招募需求
-        case 0, 2, 3, 4: return 56
-        case 5: return 155 // 工作详情
+        case 1: return kScale(90 + CGFloat(recruits.count * 38)) // 招募需求
+        case 0, 2, 3, 4: return kScale(56)
+        case 5: return kScale(155) // 工作详情
         case 6:
-            return 177 + CGFloat((photoArray.count - 1) / 3 * 65) // 宣传图片
+            return kScale(177 + CGFloat((photoArray.count - 1) / 3 * 65)) // 宣传图片
         default:
             return 0
         }
@@ -195,7 +195,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         if section == 6 {
             return 0
         }
-        return 10
+        return kScale(10)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

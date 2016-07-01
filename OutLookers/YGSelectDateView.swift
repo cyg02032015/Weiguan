@@ -46,7 +46,7 @@ class YGSelectDateView: UIView {
         let cancel = UIButton()
         cancel.setTitle("取消", forState: .Normal)
         cancel.setTitleColor(kRedColor, forState: .Normal)
-        cancel.titleLabel?.font = UIFont.systemFontOfSize(16)
+        cancel.titleLabel?.font = UIFont.customFontOfSize(16)
         cancel.layer.cornerRadius = 5
         cancel.layer.borderColor = kRedColor.CGColor
         cancel.layer.borderWidth = 1
@@ -55,7 +55,7 @@ class YGSelectDateView: UIView {
         
         let sure = UIButton()
         sure.setTitle("确定", forState: .Normal)
-        sure.titleLabel?.font = UIFont.systemFontOfSize(16)
+        sure.titleLabel?.font = UIFont.customFontOfSize(16)
         sure.layer.cornerRadius = 5
         sure.backgroundColor = kRedColor
         sure.addTarget(self, action: .tapSure, forControlEvents: .TouchUpInside)
@@ -64,7 +64,7 @@ class YGSelectDateView: UIView {
         titleLabel = UILabel()
         titleLabel.text = "才艺标价单位"
         titleLabel.textAlignment = .Center
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.font = UIFont.customFontOfSize(16)
         topContainer.addSubview(titleLabel)
         
         let lineV = UIView()

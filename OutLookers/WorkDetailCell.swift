@@ -23,37 +23,38 @@ class WorkDetailCell: UITableViewCell {
     func setupSubViews() {
         label = UILabel()
         label.text = "工作详情"
-        label.font = UIFont.systemFontOfSize(16)
+        label.font = UIFont.customFontOfSize(16)
         contentView.addSubview(label)
         
         tv = UITextView()
         tv.delegate = self
+        tv.font = UIFont.customFontOfSize(14)
         contentView.addSubview(tv)
         
         placeholderLabel = UILabel()
-        placeholderLabel.font = UIFont.systemFontOfSize(14)
+        placeholderLabel.font = UIFont.customFontOfSize(14)
         placeholderLabel.text = "请输入工作内容"
         placeholderLabel.textColor = UIColor.grayColor()
         contentView.addSubview(placeholderLabel)
         
         label.snp.makeConstraints { (make) in
-            make.left.equalTo(label.superview!).offset(15)
-            make.top.equalTo(label.superview!).offset(15)
-            make.height.equalTo(16)
+            make.left.equalTo(label.superview!).offset(kScale(15))
+            make.top.equalTo(label.superview!).offset(kScale(15))
+            make.height.equalTo(kScale(16))
         }
         
         tv.snp.makeConstraints { (make) in
-            make.left.equalTo(tv.superview!).offset(15)
-            make.right.equalTo(tv.superview!).offset(-15)
-            make.top.equalTo(label.snp.bottom).offset(6)
-            make.bottom.equalTo(tv.superview!).offset(-10)
+            make.left.equalTo(tv.superview!).offset(kScale(15))
+            make.right.equalTo(tv.superview!).offset(kScale(-15))
+            make.top.equalTo(label.snp.bottom).offset(kScale(6))
+            make.bottom.equalTo(tv.superview!).offset(kScale(-10))
         }
         
         placeholderLabel.snp.makeConstraints { (make) in
             make.right.equalTo(tv)
-            make.left.equalTo(tv).offset(4)
-            make.height.equalTo(14)
-            make.top.equalTo(tv).offset(8)
+            make.left.equalTo(tv).offset(kScale(4))
+            make.height.equalTo(kScale(14))
+            make.top.equalTo(tv).offset(kScale(8))
         }
     }
 

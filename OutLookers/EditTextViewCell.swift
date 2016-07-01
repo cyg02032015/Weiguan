@@ -22,10 +22,11 @@ class EditTextViewCell: UITableViewCell {
     func setupSubViews() {
         textView = UITextView()
         textView.delegate = self
+        textView.font = UIFont.customFontOfSize(14)
         contentView.addSubview(textView)
         
         placeholderLabel = UILabel()
-        placeholderLabel.font = UIFont.systemFontOfSize(16)
+        placeholderLabel.font = UIFont.customFontOfSize(16)
         placeholderLabel.text = "写点什么吧..."
         placeholderLabel.textColor = UIColor.grayColor()
         contentView.addSubview(placeholderLabel)
@@ -35,10 +36,10 @@ class EditTextViewCell: UITableViewCell {
         }
         
         placeholderLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(placeholderLabel.superview!).offset(15)
-            make.left.equalTo(placeholderLabel.superview!).offset(15)
-            make.height.equalTo(16)
-            make.top.equalTo(placeholderLabel.superview!).offset(15)
+            make.right.equalTo(placeholderLabel.superview!).offset(kScale(15))
+            make.left.equalTo(placeholderLabel.superview!).offset(kScale(15))
+            make.height.equalTo(kScale(16))
+            make.top.equalTo(placeholderLabel.superview!).offset(kScale(15))
         }
         
     }

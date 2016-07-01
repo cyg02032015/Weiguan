@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Device
 
 // 屏幕适配宏常量
 let ScreenWidth: CGFloat   = UIScreen.mainScreen().bounds.width
@@ -33,6 +34,20 @@ let kSinaRedirectUrl = "http://sns.whalecloud.com/sina2/callback" // 分享回�
 // 正则表达
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
+func kScale(a: CGFloat) -> CGFloat {
+    if Device.size() == .Screen5_5Inch {
+        return a
+    } else {
+        return a
+    }
+}
 
+func kSize(width: CGFloat, height: CGFloat) -> CGSize {
+    if Device.size() == .Screen5_5Inch {
+        return CGSize(width: width, height: height)
+    } else {
+        return CGSize(width: width, height: height)
+    }
+}
 
 

@@ -77,6 +77,11 @@
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
 		E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */; };
 		E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */; };
+		E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */; };
+		E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA021D2612D7003DFC1E /* IconHeaderView.swift */; };
+		E446FA061D2612D7003DFC1E /* PersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA031D2612D7003DFC1E /* PersonalDataViewController.swift */; };
+		E446FA071D2612D7003DFC1E /* PersonalHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA041D2612D7003DFC1E /* PersonalHeaderCell.swift */; };
+		E446FA091D261647003DFC1E /* UIFont+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA081D261647003DFC1E /* UIFont+EX.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -211,6 +216,11 @@
 		E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPImageCropperViewController.m; path = OutLookers/VPImageCropper/VPImageCropperViewController.m; sourceTree = SOURCE_ROOT; };
 		E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewCell.swift; path = OutLookers/YKPhotoPreviewCell.swift; sourceTree = SOURCE_ROOT; };
 		E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowPeopleViewController.swift; path = OutLookers/FollowPeopleViewController.swift; sourceTree = SOURCE_ROOT; };
+		E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowPeopleCell.swift; path = OutLookers/FollowPeopleCell.swift; sourceTree = SOURCE_ROOT; };
+		E446FA021D2612D7003DFC1E /* IconHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconHeaderView.swift; path = OutLookers/IconHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		E446FA031D2612D7003DFC1E /* PersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalDataViewController.swift; path = OutLookers/PersonalDataViewController.swift; sourceTree = SOURCE_ROOT; };
+		E446FA041D2612D7003DFC1E /* PersonalHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalHeaderCell.swift; path = OutLookers/PersonalHeaderCell.swift; sourceTree = SOURCE_ROOT; };
+		E446FA081D261647003DFC1E /* UIFont+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+EX.swift"; path = "OutLookers/UIFont+EX.swift"; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -471,6 +481,7 @@
 				D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */,
 				D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */,
 				D8686C171D19752300B3982A /* UIScrollView+EX.swift */,
+				E446FA081D261647003DFC1E /* UIFont+EX.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -490,6 +501,7 @@
 				E446F9FE1D24EE76003DFC1E /* View */,
 				D81F452F1D12CF45004D9192 /* Controller */,
 				E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */,
+				E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -522,6 +534,9 @@
 		E41C6C601D113F350013031D /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				E446FA021D2612D7003DFC1E /* IconHeaderView.swift */,
+				E446FA031D2612D7003DFC1E /* PersonalDataViewController.swift */,
+				E446FA041D2612D7003DFC1E /* PersonalHeaderCell.swift */,
 				D81F453D1D145B3D004D9192 /* Controller */,
 			);
 			path = Mine;
@@ -982,9 +997,11 @@
 				D8AA10061D1DA0220038EE73 /* TZAssetModel.m in Sources */,
 				D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */,
 				D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */,
+				E446FA091D261647003DFC1E /* UIFont+EX.swift in Sources */,
 				D8AA10091D1DA0220038EE73 /* TZImagePickerController.m in Sources */,
 				D81F45051D118D43004D9192 /* InterfaceBuiderEX.swift in Sources */,
 				D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */,
+				E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
@@ -1001,6 +1018,7 @@
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
 				D8AA100E1D1DA0220038EE73 /* UIView+Layout.m in Sources */,
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
+				E446FA061D2612D7003DFC1E /* PersonalDataViewController.swift in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
@@ -1027,7 +1045,9 @@
 				D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */,
 				D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */,
 				D8AA100C1D1DA0220038EE73 /* TZPhotoPreviewController.m in Sources */,
+				E446FA071D2612D7003DFC1E /* PersonalHeaderCell.swift in Sources */,
 				E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */,
+				E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */,
 				E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */,
 				D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,

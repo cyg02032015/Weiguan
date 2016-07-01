@@ -23,11 +23,11 @@ class SelectPhotoCell: UITableViewCell {
     func setupSubViews() {
         label = UILabel()
         label.text = "工作详情"
-        label.font = UIFont.systemFontOfSize(15)
+        label.font = UIFont.customFontOfSize(15)
         contentView.addSubview(label)
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (ScreenWidth - 30 - 15) / 3, height: kSizeScale(63))
+        layout.itemSize = CGSize(width: (ScreenWidth - 30 - 15) / 3, height: kScale(63))
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 5
         layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 28, right: 15)
@@ -40,13 +40,13 @@ class SelectPhotoCell: UITableViewCell {
     
     override func layoutSubviews() {
         label.snp.makeConstraints { (make) in
-            make.left.equalTo(label.superview!).offset(15)
-            make.top.equalTo(label.superview!).offset(15)
-            make.height.equalTo(15)
+            make.left.equalTo(label.superview!).offset(kScale(15))
+            make.top.equalTo(label.superview!).offset(kScale(15))
+            make.height.equalTo(kScale(15))
         }
         
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(label.snp.bottom).offset(10)
+            make.top.equalTo(label.snp.bottom).offset(kScale(10))
             make.left.right.bottom.equalTo(collectionView.superview!)
         }
         super.layoutSubviews()

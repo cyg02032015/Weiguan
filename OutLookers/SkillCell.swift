@@ -22,8 +22,8 @@ class SkillCell: UICollectionViewCell {
         skill = UIButton()
         skill.setTitle("商业演出", forState: .Normal)
         skill.backgroundColor = UIColor(hex: 0xC8C8C8)
-        skill.layer.cornerRadius = kSizeScale(24) / 2
-        skill.titleLabel?.font = UIFont.systemFontOfSize(14)
+        skill.layer.cornerRadius = kScale(24/2)
+        skill.titleLabel?.font = UIFont.customFontOfSize(14)
         skill.userInteractionEnabled = false
         contentView.addSubview(skill)
         

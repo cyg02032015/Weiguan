@@ -42,16 +42,16 @@ class PersonalHeaderCell: UITableViewCell {
         // 头像部分
         header = IconHeaderView()
         header.clipsToBounds = true
-        header.layer.cornerRadius = 59/2
+        header.layer.cornerRadius = kScale(59/2)
         contentView.addSubview(header)
         
         name = UILabel()
-        name.font = UIFont.systemFontOfSize(16)
+        name.font = UIFont.customFontOfSize(16)
         name.text = "小包子"
         contentView.addSubview(name)
         
         let editDataContainer = UIView()
-        editDataContainer.layer.cornerRadius = kSizeScale(25) / 2
+        editDataContainer.layer.cornerRadius = kScale(25/2)
         editDataContainer.layer.borderColor = kGrayColor.CGColor
         editDataContainer.layer.borderWidth = 1
         contentView.addSubview(editDataContainer)
@@ -63,7 +63,7 @@ class PersonalHeaderCell: UITableViewCell {
         editDataContainer.addSubview(penImgView)
         
         let editDataLabel = UILabel()
-        editDataLabel.font = UIFont.systemFontOfSize(12)
+        editDataLabel.font = UIFont.customFontOfSize(12)
         editDataLabel.textColor = kGrayColor
         editDataLabel.text = "编辑资料"
         editDataContainer.addSubview(editDataLabel)
@@ -125,12 +125,12 @@ class PersonalHeaderCell: UITableViewCell {
         friend = UILabel()
         friend.text = "123"
         friend.textAlignment = .Center
-        friend.font = UIFont.boldSystemFontOfSize(16)
+        friend.font = UIFont.customFontOfSize(16)
         friendContainer.addSubview(friend)
         
         let friendLabel = UILabel()
         friendLabel.text = "好友"
-        friendLabel.font = UIFont.systemFontOfSize(12)
+        friendLabel.font = UIFont.customFontOfSize(12)
         friendLabel.textAlignment = .Center
         friendLabel.textColor = UIColor(hex: 0x999999)
         friendContainer.addSubview(friendLabel)
@@ -174,12 +174,12 @@ class PersonalHeaderCell: UITableViewCell {
         follow = UILabel()
         follow.text = "248"
         follow.textAlignment = .Center
-        follow.font = UIFont.boldSystemFontOfSize(16)
+        follow.font = UIFont.customFontOfSize(16)
         followContainer.addSubview(follow)
         
         let followLabel = UILabel()
         followLabel.text = "关注"
-        followLabel.font = UIFont.systemFontOfSize(12)
+        followLabel.font = UIFont.customFontOfSize(12)
         followLabel.textAlignment = .Center
         followLabel.textColor = UIColor(hex: 0x999999)
         followContainer.addSubview(followLabel)
@@ -223,12 +223,12 @@ class PersonalHeaderCell: UITableViewCell {
         fans = UILabel()
         fans.text = "1278"
         fans.textAlignment = .Center
-        fans.font = UIFont.boldSystemFontOfSize(16)
+        fans.font = UIFont.customFontOfSize(16)
         fansContainer.addSubview(fans)
         
         let fansLabel = UILabel()
         fansLabel.text = "粉丝"
-        fansLabel.font = UIFont.systemFontOfSize(12)
+        fansLabel.font = UIFont.customFontOfSize(12)
         fansLabel.textAlignment = .Center
         fansLabel.textColor = UIColor(hex: 0x999999)
         fansContainer.addSubview(fansLabel)

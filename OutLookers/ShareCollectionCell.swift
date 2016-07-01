@@ -32,20 +32,20 @@ class ShareCollectionCell: UICollectionViewCell {
         
         label = UILabel()
         label.textAlignment = .Center
-        label.font = UIFont.systemFontOfSize(10)
+        label.font = UIFont.customFontOfSize(10)
         label.textColor = UIColor(hex: 0x777777)
         contentView.addSubview(label)
         
         shareButton.snp.makeConstraints { (make) in
-            make.top.equalTo(shareButton.superview!).offset(18)
+            make.top.equalTo(shareButton.superview!).offset(kScale(18))
             make.centerX.equalTo(shareButton.superview!)
-            make.size.equalTo(CGSize(width: 25, height: 25))
+            make.size.equalTo(kSize(25, height: 25))
         }
         
         label.snp.makeConstraints { (make) in
             make.left.right.equalTo(label.superview!)
-            make.top.equalTo(shareButton.snp.bottom).offset(3)
-            make.height.equalTo(10)
+            make.top.equalTo(shareButton.snp.bottom).offset(kScale(3))
+            make.height.equalTo(kScale(10))
         }
     }
     

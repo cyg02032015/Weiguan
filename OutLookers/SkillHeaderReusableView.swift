@@ -23,19 +23,19 @@ class SkillHeaderReusableView: UICollectionReusableView {
         addSubview(imgView)
         
         label = UILabel()
-        label.font = UIFont.systemFontOfSize(16)
+        label.font = UIFont.customFontOfSize(16)
         addSubview(label)
         
         imgView.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 33, height: 33))
-            make.left.equalTo(12)
+            make.size.equalTo(kSize(33, height: 33))
+            make.left.equalTo(kScale(12))
             make.centerY.equalTo(imgView.superview!)
         }
         
         label.snp.makeConstraints { (make) in
             make.left.equalTo(imgView.snp.right)
             make.centerY.equalTo(imgView)
-            make.height.equalTo(16)
+            make.height.equalTo(kScale(16))
         }
     }
     

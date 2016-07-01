@@ -45,8 +45,8 @@ class SelectSkillViewController: YGBaseViewController {
     
     func setupSubViews() {
         let layout = UICollectionViewFlowLayout()
-        layout.headerReferenceSize = CGSize(width: ScreenWidth, height: 50)
-        layout.itemSize = CGSize(width: (ScreenWidth - 30 - 24) / 4, height: kSizeScale(24))
+        layout.headerReferenceSize = CGSize(width: ScreenWidth, height: kScale(50))
+        layout.itemSize = CGSize(width: (ScreenWidth - 30 - 24) / 4, height: kScale(24))
         layout.minimumLineSpacing = 11
         layout.minimumInteritemSpacing = 8
         layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 50, right: 15)

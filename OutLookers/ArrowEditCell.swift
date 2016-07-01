@@ -21,7 +21,7 @@ class ArrowEditCell: UITableViewCell {
     
     func setupSubViews() {
         label = UILabel()
-        label.font = UIFont.systemFontOfSize(16)
+        label.font = UIFont.customFontOfSize(16)
         contentView.addSubview(label)
         
         let arrow = UIImageView(image: UIImage(named: "mine_arrow_icon"))
@@ -30,26 +30,26 @@ class ArrowEditCell: UITableViewCell {
         tf = UITextField()
         tf.userInteractionEnabled = false
         tf.textAlignment = .Right
-        tf.font = UIFont.systemFontOfSize(14)
+        tf.font = UIFont.customFontOfSize(14)
         contentView.addSubview(tf)
         
         label.snp.makeConstraints { (make) in
-            make.left.equalTo(label.superview!).offset(15)
+            make.left.equalTo(label.superview!).offset(kScale(15))
             make.centerY.equalTo(label.superview!)
-            make.height.equalTo(16)
+            make.height.equalTo(kScale(16))
         }
         
         arrow.snp.makeConstraints { (make) in
-            make.right.equalTo(arrow.superview!).offset(-15)
-            make.size.equalTo(CGSize(width: 8, height: 15))
+            make.right.equalTo(arrow.superview!).offset(kScale(-15))
+            make.size.equalTo(kSize(8, height: 15))
             make.centerY.equalTo(arrow.superview!)
         }
         
         tf.snp.makeConstraints { (make) in
-            make.right.equalTo(arrow.snp.left).offset(-12)
+            make.right.equalTo(arrow.snp.left).offset(kScale(-12))
             make.centerY.equalTo(tf.superview!)
-            make.height.equalTo(35)
-            make.left.equalTo(label.snp.right).offset(15)
+            make.height.equalTo(kScale(35))
+            make.left.equalTo(label.snp.right).offset(kScale(15))
         }
     }
     

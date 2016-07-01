@@ -40,12 +40,12 @@ class ShareCell: UITableViewCell {
         marks.addObject(NSIndexPath(forItem: 0, inSection: 0))
         let label = UILabel()
         label.text = "同步到:"
-        label.font = UIFont.systemFontOfSize(16)
+        label.font = UIFont.customFontOfSize(16)
         contentView.addSubview(label)
         
         let layout = UICollectionViewFlowLayout()
         
-        layout.itemSize = CGSize(width: 30, height: 38)
+        layout.itemSize = kSize(30, height: 38)
         layout.minimumInteritemSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
@@ -58,13 +58,13 @@ class ShareCell: UITableViewCell {
         collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
         
         label.snp.makeConstraints { (make) in
-            make.left.equalTo(15)
-            make.top.equalTo(28)
-            make.height.equalTo(16)
+            make.left.equalTo(kScale(15))
+            make.top.equalTo(kScale(28))
+            make.height.equalTo(kScale(16))
         }
         
         collectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(label.snp.right).offset(2)
+            make.left.equalTo(label.snp.right).offset(kScale(2))
             make.top.bottom.right.equalTo(collectionView.superview!)
         }
     }

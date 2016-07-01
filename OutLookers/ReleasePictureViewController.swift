@@ -93,9 +93,9 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0: return indexPath.row == 0 ? 293 : 72
-        case 1: return 257
-        case 2: return 81
+        case 0: return indexPath.row == 0 ? kScale(293) : kScale(72)
+        case 1: return kScale(257)
+        case 2: return kScale(81)
         default:
             return 0
         }
@@ -105,7 +105,7 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
         if section == 2 {
             return 0
         } else {
-            return 10
+            return kScale(10)
         }
     }
 }
@@ -132,13 +132,6 @@ extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionVi
             let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(view)
         } else {
-//            let tz = TZImagePickerController(selectedAssets: originPhotos, selectedPhotos: photos, index: indexPath.item)
-//            tz.didFinishPickingPhotosHandle = { [unowned self](photos, assets, isSelectedOrigin) in
-//                self.originPhotos.setArray(assets)
-//                self.photos.setArray(photos)
-//                cell.collectionView.reloadData()
-//                self.tableView.reloadData()
-//            }
             let vc = YKPhotoPreviewController()
             vc.currentIndex = indexPath.item
             vc.photos = self.photos

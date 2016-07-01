@@ -52,10 +52,6 @@ func LocalizedString(text: String) -> String {
     return NSLocalizedString(text, comment: "")
 }
 
-// 适配高度
-func kSizeScale(a: CGFloat) -> CGFloat {
-    return a * UIScreen.mainScreen().bounds.width / 375.0
-}
 
 func configNavigation() {
     UINavigationBar.appearance().barTintColor = UIColor(hex: 0x333333)
