@@ -33,12 +33,7 @@ class IssueViewController: YGBaseViewController {
     }
 
     func setupSubViews() {
-        /*
-         视频
-         图片
-         才艺
-         通告
-         */
+
         let container = UIView()
         container.backgroundColor = UIColor.yellowColor()
         view.addSubview(container)

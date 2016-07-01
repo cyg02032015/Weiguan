@@ -1,28 +1,28 @@
 //
-//  FollowPeopleViewController.swift
+//  PersonalDataViewController.swift
 //  OutLookers
 //
-//  Created by Youngkook on 16/6/30.
+//  Created by C on 16/7/1.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//  // 他的粉丝
+//
 
 import UIKit
 
-private let followCellIdentifier = "followPeopleId"
+private let personalHeaderidentifier = "personalHeaderId"
 
-class FollowPeopleViewController: YGBaseViewController {
-    
+class PersonalDataViewController: YGBaseViewController {
+
     var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "他的粉丝"
+        title = "我"
         
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(FollowPeopleCell.self, forCellReuseIdentifier: followCellIdentifier)
-//        tableView.separatorStyle = .None
+        tableView.registerClass(PersonalHeaderCell.self, forCellReuseIdentifier: personalHeaderidentifier)
+        tableView.separatorStyle = .None
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
@@ -32,23 +32,35 @@ class FollowPeopleViewController: YGBaseViewController {
     }
 }
 
-extension FollowPeopleViewController: UITableViewDelegate,UITableViewDataSource {
+extension PersonalDataViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(followCellIdentifier, forIndexPath: indexPath) as! FollowPeopleCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(personalHeaderidentifier, forIndexPath: indexPath) as! PersonalHeaderCell
         cell.header.iconHeaderTap { 
-            LogInfo("tap header")
+            LogInfo("头像")
+        }
+        cell.tapEditDataClosure { 
+            LogInfo("编辑资料")
+        }
+        cell.tapFriendsClosure { 
+            LogInfo("好友")
+        }
+        cell.tapFollowClosure { 
+            LogInfo("关注")
+        }
+        cell.tapFanClosure { 
+            LogInfo("粉丝")
         }
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        return 144
     }
 }

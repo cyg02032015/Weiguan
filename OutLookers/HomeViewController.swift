@@ -17,6 +17,19 @@ class HomeViewController: YGBaseViewController {
     var urls = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let btn = UIButton()
+        btn.setTitle(LocalizedString("log"), forState: .Normal)
+        btn.addTarget(self, action: #selector(HomeViewController.logClick(_:)), forControlEvents: .TouchUpInside)
+        btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        view.addSubview(btn)
+        btn.snp.makeConstraints { make in
+            make.left.right.equalTo(btn.superview!)
+            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(30)
+            make.height.equalTo(40)
+        }
+        
+        
 //        automaticallyAdjustsScrollViewInsets = false // 防止banner偏移64
 //        bannerView = YKBannerView()
 //        bannerView.placeHolderImage = UIImage(named: "ip5_1")
@@ -43,6 +56,11 @@ class HomeViewController: YGBaseViewController {
 //                LogError(error)
 //            }
 //        }
+    }
+    
+    func logClick(sender: UIButton) {
+        let logVC = FollowPeopleViewController()
+        navigationController?.pushViewController(logVC, animated: true)
     }
 }
 

@@ -15,7 +15,7 @@ class MineViewController: YGBaseViewController {
         
         let btn = UIButton()
         btn.setTitle(LocalizedString("log"), forState: .Normal)
-        btn.addTarget(self, action: #selector(MineViewController.logClick(_:)), forControlEvents: .TouchUpInside)
+        btn.addTarget(self, action: #selector(MineViewController.logClic(_:)), forControlEvents: .TouchUpInside)
         btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         view.addSubview(btn)
         btn.snp.makeConstraints { make in
@@ -25,8 +25,8 @@ class MineViewController: YGBaseViewController {
         }
     }
     
-    func logClick(sender: UIButton) {
-        let logVC = LogViewController()
+    func logClic(sender: UIButton) {
+        let logVC = PersonalDataViewController()
         navigationController?.pushViewController(logVC, animated: true)
     }
 
