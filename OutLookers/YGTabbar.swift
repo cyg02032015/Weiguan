@@ -32,8 +32,6 @@ public class YGTabbar: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         //TODO: - 设置背景
-        self.backgroundColor = UIColor.redColor()
-        
     }
 
     public required init(coder aDecoder: NSCoder) {
@@ -47,6 +45,7 @@ public class YGTabbar: UIView {
             centerBtn.addTarget(self, action: .tabbarClick, forControlEvents: .TouchUpInside)
             centerBtn.tag = 5
             addSubview(centerBtn)
+//            centerBtn.frame = CGRect(x: lastButton!.right, y: 0, width: self.width/CGFloat(MaxTabButtonCount), height: self.height)
             centerBtn.snp.makeConstraints { make in
                 make.left.equalTo(lastButton!.snp.right)
                 make.width.equalTo(centerBtn.superview!).multipliedBy(1.0/CGFloat(MaxTabButtonCount))
@@ -57,6 +56,7 @@ public class YGTabbar: UIView {
         }
         let btn = YGTabbarButton()
         addSubview(btn)
+//        btn.frame = CGRect(x: lastButton == nil ? 0 : lastButton!.right, y: 0, width: self.width/CGFloat(MaxTabButtonCount), height: self.height)
         btn.snp.makeConstraints { make in
             make.left.equalTo(lastButton == nil ? btn.superview! : lastButton!.snp.right)
             make.top.bottom.equalTo(btn.superview!)

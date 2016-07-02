@@ -106,7 +106,7 @@ extension RecruitInformationViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return kScale(56)
+        return kHeight(56)
     }
 }
 

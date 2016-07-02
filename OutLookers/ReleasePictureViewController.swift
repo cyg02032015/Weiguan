@@ -93,9 +93,9 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0: return indexPath.row == 0 ? kScale(293) : kScale(72)
-        case 1: return kScale(257)
-        case 2: return kScale(81)
+        case 0: return indexPath.row == 0 ? kHeight(293) : kHeight(72)
+        case 1: return kHeight(257)
+        case 2: return kHeight(81)
         default:
             return 0
         }
@@ -105,7 +105,7 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
         if section == 2 {
             return 0
         } else {
-            return kScale(10)
+            return kHeight(10)
         }
     }
 }

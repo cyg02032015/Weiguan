@@ -49,6 +49,6 @@ extension FollowPeopleViewController: UITableViewDelegate,UITableViewDataSource 
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return kScale(80)
+        return kHeight(80)
     }
 }

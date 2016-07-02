@@ -50,4 +50,12 @@ func kSize(width: CGFloat, height: CGFloat) -> CGSize {
     }
 }
 
+func kHeight(a: CGFloat) -> CGFloat {
+    if Device.size() == .Screen5_5Inch {
+        return a
+    } else {
+        return a
+    }
+}
+
 

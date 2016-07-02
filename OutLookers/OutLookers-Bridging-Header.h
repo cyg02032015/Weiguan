@@ -7,6 +7,8 @@
 #import "CitiesData.h"
 #import "VPImageCropperViewController.h"
 #import "TZImagePickerController.h"
+#import "UIButton+Badge.h"
+#import "UIBarButtonItem+Badge.h"
 // 友盟头文件桥接
 #import "UMSocial.h"
 #import "WXApi.h"

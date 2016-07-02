@@ -15,21 +15,16 @@ class HomeViewController: YGBaseViewController {
     var bannerView: YKBannerView!
     var infos = [BannerInfo]()
     var urls = [String]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let btn = UIButton()
+        let btn = UIButton(frame: CGRect(x: view.center.x, y: 80, width: 50, height: 30))
         btn.setTitle(LocalizedString("log"), forState: .Normal)
         btn.addTarget(self, action: #selector(HomeViewController.logClick(_:)), forControlEvents: .TouchUpInside)
         btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         view.addSubview(btn)
-        btn.snp.makeConstraints { make in
-            make.left.right.equalTo(btn.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(30)
-            make.height.equalTo(40)
-        }
-        
-        
+
 //        automaticallyAdjustsScrollViewInsets = false // 防止banner偏移64
 //        bannerView = YKBannerView()
 //        bannerView.placeHolderImage = UIImage(named: "ip5_1")

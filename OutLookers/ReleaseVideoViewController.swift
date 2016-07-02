@@ -92,9 +92,9 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0: return indexPath.row == 0 ? kScale(121) : kScale(72)
-        case 1: return kScale(257)
-        case 2: return kScale(81)
+        case 0: return indexPath.row == 0 ? kHeight(121) : kHeight(72)
+        case 1: return kHeight(257)
+        case 2: return kHeight(81)
         default:
             return 0
         }
@@ -104,7 +104,7 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
         if section == 2 {
             return 0
         } else {
-            return kScale(10)
+            return kHeight(10)
         }
     }
 }

@@ -72,7 +72,6 @@ class YGTabbarController: UITabBarController {
         super.didReceiveMemoryWarning()
     }
 }
-
 extension YGTabbarController: YGTabbarDelegate {
     func tabbarDidSelect(tabbar: YGTabbar, didSelectedfrom: Int, to: Int) {
         if to == 5 {

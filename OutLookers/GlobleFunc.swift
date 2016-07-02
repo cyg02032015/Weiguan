@@ -62,7 +62,7 @@ func configNavigation() {
 func configUMeng() {
     UMSocialData.setAppKey(kUmengAppkey)
     #if DEBUG
-    UMSocialData.openLog(true)
+//    UMSocialData.openLog(true)
     #endif
 //    //设置微信AppId、appSecret，分享url
 //    UMSocialWechatHandler.setWXAppId(kWechatAppId, appSecret: kWechatSecret, url: kWechatUrl)

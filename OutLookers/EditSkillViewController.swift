@@ -152,9 +152,9 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 1: return kScale(193) // 才艺详情
-        case 0: return kScale(56)
-        case 2: return kScale(514 + (CGFloat(self.photoArray.count) / 5 * (ScreenWidth - 30 - 20) / 5) + 5)
+        case 1: return kHeight(193) // 才艺详情
+        case 0: return kHeight(56)
+        case 2: return kHeight(514 + (CGFloat(self.photoArray.count) / 5 * (ScreenWidth - 30 - 20) / 5) + 5)
         default:
             return 0
         }
@@ -164,7 +164,7 @@ extension EditSkillViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 5 {
             return 0
         }
-        return kScale(10)
+        return kHeight(10)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -38,19 +38,19 @@ extension PersonalDataViewController: UITableViewDelegate,UITableViewDataSource 
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(personalHeaderidentifier, forIndexPath: indexPath) as! PersonalHeaderCell
-        cell.header.iconHeaderTap { 
+        cell.header.iconHeaderTap {
             LogInfo("头像")
         }
-        cell.tapEditDataClosure { 
+        cell.tapEditDataClosure {
             LogInfo("编辑资料")
         }
-        cell.tapFriendsClosure { 
+        cell.tapFriendsClosure {
             LogInfo("好友")
         }
-        cell.tapFollowClosure { 
+        cell.tapFollowClosure {
             LogInfo("关注")
         }
-        cell.tapFanClosure { 
+        cell.tapFanClosure {
             LogInfo("粉丝")
         }
         return cell
@@ -61,6 +61,6 @@ extension PersonalDataViewController: UITableViewDelegate,UITableViewDataSource 
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 144
+        return kHeight(144)
     }
 }

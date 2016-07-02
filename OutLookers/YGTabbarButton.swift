@@ -10,12 +10,13 @@ import UIKit
 
 class YGTabbarButton: UIButton {
 
-    
+    var _item: UITabBarItem!
     var item: UITabBarItem! {
         didSet {
             item.addObserver(self, forKeyPath: "image", options: .New, context: nil)
             item.addObserver(self, forKeyPath: "title", options: .New, context: nil)
             item.addObserver(self, forKeyPath: "selectedImage", options: .New, context: nil)
+            item.addObserver(self, forKeyPath: "badgeValue", options: .New, context: nil)
             self.observeValueForKeyPath(nil, ofObject: nil, change: nil, context: nil)
             
         }
@@ -36,7 +37,18 @@ class YGTabbarButton: UIButton {
         self.setImage(item.selectedImage, forState: UIControlState.Selected)
         self.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         self.setTitleColor(UIColor.yellowColor(), forState: .Selected)
-
+        guard let badge = item.badgeValue else {
+            LogError("badgeValue is nil")
+            return
+        }
+        if Int(badge) > 0 {
+            self.badgeValue = badge
+            self.badgeOriginX = self.width - 20
+            self.badgeOriginY = self.y + 5
+            self.shouldAnimateBadge = true
+        } else {
+            self.badgeValue = ""
+        }
     }
     
 //    override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
