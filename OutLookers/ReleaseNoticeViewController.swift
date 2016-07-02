@@ -23,6 +23,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     lazy var recruits: [Recruit] = [Recruit]()
     lazy var provinceTitles = NSArray()
     var photoArray: [UIImage]!
+    var request = ReleaseNoticeRequest()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -96,6 +97,8 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+            cell.delegate = self
+            cell.indexPath = indexPath
             cell.setTextInCell("工作主题", placeholder: "请输入工作主题")
             return cell
         } else if indexPath.section == 1 { // 招募需求
@@ -118,12 +121,15 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+                cell.delegate = self
+                cell.indexPath = indexPath
                 cell.setTextInCell("", placeholder: "指定详细地址 (选填)")
                 return cell
             }
         } else if indexPath.section == 5 {
             let cell = tableView.dequeueReusableCellWithIdentifier(workDetailIdentifier, forIndexPath: indexPath) as! WorkDetailCell
             cell.setTextInCell("工作详情", placeholder: "请输入工作内容")
+            cell.delegate = self
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(selectImgIdentifier, forIndexPath: indexPath) as! SelectPhotoCell
@@ -132,14 +138,15 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
         }
     }
-    
+    // MARK: 工作时间request
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 2 {
             if indexPath.row == 0 { // 工作开始时间
                 let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! ArrowEditCell
                 selectDatePicker.animation()
-                selectDatePicker.tapSureClosure({ (date) in
+                selectDatePicker.tapSureClosure({ [unowned self](date) in
                     cell.tf.text = date.stringFromDate()
+                    self.request.startTime = date.stringFromDateWith("yyyy-MM-dd")
                 })
                 
             } else { // 工作结束时间
@@ -147,6 +154,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
                 selectDatePicker.animation()
                 selectDatePicker.tapSureClosure({ (date) in
                     cell.tf.text = date.stringFromDate()
+                    self.request.endTime = date.stringFromDateWith("yyyy-MM-dd")
                 })
             }
         }
@@ -156,6 +164,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
             selectDatePicker.animation()
             selectDatePicker.tapSureClosure({ (date) in
                 cell.tf.text = date.stringFromDate()
+                self.request.register = date.stringFromDateWith("yyyy-MM-dd")
             })
         }
         
@@ -302,10 +311,78 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
 }
 
 // MARK: - RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate
-extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate {
-    
+extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate, WorkDetailCellDelegate {
+    // MARK: 发布按钮
     override func tapRightButton(sender: UIButton) {
-        LogInfo("发布")
+        self.view.endEditing(true)
+        // TODO- 测试
+//        request.userId = "1"
+//        request.theme = "1"
+//        request.recruitment = "11,12,14"
+//        request.startTime = "2015-06-05"
+//        request.endTime = "2015-06-06"
+//        request.register = "2016-06-07"
+//        request.city = "123"
+//        request.adds = "1111"
+//        request.details = "asdf"
+        request.picture = "11,12,14"
+        if isEmptyString(request.theme) {
+            YKToast.makeText("请填写工作主题")
+            return
+        }
+        if isEmptyString(request.recruitment) {
+            YKToast.makeText("请选择招募需求")
+            return
+        }
+        if isEmptyString(request.startTime) {
+            YKToast.makeText("请选择工作开始时间")
+            return
+        }
+        if isEmptyString(request.endTime) {
+            YKToast.makeText("请选择工作结束时间")
+            return
+        }
+        if isEmptyString(request.register) {
+            YKToast.makeText("请选择报名截止时间")
+            return
+        }
+        if isEmptyString(request.city) {
+            YKToast.makeText("请选择工作地点")
+            return
+        }
+        if isEmptyString(request.details) {
+            YKToast.makeText("请填写工作详情")
+            return
+        }
+        if isEmptyString(request.picture) {
+            YKToast.makeText("请选择至少一张宣传图片")
+            return
+        }
+        if isEmptyString(request.adds) {
+            request.adds = ""
+        }
+        request.userId = "1"
+        Server.getReleaseNotice(request) { (success, msg, value) in
+            if success {
+                LogInfo(value)
+            } else {
+                LogError(msg)
+                YKToast.makeText(msg!)
+            }
+        }
+    }
+    
+    func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int)) {
+        guard let t = text else { fatalError("noarrow cell return text nil") }
+        switch tuple {
+        case (0,0): request.theme = t
+        case (4,1): request.adds = t
+        default: fatalError("switch default")
+        }
+    }
+    
+    func workDetailCellReturnText(text: String) {
+        request.details = text
     }
     
     func recruitNeedsAddRecruite(sender: UIButton) {
@@ -315,6 +392,8 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     }
     
     func recruitInformationSureWithParams(recruit: Recruit) {
+        //MARK: 添加招募需求request
+        request.recruitment = "11,14,12"
         recruits.append(recruit)
         let range = NSMakeRange(1, 1)
         tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
@@ -324,6 +403,8 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
         let city = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
         cell.tf.text = city
+        // MARK: 选择城市request
+        request.city = city
     }
 }
 

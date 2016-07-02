@@ -32,6 +32,15 @@ public class YGTabbar: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         //TODO: - 设置背景
+        backgroundColor = UIColor.whiteColor()
+        let lineV = UIView()
+        lineV.backgroundColor = UIColor(hex: 0xDCDCDC)
+        addSubview(lineV)
+        lineV.snp.makeConstraints { (make) in
+            make.top.equalTo(lineV.superview!).offset(-1)
+            make.left.right.equalTo(lineV.superview!)
+            make.height.equalTo(1)
+        }
     }
 
     public required init(coder aDecoder: NSCoder) {
@@ -41,16 +50,29 @@ public class YGTabbar: UIView {
     public func addTabBarButtonWithItem(item: UITabBarItem) {
         if tabbarButtonCount > MaxTabButtonCount { return }
         if tabbarButtonCount == 2 {
+            let centerContainer = UIView()
+            centerContainer.clipsToBounds = true
+            addSubview(centerContainer)
             let centerBtn = UIButton()
             centerBtn.addTarget(self, action: .tabbarClick, forControlEvents: .TouchUpInside)
             centerBtn.tag = 5
-            addSubview(centerBtn)
+            centerBtn.contentMode = .ScaleAspectFit
+            centerBtn.clipsToBounds = true
+            centerBtn.setImage(UIImage(named: "add"), forState: .Normal)
+            centerContainer.addSubview(centerBtn)
 //            centerBtn.frame = CGRect(x: lastButton!.right, y: 0, width: self.width/CGFloat(MaxTabButtonCount), height: self.height)
-            centerBtn.snp.makeConstraints { make in
+            centerContainer.snp.makeConstraints { make in
                 make.left.equalTo(lastButton!.snp.right)
-                make.width.equalTo(centerBtn.superview!).multipliedBy(1.0/CGFloat(MaxTabButtonCount))
-                make.top.bottom.equalTo(centerBtn.superview!)
+                make.width.equalTo(centerContainer.superview!).multipliedBy(1.0/CGFloat(MaxTabButtonCount))
+                make.height.equalTo(65)
+                make.bottom.equalTo(centerContainer.superview!)
             }
+            
+            centerBtn.snp.makeConstraints(closure: { (make) in
+                make.centerX.equalTo(centerBtn.superview!)
+                make.centerY.equalTo(centerBtn.superview!)
+                make.size.equalTo(65)
+            })
             tabbarButtonCount += 1
             lastButton = centerBtn
         }

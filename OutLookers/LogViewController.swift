@@ -9,7 +9,6 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import Toast_Swift
 
 let disposeBag = DisposeBag()
 

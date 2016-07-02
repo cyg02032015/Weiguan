@@ -43,7 +43,7 @@ class IconHeaderView: UIView {
         vImgView.snp.makeConstraints { (make) in
             make.bottom.equalTo(vImgView.superview!)
             make.right.equalTo(vImgView.superview!)
-            make.size.equalTo(CGSize(width: 12, height: 12))
+            make.size.equalTo(kSize(12, height: 12))
         }
     }
     

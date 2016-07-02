@@ -26,7 +26,7 @@ class YGTabbarButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.imageView!.contentMode = .ScaleAspectFit
-        self.titleLabel!.font = UIFont.systemFontOfSize(12)
+        self.titleLabel!.font = UIFont.systemFontOfSize(10)
         self.titleLabel!.textAlignment = .Center
         self.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
     }
@@ -35,8 +35,8 @@ class YGTabbarButton: UIButton {
         self.setTitle(item.title, forState: .Normal)
         self.setImage(item.image, forState: UIControlState.Normal)
         self.setImage(item.selectedImage, forState: UIControlState.Selected)
-        self.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        self.setTitleColor(UIColor.yellowColor(), forState: .Selected)
+        self.setTitleColor(UIColor(hex: 0xC8C8C8), forState: .Normal)
+        self.setTitleColor(UIColor(hex: 0x64B8FF), forState: .Selected)
         guard let badge = item.badgeValue else {
             LogError("badgeValue is nil")
             return
@@ -51,24 +51,22 @@ class YGTabbarButton: UIButton {
         }
     }
     
-//    override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
-//        let image = self.imageForState(.Normal)
-//        if image == nil {
-//            return CGRectZero
-//        }
-////        return CGRect(x: 0, y: 2, width: contentRect.size.width, height: image!.size.height - 8)
-//        return CGRect(x: self.width/2 - 10, y: 5, width: 20, height: 20)
-//    }
-//    
-//    override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
-//        let image = self.imageForState(.Normal)
-//        if image == nil {
-//            return CGRectZero
-//        }
-////        let titleY = image!.size.height
-//        let titleH = contentRect.size.height - 25
-//        return CGRect(x: 0, y: 25, width: contentRect.size.width, height: titleH)
-//    }
+    override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
+        let image = self.imageForState(.Normal)
+        if image == nil {
+            return CGRectZero
+        }
+//        return CGRect(x: 0, y: 2, width: contentRect.size.width, height: image!.size.height - 8)
+        return CGRect(x: self.width/2 - 15, y: 3, width: 30, height: 30)
+    }
+    
+    override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
+        let image = self.imageForState(.Normal)
+        if image == nil {
+            return CGRectZero
+        }
+        return CGRect(x: 0, y: self.height - 14, width: contentRect.size.width, height: 10)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented - YGTabbarButton")

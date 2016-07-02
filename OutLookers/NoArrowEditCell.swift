@@ -8,8 +8,14 @@
 
 import UIKit
 
-class NoArrowEditCell: UITableViewCell {
+protocol NoArrowEditCellDelegate:class {
+    func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int))
+}
 
+class NoArrowEditCell: UITableViewCell {
+    
+    weak var delegate: NoArrowEditCellDelegate!
+    var indexPath: NSIndexPath!
     var label: UILabel!
     var tf: UITextField!
     var labelText: String! {
@@ -92,5 +98,8 @@ class NoArrowEditCell: UITableViewCell {
 }
 
 extension NoArrowEditCell: UITextFieldDelegate {
-
+    func textFieldDidEndEditing(textField: UITextField) {
+        delegate.noarrowCellReturnText(textField.text, tuple: (indexPath.section, indexPath.row))
+        
+    }
 }

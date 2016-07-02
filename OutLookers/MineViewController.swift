@@ -8,30 +8,111 @@
 
 import UIKit
 
+private let mineHeaderidentifier = "mineHeaderId"
+private let messageCellIdentifier = "messageCellId"
+private let mineCollectCellIdentifier = "mineCollectId"
+
 class MineViewController: YGBaseViewController {
+    
+    var images = ["Order", "account", "score", "talent", "announcement", "authentication", "", ""]
+    var titles = ["订单量", "账户", "综合评分", "才艺", "通告", "认证", "", ""]
+    
+    var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "我"
         
-        let btn = UIButton()
-        btn.setTitle(LocalizedString("log"), forState: .Normal)
-        btn.addTarget(self, action: #selector(MineViewController.logClic(_:)), forControlEvents: .TouchUpInside)
-        btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        view.addSubview(btn)
-        btn.snp.makeConstraints { make in
-            make.left.right.equalTo(btn.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(30)
-            make.height.equalTo(40)
+        tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = kBackgoundColor
+        tableView.registerClass(MineHeaderCell.self, forCellReuseIdentifier: mineHeaderidentifier)
+        tableView.registerClass(MessageCell.self, forCellReuseIdentifier: messageCellIdentifier)
+        tableView.registerClass(MineCollectCell.self, forCellReuseIdentifier: mineCollectCellIdentifier)
+        tableView.separatorStyle = .None
+        tableView.tableFooterView = UIView()
+        view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalTo(tableView.superview!)
+        }
+    }
+}
+
+extension MineViewController: UITableViewDelegate,UITableViewDataSource {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(mineHeaderidentifier, forIndexPath: indexPath) as! MineHeaderCell
+            cell.header.iconHeaderTap {
+                LogInfo("头像")
+            }
+            cell.tapEditDataClosure {
+                LogInfo("编辑资料")
+            }
+            cell.tapFriendsClosure {
+                LogInfo("好友")
+            }
+            cell.tapFollowClosure {
+                LogInfo("关注")
+            }
+            cell.tapFanClosure {
+                LogInfo("粉丝")
+            }
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(messageCellIdentifier, forIndexPath: indexPath)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(mineCollectCellIdentifier, forIndexPath: indexPath) as! MineCollectCell
+            cell.collectionViewSetDelegate(self, indexPath: indexPath)
+            return cell
         }
     }
     
-    func logClic(sender: UIButton) {
-        let logVC = PersonalDataViewController()
-        navigationController?.pushViewController(logVC, animated: true)
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0: return kHeight(144)
+        case 1: return kHeight(44.9)
+        case 2: return kHeight(208)
+        default: fatalError("switch default")
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = kBackgoundColor
+        return view
+    }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+extension MineViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 8
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(mineCollectionCellIdentifier, forIndexPath: indexPath) as! MineCollectionCell
+        if indexPath.item == 0 {
+            cell.imgButton.badgeValue = "40"
+        }
+        cell.imgButton.setImage(UIImage(named: images[indexPath.item]), forState: .Normal)
+        cell.label.text = titles[indexPath.item]
+        return cell
     }
 }

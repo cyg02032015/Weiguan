@@ -9,6 +9,8 @@
 #import "TZImagePickerController.h"
 #import "UIButton+Badge.h"
 #import "UIBarButtonItem+Badge.h"
+#import "SDCycleScrollView.h"
+#import "MBProgressHUD.h"
 // 友盟头文件桥接
 #import "UMSocial.h"
 #import "WXApi.h"

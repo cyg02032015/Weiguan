@@ -29,7 +29,6 @@
 		D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45161D118D63004D9192 /* YGTabbarController.swift */; };
 		D81F451E1D118DF7004D9192 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D81F451D1D118DF7004D9192 /* libicucore.tbd */; };
 		D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F451F1D118EF7004D9192 /* HomeViewController.swift */; };
-		D81F45221D118F3C004D9192 /* SquareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45211D118F3C004D9192 /* SquareViewController.swift */; };
 		D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45231D118F48004D9192 /* IssueViewController.swift */; };
 		D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45251D118F50004D9192 /* FollowViewController.swift */; };
 		D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45271D118F5E004D9192 /* MineViewController.swift */; };
@@ -38,6 +37,28 @@
 		D81F452E1D11A2E4004D9192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452D1D11A2E4004D9192 /* API.swift */; };
 		D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45391D143934004D9192 /* YKBannerView.swift */; };
 		D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */; };
+		D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */; };
+		D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBC1D27CB6400A24CDB /* TAAnimatedDotView.m */; };
+		D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBE1D27CB6400A24CDB /* TADotView.m */; };
+		D82F8DCA1D27CB6400A24CDB /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DC01D27CB6400A24CDB /* TAPageControl.m */; };
+		D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DC21D27CB6400A24CDB /* SDCollectionViewCell.m */; };
+		D82F8DCC1D27CB6400A24CDB /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DC41D27CB6400A24CDB /* SDCycleScrollView.m */; };
+		D82F8DCD1D27CB6400A24CDB /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DC61D27CB6400A24CDB /* UIView+SDExtension.m */; };
+		D82F8DDC1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DDB1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift */; };
+		D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DDD1D2804B300A24CDB /* UITableView-EX.swift */; };
+		D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE11D28172D00A24CDB /* MBProgressHUD.m */; };
+		D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE31D28373400A24CDB /* BaseResponse.swift */; };
+		D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE41D28373400A24CDB /* FindNoticeList.swift */; };
+		D82F8DE91D28373400A24CDB /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE51D28373400A24CDB /* Server.swift */; };
+		D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE61D28373400A24CDB /* StringResponse.swift */; };
+		D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */; };
+		D82F8DEE1D28375300A24CDB /* ArtistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */; };
+		D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */; };
+		D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087791D278B72009CFE03 /* UIButton+Badge.m */; };
+		D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877C1D27A60A009CFE03 /* FindViewController.swift */; };
+		D83087801D27B400009CFE03 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877F1D27B400009CFE03 /* MessageCell.swift */; };
+		D83087821D27B805009CFE03 /* MineCollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83087811D27B805009CFE03 /* MineCollectCell.swift */; };
+		D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83087831D27B958009CFE03 /* MineCollectionCell.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
 		D87049441D2152A7008FB780 /* VideoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87049431D2152A7008FB780 /* VideoTool.swift */; };
@@ -79,8 +100,7 @@
 		E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */; };
 		E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */; };
 		E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA021D2612D7003DFC1E /* IconHeaderView.swift */; };
-		E446FA061D2612D7003DFC1E /* PersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA031D2612D7003DFC1E /* PersonalDataViewController.swift */; };
-		E446FA071D2612D7003DFC1E /* PersonalHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA041D2612D7003DFC1E /* PersonalHeaderCell.swift */; };
+		E446FA071D2612D7003DFC1E /* MineHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA041D2612D7003DFC1E /* MineHeaderCell.swift */; };
 		E446FA091D261647003DFC1E /* UIFont+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA081D261647003DFC1E /* UIFont+EX.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
@@ -149,7 +169,6 @@
 		D81F45161D118D63004D9192 /* YGTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGTabbarController.swift; path = OutLookers/YGTabbarController.swift; sourceTree = SOURCE_ROOT; };
 		D81F451D1D118DF7004D9192 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		D81F451F1D118EF7004D9192 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = OutLookers/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
-		D81F45211D118F3C004D9192 /* SquareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquareViewController.swift; path = OutLookers/SquareViewController.swift; sourceTree = SOURCE_ROOT; };
 		D81F45231D118F48004D9192 /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IssueViewController.swift; path = OutLookers/IssueViewController.swift; sourceTree = SOURCE_ROOT; };
 		D81F45251D118F50004D9192 /* FollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowViewController.swift; path = OutLookers/FollowViewController.swift; sourceTree = SOURCE_ROOT; };
 		D81F45271D118F5E004D9192 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineViewController.swift; path = OutLookers/MineViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -158,6 +177,38 @@
 		D81F452D1D11A2E4004D9192 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = OutLookers/API.swift; sourceTree = SOURCE_ROOT; };
 		D81F45391D143934004D9192 /* YKBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKBannerView.swift; path = OutLookers/YKBannerView.swift; sourceTree = SOURCE_ROOT; };
 		D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewController.swift; path = OutLookers/YKPhotoPreviewController.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DB91D27CB6400A24CDB /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		D82F8DBB1D27CB6400A24CDB /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		D82F8DBC1D27CB6400A24CDB /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		D82F8DBD1D27CB6400A24CDB /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		D82F8DBE1D27CB6400A24CDB /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		D82F8DBF1D27CB6400A24CDB /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		D82F8DC01D27CB6400A24CDB /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		D82F8DC11D27CB6400A24CDB /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		D82F8DC21D27CB6400A24CDB /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		D82F8DC31D27CB6400A24CDB /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		D82F8DC41D27CB6400A24CDB /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		D82F8DC51D27CB6400A24CDB /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		D82F8DC61D27CB6400A24CDB /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		D82F8DDB1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseNoticeRequest.swift; path = OutLookers/ReleaseNoticeRequest.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DDD1D2804B300A24CDB /* UITableView-EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITableView-EX.swift"; path = "OutLookers/UITableView-EX.swift"; sourceTree = SOURCE_ROOT; };
+		D82F8DE01D28172D00A24CDB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = OutLookers/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
+		D82F8DE11D28172D00A24CDB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = OutLookers/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
+		D82F8DE31D28373400A24CDB /* BaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseResponse.swift; path = OutLookers/BaseResponse.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DE41D28373400A24CDB /* FindNoticeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindNoticeList.swift; path = OutLookers/FindNoticeList.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DE51D28373400A24CDB /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = OutLookers/Server.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DE61D28373400A24CDB /* StringResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringResponse.swift; path = OutLookers/StringResponse.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistDetailInfo.swift; path = OutLookers/ArtistDetailInfo.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistInfo.swift; path = OutLookers/ArtistInfo.swift; sourceTree = SOURCE_ROOT; };
+		D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
+		D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
+		D83087781D278B72009CFE03 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
+		D83087791D278B72009CFE03 /* UIButton+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Badge.m"; sourceTree = "<group>"; };
+		D830877C1D27A60A009CFE03 /* FindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindViewController.swift; path = OutLookers/FindViewController.swift; sourceTree = SOURCE_ROOT; };
+		D830877F1D27B400009CFE03 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = OutLookers/MessageCell.swift; sourceTree = SOURCE_ROOT; };
+		D83087811D27B805009CFE03 /* MineCollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineCollectCell.swift; path = OutLookers/MineCollectCell.swift; sourceTree = SOURCE_ROOT; };
+		D83087831D27B958009CFE03 /* MineCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineCollectionCell.swift; path = OutLookers/MineCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D87049431D2152A7008FB780 /* VideoTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoTool.swift; path = OutLookers/VideoTool.swift; sourceTree = SOURCE_ROOT; };
@@ -218,8 +269,7 @@
 		E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowPeopleViewController.swift; path = OutLookers/FollowPeopleViewController.swift; sourceTree = SOURCE_ROOT; };
 		E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowPeopleCell.swift; path = OutLookers/FollowPeopleCell.swift; sourceTree = SOURCE_ROOT; };
 		E446FA021D2612D7003DFC1E /* IconHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconHeaderView.swift; path = OutLookers/IconHeaderView.swift; sourceTree = SOURCE_ROOT; };
-		E446FA031D2612D7003DFC1E /* PersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalDataViewController.swift; path = OutLookers/PersonalDataViewController.swift; sourceTree = SOURCE_ROOT; };
-		E446FA041D2612D7003DFC1E /* PersonalHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalHeaderCell.swift; path = OutLookers/PersonalHeaderCell.swift; sourceTree = SOURCE_ROOT; };
+		E446FA041D2612D7003DFC1E /* MineHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineHeaderCell.swift; path = OutLookers/MineHeaderCell.swift; sourceTree = SOURCE_ROOT; };
 		E446FA081D261647003DFC1E /* UIFont+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+EX.swift"; path = "OutLookers/UIFont+EX.swift"; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
@@ -296,11 +346,70 @@
 		D81F453D1D145B3D004D9192 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E4E5DED01D179BE100CB8535 /* ProtocolViewController.swift */,
 				D81F45271D118F5E004D9192 /* MineViewController.swift */,
+				E4E5DED01D179BE100CB8535 /* ProtocolViewController.swift */,
 				D8F526A41D154CEB000C8F91 /* LogViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		D82F8DB71D27CB6400A24CDB /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				D82F8DB81D27CB6400A24CDB /* PageControl */,
+				D82F8DC11D27CB6400A24CDB /* SDCollectionViewCell.h */,
+				D82F8DC21D27CB6400A24CDB /* SDCollectionViewCell.m */,
+				D82F8DC31D27CB6400A24CDB /* SDCycleScrollView.h */,
+				D82F8DC41D27CB6400A24CDB /* SDCycleScrollView.m */,
+				D82F8DC51D27CB6400A24CDB /* UIView+SDExtension.h */,
+				D82F8DC61D27CB6400A24CDB /* UIView+SDExtension.m */,
+			);
+			name = SDCycleScrollView;
+			path = OutLookers/SDCycleScrollView;
+			sourceTree = SOURCE_ROOT;
+		};
+		D82F8DB81D27CB6400A24CDB /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				D82F8DB91D27CB6400A24CDB /* TAAbstractDotView.h */,
+				D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */,
+				D82F8DBB1D27CB6400A24CDB /* TAAnimatedDotView.h */,
+				D82F8DBC1D27CB6400A24CDB /* TAAnimatedDotView.m */,
+				D82F8DBD1D27CB6400A24CDB /* TADotView.h */,
+				D82F8DBE1D27CB6400A24CDB /* TADotView.m */,
+				D82F8DBF1D27CB6400A24CDB /* TAPageControl.h */,
+				D82F8DC01D27CB6400A24CDB /* TAPageControl.m */,
+			);
+			path = PageControl;
+			sourceTree = "<group>";
+		};
+		D82F8DD81D27EAB400A24CDB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D82F8DDB1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D82F8DDF1D28171A00A24CDB /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D82F8DE01D28172D00A24CDB /* MBProgressHUD.h */,
+				D82F8DE11D28172D00A24CDB /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		D830877E1D27B3DA009CFE03 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E446FA041D2612D7003DFC1E /* MineHeaderCell.swift */,
+				E446FA021D2612D7003DFC1E /* IconHeaderView.swift */,
+				D830877F1D27B400009CFE03 /* MessageCell.swift */,
+				D83087811D27B805009CFE03 /* MineCollectCell.swift */,
+				D83087831D27B958009CFE03 /* MineCollectionCell.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		D8686C191D19840800B3982A /* Skill */ = {
@@ -351,6 +460,10 @@
 		D8C167411D1D783C00C50EB7 /* OCFile */ = {
 			isa = PBXGroup;
 			children = (
+				D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */,
+				D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */,
+				D83087781D278B72009CFE03 /* UIButton+Badge.h */,
+				D83087791D278B72009CFE03 /* UIButton+Badge.m */,
 				E4272DE61D17F60100BE4053 /* CitiesData.h */,
 				E4272DE71D17F60100BE4053 /* CitiesData.m */,
 			);
@@ -420,7 +533,7 @@
 				E41C22D81D113B9500F58250 /* AppDelegate.swift */,
 				E41C6C5A1D113F350013031D /* BaseClass */,
 				E41C6C5D1D113F350013031D /* Home */,
-				E41C6C621D113F350013031D /* Square */,
+				E41C6C621D113F350013031D /* Find */,
 				E41C6C5E1D113F350013031D /* Issue */,
 				E41C6C5C1D113F350013031D /* Follow */,
 				E41C6C601D113F350013031D /* Mine */,
@@ -482,6 +595,7 @@
 				D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */,
 				D8686C171D19752300B3982A /* UIScrollView+EX.swift */,
 				E446FA081D261647003DFC1E /* UIFont+EX.swift */,
+				D82F8DDD1D2804B300A24CDB /* UITableView-EX.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -524,6 +638,8 @@
 		E41C6C5F1D113F350013031D /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				D82F8DDF1D28171A00A24CDB /* MBProgressHUD */,
+				D82F8DB71D27CB6400A24CDB /* SDCycleScrollView */,
 				D8AA0FF11D1DA0220038EE73 /* TZImagePickerController */,
 				E4272E021D19327800BE4053 /* VPImageCropper */,
 				D81F452A1D1198B3004D9192 /* Reachability.swift */,
@@ -534,9 +650,7 @@
 		E41C6C601D113F350013031D /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				E446FA021D2612D7003DFC1E /* IconHeaderView.swift */,
-				E446FA031D2612D7003DFC1E /* PersonalDataViewController.swift */,
-				E446FA041D2612D7003DFC1E /* PersonalHeaderCell.swift */,
+				D830877E1D27B3DA009CFE03 /* View */,
 				D81F453D1D145B3D004D9192 /* Controller */,
 			);
 			path = Mine;
@@ -545,17 +659,24 @@
 		E41C6C611D113F350013031D /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				D81F450F1D118D50004D9192 /* HttpTool.swift */,
+				D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */,
+				D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */,
+				D82F8DE31D28373400A24CDB /* BaseResponse.swift */,
+				D82F8DE41D28373400A24CDB /* FindNoticeList.swift */,
+				D82F8DE51D28373400A24CDB /* Server.swift */,
+				D82F8DE61D28373400A24CDB /* StringResponse.swift */,
 				D81F452D1D11A2E4004D9192 /* API.swift */,
+				D81F450F1D118D50004D9192 /* HttpTool.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
 		};
-		E41C6C621D113F350013031D /* Square */ = {
+		E41C6C621D113F350013031D /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				D81F45211D118F3C004D9192 /* SquareViewController.swift */,
+				D830877C1D27A60A009CFE03 /* FindViewController.swift */,
 			);
+			name = Find;
 			path = Square;
 			sourceTree = "<group>";
 		};
@@ -682,6 +803,7 @@
 		E4E5DEDA1D17A8BB00CB8535 /* Notice */ = {
 			isa = PBXGroup;
 			children = (
+				D82F8DD81D27EAB400A24CDB /* Model */,
 				E446F9F91D24ED40003DFC1E /* Controller */,
 				E47ADF5F1D1BEDE600A2F4BD /* View */,
 			);
@@ -773,7 +895,7 @@
 				TargetAttributes = {
 					E41C22D41D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 8PC7326ELF;
+						DevelopmentTeam = 4F542L7GM6;
 					};
 					E41C22E81D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -982,6 +1104,7 @@
 			files = (
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
 				D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */,
+				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D8AA100A1D1DA0220038EE73 /* TZPhotoPickerController.m in Sources */,
 				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
@@ -990,6 +1113,7 @@
 				E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */,
 				D81F45181D118D63004D9192 /* YGBaseViewController.swift in Sources */,
 				D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */,
+				D82F8DCA1D27CB6400A24CDB /* TAPageControl.m in Sources */,
 				E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */,
 				E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */,
 				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
@@ -1012,23 +1136,32 @@
 				D8AA100D1D1DA0220038EE73 /* TZVideoPlayerController.m in Sources */,
 				D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */,
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
-				D81F45221D118F3C004D9192 /* SquareViewController.swift in Sources */,
+				D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */,
+				D83087801D27B400009CFE03 /* MessageCell.swift in Sources */,
+				D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */,
 				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
+				D83087821D27B805009CFE03 /* MineCollectCell.swift in Sources */,
 				D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
+				D82F8DCD1D27CB6400A24CDB /* UIView+SDExtension.m in Sources */,
 				D8AA100E1D1DA0220038EE73 /* UIView+Layout.m in Sources */,
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
-				E446FA061D2612D7003DFC1E /* PersonalDataViewController.swift in Sources */,
+				D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
+				D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */,
+				D82F8DCC1D27CB6400A24CDB /* SDCycleScrollView.m in Sources */,
 				D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
+				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
+				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
+				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
 				E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */,
 				E47ADF6C1D1D051D00A2F4BD /* YGShareHandler.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
@@ -1040,16 +1173,19 @@
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
 				D8AA10071D1DA0220038EE73 /* TZImageManager.m in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
+				D82F8DDC1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift in Sources */,
+				D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */,
 				E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */,
 				E4E5DED31D179BEF00CB8535 /* YGSelectDateView.swift in Sources */,
 				D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */,
 				D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */,
 				D8AA100C1D1DA0220038EE73 /* TZPhotoPreviewController.m in Sources */,
-				E446FA071D2612D7003DFC1E /* PersonalHeaderCell.swift in Sources */,
+				E446FA071D2612D7003DFC1E /* MineHeaderCell.swift in Sources */,
 				E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */,
 				E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */,
 				E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */,
 				D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */,
+				D82F8DEE1D28375300A24CDB /* ArtistInfo.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,
 				D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */,
@@ -1057,10 +1193,16 @@
 				E47ADF741D1D161C00A2F4BD /* ShareCollectionCell.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
+				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,
 				E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */,
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
+				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
+				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
+				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,
+				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,
+				D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

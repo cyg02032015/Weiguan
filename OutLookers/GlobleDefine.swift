@@ -9,6 +9,8 @@
 import UIKit
 import Device
 
+let scale: CGFloat = 1.15
+
 // 屏幕适配宏常量
 let ScreenWidth: CGFloat   = UIScreen.mainScreen().bounds.width
 let ScreenHeight: CGFloat  = UIScreen.mainScreen().bounds.height
@@ -36,7 +38,7 @@ let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
 func kScale(a: CGFloat) -> CGFloat {
     if Device.size() == .Screen5_5Inch {
-        return a
+        return a * scale
     } else {
         return a
     }
@@ -44,7 +46,7 @@ func kScale(a: CGFloat) -> CGFloat {
 
 func kSize(width: CGFloat, height: CGFloat) -> CGSize {
     if Device.size() == .Screen5_5Inch {
-        return CGSize(width: width, height: height)
+        return CGSize(width: width * scale, height: height * scale)
     } else {
         return CGSize(width: width, height: height)
     }
@@ -52,7 +54,7 @@ func kSize(width: CGFloat, height: CGFloat) -> CGSize {
 
 func kHeight(a: CGFloat) -> CGFloat {
     if Device.size() == .Screen5_5Inch {
-        return a
+        return a * scale
     } else {
         return a
     }

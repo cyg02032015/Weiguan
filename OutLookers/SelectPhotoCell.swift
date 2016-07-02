@@ -22,7 +22,7 @@ class SelectPhotoCell: UITableViewCell {
     
     func setupSubViews() {
         label = UILabel()
-        label.text = "工作详情"
+        label.text = "宣传图片 (首张为封面)"
         label.font = UIFont.customFontOfSize(15)
         contentView.addSubview(label)
         

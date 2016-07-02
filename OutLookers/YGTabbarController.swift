@@ -26,6 +26,9 @@ class YGTabbarController: UITabBarController {
         super.viewDidLoad()
         addTabbar()
         addChildViewControllers()
+        self.tabBar.translucent = false
+        self.tabBar.backgroundImage = UIColor().imageWith(UIColor.clearColor())
+        self.tabBar.shadowImage = UIColor().imageWith(UIColor.clearColor())
     }
 
     func addTabbar() {
@@ -42,18 +45,18 @@ class YGTabbarController: UITabBarController {
         
         // 首页
         let homeVC = HomeViewController()
-        self.addChildViewController(homeVC, title: "首页", image: "tab_home", selectedImg: "tab_home_selected")
-        // 广场
-        let squareVC = SquareViewController()
-        self.addChildViewController(squareVC, title: "广场", image: "tab_order", selectedImg: "tab_order_selected")
+        self.addChildViewController(homeVC, title: "首页", image: "home_normal", selectedImg: "home_chosen")
+        // 发现
+        let findVC = FindViewController()
+        self.addChildViewController(findVC, title: "发现", image: "find_normal", selectedImg: "find_chosen")
         
         // 关注
         let followVC = FollowViewController()
-        self.addChildViewController(followVC, title: "关注", image: "", selectedImg: "")
+        self.addChildViewController(followVC, title: "关注", image: "care_normal", selectedImg: "care_chosen")
         
         // 个人
         let mineVC = MineViewController()
-        self.addChildViewController(mineVC, title: "我的", image: "tab_people", selectedImg: "tab_people_selected")
+        self.addChildViewController(mineVC, title: "我的", image: "me_normal", selectedImg: "me_chosen")
     }
     
     func addChildViewController(child: UIViewController, title: String?, image: String, selectedImg: String) {

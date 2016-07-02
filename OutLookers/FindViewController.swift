@@ -1,23 +1,23 @@
 //
-//  SquareViewController.swift
+//  FindViewController.swift
 //  OutLookers
 //
-//  Created by C on 16/6/15.
-//  Copyright © 2016年 youngkook. All rights reserved.
+//  Created by C on 16/7/2.
+//  Copyright © 2016年 weiguanonline. All rights reserved.
 //
 
 import UIKit
 
-class SquareViewController: YGBaseViewController {
+class FindViewController: YGBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blueColor()
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
+    } 
 }

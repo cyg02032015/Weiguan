@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 import SnapKit
 
 enum PageControlAlignment: Int {
@@ -151,11 +150,11 @@ public class YKBannerView: UIView {
             if isLoop {
                 addTimer()
             }
-            for (_, url) in dataA.enumerate() {
-                let imageView = UIImageView(frame: self.scrollView.frame)
-                imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: placeHolderImage)
-                self.imageArray.append(imageView)
-            }
+//            for (_, url) in dataA.enumerate() {
+//                let imageView = UIImageView(frame: self.scrollView.frame)
+//                imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: placeHolderImage)
+//                self.imageArray.append(imageView)
+//            }
             self.pageControl.numberOfPages = imageArray.count
             self.configContentViews()
         }

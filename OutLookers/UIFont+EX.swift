@@ -35,7 +35,7 @@ extension UIFont {
     class func customFontOfSize(a: CGFloat) -> UIFont {
         var size: CGFloat!
         if Device.size() == .Screen5_5Inch {
-            size = a
+            size = a * scale
         } else {
             size = a
         }

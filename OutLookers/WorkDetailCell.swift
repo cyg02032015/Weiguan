@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol WorkDetailCellDelegate: class {
+    func workDetailCellReturnText(text: String)
+}
+
 class WorkDetailCell: UITableViewCell {
 
+    weak var delegate: WorkDetailCellDelegate!
     var placeholderLabel: UILabel!
     var tv: UITextView!
     var label: UILabel!
@@ -72,5 +77,9 @@ extension WorkDetailCell: UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         placeholderLabel.hidden = textView.text.characters.count > 0
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        delegate.workDetailCellReturnText(textView.text)
     }
 }

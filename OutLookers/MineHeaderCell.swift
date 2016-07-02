@@ -9,13 +9,13 @@
 import UIKit
 
 private extension Selector {
-    static let tapEditData = #selector(PersonalHeaderCell.tapEditData)
-    static let tapFriends = #selector(PersonalHeaderCell.tapFriends)
-    static let tapFollows = #selector(PersonalHeaderCell.tapFollows)
-    static let tapFans = #selector(PersonalHeaderCell.tapFans)
+    static let tapEditData = #selector(MineHeaderCell.tapEditData)
+    static let tapFriends = #selector(MineHeaderCell.tapFriends)
+    static let tapFollows = #selector(MineHeaderCell.tapFollows)
+    static let tapFans = #selector(MineHeaderCell.tapFans)
 }
 
-class PersonalHeaderCell: UITableViewCell {
+class MineHeaderCell: UITableViewCell {
 
     typealias EditDataClosure = () -> ()
     typealias TapFriendClosure = () -> ()
@@ -73,34 +73,34 @@ class PersonalHeaderCell: UITableViewCell {
         contentView.addSubview(lineV)
         
         header.snp.makeConstraints { (make) in
-            make.top.left.equalTo(header.superview!).offset(15)
-            make.size.equalTo(59)
+            make.top.left.equalTo(header.superview!).offset(kScale(15))
+            make.size.equalTo(kSize(59, height: 59))
         }
         
         name.snp.makeConstraints { (make) in
-            make.left.equalTo(header.snp.right).offset(11)
+            make.left.equalTo(header.snp.right).offset(kScale(11))
             make.centerY.equalTo(header)
         }
         
         editDataContainer.snp.makeConstraints { (make) in
-            make.right.equalTo(editDataContainer.superview!).offset(-20)
+            make.right.equalTo(editDataContainer.superview!).offset(kScale(-20))
             make.centerY.equalTo(header)
-            make.size.equalTo(CGSize(width: 90, height: 25))
+            make.size.equalTo(kSize(90, height: 25))
         }
         
         editDataLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(editDataLabel.superview!).offset(14)
+            make.left.equalTo(editDataLabel.superview!).offset(kScale(14))
             make.centerY.equalTo(editDataLabel.superview!)
         }
         
         penImgView.snp.makeConstraints { (make) in
-            make.size.equalTo(11)
+            make.size.equalTo(kSize(11, height: 11))
             make.centerY.equalTo(penImgView.superview!)
-            make.left.equalTo(editDataLabel.snp.right).offset(5)
+            make.left.equalTo(editDataLabel.snp.right).offset(kScale(5))
         }
         
         lineV.snp.makeConstraints { (make) in
-            make.top.equalTo(header.snp.bottom).offset(20)
+            make.top.equalTo(header.snp.bottom).offset(kScale(20))
             make.left.right.equalTo(lineV.superview!)
             make.height.equalTo(1)
         }
@@ -144,14 +144,14 @@ class PersonalHeaderCell: UITableViewCell {
         
         friend.snp.makeConstraints { (make) in
             make.left.right.equalTo(friend.superview!)
-            make.top.equalTo(friend.superview!).offset(8)
-            make.height.equalTo(19)
+            make.top.equalTo(friend.superview!).offset(kScale(8))
+            make.height.equalTo(kScale(19))
         }
         
         friendLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(friendLabel.superview!)
             make.top.equalTo(friend.snp.bottom)
-            make.height.equalTo(12)
+            make.height.equalTo(kScale(12))
         }
         
         let verticalLine1 = UIView()
@@ -193,14 +193,14 @@ class PersonalHeaderCell: UITableViewCell {
         
         follow.snp.makeConstraints { (make) in
             make.left.right.equalTo(follow.superview!)
-            make.top.equalTo(follow.superview!).offset(8)
-            make.height.equalTo(19)
+            make.top.equalTo(follow.superview!).offset(kScale(8))
+            make.height.equalTo(kScale(19))
         }
         
         followLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(followLabel.superview!)
             make.top.equalTo(follow.snp.bottom)
-            make.height.equalTo(12)
+            make.height.equalTo(kScale(12))
         }
         
         let verticalLine2 = UIView()
@@ -242,14 +242,14 @@ class PersonalHeaderCell: UITableViewCell {
         
         fans.snp.makeConstraints { (make) in
             make.left.right.equalTo(fans.superview!)
-            make.top.equalTo(fans.superview!).offset(8)
-            make.height.equalTo(19)
+            make.top.equalTo(fans.superview!).offset(kScale(8))
+            make.height.equalTo(kScale(19))
         }
         
         fansLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(fansLabel.superview!)
             make.top.equalTo(fans.snp.bottom)
-            make.height.equalTo(12)
+            make.height.equalTo(kScale(12))
         }
     }
     
