@@ -16,6 +16,8 @@ class RecommendHeaderView: UIView {
     }
     
     func setupSubViews() {
+        backgroundColor = UIColor.whiteColor()
+        
         let imgView = UIImageView(image: UIImage(named: "home_lead"))
         addSubview(imgView)
         

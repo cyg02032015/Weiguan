@@ -32,7 +32,7 @@ class HomeViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .None
@@ -116,6 +116,10 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         } else {
             return kHeight(10)
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
 }
 

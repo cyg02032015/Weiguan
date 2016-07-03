@@ -203,7 +203,11 @@ extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavig
 extension ReleasePictureViewController: ShareCellDelegate {
     
     override func tapRightButton(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: { [unowned self] in
+            self.photos.removeAllObjects()
+            self.pictures.removeAll()
+            self.originPhotos.removeAllObjects()
+        })
     }
     
     func shareCellReturnsShareTitle(text: String) {
