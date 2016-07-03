@@ -53,6 +53,9 @@
 		D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE61D28373400A24CDB /* StringResponse.swift */; };
 		D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */; };
 		D82F8DEE1D28375300A24CDB /* ArtistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */; };
+		D82F8DF01D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DEF1D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift */; };
+		D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */; };
+		D82F8DF61D29130B00A24CDB /* RecommendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */; };
 		D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */; };
 		D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087791D278B72009CFE03 /* UIButton+Badge.m */; };
 		D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877C1D27A60A009CFE03 /* FindViewController.swift */; };
@@ -201,6 +204,9 @@
 		D82F8DE61D28373400A24CDB /* StringResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringResponse.swift; path = OutLookers/StringResponse.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistDetailInfo.swift; path = OutLookers/ArtistDetailInfo.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistInfo.swift; path = OutLookers/ArtistInfo.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DEF1D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHotmanTableViewCell.swift; path = OutLookers/RecommendHotmanTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHotmanCollectionCell.swift; path = OutLookers/RecommendHotmanCollectionCell.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHeaderView.swift; path = OutLookers/RecommendHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		D83087781D278B72009CFE03 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
@@ -746,6 +752,9 @@
 		E446F9FE1D24EE76003DFC1E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D82F8DEF1D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift */,
+				D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */,
+				D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1104,9 +1113,11 @@
 			files = (
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
 				D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */,
+				D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D8AA100A1D1DA0220038EE73 /* TZPhotoPickerController.m in Sources */,
+				D82F8DF01D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift in Sources */,
 				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
 				D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */,
 				E4E5DED51D179BFD00CB8535 /* YKToast.swift in Sources */,
@@ -1174,6 +1185,7 @@
 				D8AA10071D1DA0220038EE73 /* TZImageManager.m in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
 				D82F8DDC1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift in Sources */,
+				D82F8DF61D29130B00A24CDB /* RecommendHeaderView.swift in Sources */,
 				D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */,
 				E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */,
 				E4E5DED31D179BEF00CB8535 /* YGSelectDateView.swift in Sources */,

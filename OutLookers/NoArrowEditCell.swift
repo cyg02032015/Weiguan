@@ -99,7 +99,9 @@ class NoArrowEditCell: UITableViewCell {
 
 extension NoArrowEditCell: UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
-        delegate.noarrowCellReturnText(textField.text, tuple: (indexPath.section, indexPath.row))
+        if delegate != nil {
+            delegate.noarrowCellReturnText(textField.text, tuple: (indexPath.section, indexPath.row))
+        }
         
     }
 }

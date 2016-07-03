@@ -66,10 +66,11 @@ class ReleaseNoticeViewController: YGBaseViewController {
 
     func setupSubViews() {
         photoArray = [UIImage(named: "release_announcement_Addpictures")!]
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRectZero, style: .Grouped)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorColor = kLineColor
         tableView.tableFooterView = UIView()
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowIdentifier)
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowIdentifier)
@@ -207,6 +208,12 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         return kHeight(10)
     }
     
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = kBackgoundColor
+        return view
+    }
+    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
@@ -324,7 +331,6 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
 //        request.register = "2016-06-07"
 //        request.city = "123"
 //        request.adds = "1111"
-//        request.details = "asdf"
         request.picture = "11,12,14"
         if isEmptyString(request.theme) {
             YKToast.makeText("请填写工作主题")
@@ -395,8 +401,9 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
         //MARK: 添加招募需求request
         request.recruitment = "11,14,12"
         recruits.append(recruit)
-        let range = NSMakeRange(1, 1)
-        tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
+        tableView.reloadData()
+//        let range = NSMakeRange(1, 1)
+//        tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
     }
     
     func pickerViewSelectedSure(sender: UIButton) {

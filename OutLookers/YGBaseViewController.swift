@@ -18,7 +18,7 @@ class YGBaseViewController: UIViewController {
     //MARK: -LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = kBackgoundColor
     }
     
     func createNaviRightButton(title: String) -> UIButton {

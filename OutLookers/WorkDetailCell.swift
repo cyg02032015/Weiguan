@@ -80,6 +80,8 @@ extension WorkDetailCell: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(textView: UITextView) {
-        delegate.workDetailCellReturnText(textView.text)
+        if delegate != nil {
+            delegate.workDetailCellReturnText(textView.text)
+        }
     }
 }

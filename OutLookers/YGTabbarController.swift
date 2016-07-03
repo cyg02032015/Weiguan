@@ -78,8 +78,15 @@ class YGTabbarController: UITabBarController {
 extension YGTabbarController: YGTabbarDelegate {
     func tabbarDidSelect(tabbar: YGTabbar, didSelectedfrom: Int, to: Int) {
         if to == 5 {
-            let navi = YGNavigationController(rootViewController: IssueViewController())
-            presentViewController(navi, animated: true, completion: nil)
+            let issuevc = IssueViewController()
+            let navi = YGNavigationController(rootViewController: issuevc)
+//            navi.view.backgroundColor = UIColor(r: 0, g: 0, b: 0, a: 0.4)
+//            self.definesPresentationContext = true
+//            issuevc.view.backgroundColor = UIColor(r: 0, g: 0, b: 0, a: 0.4)
+//            issuevc.modalPresentationStyle = .OverCurrentContext
+            self.presentViewController(navi, animated: true, completion: {
+                
+            })
         }
 //        if to == 2 && UserSingleton.shareManager.cookie == nil {
 //            self.selectedIndex = didSelectedfrom
