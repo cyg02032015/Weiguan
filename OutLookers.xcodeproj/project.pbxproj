@@ -58,6 +58,12 @@
 		D82F8DF61D29130B00A24CDB /* RecommendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */; };
 		D82F8DF81D2AABE000A24CDB /* PHViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF71D2AABE000A24CDB /* PHViewController.swift */; };
 		D82F8DFA1D2AAC3A00A24CDB /* PHHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */; };
+		D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DFF1D2C0D9400A24CDB /* TYBasePageTabBar.m */; };
+		D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E011D2C0D9400A24CDB /* TYSlidePageScrollView.m */; };
+		D82F8E0A1D2C0D9400A24CDB /* TYSlidePageScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E031D2C0D9400A24CDB /* TYSlidePageScrollViewController.m */; };
+		D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E051D2C0D9400A24CDB /* TYTitlePageTabBar.m */; };
+		D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E071D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m */; };
+		D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */; };
 		D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */; };
 		D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087791D278B72009CFE03 /* UIButton+Badge.m */; };
 		D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877C1D27A60A009CFE03 /* FindViewController.swift */; };
@@ -211,6 +217,17 @@
 		D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHeaderView.swift; path = OutLookers/RecommendHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DF71D2AABE000A24CDB /* PHViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHViewController.swift; path = OutLookers/PHViewController.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHHeaderView.swift; path = OutLookers/PHHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DFE1D2C0D9400A24CDB /* TYBasePageTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYBasePageTabBar.h; sourceTree = "<group>"; };
+		D82F8DFF1D2C0D9400A24CDB /* TYBasePageTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYBasePageTabBar.m; sourceTree = "<group>"; };
+		D82F8E001D2C0D9400A24CDB /* TYSlidePageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYSlidePageScrollView.h; sourceTree = "<group>"; };
+		D82F8E011D2C0D9400A24CDB /* TYSlidePageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYSlidePageScrollView.m; sourceTree = "<group>"; };
+		D82F8E021D2C0D9400A24CDB /* TYSlidePageScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYSlidePageScrollViewController.h; sourceTree = "<group>"; };
+		D82F8E031D2C0D9400A24CDB /* TYSlidePageScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYSlidePageScrollViewController.m; sourceTree = "<group>"; };
+		D82F8E041D2C0D9400A24CDB /* TYTitlePageTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYTitlePageTabBar.h; sourceTree = "<group>"; };
+		D82F8E051D2C0D9400A24CDB /* TYTitlePageTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYTitlePageTabBar.m; sourceTree = "<group>"; };
+		D82F8E061D2C0D9400A24CDB /* UIScrollView+ty_swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ty_swizzle.h"; sourceTree = "<group>"; };
+		D82F8E071D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ty_swizzle.m"; sourceTree = "<group>"; };
+		D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentViewController.swift; path = OutLookers/TalentViewController.swift; sourceTree = SOURCE_ROOT; };
 		D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		D83087781D278B72009CFE03 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
@@ -350,6 +367,7 @@
 			children = (
 				D81F451F1D118EF7004D9192 /* HomeViewController.swift */,
 				D82F8DF71D2AABE000A24CDB /* PHViewController.swift */,
+				D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -410,6 +428,24 @@
 			);
 			name = MBProgressHUD;
 			sourceTree = "<group>";
+		};
+		D82F8DFD1D2C0D9400A24CDB /* TYSlidePageScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				D82F8DFE1D2C0D9400A24CDB /* TYBasePageTabBar.h */,
+				D82F8DFF1D2C0D9400A24CDB /* TYBasePageTabBar.m */,
+				D82F8E001D2C0D9400A24CDB /* TYSlidePageScrollView.h */,
+				D82F8E011D2C0D9400A24CDB /* TYSlidePageScrollView.m */,
+				D82F8E021D2C0D9400A24CDB /* TYSlidePageScrollViewController.h */,
+				D82F8E031D2C0D9400A24CDB /* TYSlidePageScrollViewController.m */,
+				D82F8E041D2C0D9400A24CDB /* TYTitlePageTabBar.h */,
+				D82F8E051D2C0D9400A24CDB /* TYTitlePageTabBar.m */,
+				D82F8E061D2C0D9400A24CDB /* UIScrollView+ty_swizzle.h */,
+				D82F8E071D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m */,
+			);
+			name = TYSlidePageScrollView;
+			path = OutLookers/TYSlidePageScrollView;
+			sourceTree = SOURCE_ROOT;
 		};
 		D830877E1D27B3DA009CFE03 /* View */ = {
 			isa = PBXGroup;
@@ -649,6 +685,7 @@
 		E41C6C5F1D113F350013031D /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				D82F8DFD1D2C0D9400A24CDB /* TYSlidePageScrollView */,
 				D82F8DDF1D28171A00A24CDB /* MBProgressHUD */,
 				D82F8DB71D27CB6400A24CDB /* SDCycleScrollView */,
 				D8AA0FF11D1DA0220038EE73 /* TZImagePickerController */,
@@ -1120,6 +1157,7 @@
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
 				D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */,
 				D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */,
+				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D8AA100A1D1DA0220038EE73 /* TZPhotoPickerController.m in Sources */,
@@ -1144,6 +1182,7 @@
 				D81F45051D118D43004D9192 /* InterfaceBuiderEX.swift in Sources */,
 				D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */,
 				E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */,
+				D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
@@ -1180,12 +1219,14 @@
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
 				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
+				D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */,
 				E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */,
 				E47ADF6C1D1D051D00A2F4BD /* YGShareHandler.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
 				D87049441D2152A7008FB780 /* VideoTool.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
+				D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */,
 				E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */,
 				D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */,
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
@@ -1213,12 +1254,14 @@
 				D82F8DF81D2AABE000A24CDB /* PHViewController.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
+				D82F8E0A1D2C0D9400A24CDB /* TYSlidePageScrollViewController.m in Sources */,
 				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,
 				E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */,
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
+				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
 				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
 				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,
 				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,
