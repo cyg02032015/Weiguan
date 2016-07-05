@@ -56,6 +56,8 @@
 		D82F8DF01D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DEF1D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift */; };
 		D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */; };
 		D82F8DF61D29130B00A24CDB /* RecommendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */; };
+		D82F8DF81D2AABE000A24CDB /* PHViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF71D2AABE000A24CDB /* PHViewController.swift */; };
+		D82F8DFA1D2AAC3A00A24CDB /* PHHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */; };
 		D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */; };
 		D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087791D278B72009CFE03 /* UIButton+Badge.m */; };
 		D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877C1D27A60A009CFE03 /* FindViewController.swift */; };
@@ -207,6 +209,8 @@
 		D82F8DEF1D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHotmanTableViewCell.swift; path = OutLookers/RecommendHotmanTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHotmanCollectionCell.swift; path = OutLookers/RecommendHotmanCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHeaderView.swift; path = OutLookers/RecommendHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DF71D2AABE000A24CDB /* PHViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHViewController.swift; path = OutLookers/PHViewController.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHHeaderView.swift; path = OutLookers/PHHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		D83087781D278B72009CFE03 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				D81F451F1D118EF7004D9192 /* HomeViewController.swift */,
+				D82F8DF71D2AABE000A24CDB /* PHViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -753,8 +758,9 @@
 			isa = PBXGroup;
 			children = (
 				D82F8DEF1D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift */,
-				D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */,
 				D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */,
+				D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */,
+				D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1126,6 +1132,7 @@
 				D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */,
 				D82F8DCA1D27CB6400A24CDB /* TAPageControl.m in Sources */,
 				E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */,
+				D82F8DFA1D2AAC3A00A24CDB /* PHHeaderView.swift in Sources */,
 				E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */,
 				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
@@ -1203,6 +1210,7 @@
 				D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */,
 				D8AA100B1D1DA0220038EE73 /* TZPhotoPreviewCell.m in Sources */,
 				E47ADF741D1D161C00A2F4BD /* ShareCollectionCell.swift in Sources */,
+				D82F8DF81D2AABE000A24CDB /* PHViewController.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,

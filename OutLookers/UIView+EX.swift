@@ -17,7 +17,5 @@ extension UIView {
         blurEffectView.frame = view.bounds
         view.insertSubview(blurEffectView, atIndex: 0)
     }
-    
-    
 }
 
