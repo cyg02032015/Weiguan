@@ -14,9 +14,15 @@ class TalentViewController: YGBaseViewController {
 
     lazy var data = [String]()
     var tableView: UITableView!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        LogInfo("viewwillappear")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        LogWarn("viewdidload")
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
