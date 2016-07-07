@@ -8,18 +8,20 @@
 
 import UIKit
 
+private extension Selector {
+    static let tapFans = #selector(PHHeaderView.fansLabelClick)
+    static let tapFollow = #selector(PHHeaderView.followLabelClick)
+}
+
 class PHHeaderView: UIView {
 
     var backImgView: UIImageView!
     var headImgView: UIImageView!
     var vImageView: UIImageView!
-    var follow: UILabel!
-    var followLabel: UILabel!
-    var fans: UILabel!
-    var fansLabel: UILabel!
+    var follow: TouchLabel!
+    var fans: TouchLabel!
     var firstLabel: UILabel!
     var secondLabel: UILabel!
-//    var thirdLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +30,7 @@ class PHHeaderView: UIView {
     
     func setupSubViews() {
         backImgView = UIImageView()
+        backImgView.userInteractionEnabled = true
         addSubview(backImgView)
         backImgView.snp.makeConstraints { (make) in
             make.edges.equalTo(backImgView.superview!)
@@ -54,44 +57,27 @@ class PHHeaderView: UIView {
             make.centerX.equalTo(lineV.superview!)
         }
         
-        followLabel = UILabel()
-        followLabel.font = UIFont.customFontOfSize(14)
-        followLabel.textColor = UIColor.whiteColor()
-        backImgView.addSubview(followLabel)
-        followLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(lineV)
-            make.right.equalTo(lineV.snp.left).offset(kScale(-18))
-            make.height.equalTo(kHeight(14))
-        }
-        
-        follow = UILabel()
+        follow = TouchLabel()
         follow.font = UIFont.customNumFontOfSize(16)
         follow.textColor = UIColor.whiteColor()
+        follow.textAlignment = .Right
+        follow.addTarget(self, action: .tapFollow)
         backImgView.addSubview(follow)
         follow.snp.makeConstraints { (make) in
-            make.centerY.equalTo(followLabel)
-            make.right.equalTo(followLabel.snp.left).offset(kScale(-5))
+            make.centerY.equalTo(lineV)
+            make.right.equalTo(lineV.snp.left).offset(kScale(-18))
             make.height.equalTo(kHeight(16))
         }
         
-        fans = UILabel()
+        fans = TouchLabel()
         fans.font = UIFont.customNumFontOfSize(16)
         fans.textColor = UIColor.whiteColor()
+        fans.addTarget(self, action: .tapFans)
         backImgView.addSubview(fans)
         fans.snp.makeConstraints { (make) in
             make.centerY.equalTo(lineV)
             make.left.equalTo(lineV.snp.right).offset(kScale(20))
             make.height.equalTo(kHeight(16))
-        }
-        
-        fansLabel = UILabel()
-        fansLabel.font = UIFont.customFontOfSize(14)
-        fansLabel.textColor = UIColor.whiteColor()
-        backImgView.addSubview(fansLabel)
-        fansLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(fans)
-            make.left.equalTo(fans.snp.right).offset(kScale(5))
-            make.height.equalTo(kHeight(14))
         }
         
         firstLabel = UILabel()
@@ -128,22 +114,20 @@ class PHHeaderView: UIView {
         
         backImgView.image = boxBlurImage(UIImage(named: "back.png")!, withBlurNumber: 0.5)
         headImgView.image = UIImage(named: "back.png")
-        follow.text = "155"
-        followLabel.text = "关注"
-        fans.text = "234"
-        fansLabel.text = "粉丝"
+        follow.text = "155 关注"
+        fans.text = "234 粉丝"
         firstLabel.text = "围观认证：男人装御用模特"
         vImageView.backgroundColor = UIColor.yellowColor()
         secondLabel.text = "欧美 日韩 街头 性感 中国风 欧美 日韩 街头 性感 中国风日韩 街头 性感 中国风"
-        
-//        thirdLabel = UILabel()
-//        thirdLabel.font = UIFont.customFontOfSize(14)
-//        thirdLabel.textColor = UIColor.whiteColor()
-//        backImgView.addSubview(thirdLabel)
-//        thirdLabel.snp.makeConstraints { (make) in
-//            
-//        }
 
+    }
+    
+    func followLabelClick() {
+        LogWarn("follow")
+    }
+    
+    func fansLabelClick() {
+        LogWarn("fans")
     }
     
     required init?(coder aDecoder: NSCoder) {

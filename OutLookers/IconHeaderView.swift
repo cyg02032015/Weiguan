@@ -14,6 +14,17 @@ class IconHeaderView: UIView {
     var closure: HeaderClosure!
     var iconView: UIImageView!
     var vImgView: UIImageView!
+    private var _customCornerRadius: CGFloat = kScale(50/2)
+    var customCornerRadius: CGFloat! {
+        set {
+            guard let radius = newValue else { LogWarn(" radius is nil "); return }
+            _customCornerRadius = radius
+            iconView.layer.cornerRadius = radius
+        }
+        get {
+            return _customCornerRadius
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,7 +35,7 @@ class IconHeaderView: UIView {
         iconView = UIImageView()
         iconView.userInteractionEnabled = true
         iconView.clipsToBounds = true
-//        iconView.layer.cornerRadius = 50/2
+        iconView.layer.cornerRadius = _customCornerRadius
         addSubview(iconView)
         
         vImgView = UIImageView()

@@ -24,7 +24,7 @@ class ArrowEditCell: UITableViewCell {
         label.font = UIFont.customFontOfSize(16)
         contentView.addSubview(label)
         
-        let arrow = UIImageView(image: UIImage(named: "mine_arrow_icon"))
+        let arrow = UIImageView(image: UIImage(named: "open"))
         contentView.addSubview(arrow)
         
         tf = UITextField()

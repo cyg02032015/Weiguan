@@ -114,6 +114,12 @@
 		E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA021D2612D7003DFC1E /* IconHeaderView.swift */; };
 		E446FA071D2612D7003DFC1E /* MineHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA041D2612D7003DFC1E /* MineHeaderCell.swift */; };
 		E446FA091D261647003DFC1E /* UIFont+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA081D261647003DFC1E /* UIFont+EX.swift */; };
+		E446FA111D2E10E1003DFC1E /* TalentWorksCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA101D2E10E1003DFC1E /* TalentWorksCollectionCell.swift */; };
+		E446FA131D2E26A6003DFC1E /* DynamicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA121D2E26A6003DFC1E /* DynamicViewController.swift */; };
+		E446FA151D2E29E6003DFC1E /* TouchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA141D2E29E6003DFC1E /* TouchLabel.swift */; };
+		E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA161D2E311B003DFC1E /* DynamicCell.swift */; };
+		E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */; };
+		E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -300,6 +306,12 @@
 		E446FA021D2612D7003DFC1E /* IconHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconHeaderView.swift; path = OutLookers/IconHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		E446FA041D2612D7003DFC1E /* MineHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineHeaderCell.swift; path = OutLookers/MineHeaderCell.swift; sourceTree = SOURCE_ROOT; };
 		E446FA081D261647003DFC1E /* UIFont+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+EX.swift"; path = "OutLookers/UIFont+EX.swift"; sourceTree = SOURCE_ROOT; };
+		E446FA101D2E10E1003DFC1E /* TalentWorksCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentWorksCollectionCell.swift; path = OutLookers/TalentWorksCollectionCell.swift; sourceTree = SOURCE_ROOT; };
+		E446FA121D2E26A6003DFC1E /* DynamicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicViewController.swift; path = OutLookers/DynamicViewController.swift; sourceTree = SOURCE_ROOT; };
+		E446FA141D2E29E6003DFC1E /* TouchLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchLabel.swift; path = OutLookers/TouchLabel.swift; sourceTree = SOURCE_ROOT; };
+		E446FA161D2E311B003DFC1E /* DynamicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicCell.swift; path = OutLookers/DynamicCell.swift; sourceTree = SOURCE_ROOT; };
+		E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollVerticalDelegate.swift; path = OutLookers/ScrollVerticalDelegate.swift; sourceTree = SOURCE_ROOT; };
+		E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHToolView.swift; path = OutLookers/PHToolView.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -370,6 +382,8 @@
 				D81F451F1D118EF7004D9192 /* HomeViewController.swift */,
 				D82F8DF71D2AABE000A24CDB /* PHViewController.swift */,
 				D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */,
+				E446FA121D2E26A6003DFC1E /* DynamicViewController.swift */,
+				E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -630,6 +644,7 @@
 		E41C6C5B1D113F350013031D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				E446FA141D2E29E6003DFC1E /* TouchLabel.swift */,
 				E4E5DED41D179BFD00CB8535 /* YKToast.swift */,
 				D81F44F91D118D43004D9192 /* CGRect+EX.swift */,
 				D81F44FA1D118D43004D9192 /* InterfaceBuiderEX.swift */,
@@ -801,6 +816,9 @@
 				D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */,
 				D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */,
 				D82F8E0F1D2D320900A24CDB /* TalentTableViewCell.swift */,
+				E446FA101D2E10E1003DFC1E /* TalentWorksCollectionCell.swift */,
+				E446FA161D2E311B003DFC1E /* DynamicCell.swift */,
+				E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1163,9 +1181,11 @@
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
+				E446FA111D2E10E1003DFC1E /* TalentWorksCollectionCell.swift in Sources */,
 				D8AA100A1D1DA0220038EE73 /* TZPhotoPickerController.m in Sources */,
 				D82F8DF01D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift in Sources */,
 				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
+				E446FA131D2E26A6003DFC1E /* DynamicViewController.swift in Sources */,
 				D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */,
 				E4E5DED51D179BFD00CB8535 /* YKToast.swift in Sources */,
 				E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */,
@@ -1190,6 +1210,7 @@
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
+				E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */,
 				E4E5DECB1D179BD200CB8535 /* ArrowEditCell.swift in Sources */,
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
 				E4E5DECF1D179BD200CB8535 /* WorkDetailCell.swift in Sources */,
@@ -1233,6 +1254,7 @@
 				E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */,
 				D81F45201D118EF7004D9192 /* HomeViewController.swift in Sources */,
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
+				E446FA151D2E29E6003DFC1E /* TouchLabel.swift in Sources */,
 				D8AA10071D1DA0220038EE73 /* TZImageManager.m in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
 				D82F8DDC1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift in Sources */,
@@ -1263,9 +1285,11 @@
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
+				E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
 				D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */,
+				E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */,
 				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
 				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,
 				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,

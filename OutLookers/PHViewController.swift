@@ -20,7 +20,7 @@ class PHViewController: YGBaseViewController {
     
     func setupSubViews() {
         self.title = "小包子"
-        slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight)))
+        slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight))) // height - naviheight  偏移问题
         slidePageScrollView.pageTabBarIsStopOnTop = true
         slidePageScrollView.pageTabBarStopOnTopHeight = 0
         slidePageScrollView.parallaxHeaderEffect = false
@@ -39,18 +39,29 @@ class PHViewController: YGBaseViewController {
         titlePageTabbar.backgroundColor = UIColor(hex: 0xf8f8f8)
         slidePageScrollView.pageTabBar = titlePageTabbar
         
-        let vc1 = TalentViewController()
-        vc1.view.frame = view.frame
-        self.addChildViewController(vc1)
+        let talentVC = TalentViewController()
+        talentVC.view.frame = view.frame
+        talentVC.delegate = self
+        self.addChildViewController(talentVC)
         
-        let vc2 = TalentViewController()
-        vc2.view.frame = view.frame
-        self.addChildViewController(vc2)
+        let dynamicVC = DynamicViewController()
+        dynamicVC.view.frame = view.frame
+        self.addChildViewController(dynamicVC)
         let vc3 = TalentViewController()
         vc3.view.frame = view.frame
         self.addChildViewController(vc3)
         
         slidePageScrollView.reloadData()
+    }
+}
+
+extension PHViewController: ScrollVerticalDelegate {
+    func customScrollViewDidEndDecelerating(isScroll: Bool) {
+        if isScroll {
+            LogWarn("is scroll")
+        } else {
+            LogError("no scroll")
+        }
     }
 }
 
@@ -60,7 +71,19 @@ extension PHViewController: TYSlidePageScrollViewDataSource, TYSlidePageScrollVi
     }
     
     func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, pageVerticalScrollViewForIndex index: Int) -> UIScrollView! {
-        let tableViewVC = childViewControllers[index] as! TalentViewController
-        return tableViewVC.tableView
+        if index == 0 {
+            let tableViewVC = childViewControllers[index] as! TalentViewController
+            return tableViewVC.tableView
+        } else if index == 1 {
+            let tableViewVC = childViewControllers[index] as! DynamicViewController
+            return tableViewVC.tableView
+        } else {
+            let tableViewVC = childViewControllers[index] as! TalentViewController
+            return tableViewVC.tableView
+        }
+    }
+    
+    func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, horizenScrollViewDidEndDecelerating scrollView: UIScrollView!) {
+        LogInfo("end")
     }
 }

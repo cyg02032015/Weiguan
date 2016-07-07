@@ -8,6 +8,8 @@
 
 import UIKit
 
+public let talentWorksCollectionCellIdentifier = "talentWorksCollectionCellId"
+
 class TalentTableViewCell: UITableViewCell {
 
     var talentLabel: UILabel!       //  时装模特
@@ -15,6 +17,8 @@ class TalentTableViewCell: UITableViewCell {
     var introLabel: UILabel!        //  才艺介绍
     var detailsLabel: UILabel!      //  3行字
     var collectionView: UICollectionView!
+    var seeDetail: UIButton!        //  查看详情
+    var share: UIButton!            //  分享
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -100,21 +104,51 @@ class TalentTableViewCell: UITableViewCell {
             make.height.equalTo(kScale(14))
         }
         
-//        let layout = UICollectionViewFlowLayout()
-//        layout.itemSize = CGSize(width: (ScreenWidth - 30 - 15) / 4, height: (ScreenWidth - 30 - 15) / 4)
-//        layout.minimumLineSpacing = 6
-//        layout.minimumInteritemSpacing = 5
-//        layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 22, right: 15)
-//        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-//        collectionView.backgroundColor = UIColor.whiteColor()
-//        collectionView.scrollEnabled = false
-//        contentView.addSubview(collectionView)
-//        collectionView.registerClass(PhotoCollectionCell.self, forCellWithReuseIdentifier: releasePictureCollectionCellIdentifier)
-//        
-//        collectionView.snp.makeConstraints { (make) in
-//            make.edges.equalTo(collectionView.superview!)
-//        }
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = kSize(320, height: 324)
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .Horizontal
+        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.showsHorizontalScrollIndicator = false
+        contentView.addSubview(collectionView)
+        collectionView.registerClass(TalentWorksCollectionCell.self, forCellWithReuseIdentifier: talentWorksCollectionCellIdentifier)
+        
+        collectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(worksLabel.snp.bottom).offset(kScale(15))
+            make.left.right.equalTo(collectionView.superview!)
+            make.height.equalTo(kScale(324))
+        }
 
+        seeDetail = UIButton()
+        seeDetail.layer.cornerRadius = kScale(24/2)
+        seeDetail.layer.borderColor = UIColor(hex: 0x666666).CGColor
+        seeDetail.layer.borderWidth = 1
+        seeDetail.setTitle("查看详情", forState: .Normal)
+        seeDetail.setTitleColor(UIColor(hex: 0x666666), forState: .Normal)
+        seeDetail.titleLabel?.font = UIFont.customFontOfSize(14)
+        contentView.addSubview(seeDetail)
+        seeDetail.snp.makeConstraints { (make) in
+            make.top.equalTo(collectionView.snp.bottom).offset(kScale(20))
+            make.size.equalTo(kSize(80, height: 24))
+            make.left.equalTo(seeDetail.superview!).offset(kScale(97))
+            make.bottom.lessThanOrEqualTo(seeDetail.superview!).offset(kScale(-20))
+        }
+        
+        share = UIButton()
+        share.layer.cornerRadius = kScale(24/2)
+        share.layer.borderColor = UIColor(hex: 0x666666).CGColor
+        share.layer.borderWidth = 1
+        share.setTitle("分享", forState: .Normal)
+        share.setTitleColor(UIColor(hex: 0x666666), forState: .Normal)
+        share.titleLabel?.font = UIFont.customFontOfSize(14)
+        contentView.addSubview(share)
+        share.snp.makeConstraints { (make) in
+            make.centerY.equalTo(seeDetail)
+            make.size.equalTo(seeDetail)
+            make.left.equalTo(seeDetail.snp.right).offset(kScale(20))
+        }
         
         talentLabel.text = "时装模特"
         moneyDayLabel.text = "1000/天"
@@ -128,6 +162,7 @@ class TalentTableViewCell: UITableViewCell {
     func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) {
         collectionView.delegate = delegate
         collectionView.dataSource = delegate
+        collectionView.tag = indexPath.section
         collectionView.reloadData()
     }
     

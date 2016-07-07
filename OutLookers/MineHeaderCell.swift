@@ -41,8 +41,8 @@ class MineHeaderCell: UITableViewCell {
     func setupSubViews() {
         // 头像部分
         header = IconHeaderView()
-        header.clipsToBounds = true
-        header.layer.cornerRadius = kScale(59/2)
+//        header.clipsToBounds = true
+        header.customCornerRadius = kScale(59/2)
         contentView.addSubview(header)
         
         name = UILabel()

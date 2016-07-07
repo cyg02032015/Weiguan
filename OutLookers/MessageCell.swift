@@ -19,7 +19,7 @@ class MessageCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        let imgView = UIImageView(image: UIImage(named: "upload"))
+        let imgView = UIImageView(image: UIImage(named: "news"))
         contentView.addSubview(imgView)
         
         imgView.snp.makeConstraints { (make) in
@@ -38,7 +38,7 @@ class MessageCell: UITableViewCell {
             make.centerY.equalTo(imgView)
         }
         
-        let arrow = UIImageView(image: UIImage(named: "mine_arrow_icon"))
+        let arrow = UIImageView(image: UIImage(named: "open"))
         contentView.addSubview(arrow)
         
         arrow.snp.makeConstraints { (make) in
