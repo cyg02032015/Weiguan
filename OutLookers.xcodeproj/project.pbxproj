@@ -65,6 +65,9 @@
 		D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E071D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m */; };
 		D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */; };
 		D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E0F1D2D320900A24CDB /* TalentTableViewCell.swift */; };
+		D82F8E121D2E9CC100A24CDB /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E111D2E9CC100A24CDB /* DataViewController.swift */; };
+		D82F8E141D2E9D0000A24CDB /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E131D2E9D0000A24CDB /* DataTableViewCell.swift */; };
+		D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E151D2EA48900A24CDB /* DataSecondCell.swift */; };
 		D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */; };
 		D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087791D278B72009CFE03 /* UIButton+Badge.m */; };
 		D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877C1D27A60A009CFE03 /* FindViewController.swift */; };
@@ -236,6 +239,9 @@
 		D82F8E071D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ty_swizzle.m"; sourceTree = "<group>"; };
 		D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentViewController.swift; path = OutLookers/TalentViewController.swift; sourceTree = SOURCE_ROOT; };
 		D82F8E0F1D2D320900A24CDB /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentTableViewCell.swift; path = OutLookers/TalentTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D82F8E111D2E9CC100A24CDB /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataViewController.swift; path = OutLookers/DataViewController.swift; sourceTree = SOURCE_ROOT; };
+		D82F8E131D2E9D0000A24CDB /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataTableViewCell.swift; path = OutLookers/DataTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D82F8E151D2EA48900A24CDB /* DataSecondCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSecondCell.swift; path = OutLookers/DataSecondCell.swift; sourceTree = SOURCE_ROOT; };
 		D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		D83087781D278B72009CFE03 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
@@ -383,6 +389,7 @@
 				D82F8DF71D2AABE000A24CDB /* PHViewController.swift */,
 				D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */,
 				E446FA121D2E26A6003DFC1E /* DynamicViewController.swift */,
+				D82F8E111D2E9CC100A24CDB /* DataViewController.swift */,
 				E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */,
 			);
 			name = Controller;
@@ -819,6 +826,8 @@
 				E446FA101D2E10E1003DFC1E /* TalentWorksCollectionCell.swift */,
 				E446FA161D2E311B003DFC1E /* DynamicCell.swift */,
 				E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */,
+				D82F8E131D2E9D0000A24CDB /* DataTableViewCell.swift */,
+				D82F8E151D2EA48900A24CDB /* DataSecondCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1227,6 +1236,8 @@
 				D82F8DCD1D27CB6400A24CDB /* UIView+SDExtension.m in Sources */,
 				D8AA100E1D1DA0220038EE73 /* UIView+Layout.m in Sources */,
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
+				D82F8E141D2E9D0000A24CDB /* DataTableViewCell.swift in Sources */,
+				D82F8E121D2E9CC100A24CDB /* DataViewController.swift in Sources */,
 				D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */,
@@ -1249,6 +1260,7 @@
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
 				D87049441D2152A7008FB780 /* VideoTool.swift in Sources */,
+				D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
 				D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */,
 				E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */,

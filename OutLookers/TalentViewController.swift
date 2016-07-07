@@ -68,14 +68,20 @@ extension TalentViewController {
         return 1
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        if delegate != nil && scrollView.isKindOfClass(UITableView.self) {
+            delegate.customScrollViewDidEndDecelerating(true)
+        }
+    }
+    
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate && delegate != nil{
+        if !decelerate && delegate != nil && scrollView.isKindOfClass(UITableView.self) {
             delegate.customScrollViewDidEndDecelerating(false)
         }
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        if delegate != nil {
+        if delegate != nil && scrollView.isKindOfClass(UITableView.self) {
             delegate.customScrollViewDidEndDecelerating(false)
         }
     }

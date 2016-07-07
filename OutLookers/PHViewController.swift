@@ -12,6 +12,7 @@ class PHViewController: YGBaseViewController {
 
     var slidePageScrollView: TYSlidePageScrollView!
     var tableView: UITableView!
+    var toolView: PHToolView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +40,32 @@ class PHViewController: YGBaseViewController {
         titlePageTabbar.backgroundColor = UIColor(hex: 0xf8f8f8)
         slidePageScrollView.pageTabBar = titlePageTabbar
         
+        
+        let dataVC = DataViewController()
+        dataVC.view.frame = view.frame
+        self.addChildViewController(dataVC)
+        
+        let dynamicVC = DynamicViewController()
+        dynamicVC.view.frame = view.frame
+        self.addChildViewController(dynamicVC)
+        
         let talentVC = TalentViewController()
         talentVC.view.frame = view.frame
         talentVC.delegate = self
         self.addChildViewController(talentVC)
         
-        let dynamicVC = DynamicViewController()
-        dynamicVC.view.frame = view.frame
-        self.addChildViewController(dynamicVC)
-        let vc3 = TalentViewController()
-        vc3.view.frame = view.frame
-        self.addChildViewController(vc3)
-        
         slidePageScrollView.reloadData()
+        
+        toolView = PHToolView()
+        toolView.layer.cornerRadius = kScale(40/2)
+        toolView.clipsToBounds = true
+        view.addSubview(toolView)
+        toolView.snp.makeConstraints { (make) in
+            make.left.equalTo(toolView.superview!).offset(kScale(37))
+            make.right.equalTo(toolView.superview!).offset(kScale(-37))
+            make.height.equalTo(kScale(40))
+            make.bottom.equalTo(toolView.superview!).offset(kScale(-15))
+        }
     }
 }
 
@@ -72,7 +86,7 @@ extension PHViewController: TYSlidePageScrollViewDataSource, TYSlidePageScrollVi
     
     func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, pageVerticalScrollViewForIndex index: Int) -> UIScrollView! {
         if index == 0 {
-            let tableViewVC = childViewControllers[index] as! TalentViewController
+            let tableViewVC = childViewControllers[index] as! DataViewController
             return tableViewVC.tableView
         } else if index == 1 {
             let tableViewVC = childViewControllers[index] as! DynamicViewController
