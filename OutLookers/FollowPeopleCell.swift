@@ -35,7 +35,7 @@ class FollowPeopleCell: UITableViewCell {
         
         followContainer = UIView()
         followContainer.layer.cornerRadius = kScale(24/2)
-        followContainer.layer.borderColor = kRedColor.CGColor
+        followContainer.layer.borderColor = kCommonColor.CGColor
         followContainer.layer.borderWidth = 1
         contentView.addSubview(followContainer)
         
@@ -44,7 +44,7 @@ class FollowPeopleCell: UITableViewCell {
         
         followLabel = UILabel()
         followLabel.font = UIFont.customFontOfSize(12)
-        followLabel.textColor = kRedColor
+        followLabel.textColor = kCommonColor
         followContainer.addSubview(followLabel)
         
         nameLabel.text = "我的关注"

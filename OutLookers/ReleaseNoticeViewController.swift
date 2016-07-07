@@ -93,9 +93,9 @@ class ReleaseNoticeViewController: YGBaseViewController {
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
-extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSource {
+extension ReleaseNoticeViewController {
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
             cell.delegate = self
@@ -174,7 +174,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0, 1: return 1
         case 2: return 2
@@ -185,7 +185,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 7
     }
     
@@ -201,7 +201,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 6 {
             return 0
         }
@@ -214,7 +214,7 @@ extension ReleaseNoticeViewController: UITableViewDelegate, UITableViewDataSourc
         return view
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
 }

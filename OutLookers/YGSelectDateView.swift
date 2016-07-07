@@ -45,10 +45,10 @@ class YGSelectDateView: UIView {
         
         let cancel = UIButton()
         cancel.setTitle("取消", forState: .Normal)
-        cancel.setTitleColor(kRedColor, forState: .Normal)
+        cancel.setTitleColor(kCommonColor, forState: .Normal)
         cancel.titleLabel?.font = UIFont.customFontOfSize(16)
         cancel.layer.cornerRadius = 5
-        cancel.layer.borderColor = kRedColor.CGColor
+        cancel.layer.borderColor = kCommonColor.CGColor
         cancel.layer.borderWidth = 1
         cancel.addTarget(self, action: .tapCancel, forControlEvents: .TouchUpInside)
         topContainer.addSubview(cancel)
@@ -57,7 +57,7 @@ class YGSelectDateView: UIView {
         sure.setTitle("确定", forState: .Normal)
         sure.titleLabel?.font = UIFont.customFontOfSize(16)
         sure.layer.cornerRadius = 5
-        sure.backgroundColor = kRedColor
+        sure.backgroundColor = kCommonColor
         sure.addTarget(self, action: .tapSure, forControlEvents: .TouchUpInside)
         topContainer.addSubview(sure)
         

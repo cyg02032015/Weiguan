@@ -90,7 +90,7 @@ extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SkillCell
-        cell.skill.backgroundColor = kRedColor
+        cell.skill.backgroundColor = kCommonColor
         if type == SelectSkillType.Back {
             if tapItem != nil {
                 guard let t = cell.skill.titleLabel?.text else { fatalError("text nil") }

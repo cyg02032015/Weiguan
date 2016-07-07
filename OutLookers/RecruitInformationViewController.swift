@@ -69,12 +69,13 @@ class RecruitInformationViewController: YGBaseViewController {
     }
 }
 
-extension RecruitInformationViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension RecruitInformationViewController {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(arrowIdentifier, forIndexPath: indexPath) as! ArrowEditCell
             cell.setTextInCell("才艺类型", placeholder: "点击选择类型")

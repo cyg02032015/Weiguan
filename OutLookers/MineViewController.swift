@@ -40,11 +40,12 @@ class MineViewController: YGBaseViewController {
     }
 }
 
-extension MineViewController: UITableViewDelegate,UITableViewDataSource {
+// MARK: - UITableViewDelegate,UITableViewDataSource
+extension MineViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(mineHeaderidentifier, forIndexPath: indexPath) as! MineHeaderCell
             cell.header.iconHeaderTap {
@@ -73,11 +74,11 @@ extension MineViewController: UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
@@ -90,7 +91,7 @@ extension MineViewController: UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10
     }
     

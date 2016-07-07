@@ -10,6 +10,6 @@ import UIKit
 
 // 按钮状态颜色
 let kGrayColor = UIColor(hex: 0x999999)
-let kRedColor = UIColor(hex: 0xF7595B)
+let kCommonColor = UIColor(hex: 0x64B8FF)
 let kLineColor = UIColor(hex: 0xE4E4E4)
 let kBackgoundColor = UIColor(hex: 0xF2F2F2)

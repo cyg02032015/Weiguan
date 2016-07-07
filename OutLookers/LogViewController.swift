@@ -51,7 +51,7 @@ class LogViewController: YGBaseViewController {
         everthingValid.subscribe { [weak self](event) in
             guard let weakSelf = self else { return }
             if let _ = event.element where event.element == true {
-                weakSelf.submitButton.backgroundColor = kRedColor
+                weakSelf.submitButton.backgroundColor = kCommonColor
             } else {
                 weakSelf.submitButton.backgroundColor = kGrayColor
             }
@@ -82,7 +82,7 @@ class LogViewController: YGBaseViewController {
         verifyButton.setTitle("获取验证码", forState: .Normal)
         verifyButton.titleLabel?.font = UIFont.customFontOfSize(13)
         verifyButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        verifyButton.backgroundColor = kRedColor
+        verifyButton.backgroundColor = kCommonColor
         verifyButton.addTarget(self, action: .tapVerify, forControlEvents: .TouchUpInside)
         mobileContainer.addSubview(verifyButton)
         
@@ -251,7 +251,7 @@ extension LogViewController {
             timer.invalidate()
             verifyButton.userInteractionEnabled = true
             verifyButton.setTitle("获取验证码", forState: .Normal)
-            verifyButton.backgroundColor = kRedColor
+            verifyButton.backgroundColor = kCommonColor
         } else {
             verifyButton.setTitle("\(countDown)s", forState: .Normal)
             verifyButton.backgroundColor = kGrayColor

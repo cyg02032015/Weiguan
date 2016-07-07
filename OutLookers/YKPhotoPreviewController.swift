@@ -100,7 +100,7 @@ class YKPhotoPreviewController: YGBaseViewController {
     }
 }
 
-extension YKPhotoPreviewController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
+extension YKPhotoPreviewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }

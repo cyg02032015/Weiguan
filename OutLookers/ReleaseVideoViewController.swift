@@ -55,12 +55,13 @@ class ReleaseVideoViewController: YGBaseViewController {
     
 }
 
-extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension ReleaseVideoViewController {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 2
         case 1: return 1
@@ -70,7 +71,7 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(videoCoverIdentifier, forIndexPath: indexPath) as! VideoCoverCell
@@ -100,7 +101,7 @@ extension ReleaseVideoViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 2 {
             return 0
         } else {

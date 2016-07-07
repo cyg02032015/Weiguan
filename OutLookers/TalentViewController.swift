@@ -23,10 +23,10 @@ class TalentViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         LogWarn("viewdidload")
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: talentCellIdentifier)
+        tableView.registerClass(TalentTableViewCell.self, forCellReuseIdentifier: talentCellIdentifier)
         tableView.separatorStyle = .None
         tableView.showsVerticalScrollIndicator = false
         tableView.tableFooterView = UIView()
@@ -34,25 +34,27 @@ class TalentViewController: YGBaseViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
         }
-        
-        delay(5) {
-            self.data = ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
-            self.tableView.reloadData()
-        }
     }
 }
 
-extension TalentViewController: UITableViewDelegate,UITableViewDataSource {
+extension TalentViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(talentCellIdentifier, forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = "\(indexPath.row)"
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(talentCellIdentifier, forIndexPath: indexPath) as! TalentTableViewCell
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return kHeight(602)
     }
 }

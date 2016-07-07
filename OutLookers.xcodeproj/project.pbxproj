@@ -64,6 +64,7 @@
 		D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E051D2C0D9400A24CDB /* TYTitlePageTabBar.m */; };
 		D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E071D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m */; };
 		D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */; };
+		D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E0F1D2D320900A24CDB /* TalentTableViewCell.swift */; };
 		D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */; };
 		D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087791D278B72009CFE03 /* UIButton+Badge.m */; };
 		D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877C1D27A60A009CFE03 /* FindViewController.swift */; };
@@ -228,6 +229,7 @@
 		D82F8E061D2C0D9400A24CDB /* UIScrollView+ty_swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ty_swizzle.h"; sourceTree = "<group>"; };
 		D82F8E071D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ty_swizzle.m"; sourceTree = "<group>"; };
 		D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentViewController.swift; path = OutLookers/TalentViewController.swift; sourceTree = SOURCE_ROOT; };
+		D82F8E0F1D2D320900A24CDB /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentTableViewCell.swift; path = OutLookers/TalentTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		D83087781D278B72009CFE03 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
@@ -798,6 +800,7 @@
 				D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */,
 				D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */,
 				D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */,
+				D82F8E0F1D2D320900A24CDB /* TalentTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1262,6 +1265,7 @@
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
+				D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */,
 				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
 				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,
 				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,

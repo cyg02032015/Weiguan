@@ -56,12 +56,12 @@ class ReleasePictureViewController: YGBaseViewController {
 
 }
 
-extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+extension ReleasePictureViewController {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 2
         case 1: return 1
@@ -71,7 +71,7 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(pictureSelectIdentifier, forIndexPath: indexPath) as! PictureSelectCell
@@ -101,7 +101,7 @@ extension ReleasePictureViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 2 {
             return 0
         } else {
@@ -179,7 +179,7 @@ extension ReleasePictureViewController: UIActionSheetDelegate {
 extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, TZImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        _ = info["UIImagePickerControllerOriginalImage"] as! UIImage
         picker.dismissViewControllerAnimated(true) {}
     }
         

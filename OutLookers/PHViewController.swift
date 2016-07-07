@@ -20,8 +20,7 @@ class PHViewController: YGBaseViewController {
     
     func setupSubViews() {
         self.title = "小包子"
-        
-        slidePageScrollView = TYSlidePageScrollView(frame: self.view.bounds)
+        slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight)))
         slidePageScrollView.pageTabBarIsStopOnTop = true
         slidePageScrollView.pageTabBarStopOnTopHeight = 0
         slidePageScrollView.parallaxHeaderEffect = false
@@ -41,14 +40,14 @@ class PHViewController: YGBaseViewController {
         slidePageScrollView.pageTabBar = titlePageTabbar
         
         let vc1 = TalentViewController()
-        vc1.view.frame = self.view.frame
+        vc1.view.frame = view.frame
         self.addChildViewController(vc1)
         
         let vc2 = TalentViewController()
-        vc2.view.frame = self.view.frame
+        vc2.view.frame = view.frame
         self.addChildViewController(vc2)
         let vc3 = TalentViewController()
-        vc3.view.frame = self.view.frame
+        vc3.view.frame = view.frame
         self.addChildViewController(vc3)
         
         slidePageScrollView.reloadData()
@@ -61,7 +60,7 @@ extension PHViewController: TYSlidePageScrollViewDataSource, TYSlidePageScrollVi
     }
     
     func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, pageVerticalScrollViewForIndex index: Int) -> UIScrollView! {
-        let tableViewVC = self.childViewControllers[index] as! TalentViewController
+        let tableViewVC = childViewControllers[index] as! TalentViewController
         return tableViewVC.tableView
     }
 }

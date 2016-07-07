@@ -73,15 +73,15 @@ extension HomeViewController: SDCycleScrollViewDelegate {
 }
 
 // MARK: - UITableViewDelegate,UITableViewDataSource
-extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+extension HomeViewController {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(recommendHotmanTableViewCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanTableViewCell
             cell.collectionViewSetDelegate(self, indexPath: indexPath)
@@ -91,7 +91,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
@@ -99,7 +99,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         return kHeight(213)
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let header = RecommendHeaderView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(43))))
             return header
@@ -110,16 +110,12 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return kHeight(43)
         } else {
             return kHeight(10)
         }
-    }
-    
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
     }
 }
 

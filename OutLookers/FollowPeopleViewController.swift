@@ -32,11 +32,12 @@ class FollowPeopleViewController: YGBaseViewController {
     }
 }
 
-extension FollowPeopleViewController: UITableViewDelegate,UITableViewDataSource {
+// MARK: - UITableViewDelegate,UITableViewDataSource
+extension FollowPeopleViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(followCellIdentifier, forIndexPath: indexPath) as! FollowPeopleCell
         cell.header.iconHeaderTap { 
             LogInfo("tap header")
@@ -44,7 +45,7 @@ extension FollowPeopleViewController: UITableViewDelegate,UITableViewDataSource 
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
