@@ -132,7 +132,8 @@ class TalentTableViewCell: UITableViewCell {
         seeDetail.snp.makeConstraints { (make) in
             make.top.equalTo(collectionView.snp.bottom).offset(kScale(20))
             make.size.equalTo(kSize(80, height: 24))
-            make.left.equalTo(seeDetail.superview!).offset(kScale(97))
+//            make.left.equalTo(seeDetail.superview!).offset(kScale(97))
+            make.centerX.equalTo(seeDetail.superview!).offset(kScale(-50))
             make.bottom.lessThanOrEqualTo(seeDetail.superview!).offset(kScale(-20))
         }
         

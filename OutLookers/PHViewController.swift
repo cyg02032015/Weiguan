@@ -36,7 +36,7 @@ class PHViewController: YGBaseViewController {
         
         let titlePageTabbar = TYTitlePageTabBar(titleArray: ["资料", "动态", "才艺"])
         titlePageTabbar.frame = CGRect(origin: CGPointZero, size: CGSize(width: CGRectGetWidth(slidePageScrollView.frame), height: 46))
-        titlePageTabbar.edgeInset = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 100)
+        titlePageTabbar.edgeInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 80)
         titlePageTabbar.backgroundColor = UIColor(hex: 0xf8f8f8)
         slidePageScrollView.pageTabBar = titlePageTabbar
         
