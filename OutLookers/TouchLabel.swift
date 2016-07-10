@@ -30,3 +30,20 @@ public class TouchLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
+class ViewFactory
+    
+{
+    
+    class func createButton(title:String, action:Selector, sender:UIViewController)->UIButton
+        
+    {
+        
+        let button = UIButton()
+        button.setTitle(title, forState:.Normal)
+        button.titleLabel!.font = UIFont.customFontOfSize(14)
+        return button
+        
+    }
+}

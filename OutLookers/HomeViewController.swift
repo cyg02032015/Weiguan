@@ -139,8 +139,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let phvc = PHViewController()
-        self.navigationController?.pushViewController(phvc, animated: true)
+        if indexPath.item == 0 {
+            let phvc = PHViewController()
+            self.navigationController?.pushViewController(phvc, animated: true)
+        } else if indexPath.item == 1 {
+            let vc = OrganizationViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 

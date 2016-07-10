@@ -143,7 +143,8 @@ class DataTableViewCell: UITableViewCell {
         lineV1.backgroundColor = kLineColor
         contentView.addSubview(lineV1)
         lineV1.snp.makeConstraints { (make) in
-            make.top.left.equalTo(lineV1.superview!).offset(kScale(15))
+            make.top.equalTo(waistlineLabel.snp.bottom).offset(kScale(15))
+            make.left.equalTo(lineV1.superview!).offset(kScale(15))
             make.right.equalTo(lineV1.superview!).offset(kScale(-15))
             make.height.equalTo(1)
         }
@@ -176,6 +177,33 @@ class DataTableViewCell: UITableViewCell {
         }
         
         
+        // 第三行
+        let lineImgView3 = UIImageView(image: UIImage(named: "home_lead"))
+        contentView.addSubview(lineImgView3)
+        lineImgView3.snp.makeConstraints { (make) in
+            make.top.equalTo(lineV1.snp.bottom).offset(kScale(15))
+            make.left.equalTo(lineImgView1)
+            make.size.equalTo(kSize(4, height: 15))
+        }
+        
+        // 通告经验
+        let experenceLabel = UILabel()
+        experenceLabel.font = UIFont.customFontOfSize(16)
+        contentView.addSubview(experenceLabel)
+        experenceLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(lineImgView3)
+            make.left.equalTo(lineImgView3.snp.right).offset(kScale(5))
+            make.height.equalTo(kScale(16))
+        }
+        
+        let editBtn3 = UIButton()
+        editBtn3.setImage(UIImage(named: "Fill"), forState: .Normal)
+        contentView.addSubview(editBtn3)
+        editBtn3.snp.makeConstraints { (make) in
+            make.centerY.equalTo(experenceLabel)
+            make.right.equalTo(editBtn3.superview!).offset(kScale(-15))
+            make.size.equalTo(kSize(15, height: 17))
+        }
         
         basicDataLabel.text = "基本资料"
         sexLabel.text = "性别：女"
@@ -189,6 +217,8 @@ class DataTableViewCell: UITableViewCell {
         constellatoryLabel.text = "星座：天蝎座"
         
         featureLabel.text = "个人特征"
+        
+//        experenceLabel.text = "通告经验"
     }
     
     required init?(coder aDecoder: NSCoder) {
