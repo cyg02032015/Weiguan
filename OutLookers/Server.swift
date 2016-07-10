@@ -21,7 +21,7 @@ class Server {
             "endTime" : request.endTime,
             "register" : request.register,
             "city" : request.city,
-            "adds" : request.adds,
+            "adds" : request.adds ?? "",
             "details" : request.details,
             "picture" : request.picture
         ]
