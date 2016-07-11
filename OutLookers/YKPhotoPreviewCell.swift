@@ -116,7 +116,7 @@ extension YKPhotoPreviewCell: UIScrollViewDelegate {
         self.imageContainer.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX, y: scrollView.contentSize.height * 0.5 + offsetY)
     }
 }
-//
+
 extension YKPhotoPreviewCell {
     
     func singleTapGesture(recognizer: UITapGestureRecognizer) {
