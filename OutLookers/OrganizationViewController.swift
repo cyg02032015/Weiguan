@@ -12,6 +12,7 @@ import UIKit
 class OrganizationViewController: YGBaseViewController {
 
     var slidePageScrollView: TYSlidePageScrollView!
+    var toolView: OGToolView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
@@ -54,17 +55,16 @@ class OrganizationViewController: YGBaseViewController {
         
         slidePageScrollView.reloadData()
         
-        //        toolView = PHToolView()
-        //        toolView.layer.cornerRadius = kScale(40/2)
-        //        toolView.clipsToBounds = true
-        //        view.addSubview(toolView)
-        //        toolView.snp.makeConstraints { (make) in
-        //            make.left.equalTo(toolView.superview!).offset(kScale(37))
-        //            make.right.equalTo(toolView.superview!).offset(kScale(-37))
-        //            make.height.equalTo(kScale(40))
-        //            make.bottom.equalTo(toolView.superview!).offset(kScale(-15))
-        //        }
-
+        toolView = OGToolView()
+        toolView.layer.cornerRadius = kScale(40/2)
+        toolView.clipsToBounds = true
+        view.addSubview(toolView)
+        toolView.snp.makeConstraints { (make) in
+            make.left.equalTo(toolView.superview!).offset(kScale(37))
+            make.right.equalTo(toolView.superview!).offset(kScale(-37))
+            make.height.equalTo(kScale(40))
+            make.bottom.equalTo(toolView.superview!).offset(kScale(-15))
+        }
     }
 }
 

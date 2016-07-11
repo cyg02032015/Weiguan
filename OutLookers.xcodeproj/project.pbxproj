@@ -129,6 +129,7 @@
 		E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA161D2E311B003DFC1E /* DynamicCell.swift */; };
 		E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */; };
 		E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */; };
+		E4473EB31D337BF5000CEEF2 /* OGToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EB21D337BF5000CEEF2 /* OGToolView.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -330,6 +331,7 @@
 		E446FA161D2E311B003DFC1E /* DynamicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicCell.swift; path = OutLookers/DynamicCell.swift; sourceTree = SOURCE_ROOT; };
 		E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollVerticalDelegate.swift; path = OutLookers/ScrollVerticalDelegate.swift; sourceTree = SOURCE_ROOT; };
 		E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHToolView.swift; path = OutLookers/PHToolView.swift; sourceTree = SOURCE_ROOT; };
+		E4473EB21D337BF5000CEEF2 /* OGToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OGToolView.swift; path = OutLookers/OGToolView.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -860,6 +862,7 @@
 				D82F8DF11D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift */,
 				D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */,
 				E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */,
+				E4473EB21D337BF5000CEEF2 /* OGToolView.swift */,
 				D82F8E1D1D30EFB100A24CDB /* OGDataTableViewCell.swift */,
 				D82F8E211D30F4F600A24CDB /* OGCircularCell.swift */,
 			);
@@ -1278,6 +1281,7 @@
 				D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */,
 				D82F8DCC1D27CB6400A24CDB /* SDCycleScrollView.m in Sources */,
 				D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */,
+				E4473EB31D337BF5000CEEF2 /* OGToolView.swift in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,

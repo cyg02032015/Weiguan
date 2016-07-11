@@ -19,6 +19,11 @@ class DataTableViewCell: UITableViewCell {
     var waistlineLabel: UILabel!    // 腰围
     var hiplineLabel: UILabel!      // 臀围
     var constellatoryLabel: UILabel!// 星座
+    var style: UILabel!             // 风格
+    var appearance: UILabel!        // 外貌
+    var shape: UILabel!             // 体型
+    var charm: UILabel!             // 魅力
+    var experence: UILabel!         // 通告经验
     
     let basicFont: CGFloat = 14
     
@@ -176,12 +181,57 @@ class DataTableViewCell: UITableViewCell {
             make.size.equalTo(kSize(15, height: 17))
         }
         
+        style = UILabel.createLabel(14)
+        contentView.addSubview(style)
+        style.snp.makeConstraints { (make) in
+            make.left.equalTo(lineImgView2)
+            make.top.equalTo(featureLabel.snp.bottom).offset(kScale(10))
+            make.height.equalTo(kScale(16))
+            make.right.equalTo(style.superview!).offset(kScale(-15))
+        }
+        
+        appearance = UILabel.createLabel(14)
+        contentView.addSubview(appearance)
+        appearance.snp.makeConstraints { (make) in
+            make.left.equalTo(style)
+            make.top.equalTo(style.snp.bottom).offset(kScale(6))
+            make.height.equalTo(style)
+            make.right.equalTo(style)
+        }
+        
+        shape = UILabel.createLabel(14)
+        contentView.addSubview(shape)
+        shape.snp.makeConstraints { (make) in
+            make.left.equalTo(appearance)
+            make.top.equalTo(appearance.snp.bottom).offset(kScale(6))
+            make.height.equalTo(appearance)
+            make.right.equalTo(appearance)
+        }
+        
+        charm = UILabel.createLabel(14)
+        contentView.addSubview(charm)
+        charm.snp.makeConstraints { (make) in
+            make.left.equalTo(shape)
+            make.top.equalTo(shape.snp.bottom).offset(kScale(6))
+            make.height.equalTo(shape)
+            make.right.equalTo(shape)
+        }
+        
+        let lineV2 = UIView()
+        lineV2.backgroundColor = kLineColor
+        contentView.addSubview(lineV2)
+        lineV2.snp.makeConstraints { (make) in
+            make.top.equalTo(charm.snp.bottom).offset(kScale(15))
+            make.left.equalTo(lineV2.superview!).offset(kScale(15))
+            make.right.equalTo(lineV2.superview!).offset(kScale(-15))
+            make.height.equalTo(1)
+        }
         
         // 第三行
         let lineImgView3 = UIImageView(image: UIImage(named: "home_lead"))
         contentView.addSubview(lineImgView3)
         lineImgView3.snp.makeConstraints { (make) in
-            make.top.equalTo(lineV1.snp.bottom).offset(kScale(15))
+            make.top.equalTo(lineV2.snp.bottom).offset(kScale(15))
             make.left.equalTo(lineImgView1)
             make.size.equalTo(kSize(4, height: 15))
         }
@@ -205,6 +255,15 @@ class DataTableViewCell: UITableViewCell {
             make.size.equalTo(kSize(15, height: 17))
         }
         
+        experence = UILabel.createLabel(14)
+        contentView.addSubview(experence)
+        experence.snp.makeConstraints { (make) in
+            make.top.equalTo(experenceLabel.snp.bottom).offset(kScale(9))
+            make.left.equalTo(lineImgView3)
+            make.height.equalTo(kScale(14))
+            make.right.equalTo(experence.superview!).offset(kScale(-15))
+        }
+        
         basicDataLabel.text = "基本资料"
         sexLabel.text = "性别：女"
         ageLabel.text = "年龄：26"
@@ -217,8 +276,13 @@ class DataTableViewCell: UITableViewCell {
         constellatoryLabel.text = "星座：天蝎座"
         
         featureLabel.text = "个人特征"
+        style.text = "风格特征：欧美 日韩 街头 性感 中国风日韩 街头 性感 "
+        appearance.text = "外貌特征：短发 骨感 双眼皮短发 骨感 双眼皮短发 骨感"
+        shape.text = "体型特征：瘦短发 骨感 双眼皮短发 骨感 双眼皮短发短"
+        charm.text = "魅力部位：眼睛 腿部眼睛 腿部眼睛 腿部。"
+        experenceLabel.text = "通告经验"
+        experence.text = "曾任《男人装》御用模特。"
         
-//        experenceLabel.text = "通告经验"
     }
     
     required init?(coder aDecoder: NSCoder) {
