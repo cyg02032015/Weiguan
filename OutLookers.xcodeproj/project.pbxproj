@@ -74,6 +74,8 @@
 		D82F8E201D30F4E200A24CDB /* OGCircularViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E1F1D30F4E200A24CDB /* OGCircularViewController.swift */; };
 		D82F8E221D30F4F600A24CDB /* OGCircularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E211D30F4F600A24CDB /* OGCircularCell.swift */; };
 		D82F8E241D31070400A24CDB /* UILabel+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E231D31070400A24CDB /* UILabel+EX.swift */; };
+		D82F8E281D33E47300A24CDB /* ReleaseNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E271D33E47300A24CDB /* ReleaseNoticeCell.swift */; };
+		D82F8E2A1D33E83D00A24CDB /* ReleaseTalentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8E291D33E83D00A24CDB /* ReleaseTalentCell.swift */; };
 		D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */; };
 		D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D83087791D278B72009CFE03 /* UIButton+Badge.m */; };
 		D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877C1D27A60A009CFE03 /* FindViewController.swift */; };
@@ -255,6 +257,8 @@
 		D82F8E1F1D30F4E200A24CDB /* OGCircularViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OGCircularViewController.swift; path = OutLookers/OGCircularViewController.swift; sourceTree = SOURCE_ROOT; };
 		D82F8E211D30F4F600A24CDB /* OGCircularCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OGCircularCell.swift; path = OutLookers/OGCircularCell.swift; sourceTree = SOURCE_ROOT; };
 		D82F8E231D31070400A24CDB /* UILabel+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UILabel+EX.swift"; path = "OutLookers/UILabel+EX.swift"; sourceTree = SOURCE_ROOT; };
+		D82F8E271D33E47300A24CDB /* ReleaseNoticeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseNoticeCell.swift; path = OutLookers/ReleaseNoticeCell.swift; sourceTree = SOURCE_ROOT; };
+		D82F8E291D33E83D00A24CDB /* ReleaseTalentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseTalentCell.swift; path = OutLookers/ReleaseTalentCell.swift; sourceTree = SOURCE_ROOT; };
 		D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		D83087781D278B72009CFE03 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
@@ -507,6 +511,23 @@
 			name = Personal;
 			sourceTree = "<group>";
 		};
+		D82F8E251D33E35000A24CDB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D81F45251D118F50004D9192 /* FollowViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D82F8E261D33E35F00A24CDB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D82F8E271D33E47300A24CDB /* ReleaseNoticeCell.swift */,
+				D82F8E291D33E83D00A24CDB /* ReleaseTalentCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		D830877E1D27B3DA009CFE03 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,7 +733,8 @@
 		E41C6C5C1D113F350013031D /* Follow */ = {
 			isa = PBXGroup;
 			children = (
-				D81F45251D118F50004D9192 /* FollowViewController.swift */,
+				D82F8E261D33E35F00A24CDB /* View */,
+				D82F8E251D33E35000A24CDB /* Controller */,
 			);
 			name = Follow;
 			path = Fllow;
@@ -1252,6 +1274,7 @@
 				D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */,
 				E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */,
 				D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */,
+				D82F8E2A1D33E83D00A24CDB /* ReleaseTalentCell.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
@@ -1266,6 +1289,7 @@
 				D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */,
 				D83087801D27B400009CFE03 /* MessageCell.swift in Sources */,
 				D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */,
+				D82F8E281D33E47300A24CDB /* ReleaseNoticeCell.swift in Sources */,
 				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
 				D83087821D27B805009CFE03 /* MineCollectCell.swift in Sources */,
 				D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */,

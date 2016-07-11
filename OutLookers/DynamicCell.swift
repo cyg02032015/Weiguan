@@ -15,6 +15,7 @@ class DynamicCell: UITableViewCell {
     var timeLabel: UILabel!
     var bigImgView: UIImageView!
     var details: UILabel!
+    var releaseLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,7 +40,15 @@ class DynamicCell: UITableViewCell {
             make.top.equalTo(nameLabel.superview!).offset(kScale(15))
             make.left.equalTo(headImgView.snp.right).offset(kScale(10))
             make.height.equalTo(kScale(16))
-            make.right.equalTo(nameLabel.superview!).offset(kScale(-15))
+        }
+        
+        releaseLabel = UILabel.createLabel(14, textColor: UIColor(hex: 0xc0c0c0))
+        contentView.addSubview(releaseLabel)
+        releaseLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(releaseLabel.superview!).offset(kScale(22))
+            make.left.equalTo(nameLabel.snp.right).offset(kScale(20))
+            make.height.equalTo(14)
+            make.right.lessThanOrEqualTo(releaseLabel.superview!).offset(kScale(-15))
         }
         
         let timeImgView = UIImageView(image: UIImage(named: ""))
@@ -190,7 +199,7 @@ class DynamicCell: UITableViewCell {
         timeLabel.text = "15:02"
         headImgView.backgroundColor = UIColor.redColor()
         bigImgView.backgroundColor = UIColor.grayColor()
-        details.text = "asdfaslfkasjdfsalfkhasglsakghaskgjahgwoeiurtqwporiewyuotpqiwytqwoptiyq"
+        details.text = "asdfaslfkasjdfsalfkhasglsakghaskgdfsalfkhasglsakghaskgdfsalfkhasglsakghaskgjahgwoeiurtqwporiewyuotpqiwytqwoptiyq"
         
     }
     
