@@ -35,29 +35,4 @@ public class YGPhotoKitController: UIViewController {
         super.viewDidLoad()
         
     }
-    /*
-     - (void)viewDidLoad {
-     [super viewDidLoad];
-     [self.viewOverlay setHollowWithCenterFrame:self.rectClip];
-     [self.view setBackgroundColor:[UIColor blackColor]];
-     [self.view addSubview:self.imageView];
-     [self.view addSubview:self.viewOverlay];
-     [self.view addSubview:self.buttonCancel];
-     [self.view addSubview:self.buttonConfirm];
-     [self.view addSubview:self.buttonBack];
-     [self addGestureRecognizerToView:self.view];
-     }
-
-     */
-    
-//    func cancel(sender: UIButton)  {
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
-//    
-//    func confirm(sender: UIButton) {
-//        delegate.photoKitController(self, resultImage: self.getResultImage)
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
-    
-    
 }

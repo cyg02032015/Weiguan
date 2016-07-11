@@ -40,7 +40,6 @@ class YGPickerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupSubViews()
     }
     
     func setupSubViews(delegate: protocol<UIPickerViewDataSource, UIPickerViewDelegate>) {
@@ -93,7 +92,7 @@ class YGPickerView: UIView {
         container.snp.makeConstraints { (make) in
             make.left.right.equalTo(container.superview!)
             make.height.equalTo(kSelectDateHeight)
-            make.bottom.equalTo(container.superview!).offset(kSelectDateHeight).priorityLow()
+           make.bottom.equalTo(container.superview!).offset(kSelectDateHeight).priorityLow()
         }
         
         topContainer.snp.makeConstraints { (make) in
