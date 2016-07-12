@@ -51,7 +51,7 @@ class DynamicCell: UITableViewCell {
             make.right.lessThanOrEqualTo(releaseLabel.superview!).offset(kScale(-15))
         }
         
-        let timeImgView = UIImageView(image: UIImage(named: ""))
+        let timeImgView = UIImageView(image: UIImage(named: "time"))
         contentView.addSubview(timeImgView)
         timeImgView.snp.makeConstraints { (make) in
             make.top.equalTo(nameLabel.snp.bottom).offset(kScale(4))
@@ -113,7 +113,7 @@ class DynamicCell: UITableViewCell {
         toolContainer.addSubview(praiseTAContainer)
         
         let praiseBtn = UIButton()
-        praiseBtn.setImage(UIImage(named: "home_lead"), forState: .Normal)
+        praiseBtn.setImage(UIImage(named: "like_normal"), forState: .Normal)
         praiseBtn.setTitle("赞TA", forState: .Normal)
         praiseBtn.titleLabel?.font = UIFont.customFontOfSize(22)
         praiseBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -145,7 +145,7 @@ class DynamicCell: UITableViewCell {
         toolContainer.addSubview(commentContainer)
         
         let commentBtn = UIButton()
-        commentBtn.setImage(UIImage(named: "home_lead"), forState: .Normal)
+        commentBtn.setImage(UIImage(named: "dis"), forState: .Normal)
         commentBtn.setTitle("评论", forState: .Normal)
         commentBtn.titleLabel?.font = UIFont.customFontOfSize(22)
         commentBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -184,7 +184,7 @@ class DynamicCell: UITableViewCell {
         }
         
         let shareBtn = UIButton()
-        shareBtn.setImage(UIImage(named: "home_lead"), forState: .Normal)
+        shareBtn.setImage(UIImage(named: "share"), forState: .Normal)
         shareBtn.setTitle("评论", forState: .Normal)
         shareBtn.titleLabel?.font = UIFont.customFontOfSize(22)
         shareBtn.setTitleColor(kGrayColor, forState: .Normal)

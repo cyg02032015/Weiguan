@@ -52,7 +52,7 @@ class ReleaseTalentCell: UITableViewCell {
             make.right.lessThanOrEqualTo(releaseLabel.superview!).offset(kScale(-15))
         }
         
-        let timeImgView = UIImageView(image: UIImage(named: ""))
+        let timeImgView = UIImageView(image: UIImage(named: "time"))
         contentView.addSubview(timeImgView)
         timeImgView.snp.makeConstraints { (make) in
             make.top.equalTo(nameLabel.snp.bottom).offset(kScale(4))

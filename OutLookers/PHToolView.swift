@@ -37,7 +37,7 @@ class PHToolView: UIView {
         privateLatter.setTitle("私信", forState: .Normal)
         privateLatter.setTitleColor(kCommonColor, forState: .Normal)
         privateLatter.titleLabel?.font = UIFont.customFontOfSize(16)
-        privateLatter.setImage(UIImage(named: "private letter"), forState: .Normal)
+        privateLatter.setImage(UIImage(named: "chat"), forState: .Normal)
         privateLatter.backgroundColor = UIColor.whiteColor()
         addSubview(privateLatter)
         privateLatter.snp.makeConstraints { (make) in

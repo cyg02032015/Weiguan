@@ -44,7 +44,7 @@ class OGToolView: UIView {
         privateLatter = UIButton()
         privateLatter.setTitle("私信", forState: .Normal)
         privateLatter.titleLabel?.font = UIFont.customFontOfSize(16)
-        privateLatter.setImage(UIImage(named: "private letter"), forState: .Normal)
+        privateLatter.setImage(UIImage(named: "white"), forState: .Normal)
         privateLatter.backgroundColor = kCommonColor
         addSubview(privateLatter)
         privateLatter.snp.makeConstraints { (make) in
