@@ -97,6 +97,10 @@
 		D8AA100C1D1DA0220038EE73 /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA10001D1DA0220038EE73 /* TZPhotoPreviewController.m */; };
 		D8AA100D1D1DA0220038EE73 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA10021D1DA0220038EE73 /* TZVideoPlayerController.m */; };
 		D8AA100E1D1DA0220038EE73 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA10041D1DA0220038EE73 /* UIView+Layout.m */; };
+		D8B6413E1D354EFC00DF916D /* PHOrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6413D1D354EFC00DF916D /* PHOrderListViewController.swift */; };
+		D8B641401D354FBE00DF916D /* TaJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6413F1D354FBE00DF916D /* TaJoinViewController.swift */; };
+		D8B641421D35500400DF916D /* TaReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641411D35500400DF916D /* TaReleaseViewController.swift */; };
+		D8B641441D35535D00DF916D /* PHTaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641431D35535D00DF916D /* PHTaTableViewCell.swift */; };
 		D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */; };
 		D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */; };
 		D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */; };
@@ -291,6 +295,10 @@
 		D8AA10021D1DA0220038EE73 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
 		D8AA10031D1DA0220038EE73 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		D8AA10041D1DA0220038EE73 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		D8B6413D1D354EFC00DF916D /* PHOrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHOrderListViewController.swift; path = OutLookers/PHOrderListViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8B6413F1D354FBE00DF916D /* TaJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaJoinViewController.swift; path = OutLookers/TaJoinViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8B641411D35500400DF916D /* TaReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaReleaseViewController.swift; path = OutLookers/TaReleaseViewController.swift; sourceTree = SOURCE_ROOT; };
+		D8B641431D35535D00DF916D /* PHTaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHTaTableViewCell.swift; path = OutLookers/PHTaTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseVideoViewController.swift; path = OutLookers/ReleaseVideoViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleasePictureViewController.swift; path = OutLookers/ReleasePictureViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditSkillViewController.swift; path = OutLookers/EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -496,6 +504,7 @@
 				E446FA161D2E311B003DFC1E /* DynamicCell.swift */,
 				D82F8E131D2E9D0000A24CDB /* DataTableViewCell.swift */,
 				D82F8E151D2EA48900A24CDB /* DataSecondCell.swift */,
+				D8B641431D35535D00DF916D /* PHTaTableViewCell.swift */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -507,6 +516,9 @@
 				D82F8E0D1D2C0ECD00A24CDB /* TalentViewController.swift */,
 				E446FA121D2E26A6003DFC1E /* DynamicViewController.swift */,
 				D82F8E111D2E9CC100A24CDB /* DataViewController.swift */,
+				D8B6413D1D354EFC00DF916D /* PHOrderListViewController.swift */,
+				D8B6413F1D354FBE00DF916D /* TaJoinViewController.swift */,
+				D8B641411D35500400DF916D /* TaReleaseViewController.swift */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1245,11 +1257,13 @@
 			files = (
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
 				D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */,
+				D8B641441D35535D00DF916D /* PHTaTableViewCell.swift in Sources */,
 				D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */,
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				E446FA111D2E10E1003DFC1E /* TalentWorksCollectionCell.swift in Sources */,
+				D8B641421D35500400DF916D /* TaReleaseViewController.swift in Sources */,
 				D8AA100A1D1DA0220038EE73 /* TZPhotoPickerController.m in Sources */,
 				D82F8DF01D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift in Sources */,
 				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
@@ -1288,6 +1302,7 @@
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
 				D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */,
 				D83087801D27B400009CFE03 /* MessageCell.swift in Sources */,
+				D8B641401D354FBE00DF916D /* TaJoinViewController.swift in Sources */,
 				D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */,
 				D82F8E281D33E47300A24CDB /* ReleaseNoticeCell.swift in Sources */,
 				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
@@ -1316,6 +1331,7 @@
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
 				D82F8E1C1D30EEAF00A24CDB /* OGDataViewController.swift in Sources */,
+				D8B6413E1D354EFC00DF916D /* PHOrderListViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
 				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
 				D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */,

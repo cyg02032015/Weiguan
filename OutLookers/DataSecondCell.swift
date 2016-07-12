@@ -8,9 +8,19 @@
 
 import UIKit
 
+private extension Selector {
+    static let tapOrderCount = #selector(DataSecondCell.tapOrderCount(_:))
+    static let tapScore = #selector(DataSecondCell.tapScore(_:))
+}
+
+protocol DataSecondCellDelegate: class {
+    func dataSecondCellTapOrderCount(sender: UIButton)
+    func dataSecondCellTapScore(sender: UIButton)
+}
+
 class DataSecondCell: UITableViewCell {
 
-    
+    weak var delegate: DataSecondCellDelegate!
     var orderCount: UIButton!
     var score: UIButton!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -45,6 +55,7 @@ class DataSecondCell: UITableViewCell {
         orderCount.layer.cornerRadius = kScale(60/2)
         orderCount.setTitleColor(kCommonColor, forState: .Normal)
         orderCount.titleLabel?.font = UIFont.customFontOfSize(16)
+        orderCount.addTarget(self, action: .tapOrderCount, forControlEvents: .TouchUpInside)
         contentView.addSubview(orderCount)
         orderCount.snp.makeConstraints { (make) in
             make.size.equalTo(kSize(60, height: 60))
@@ -77,6 +88,7 @@ class DataSecondCell: UITableViewCell {
         score.layer.cornerRadius = kScale(60/2)
         score.setTitleColor(kCommonColor, forState: .Normal)
         score.titleLabel?.font = UIFont.customFontOfSize(16)
+        score.addTarget(self, action: .tapScore, forControlEvents: .TouchUpInside)
         contentView.addSubview(score)
         score.snp.makeConstraints { (make) in
             make.size.equalTo(kSize(60, height: 60))
@@ -89,6 +101,18 @@ class DataSecondCell: UITableViewCell {
         orderCount.setTitle("0", forState: .Normal)
         score.setTitle("0.0", forState: .Normal)
 
+    }
+    
+    func tapOrderCount(sender: UIButton) {
+        if delegate != nil {
+            delegate.dataSecondCellTapOrderCount(sender)
+        }
+    }
+    
+    func tapScore(sender: UIButton) {
+        if delegate != nil {
+            delegate.dataSecondCellTapScore(sender)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

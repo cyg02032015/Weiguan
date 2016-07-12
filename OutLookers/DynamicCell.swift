@@ -195,7 +195,6 @@ class DynamicCell: UITableViewCell {
         }
 
         nameLabel.text = "晨曦"
-        timeImgView.backgroundColor = UIColor.yellowColor()
         timeLabel.text = "15:02"
         headImgView.backgroundColor = UIColor.redColor()
         bigImgView.backgroundColor = UIColor.grayColor()

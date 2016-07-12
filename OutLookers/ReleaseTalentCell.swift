@@ -106,7 +106,6 @@ class ReleaseTalentCell: UITableViewCell {
         }
         
         headImgView.backgroundColor = UIColor.yellowColor()
-        timeImgView.backgroundColor = UIColor.redColor()
         nameLabel.text = "阿里星球"
         timeLabel.text = "16:02"
         bigImgView.backgroundColor = UIColor.grayColor()

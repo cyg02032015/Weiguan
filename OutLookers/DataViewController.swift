@@ -52,6 +52,7 @@ extension DataViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(dataSecondCellIdentifier, forIndexPath: indexPath) as! DataSecondCell
+            cell.delegate = self
             return cell
         }
     }
@@ -62,5 +63,17 @@ extension DataViewController {
         } else {
             return kScale(157)
         }
+    }
+}
+
+// MARK: - DataSecondCellDelegate
+extension DataViewController: DataSecondCellDelegate {
+    func dataSecondCellTapScore(sender: UIButton) {
+        
+    }
+    
+    func dataSecondCellTapOrderCount(sender: UIButton) {
+        let vc = PHOrderListViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
