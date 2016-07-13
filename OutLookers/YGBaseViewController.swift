@@ -8,10 +8,6 @@
 
 import UIKit
 
-extension Selector {
-    static let tapRightButton = #selector(YGBaseViewController.tapRightButton(_:))
-}
-
 class YGBaseViewController: UIViewController {
     
     
@@ -19,21 +15,6 @@ class YGBaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = kBackgoundColor
-    }
-    
-    func createNaviRightButton(title: String) -> UIButton {
-        let button = UIButton()
-        button.setTitle(title, forState: .Normal)
-        button.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-        button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        button.addTarget(self, action: .tapRightButton, forControlEvents: .TouchUpInside)
-        let rightBarButton = UIBarButtonItem(customView: button)
-        self.navigationItem.rightBarButtonItem = rightBarButton
-        return button
-    }
-    
-    func tapRightButton(sender: UIButton) {
-        LogVerbose("baseviewcontroller tap right")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -75,6 +56,12 @@ extension YGBaseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(10))))
+        view.backgroundColor = kBackgoundColor
+        return view
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(10))))
         view.backgroundColor = kBackgoundColor
         return view

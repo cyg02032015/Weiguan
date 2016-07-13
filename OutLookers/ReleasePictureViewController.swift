@@ -13,6 +13,10 @@ private let pictureSelectIdentifier = "pictureSelectIdentifier"
 private let editTextViewIdentifier = "editTextViewIdentifier"
 private let shareCellIdentifier = "shareCellId"
 
+private extension Selector {
+    static let tapReleaseButton = #selector(ReleasePictureViewController.tapReleaseButton(_:))
+}
+
 class ReleasePictureViewController: YGBaseViewController {
 
     var tableView: UITableView!
@@ -20,6 +24,7 @@ class ReleasePictureViewController: YGBaseViewController {
     lazy var pictures = [UIImage]()
     lazy var photos = NSMutableArray()
     lazy var originPhotos = NSMutableArray()
+    var releaseButton: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,7 +40,8 @@ class ReleasePictureViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRectZero, style: .Grouped)
+        tableView.backgroundColor = kBackgoundColor
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,11 +52,17 @@ class ReleasePictureViewController: YGBaseViewController {
         
         tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
-        createNaviRightButton("发布")
+        releaseButton = Util.createReleaseButton("发布")
+        releaseButton.addTarget(self, action: .tapReleaseButton, forControlEvents: .TouchUpInside)
+        view.addSubview(releaseButton)
+        releaseButton.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(releaseButton.superview!)
+            make.height.equalTo(kScale(50))
+        }
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(tableView.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideBottom)
+            make.top.left.right.equalTo(tableView.superview!)
+            make.bottom.equalTo(releaseButton.snp.top)
         }
     }
 
@@ -103,7 +115,7 @@ extension ReleasePictureViewController {
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 2 {
-            return 0
+            return 0.01
         } else {
             return kHeight(10)
         }
@@ -202,7 +214,7 @@ extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavig
 // MARK: - 按钮点击&响应
 extension ReleasePictureViewController: ShareCellDelegate {
     
-    override func tapRightButton(sender: UIButton) {
+    func tapReleaseButton(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: { [unowned self] in
             self.photos.removeAllObjects()
             self.pictures.removeAll()

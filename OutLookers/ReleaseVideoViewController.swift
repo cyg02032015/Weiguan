@@ -14,11 +14,16 @@ private let videoCoverIdentifier = "videoCoverId"
 private let editTextViewIdentifier = "editTextViewId"
 private let shareCellIdentifier = "shareCellId"
 
-class ReleaseVideoViewController: YGBaseViewController {
+private extension Selector {
+    static let tapReleaseButton = #selector(ReleaseVideoViewController.tapReleaseButton(_:))
+}
 
+class ReleaseVideoViewController: YGBaseViewController {
+    
     var tableView: UITableView!
     var videoUrl: NSURL!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
+    var releaseButton: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,7 +39,9 @@ class ReleaseVideoViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        tableView = UITableView()
+        
+        tableView = UITableView(frame: CGRectZero, style: .Grouped)
+        tableView.backgroundColor = kBackgoundColor
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,17 +49,34 @@ class ReleaseVideoViewController: YGBaseViewController {
         tableView.separatorStyle = .None
         tableView.registerClass(VideoCoverCell.self, forCellReuseIdentifier: videoCoverIdentifier)
         tableView.registerClass(EditTextViewCell.self, forCellReuseIdentifier: editTextViewIdentifier)
-        
         tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
-        createNaviRightButton("发布")
+        releaseButton = Util.createReleaseButton("发布")
+        releaseButton.addTarget(self, action: .tapReleaseButton, forControlEvents: .TouchUpInside)
+        view.addSubview(releaseButton)
+        
+        releaseButton.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(releaseButton.superview!)
+            make.height.equalTo(kScale(50))
+        }
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(tableView.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideBottom)
+            make.top.left.right.equalTo(tableView.superview!)
+            make.bottom.equalTo(releaseButton.snp.top)
         }
     }
     
+    func selectVideo() {
+        if UIImagePickerController.isAvailablePhotoLibrary() {
+            let controller = UIImagePickerController()
+            controller.sourceType = .PhotoLibrary
+            var mediaTypes = [String]()
+            mediaTypes.append(kUTTypeMovie as String)
+            controller.mediaTypes = mediaTypes
+            controller.delegate = self
+            presentViewController(controller, animated: true, completion: {})
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -82,7 +106,7 @@ extension ReleaseVideoViewController {
                 return cell
             }
         } else if indexPath.section == 1 {
-             return UITableViewCell()
+            return UITableViewCell()
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(shareCellIdentifier, forIndexPath: indexPath) as! ShareCell
             cell.tuple = shareTuple
@@ -103,7 +127,7 @@ extension ReleaseVideoViewController {
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 2 {
-            return 0
+            return 0.01
         } else {
             return kHeight(10)
         }
@@ -113,30 +137,34 @@ extension ReleaseVideoViewController {
 // MARK: - 按钮点击&响应
 extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate {
     
-    override func tapRightButton(sender: UIButton) {
+    func tapReleaseButton(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func videoCoverImageViewTap() {
-        if UIImagePickerController.isAvailablePhotoLibrary() {
-            let controller = UIImagePickerController()
-            controller.sourceType = .PhotoLibrary
-            var mediaTypes = [String]()
-            mediaTypes.append(kUTTypeMovie as String)
-            controller.mediaTypes = mediaTypes
-            controller.delegate = self
-            presentViewController(controller, animated: true, completion: {})
-        }
+        selectVideo()
     }
     
     func videoCoverTapSettingCover() {
-        let vc = SettingCoverController()
-        vc.videoUrl = videoUrl
-        navigationController?.pushViewController(vc, animated: true)
+        if videoUrl == nil {
+            selectVideo()
+        } else {
+            let vc = SettingCoverController()
+            vc.videoUrl = videoUrl
+            vc.delegate = self
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func shareCellReturnsShareTitle(text: String) {
         LogInfo("分享 \(text)")
+    }
+}
+
+extension ReleaseVideoViewController: SettingCoverControllerDelegate {
+    func settingCoverSendCover(image: UIImage) {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! VideoCoverCell
+        cell.imgView.image = image
     }
 }
 

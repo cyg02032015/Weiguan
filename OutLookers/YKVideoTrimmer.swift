@@ -58,10 +58,10 @@ class YKVideoTrimmer: UIView {
         imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
         
-        let picWidth: CGFloat = UIScreen.mainScreen().bounds.width / CGFloat(imgCount)
+        let picWidth: CGFloat = self.gg_width / CGFloat(imgCount)
         var halfWayImage: CGImageRef?
         let duration = CMTimeGetSeconds(self.asset.duration)
-        let screenWidth = UIScreen.mainScreen().bounds.width
+        let screenWidth = self.gg_width
         backView = UIView()
         addSubview(backView)
         backView.frame = CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: CGRectGetWidth(self.frame)))

@@ -95,7 +95,7 @@ extension MineViewController {
         return 10
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = kBackgoundColor
         return view

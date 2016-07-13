@@ -12,6 +12,10 @@ private let noArrowIdentifier = "noArrowId"
 private let arrowIdentifier = "arrowId"
 private let budgetPriceIdentifier = "budgetPriceId"
 
+private extension Selector {
+    static let tapReleaseButton = #selector(RecruitInformationViewController.tapReleaseButton(_:))
+}
+
 protocol RecruitInformationDelegate: class {
     func recruitInformationSureWithParams(recruit: Recruit)
 }
@@ -48,6 +52,7 @@ class RecruitInformationViewController: YGBaseViewController {
         title = "招募信息"
         
         tableView = UITableView()
+        tableView.backgroundColor = kBackgoundColor
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -56,11 +61,17 @@ class RecruitInformationViewController: YGBaseViewController {
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowIdentifier)
         tableView.registerClass(BudgetPriceCell.self, forCellReuseIdentifier: budgetPriceIdentifier)
         
-        rightButton = createNaviRightButton("确定")
+        rightButton = Util.createReleaseButton("确定")
+        rightButton.addTarget(self, action: .tapReleaseButton, forControlEvents: .TouchUpInside)
+        view.addSubview(rightButton)
+        rightButton.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(rightButton.superview!)
+            make.height.equalTo(kScale(50))
+        }
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(tableView.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideBottom)
+            make.top.left.right.equalTo(tableView.superview!)
+            make.bottom.equalTo(rightButton.snp.top)
         }
     }
     
@@ -111,12 +122,16 @@ extension RecruitInformationViewController {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return kHeight(56)
     }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
 }
 
 // MARK: -点击按钮 & NoArrowEditCellDelegate
 extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCellDelegate, NoArrowEditCellDelegate {
 
-    override func tapRightButton(sender: UIButton) {
+    func tapReleaseButton(sender: UIButton) {
         let cell0 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? ArrowEditCell
         let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as? NoArrowEditCell
         let cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as? BudgetPriceCell

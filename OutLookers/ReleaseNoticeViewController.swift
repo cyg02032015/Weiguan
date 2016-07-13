@@ -15,6 +15,10 @@ private let recruiteIdentifier = "recruiteId"
 private let workDetailIdentifier = "workDetailId"
 private let selectImgIdentifier = "selectImgId"
 
+private extension Selector {
+    static let tapReleaseButton = #selector(ReleaseNoticeViewController.tapReleaseButton(_:))
+}
+
 class ReleaseNoticeViewController: YGBaseViewController {
 
     var tableView: UITableView!
@@ -24,6 +28,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     lazy var provinceTitles = NSArray()
     var photoArray: [UIImage]!
     var request = ReleaseNoticeRequest()
+    var releaseButton: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,6 +72,8 @@ class ReleaseNoticeViewController: YGBaseViewController {
     func setupSubViews() {
         photoArray = [UIImage(named: "release_announcement_Addpictures")!]
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
+        tableView.backgroundColor = kBackgoundColor
+        tableView.separatorStyle = .None
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -78,11 +85,17 @@ class ReleaseNoticeViewController: YGBaseViewController {
         tableView.registerClass(WorkDetailCell.self, forCellReuseIdentifier: workDetailIdentifier)
         tableView.registerClass(SelectPhotoCell.self, forCellReuseIdentifier: selectImgIdentifier)
         
-        createNaviRightButton("发布")
+        releaseButton = Util.createReleaseButton("发布")
+        releaseButton.addTarget(self, action: .tapReleaseButton, forControlEvents: .TouchUpInside)
+        view.addSubview(releaseButton)
+        releaseButton.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalTo(releaseButton.superview!)
+            make.height.equalTo(kScale(50))
+        }
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(tableView.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideBottom)
+            make.top.left.right.equalTo(tableView.superview!)
+            make.bottom.equalTo(releaseButton.snp.top)
         }
         
     }
@@ -203,15 +216,9 @@ extension ReleaseNoticeViewController {
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 6 {
-            return 0
+            return 0.01
         }
         return kHeight(10)
-    }
-    
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = kBackgoundColor
-        return view
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -320,7 +327,7 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
 // MARK: - RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate
 extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate, WorkDetailCellDelegate {
     // MARK: 发布按钮
-    override func tapRightButton(sender: UIButton) {
+    func tapReleaseButton(sender: UIButton) {
         self.view.endEditing(true)
         // TODO- 测试
 //        request.userId = "1"

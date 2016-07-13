@@ -101,6 +101,7 @@
 		D8B641401D354FBE00DF916D /* TaJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6413F1D354FBE00DF916D /* TaJoinViewController.swift */; };
 		D8B641421D35500400DF916D /* TaReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641411D35500400DF916D /* TaReleaseViewController.swift */; };
 		D8B641441D35535D00DF916D /* PHTaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641431D35535D00DF916D /* PHTaTableViewCell.swift */; };
+		D8B641461D367F1300DF916D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641451D367F1300DF916D /* Util.swift */; };
 		D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */; };
 		D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */; };
 		D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */; };
@@ -301,6 +302,7 @@
 		D8B6413F1D354FBE00DF916D /* TaJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaJoinViewController.swift; path = OutLookers/TaJoinViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8B641411D35500400DF916D /* TaReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaReleaseViewController.swift; path = OutLookers/TaReleaseViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8B641431D35535D00DF916D /* PHTaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHTaTableViewCell.swift; path = OutLookers/PHTaTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D8B641451D367F1300DF916D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = OutLookers/Util.swift; sourceTree = SOURCE_ROOT; };
 		D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseVideoViewController.swift; path = OutLookers/ReleaseVideoViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleasePictureViewController.swift; path = OutLookers/ReleasePictureViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditSkillViewController.swift; path = OutLookers/EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -634,6 +636,7 @@
 				E4E5DED81D179E1000CB8535 /* YGPickerView.swift */,
 				D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */,
 				E47ADF6B1D1D051D00A2F4BD /* YGShareHandler.swift */,
+				D8B641451D367F1300DF916D /* Util.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -1298,6 +1301,7 @@
 				D82F8E2A1D33E83D00A24CDB /* ReleaseTalentCell.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
+				D8B641461D367F1300DF916D /* Util.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
 				E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */,

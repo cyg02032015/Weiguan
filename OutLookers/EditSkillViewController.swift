@@ -21,6 +21,10 @@ enum PhotoSelectType: String {
     case AddPictrue = "AddPicture"
 }
 
+private extension Selector {
+    static let tapReleaseButton = #selector(EditSkillViewController.tapReleaseButton(_:))
+}
+
 class EditSkillViewController: YGBaseViewController {
 
     var tableView: UITableView!
@@ -62,15 +66,18 @@ class EditSkillViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "编辑才艺"
+        title = "编辑动态"
         setupSubViews()
     }
     
     func setupSubViews() {
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRectZero, style: .Grouped)
+        tableView.backgroundColor = kBackgoundColor
+//        tableView.separatorStyle = .None
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorColor = kLineColor
         tableView.tableFooterView = UIView()
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowIdentifier)
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowIdentifier)
@@ -78,11 +85,17 @@ class EditSkillViewController: YGBaseViewController {
         tableView.registerClass(SkillSetCell.self, forCellReuseIdentifier: skillSetIdentifier)
         tableView.registerClass(BudgetPriceCell.self, forCellReuseIdentifier: budgetCellIdentifier)
         
-        createNaviRightButton("发布")
+        releaseButton = Util.createReleaseButton("发布")
+        releaseButton.addTarget(self, action: .tapReleaseButton, forControlEvents: .TouchUpInside)
+        view.addSubview(releaseButton)
+        releaseButton.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(releaseButton.superview!)
+            make.height.equalTo(kScale(50))
+        }
         
         tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(tableView.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideBottom)
+            make.top.left.right.equalTo(tableView.superview!)
+            make.bottom.equalTo(releaseButton.snp.top)
         }
     }
     
@@ -212,7 +225,7 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
 }
 
 extension EditSkillViewController: BudgetPriceCellDelegate {
-    override func tapRightButton(sender: UIButton) {
+    func tapReleaseButton(sender: UIButton) {
         dismissViewControllerAnimated(true) { [unowned self] in
             self.photoArray.removeAllObjects()
         }
