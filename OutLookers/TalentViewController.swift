@@ -93,6 +93,7 @@ extension TalentViewController {
     }
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension TalentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -109,6 +110,8 @@ extension TalentViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let vc = TalentDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
         LogInfo("\(collectionView.tag)     \(indexPath.item)")
     }
 }

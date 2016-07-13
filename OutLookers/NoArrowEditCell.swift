@@ -102,6 +102,5 @@ extension NoArrowEditCell: UITextFieldDelegate {
         if delegate != nil {
             delegate.noarrowCellReturnText(textField.text, tuple: (indexPath.section, indexPath.row))
         }
-        
     }
 }
