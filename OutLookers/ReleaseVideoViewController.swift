@@ -17,7 +17,7 @@ private let shareCellIdentifier = "shareCellId"
 class ReleaseVideoViewController: YGBaseViewController {
 
     var tableView: UITableView!
-
+    var videoUrl: NSURL!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     
     override func viewWillAppear(animated: Bool) {
@@ -117,7 +117,7 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate 
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func videoCoverImageViewTap(sender: UITapGestureRecognizer) {
+    func videoCoverImageViewTap() {
         if UIImagePickerController.isAvailablePhotoLibrary() {
             let controller = UIImagePickerController()
             controller.sourceType = .PhotoLibrary
@@ -127,6 +127,12 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate 
             controller.delegate = self
             presentViewController(controller, animated: true, completion: {})
         }
+    }
+    
+    func videoCoverTapSettingCover() {
+        let vc = SettingCoverController()
+        vc.videoUrl = videoUrl
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func shareCellReturnsShareTitle(text: String) {
@@ -141,9 +147,9 @@ extension ReleaseVideoViewController: UIImagePickerControllerDelegate, UINavigat
         if mediaType == kUTTypeMovie as String {
             LogInfo(info[UIImagePickerControllerMediaType])
             guard let url = info[UIImagePickerControllerMediaURL] as? NSURL else { fatalError("获取视频 URL 失败")}
+            videoUrl = url
             let thumbleImg = VideoTool.getThumbleImage(url)
             cell.imgView.image = thumbleImg
-            
             dismissViewControllerAnimated(true, completion: {})
         }
     }

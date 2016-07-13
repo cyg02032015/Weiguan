@@ -35,7 +35,7 @@ class YKPhotoPreviewController: YGBaseViewController {
             UIApplication.sharedApplication().statusBarHidden = true
         }
         if currentIndex != nil {
-            collectionView.setContentOffset(CGPoint(x: view.width * CGFloat(currentIndex), y: 0), animated: false)
+            collectionView.setContentOffset(CGPoint(x: view.gg_width * CGFloat(currentIndex), y: 0), animated: false)
         }
         if photos.count > 0 {
             collectionView.reloadData()
@@ -50,19 +50,19 @@ class YKPhotoPreviewController: YGBaseViewController {
     }
     
     func configToolBar() {
-        toolBar = UIView(frame: CGRect(origin: CGPoint(x: 0, y: view.height - 49), size: CGSize(width: view.width, height: 49)))
+        toolBar = UIView(frame: CGRect(origin: CGPoint(x: 0, y: view.gg_height - 49), size: CGSize(width: view.gg_width, height: 49)))
         toolBar.backgroundColor = UIColor(r: 34, g: 34, b: 34, a: 1.0)
         toolBar.alpha = 0.7
         view.addSubview(toolBar)
         
-        let deletButton = UIButton(frame: CGRect(x: view.width - 50, y: 0, width: 44, height: 49))
+        let deletButton = UIButton(frame: CGRect(x: view.gg_width - 50, y: 0, width: 44, height: 49))
         deletButton.addTarget(self, action: .tapDeletButton, forControlEvents: .TouchUpInside)
         deletButton.setTitle("de", forState: .Normal)
         toolBar.addSubview(deletButton)
     }
     
     func configNavigationBar() {
-        naviBar = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: view.width, height: 64)))
+        naviBar = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: view.gg_width, height: 64)))
         naviBar.backgroundColor = UIColor(r: 34, g: 34, b: 34, a: 1.0)
         naviBar.alpha = 0.7
         view.addSubview(naviBar)
@@ -72,7 +72,7 @@ class YKPhotoPreviewController: YGBaseViewController {
         backButton.setTitle("返回", forState: .Normal)
         naviBar.addSubview(backButton)
         
-        titleLabel = UILabel(frame: CGRect(x: 50, y: 0, width: view.width - 100, height: naviBar.height))
+        titleLabel = UILabel(frame: CGRect(x: 50, y: 0, width: view.gg_width - 100, height: naviBar.gg_height))
         titleLabel.textAlignment = .Center
         titleLabel.textColor = UIColor.whiteColor()
         titleLabel.text = "\(currentIndex + 1)/\(photos.count)"
@@ -81,12 +81,12 @@ class YKPhotoPreviewController: YGBaseViewController {
     
     func configCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.width, height: view.height)
+        layout.itemSize = CGSize(width: view.gg_width, height: view.gg_height)
         layout.scrollDirection = .Horizontal
         
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        collectionView = UICollectionView(frame: CGRect(origin: CGPointZero, size: CGSize(width: view.width, height: view.height)), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(origin: CGPointZero, size: CGSize(width: view.gg_width, height: view.gg_height)), collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.blackColor()
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -94,7 +94,7 @@ class YKPhotoPreviewController: YGBaseViewController {
         collectionView.scrollsToTop = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentOffset = CGPointZero
-        collectionView.contentSize = CGSizeMake(view.width * CGFloat(photos.count), view.height)
+        collectionView.contentSize = CGSizeMake(view.gg_width * CGFloat(photos.count), view.gg_height)
         view.addSubview(collectionView)
         collectionView.registerClass(YKPhotoPreviewCell.self, forCellWithReuseIdentifier: photoPreviewCellIdentifier)
     }
@@ -118,7 +118,7 @@ extension YKPhotoPreviewController: UICollectionViewDelegate, UICollectionViewDa
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
-        currentIndex = Int((offset.x + (view.width * 0.5)) / view.width)
+        currentIndex = Int((offset.x + (view.gg_width * 0.5)) / view.gg_width)
     }
     
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {

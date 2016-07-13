@@ -29,8 +29,8 @@ class MineCollectionCell: UICollectionViewCell {
             make.centerX.equalTo(imgButton.superview!)
         }
         layoutIfNeeded()
-        imgButton.badgeOriginX = imgButton.right - 10
-        imgButton.badgeOriginY = imgButton.top - 30
+        imgButton.badgeOriginX = imgButton.gg_right - 10
+        imgButton.badgeOriginY = imgButton.gg_top - 30
         
         label = UILabel()
         label.font = UIFont.customFontOfSize(14)

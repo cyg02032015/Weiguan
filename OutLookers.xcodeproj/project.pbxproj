@@ -136,6 +136,8 @@
 		E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */; };
 		E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */; };
 		E4473EB31D337BF5000CEEF2 /* OGToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EB21D337BF5000CEEF2 /* OGToolView.swift */; };
+		E4473EB71D3625C7000CEEF2 /* YKVideoTrimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EB61D3625C7000CEEF2 /* YKVideoTrimmer.swift */; };
+		E4473EB91D36298A000CEEF2 /* SettingCoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EB81D36298A000CEEF2 /* SettingCoverController.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -344,6 +346,8 @@
 		E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollVerticalDelegate.swift; path = OutLookers/ScrollVerticalDelegate.swift; sourceTree = SOURCE_ROOT; };
 		E446FA1A1D2E6B44003DFC1E /* PHToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHToolView.swift; path = OutLookers/PHToolView.swift; sourceTree = SOURCE_ROOT; };
 		E4473EB21D337BF5000CEEF2 /* OGToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OGToolView.swift; path = OutLookers/OGToolView.swift; sourceTree = SOURCE_ROOT; };
+		E4473EB61D3625C7000CEEF2 /* YKVideoTrimmer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKVideoTrimmer.swift; path = OutLookers/YKVideoTrimmer.swift; sourceTree = SOURCE_ROOT; };
+		E4473EB81D36298A000CEEF2 /* SettingCoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingCoverController.swift; path = OutLookers/SettingCoverController.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -622,6 +626,8 @@
 		D8F526CD1D16CAD1000C8F91 /* YKLib */ = {
 			isa = PBXGroup;
 			children = (
+				E446FA141D2E29E6003DFC1E /* TouchLabel.swift */,
+				E4473EB61D3625C7000CEEF2 /* YKVideoTrimmer.swift */,
 				E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */,
 				D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */,
 				E4E5DED21D179BEF00CB8535 /* YGSelectDateView.swift */,
@@ -721,7 +727,6 @@
 		E41C6C5B1D113F350013031D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E446FA141D2E29E6003DFC1E /* TouchLabel.swift */,
 				E4E5DED41D179BFD00CB8535 /* YKToast.swift */,
 				D81F44F91D118D43004D9192 /* CGRect+EX.swift */,
 				D81F44FA1D118D43004D9192 /* InterfaceBuiderEX.swift */,
@@ -857,6 +862,7 @@
 			isa = PBXGroup;
 			children = (
 				D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */,
+				E4473EB81D36298A000CEEF2 /* SettingCoverController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1284,6 +1290,7 @@
 				D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */,
 				E446FA091D261647003DFC1E /* UIFont+EX.swift in Sources */,
 				D8AA10091D1DA0220038EE73 /* TZImagePickerController.m in Sources */,
+				E4473EB91D36298A000CEEF2 /* SettingCoverController.swift in Sources */,
 				D81F45051D118D43004D9192 /* InterfaceBuiderEX.swift in Sources */,
 				D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */,
 				E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */,
@@ -1385,6 +1392,7 @@
 				D82F8E1A1D30ED9200A24CDB /* OrganizationViewController.swift in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
 				D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */,
+				E4473EB71D3625C7000CEEF2 /* YKVideoTrimmer.swift in Sources */,
 				E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */,
 				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
 				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,

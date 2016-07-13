@@ -42,33 +42,33 @@ class YKPhotoPreviewCell: UICollectionViewCell {
     }
     
     func resizeSubviews() {
-        imageContainer.origin = CGPointZero
-        imageContainer.width = self.width
+        imageContainer.gg_origin = CGPointZero
+        imageContainer.gg_width = self.gg_width
         
         guard let image = imageView.image else { LogError("image is nil"); return }
-        if image.size.height / image.size.width > self.height / self.width {
-            imageContainer.height = floor(image.size.height / (image.size.width / self.width))
+        if image.size.height / image.size.width > self.gg_height / self.gg_width {
+            imageContainer.gg_height = floor(image.size.height / (image.size.width / self.gg_width))
         } else {
-            var height = image.size.height / image.size.width * self.width
+            var height = image.size.height / image.size.width * self.gg_width
             if height < 1 || isnan(height) {
-                height = self.height
+                height = self.gg_height
             }
             height = floor(height)
-            imageContainer.height = height
-            imageContainer.center.y = self.height / 2
+            imageContainer.gg_height = height
+            imageContainer.center.y = self.gg_height / 2
         }
-        if imageContainer.height > self.height && imageContainer.height - self.height <= 1 {
-            imageContainer.height = self.height
+        if imageContainer.gg_height > self.gg_height && imageContainer.gg_height - self.gg_height <= 1 {
+            imageContainer.gg_height = self.gg_height
         }
-        scrollView.contentSize = CGSize(width: self.width, height: max(imageContainer.height, self.height))
+        scrollView.contentSize = CGSize(width: self.gg_width, height: max(imageContainer.gg_height, self.gg_height))
         scrollView.scrollRectToVisible(self.bounds, animated: false)
-        scrollView.alwaysBounceVertical = imageContainer.height <= self.height ? false : true
+        scrollView.alwaysBounceVertical = imageContainer.gg_height <= self.gg_height ? false : true
         imageView.frame = imageContainer.bounds
     }
     
     func setupSubView() {
         backgroundColor = UIColor.blackColor()
-        scrollView = UIScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: width, height: height)))
+        scrollView = UIScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: gg_width, height: gg_height)))
         scrollView.bouncesZoom = true
         scrollView.maximumZoomScale = 2.5
         scrollView.minimumZoomScale = 1.0
@@ -111,8 +111,8 @@ extension YKPhotoPreviewCell: UIScrollViewDelegate {
     }
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
-        let offsetX = (scrollView.width > scrollView.contentSize.width) ? (scrollView.width - scrollView.contentSize.width) * 0.5 : 0
-        let offsetY = (scrollView.height > scrollView.contentSize.height) ? (scrollView.height - scrollView.contentSize.height) * 0.5 : 0
+        let offsetX = (scrollView.gg_width > scrollView.contentSize.width) ? (scrollView.gg_width - scrollView.contentSize.width) * 0.5 : 0
+        let offsetY = (scrollView.gg_height > scrollView.contentSize.height) ? (scrollView.gg_height - scrollView.contentSize.height) * 0.5 : 0
         self.imageContainer.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX, y: scrollView.contentSize.height * 0.5 + offsetY)
     }
 }

@@ -43,8 +43,8 @@ class YGTabbarButton: UIButton {
         }
         if Int(badge) > 0 {
             self.badgeValue = badge
-            self.badgeOriginX = self.width - 20
-            self.badgeOriginY = self.y + 5
+            self.badgeOriginX = self.gg_width - 20
+            self.badgeOriginY = self.gg_y + 5
             self.shouldAnimateBadge = true
         } else {
             self.badgeValue = ""
@@ -57,7 +57,7 @@ class YGTabbarButton: UIButton {
             return CGRectZero
         }
 //        return CGRect(x: 0, y: 2, width: contentRect.size.width, height: image!.size.height - 8)
-        return CGRect(x: self.width/2 - 15, y: 3, width: 30, height: 30)
+        return CGRect(x: self.gg_width/2 - 15, y: 3, width: 30, height: 30)
     }
     
     override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
@@ -65,7 +65,7 @@ class YGTabbarButton: UIButton {
         if image == nil {
             return CGRectZero
         }
-        return CGRect(x: 0, y: self.height - 14, width: contentRect.size.width, height: 10)
+        return CGRect(x: 0, y: self.gg_height - 14, width: contentRect.size.width, height: 10)
     }
     
     required init?(coder aDecoder: NSCoder) {

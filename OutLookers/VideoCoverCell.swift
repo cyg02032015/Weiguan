@@ -9,16 +9,18 @@
 import UIKit
 
 private extension Selector {
-    static let tapImgView = #selector(VideoCoverCell.tapImgView(_:))
+    static let tapImgView = #selector(VideoCoverCell.tapImgView)
+    static let tapSettingCover = #selector(VideoCoverCell.tapSettingCover)
 }
 
 protocol VideoCoverCellDelegate: class {
-    func videoCoverImageViewTap(sender: UITapGestureRecognizer)
+    func videoCoverImageViewTap()
+    func videoCoverTapSettingCover()
 }
 
 class VideoCoverCell: UITableViewCell {
     
-    var imgView: UIImageView!
+    var imgView: TouchImageView!
     weak var delegate: VideoCoverCellDelegate!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -28,16 +30,14 @@ class VideoCoverCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        imgView = UIImageView()
+        imgView = TouchImageView()
         imgView.backgroundColor = UIColor.blackColor()
-        imgView.userInteractionEnabled = true
+        imgView.addTarget(self, action: .tapImgView)
         contentView.addSubview(imgView);
         
-        let tap = UITapGestureRecognizer(target: self, action: .tapImgView)
-        imgView.addGestureRecognizer(tap)
-        
-        let v = UIView()
+        let v = TouchView()
         v.backgroundColor = UIColor(r: 254, g: 78, b: 78, a: 0.7)
+        v.addTarget(self, action: .tapSettingCover)
         imgView.addSubview(v)
         
         let smlImg = UIImageView(image: UIImage(named: "Set cover"))
@@ -83,8 +83,16 @@ class VideoCoverCell: UITableViewCell {
         }
     }
     
-    func tapImgView(sender: UITapGestureRecognizer) {
-        delegate.videoCoverImageViewTap(sender)
+    func tapImgView() {
+        if delegate != nil {
+            delegate.videoCoverImageViewTap()
+        }
+    }
+    
+    func tapSettingCover() {
+        if delegate != nil {
+            delegate.videoCoverTapSettingCover()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
