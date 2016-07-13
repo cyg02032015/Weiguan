@@ -4,7 +4,7 @@
 //
 //  Created by C on 16/7/7.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//
+//  若用户没有编辑则显示框架，数字显示0
 
 import UIKit
 

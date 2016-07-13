@@ -5,6 +5,13 @@
 //  Created by Youngkook on 16/7/7.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
 //  个人主页-动态
+/*
+ 若数值为0则显示为赞TA/评论/分享，
+ 若不为0则显示具体数值；
+ 在已赞状态下再次单击为取消点赞；
+ 点击评论跳转详情页；
+ 点击分享弹出分享列表；
+ */
 
 import UIKit
 

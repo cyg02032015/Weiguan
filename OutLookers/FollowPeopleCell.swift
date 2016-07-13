@@ -5,7 +5,11 @@
 //  Created by C on 16/6/30.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
 //
-
+/*
+ 性别区别他、她；
+ 若没有则显示TA;
+ */
+//点击头像跳转至ta的个人主页；
 import UIKit
 
 class FollowPeopleCell: UITableViewCell {

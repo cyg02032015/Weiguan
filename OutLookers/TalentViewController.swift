@@ -5,6 +5,12 @@
 //  Created by C on 16/7/5.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
 //
+/*
+ 才艺介绍最多展示三行文字；
+ 作品可以左右滑动切换查阅；
+ 单击内容区域进入详情页，
+ 等同于“查看详情”
+ */
 
 import UIKit
 

@@ -6,6 +6,14 @@
 //  Copyright © 2016年 weiguanonline. All rights reserved.
 //
 
+/*
+ 点击跳转通告详情页；
+ 若通告被删除则浮层提示，
+ 浮现效果持续1s自动消失
+ 或用户点击“我知道了”消失,页面不跳转；
+ 出售才艺则跳转到对应的才艺详情；
+ */
+
 import UIKit
 
 class PHOrderListViewController: YGBaseViewController {

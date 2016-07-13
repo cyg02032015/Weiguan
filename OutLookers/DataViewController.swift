@@ -69,10 +69,19 @@ extension DataViewController {
 // MARK: - DataSecondCellDelegate
 extension DataViewController: DataSecondCellDelegate {
     func dataSecondCellTapScore(sender: UIButton) {
-        
+        /*
+         显示用户接发单后收到的评分；
+         点击进入ta的评价页面；
+         若没有评分则数值显示“-”；
+         */
     }
     
     func dataSecondCellTapOrderCount(sender: UIButton) {
+        /*
+         显示数值为用户接单和发单的总数；
+         点击进入ta的通告列表；
+         若没有接发单则不显示订单量和综合评分；
+         */
         let vc = PHOrderListViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
