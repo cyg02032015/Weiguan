@@ -51,8 +51,10 @@ extension MineViewController {
             cell.header.iconHeaderTap {
                 LogInfo("头像")
             }
-            cell.tapEditDataClosure {
+            cell.tapEditDataClosure { [unowned self] in
                 LogInfo("编辑资料")
+                let vc = EditDataViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             cell.tapFriendsClosure {
                 LogInfo("好友")

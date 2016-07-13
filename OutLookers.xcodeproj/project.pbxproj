@@ -105,6 +105,7 @@
 		D8B641481D36A06D00DF916D /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641471D36A06D00DF916D /* TalentDetailViewController.swift */; };
 		D8B6414A1D36A1AD00DF916D /* TalentDetailHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641491D36A1AD00DF916D /* TalentDetailHeadCell.swift */; };
 		D8B6414C1D36A4C900DF916D /* TalentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6414B1D36A4C900DF916D /* TalentDetailCell.swift */; };
+		D8B6414E1D36B12500DF916D /* EditDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6414D1D36B12500DF916D /* EditDataViewController.swift */; };
 		D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */; };
 		D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */; };
 		D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */; };
@@ -309,6 +310,7 @@
 		D8B641471D36A06D00DF916D /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentDetailViewController.swift; path = OutLookers/TalentDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8B641491D36A1AD00DF916D /* TalentDetailHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentDetailHeadCell.swift; path = OutLookers/TalentDetailHeadCell.swift; sourceTree = SOURCE_ROOT; };
 		D8B6414B1D36A4C900DF916D /* TalentDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentDetailCell.swift; path = OutLookers/TalentDetailCell.swift; sourceTree = SOURCE_ROOT; };
+		D8B6414D1D36B12500DF916D /* EditDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditDataViewController.swift; path = OutLookers/EditDataViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167321D1AFCC500C50EB7 /* ReleaseVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleaseVideoViewController.swift; path = OutLookers/ReleaseVideoViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167341D1AFCD200C50EB7 /* ReleasePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReleasePictureViewController.swift; path = OutLookers/ReleasePictureViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8C167361D1AFCE100C50EB7 /* EditSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditSkillViewController.swift; path = OutLookers/EditSkillViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -439,6 +441,7 @@
 				D81F45271D118F5E004D9192 /* MineViewController.swift */,
 				E4E5DED01D179BE100CB8535 /* ProtocolViewController.swift */,
 				D8F526A41D154CEB000C8F91 /* LogViewController.swift */,
+				D8B6414D1D36B12500DF916D /* EditDataViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1311,6 +1314,7 @@
 				D82F8E2A1D33E83D00A24CDB /* ReleaseTalentCell.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
+				D8B6414E1D36B12500DF916D /* EditDataViewController.swift in Sources */,
 				D8B641461D367F1300DF916D /* Util.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
