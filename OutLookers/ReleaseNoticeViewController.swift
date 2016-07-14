@@ -39,15 +39,6 @@ class ReleaseNoticeViewController: YGBaseViewController {
         selectDatePicker.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
         }
-        
-        provinceTitles = CitiesData.sharedInstance().provinceTitle()
-        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
-        pickerView.delegate = self
-        UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
-        pickerView.hidden = true
-        pickerView.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalTo(pickerView.superview!)
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -56,17 +47,15 @@ class ReleaseNoticeViewController: YGBaseViewController {
             selectDatePicker.removeFromSuperview()
             selectDatePicker = nil
         }
-        
-        if pickerView != nil {
-            pickerView.removeFromSuperview()
-            pickerView = nil
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑通告"
         setupSubViews()
+        provinceTitles = CitiesData.sharedInstance().provinceTitle()
+        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
+        pickerView.delegate = self
     }
 
     func setupSubViews() {
@@ -413,8 +402,8 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
 //        tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
     }
     
-    func pickerViewSelectedSure(sender: UIButton) {
-        let city = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
+        let city = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
         cell.tf.text = city
         // MARK: 选择城市request

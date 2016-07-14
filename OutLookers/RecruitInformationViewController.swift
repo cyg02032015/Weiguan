@@ -28,25 +28,6 @@ class RecruitInformationViewController: YGBaseViewController {
     weak var delegate: RecruitInformationDelegate!
     var rightButton: UIButton!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
-        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
-        pickerView.titleLabel.text = "才艺标价单位"
-        UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
-        pickerView.delegate = self
-        pickerView.hidden = true
-        pickerView.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalTo(pickerView.superview!)
-        }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        pickerView.removeFromSuperview()
-        pickerView = nil
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "招募信息"
@@ -73,6 +54,11 @@ class RecruitInformationViewController: YGBaseViewController {
             make.top.left.right.equalTo(tableView.superview!)
             make.bottom.equalTo(rightButton.snp.top)
         }
+        
+        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
+        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
+        pickerView.titleLabel.text = "才艺标价单位"
+        pickerView.delegate = self
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -155,8 +141,8 @@ extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCel
         pickerView.animation()
     }
     
-    func pickerViewSelectedSure(sender: UIButton) {
-        let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
+        let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
         cell.button.selected = true
         guard let unit = skillUnit else { fatalError("picker skill unit nil") }

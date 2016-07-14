@@ -19,7 +19,7 @@ private extension Selector {
 }
 
 protocol YGPickerViewDelegate: class {
-    func pickerViewSelectedSure(sender: UIButton)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView)
 }
 
 
@@ -43,7 +43,8 @@ class YGPickerView: UIView {
     }
     
     func setupSubViews(delegate: protocol<UIPickerViewDataSource, UIPickerViewDelegate>) {
-        
+        UIApplication.sharedApplication().keyWindow!.frame = CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight))
+        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
         let tap = UITapGestureRecognizer(target: self, action: .tapView)
         addGestureRecognizer(tap)
         
@@ -86,6 +87,7 @@ class YGPickerView: UIView {
         picker.delegate = delegate
         picker.dataSource = delegate
         container.addSubview(picker)
+        
     }
     
     override func layoutSubviews() {
@@ -129,23 +131,39 @@ class YGPickerView: UIView {
             make.left.right.bottom.equalTo(picker.superview!)
             make.top.equalTo(topContainer.snp.bottom)
         }
+        
     }
     
     func animation() {
+        guard let view = UIApplication.sharedApplication().keyWindow else {
+            LogError("keyWindow is nil")
+            return
+        }
+        view.addSubview(self)
         
-        container.snp.updateConstraints { (make) in
-            make.bottom.equalTo(container.superview!)
+        self.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.superview!)
         }
-        setNeedsUpdateConstraints()
-        updateConstraints()
-        self.hidden = false
-        UIView.animateWithDuration(0.3) {
-            self.layoutIfNeeded()
-            self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+        
+        delay(0.05) { [unowned self] in
+            self.container.snp.updateConstraints { (make) in
+            make.bottom.equalTo(self.container.superview!)
+            }
+            self.setNeedsUpdateConstraints()
+            self.updateConstraints()
+            UIView.animateWithDuration(0.3) {
+                self.layoutIfNeeded()
+                self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+            }
         }
+        
     }
     
     func tapCancel(sender: UIButton) {
+        if self.superview == nil {
+            LogError("picker does not superview")
+            return
+        }
         container.snp.updateConstraints { (make) in
             make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
         }
@@ -155,26 +173,34 @@ class YGPickerView: UIView {
             self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
-            self.hidden = true
+            self.removeFromSuperview()
         }
     }
     
     func tapSure(sender: UIButton) {
+        if self.superview == nil {
+            LogError("picker does not superview")
+            return
+        }
         container.snp.updateConstraints { (make) in
             make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
         }
+        delegate.pickerViewSelectedSure(sender, pickerView: self)
         setNeedsUpdateConstraints()
         updateConstraints()
-        delegate.pickerViewSelectedSure(sender)
         UIView.animateWithDuration(0.3, animations: {
             self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
-            self.hidden = true
+            self.removeFromSuperview()
         }
     }
     
     func tapView(sender: UITapGestureRecognizer) {
+        if self.superview == nil {
+            LogError("picker does not superview")
+            return
+        }
         container.snp.updateConstraints { (make) in
             make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
         }
@@ -184,7 +210,7 @@ class YGPickerView: UIView {
             self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
-            self.hidden = true
+            self.removeFromSuperview()
         }
     }
     

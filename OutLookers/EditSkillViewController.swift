@@ -44,30 +44,16 @@ class EditSkillViewController: YGBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-        provinceTitles = CitiesData.sharedInstance().provinceTitle()
-        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
-        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
-        pickerView.delegate = self
-        UIApplication.sharedApplication().keyWindow!.addSubview(pickerView)
-        pickerView.hidden = true
-        pickerView.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalTo(pickerView.superview!)
-        }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        if pickerView != nil {
-            pickerView.removeFromSuperview()
-            pickerView = nil
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑动态"
         setupSubViews()
+        provinceTitles = CitiesData.sharedInstance().provinceTitle()
+        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
+        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
+        pickerView.delegate = self
     }
     
     func setupSubViews() {
@@ -343,13 +329,13 @@ extension EditSkillViewController: VPImageCropperDelegate {
 }
 
 extension EditSkillViewController: YGPickerViewDelegate {
-    func pickerViewSelectedSure(sender: UIButton) {
+    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
         if isProvincePicker {
-            let city = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
+            let city = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! ArrowEditCell
             cell.tf.text = city
         } else {
-            let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView!.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
+            let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
             cell.button.selected = true
             cell.setButtonText(skillUnit!)
