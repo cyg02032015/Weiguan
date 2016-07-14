@@ -145,6 +145,7 @@
 		E4473EB91D36298A000CEEF2 /* SettingCoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EB81D36298A000CEEF2 /* SettingCoverController.swift */; };
 		E4473EBB1D373FE3000CEEF2 /* HeadImgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EBA1D373FE3000CEEF2 /* HeadImgCell.swift */; };
 		E4473EBD1D375E18000CEEF2 /* PhoneBindCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EBC1D375E18000CEEF2 /* PhoneBindCell.swift */; };
+		E4473EBF1D37A472000CEEF2 /* PersonFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EBE1D37A472000CEEF2 /* PersonFileViewController.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -362,6 +363,7 @@
 		E4473EB81D36298A000CEEF2 /* SettingCoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingCoverController.swift; path = OutLookers/SettingCoverController.swift; sourceTree = SOURCE_ROOT; };
 		E4473EBA1D373FE3000CEEF2 /* HeadImgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeadImgCell.swift; path = OutLookers/HeadImgCell.swift; sourceTree = SOURCE_ROOT; };
 		E4473EBC1D375E18000CEEF2 /* PhoneBindCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneBindCell.swift; path = OutLookers/PhoneBindCell.swift; sourceTree = SOURCE_ROOT; };
+		E4473EBE1D37A472000CEEF2 /* PersonFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonFileViewController.swift; path = OutLookers/PersonFileViewController.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -446,6 +448,7 @@
 				E4E5DED01D179BE100CB8535 /* ProtocolViewController.swift */,
 				D8F526A41D154CEB000C8F91 /* LogViewController.swift */,
 				D8B6414D1D36B12500DF916D /* EditDataViewController.swift */,
+				E4473EBE1D37A472000CEEF2 /* PersonFileViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1398,6 +1401,7 @@
 				E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */,
 				E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */,
 				D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */,
+				E4473EBF1D37A472000CEEF2 /* PersonFileViewController.swift in Sources */,
 				D82F8DEE1D28375300A24CDB /* ArtistInfo.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,

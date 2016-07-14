@@ -13,6 +13,10 @@ private let noArrowEditCellId = "noArrowEditCellId"
 private let arrowEditCellId = "arrowEditCellId"
 private let phoneBindCellId = "phoneBindCellId"
 
+private extension Selector {
+    static let tapSaveButton = #selector(EditDataViewController.tapSaveButton(_:))
+}
+
 class EditDataViewController: YGBaseViewController {
 
     lazy var provinceTitles = NSArray()
@@ -20,6 +24,7 @@ class EditDataViewController: YGBaseViewController {
     var ageDatePickerView: YGSelectDateView!
     var tableView: UITableView!
     var headImgView: TouchImageView!
+    var save: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +43,7 @@ class EditDataViewController: YGBaseViewController {
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorColor = kBackgoundColor
         tableView.registerClass(HeadImgCell.self, forCellReuseIdentifier: headImgCellId)
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowEditCellId)
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowEditCellId)
@@ -46,6 +52,10 @@ class EditDataViewController: YGBaseViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
         }
+    }
+    
+    func tapSaveButton(sender: UIButton) {
+        LogInfo("save button click")
     }
 }
 
@@ -143,6 +153,39 @@ extension EditDataViewController {
             return kHeight(112)
         } else {
             return kHeight(46)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 3 {
+            return kHeight(144)
+        } else {
+            return kHeight(10)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 3 {
+            let view = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kScale(144))))
+            view.backgroundColor = kBackgoundColor
+            save = UIButton()
+            save.setTitle("保存", forState: .Normal)
+            save.titleLabel!.font = UIFont.customFontOfSize(16)
+            save.backgroundColor = kButtonGrayColor
+            save.layer.cornerRadius = kScale(40/2)
+            save.addTarget(self, action: .tapSaveButton, forControlEvents: .TouchUpInside)
+            view.addSubview(save)
+            save.snp.makeConstraints { (make) in
+                make.left.equalTo(save.superview!).offset(kScale(37))
+                make.right.equalTo(save.superview!).offset(kScale(-37))
+                make.top.equalTo(save.superview!).offset(kScale(54))
+                make.height.equalTo(kScale(40))
+            }
+            return view
+        } else {
+            let view = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(10))))
+            view.backgroundColor = kBackgoundColor
+            return view
         }
     }
 }
