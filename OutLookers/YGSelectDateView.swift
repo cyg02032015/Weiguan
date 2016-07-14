@@ -118,19 +118,32 @@ class YGSelectDateView: UIView {
     }
     
     func animation() {
-        self.hidden = false
-        container.snp.updateConstraints { (make) in
-            make.bottom.equalTo(container.superview!)
+        guard let view = UIApplication.sharedApplication().keyWindow else {
+            LogError("keyWindow is nil")
+            return
         }
-        setNeedsUpdateConstraints()
-        updateConstraints()
-        UIView.animateWithDuration(0.3) { 
-            self.layoutIfNeeded()
-            self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+        view.addSubview(self)
+        self.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.superview!)
+        }
+        delay(0.05) { [unowned self] in
+            self.container.snp.updateConstraints { (make) in
+                make.bottom.equalTo(self.container.superview!)
+            }
+            self.setNeedsUpdateConstraints()
+            self.updateConstraints()
+            UIView.animateWithDuration(0.3) {
+                self.layoutIfNeeded()
+                self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+            }
         }
     }
     
     func tapCancel(sender: UIButton) {
+        if self.superview == nil {
+            LogError("picker does not superview")
+            return
+        }
         container.snp.updateConstraints { (make) in
             make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
         }
@@ -140,11 +153,15 @@ class YGSelectDateView: UIView {
             self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
-            self.hidden = true
+            self.removeFromSuperview()
         }
     }
     
     func tapSure(sender: UIButton) {
+        if self.superview == nil {
+            LogError("picker does not superview")
+            return
+        }
         if getDate != nil {
             self.getDate(date: datePicker.date)
         }
@@ -158,11 +175,15 @@ class YGSelectDateView: UIView {
             self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
-            self.hidden = true
+            self.removeFromSuperview()
         }
     }
     
     func tapView(sender: UITapGestureRecognizer) {
+        if self.superview == nil {
+            LogError("picker does not superview")
+            return
+        }
         container.snp.updateConstraints { (make) in
             make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
         }
@@ -172,7 +193,7 @@ class YGSelectDateView: UIView {
             self.layoutIfNeeded()
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         }) { (isCompleted) in
-            self.hidden = true
+            self.removeFromSuperview()
         }
     }
     

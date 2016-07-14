@@ -16,24 +16,20 @@ private let phoneBindCellId = "phoneBindCellId"
 class EditDataViewController: YGBaseViewController {
 
     lazy var provinceTitles = NSArray()
-    lazy var skillUnitPickerArray = [String]()
     var cityPickerView: YGPickerView!
-    var isProvincePicker = false  // 区分PickerView数据源
+    var ageDatePickerView: YGSelectDateView!
     var tableView: UITableView!
+    var headImgView: TouchImageView!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
         
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
-        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
         cityPickerView = YGPickerView(frame: CGRectZero, delegate: self)
         cityPickerView.delegate = self
+        ageDatePickerView = YGSelectDateView()
+        ageDatePickerView.datePicker.datePickerMode = .Date
         
     }
     
@@ -46,8 +42,6 @@ class EditDataViewController: YGBaseViewController {
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowEditCellId)
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowEditCellId)
         tableView.registerClass(PhoneBindCell.self, forCellReuseIdentifier: phoneBindCellId)
-        tableView.separatorStyle = .None
-        tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
@@ -114,6 +108,36 @@ extension EditDataViewController {
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            if indexPath.row == 1 {
+                cityPickerView.animation()
+            } else if indexPath.row == 2 {
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
+                ageDatePickerView.animation()
+                ageDatePickerView.tapSureClosure({ [unowned cell](date) in
+                    cell.tf.text = "\(date)"
+                })
+            } else {
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
+                let sheet = UIAlertController(title: "请选择性别", message: nil, preferredStyle: .ActionSheet)
+                let male = UIAlertAction(title: "男", style: .Default, handler: { [unowned cell](action) in
+                    cell.tf.text = action.title
+                })
+                let female = UIAlertAction(title: "女", style: .Default, handler: { [unowned cell](action) in
+                    cell.tf.text = action.title
+                })
+                let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+                sheet.addAction(male)
+                sheet.addAction(female)
+                sheet.addAction(cancel)
+                presentViewController(sheet, animated: true, completion: nil)
+            }
+        } else if indexPath.section == 3 {
+            
+        }
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return kHeight(112)
@@ -123,9 +147,29 @@ extension EditDataViewController {
     }
 }
 
+// MARK: - HeadImgCellDelegate, PhoneBindCellDelegate
 extension EditDataViewController: HeadImgCellDelegate, PhoneBindCellDelegate {
     func headImgTap(imgView: TouchImageView) {
-        LogInfo("imgview = \(imgView)")
+        self.headImgView = imgView
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let camera = UIAlertAction(title: "拍照", style: .Default, handler: { (action) in
+            let vc = Util.actionSheetImagePicker(isCamera: true)
+            guard let v = vc else { return }
+            v.delegate = self
+            self.presentViewController(v, animated: true, completion: nil)
+        })
+        let library = UIAlertAction(title: "从相册中选取", style: .Default, handler: { (action) in
+            let vc = Util.actionSheetImagePicker(isCamera: false)
+            guard let v = vc else { return }
+            v.delegate = self
+            self.presentViewController(v, animated: true, completion: nil)
+        })
+        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        sheet.addAction(camera)
+        sheet.addAction(library)
+        sheet.addAction(cancel)
+        self.presentViewController(sheet, animated: true, completion: nil)
+
     }
     
     func phoneBindTapBind(sender: UIButton) {
@@ -133,10 +177,27 @@ extension EditDataViewController: HeadImgCellDelegate, PhoneBindCellDelegate {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate
+extension EditDataViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        LogInfo(info)
+        let originalImg = info["UIImagePickerControllerEditedImage"] as! UIImage
+        self.dismissViewControllerAnimated(true, completion: nil)
+        originalImg.resetSizeOfImageData(originalImg, maxSize: 300) { [unowned self](data) in
+            self.headImgView.image = UIImage(data: data)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true) { }//TODO
+    }
+}
+
+// MARK: - YGPickerViewDelegate
 extension EditDataViewController: YGPickerViewDelegate {
     func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
-        let city = cityPickerView.picker.delegate!.pickerView!(cityPickerView!.picker!, titleForRow: cityPickerView.picker.selectedRowInComponent(1), forComponent: 1)
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! ArrowEditCell
+        let city = cityPickerView.picker.delegate!.pickerView!(pickerView.picker, titleForRow: cityPickerView.picker.selectedRowInComponent(1), forComponent: 1)
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! ArrowEditCell
         cell.tf.text = city
     }
 }
@@ -144,46 +205,32 @@ extension EditDataViewController: YGPickerViewDelegate {
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension EditDataViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        if isProvincePicker {
-            return 2
-        } else {
-            return 1
-        }
+        return 2
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if isProvincePicker {
-            if component == 0 {
-                return provinceTitles.count
-            } else {
-                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-                return cities.count > 0 ? cities.count : 0
-            }
+        if component == 0 {
+            return provinceTitles.count
         } else {
-            return skillUnitPickerArray.count
+            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
+            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
+            return cities.count > 0 ? cities.count : 0
         }
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if isProvincePicker {
-            if component == 0 {
-                return (provinceTitles[row] as! String)
-            } else {
-                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-                return cities.count > row ? (cities[row] as! String) : ""
-            }
+        if component == 0 {
+            return (provinceTitles[row] as! String)
         } else {
-            return skillUnitPickerArray[row]
+            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
+            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
+            return cities.count > row ? (cities[row] as! String) : ""
         }
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if isProvincePicker {
-            if component == 0 {
-                pickerView.reloadComponent(1)
-            }
+        if component == 0 {
+            pickerView.reloadComponent(1)
         }
     }
 }

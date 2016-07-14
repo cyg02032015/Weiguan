@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class Util {
     
@@ -16,5 +17,34 @@ class Util {
         button.backgroundColor = kGrayColor
         button.titleLabel!.font = UIFont.customFontOfSize(16)
         return button
+    }
+    
+    class func actionSheetImagePicker(isCamera camera: Bool) -> UIImagePickerController? {
+        if camera {
+            if UIImagePickerController.isAvailableCamera() && UIImagePickerController.isSupportTakingPhotos(){
+                let controller = UIImagePickerController()
+                controller.sourceType = .Camera
+                if UIImagePickerController.isAvailableCameraDeviceFront() {
+                    controller.cameraDevice = .Front
+                }
+                var mediaTypes = [String]()
+                mediaTypes.append(kUTTypeImage as String)
+                controller.mediaTypes = mediaTypes
+                controller.allowsEditing = true
+                return controller
+            }
+            return nil
+        } else {
+            if UIImagePickerController.isAvailablePhotoLibrary() {
+                let controller = UIImagePickerController()
+                controller.sourceType = .PhotoLibrary
+                var mediaTypes = [String]()
+                mediaTypes.append(kUTTypeImage as String)
+                controller.mediaTypes = mediaTypes
+                controller.allowsEditing = true
+                return controller
+            }
+            return nil
+        }
     }
 }

@@ -33,26 +33,13 @@ class ReleaseNoticeViewController: YGBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-        selectDatePicker = YGSelectDateView()
-        UIApplication.sharedApplication().keyWindow!.addSubview(selectDatePicker)
-        selectDatePicker.hidden = true
-        selectDatePicker.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalTo(selectDatePicker.superview!)
-        }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        if selectDatePicker != nil {
-            selectDatePicker.removeFromSuperview()
-            selectDatePicker = nil
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑通告"
         setupSubViews()
+        selectDatePicker = YGSelectDateView()
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
@@ -235,43 +222,25 @@ extension ReleaseNoticeViewController: UICollectionViewDelegate, UICollectionVie
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionCell
         guard let image = cell.imgView.image else { return }
         if image == photoArray[photoArray.count - 1] {
-            let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
-            actionSheet.showInView(view)
+            let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let camera = UIAlertAction(title: "拍照", style: .Default, handler: { (action) in
+                    let vc = Util.actionSheetImagePicker(isCamera: true)
+                guard let v = vc else { return }
+                    v.delegate = self
+                    self.presentViewController(v, animated: true, completion: nil)
+                })
+            let library = UIAlertAction(title: "从相册中选取", style: .Default, handler: { (action) in
+                let vc = Util.actionSheetImagePicker(isCamera: false)
+                guard let v = vc else { return }
+                v.delegate = self
+                self.presentViewController(v, animated: true, completion: nil)
+                })
+            let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            sheet.addAction(camera)
+            sheet.addAction(library)
+            sheet.addAction(cancel)
+            self.presentViewController(sheet, animated: true, completion: nil)
         }
-    }
-}
-
-extension ReleaseNoticeViewController: UIActionSheetDelegate {
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        switch buttonIndex {
-        case 1:// 拍照
-            if UIImagePickerController.isAvailableCamera() && UIImagePickerController.isSupportTakingPhotos(){
-                let controller = UIImagePickerController()
-                controller.sourceType = .Camera
-                if UIImagePickerController.isAvailableCameraDeviceFront() {
-                    controller.cameraDevice = .Front
-                }
-                var mediaTypes = [String]()
-                mediaTypes.append(kUTTypeImage as String)
-                controller.mediaTypes = mediaTypes
-                controller.delegate = self
-                presentViewController(controller, animated: true, completion: {})
-            }
-            break
-        case 2:// 相册
-            if UIImagePickerController.isAvailablePhotoLibrary() {
-                let controller = UIImagePickerController()
-                controller.sourceType = .PhotoLibrary
-                var mediaTypes = [String]()
-                mediaTypes.append(kUTTypeImage as String)
-                controller.mediaTypes = mediaTypes
-                controller.delegate = self
-                presentViewController(controller, animated: true, completion: {})
-            }
-            break
-        default: LogWarn("switch default")
-        }
-
     }
 }
 
