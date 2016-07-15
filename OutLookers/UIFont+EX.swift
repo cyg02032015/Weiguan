@@ -42,6 +42,15 @@ extension UIFont {
         return UIFont(name: "STHeitiSC-Light", size: size)!
     }
     
+    class func customHelveticaFontOfSize(a: CGFloat) -> UIFont {
+        var size: CGFloat!
+        if Device.size() == .Screen5_5Inch {
+            size = a * scale
+        } else {
+            size = a
+        }
+        return UIFont(name: "Helvetica", size: size)!
+    }
     
     class func customNumFontOfSize(a: CGFloat) -> UIFont {
         var size: CGFloat!

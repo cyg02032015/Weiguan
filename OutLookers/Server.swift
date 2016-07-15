@@ -37,10 +37,29 @@ class Server {
                 handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
     /// 发现-通告列表
     class func getFindNoticeList(handler: (success: Bool, msg: String?, value: [FindNoticeList]?)->Void) {
         HttpTool.post(API.findNoticeList, parameters: nil, complete: { (response) in
             let info = FindNoticeList(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+            }) { (error) in
+                handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 发送获取验证码
+    class func getVerifyCode(request: VerifyRequest, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userPhone" : request.userPhone,
+            "userId" : request.userId
+        ]
+        HttpTool.post(API.getVerifyCode, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)
             } else {

@@ -15,7 +15,8 @@ class DynamicCell: UITableViewCell {
     var timeLabel: UILabel!
     var bigImgView: UIImageView!
     var details: UILabel!
-    var releaseLabel: UILabel!
+    var releaseLabel: UILabel!  // 发布了动态
+    var followButton: UIButton!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -67,6 +68,21 @@ class DynamicCell: UITableViewCell {
             make.centerY.equalTo(timeImgView)
             make.left.equalTo(timeImgView.snp.right).offset(kScale(4))
             make.height.equalTo(kScale(12))
+        }
+        
+        followButton = UIButton()
+        followButton.setImage(UIImage(named: ""), forState: .Normal)
+        followButton.setTitle("关注", forState: .Normal)
+        followButton.setTitleColor(kCommonColor, forState: .Normal)
+        followButton.titleLabel!.font = UIFont.customFontOfSize(10)
+        followButton.layer.cornerRadius = kScale(23/2)
+        followButton.layer.borderColor = kCommonColor.CGColor
+        followButton.layer.borderWidth = 1
+        contentView.addSubview(followButton)
+        followButton.snp.makeConstraints { (make) in
+            make.right.equalTo(followButton.superview!).offset(kScale(-16))
+            make.size.equalTo(kSize(48, height: 23))
+            make.centerY.equalTo(headImgView)
         }
         
         bigImgView = UIImageView()

@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 private let recommendHotmanTableViewCellIdentifier = "recommendHotmanTableViewCellId"
+private let homeCellId = "homeCellId"
 
 class HomeViewController: YGBaseViewController {
     var tableView: UITableView!
@@ -37,8 +38,10 @@ class HomeViewController: YGBaseViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .None
         tableView.tableFooterView = UIView()
+        tableView.estimatedRowHeight = kHeight(500)
         view.addSubview(tableView)
         tableView.registerClass(RecommendHotmanTableViewCell.self, forCellReuseIdentifier: recommendHotmanTableViewCellIdentifier)
+        tableView.registerClass(HomeCell.self, forCellReuseIdentifier: homeCellId)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
         }
@@ -87,16 +90,25 @@ extension HomeViewController {
             cell.collectionViewSetDelegate(self, indexPath: indexPath)
             return cell
         } else {
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCellWithIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCell
+            return cell
         }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else {
+            return 3
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return kHeight(213)
+        if indexPath.section == 0 {
+            return kHeight(213)
+        } else {
+            return UITableViewAutomaticDimension
+        }
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -114,7 +126,7 @@ extension HomeViewController {
         if section == 0 {
             return kHeight(43)
         } else {
-            return kHeight(10)
+            return 0.01
         }
     }
 }
@@ -122,15 +134,13 @@ extension HomeViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(recommendHotmanCollectionCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanCollectionCell
         cell.nameLabel.text = "刘亚倩"
         cell.jobLabel.text = "车模"
-        cell.leftText = "混血"
-        cell.rightText = "轮廓清晰"
         return cell
     }
     
@@ -145,6 +155,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if indexPath.item == 1 {
             let vc = OrganizationViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+        } else {
         }
     }
 }
