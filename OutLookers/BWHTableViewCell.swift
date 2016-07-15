@@ -8,8 +8,17 @@
 
 import UIKit
 
+let hTag = 1050
+let wTag = 1051
+let bTag = 1052
+
+protocol BWHCellDelegate: class {
+    func bwhCellTextFieldEndEdting(textField: UITextField)
+}
+
 class BWHTableViewCell: UITableViewCell {
 
+    weak var delegate: BWHCellDelegate!
     var label: UILabel!
     var bTF: UITextField!   // 胸
     var wTF: UITextField!   // 腰
@@ -40,6 +49,7 @@ class BWHTableViewCell: UITableViewCell {
         }
         
         hTF = UITextField()
+        hTF.tag = hTag
         hTF.delegate = self
         hTF.borderStyle = .Line
         hTF.font = UIFont.customFontOfSize(14)
@@ -61,6 +71,7 @@ class BWHTableViewCell: UITableViewCell {
         }
         
         wTF = UITextField()
+        wTF.tag = wTag
         wTF.delegate = self
         wTF.borderStyle = .Line
         wTF.font = UIFont.customFontOfSize(14)
@@ -82,6 +93,7 @@ class BWHTableViewCell: UITableViewCell {
         }
         
         bTF = UITextField()
+        bTF.tag = bTag
         bTF.delegate = self
         bTF.borderStyle = .Line
         bTF.font = UIFont.customFontOfSize(14)
@@ -111,6 +123,8 @@ class BWHTableViewCell: UITableViewCell {
 
 extension BWHTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
-        
+        if delegate != nil {
+            delegate.bwhCellTextFieldEndEdting(textField)
+        }
     }
 }

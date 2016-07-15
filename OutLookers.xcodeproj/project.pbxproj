@@ -125,6 +125,7 @@
 		E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E41C22DF1D113B9500F58250 /* Assets.xcassets */; };
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
 		E41C22F91D113B9500F58250 /* OutLookersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22F81D113B9500F58250 /* OutLookersUITests.swift */; };
+		E41DD9211D38E5E700E5E7E9 /* PersonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9201D38E5E700E5E7E9 /* PersonFile.swift */; };
 		E4272DDD1D17F25B00BE4053 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4272DDC1D17F25B00BE4053 /* area.plist */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
@@ -344,6 +345,7 @@
 		E41C22F41D113B9500F58250 /* OutLookersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OutLookersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41C22F81D113B9500F58250 /* OutLookersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutLookersUITests.swift; sourceTree = "<group>"; };
 		E41C22FA1D113B9500F58250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E41DD9201D38E5E700E5E7E9 /* PersonFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonFile.swift; path = OutLookers/PersonFile.swift; sourceTree = SOURCE_ROOT; };
 		E4272DDC1D17F25B00BE4053 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = area.plist; path = OutLookers/area.plist; sourceTree = SOURCE_ROOT; };
 		E4272DE61D17F60100BE4053 /* CitiesData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesData.h; path = OutLookers/CitiesData.h; sourceTree = SOURCE_ROOT; };
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
@@ -832,6 +834,7 @@
 		E41C6C601D113F350013031D /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				E41DD91F1D38E5D600E5E7E9 /* Model */,
 				D830877E1D27B3DA009CFE03 /* View */,
 				D81F453D1D145B3D004D9192 /* Controller */,
 			);
@@ -879,6 +882,14 @@
 				D8F526AA1D15691F000C8F91 /* InfoPlist.strings */,
 			);
 			path = OtherSource;
+			sourceTree = "<group>";
+		};
+		E41DD91F1D38E5D600E5E7E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E41DD9201D38E5E700E5E7E9 /* PersonFile.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		E4272E021D19327800BE4053 /* VPImageCropper */ = {
@@ -1442,6 +1453,7 @@
 				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,
 				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,
 				D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */,
+				E41DD9211D38E5E700E5E7E9 /* PersonFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

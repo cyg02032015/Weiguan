@@ -9,7 +9,7 @@
 import UIKit
 
 private extension Selector {
-    static let tapEditButton = #selector(PersonFileViewController.tapEditButton(_:))
+    static let tapEditButton = #selector(PersonFileHeadView.tapEditButton(_:))
 }
 
 protocol PersonFileHeadViewDelegate: class {
