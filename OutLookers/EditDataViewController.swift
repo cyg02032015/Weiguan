@@ -144,7 +144,8 @@ extension EditDataViewController {
                 presentViewController(sheet, animated: true, completion: nil)
             }
         } else if indexPath.section == 3 {
-            
+            let vc = PersonFileViewController()
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
