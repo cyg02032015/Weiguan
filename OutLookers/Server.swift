@@ -83,4 +83,28 @@ class Server {
                 handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
+    /// 机构认证
+    class func organizationAuth(request: OrganizeRequest, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId":request.userId,
+            "type":request.type,
+            "name":request.name,
+            "license":request.license,
+            "adds":request.adds,
+            "linkman":request.linkman,
+            "phone":request.phone,
+            "photo":request.photo
+        ]
+        HttpTool.post(API.organizationAuth, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+            }) { (error) in
+                handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
 }

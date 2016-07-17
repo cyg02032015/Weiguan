@@ -118,4 +118,21 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.label.text = titles[indexPath.item]
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.item == 0 {
+            
+        } else if indexPath.item == 1 {
+            
+        } else if indexPath.item == 2 {
+            
+        } else if indexPath.item == 3 {
+            
+        } else if indexPath.item == 4 {
+            
+        } else if indexPath.item == 5 {
+            let vc = AuthenticationViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }

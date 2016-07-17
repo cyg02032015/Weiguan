@@ -51,4 +51,6 @@ struct API {
     static let editProfilePersonDocument = baseURL + "/api/release/v1/archives/"
     /// 发送获取验证码
     static let getVerifyCode = baseURL + "/api/personal/v1/mobile/verify"
+    /// 机构认证
+    static let organizationAuth = baseURL + "/api/authentication/v1/identity/agency"
 }

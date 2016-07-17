@@ -10,7 +10,6 @@ import UIKit
 
 class YGBaseViewController: UIViewController {
     
-    
     //MARK: -LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +18,13 @@ class YGBaseViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if self.tabBarController?.tabBar.subviews.count > 2 {
+            for child in self.tabBarController!.tabBar.subviews {
+                if child.isKindOfClass(UIControl.self) {
+                    child.removeFromSuperview()
+                }
+            }
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {

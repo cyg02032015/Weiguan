@@ -4,7 +4,7 @@
 use_frameworks!
 
 target 'OutLookers' do
-
+pod 'HyphenateFullSDK', :git => 'https://github.com/easemob/hyphenate-full-cocoapods.git'
 pod 'Alamofire', '~> 3.4.1'
 pod 'SwiftyJSON', '~> 2.3.2'
 pod 'SnapKit', '~> 0.30.0.beta1'

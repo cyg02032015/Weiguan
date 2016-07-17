@@ -46,4 +46,9 @@ extension HotManViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(hotmanCellId, forIndexPath: indexPath) as! HotmanCell
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = DynamicDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

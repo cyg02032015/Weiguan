@@ -10,6 +10,11 @@
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
 		C8E0CF148F916A2B78E0689E /* Pods_OutLookers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */; };
+		D819908F1D3BA8F3007734C0 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819908E1D3BA8F3007734C0 /* CommentCell.swift */; };
+		D81992081D3BBE2D007734C0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992071D3BBE2D007734C0 /* AuthenticationViewController.swift */; };
+		D819920A1D3BC3AE007734C0 /* OrganizeAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */; };
+		D819920C1D3BC699007734C0 /* BusinessLicenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */; };
+		D819920E1D3BD0F2007734C0 /* OrganizeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819920D1D3BD0F2007734C0 /* OrganizeRequest.swift */; };
 		D81F44F71D118D15004D9192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */; };
 		D81F44F81D118D15004D9192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F51D118D15004D9192 /* Main.storyboard */; };
 		D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44F91D118D43004D9192 /* CGRect+EX.swift */; };
@@ -95,6 +100,8 @@
 		D870C7431D3B5300003B7A09 /* PersonCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */; };
 		D870C7451D3B5473003B7A09 /* PersonCharacterHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */; };
 		D870C7471D3B8170003B7A09 /* PersonCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7461D3B816F003B7A09 /* PersonCharacter.swift */; };
+		D870C7491D3B99BF003B7A09 /* DynamicDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7481D3B99BF003B7A09 /* DynamicDetailViewController.swift */; };
+		D870C74B1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C74A1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift */; };
 		D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */; };
 		D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */; };
 		D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FF31D1DA0220038EE73 /* TZAssetCell.m */; };
@@ -208,6 +215,11 @@
 		53F25489BE546B333CB5780D /* Pods-OutLookers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookers.release.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookers/Pods-OutLookers.release.xcconfig"; sourceTree = "<group>"; };
 		89AE0346E31CFEEDB9FD43B1 /* Pods-OutLookersUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.release.xcconfig"; sourceTree = "<group>"; };
 		985BDA0435E8BA97DFE33E62 /* Pods-OutLookersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersTests/Pods-OutLookersTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D819908E1D3BA8F3007734C0 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentCell.swift; path = OutLookers/CommentCell.swift; sourceTree = SOURCE_ROOT; };
+		D81992071D3BBE2D007734C0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = OutLookers/AuthenticationViewController.swift; sourceTree = SOURCE_ROOT; };
+		D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrganizeAuthViewController.swift; path = OutLookers/OrganizeAuthViewController.swift; sourceTree = SOURCE_ROOT; };
+		D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BusinessLicenceCell.swift; path = OutLookers/BusinessLicenceCell.swift; sourceTree = SOURCE_ROOT; };
+		D819920D1D3BD0F2007734C0 /* OrganizeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrganizeRequest.swift; path = OutLookers/OrganizeRequest.swift; sourceTree = SOURCE_ROOT; };
 		D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OutLookers/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F51D118D15004D9192 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = OutLookers/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OutLookers-Bridging-Header.h"; path = "OutLookers/OutLookers-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -309,6 +321,8 @@
 		D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonCharacterViewController.swift; path = OutLookers/PersonCharacterViewController.swift; sourceTree = SOURCE_ROOT; };
 		D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonCharacterHeadView.swift; path = OutLookers/PersonCharacterHeadView.swift; sourceTree = SOURCE_ROOT; };
 		D870C7461D3B816F003B7A09 /* PersonCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonCharacter.swift; path = OutLookers/PersonCharacter.swift; sourceTree = SOURCE_ROOT; };
+		D870C7481D3B99BF003B7A09 /* DynamicDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicDetailViewController.swift; path = OutLookers/DynamicDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		D870C74A1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicDetailVideoCell.swift; path = OutLookers/DynamicDetailVideoCell.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogFormatter.swift; path = OutLookers/LogFormatter.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BudgetPriceCell.swift; path = OutLookers/BudgetPriceCell.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FF21D1DA0220038EE73 /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
@@ -480,6 +494,8 @@
 				D8B6414D1D36B12500DF916D /* EditDataViewController.swift */,
 				E4473EBE1D37A472000CEEF2 /* PersonFileViewController.swift */,
 				D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */,
+				D81992071D3BBE2D007734C0 /* AuthenticationViewController.swift */,
+				D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -610,6 +626,7 @@
 				E4473EC21D38C94F000CEEF2 /* BWHTableViewCell.swift */,
 				E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */,
 				D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */,
+				D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -629,6 +646,7 @@
 				D870C7321D392B24003B7A09 /* SquareViewController.swift */,
 				D870C7351D393236003B7A09 /* HotManViewController.swift */,
 				D870C7371D393250003B7A09 /* CircularViewController.swift */,
+				D870C7481D3B99BF003B7A09 /* DynamicDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -638,6 +656,8 @@
 			children = (
 				D870C7391D3932D7003B7A09 /* HotmanCell.swift */,
 				D870C73B1D393310003B7A09 /* CircularCell.swift */,
+				D870C74A1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift */,
+				D819908E1D3BA8F3007734C0 /* CommentCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -662,6 +682,7 @@
 			isa = PBXGroup;
 			children = (
 				D870C7401D394B67003B7A09 /* VerifyRequest.swift */,
+				D819920D1D3BD0F2007734C0 /* OrganizeRequest.swift */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1370,6 +1391,7 @@
 				D8B6414C1D36A4C900DF916D /* TalentDetailCell.swift in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
+				D81992081D3BBE2D007734C0 /* AuthenticationViewController.swift in Sources */,
 				E446FA111D2E10E1003DFC1E /* TalentWorksCollectionCell.swift in Sources */,
 				D870C7411D394B67003B7A09 /* VerifyRequest.swift in Sources */,
 				D870C7381D393250003B7A09 /* CircularViewController.swift in Sources */,
@@ -1394,6 +1416,7 @@
 				E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */,
 				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
+				D819920E1D3BD0F2007734C0 /* OrganizeRequest.swift in Sources */,
 				D8AA10061D1DA0220038EE73 /* TZAssetModel.m in Sources */,
 				D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */,
 				D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */,
@@ -1415,6 +1438,7 @@
 				E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */,
 				E4E5DECB1D179BD200CB8535 /* ArrowEditCell.swift in Sources */,
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
+				D819920A1D3BC3AE007734C0 /* OrganizeAuthViewController.swift in Sources */,
 				E4E5DECF1D179BD200CB8535 /* WorkDetailCell.swift in Sources */,
 				D8AA100D1D1DA0220038EE73 /* TZVideoPlayerController.m in Sources */,
 				D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */,
@@ -1454,6 +1478,7 @@
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
 				D82F8E1C1D30EEAF00A24CDB /* OGDataViewController.swift in Sources */,
 				D8B6413E1D354EFC00DF916D /* PHOrderListViewController.swift in Sources */,
+				D870C7491D3B99BF003B7A09 /* DynamicDetailViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
 				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
 				D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */,
@@ -1504,6 +1529,7 @@
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 				D82F8E0A1D2C0D9400A24CDB /* TYSlidePageScrollViewController.m in Sources */,
 				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,
+				D819920C1D3BC699007734C0 /* BusinessLicenceCell.swift in Sources */,
 				E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */,
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
@@ -1513,8 +1539,10 @@
 				D82F8E1A1D30ED9200A24CDB /* OrganizationViewController.swift in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
 				D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */,
+				D870C74B1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift in Sources */,
 				E4473EB71D3625C7000CEEF2 /* YKVideoTrimmer.swift in Sources */,
 				E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */,
+				D819908F1D3BA8F3007734C0 /* CommentCell.swift in Sources */,
 				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
 				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,
 				D870C7331D392B24003B7A09 /* SquareViewController.swift in Sources */,
@@ -1602,6 +1630,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1662,6 +1691,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = OutLookers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1697,6 +1727,7 @@
 			baseConfigurationReference = 985BDA0435E8BA97DFE33E62 /* Pods-OutLookersTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = OutLookersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngkook.OutLookersTests;
@@ -1722,6 +1753,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */;
 			buildSettings = {
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = OutLookersUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngkook.OutLookersUITests;

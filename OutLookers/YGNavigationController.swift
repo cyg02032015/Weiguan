@@ -8,34 +8,12 @@
 
 import UIKit
 
-private extension Selector {
-    static let removeSystemTabbar = #selector(YGNavigationController.removeSystemTabbar)
-}
-
 public class YGNavigationController: UINavigationController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: .removeSystemTabbar, name: "removeMoreUITabbar", object: nil)
     }
 
-    // popToRootViewController时tabbar重复bug的修正
-    func removeSystemTabbar() {
-        guard self.tabBarController?.tabBar.subviews.count > 0 else {
-            return
-        }
-        
-        for child in self.tabBarController!.tabBar.subviews {
-            if child.isKindOfClass(UIControl.classForCoder()) {
-                child.removeFromSuperview()
-            }
-        }
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
     
     private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

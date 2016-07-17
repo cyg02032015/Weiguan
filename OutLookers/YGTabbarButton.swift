@@ -52,19 +52,10 @@ class YGTabbarButton: UIButton {
     }
     
     override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
-        let image = self.imageForState(.Normal)
-        if image == nil {
-            return CGRectZero
-        }
-//        return CGRect(x: 0, y: 2, width: contentRect.size.width, height: image!.size.height - 8)
         return CGRect(x: self.gg_width/2 - 15, y: 3, width: 30, height: 30)
     }
     
     override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
-        let image = self.imageForState(.Normal)
-        if image == nil {
-            return CGRectZero
-        }
         return CGRect(x: 0, y: self.gg_height - 14, width: contentRect.size.width, height: 10)
     }
     

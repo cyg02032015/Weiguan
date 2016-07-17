@@ -60,7 +60,6 @@ public class YGTabbar: UIView {
             centerBtn.clipsToBounds = true
             centerBtn.setImage(UIImage(named: "add"), forState: .Normal)
             centerContainer.addSubview(centerBtn)
-//            centerBtn.frame = CGRect(x: lastButton!.right, y: 0, width: self.width/CGFloat(MaxTabButtonCount), height: self.height)
             centerContainer.snp.makeConstraints { make in
                 make.left.equalTo(lastButton!.snp.right)
                 make.width.equalTo(centerContainer.superview!).multipliedBy(1.0/CGFloat(MaxTabButtonCount))
@@ -78,7 +77,6 @@ public class YGTabbar: UIView {
         }
         let btn = YGTabbarButton()
         addSubview(btn)
-//        btn.frame = CGRect(x: lastButton == nil ? 0 : lastButton!.right, y: 0, width: self.width/CGFloat(MaxTabButtonCount), height: self.height)
         btn.snp.makeConstraints { make in
             make.left.equalTo(lastButton == nil ? btn.superview! : lastButton!.snp.right)
             make.top.bottom.equalTo(btn.superview!)
