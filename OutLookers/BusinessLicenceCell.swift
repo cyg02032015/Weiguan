@@ -18,7 +18,7 @@ protocol BusinessLicenceCellDelegate: class {
 
 class BusinessLicenceCell: UITableViewCell {
 
-    var delegate: BusinessLicenceCellDelegate!
+    weak var delegate: BusinessLicenceCellDelegate!
     var desc: UILabel!
     var imgView: TouchImageView!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

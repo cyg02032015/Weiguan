@@ -64,18 +64,16 @@ class OrganizeAuthViewController: YGBaseViewController {
     }
     
     func tapCommit(sender: UIButton) {
-        
-        self.navigationController?.popToRootViewControllerAnimated(true)
-//        YKToast.show("正在提交")
-//        Server.organizationAuth(organizeRequest) { [unowned self](success, msg, value) in
-//            YKToast.dismiss()
-//            if success {
-//                LogInfo(value!)
-//                self.navigationController?.popToRootViewControllerAnimated(true)
-//            } else {
-//                LogError(msg!)
-//            }
-//        }
+        YKToast.show("正在提交")
+        Server.organizationAuth(organizeRequest) { [unowned self](success, msg, value) in
+            YKToast.dismiss()
+            if success {
+                LogInfo(value!)
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            } else {
+                LogError(msg!)
+            }
+        }
     }
     
     func checkRequest() {
