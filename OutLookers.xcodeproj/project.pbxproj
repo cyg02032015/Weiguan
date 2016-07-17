@@ -92,6 +92,9 @@
 		D870C73C1D393310003B7A09 /* CircularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C73B1D393310003B7A09 /* CircularCell.swift */; };
 		D870C73E1D393D3E003B7A09 /* CircelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C73D1D393D3E003B7A09 /* CircelView.swift */; };
 		D870C7411D394B67003B7A09 /* VerifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7401D394B67003B7A09 /* VerifyRequest.swift */; };
+		D870C7431D3B5300003B7A09 /* PersonCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */; };
+		D870C7451D3B5473003B7A09 /* PersonCharacterHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */; };
+		D870C7471D3B8170003B7A09 /* PersonCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870C7461D3B816F003B7A09 /* PersonCharacter.swift */; };
 		D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */; };
 		D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */; };
 		D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA0FF31D1DA0220038EE73 /* TZAssetCell.m */; };
@@ -303,6 +306,9 @@
 		D870C73B1D393310003B7A09 /* CircularCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularCell.swift; path = OutLookers/CircularCell.swift; sourceTree = SOURCE_ROOT; };
 		D870C73D1D393D3E003B7A09 /* CircelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircelView.swift; path = OutLookers/CircelView.swift; sourceTree = SOURCE_ROOT; };
 		D870C7401D394B67003B7A09 /* VerifyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyRequest.swift; path = OutLookers/VerifyRequest.swift; sourceTree = SOURCE_ROOT; };
+		D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonCharacterViewController.swift; path = OutLookers/PersonCharacterViewController.swift; sourceTree = SOURCE_ROOT; };
+		D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonCharacterHeadView.swift; path = OutLookers/PersonCharacterHeadView.swift; sourceTree = SOURCE_ROOT; };
+		D870C7461D3B816F003B7A09 /* PersonCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonCharacter.swift; path = OutLookers/PersonCharacter.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogFormatter.swift; path = OutLookers/LogFormatter.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BudgetPriceCell.swift; path = OutLookers/BudgetPriceCell.swift; sourceTree = SOURCE_ROOT; };
 		D8AA0FF21D1DA0220038EE73 /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
@@ -473,6 +479,7 @@
 				D8F526A41D154CEB000C8F91 /* LogViewController.swift */,
 				D8B6414D1D36B12500DF916D /* EditDataViewController.swift */,
 				E4473EBE1D37A472000CEEF2 /* PersonFileViewController.swift */,
+				D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -602,6 +609,7 @@
 				E4473EC01D38C4CA000CEEF2 /* PersonFileHeadView.swift */,
 				E4473EC21D38C94F000CEEF2 /* BWHTableViewCell.swift */,
 				E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */,
+				D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -951,6 +959,7 @@
 			isa = PBXGroup;
 			children = (
 				E41DD9201D38E5E700E5E7E9 /* PersonFile.swift */,
+				D870C7461D3B816F003B7A09 /* PersonCharacter.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1437,7 +1446,9 @@
 				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
+				D870C7471D3B8170003B7A09 /* PersonCharacter.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
+				D870C7431D3B5300003B7A09 /* PersonCharacterViewController.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
@@ -1509,6 +1520,7 @@
 				D870C7331D392B24003B7A09 /* SquareViewController.swift in Sources */,
 				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,
 				D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */,
+				D870C7451D3B5473003B7A09 /* PersonCharacterHeadView.swift in Sources */,
 				E41DD9211D38E5E700E5E7E9 /* PersonFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

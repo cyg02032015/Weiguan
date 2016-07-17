@@ -11,6 +11,22 @@ import UIKit
 class SkillCell: UICollectionViewCell {
     
     var skill: UIButton!
+    var section: Int = 0
+    var row: Int = 0
+    var _isSelected: Bool!
+    var isSelected: Bool! {
+        get {
+            return _isSelected
+        }
+        set {
+            _isSelected = newValue
+            if newValue == true {
+                skill.backgroundColor = kCommonColor
+            } else {
+                skill.backgroundColor = kLineColor
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

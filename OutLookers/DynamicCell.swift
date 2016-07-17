@@ -131,7 +131,7 @@ class DynamicCell: UITableViewCell {
         let praiseBtn = UIButton()
         praiseBtn.setImage(UIImage(named: "like_normal"), forState: .Normal)
         praiseBtn.setTitle("赞TA", forState: .Normal)
-        praiseBtn.titleLabel?.font = UIFont.customFontOfSize(22)
+        praiseBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         praiseBtn.setTitleColor(kGrayColor, forState: .Normal)
         praiseTAContainer.addSubview(praiseBtn)
         
@@ -163,7 +163,7 @@ class DynamicCell: UITableViewCell {
         let commentBtn = UIButton()
         commentBtn.setImage(UIImage(named: "dis"), forState: .Normal)
         commentBtn.setTitle("评论", forState: .Normal)
-        commentBtn.titleLabel?.font = UIFont.customFontOfSize(22)
+        commentBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         commentBtn.setTitleColor(kGrayColor, forState: .Normal)
         commentContainer.addSubview(commentBtn)
         
@@ -202,7 +202,7 @@ class DynamicCell: UITableViewCell {
         let shareBtn = UIButton()
         shareBtn.setImage(UIImage(named: "share"), forState: .Normal)
         shareBtn.setTitle("评论", forState: .Normal)
-        shareBtn.titleLabel?.font = UIFont.customFontOfSize(22)
+        shareBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         shareBtn.setTitleColor(kGrayColor, forState: .Normal)
         shareContainer.addSubview(shareBtn)
 

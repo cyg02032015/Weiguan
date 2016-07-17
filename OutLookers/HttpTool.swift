@@ -21,6 +21,7 @@ public class HttpTool {
     }
     
     class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
+        LogDebug("url = \(url)")
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers: nil).responseJSON { (response) in
             switch response.result {
             case .Success(let Value):

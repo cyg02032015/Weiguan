@@ -46,7 +46,7 @@ struct API {
     /// 发现-红人
     static let findHotman = baseURL + "/api/release/v1/user/get"
     /// 编辑资料-个人特色-个人特征
-    static let editProfile = baseURL + "/api/release/v1/features/select"
+    static let personCharacter = baseURL + "/api/personal/v1/features/select"
     /// 编辑资料-个人档案
     static let editProfilePersonDocument = baseURL + "/api/release/v1/archives/"
     /// 发送获取验证码

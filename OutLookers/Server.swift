@@ -69,4 +69,18 @@ class Server {
                 handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
+    /// 编辑资料-个人特色-个人特征
+    class func getPersonCharacter(handler:(success: Bool, msg: String?, value: [PersonCharacter]?)->Void) {
+        HttpTool.post(API.personCharacter, parameters: nil, complete: { (response) in
+            let info = PersonCharacter(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+            }) { (error) in
+                handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
 }

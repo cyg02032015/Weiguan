@@ -169,7 +169,8 @@ extension PersonFileViewController {
 
 extension PersonFileViewController: PersonFileHeadViewDelegate, BWHCellDelegate {
     func personFileTapEditButton(sender: UIButton) {
-        LogInfo("section = \(sender.tag)")
+        let vc = PersonCharacterViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func bwhCellTextFieldEndEdting(textField: UITextField) {
