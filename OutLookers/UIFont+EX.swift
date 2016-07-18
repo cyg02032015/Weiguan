@@ -61,6 +61,16 @@ extension UIFont {
         }
         return UIFont(name: "STHeitiSC-Medium", size: size)!
     }
+    
+    class func customMoneyFontOfSize(a: CGFloat) -> UIFont {
+        var size: CGFloat!
+        if Device.size() == .Screen5_5Inch {
+            size = a * scale
+        } else {
+            size = a
+        }
+        return UIFont(name: "Helvetica-Bold", size: size)!
+    }
 }
 
 

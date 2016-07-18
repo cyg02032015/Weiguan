@@ -20,6 +20,9 @@
 		D81992271D3D14F3007734C0 /* MyEnterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992261D3D14F3007734C0 /* MyEnterCell.swift */; };
 		D81992291D3D1F3A007734C0 /* MyReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992281D3D1F3A007734C0 /* MyReleaseViewController.swift */; };
 		D819922B1D3D1F7B007734C0 /* MyReleaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819922A1D3D1F7B007734C0 /* MyReleaseCell.swift */; };
+		D81992311D3D2E5A007734C0 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992301D3D2E5A007734C0 /* MyAccountViewController.swift */; };
+		D81992331D3D2F2E007734C0 /* MyAccountHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992321D3D2F2E007734C0 /* MyAccountHeadCell.swift */; };
+		D81992351D3D31F1007734C0 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992341D3D31F1007734C0 /* MyAccountCell.swift */; };
 		D81F44F71D118D15004D9192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */; };
 		D81F44F81D118D15004D9192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F51D118D15004D9192 /* Main.storyboard */; };
 		D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44F91D118D43004D9192 /* CGRect+EX.swift */; };
@@ -235,6 +238,9 @@
 		D81992261D3D14F3007734C0 /* MyEnterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyEnterCell.swift; path = OutLookers/MyEnterCell.swift; sourceTree = SOURCE_ROOT; };
 		D81992281D3D1F3A007734C0 /* MyReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyReleaseViewController.swift; path = OutLookers/MyReleaseViewController.swift; sourceTree = SOURCE_ROOT; };
 		D819922A1D3D1F7B007734C0 /* MyReleaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyReleaseCell.swift; path = OutLookers/MyReleaseCell.swift; sourceTree = SOURCE_ROOT; };
+		D81992301D3D2E5A007734C0 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAccountViewController.swift; path = OutLookers/MyAccountViewController.swift; sourceTree = SOURCE_ROOT; };
+		D81992321D3D2F2E007734C0 /* MyAccountHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAccountHeadCell.swift; path = OutLookers/MyAccountHeadCell.swift; sourceTree = SOURCE_ROOT; };
+		D81992341D3D31F1007734C0 /* MyAccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAccountCell.swift; path = OutLookers/MyAccountCell.swift; sourceTree = SOURCE_ROOT; };
 		D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OutLookers/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F51D118D15004D9192 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = OutLookers/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OutLookers-Bridging-Header.h"; path = "OutLookers/OutLookers-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -567,6 +573,23 @@
 			name = MyTalent;
 			sourceTree = "<group>";
 		};
+		D819922E1D3D2E3B007734C0 /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				D81992301D3D2E5A007734C0 /* MyAccountViewController.swift */,
+			);
+			name = MyAccount;
+			sourceTree = "<group>";
+		};
+		D819922F1D3D2E45007734C0 /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				D81992321D3D2F2E007734C0 /* MyAccountHeadCell.swift */,
+				D81992341D3D31F1007734C0 /* MyAccountCell.swift */,
+			);
+			name = MyAccount;
+			sourceTree = "<group>";
+		};
 		D81F452F1D12CF45004D9192 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +606,7 @@
 		D81F453D1D145B3D004D9192 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D819922E1D3D2E3B007734C0 /* MyAccount */,
 				D819922D1D3D201E007734C0 /* MyTalent */,
 				D81992201D3D1219007734C0 /* MyCircular */,
 				D819921D1D3D113F007734C0 /* PersonEdit */,
@@ -709,6 +733,7 @@
 		D830877E1D27B3DA009CFE03 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D819922F1D3D2E45007734C0 /* MyAccount */,
 				D819922C1D3D2011007734C0 /* MyTalent */,
 				D81992251D3D14CA007734C0 /* MyEnter */,
 				D819921F1D3D11B9007734C0 /* Auth */,
@@ -1535,6 +1560,7 @@
 				D83087801D27B400009CFE03 /* MessageCell.swift in Sources */,
 				D8B641401D354FBE00DF916D /* TaJoinViewController.swift in Sources */,
 				D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */,
+				D81992331D3D2F2E007734C0 /* MyAccountHeadCell.swift in Sources */,
 				D82F8E281D33E47300A24CDB /* ReleaseNoticeCell.swift in Sources */,
 				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
 				D83087821D27B805009CFE03 /* MineCollectCell.swift in Sources */,
@@ -1557,6 +1583,7 @@
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,
+				D81992311D3D2E5A007734C0 /* MyAccountViewController.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
 				D870C7471D3B8170003B7A09 /* PersonCharacter.swift in Sources */,
@@ -1612,6 +1639,7 @@
 				D82F8DEE1D28375300A24CDB /* ArtistInfo.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,
+				D81992351D3D31F1007734C0 /* MyAccountCell.swift in Sources */,
 				D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */,
 				D8AA100B1D1DA0220038EE73 /* TZPhotoPreviewCell.m in Sources */,
 				E47ADF741D1D161C00A2F4BD /* ShareCollectionCell.swift in Sources */,

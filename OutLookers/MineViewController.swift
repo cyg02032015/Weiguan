@@ -123,7 +123,8 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
         if indexPath.item == 0 {
             
         } else if indexPath.item == 1 {
-            
+            let vc = MyAccountViewController()
+            navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 2 {
             
         } else if indexPath.item == 3 {
