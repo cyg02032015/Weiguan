@@ -144,6 +144,9 @@
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
 		E41C22F91D113B9500F58250 /* OutLookersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22F81D113B9500F58250 /* OutLookersUITests.swift */; };
 		E41DD9211D38E5E700E5E7E9 /* PersonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9201D38E5E700E5E7E9 /* PersonFile.swift */; };
+		E41DD9231D3C944400E5E7E9 /* TalentAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */; };
+		E41DD9251D3CA76E00E5E7E9 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9241D3CA76E00E5E7E9 /* BaseRequest.swift */; };
+		E41DD9271D3CA86200E5E7E9 /* IsAuthResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9261D3CA86200E5E7E9 /* IsAuthResp.swift */; };
 		E4272DDD1D17F25B00BE4053 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4272DDC1D17F25B00BE4053 /* area.plist */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
@@ -382,6 +385,9 @@
 		E41C22F81D113B9500F58250 /* OutLookersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutLookersUITests.swift; sourceTree = "<group>"; };
 		E41C22FA1D113B9500F58250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E41DD9201D38E5E700E5E7E9 /* PersonFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonFile.swift; path = OutLookers/PersonFile.swift; sourceTree = SOURCE_ROOT; };
+		E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentAuthViewController.swift; path = OutLookers/TalentAuthViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41DD9241D3CA76E00E5E7E9 /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseRequest.swift; path = OutLookers/BaseRequest.swift; sourceTree = SOURCE_ROOT; };
+		E41DD9261D3CA86200E5E7E9 /* IsAuthResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IsAuthResp.swift; path = OutLookers/IsAuthResp.swift; sourceTree = SOURCE_ROOT; };
 		E4272DDC1D17F25B00BE4053 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = area.plist; path = OutLookers/area.plist; sourceTree = SOURCE_ROOT; };
 		E4272DE61D17F60100BE4053 /* CitiesData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesData.h; path = OutLookers/CitiesData.h; sourceTree = SOURCE_ROOT; };
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
@@ -496,6 +502,7 @@
 				D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */,
 				D81992071D3BBE2D007734C0 /* AuthenticationViewController.swift */,
 				D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */,
+				E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -676,15 +683,6 @@
 				D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */,
 			);
 			name = Public;
-			sourceTree = "<group>";
-		};
-		D870C73F1D394B4F003B7A09 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				D870C7401D394B67003B7A09 /* VerifyRequest.swift */,
-				D819920D1D3BD0F2007734C0 /* OrganizeRequest.swift */,
-			);
-			name = Request;
 			sourceTree = "<group>";
 		};
 		D8AA0FF11D1DA0220038EE73 /* TZImagePickerController */ = {
@@ -933,7 +931,6 @@
 		E41C6C611D113F350013031D /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				D870C73F1D394B4F003B7A09 /* Request */,
 				D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */,
 				D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */,
 				D82F8DE31D28373400A24CDB /* BaseResponse.swift */,
@@ -979,8 +976,12 @@
 		E41DD91F1D38E5D600E5E7E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D870C7401D394B67003B7A09 /* VerifyRequest.swift */,
+				D819920D1D3BD0F2007734C0 /* OrganizeRequest.swift */,
+				E41DD9241D3CA76E00E5E7E9 /* BaseRequest.swift */,
 				E41DD9201D38E5E700E5E7E9 /* PersonFile.swift */,
 				D870C7461D3B816F003B7A09 /* PersonCharacter.swift */,
+				E41DD9261D3CA86200E5E7E9 /* IsAuthResp.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1458,6 +1459,7 @@
 				D8B641521D3919EB00DF916D /* HomeCell.swift in Sources */,
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
 				D82F8E141D2E9D0000A24CDB /* DataTableViewCell.swift in Sources */,
+				E41DD9251D3CA76E00E5E7E9 /* BaseRequest.swift in Sources */,
 				D82F8E121D2E9CC100A24CDB /* DataViewController.swift in Sources */,
 				D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
@@ -1471,6 +1473,7 @@
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
 				D870C7471D3B8170003B7A09 /* PersonCharacter.swift in Sources */,
+				E41DD9271D3CA86200E5E7E9 /* IsAuthResp.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D870C7431D3B5300003B7A09 /* PersonCharacterViewController.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
@@ -1481,6 +1484,7 @@
 				D870C7491D3B99BF003B7A09 /* DynamicDetailViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
 				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
+				E41DD9231D3C944400E5E7E9 /* TalentAuthViewController.swift in Sources */,
 				D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */,
 				E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */,
 				E4473EC11D38C4CA000CEEF2 /* PersonFileHeadView.swift in Sources */,

@@ -74,7 +74,7 @@ class PersonCharacterViewController: YGBaseViewController {
                         self.rowArray.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name, result: pid2))
                     } else if character.id == 3 {
                         self.rowArray.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name, result: pid3))
-                    } else {
+                    } else if character.id == 4 {
                         self.rowArray.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name, result: pid4))
                     }
                 }
@@ -154,6 +154,7 @@ extension PersonCharacterViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: personCharacterHeadViewId, forIndexPath: indexPath) as! PersonCharacterHeadView
         headerView.title.text = rowArray[indexPath.section].name
+        headerView.option.text = optionTitles[indexPath.section]
         return headerView
     }
 }

@@ -19,6 +19,14 @@ class AuthenticationViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        let req = BaseRequest(userId: "1")
+        Server.isAuth(req) { (success, msg, value) in
+            if success {
+                LogInfo("\(value!.authentication)   \(value!.type)")
+            } else {
+                LogError(msg!)
+            }
+        }
     }
     
     func setupSubViews() {
@@ -67,14 +75,8 @@ class AuthenticationViewController: YGBaseViewController {
     }
     
     func tapTalent(sender: UIButton) {
-        let alert = UIAlertController(title: "提示", message: "每个用户只能认证一种角色，您当前已通过粉丝认证，若继续认证则视为放弃粉丝认证", preferredStyle: .Alert)
-        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
-        let continued = UIAlertAction(title: "继续认证", style: .Default) { (action) in
-            
-        }
-        alert.addAction(cancel)
-        alert.addAction(continued)
-        presentViewController(alert, animated: true, completion: nil)
+        let vc = TalentAuthViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tapOrganization(sender: UIButton) {
@@ -83,6 +85,25 @@ class AuthenticationViewController: YGBaseViewController {
     }
     
     func tapFans(sender: UIButton) {
-        
+        showAlertController()
+    }
+    
+    func showAlertController() {
+        let alert = UIAlertController(title: "提示", message: "每个用户只能认证一种角色，您当前已通过粉丝认证，若继续认证则视为放弃粉丝认证", preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        let continued = UIAlertAction(title: "继续认证", style: .Default) { (action) in
+            let req = BaseRequest(userId: "1")
+            Server.modifyAuth(req, handler: { (success, msg, value) in
+                if success {
+                    // TODO
+                    LogInfo(value!)
+                } else {
+                    LogError(msg!)
+                }
+            })
+        }
+        alert.addAction(cancel)
+        alert.addAction(continued)
+        presentViewController(alert, animated: true, completion: nil)
     }
 }

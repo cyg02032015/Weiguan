@@ -8,7 +8,7 @@
 
 import Foundation
 
-let baseURL = "http://139.129.106.27"
+let baseURL = "http://60.205.15.7"
 
 struct API {
     /// 发布图片视频
@@ -53,4 +53,9 @@ struct API {
     static let getVerifyCode = baseURL + "/api/personal/v1/mobile/verify"
     /// 机构认证
     static let organizationAuth = baseURL + "/api/authentication/v1/identity/agency"
+    /// 是否认证
+    static let isAuth = baseURL + "/api/authentication/v1/identity/isbinding"
+    /// 变更角色-删除原有认证
+    static let authDelete = baseURL + "/api/personal/v1/identity/delete"
+    
 }

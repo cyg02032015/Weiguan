@@ -107,4 +107,34 @@ class Server {
                 handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
+    /// 是否认证
+    class func isAuth(request: BaseRequest, handler: (success: Bool, msg: String?, value: IsAuthResp?)->Void) {
+        let parameters = ["userId":request.userId]
+        HttpTool.post(API.isAuth, parameters: parameters, complete: { (response) in
+            let info = IsAuthResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+            }) { (error) in
+                handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 变更角色-删除原有认证
+    class func modifyAuth(request: BaseRequest, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = ["userId":request.userId]
+        HttpTool.post(API.authDelete, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
 }

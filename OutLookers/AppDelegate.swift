@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         
         configNavigation()
         configUMeng()
