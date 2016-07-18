@@ -130,7 +130,8 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 4 {
-            
+            let vc = MyCircularViewController()
+            navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 5 {
             let vc = AuthenticationViewController()
             navigationController?.pushViewController(vc, animated: true)

@@ -31,7 +31,6 @@ class PersonCharacterViewController: YGBaseViewController {
     var tapItem: TapItemClosure!
     var collectionView: UICollectionView!
     lazy var imgStrings = ["help", "teach ", "accompany"]
-//    lazy var sectionModel = [PersonCharaterModel]()
     lazy var optionTitles = ["（可多选）", "（可多选）", "", "（可多选）", "", ""]
     lazy var dataSources = [PersonCharacter]()
     lazy var rowArray = [PersonCharaterModel]()

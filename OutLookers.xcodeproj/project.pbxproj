@@ -15,6 +15,11 @@
 		D819920A1D3BC3AE007734C0 /* OrganizeAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */; };
 		D819920C1D3BC699007734C0 /* BusinessLicenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */; };
 		D819920E1D3BD0F2007734C0 /* OrganizeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819920D1D3BD0F2007734C0 /* OrganizeRequest.swift */; };
+		D81992221D3D1257007734C0 /* MyCircularViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992211D3D1257007734C0 /* MyCircularViewController.swift */; };
+		D81992241D3D146D007734C0 /* MyEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992231D3D146D007734C0 /* MyEnterViewController.swift */; };
+		D81992271D3D14F3007734C0 /* MyEnterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992261D3D14F3007734C0 /* MyEnterCell.swift */; };
+		D81992291D3D1F3A007734C0 /* MyReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992281D3D1F3A007734C0 /* MyReleaseViewController.swift */; };
+		D819922B1D3D1F7B007734C0 /* MyReleaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819922A1D3D1F7B007734C0 /* MyReleaseCell.swift */; };
 		D81F44F71D118D15004D9192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */; };
 		D81F44F81D118D15004D9192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F51D118D15004D9192 /* Main.storyboard */; };
 		D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44F91D118D43004D9192 /* CGRect+EX.swift */; };
@@ -225,6 +230,11 @@
 		D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrganizeAuthViewController.swift; path = OutLookers/OrganizeAuthViewController.swift; sourceTree = SOURCE_ROOT; };
 		D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BusinessLicenceCell.swift; path = OutLookers/BusinessLicenceCell.swift; sourceTree = SOURCE_ROOT; };
 		D819920D1D3BD0F2007734C0 /* OrganizeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrganizeRequest.swift; path = OutLookers/OrganizeRequest.swift; sourceTree = SOURCE_ROOT; };
+		D81992211D3D1257007734C0 /* MyCircularViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyCircularViewController.swift; path = OutLookers/MyCircularViewController.swift; sourceTree = SOURCE_ROOT; };
+		D81992231D3D146D007734C0 /* MyEnterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyEnterViewController.swift; path = OutLookers/MyEnterViewController.swift; sourceTree = SOURCE_ROOT; };
+		D81992261D3D14F3007734C0 /* MyEnterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyEnterCell.swift; path = OutLookers/MyEnterCell.swift; sourceTree = SOURCE_ROOT; };
+		D81992281D3D1F3A007734C0 /* MyReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyReleaseViewController.swift; path = OutLookers/MyReleaseViewController.swift; sourceTree = SOURCE_ROOT; };
+		D819922A1D3D1F7B007734C0 /* MyReleaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyReleaseCell.swift; path = OutLookers/MyReleaseCell.swift; sourceTree = SOURCE_ROOT; };
 		D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OutLookers/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F51D118D15004D9192 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = OutLookers/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OutLookers-Bridging-Header.h"; path = "OutLookers/OutLookers-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -482,6 +492,81 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D819921C1D3D111D007734C0 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				D81992071D3BBE2D007734C0 /* AuthenticationViewController.swift */,
+				D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */,
+				E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		D819921D1D3D113F007734C0 /* PersonEdit */ = {
+			isa = PBXGroup;
+			children = (
+				D8B6414D1D36B12500DF916D /* EditDataViewController.swift */,
+				E4473EBE1D37A472000CEEF2 /* PersonFileViewController.swift */,
+				D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */,
+			);
+			name = PersonEdit;
+			sourceTree = "<group>";
+		};
+		D819921E1D3D1156007734C0 /* PersonEdit */ = {
+			isa = PBXGroup;
+			children = (
+				E4473EBA1D373FE3000CEEF2 /* HeadImgCell.swift */,
+				E4473EBC1D375E18000CEEF2 /* PhoneBindCell.swift */,
+				E4473EC21D38C94F000CEEF2 /* BWHTableViewCell.swift */,
+				E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */,
+				D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */,
+			);
+			name = PersonEdit;
+			sourceTree = "<group>";
+		};
+		D819921F1D3D11B9007734C0 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		D81992201D3D1219007734C0 /* MyCircular */ = {
+			isa = PBXGroup;
+			children = (
+				D81992211D3D1257007734C0 /* MyCircularViewController.swift */,
+				D81992231D3D146D007734C0 /* MyEnterViewController.swift */,
+				D81992281D3D1F3A007734C0 /* MyReleaseViewController.swift */,
+			);
+			name = MyCircular;
+			sourceTree = "<group>";
+		};
+		D81992251D3D14CA007734C0 /* MyEnter */ = {
+			isa = PBXGroup;
+			children = (
+				D81992261D3D14F3007734C0 /* MyEnterCell.swift */,
+				D819922A1D3D1F7B007734C0 /* MyReleaseCell.swift */,
+			);
+			name = MyEnter;
+			sourceTree = "<group>";
+		};
+		D819922C1D3D2011007734C0 /* MyTalent */ = {
+			isa = PBXGroup;
+			children = (
+				E41DD92A1D3CC00500E5E7E9 /* MyTalentCell.swift */,
+			);
+			name = MyTalent;
+			sourceTree = "<group>";
+		};
+		D819922D1D3D201E007734C0 /* MyTalent */ = {
+			isa = PBXGroup;
+			children = (
+				E41DD9281D3CBBD000E5E7E9 /* MyTalentViewController.swift */,
+			);
+			name = MyTalent;
+			sourceTree = "<group>";
+		};
 		D81F452F1D12CF45004D9192 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,16 +583,13 @@
 		D81F453D1D145B3D004D9192 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D819922D1D3D201E007734C0 /* MyTalent */,
+				D81992201D3D1219007734C0 /* MyCircular */,
+				D819921D1D3D113F007734C0 /* PersonEdit */,
+				D819921C1D3D111D007734C0 /* Auth */,
 				D81F45271D118F5E004D9192 /* MineViewController.swift */,
 				E4E5DED01D179BE100CB8535 /* ProtocolViewController.swift */,
 				D8F526A41D154CEB000C8F91 /* LogViewController.swift */,
-				D8B6414D1D36B12500DF916D /* EditDataViewController.swift */,
-				E4473EBE1D37A472000CEEF2 /* PersonFileViewController.swift */,
-				D870C7421D3B5300003B7A09 /* PersonCharacterViewController.swift */,
-				D81992071D3BBE2D007734C0 /* AuthenticationViewController.swift */,
-				D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */,
-				E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */,
-				E41DD9281D3CBBD000E5E7E9 /* MyTalentViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -627,19 +709,16 @@
 		D830877E1D27B3DA009CFE03 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D819922C1D3D2011007734C0 /* MyTalent */,
+				D81992251D3D14CA007734C0 /* MyEnter */,
+				D819921F1D3D11B9007734C0 /* Auth */,
+				D819921E1D3D1156007734C0 /* PersonEdit */,
 				E446FA041D2612D7003DFC1E /* MineHeaderCell.swift */,
 				E446FA021D2612D7003DFC1E /* IconHeaderView.swift */,
 				D830877F1D27B400009CFE03 /* MessageCell.swift */,
 				D83087811D27B805009CFE03 /* MineCollectCell.swift */,
 				D83087831D27B958009CFE03 /* MineCollectionCell.swift */,
-				E4473EBA1D373FE3000CEEF2 /* HeadImgCell.swift */,
-				E4473EBC1D375E18000CEEF2 /* PhoneBindCell.swift */,
 				E4473EC01D38C4CA000CEEF2 /* PersonFileHeadView.swift */,
-				E4473EC21D38C94F000CEEF2 /* BWHTableViewCell.swift */,
-				E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */,
-				D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */,
-				D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */,
-				E41DD92A1D3CC00500E5E7E9 /* MyTalentCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1415,10 +1494,12 @@
 				D870C73E1D393D3E003B7A09 /* CircelView.swift in Sources */,
 				E4473EBB1D373FE3000CEEF2 /* HeadImgCell.swift in Sources */,
 				D81F45181D118D63004D9192 /* YGBaseViewController.swift in Sources */,
+				D81992221D3D1257007734C0 /* MyCircularViewController.swift in Sources */,
 				D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */,
 				D82F8DCA1D27CB6400A24CDB /* TAPageControl.m in Sources */,
 				E4473EBD1D375E18000CEEF2 /* PhoneBindCell.swift in Sources */,
 				E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */,
+				D81992291D3D1F3A007734C0 /* MyReleaseViewController.swift in Sources */,
 				D82F8DFA1D2AAC3A00A24CDB /* PHHeaderView.swift in Sources */,
 				E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */,
 				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
@@ -1492,6 +1573,7 @@
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
 				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
 				E41DD9231D3C944400E5E7E9 /* TalentAuthViewController.swift in Sources */,
+				D81992271D3D14F3007734C0 /* MyEnterCell.swift in Sources */,
 				D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */,
 				E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */,
 				E4473EC11D38C4CA000CEEF2 /* PersonFileHeadView.swift in Sources */,
@@ -1542,8 +1624,10 @@
 				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,
 				D819920C1D3BC699007734C0 /* BusinessLicenceCell.swift in Sources */,
 				E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */,
+				D819922B1D3D1F7B007734C0 /* MyReleaseCell.swift in Sources */,
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
+				D81992241D3D146D007734C0 /* MyEnterViewController.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 				E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */,
 				E41DD9291D3CBBD000E5E7E9 /* MyTalentViewController.swift in Sources */,
