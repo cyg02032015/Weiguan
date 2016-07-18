@@ -107,7 +107,7 @@ class TalentAuthViewController: YGBaseViewController {
             make.top.equalTo(custom4.snp.bottom).offset(kScale(30))
             make.height.equalTo(kScale(40))
         }
-        kBackgoundColor
+
         let layout = UICollectionViewFlowLayout()
         
         layout.itemSize = CGSize(width: (ScreenWidth - 30 - 40) / 4, height: kScale(72))

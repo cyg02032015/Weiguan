@@ -127,7 +127,8 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
         } else if indexPath.item == 2 {
             
         } else if indexPath.item == 3 {
-            
+            let vc = MyTalentViewController()
+            navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 4 {
             
         } else if indexPath.item == 5 {

@@ -17,6 +17,7 @@ class PhotoCollectionCell: UICollectionViewCell {
         }
     }
     
+    var imgVideoCover: UIImageView!
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubViews()
@@ -32,8 +33,19 @@ class PhotoCollectionCell: UICollectionViewCell {
         contentView.addSubview(imgView)
         
         imgView.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalTo(imgView.superview!)
+            make.edges.equalTo(imgView.superview!)
         }
+        
+        imgVideoCover = UIImageView(image: UIImage(named: "skill-1"))
+        imgVideoCover.hidden = true
+        imgVideoCover.userInteractionEnabled = true
+        imgView.addSubview(imgVideoCover)
+        imgVideoCover.snp.makeConstraints { (make) in
+            make.centerY.equalTo(imgVideoCover.superview!)
+            make.centerX.equalTo(imgVideoCover.superview!)
+            make.size.equalTo(kSize(30, height: 30))
+        }
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

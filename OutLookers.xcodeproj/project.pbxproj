@@ -147,6 +147,8 @@
 		E41DD9231D3C944400E5E7E9 /* TalentAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */; };
 		E41DD9251D3CA76E00E5E7E9 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9241D3CA76E00E5E7E9 /* BaseRequest.swift */; };
 		E41DD9271D3CA86200E5E7E9 /* IsAuthResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9261D3CA86200E5E7E9 /* IsAuthResp.swift */; };
+		E41DD9291D3CBBD000E5E7E9 /* MyTalentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9281D3CBBD000E5E7E9 /* MyTalentViewController.swift */; };
+		E41DD92B1D3CC00500E5E7E9 /* MyTalentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD92A1D3CC00500E5E7E9 /* MyTalentCell.swift */; };
 		E4272DDD1D17F25B00BE4053 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4272DDC1D17F25B00BE4053 /* area.plist */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
@@ -388,6 +390,8 @@
 		E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentAuthViewController.swift; path = OutLookers/TalentAuthViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41DD9241D3CA76E00E5E7E9 /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseRequest.swift; path = OutLookers/BaseRequest.swift; sourceTree = SOURCE_ROOT; };
 		E41DD9261D3CA86200E5E7E9 /* IsAuthResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IsAuthResp.swift; path = OutLookers/IsAuthResp.swift; sourceTree = SOURCE_ROOT; };
+		E41DD9281D3CBBD000E5E7E9 /* MyTalentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyTalentViewController.swift; path = OutLookers/MyTalentViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41DD92A1D3CC00500E5E7E9 /* MyTalentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyTalentCell.swift; path = OutLookers/MyTalentCell.swift; sourceTree = SOURCE_ROOT; };
 		E4272DDC1D17F25B00BE4053 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = area.plist; path = OutLookers/area.plist; sourceTree = SOURCE_ROOT; };
 		E4272DE61D17F60100BE4053 /* CitiesData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesData.h; path = OutLookers/CitiesData.h; sourceTree = SOURCE_ROOT; };
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
@@ -503,6 +507,7 @@
 				D81992071D3BBE2D007734C0 /* AuthenticationViewController.swift */,
 				D81992091D3BC3AE007734C0 /* OrganizeAuthViewController.swift */,
 				E41DD9221D3C944400E5E7E9 /* TalentAuthViewController.swift */,
+				E41DD9281D3CBBD000E5E7E9 /* MyTalentViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */,
 				D870C7441D3B5473003B7A09 /* PersonCharacterHeadView.swift */,
 				D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */,
+				E41DD92A1D3CC00500E5E7E9 /* MyTalentCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -672,6 +678,7 @@
 		D870C7341D392B61003B7A09 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */,
 				D82F8DF91D2AAC3A00A24CDB /* PHHeaderView.swift */,
 				E4E5DEC71D179BD200CB8535 /* NoArrowEditCell.swift */,
 				E4E5DEC61D179BD200CB8535 /* ArrowEditCell.swift */,
@@ -1058,7 +1065,6 @@
 		E47ADF601D1BEE1600A2F4BD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */,
 				D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */,
 				D8C167381D1AFCF100C50EB7 /* SkillSetCell.swift */,
 				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
@@ -1479,6 +1485,7 @@
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
+				E41DD92B1D3CC00500E5E7E9 /* MyTalentCell.swift in Sources */,
 				D82F8E1C1D30EEAF00A24CDB /* OGDataViewController.swift in Sources */,
 				D8B6413E1D354EFC00DF916D /* PHOrderListViewController.swift in Sources */,
 				D870C7491D3B99BF003B7A09 /* DynamicDetailViewController.swift in Sources */,
@@ -1539,6 +1546,7 @@
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 				E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */,
+				E41DD9291D3CBBD000E5E7E9 /* MyTalentViewController.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
 				D82F8E1A1D30ED9200A24CDB /* OrganizationViewController.swift in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
