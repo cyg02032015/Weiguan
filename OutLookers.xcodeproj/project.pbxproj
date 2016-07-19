@@ -147,6 +147,18 @@
 		D8F526AB1D15691F000C8F91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F526AA1D15691F000C8F91 /* InfoPlist.strings */; };
 		D8F526AC1D1569D3000C8F91 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F526AE1D1569D3000C8F91 /* Localizable.strings */; };
 		D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526B31D156B58000C8F91 /* GlobleFunc.swift */; };
+		E41B925E1D3DCF4D00749769 /* BindAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B925D1D3DCF4D00749769 /* BindAccountViewController.swift */; };
+		E41B92601D3DE30A00749769 /* GetVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B925F1D3DE30A00749769 /* GetVerifyViewController.swift */; };
+		E41B92681D3DF09500749769 /* ZSPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92671D3DF09500749769 /* ZSPasswordView.swift */; };
+		E41B926A1D3DF0F400749769 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92691D3DF0F400749769 /* SetPasswordViewController.swift */; };
+		E41B926D1D3DFB6700749769 /* UserSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B926C1D3DFB6700749769 /* UserSingle.swift */; };
+		E41B926F1D3DFFDD00749769 /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B926E1D3DFFDD00749769 /* ModifyPasswordViewController.swift */; };
+		E41B92711D3E008700749769 /* ModifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92701D3E008700749769 /* ModifyCell.swift */; };
+		E41B92731D3E0A2D00749769 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92721D3E0A2D00749769 /* TransactionDetailViewController.swift */; };
+		E41B92751D3E0C0700749769 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92741D3E0C0700749769 /* TransactionCell.swift */; };
+		E41B92771D3E13C100749769 /* PutCashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92761D3E13C100749769 /* PutCashViewController.swift */; };
+		E41B92791D3E162C00749769 /* AliPutCashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92781D3E162C00749769 /* AliPutCashViewController.swift */; };
+		E41B927B1D3E1F0200749769 /* WechatCashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B927A1D3E1F0200749769 /* WechatCashViewController.swift */; };
 		E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22D81D113B9500F58250 /* AppDelegate.swift */; };
 		E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E41C22DF1D113B9500F58250 /* Assets.xcassets */; };
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
@@ -392,6 +404,18 @@
 		D8F526B11D156A42000C8F91 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D8F526B21D156ADF000C8F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D8F526B31D156B58000C8F91 /* GlobleFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleFunc.swift; path = OutLookers/GlobleFunc.swift; sourceTree = SOURCE_ROOT; };
+		E41B925D1D3DCF4D00749769 /* BindAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BindAccountViewController.swift; path = OutLookers/BindAccountViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B925F1D3DE30A00749769 /* GetVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetVerifyViewController.swift; path = OutLookers/GetVerifyViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B92671D3DF09500749769 /* ZSPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSPasswordView.swift; path = OutLookers/ZSPasswordView.swift; sourceTree = SOURCE_ROOT; };
+		E41B92691D3DF0F400749769 /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetPasswordViewController.swift; path = OutLookers/SetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B926C1D3DFB6700749769 /* UserSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSingle.swift; path = OutLookers/UserSingle.swift; sourceTree = SOURCE_ROOT; };
+		E41B926E1D3DFFDD00749769 /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModifyPasswordViewController.swift; path = OutLookers/ModifyPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B92701D3E008700749769 /* ModifyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModifyCell.swift; path = OutLookers/ModifyCell.swift; sourceTree = SOURCE_ROOT; };
+		E41B92721D3E0A2D00749769 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransactionDetailViewController.swift; path = OutLookers/TransactionDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B92741D3E0C0700749769 /* TransactionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransactionCell.swift; path = OutLookers/TransactionCell.swift; sourceTree = SOURCE_ROOT; };
+		E41B92761D3E13C100749769 /* PutCashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PutCashViewController.swift; path = OutLookers/PutCashViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B92781D3E162C00749769 /* AliPutCashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AliPutCashViewController.swift; path = OutLookers/AliPutCashViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B927A1D3E1F0200749769 /* WechatCashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WechatCashViewController.swift; path = OutLookers/WechatCashViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41C22D51D113B9500F58250 /* OutLookers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutLookers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41C22D81D113B9500F58250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E41C22DF1D113B9500F58250 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -577,6 +601,14 @@
 			isa = PBXGroup;
 			children = (
 				D81992301D3D2E5A007734C0 /* MyAccountViewController.swift */,
+				E41B925D1D3DCF4D00749769 /* BindAccountViewController.swift */,
+				E41B925F1D3DE30A00749769 /* GetVerifyViewController.swift */,
+				E41B92691D3DF0F400749769 /* SetPasswordViewController.swift */,
+				E41B926E1D3DFFDD00749769 /* ModifyPasswordViewController.swift */,
+				E41B92721D3E0A2D00749769 /* TransactionDetailViewController.swift */,
+				E41B92761D3E13C100749769 /* PutCashViewController.swift */,
+				E41B92781D3E162C00749769 /* AliPutCashViewController.swift */,
+				E41B927A1D3E1F0200749769 /* WechatCashViewController.swift */,
 			);
 			name = MyAccount;
 			sourceTree = "<group>";
@@ -586,6 +618,8 @@
 			children = (
 				D81992321D3D2F2E007734C0 /* MyAccountHeadCell.swift */,
 				D81992341D3D31F1007734C0 /* MyAccountCell.swift */,
+				E41B92701D3E008700749769 /* ModifyCell.swift */,
+				E41B92741D3E0C0700749769 /* TransactionCell.swift */,
 			);
 			name = MyAccount;
 			sourceTree = "<group>";
@@ -857,6 +891,7 @@
 		D8F526CD1D16CAD1000C8F91 /* YKLib */ = {
 			isa = PBXGroup;
 			children = (
+				E41B92671D3DF09500749769 /* ZSPasswordView.swift */,
 				E446FA141D2E29E6003DFC1E /* TouchLabel.swift */,
 				E4473EB61D3625C7000CEEF2 /* YKVideoTrimmer.swift */,
 				E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */,
@@ -880,6 +915,14 @@
 				4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E41B926B1D3DFB5600749769 /* Single */ = {
+			isa = PBXGroup;
+			children = (
+				E41B926C1D3DFB6700749769 /* UserSingle.swift */,
+			);
+			name = Single;
 			sourceTree = "<group>";
 		};
 		E41C22CC1D113B9500F58250 = {
@@ -1042,6 +1085,7 @@
 		E41C6C611D113F350013031D /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				E41B926B1D3DFB5600749769 /* Single */,
 				D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */,
 				D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */,
 				D82F8DE31D28373400A24CDB /* BaseResponse.swift */,
@@ -1500,6 +1544,7 @@
 				D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */,
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D8B6414C1D36A4C900DF916D /* TalentDetailCell.swift in Sources */,
+				E41B92711D3E008700749769 /* ModifyCell.swift in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D81992081D3BBE2D007734C0 /* AuthenticationViewController.swift in Sources */,
@@ -1509,8 +1554,10 @@
 				D8B641421D35500400DF916D /* TaReleaseViewController.swift in Sources */,
 				D8AA100A1D1DA0220038EE73 /* TZPhotoPickerController.m in Sources */,
 				D870C7361D393236003B7A09 /* HotManViewController.swift in Sources */,
+				E41B92731D3E0A2D00749769 /* TransactionDetailViewController.swift in Sources */,
 				D82F8DF01D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift in Sources */,
 				D870C73C1D393310003B7A09 /* CircularCell.swift in Sources */,
+				E41B927B1D3E1F0200749769 /* WechatCashViewController.swift in Sources */,
 				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
 				E446FA131D2E26A6003DFC1E /* DynamicViewController.swift in Sources */,
 				D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */,
@@ -1554,6 +1601,7 @@
 				D819920A1D3BC3AE007734C0 /* OrganizeAuthViewController.swift in Sources */,
 				E4E5DECF1D179BD200CB8535 /* WorkDetailCell.swift in Sources */,
 				D8AA100D1D1DA0220038EE73 /* TZVideoPlayerController.m in Sources */,
+				E41B925E1D3DCF4D00749769 /* BindAccountViewController.swift in Sources */,
 				D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */,
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
 				D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */,
@@ -1565,15 +1613,18 @@
 				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
 				D83087821D27B805009CFE03 /* MineCollectCell.swift in Sources */,
 				D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */,
+				E41B926A1D3DF0F400749769 /* SetPasswordViewController.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
 				D82F8E241D31070400A24CDB /* UILabel+EX.swift in Sources */,
 				D82F8DCD1D27CB6400A24CDB /* UIView+SDExtension.m in Sources */,
 				D8AA100E1D1DA0220038EE73 /* UIView+Layout.m in Sources */,
+				E41B926D1D3DFB6700749769 /* UserSingle.swift in Sources */,
 				D8B641521D3919EB00DF916D /* HomeCell.swift in Sources */,
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
 				D82F8E141D2E9D0000A24CDB /* DataTableViewCell.swift in Sources */,
 				E41DD9251D3CA76E00E5E7E9 /* BaseRequest.swift in Sources */,
 				D82F8E121D2E9CC100A24CDB /* DataViewController.swift in Sources */,
+				E41B92681D3DF09500749769 /* ZSPasswordView.swift in Sources */,
 				D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */,
@@ -1581,6 +1632,7 @@
 				D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */,
 				E4473EB31D337BF5000CEEF2 /* OGToolView.swift in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
+				E41B92601D3DE30A00749769 /* GetVerifyViewController.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,
 				D81992311D3D2E5A007734C0 /* MyAccountViewController.swift in Sources */,
@@ -1593,6 +1645,7 @@
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
+				E41B92791D3E162C00749769 /* AliPutCashViewController.swift in Sources */,
 				E41DD92B1D3CC00500E5E7E9 /* MyTalentCell.swift in Sources */,
 				D82F8E1C1D30EEAF00A24CDB /* OGDataViewController.swift in Sources */,
 				D8B6413E1D354EFC00DF916D /* PHOrderListViewController.swift in Sources */,
@@ -1606,6 +1659,7 @@
 				E4473EC11D38C4CA000CEEF2 /* PersonFileHeadView.swift in Sources */,
 				E47ADF6C1D1D051D00A2F4BD /* YGShareHandler.swift in Sources */,
 				D8B641481D36A06D00DF916D /* TalentDetailViewController.swift in Sources */,
+				E41B92771D3E13C100749769 /* PutCashViewController.swift in Sources */,
 				D870C73A1D3932D7003B7A09 /* HotmanCell.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
@@ -1627,6 +1681,7 @@
 				D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */,
 				E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */,
 				E4E5DED31D179BEF00CB8535 /* YGSelectDateView.swift in Sources */,
+				E41B92751D3E0C0700749769 /* TransactionCell.swift in Sources */,
 				D81F451C1D118D63004D9192 /* YGTabbarController.swift in Sources */,
 				D81F45241D118F48004D9192 /* IssueViewController.swift in Sources */,
 				D8AA100C1D1DA0220038EE73 /* TZPhotoPreviewController.m in Sources */,
@@ -1650,6 +1705,7 @@
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 				D82F8E0A1D2C0D9400A24CDB /* TYSlidePageScrollViewController.m in Sources */,
 				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,
+				E41B926F1D3DFFDD00749769 /* ModifyPasswordViewController.swift in Sources */,
 				D819920C1D3BC699007734C0 /* BusinessLicenceCell.swift in Sources */,
 				E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */,
 				D819922B1D3D1F7B007734C0 /* MyReleaseCell.swift in Sources */,

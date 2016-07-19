@@ -196,7 +196,7 @@ class LogViewController: YGBaseViewController {
         let c = UIView()
         c.layer.borderWidth = 1
         c.layer.borderColor = kGrayColor.CGColor
-        c.layer.cornerRadius = 23
+        c.layer.cornerRadius = kScale(23)
         c.clipsToBounds = true
         return c
     }

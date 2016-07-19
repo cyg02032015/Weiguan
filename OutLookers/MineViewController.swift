@@ -48,8 +48,10 @@ extension MineViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(mineHeaderidentifier, forIndexPath: indexPath) as! MineHeaderCell
-            cell.header.iconHeaderTap {
+            cell.header.iconHeaderTap { [unowned self] in
                 LogInfo("头像")
+                let vc = LogViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             cell.tapEditDataClosure { [unowned self] in
                 LogInfo("编辑资料")

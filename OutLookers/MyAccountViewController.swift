@@ -21,6 +21,11 @@ class MyAccountViewController: YGBaseViewController {
     lazy var imgs = ["Group 3", "group1", "Group 5"]
     lazy var titles = ["交易记录", "交易密码", "账号绑定"]
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        LogInfo("\(UserSingleton.sharedInstance.newPwd)   \(UserSingleton.sharedInstance.originPwd)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
@@ -28,14 +33,12 @@ class MyAccountViewController: YGBaseViewController {
     
     func setupSubViews() {
         title = "我的账户"
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.backgroundColor = kBackgoundColor
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(MyAccountHeadCell.self, forCellReuseIdentifier: myAccountHeadCellId)
         tableView.registerClass(MyAccountCell.self, forCellReuseIdentifier: myAccountCellId)
-//        tableView.separatorColor = kBackgoundColor
-        //tableView.separatorStyle = .None
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -44,7 +47,8 @@ class MyAccountViewController: YGBaseViewController {
     }
     
     func tapCashButton(sender: UIButton) {
-        LogInfo("提现")
+        let vc = PutCashViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -70,6 +74,26 @@ extension MyAccountViewController {
             cell.imgView.image = UIImage(named: imgs[indexPath.row])
             cell.label.text = titles[indexPath.row]
             return cell
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                let vc = TransactionDetailViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            } else if indexPath.row == 1 {
+                if UserSingleton.sharedInstance.isSetPassword {
+                    let vc = ModifyPasswordViewController()
+                    navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let vc = GetVerifyViewController()
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            } else {
+                let vc = BindAccountViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     
