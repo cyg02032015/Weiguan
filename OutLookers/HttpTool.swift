@@ -25,7 +25,7 @@ public class HttpTool {
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers: nil).responseJSON { (response) in
             switch response.result {
             case .Success(let Value):
-                LogVerbose(JSON(Value))
+                LogDebug(JSON(Value))
                 complete(response: JSON(Value))
             case .Failure(let Error):
                 fail(error: Error)

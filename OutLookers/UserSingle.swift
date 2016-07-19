@@ -8,12 +8,19 @@
 
 import UIKit
 
+enum UserType: Int {
+    case Tourist = 0  // 游客
+    case HotMan = 1   // 网红
+    case Organization = 2  // 机构
+    case Fans = 3   // 粉丝
+}
+
 private let sharedUser = UserSingleton()
 class UserSingleton {
     class var sharedInstance: UserSingleton {
         return sharedUser
     }
-    
+    var type: UserType = .Tourist
     var isSetPassword: Bool = false
     var originPwd: String!
     var newPwd: String!

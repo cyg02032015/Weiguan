@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let req = BaseRequest(userId: "1")
+        Server.isAuth(req) { (success, msg, value) in
+            if success {
+                UserSingleton.sharedInstance.type = value!.type
+                LogInfo(UserSingleton.sharedInstance.type)
+            } else {
+                LogError(msg!)
+            }
+        }
         #if DEBUG
         configCocoaLumberjack()
         #endif

@@ -88,7 +88,7 @@ extension AliPutCashViewController {
         }
         
         let cashButton = UIButton()
-        cashButton.setTitle("提现", forState: .Normal)
+        cashButton.setTitle("确认提现", forState: .Normal)
         cashButton.addTarget(self, action: .tapCashButton, forControlEvents: .TouchUpInside)
         cashButton.backgroundColor = kCommonColor
         cashButton.layer.cornerRadius = kScale(6)
