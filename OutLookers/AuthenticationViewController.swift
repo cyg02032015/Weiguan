@@ -85,7 +85,9 @@ class AuthenticationViewController: YGBaseViewController {
     }
     
     func tapFans(sender: UIButton) {
-        showAlertController()
+        let vc = FansAuthViewController()
+        navigationController?.pushViewController(vc, animated: true)
+//        showAlertController()
     }
     
     func showAlertController() {

@@ -47,6 +47,21 @@
     return self;
 }
 
+- (void)setSelectedTextColor:(UIColor *)selectedTextColor {
+    _selectedTextColor = selectedTextColor;
+    [self addTitleBtnArray];
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+    _textColor = textColor;
+    [self addTitleBtnArray];
+}
+
+- (void)setHorIndicatorColor:(UIColor *)horIndicatorColor {
+    _horIndicatorColor = horIndicatorColor;
+    [self addHorIndicatorView];
+}
+
 - (void)setTitleArray:(NSArray *)titleArray
 {
     _titleArray = titleArray;
@@ -57,6 +72,10 @@
 
 - (void)addHorIndicatorView
 {
+    if (_horIndicator) {
+        _horIndicator.backgroundColor = _horIndicatorColor;
+        return;
+    }
     UIView *horIndicator = [[UIView alloc]init];
     horIndicator.backgroundColor = _horIndicatorColor;
     [self addSubview:horIndicator];

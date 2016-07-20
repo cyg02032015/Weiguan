@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "TYSlidePageScrollViewController.h"
 #import "TYTitlePageTabBar.h"
+#import "HCSStarRatingView.h"
 // 友盟头文件桥接
 #import "UMSocial.h"
 #import "WXApi.h"

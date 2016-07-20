@@ -128,7 +128,8 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
             let vc = MyAccountViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 2 {
-            
+            let vc = Comment2ViewController()     // Comment2ViewController    MyCommentViewController
+            navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 3 {
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)
