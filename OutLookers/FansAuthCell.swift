@@ -13,6 +13,17 @@ class FansAuthCell: UICollectionViewCell {
     var imgView: UIImageView!
     var selectButton: UIButton!
     var name: UILabel!
+    var vImgView: UIImageView!
+    private var _isSelect: Bool = false
+    var isSelect: Bool! {
+        set {
+            _isSelect = newValue
+            selectButton.selected = newValue
+        }
+        get {
+            return _isSelect
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,8 +60,17 @@ class FansAuthCell: UICollectionViewCell {
             make.top.equalTo(imgView)
         }
         
+        vImgView = UIImageView()
+        contentView.addSubview(vImgView)
+        vImgView.snp.makeConstraints { (make) in
+            make.size.equalTo(kSize(24, height: 24))
+            make.right.equalTo(imgView)
+            make.bottom.equalTo(imgView)
+        }
+        
         imgView.backgroundColor = UIColor.yellowColor()
         name.text = "qwqeqe"
+        vImgView.backgroundColor = UIColor.blackColor()
     }
     
     required init?(coder aDecoder: NSCoder) {

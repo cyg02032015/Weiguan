@@ -169,6 +169,13 @@
 		E41B92D61D3F719100749769 /* Comment2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92D51D3F719100749769 /* Comment2ViewController.swift */; };
 		E41B92D81D3F758800749769 /* FansAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92D71D3F758800749769 /* FansAuthViewController.swift */; };
 		E41B92DA1D3F791D00749769 /* FansAuthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92D91D3F791D00749769 /* FansAuthCell.swift */; };
+		E41B92DC1D4077E900749769 /* FansHeadReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92DB1D4077E900749769 /* FansHeadReusableView.swift */; };
+		E41B92E01D407CB800749769 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92DF1D407CB800749769 /* MessageViewController.swift */; };
+		E41B92E21D408ACB00749769 /* MessageSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92E11D408ACB00749769 /* MessageSectionCell.swift */; };
+		E41B92E61D408E9100749769 /* MCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92E51D408E9100749769 /* MCommentCell.swift */; };
+		E41B92E81D40912300749769 /* MPraiseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92E71D40912300749769 /* MPraiseCell.swift */; };
+		E41B92EA1D40916300749769 /* MCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92E91D40916300749769 /* MCommentViewController.swift */; };
+		E41B92EC1D40916C00749769 /* MPraiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B92EB1D40916C00749769 /* MPraiseViewController.swift */; };
 		E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22D81D113B9500F58250 /* AppDelegate.swift */; };
 		E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E41C22DF1D113B9500F58250 /* Assets.xcassets */; };
 		E41C22EE1D113B9500F58250 /* OutLookersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41C22ED1D113B9500F58250 /* OutLookersTests.swift */; };
@@ -437,6 +444,13 @@
 		E41B92D51D3F719100749769 /* Comment2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Comment2ViewController.swift; path = OutLookers/Comment2ViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41B92D71D3F758800749769 /* FansAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FansAuthViewController.swift; path = OutLookers/FansAuthViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41B92D91D3F791D00749769 /* FansAuthCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FansAuthCell.swift; path = OutLookers/FansAuthCell.swift; sourceTree = SOURCE_ROOT; };
+		E41B92DB1D4077E900749769 /* FansHeadReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FansHeadReusableView.swift; path = OutLookers/FansHeadReusableView.swift; sourceTree = SOURCE_ROOT; };
+		E41B92DF1D407CB800749769 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewController.swift; path = OutLookers/MessageViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B92E11D408ACB00749769 /* MessageSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageSectionCell.swift; path = OutLookers/MessageSectionCell.swift; sourceTree = SOURCE_ROOT; };
+		E41B92E51D408E9100749769 /* MCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCommentCell.swift; path = OutLookers/MCommentCell.swift; sourceTree = SOURCE_ROOT; };
+		E41B92E71D40912300749769 /* MPraiseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MPraiseCell.swift; path = OutLookers/MPraiseCell.swift; sourceTree = SOURCE_ROOT; };
+		E41B92E91D40916300749769 /* MCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCommentViewController.swift; path = OutLookers/MCommentViewController.swift; sourceTree = SOURCE_ROOT; };
+		E41B92EB1D40916C00749769 /* MPraiseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MPraiseViewController.swift; path = OutLookers/MPraiseViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41C22D51D113B9500F58250 /* OutLookers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutLookers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41C22D81D113B9500F58250 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E41C22DF1D113B9500F58250 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -581,6 +595,7 @@
 			children = (
 				D819920B1D3BC699007734C0 /* BusinessLicenceCell.swift */,
 				E41B92D91D3F791D00749769 /* FansAuthCell.swift */,
+				E41B92DB1D4077E900749769 /* FansHeadReusableView.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -663,6 +678,7 @@
 		D81F453D1D145B3D004D9192 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E41B92DE1D407C9F00749769 /* Message */,
 				E41B927C1D3F334600749769 /* MyComment */,
 				D819922E1D3D2E3B007734C0 /* MyAccount */,
 				D819922D1D3D201E007734C0 /* MyTalent */,
@@ -791,6 +807,7 @@
 		D830877E1D27B3DA009CFE03 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E41B92DD1D407C9900749769 /* Message */,
 				E41B927D1D3F335700749769 /* MyComment */,
 				D819922F1D3D2E45007734C0 /* MyAccount */,
 				D819922C1D3D2011007734C0 /* MyTalent */,
@@ -980,6 +997,26 @@
 			name = HCSStarRatingView;
 			path = OutLookers/HCSStarRatingView;
 			sourceTree = SOURCE_ROOT;
+		};
+		E41B92DD1D407C9900749769 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				E41B92E11D408ACB00749769 /* MessageSectionCell.swift */,
+				E41B92E51D408E9100749769 /* MCommentCell.swift */,
+				E41B92E71D40912300749769 /* MPraiseCell.swift */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		E41B92DE1D407C9F00749769 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				E41B92DF1D407CB800749769 /* MessageViewController.swift */,
+				E41B92E91D40916300749769 /* MCommentViewController.swift */,
+				E41B92EB1D40916C00749769 /* MPraiseViewController.swift */,
+			);
+			name = Message;
+			sourceTree = "<group>";
 		};
 		E41C22CC1D113B9500F58250 = {
 			isa = PBXGroup;
@@ -1603,6 +1640,7 @@
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D8B6414C1D36A4C900DF916D /* TalentDetailCell.swift in Sources */,
 				E41B92711D3E008700749769 /* ModifyCell.swift in Sources */,
+				E41B92E61D408E9100749769 /* MCommentCell.swift in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				E41B92D01D3F5E9600749769 /* CommentViewController.swift in Sources */,
@@ -1665,6 +1703,7 @@
 				E41B925E1D3DCF4D00749769 /* BindAccountViewController.swift in Sources */,
 				D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */,
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
+				E41B92E01D407CB800749769 /* MessageViewController.swift in Sources */,
 				D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */,
 				D83087801D27B400009CFE03 /* MessageCell.swift in Sources */,
 				D8B641401D354FBE00DF916D /* TaJoinViewController.swift in Sources */,
@@ -1696,6 +1735,7 @@
 				E41B92601D3DE30A00749769 /* GetVerifyViewController.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
 				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,
+				E41B92EC1D40916C00749769 /* MPraiseViewController.swift in Sources */,
 				D81992311D3D2E5A007734C0 /* MyAccountViewController.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
@@ -1704,12 +1744,14 @@
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D870C7431D3B5300003B7A09 /* PersonCharacterViewController.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
+				E41B92E21D408ACB00749769 /* MessageSectionCell.swift in Sources */,
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
 				E41B92791D3E162C00749769 /* AliPutCashViewController.swift in Sources */,
 				E41DD92B1D3CC00500E5E7E9 /* MyTalentCell.swift in Sources */,
 				D82F8E1C1D30EEAF00A24CDB /* OGDataViewController.swift in Sources */,
 				D8B6413E1D354EFC00DF916D /* PHOrderListViewController.swift in Sources */,
+				E41B92E81D40912300749769 /* MPraiseCell.swift in Sources */,
 				D870C7491D3B99BF003B7A09 /* DynamicDetailViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
 				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
@@ -1751,6 +1793,7 @@
 				D8AA100C1D1DA0220038EE73 /* TZPhotoPreviewController.m in Sources */,
 				E446FA071D2612D7003DFC1E /* MineHeaderCell.swift in Sources */,
 				E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */,
+				E41B92DC1D4077E900749769 /* FansHeadReusableView.swift in Sources */,
 				E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */,
 				E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */,
 				D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */,
@@ -1778,6 +1821,7 @@
 				D819922B1D3D1F7B007734C0 /* MyReleaseCell.swift in Sources */,
 				D8C167391D1AFCF100C50EB7 /* SkillSetCell.swift in Sources */,
 				D8AA0FD01D1D8CC50038EE73 /* BudgetPriceCell.swift in Sources */,
+				E41B92EA1D40916300749769 /* MCommentViewController.swift in Sources */,
 				D81992241D3D146D007734C0 /* MyEnterViewController.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 				E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */,

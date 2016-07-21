@@ -31,6 +31,7 @@ class CommentHead2View: UIView {
             make.width.equalTo(kScale(212))
             make.height.equalTo(kScale(19))
         }
+        
         talent = UILabel.createLabel(16, textColor: UIColor(hex: 0x666666))
         container.addSubview(talent)
         talent.snp.makeConstraints { (make) in
@@ -60,7 +61,7 @@ class CommentHead2View: UIView {
             make.left.equalTo(talentRating.snp.right).offset(kScale(10))
             make.centerY.equalTo(talentRating)
             make.height.equalTo(kScale(16))
-            make.right.lessThanOrEqualTo(talentScore.superview!).offset(kScale(-15))
+//            make.right.lessThanOrEqualTo(talentScore.superview!).offset(kScale(-15))
         }
         
         talent.text = "才艺评分"

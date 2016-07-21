@@ -43,7 +43,10 @@ class MineViewController: YGBaseViewController {
 // MARK: - UITableViewDelegate,UITableViewDataSource
 extension MineViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if indexPath.section == 1 {
+            let vc = MessageViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
@@ -69,7 +72,8 @@ extension MineViewController {
             }
             return cell
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(messageCellIdentifier, forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(messageCellIdentifier, forIndexPath: indexPath) as! MessageCell
+            cell.setImgAndText("news11", text: "我的消息")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(mineCollectCellIdentifier, forIndexPath: indexPath) as! MineCollectCell

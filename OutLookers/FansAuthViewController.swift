@@ -9,6 +9,7 @@
 import UIKit
 
 private let fansAuthCellId = "fansAuthCellId"
+private let fansHeadViewId = "fansHeadViewId"
 
 class FansAuthViewController: YGBaseViewController {
 
@@ -19,7 +20,7 @@ class FansAuthViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        
+        title = "粉丝认证"
         let commitButton = Util.createReleaseButton("提交")
         view.addSubview(commitButton)
         commitButton.snp.makeConstraints { (make) in
@@ -28,6 +29,7 @@ class FansAuthViewController: YGBaseViewController {
         }
         
         let layout = UICollectionViewFlowLayout()
+        layout.headerReferenceSize = CGSize(width: ScreenWidth, height: kScale(60))
         layout.itemSize = CGSize(width: (ScreenWidth - 2) / 3, height: kHeight(100))
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 0
@@ -37,6 +39,7 @@ class FansAuthViewController: YGBaseViewController {
         collectionView.dataSource = self
         view.addSubview(collectionView)
         collectionView.registerClass(FansAuthCell.self, forCellWithReuseIdentifier: fansAuthCellId)
+        collectionView.registerClass(FansHeadReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: fansHeadViewId)
         collectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(collectionView.superview!)
             make.bottom.equalTo(commitButton.snp.top)
@@ -60,15 +63,17 @@ extension FansAuthViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! FansAuthCell
-
+        if cell.isSelect == true {
+            cell.isSelect = !cell.isSelect
+        } else {
+            cell.isSelect = true
+        }
     }
     
-//    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-//        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: SkillHeaderIdentifier, forIndexPath: indexPath) as! SkillHeaderReusableView
-//        headerView.imgView.image = UIImage(named: imgStrings[indexPath.section])
-//        headerView.label.text = titleStrings[indexPath.section]
-//        return headerView
-//    }
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: fansHeadViewId, forIndexPath: indexPath) as! FansHeadReusableView
+        return headerView
+    }
 }
 
 

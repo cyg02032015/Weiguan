@@ -11,6 +11,8 @@ import UIKit
 class MessageCell: UITableViewCell {
 
     var badgeButton: UIButton!
+    var imgView: UIImageView!
+    var label: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,17 +21,17 @@ class MessageCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        let imgView = UIImageView(image: UIImage(named: "news"))
+        imgView = UIImageView()
+        imgView.contentMode = .ScaleAspectFit
         contentView.addSubview(imgView)
         
         imgView.snp.makeConstraints { (make) in
             make.left.equalTo(imgView.superview!).offset(kScale(15))
             make.centerY.equalTo(imgView.superview!)
-            make.size.equalTo(kSize(20, height: 15))
+            make.size.equalTo(kSize(20, height: 20))
         }
         
-        let label = UILabel()
-        label.text = "我的消息"
+        label = UILabel()
         label.font = UIFont.customFontOfSize(14)
         contentView.addSubview(label)
         
@@ -60,6 +62,11 @@ class MessageCell: UITableViewCell {
         badgeButton.badgeOriginX = 0
         badgeButton.badgeOriginY = -3
         
+    }
+    
+    func setImgAndText(imgName: String, text: String) {
+        imgView.image = UIImage(named: imgName)
+        label.text = text
     }
     
     required init?(coder aDecoder: NSCoder) {
