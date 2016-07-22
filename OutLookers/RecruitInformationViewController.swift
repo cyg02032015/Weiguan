@@ -141,8 +141,8 @@ extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCel
         pickerView.animation()
     }
     
-    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
-        let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
+        let skillUnit = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
         cell.button.selected = true
         guard let unit = skillUnit else { fatalError("picker skill unit nil") }

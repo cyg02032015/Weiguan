@@ -329,13 +329,13 @@ extension EditSkillViewController: VPImageCropperDelegate {
 }
 
 extension EditSkillViewController: YGPickerViewDelegate {
-    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
         if isProvincePicker {
-            let city = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
+            let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! ArrowEditCell
             cell.tf.text = city
         } else {
-            let skillUnit = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
+            let skillUnit = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
             cell.button.selected = true
             cell.setButtonText(skillUnit!)

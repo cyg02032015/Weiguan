@@ -216,6 +216,8 @@
 		E45BFF7F1D41E9A10013356C /* InvitationToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF7E1D41E9A10013356C /* InvitationToolView.swift */; };
 		E45BFF811D41ED7D0013356C /* InvitationCircularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF801D41ED7D0013356C /* InvitationCircularCell.swift */; };
 		E45BFF831D41ED8F0013356C /* InvitationTalentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF821D41ED8F0013356C /* InvitationTalentCell.swift */; };
+		E45BFF891D422F8D0013356C /* CircularDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF881D422F8D0013356C /* CircularDetailViewController.swift */; };
+		E45BFF8B1D422FCF0013356C /* CircularRecruitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF8A1D422FCF0013356C /* CircularRecruitCell.swift */; };
 		E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */; };
 		E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */; };
 		E47ADF6A1D1BF8ED00A2F4BD /* EditTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */; };
@@ -505,6 +507,8 @@
 		E45BFF7E1D41E9A10013356C /* InvitationToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationToolView.swift; path = OutLookers/InvitationToolView.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF801D41ED7D0013356C /* InvitationCircularCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationCircularCell.swift; path = OutLookers/InvitationCircularCell.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF821D41ED8F0013356C /* InvitationTalentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationTalentCell.swift; path = OutLookers/InvitationTalentCell.swift; sourceTree = SOURCE_ROOT; };
+		E45BFF881D422F8D0013356C /* CircularDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularDetailViewController.swift; path = OutLookers/CircularDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		E45BFF8A1D422FCF0013356C /* CircularRecruitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularRecruitCell.swift; path = OutLookers/CircularRecruitCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF651D1BEEEF00A2F4BD /* VideoCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCoverCell.swift; path = OutLookers/VideoCoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF671D1BEF0300A2F4BD /* PictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PictureSelectCell.swift; path = OutLookers/PictureSelectCell.swift; sourceTree = SOURCE_ROOT; };
 		E47ADF691D1BF8ED00A2F4BD /* EditTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextViewCell.swift; path = OutLookers/EditTextViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -677,7 +681,8 @@
 		D81F452F1D12CF45004D9192 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E45BFF781D41C3D50013356C /* InvitationDetailViewController.swift */,
+				E45BFF861D422F6D0013356C /* CircularDetail */,
+				E45BFF851D422F5F0013356C /* Invitation */,
 				D82F8E181D30ED3000A24CDB /* Personal */,
 				D81F451F1D118EF7004D9192 /* HomeViewController.swift */,
 				E446FA181D2E6181003DFC1E /* ScrollVerticalDelegate.swift */,
@@ -1296,11 +1301,8 @@
 		E446F9FE1D24EE76003DFC1E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E45BFF7A1D41CAED0013356C /* InvitationHeadCell.swift */,
-				E45BFF7C1D41D2890013356C /* InvitationAddCell.swift */,
-				E45BFF7E1D41E9A10013356C /* InvitationToolView.swift */,
-				E45BFF801D41ED7D0013356C /* InvitationCircularCell.swift */,
-				E45BFF821D41ED8F0013356C /* InvitationTalentCell.swift */,
+				E45BFF871D422F790013356C /* CircularDetail */,
+				E45BFF841D422F520013356C /* Invitation */,
 				D82F8E171D30ECDA00A24CDB /* Personal */,
 				D82F8DEF1D28E8EE00A24CDB /* RecommendHotmanTableViewCell.swift */,
 				D82F8DF51D29130B00A24CDB /* RecommendHeaderView.swift */,
@@ -1311,6 +1313,42 @@
 				D82F8E211D30F4F600A24CDB /* OGCircularCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		E45BFF841D422F520013356C /* Invitation */ = {
+			isa = PBXGroup;
+			children = (
+				E45BFF7A1D41CAED0013356C /* InvitationHeadCell.swift */,
+				E45BFF7C1D41D2890013356C /* InvitationAddCell.swift */,
+				E45BFF7E1D41E9A10013356C /* InvitationToolView.swift */,
+				E45BFF801D41ED7D0013356C /* InvitationCircularCell.swift */,
+				E45BFF821D41ED8F0013356C /* InvitationTalentCell.swift */,
+			);
+			name = Invitation;
+			sourceTree = "<group>";
+		};
+		E45BFF851D422F5F0013356C /* Invitation */ = {
+			isa = PBXGroup;
+			children = (
+				E45BFF781D41C3D50013356C /* InvitationDetailViewController.swift */,
+			);
+			name = Invitation;
+			sourceTree = "<group>";
+		};
+		E45BFF861D422F6D0013356C /* CircularDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E45BFF881D422F8D0013356C /* CircularDetailViewController.swift */,
+			);
+			name = CircularDetail;
+			sourceTree = "<group>";
+		};
+		E45BFF871D422F790013356C /* CircularDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E45BFF8A1D422FCF0013356C /* CircularRecruitCell.swift */,
+			);
+			name = CircularDetail;
 			sourceTree = "<group>";
 		};
 		E47ADF5F1D1BEDE600A2F4BD /* View */ = {
@@ -1853,6 +1891,7 @@
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
 				D82F8E1A1D30ED9200A24CDB /* OrganizationViewController.swift in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
+				E45BFF891D422F8D0013356C /* CircularDetailViewController.swift in Sources */,
 				D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */,
 				D870C74B1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift in Sources */,
 				E4473EB71D3625C7000CEEF2 /* YKVideoTrimmer.swift in Sources */,
@@ -1865,6 +1904,7 @@
 				D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */,
 				D870C7451D3B5473003B7A09 /* PersonCharacterHeadView.swift in Sources */,
 				E41DD9211D38E5E700E5E7E9 /* PersonFile.swift in Sources */,
+				E45BFF8B1D422FCF0013356C /* CircularRecruitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

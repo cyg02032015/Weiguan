@@ -14,8 +14,8 @@ private let mineCollectCellIdentifier = "mineCollectId"
 
 class MineViewController: YGBaseViewController {
     
-    var images = ["Order", "account", "score", "talent", "announcement", "authentication", "", ""]
-    var titles = ["订单量", "账户", "综合评分", "才艺", "通告", "认证", "", ""]
+    var images = ["Order", "account", "score1", "talent", "Group 5", "authentication", "feedback", ""]
+    var titles = ["订单量", "账户", "综合评分", "才艺", "通告", "认证", "意见反馈", ""]
     
     var tableView: UITableView!
     
@@ -143,6 +143,8 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
         } else if indexPath.item == 5 {
             let vc = AuthenticationViewController()
             navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.item == 6 {
+            
         }
     }
 }

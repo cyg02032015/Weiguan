@@ -24,8 +24,8 @@ class MineCollectionCell: UICollectionViewCell {
         contentView.addSubview(imgButton)
         
         imgButton.snp.makeConstraints { (make) in
-            make.top.equalTo(imgButton.superview!).offset(kScale(25))
-            make.size.equalTo(kSize(30, height: 30))
+            make.top.equalTo(imgButton.superview!).offset(kScale(21))
+            make.size.equalTo(kSize(42, height: 42))
             make.centerX.equalTo(imgButton.superview!)
         }
         layoutIfNeeded()

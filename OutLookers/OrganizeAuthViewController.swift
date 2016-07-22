@@ -263,14 +263,14 @@ extension OrganizeAuthViewController: UIPickerViewDelegate, UIPickerViewDataSour
         }
     }
     
-    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
-        if pickerView == typePickerView {
-            let type = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
+        if pickerView == typePickerView.picker {
+            let type = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! NoArrowEditCell
             cell.tf.text = type
             organizeRequest.type = type
         } else {
-            let city = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
+            let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! NoArrowEditCell
             cell.tf.text = city
             organizeRequest.adds = city

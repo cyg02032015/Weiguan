@@ -19,7 +19,7 @@ private extension Selector {
 }
 
 protocol YGPickerViewDelegate: class {
-    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView)
 }
 
 
@@ -31,6 +31,16 @@ class YGPickerView: UIView {
     var sure: UIButton!
     var topContainer: UIView!
     var lineV: UIView!
+    private var _title: String = ""
+    var title: String! {
+        set {
+            _title = newValue
+            titleLabel.text = _title
+        }
+        get {
+            return _title
+        }
+    }
     weak var delegate: YGPickerViewDelegate!
     
     convenience init(frame: CGRect, delegate: protocol<UIPickerViewDataSource, UIPickerViewDelegate>) {
@@ -74,7 +84,6 @@ class YGPickerView: UIView {
         topContainer.addSubview(sure)
         
         titleLabel = UILabel()
-        titleLabel.text = "才艺标价单位"
         titleLabel.textAlignment = .Center
         titleLabel.font = UIFont.customFontOfSize(16)
         topContainer.addSubview(titleLabel)
@@ -185,7 +194,9 @@ class YGPickerView: UIView {
         container.snp.updateConstraints { (make) in
             make.bottom.equalTo(container.superview!).offset(kSelectDateHeight)
         }
-        delegate.pickerViewSelectedSure(sender, pickerView: self)
+        if delegate != nil {
+            delegate.pickerViewSelectedSure(sender, pickerView: self.picker)
+        }
         setNeedsUpdateConstraints()
         updateConstraints()
         UIView.animateWithDuration(0.3, animations: {

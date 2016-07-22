@@ -239,8 +239,8 @@ extension EditDataViewController: UIImagePickerControllerDelegate, UINavigationC
 
 // MARK: - YGPickerViewDelegate
 extension EditDataViewController: YGPickerViewDelegate {
-    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
-        let city = cityPickerView.picker.delegate!.pickerView!(pickerView.picker, titleForRow: cityPickerView.picker.selectedRowInComponent(1), forComponent: 1)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
+        let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! ArrowEditCell
         cell.tf.text = city
     }

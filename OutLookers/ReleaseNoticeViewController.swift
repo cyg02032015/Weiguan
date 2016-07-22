@@ -371,8 +371,8 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
 //        tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
     }
     
-    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
-        let city = pickerView.picker.delegate!.pickerView!(pickerView.picker!, titleForRow: pickerView.picker.selectedRowInComponent(1), forComponent: 1)
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
+        let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
         cell.tf.text = city
         // MARK: 选择城市request

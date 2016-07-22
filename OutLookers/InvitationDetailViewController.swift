@@ -16,6 +16,9 @@ private let invitationCircularCellId = "invitationCircularCellId"
 class InvitationDetailViewController: YGBaseViewController {
 
     var tableView: UITableView!
+    var circularPicker: YGPickerView!
+    var jobPicker: YGPickerView!
+    var talentPicker: YGPickerView!
     var toolView: InvitationToolView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,18 @@ class InvitationDetailViewController: YGBaseViewController {
             make.top.left.right.equalTo(tableView.superview!)
             make.bottom.equalTo(toolView.snp.top)
         }
+        
+        circularPicker = YGPickerView(frame: CGRectZero, delegate: self)
+        circularPicker.delegate = self
+        circularPicker.title = "选择通告"
+        
+        jobPicker = YGPickerView(frame: CGRectZero, delegate: self)
+        jobPicker.delegate = self
+        jobPicker.title = "选择工作类型"
+        
+        talentPicker = YGPickerView(frame: CGRectZero, delegate: self)
+        talentPicker.delegate = self
+        talentPicker.title = "选择才艺"
     }
 }
 
@@ -79,6 +94,14 @@ extension InvitationDetailViewController {
 //            let cell = tableView.dequeueReusableCellWithIdentifier(invitationAddCellId, forIndexPath: indexPath) as! InvitationAddCell
 //            cell.addButton.setTitle("添加才艺", forState: .Normal)
             return cell
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            circularPicker.animation()
+        } else if indexPath.section == 2 {
+            talentPicker.animation()
         }
     }
     
@@ -125,6 +148,36 @@ extension InvitationDetailViewController {
             label.text = "购买才艺"
         }
         return view
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .Delete
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        LogInfo("commit editing")
+    }
+}
+
+extension InvitationDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource, YGPickerViewDelegate {
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
+        if pickerView == circularPicker.picker {
+            delay(0.5) { [unowned self] in
+                self.jobPicker.animation()
+            }
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
     }
 }
 

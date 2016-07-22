@@ -210,13 +210,13 @@ extension PersonFileViewController: UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     
-    func pickerViewSelectedSure(sender: UIButton, pickerView: YGPickerView) {
-        let text = pickerView.picker.delegate!.pickerView!(pickerView.picker, titleForRow: pickerView.picker.selectedRowInComponent(0), forComponent: 0)
-        if pickerView == heightPickerView {
+    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
+        let text = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
+        if pickerView == heightPickerView.picker {
             let cell = tableView.cellForRowAt(0, row: 0) as! ArrowEditCell
             cell.tf.text = text
             personFile.height = text
-        } else if pickerView == weightPickerView {
+        } else if pickerView == weightPickerView.picker {
             let cell = tableView.cellForRowAt(0, row: 1) as! ArrowEditCell
             cell.tf.text = text
             personFile.weight = text
