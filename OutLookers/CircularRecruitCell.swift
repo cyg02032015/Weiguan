@@ -10,7 +10,7 @@ import UIKit
 
 class CircularRecruitCell: UITableViewCell {
 
-    
+    var headerView: SDCycleScrollView!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .None
@@ -18,11 +18,18 @@ class CircularRecruitCell: UITableViewCell {
     }
     
     func setupSubViews() {
+        headerView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: kHeight(219)), delegate: self, placeholderImage: UIImage(named: ""))
+        contentView.addSubview(headerView)
+        
+        
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+extension CircularRecruitCell: SDCycleScrollViewDelegate {
+    
 }
