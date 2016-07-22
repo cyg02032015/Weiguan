@@ -8,8 +8,19 @@
 
 import UIKit
 
+private extension Selector {
+    static let tapFollow = #selector(OGToolView.tapFollow(_:))
+    static let tapPrivateLatter = #selector(OGToolView.tapPrivateLatter(_:))
+}
+
+protocol OGToolViewDelegate: class {
+    func toolViewTapFollow(sender: UIButton)
+    func toolViewTapPrivateLatter(sender: UIButton)
+}
+
 class OGToolView: UIView {
 
+    weak var delegate: OGToolViewDelegate!
     var follow: UIButton!      // 关注
     var privateLatter: UIButton!  // 私信
     
@@ -22,6 +33,7 @@ class OGToolView: UIView {
     
     func setupSubViews() {
         follow = UIButton()
+        follow.addTarget(self, action: .tapFollow, forControlEvents: .TouchUpInside)
         follow.setTitle("关注", forState: .Normal)
         follow.titleLabel?.font = UIFont.customFontOfSize(16)
         follow.setImage(UIImage(named: "follow"), forState: .Normal)
@@ -42,6 +54,7 @@ class OGToolView: UIView {
         }
         
         privateLatter = UIButton()
+        privateLatter.addTarget(self, action: .tapPrivateLatter, forControlEvents: .TouchUpInside)
         privateLatter.setTitle("私信", forState: .Normal)
         privateLatter.titleLabel?.font = UIFont.customFontOfSize(16)
         privateLatter.setImage(UIImage(named: "white"), forState: .Normal)
@@ -52,6 +65,18 @@ class OGToolView: UIView {
             make.width.equalTo(follow)
             make.top.equalTo(privateLatter.superview!)
             make.bottom.equalTo(privateLatter.superview!)
+        }
+    }
+    
+    func tapFollow(sender: UIButton) {
+        if delegate != nil {
+            delegate.toolViewTapFollow(sender)
+        }
+    }
+    
+    func tapPrivateLatter(sender: UIButton) {
+        if delegate != nil {
+            delegate.toolViewTapPrivateLatter(sender)
         }
     }
     

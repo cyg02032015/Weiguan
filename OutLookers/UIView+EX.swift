@@ -17,5 +17,17 @@ extension UIView {
         blurEffectView.frame = view.bounds
         view.insertSubview(blurEffectView, atIndex: 0)
     }
+    
+    func dottedLine(cornerRadios cornerRadios: CGFloat, lineColor: UIColor = kLineColor) {
+        let border = CAShapeLayer()
+        border.strokeColor = lineColor.CGColor
+        border.fillColor = UIColor.clearColor().CGColor
+        border.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: cornerRadios).CGPath
+        border.frame = self.bounds
+        border.lineWidth = 1
+        border.lineCap = "square"
+        border.lineDashPattern = [4,2]
+        self.layer.addSublayer(border)
+    }
 }
 

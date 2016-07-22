@@ -25,7 +25,7 @@ class HomeViewController: YGBaseViewController {
             if success == true {
                 LogInfo(value)
             } else {
-                LogWarn(msg)
+                LogError(msg)
             }
         }
         

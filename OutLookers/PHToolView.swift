@@ -8,8 +8,21 @@
 
 import UIKit
 
+private extension Selector {
+    static let tapFollow = #selector(PHToolView.tapFollow(_:))
+    static let tapPrivateLatter = #selector(PHToolView.tapPrivateLatter(_:))
+    static let tapInvitation = #selector(PHToolView.tapInvitation(_:))
+}
+
+protocol PHToolViewDelegate: class {
+    func toolViewTapFollow(sender: UIButton)
+    func toolViewTapPrivateLatter(sender: UIButton)
+    func toolViewTapInvitation(sender: UIButton)
+}
+
 class PHToolView: UIView {
 
+    weak var delegate: PHToolViewDelegate!
     var follow: UIButton!      // 关注
     var privateLatter: UIButton!  // 私信
     var invitation: UIButton!     // 邀约
@@ -23,6 +36,7 @@ class PHToolView: UIView {
     
     func setupSubViews() {
         follow = UIButton()
+        follow.addTarget(self, action: .tapFollow, forControlEvents: .TouchUpInside)
         follow.setTitle("关注", forState: .Normal)
         follow.titleLabel?.font = UIFont.customFontOfSize(16)
         follow.setImage(UIImage(named: "follow"), forState: .Normal)
@@ -34,6 +48,7 @@ class PHToolView: UIView {
         }
         
         privateLatter = UIButton()
+        privateLatter.addTarget(self, action: .tapPrivateLatter, forControlEvents: .TouchUpInside)
         privateLatter.setTitle("私信", forState: .Normal)
         privateLatter.setTitleColor(kCommonColor, forState: .Normal)
         privateLatter.titleLabel?.font = UIFont.customFontOfSize(16)
@@ -48,6 +63,7 @@ class PHToolView: UIView {
         }
         
         invitation = UIButton()
+        invitation.addTarget(self, action: .tapInvitation, forControlEvents: .TouchUpInside)
         invitation.setTitle("邀约", forState: .Normal)
         invitation.titleLabel?.font = UIFont.customFontOfSize(16)
         invitation.setImage(UIImage(named: "invitation"), forState: .Normal)
@@ -57,6 +73,24 @@ class PHToolView: UIView {
             make.left.equalTo(privateLatter.snp.right)
             make.width.equalTo(privateLatter)
             make.top.bottom.equalTo(follow)
+        }
+    }
+    
+    func tapFollow(sender: UIButton) {
+        if delegate != nil {
+            delegate.toolViewTapFollow(sender)
+        }
+    }
+    
+    func tapPrivateLatter(sender: UIButton) {
+        if delegate != nil {
+            delegate.toolViewTapPrivateLatter(sender)
+        }
+    }
+    
+    func tapInvitation(sender: UIButton) {
+        if delegate != nil {
+            delegate.toolViewTapInvitation(sender)
         }
     }
     

@@ -57,6 +57,7 @@ class PHViewController: YGBaseViewController {
         slidePageScrollView.reloadData()
         
         toolView = PHToolView()
+        toolView.delegate = self
         toolView.layer.cornerRadius = kScale(40/2)
         toolView.clipsToBounds = true
         view.addSubview(toolView)
@@ -66,6 +67,22 @@ class PHViewController: YGBaseViewController {
             make.height.equalTo(kScale(40))
             make.bottom.equalTo(toolView.superview!).offset(kScale(-15))
         }
+    }
+}
+
+extension PHViewController: PHToolViewDelegate {
+    func toolViewTapFollow(sender: UIButton) {
+        LogInfo("关注")
+    }
+    
+    func toolViewTapPrivateLatter(sender: UIButton) {
+        LogInfo("私信")
+    }
+    
+    func toolViewTapInvitation(sender: UIButton) {
+        LogInfo("邀约")
+        let vc = InvitationDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

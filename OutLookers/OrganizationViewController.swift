@@ -56,6 +56,7 @@ class OrganizationViewController: YGBaseViewController {
         slidePageScrollView.reloadData()
         
         toolView = OGToolView()
+        toolView.delegate = self
         toolView.layer.cornerRadius = kScale(40/2)
         toolView.clipsToBounds = true
         view.addSubview(toolView)
@@ -65,6 +66,16 @@ class OrganizationViewController: YGBaseViewController {
             make.height.equalTo(kScale(40))
             make.bottom.equalTo(toolView.superview!).offset(kScale(-15))
         }
+    }
+}
+
+extension OrganizationViewController: OGToolViewDelegate {
+    func toolViewTapFollow(sender: UIButton) {
+        LogInfo("关注")
+    }
+    
+    func toolViewTapPrivateLatter(sender: UIButton) {
+        LogInfo("私信")
     }
 }
 
