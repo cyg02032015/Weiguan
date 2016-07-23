@@ -47,4 +47,27 @@ class Util {
             return nil
         }
     }
+    
+    class func setupLeftBarButtonItemOfViewController(viewController: UIViewController, imgName: String) -> (UIButton, UIImageView) {
+        let back = UIButton(type: .Custom)
+        back.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
+        let imgView = UIImageView(image: UIImage(named: imgName))
+        back.addSubview(imgView)
+        imgView.frame = CGRect(x: 0, y: back.gg_midY - 10, width: 12, height: 20)
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: back)
+        return (back, imgView)
+    }
+    /*
+     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+     backButton.frame = CGRectMake(0, 0, 45, 49);
+     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
+     [backButton addSubview:imageView];
+     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+     make.left.equalTo(imageView.superview);
+     make.centerY.equalTo(imageView.superview);
+     make.size.mas_equalTo(CGSizeMake(16, 16));
+     }];
+     vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+     return backButton;
+     */
 }

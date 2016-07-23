@@ -18,7 +18,9 @@ class MyCircularViewController: YGBaseViewController {
     
     func setupSubViews() {
         title = "我的通告"
-        slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight))) // height - naviheight  偏移问题
+        slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPoint(x: 0, y: NaviHeight), size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight))) // height - naviheight  偏移问题
+//        slidePageScrollView.headerViewScrollEnable = true
+//        slidePageScrollView.pageTabBarStopOnTopHeight = NaviHeight
         slidePageScrollView.dataSource = self
         slidePageScrollView.delegate = self
         view.addSubview(slidePageScrollView)

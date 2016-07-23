@@ -22,7 +22,7 @@ class BindAccountViewController: YGBaseViewController {
         view.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.left.equalTo(kScale(15))
-            make.top.equalTo(label.superview!).offset(kScale(14))
+            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(kScale(14))
             make.height.equalTo(kScale(16))
         }
         

@@ -43,7 +43,7 @@ class PHHeaderView: UIView {
         headImgView.clipsToBounds = true
         backImgView.addSubview(headImgView)
         headImgView.snp.makeConstraints { (make) in
-            make.top.equalTo(headImgView.superview!).offset(kScale(37))
+            make.top.equalTo(headImgView.superview!).offset(kScale(101))
             make.centerX.equalTo(headImgView.superview!)
             make.size.equalTo(kSize(80, height: 80))
         }

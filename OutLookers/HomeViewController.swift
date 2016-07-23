@@ -17,7 +17,18 @@ class HomeViewController: YGBaseViewController {
     var tableView: UITableView!
     var infos = [BannerInfo]()
     var urls = [String]()
+    var statusView: UIView!
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+//        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +44,8 @@ class HomeViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
+        
+        
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,8 +56,10 @@ class HomeViewController: YGBaseViewController {
         tableView.registerClass(RecommendHotmanTableViewCell.self, forCellReuseIdentifier: recommendHotmanTableViewCellIdentifier)
         tableView.registerClass(HomeCell.self, forCellReuseIdentifier: homeCellId)
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(tableView.superview!)
+            make.left.right.bottom.equalTo(tableView.superview!)
+            make.top.equalTo(tableView.superview!).offset(-20)
         }
+        
         // 轮播图
         let banner = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(210))), delegate: self, placeholderImage: UIImage(named: ""))
         banner.pageDotImage = UIImage(named: "home_point_normal")
@@ -68,6 +83,9 @@ class HomeViewController: YGBaseViewController {
         }
         
         
+        statusView = UIView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: 20))
+        statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: 0.0)
+        view.addSubview(statusView)
     }
 }
 
@@ -156,6 +174,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let vc = OrganizationViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
+        }
+    }
+}
+
+extension HomeViewController {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        if offsetY > 100 {
+            statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: offsetY/100)
+        } else {
+            statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: offsetY/100)
         }
     }
 }

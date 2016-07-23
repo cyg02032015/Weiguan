@@ -17,7 +17,7 @@ class HotManViewController: YGBaseViewController {
         super.viewDidLoad()
         setupSubViews()
     }
-
+    
     func setupSubViews() {
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self

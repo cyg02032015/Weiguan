@@ -23,6 +23,7 @@
 		D81992311D3D2E5A007734C0 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992301D3D2E5A007734C0 /* MyAccountViewController.swift */; };
 		D81992331D3D2F2E007734C0 /* MyAccountHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992321D3D2F2E007734C0 /* MyAccountHeadCell.swift */; };
 		D81992351D3D31F1007734C0 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992341D3D31F1007734C0 /* MyAccountCell.swift */; };
+		D81992381D438D8C007734C0 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D81992371D438D8C007734C0 /* UINavigationBar+Awesome.m */; };
 		D81F44F71D118D15004D9192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */; };
 		D81F44F81D118D15004D9192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F51D118D15004D9192 /* Main.storyboard */; };
 		D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44F91D118D43004D9192 /* CGRect+EX.swift */; };
@@ -278,6 +279,8 @@
 		D81992301D3D2E5A007734C0 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAccountViewController.swift; path = OutLookers/MyAccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		D81992321D3D2F2E007734C0 /* MyAccountHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAccountHeadCell.swift; path = OutLookers/MyAccountHeadCell.swift; sourceTree = SOURCE_ROOT; };
 		D81992341D3D31F1007734C0 /* MyAccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAccountCell.swift; path = OutLookers/MyAccountCell.swift; sourceTree = SOURCE_ROOT; };
+		D81992361D438D8C007734C0 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		D81992371D438D8C007734C0 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OutLookers/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F51D118D15004D9192 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = OutLookers/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OutLookers-Bridging-Header.h"; path = "OutLookers/OutLookers-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -929,6 +932,8 @@
 		D8C167411D1D783C00C50EB7 /* OCFile */ = {
 			isa = PBXGroup;
 			children = (
+				D81992361D438D8C007734C0 /* UINavigationBar+Awesome.h */,
+				D81992371D438D8C007734C0 /* UINavigationBar+Awesome.m */,
 				D83087761D278B72009CFE03 /* UIBarButtonItem+Badge.h */,
 				D83087771D278B72009CFE03 /* UIBarButtonItem+Badge.m */,
 				D83087781D278B72009CFE03 /* UIButton+Badge.h */,
@@ -1776,6 +1781,7 @@
 				D82F8DCD1D27CB6400A24CDB /* UIView+SDExtension.m in Sources */,
 				D8AA100E1D1DA0220038EE73 /* UIView+Layout.m in Sources */,
 				E41B926D1D3DFB6700749769 /* UserSingle.swift in Sources */,
+				D81992381D438D8C007734C0 /* UINavigationBar+Awesome.m in Sources */,
 				D8B641521D3919EB00DF916D /* HomeCell.swift in Sources */,
 				E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */,
 				D82F8E141D2E9D0000A24CDB /* DataTableViewCell.swift in Sources */,

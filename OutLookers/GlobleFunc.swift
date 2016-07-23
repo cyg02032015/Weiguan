@@ -55,9 +55,9 @@ func LocalizedString(text: String) -> String {
 
 
 func configNavigation() {
-    UINavigationBar.appearance().barTintColor = UIColor(hex: 0x333333)
-    UINavigationBar.appearance().translucent = false
-    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+    UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+    UINavigationBar.appearance().translucent = true
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
 }
 
 func configUMeng() {

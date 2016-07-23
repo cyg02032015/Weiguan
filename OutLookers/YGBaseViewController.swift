@@ -9,12 +9,24 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+private extension Selector {
+    static let backButtonPressed = #selector(YGBaseViewController.backButtonPressed(_:))
+}
+
 class YGBaseViewController: UIViewController {
     
     //MARK: -LifeCycle
+    var back: UIButton!
+    var backImgView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = kBackgoundColor
+        if self.navigationController?.viewControllers.count > 1 {
+            let tumple: (UIButton, UIImageView) = Util.setupLeftBarButtonItemOfViewController(self, imgName: "back-1")
+            back = tumple.0
+            backImgView = tumple.1
+            back.addTarget(self, action: .backButtonPressed, forControlEvents: .TouchUpInside)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -26,6 +38,10 @@ class YGBaseViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func backButtonPressed(sender: UIButton) {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewDidDisappear(animated: Bool) {

@@ -14,9 +14,21 @@ private let commentCellId = "commentCellId"
 class DynamicDetailViewController: YGBaseViewController {
 
     var tableView: UITableView!
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "动态详情"
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self

@@ -9,27 +9,54 @@
 
 import UIKit
 
+private extension Selector {
+    static let tapMore = #selector(OrganizationViewController.tapMore(_:))
+}
+
 class OrganizationViewController: YGBaseViewController {
 
     var slidePageScrollView: TYSlidePageScrollView!
     var toolView: OGToolView!
+    var rightNaviButton: UIButton!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: animated)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        backImgView.image = UIImage(named: "Group 3")
         setupSubViews()
     }
     
     func setupSubViews() {
+        
+        rightNaviButton = UIButton(type: .Custom)
+        rightNaviButton.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
+        rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
+        rightNaviButton.addTarget(self, action: .tapMore, forControlEvents: .TouchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightNaviButton)
+        
         self.title = "小包子"
         slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight))) // height - naviheight  偏移问题
         slidePageScrollView.pageTabBarIsStopOnTop = true
-        slidePageScrollView.pageTabBarStopOnTopHeight = 0
+        slidePageScrollView.pageTabBarStopOnTopHeight = NaviHeight
         slidePageScrollView.parallaxHeaderEffect = false
         slidePageScrollView.dataSource = self
         slidePageScrollView.delegate = self
         view.addSubview(slidePageScrollView)
         
         let header = PHHeaderView()
-        header.frame = CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(230)))
+        header.frame = CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(294)))
         
         slidePageScrollView.headerView = header
         
@@ -67,6 +94,15 @@ class OrganizationViewController: YGBaseViewController {
             make.bottom.equalTo(toolView.superview!).offset(kScale(-15))
         }
     }
+    
+    func tapMore(sender: UIButton) {
+        LogInfo("more")
+    }
+    
+    override func backButtonPressed(sender: UIButton) {
+        slidePageScrollView.isDealloc = true
+        navigationController?.popViewControllerAnimated(true)
+    }
 }
 
 extension OrganizationViewController: OGToolViewDelegate {
@@ -97,7 +133,24 @@ extension OrganizationViewController: TYSlidePageScrollViewDataSource, TYSlidePa
         }
     }
     
-    func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, horizenScrollViewDidEndDecelerating scrollView: UIScrollView!) {
-        LogInfo("end")
+    func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, verticalScrollViewDidScroll pageScrollView: UIScrollView!) {
+        let color = UIColor(r: 255, g: 255, b: 255, a: 1.0)
+        let headerContentViewHeight = -slidePageScrollView.headerView.gg_height + slidePageScrollView.pageTabBar.gg_height
+        let offsetY = pageScrollView.contentOffset.y
+        LogInfo(offsetY - headerContentViewHeight)
+        let delta = offsetY - headerContentViewHeight
+        if delta > 0 {
+            backImgView.image = UIImage(named: "back-1")
+            rightNaviButton.setImage(UIImage(named: "more1"), forState: .Normal)
+            UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
+            navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(delta / 100))
+        } else {
+            backImgView.image = UIImage(named: "back1")
+            rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
+            UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
+            navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(delta / 100))
+        }
     }
 }

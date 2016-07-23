@@ -35,7 +35,6 @@
 
 @property (nonatomic, assign) CGFloat headerContentViewHeight;
 @property (nonatomic, assign) CGFloat pageScrollViewOffsetY;
-
 @end
 
 @implementation TYSlidePageScrollView
@@ -43,6 +42,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        self.isDealloc = NO;
         [self setPropertys];
         
         [self addHorScrollView];
@@ -55,6 +55,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        self.isDealloc = NO;
         [self setPropertys];
         
         [self addHorScrollView];
@@ -490,7 +491,7 @@
 // page scrollView
 - (void)pageScrollViewDidScroll:(UIScrollView *)pageScrollView changeOtherPageViews:(BOOL)isNeedChange
 {
-    if (_delegateFlags.verticalScrollViewDidScroll) {
+    if (_delegateFlags.verticalScrollViewDidScroll && self.isDealloc == NO) {
         [_delegate slidePageScrollView:self verticalScrollViewDidScroll:pageScrollView];
     }
 

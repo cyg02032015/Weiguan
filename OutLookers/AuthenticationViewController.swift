@@ -42,7 +42,7 @@ class AuthenticationViewController: YGBaseViewController {
         talent.snp.makeConstraints { (make) in
             make.centerX.equalTo(talent.superview!)
             make.size.equalTo(kSize(192, height: 48))
-            make.top.equalTo(talent.superview!).offset(kScale(60))
+            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(kScale(60))
         }
         
         let organization = UIButton()
