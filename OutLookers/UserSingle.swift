@@ -24,4 +24,5 @@ class UserSingleton {
     var isSetPassword: Bool = false
     var originPwd: String!
     var newPwd: String!
+    var userId: String = "1"
 }

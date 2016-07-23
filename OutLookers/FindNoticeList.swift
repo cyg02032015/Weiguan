@@ -50,5 +50,4 @@ class FindNoticeList: BaseResponse {
             result.append(value)
         }
     }
-    
 }

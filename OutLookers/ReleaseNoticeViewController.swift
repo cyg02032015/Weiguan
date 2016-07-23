@@ -332,7 +332,6 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
         if isEmptyString(request.adds) {
             request.adds = ""
         }
-        request.userId = "1"
         Server.getReleaseNotice(request) { (success, msg, value) in
             if success {
                 LogInfo(value)

@@ -14,17 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    func testAPI() {
+        var req = ReleaseNoticeRequest()
+        Server.dynamicList(1, state: 2, userId: "1", isPerson: true) { (success, msg, value) in
+            LogInfo(value)
+            LogError(msg)
+        }
+        
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let req = BaseRequest(userId: "1")
-        Server.isAuth(req) { (success, msg, value) in
-            if success {
-                UserSingleton.sharedInstance.type = value!.type
-                LogInfo(UserSingleton.sharedInstance.type)
-            } else {
-                LogError(msg!)
-            }
-        }
+        testAPI()
+
         #if DEBUG
         configCocoaLumberjack()
         #endif

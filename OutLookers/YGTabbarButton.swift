@@ -37,10 +37,7 @@ class YGTabbarButton: UIButton {
         self.setImage(item.selectedImage, forState: UIControlState.Selected)
         self.setTitleColor(UIColor(hex: 0xC8C8C8), forState: .Normal)
         self.setTitleColor(UIColor(hex: 0x64B8FF), forState: .Selected)
-        guard let badge = item.badgeValue else {
-            LogError("badgeValue is nil")
-            return
-        }
+        guard let badge = item.badgeValue else { return }
         if Int(badge) > 0 {
             self.badgeValue = badge
             self.badgeOriginX = self.gg_width - 20

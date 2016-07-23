@@ -27,7 +27,7 @@ struct ReleaseNoticeRequest {
     var startTime : String!
     /// 工作主题
     var theme : String!
-    /// 用户Id
-    var userId : String!
+    /// 封面图片id
+    var cover : String!
     
 }

@@ -31,14 +31,6 @@ class HomeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        Server.getFindNoticeList { (success, msg, value) in
-            if success == true {
-                LogInfo(value)
-            } else {
-                LogError(msg)
-            }
-        }
         
         setupSubViews()
     }
