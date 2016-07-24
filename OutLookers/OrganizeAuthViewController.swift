@@ -78,8 +78,7 @@ class OrganizeAuthViewController: YGBaseViewController {
     
     func checkRequest() {
         // TODO
-        organizeRequest.userId = "1"
-        if !isEmptyString(organizeRequest.userId) && !isEmptyString(organizeRequest.type) && !isEmptyString(organizeRequest.name) && !isEmptyString(organizeRequest.license) && !isEmptyString(organizeRequest.adds) && !isEmptyString(organizeRequest.linkman) && !isEmptyString(organizeRequest.phone) {
+        if !isEmptyString(UserSingleton.sharedInstance.userId) && !isEmptyString(organizeRequest.type) && !isEmptyString(organizeRequest.name) && !isEmptyString(organizeRequest.license) && !isEmptyString(organizeRequest.adds) && !isEmptyString(organizeRequest.linkman) && !isEmptyString(organizeRequest.phone) {
             if !isEmptyString(organizeRequest.photo) {
                 self.commitButton.userInteractionEnabled = true
                 self.commitButton.backgroundColor = kCommonColor

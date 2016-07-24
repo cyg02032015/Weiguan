@@ -44,8 +44,7 @@ class DataTableViewCell: UITableViewCell {
             make.size.equalTo(kSize(4, height: 15))
         }
         
-        let basicDataLabel = UILabel()
-        basicDataLabel.font = UIFont.customFontOfSize(16)
+        let basicDataLabel = UILabel.createLabel(16)
         contentView.addSubview(basicDataLabel)
         basicDataLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(lineImgView1)
@@ -53,14 +52,14 @@ class DataTableViewCell: UITableViewCell {
             make.height.equalTo(kScale(16))
         }
         
-        let editBtn1 = UIButton()
-        editBtn1.setImage(UIImage(named: "Fill"), forState: .Normal)
-        contentView.addSubview(editBtn1)
-        editBtn1.snp.makeConstraints { (make) in
-            make.centerY.equalTo(basicDataLabel)
-            make.right.equalTo(editBtn1.superview!).offset(kScale(-15))
-            make.size.equalTo(kSize(15, height: 17))
-        }
+//        let editBtn1 = UIButton()
+//        editBtn1.setImage(UIImage(named: "Fill"), forState: .Normal)
+//        contentView.addSubview(editBtn1)
+//        editBtn1.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(basicDataLabel)
+//            make.right.equalTo(editBtn1.superview!).offset(kScale(-15))
+//            make.size.equalTo(kSize(15, height: 17))
+//        }
         
         // 基本资料各种属性
         sexLabel = UILabel()
@@ -163,8 +162,7 @@ class DataTableViewCell: UITableViewCell {
             make.size.equalTo(kSize(4, height: 15))
         }
         // 个人特征
-        let featureLabel = UILabel()
-        featureLabel.font = UIFont.customFontOfSize(16)
+        let featureLabel = UILabel.createLabel(16)
         contentView.addSubview(featureLabel)
         featureLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(lineImgView2)
@@ -172,14 +170,14 @@ class DataTableViewCell: UITableViewCell {
             make.height.equalTo(kScale(16))
         }
         
-        let editBtn2 = UIButton()
-        editBtn2.setImage(UIImage(named: "Fill"), forState: .Normal)
-        contentView.addSubview(editBtn2)
-        editBtn2.snp.makeConstraints { (make) in
-            make.centerY.equalTo(featureLabel)
-            make.right.equalTo(editBtn2.superview!).offset(kScale(-15))
-            make.size.equalTo(kSize(15, height: 17))
-        }
+//        let editBtn2 = UIButton()
+//        editBtn2.setImage(UIImage(named: "Fill"), forState: .Normal)
+//        contentView.addSubview(editBtn2)
+//        editBtn2.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(featureLabel)
+//            make.right.equalTo(editBtn2.superview!).offset(kScale(-15))
+//            make.size.equalTo(kSize(15, height: 17))
+//        }
         
         style = UILabel.createLabel(14)
         contentView.addSubview(style)
@@ -237,8 +235,7 @@ class DataTableViewCell: UITableViewCell {
         }
         
         // 通告经验
-        let experenceLabel = UILabel()
-        experenceLabel.font = UIFont.customFontOfSize(16)
+        let experenceLabel = UILabel.createLabel(16)
         contentView.addSubview(experenceLabel)
         experenceLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(lineImgView3)
@@ -246,14 +243,14 @@ class DataTableViewCell: UITableViewCell {
             make.height.equalTo(kScale(16))
         }
         
-        let editBtn3 = UIButton()
-        editBtn3.setImage(UIImage(named: "Fill"), forState: .Normal)
-        contentView.addSubview(editBtn3)
-        editBtn3.snp.makeConstraints { (make) in
-            make.centerY.equalTo(experenceLabel)
-            make.right.equalTo(editBtn3.superview!).offset(kScale(-15))
-            make.size.equalTo(kSize(15, height: 17))
-        }
+//        let editBtn3 = UIButton()
+//        editBtn3.setImage(UIImage(named: "Fill"), forState: .Normal)
+//        contentView.addSubview(editBtn3)
+//        editBtn3.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(experenceLabel)
+//            make.right.equalTo(editBtn3.superview!).offset(kScale(-15))
+//            make.size.equalTo(kSize(15, height: 17))
+//        }
         
         experence = UILabel.createLabel(14)
         contentView.addSubview(experence)
@@ -282,7 +279,6 @@ class DataTableViewCell: UITableViewCell {
         charm.text = "魅力部位：眼睛 腿部眼睛 腿部眼睛 腿部。"
         experenceLabel.text = "通告经验"
         experence.text = "曾任《男人装》御用模特。"
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

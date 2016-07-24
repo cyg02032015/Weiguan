@@ -56,7 +56,6 @@ class PHViewController: YGBaseViewController {
         rightNaviButton.setImage(UIImage(named: "more1"), forState: .Normal)
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
-//        navigationController?.navigationBar.lt_setBackgroundColor(UIColor(r: 255, g: 255, b: 255, a: 1.0).colorWithAlphaComponent(1.0))
         navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationController?.navigationBar.lt_reset()
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
@@ -89,16 +88,11 @@ class PHViewController: YGBaseViewController {
         
         slidePageScrollView.headerView = header
         
-        let titlePageTabbar = TYTitlePageTabBar(titleArray: ["资料", "动态", "才艺"])
+        let titlePageTabbar = TYTitlePageTabBar(titleArray: ["动态", "才艺"])
         titlePageTabbar.frame = CGRect(origin: CGPointZero, size: CGSize(width: CGRectGetWidth(slidePageScrollView.frame), height: 46))
         titlePageTabbar.edgeInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 80)
         titlePageTabbar.backgroundColor = UIColor(hex: 0xf8f8f8)
         slidePageScrollView.pageTabBar = titlePageTabbar
-        
-        
-        let dataVC = DataViewController()
-        dataVC.view.frame = view.frame
-        self.addChildViewController(dataVC)
         
         let dynamicVC = DynamicViewController()
         dynamicVC.view.frame = view.frame
@@ -125,7 +119,8 @@ class PHViewController: YGBaseViewController {
     }
     
     func tapMore(sender: UIButton) {
-        LogInfo("more")
+        let vc = DataViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func backButtonPressed(sender: UIButton) {
@@ -167,9 +162,6 @@ extension PHViewController: TYSlidePageScrollViewDataSource, TYSlidePageScrollVi
     
     func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, pageVerticalScrollViewForIndex index: Int) -> UIScrollView! {
         if index == 0 {
-            let tableViewVC = childViewControllers[index] as! DataViewController
-            return tableViewVC.tableView
-        } else if index == 1 {
             let tableViewVC = childViewControllers[index] as! DynamicViewController
             return tableViewVC.tableView
         } else {

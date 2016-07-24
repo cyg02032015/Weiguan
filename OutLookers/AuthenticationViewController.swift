@@ -19,8 +19,7 @@ class AuthenticationViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        let req = BaseRequest(userId: "1")
-        Server.isAuth(req) { (success, msg, value) in
+        Server.isAuth { (success, msg, value) in
             if success {
                 LogInfo("\(value!.authentication)   \(value!.type)")
             } else {
@@ -94,8 +93,7 @@ class AuthenticationViewController: YGBaseViewController {
         let alert = UIAlertController(title: "提示", message: "每个用户只能认证一种角色，您当前已通过粉丝认证，若继续认证则视为放弃粉丝认证", preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
         let continued = UIAlertAction(title: "继续认证", style: .Default) { (action) in
-            let req = BaseRequest(userId: "1")
-            Server.modifyAuth(req, handler: { (success, msg, value) in
+        Server.modifyAuth({ (success, msg, value) in
                 if success {
                     // TODO
                     LogInfo(value!)

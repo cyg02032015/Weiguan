@@ -1,5 +1,5 @@
 //
-//  DynamicListResp.swift
+//  MyFollowResp.swift
 //  OutLookers
 //
 //  Created by C on 16/7/24.
@@ -9,25 +9,24 @@
 import UIKit
 import SwiftyJSON
 
-class DynamicListResp: BaseResponse {
-
+class MyFollowResp: BaseResponse {
+    
     var order : String!
     var orderBy : String!
     var pageNo : Int!
     var pageSize : Int!
-    var list : [DynamicResult]!
+    var list : [FollowList]!
     var totalCount : Int!
-    var result: DynamicListResp!
+    var result: MyFollowResp!
     
     override init(fromJson json: JSON!) {
         super.init(fromJson: json)
         if json == nil{
             return
         }
-        
         let pageJson = json["page"]
         if pageJson != JSON.null {
-            result = DynamicListResp(fromJson: pageJson)
+            result = MyFollowResp(fromJson: pageJson)
             return
         }
         order = json["order"].stringValue
@@ -35,38 +34,33 @@ class DynamicListResp: BaseResponse {
         pageNo = json["pageNo"].intValue
         pageSize = json["pageSize"].intValue
         
-        list = [DynamicResult]()
+        list = [FollowList]()
         let resultArray = json["result"].arrayValue
         for resultJson in resultArray{
-            let value = DynamicResult(fromJson: resultJson)
+            let value = FollowList(fromJson: resultJson)
             list.append(value)
         }
         totalCount = json["totalCount"].intValue
     }
 }
 
-class DynamicResult {
-    var cover : String!
-    var createTime : String!
+class FollowList {
+    var fan : Int!
+    var followUserId : Int!
     var id : Int!
-    var isVideo : Int!
     var name : String!
     var photo : String!
-    var picture : String!
-    var text : String!
     var userId : Int!
-    init(fromJson json: JSON!) {
+    
+    init(fromJson json: JSON!){
         if json == nil{
             return
         }
-        cover = json["cover"].stringValue
-        createTime = json["createTime"].stringValue
+        fan = json["fan"].intValue
+        followUserId = json["followUserId"].intValue
         id = json["id"].intValue
-        isVideo = json["isVideo"].intValue
         name = json["name"].stringValue
         photo = json["photo"].stringValue
-        picture = json["picture"].stringValue
-        text = json["text"].stringValue
         userId = json["userId"].intValue
     }
 }

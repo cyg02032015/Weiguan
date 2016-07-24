@@ -47,15 +47,51 @@ struct API {
     static let findHotman = baseURL + "/api/release/v1/user/get"
     /// 编辑资料-个人特色-个人特征
     static let personCharacter = baseURL + "/api/personal/v1/features/select"
-    /// 编辑资料-个人档案
-    static let editProfilePersonDocument = baseURL + "/api/release/v1/archives/"
+    /// 创建资料-个人档案
+    static let editProfilePersonDocument = baseURL + "/api/personal/v1/archives/create"
+    /// 是否绑定手机号
+    static let isBindPhone = baseURL + "/api/personal/v1/mobile/whether"
+    /// 手机号绑定
+    static let phoneBind = baseURL + "/api/personal/v1/mobile/binding"
     /// 发送获取验证码
     static let getVerifyCode = baseURL + "/api/personal/v1/mobile/verify"
+    /// 个人档案-查看
+    static let showPersonFiles = baseURL + "/api/personal/v1/archives/select"
+    /// 变更角色-删除原有认证
+    static let authDelete = baseURL + "/api/authentication/v1/identity/delete"
     /// 机构认证
     static let organizationAuth = baseURL + "/api/authentication/v1/identity/agency"
     /// 是否认证
     static let isAuth = baseURL + "/api/authentication/v1/identity/isbinding"
-    /// 变更角色-删除原有认证
-    static let authDelete = baseURL + "/api/personal/v1/identity/delete"
+    /// 粉丝认证
+    static let fansAuth = baseURL + "/api/authentication/v1/identity/fans"
+    /// 红人认证
+    static let hotmanAuth = baseURL + "/api/authentication/v1/identity/reds"
+    /// 红人认证资格显示
+    static let hotmanAuthShow = baseURL + "/api/authentication/v1/identity/qualification"
+    /// 提交报名-获取用户才艺
+    static let commitEnrollGetUserTalent = baseURL + "/api/release/v1/registration/talent"
+    /// 提交报名
+    static let commitEnroll = baseURL + "/api/release/v1/announcement/register"
+    /// 通告-报名人员
+    static let circularEnrollPerson = baseURL + "/api/release/v1/announcement/user"
+    /// 取消关注
+    static let cancelFollow = baseURL + "/api/release/v1/follow/delete"
+    /// 参与的通告
+    static let participateCircular = baseURL + "/api/release/v1/announcement/participation"
+    /// 我的关注
+    static let myFollow = baseURL + "/api/authentication/v1/follow/users"
+    /// 我的粉丝
+    static let myFans = baseURL + "/api/authentication/v1/fans/users"
+    /// 获取图片，视频地址
+    static let getPicAndVideoURL = baseURL + "/api/release/v1/photo/get"
+    /// 获取用户头像昵称
+    static let getUserAvatarAndName = baseURL + "/api/release/v1/material/get"
+    /// 添加作品集
+    static let addworks = baseURL + "/api/release/v1/works/create"
+    /// 获取作品集
+    static let getworks = baseURL + "/api/release/v1/works/select"
+    /// 通告-招募信息
+    static let circularRecruitInformation = baseURL + "/api/release/v1/recruitment/list"
     
 }

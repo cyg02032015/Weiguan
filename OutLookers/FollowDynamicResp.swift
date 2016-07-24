@@ -1,5 +1,5 @@
 //
-//  DynamicListResp.swift
+//  FollowDynamicResp.swift
 //  OutLookers
 //
 //  Created by C on 16/7/24.
@@ -9,25 +9,23 @@
 import UIKit
 import SwiftyJSON
 
-class DynamicListResp: BaseResponse {
-
+class FollowDynamicResp: BaseResponse {
     var order : String!
     var orderBy : String!
     var pageNo : Int!
     var pageSize : Int!
-    var list : [DynamicResult]!
+    var list : [FollowDynamicResult]!
     var totalCount : Int!
-    var result: DynamicListResp!
+    var result: FollowDynamicResp!
     
     override init(fromJson json: JSON!) {
         super.init(fromJson: json)
         if json == nil{
             return
         }
-        
         let pageJson = json["page"]
         if pageJson != JSON.null {
-            result = DynamicListResp(fromJson: pageJson)
+            result = FollowDynamicResp(fromJson: pageJson)
             return
         }
         order = json["order"].stringValue
@@ -35,17 +33,18 @@ class DynamicListResp: BaseResponse {
         pageNo = json["pageNo"].intValue
         pageSize = json["pageSize"].intValue
         
-        list = [DynamicResult]()
+        
+        list = [FollowDynamicResult]()
         let resultArray = json["result"].arrayValue
         for resultJson in resultArray{
-            let value = DynamicResult(fromJson: resultJson)
+            let value = FollowDynamicResult(fromJson: resultJson)
             list.append(value)
         }
         totalCount = json["totalCount"].intValue
     }
 }
 
-class DynamicResult {
+class FollowDynamicResult {
     var cover : String!
     var createTime : String!
     var id : Int!
@@ -55,7 +54,8 @@ class DynamicResult {
     var picture : String!
     var text : String!
     var userId : Int!
-    init(fromJson json: JSON!) {
+    
+    init(fromJson json: JSON!){
         if json == nil{
             return
         }

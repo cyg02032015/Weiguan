@@ -1,39 +1,37 @@
 //
-//  SearchTalent.swift
+//  CommitEnrollGetUserTalentResp.swift
 //  OutLookers
 //
-//  Created by C on 16/7/23.
+//  Created by C on 16/7/24.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
 //
 
 import UIKit
 import SwiftyJSON
 
-class SearchTalent: BaseResponse {
+class CommitEnrollGetUserTalentResp: BaseResponse {
     
-    var result: [SearchTalentList]!
+    var result: [UserTalentList]!
     
     override init(fromJson json: JSON!){
         super.init(fromJson: json)
         if json == nil{
             return
         }
-        
-        result = [SearchTalentList]()
-        guard let resultArray = json["result"].dictionaryValue["list"]?.arrayValue else { return }
-        for resultJson in resultArray {
-            let value = SearchTalentList(fromJson: resultJson)
+        guard let listArray = json["result"].dictionaryValue["list"]?.arrayValue else {return}
+        result = [UserTalentList]()
+        for listJson in listArray {
+            let value = UserTalentList(fromJson: listJson)
             result.append(value)
         }
     }
 }
 
-class SearchTalentList {
-    
+class UserTalentList {
     var id : Int!
     var name : String!
     
-    init(fromJson json: JSON!) {
+    init(fromJson json: JSON!){
         if json == nil{
             return
         }

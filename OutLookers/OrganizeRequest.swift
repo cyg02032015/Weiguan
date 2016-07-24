@@ -23,6 +23,4 @@ struct OrganizeRequest {
     var photo : String!
     /// 机构类型
     var type : String!
-
-    var userId : String!
 }

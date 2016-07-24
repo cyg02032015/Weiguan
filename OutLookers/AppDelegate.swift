@@ -15,11 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func testAPI() {
-        var req = ReleaseNoticeRequest()
-        Server.dynamicList(1, state: 2, userId: "1", isPerson: true) { (success, msg, value) in
+        var req = AddworksReq()
+        req.talentId = "1"
+        req.text = "累死哥了"
+        req.worksIds = "11"
+        Server.dynamicDetail("1") {(success, msg, value) in
             LogInfo(value)
             LogError(msg)
         }
+        
         
     }
 

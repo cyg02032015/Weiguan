@@ -1,5 +1,5 @@
 //
-//  DynamicListResp.swift
+//  ParticipateCircularResp.swift
 //  OutLookers
 //
 //  Created by C on 16/7/24.
@@ -9,25 +9,24 @@
 import UIKit
 import SwiftyJSON
 
-class DynamicListResp: BaseResponse {
-
+class ParticipateCircularResp: BaseResponse {
+    
     var order : String!
     var orderBy : String!
     var pageNo : Int!
     var pageSize : Int!
-    var list : [DynamicResult]!
+    var list : [CircularList]!
     var totalCount : Int!
-    var result: DynamicListResp!
+    var result: ParticipateCircularResp!
     
     override init(fromJson json: JSON!) {
         super.init(fromJson: json)
         if json == nil{
             return
         }
-        
         let pageJson = json["page"]
         if pageJson != JSON.null {
-            result = DynamicListResp(fromJson: pageJson)
+            result = ParticipateCircularResp(fromJson: pageJson)
             return
         }
         order = json["order"].stringValue
@@ -35,38 +34,38 @@ class DynamicListResp: BaseResponse {
         pageNo = json["pageNo"].intValue
         pageSize = json["pageSize"].intValue
         
-        list = [DynamicResult]()
+        
+        list = [CircularList]()
         let resultArray = json["result"].arrayValue
         for resultJson in resultArray{
-            let value = DynamicResult(fromJson: resultJson)
+            let value = CircularList(fromJson: resultJson)
             list.append(value)
         }
         totalCount = json["totalCount"].intValue
     }
 }
 
-class DynamicResult {
+class CircularList {
+    
     var cover : String!
-    var createTime : String!
+    var endTime : String!
     var id : Int!
-    var isVideo : Int!
-    var name : String!
-    var photo : String!
-    var picture : String!
-    var text : String!
+    var startTime : String!
+    var state : String!
+    var theme : String!
     var userId : Int!
-    init(fromJson json: JSON!) {
+    
+    init(fromJson json: JSON!){
         if json == nil{
             return
         }
         cover = json["cover"].stringValue
-        createTime = json["createTime"].stringValue
+        endTime = json["endTime"].stringValue
         id = json["id"].intValue
-        isVideo = json["isVideo"].intValue
-        name = json["name"].stringValue
-        photo = json["photo"].stringValue
-        picture = json["picture"].stringValue
-        text = json["text"].stringValue
+        startTime = json["startTime"].stringValue
+        state = json["state"].stringValue
+        theme = json["theme"].stringValue
         userId = json["userId"].intValue
     }
+    
 }

@@ -27,18 +27,17 @@ class DynamicDetailResp: BaseResponse {
         if json == nil{
             return
         }
-        
+        let resultJson = json["result"]
+        if resultJson != JSON.null {
+            result = DynamicDetailResp(fromJson: resultJson)
+            return
+        }
         cover = json["cover"].intValue
         id = json["id"].intValue
         isVideo = json["isVideo"].stringValue
         picture = json["picture"].stringValue
         text = json["text"].stringValue
         userId = json["userId"].intValue
-        
-        let resultJson = json["result"]
-        if resultJson != JSON.null {
-            result = DynamicDetailResp(fromJson: resultJson)
-        }
         
         pictureList = [PictureList]()
         let pictureListArray = json["pictureList"].arrayValue

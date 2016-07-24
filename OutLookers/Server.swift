@@ -9,6 +9,8 @@
 import UIKit
 import SwiftyJSON
 
+let pageSize = 10
+
 class Server {
     /// 发布图片、视频接口
     class func releasePicAndVideo(request: ReleasePicAndVideoReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
@@ -33,7 +35,7 @@ class Server {
     }
     
     /// 查询才艺接口
-    class func searchTalent(handler: (success: Bool, msg: String?, value: [SearchTalent]?)->Void) {
+    class func searchTalent(handler: (success: Bool, msg: String?, value: [SearchTalentList]?)->Void) {
         let parameters = [
             "userId" : UserSingleton.sharedInstance.userId
         ]
@@ -79,7 +81,7 @@ class Server {
     }
     
     /// 发布才艺-类型选择
-    class func releaseTalentSelectType(handler: (success: Bool, msg: String?, value: [ReleaseTalentSelectType]?)->Void) {
+    class func releaseTalentSelectType(handler: (success: Bool, msg: String?, value: [TalentSelectTypeList]?)->Void) {
         HttpTool.post(API.releaseTalentTypeSelect, parameters: nil, complete: { (response) in
             let info = ReleaseTalentSelectType(fromJson: response)
             if info.success == true {
@@ -172,10 +174,10 @@ class Server {
     }
     
     /// 动态列表
-    class func dynamicList(pageNo: Int, state: Int, userId: String, isPerson: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
+    class func dynamicList(pageNo: Int, state: Int, isPerson: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
         var parameters = [
             "pageNo" : "\(pageNo)",
-            "pageSize" : "10",
+            "pageSize" : "\(pageSize)",
             "state" : "\(state)",
             ]
         if isPerson {
@@ -194,11 +196,104 @@ class Server {
     }
     
     /// 才艺列表
+    class func talentList(pageNo: Int, state: Int, handler: (success: Bool, msg: String?, value: TalentListResp?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)",
+            "state" : "\(state)"
+            ]
+        HttpTool.post(API.talentList, parameters: parameters, complete: { (response) in
+            let info = TalentListResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 才艺详情
+    class func talentDetail(id: String, handler: (success: Bool, msg: String?, value: TalentDtailResp?)->Void) {
+        let parameters = ["id" : id]
+        HttpTool.post(API.talentDetail, parameters: parameters, complete: { (response) in
+            let info = TalentDtailResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 才艺删除
+    class func deleteTalent(id: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = ["id" : id]
+        HttpTool.post(API.talentDelete, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 关注
+    class func followUser(followUserId: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "followUserId" : followUserId,
+            "userId" : UserSingleton.sharedInstance.userId
+            ]
+        HttpTool.post(API.follow, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 关注-动态
+    class func followDynamic(pageNo: Int, handler: (success: Bool, msg: String?, value: FollowDynamicResp?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)",
+        ]
+        HttpTool.post(API.followDynamic, parameters: parameters, complete: { (response) in
+            let info = FollowDynamicResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
     
     /// 发现-通告列表
-    class func getFindNoticeList(handler: (success: Bool, msg: String?, value: [FindNoticeList]?)->Void) {
-        HttpTool.post(API.findNoticeList, parameters: nil, complete: { (response) in
-            let info = FindNoticeList(fromJson: response)
+    class func getFindNoticeList(pageNo: Int, state: Int, isPerson: Bool, handler: (success: Bool, msg: String?, value: FindNoticeListResp?)->Void) {
+        var parameters = [
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)",
+            "state" : "\(state)",
+            ]
+        if isPerson {
+            parameters["userId"] = UserSingleton.sharedInstance.userId
+        }
+        HttpTool.post(API.findNoticeList, parameters: parameters, complete: { (response) in
+            let info = FindNoticeListResp(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)
             } else {
@@ -209,21 +304,33 @@ class Server {
         }
     }
     
-    /// 发送获取验证码
-    class func getVerifyCode(request: VerifyRequest, handler: (success: Bool, msg: String?, value: String?)->Void) {
-        let parameters = [
-            "userPhone" : request.userPhone,
-            "userId" : request.userId
-        ]
-        HttpTool.post(API.getVerifyCode, parameters: parameters, complete: { (response) in
-            let info = StringResponse(fromJson: response)
+    /// 发现-通告详情
+    class func findNoticeDetail(id: String, handler: (success: Bool, msg: String?, value: FindNoticeDetailResp?)->Void) {
+        let parameters = ["id" : id]
+        HttpTool.post(API.findNoticeDetail, parameters: parameters, complete: { (response) in
+            let info = FindNoticeDetailResp(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)
             } else {
                 handler(success: false, msg: info.msg, value: nil)
             }
-            }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+
+    /// 发现-红人
+    class func findHotman(handler: (success: Bool, msg: String?, value: [FindeHotman]?)->Void) {
+        
+        HttpTool.post(API.findHotman, parameters: nil, complete: { (response) in
+            let info = FindHotmanResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
     
@@ -236,15 +343,125 @@ class Server {
             } else {
                 handler(success: false, msg: info.msg, value: nil)
             }
-            }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 创建资料-个人档案
+    class func personalFiles(req: PersonFilesReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "height" : req.height,
+            "weight" : req.weight,
+            "bust" : req.bust,
+            "waist" : req.waist,
+            "hipline" : req.hipline,
+            "constellation" : req.constellation,
+            "characteristics" : req.characteristics,
+            "experience" : req.experience
+            ]
+        HttpTool.post(API.editProfilePersonDocument, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 是否绑定手机号
+    class func isBindPhone(handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.isBindPhone, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    class func bindPhone(phone: String,smsCode: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "userPhone" : phone,
+            "smsCode" : smsCode
+            ]
+        HttpTool.post(API.phoneBind, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 发送获取验证码
+    class func getVerifyCode(phone: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userPhone" : phone,
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.getVerifyCode, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 个人资料-查看
+    class func showPersonFiles(handler: (success: Bool, msg: String?, value: PersonFilesResp?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.showPersonFiles, parameters: parameters, complete: { (response) in
+            let info = PersonFilesResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 变更角色-删除原有认证
+    class func modifyAuth(handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = ["userId":UserSingleton.sharedInstance.userId]
+        HttpTool.post(API.authDelete, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
     
     /// 机构认证
     class func organizationAuth(request: OrganizeRequest, handler: (success: Bool, msg: String?, value: String?)->Void) {
         let parameters = [
-            "userId":request.userId,
+            "userId":UserSingleton.sharedInstance.userId,
             "type":request.type,
             "name":request.name,
             "license":request.license,
@@ -260,14 +477,14 @@ class Server {
             } else {
                 handler(success: false, msg: info.msg!, value: nil)
             }
-            }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
     
     /// 是否认证
-    class func isAuth(request: BaseRequest, handler: (success: Bool, msg: String?, value: IsAuthResp?)->Void) {
-        let parameters = ["userId":request.userId]
+    class func isAuth(handler: (success: Bool, msg: String?, value: IsAuthResp?)->Void) {
+        let parameters = ["userId":UserSingleton.sharedInstance.userId]
         HttpTool.post(API.isAuth, parameters: parameters, complete: { (response) in
             let info = IsAuthResp(fromJson: response)
             if info.success == true {
@@ -275,15 +492,15 @@ class Server {
             } else {
                 handler(success: false, msg: info.msg!, value: nil)
             }
-            }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
     
-    /// 变更角色-删除原有认证
-    class func modifyAuth(request: BaseRequest, handler: (success: Bool, msg: String?, value: String?)->Void) {
-        let parameters = ["userId":request.userId]
-        HttpTool.post(API.authDelete, parameters: parameters, complete: { (response) in
+    /// 粉丝认证
+    class func fansAuth(redsId: String,handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = ["userId":UserSingleton.sharedInstance.userId, "redsId":redsId]
+        HttpTool.post(API.fansAuth, parameters: parameters, complete: { (response) in
             let info = StringResponse(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)
@@ -294,4 +511,251 @@ class Server {
             handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
+    /// 红人认证
+    class func hotmanAuth(photo: String,handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = ["userId":UserSingleton.sharedInstance.userId, "photo":photo]
+        HttpTool.post(API.hotmanAuth, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 红人认证资格显示
+    class func hotmanAuthShow(handler: (success: Bool, msg: String?, value: HotmanAuthShowResp?)->Void) {
+        let parameters = ["userId":UserSingleton.sharedInstance.userId]
+        HttpTool.post(API.hotmanAuthShow, parameters: parameters, complete: { (response) in
+            let info = HotmanAuthShowResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 提交报名-获取用户才艺
+    class func commitEnrollGetUserTalent(handler: (success: Bool, msg: String?, value: [UserTalentList]?)->Void) {
+        let parameters = ["userId":UserSingleton.sharedInstance.userId]
+        HttpTool.post(API.commitEnrollGetUserTalent, parameters: parameters, complete: { (response) in
+            let info = CommitEnrollGetUserTalentResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 提交报名
+    class func commitEnroll(req: CommitEnrollReq,handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "announcementId" : req.announcementId,
+            "recruitmentId" : req.recruitmentId,
+            "recruitmentName" : req.recruitmentName,
+            "userId" : UserSingleton.sharedInstance.userId,
+            "talentId" : req.talentId
+            ]
+        HttpTool.post(API.commitEnroll, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+
+    /// 通告-报名人员
+    class func circularEnrollPerson(announcementId: String,handler: (success: Bool, msg: String?, value: [EnrollPersonList]?)->Void) {
+        let parameters = [
+            "announcementId" : announcementId
+        ]
+        HttpTool.post(API.circularEnrollPerson, parameters: parameters, complete: { (response) in
+            let info = CircularEnrollPersonResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg!, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 取消关注
+    class func cancelFollow(followUserId: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "followUserId" : followUserId,
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.cancelFollow, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 参与的通告
+    class func participateCircular(pageNo: Int, handler: (success: Bool, msg: String?, value: ParticipateCircularResp?)->Void) {
+        let parameters = [
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)",
+            "userId" : UserSingleton.sharedInstance.userId
+            ]
+        HttpTool.post(API.participateCircular, parameters: parameters, complete: { (response) in
+            let info = ParticipateCircularResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 我的关注
+    class func myFollow(pageNo: Int, handler: (success: Bool, msg: String?, value: MyFollowResp?)->Void) {
+        let parameters = [
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)",
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.myFollow, parameters: parameters, complete: { (response) in
+            let info = MyFollowResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 我的关注
+    class func myFans(pageNo: Int, handler: (success: Bool, msg: String?, value: MyFansResp?)->Void) {
+        let parameters = [
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)",
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.myFans, parameters: parameters, complete: { (response) in
+            let info = MyFansResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 获取图片，视频地址
+    class func getPicAndVideoURL(idList: String, handler: (success: Bool, msg: String?, value: [PicAndVideoList]?)->Void) {
+        let parameters = [
+            "idList" : idList
+        ]
+        HttpTool.post(API.getPicAndVideoURL, parameters: parameters, complete: { (response) in
+            let info = GetPicAndVideoResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 获取用户头像昵称
+    class func getAvatarAndName(idList: String, handler: (success: Bool, msg: String?, value: [AvatarNameList]?)->Void) {
+        let parameters = [
+            "idList" : idList
+        ]
+        HttpTool.post(API.getUserAvatarAndName, parameters: parameters, complete: { (response) in
+            let info = AvatarAndNameResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 添加作品集
+    class func addworks(req: AddworksReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "talentId" : req.talentId,
+            "text" : req.text,
+            "worksIds" : req.worksIds
+            ]
+        HttpTool.post(API.addworks, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 获取作品集
+    class func getWorks(talentId: String, handler: (success: Bool, msg: String?, value: [WorksList]?)->Void) {
+        let parameters = [
+            "talentId" : talentId
+        ]
+        HttpTool.post(API.getworks, parameters: parameters, complete: { (response) in
+            let info = GetWorksResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 通告-招募信息
+    class func circularRecruitInformation(idList: String, handler: (success: Bool, msg: String?, value: [RecruitInformationList]?)->Void) {
+        let parameters = [
+            "idList" : idList
+        ]
+        HttpTool.post(API.circularRecruitInformation, parameters: parameters, complete: { (response) in
+            let info = RecruitInformationResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+
+    
 }

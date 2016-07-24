@@ -15,10 +15,19 @@ class DataViewController: YGBaseViewController {
 
     
     var tableView: UITableView!
+    var rightButton: UIButton!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        LogWarn("viewdidload")
+        title = "个人资料"
+        rightButton = setRightNaviItem()
+//        rightButton.setImage(UIImage(named: "more1"), forState: .Normal)
+        rightButton.setTitle("编辑", forState: .Normal)
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self

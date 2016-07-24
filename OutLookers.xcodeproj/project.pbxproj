@@ -32,6 +32,25 @@
 		D81992451D43CCCA007734C0 /* EditCircularRecruitResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992441D43CCCA007734C0 /* EditCircularRecruitResp.swift */; };
 		D81992471D43D7B0007734C0 /* DynamicDetailResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992461D43D7B0007734C0 /* DynamicDetailResp.swift */; };
 		D81992491D43DCEA007734C0 /* DynamicListResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992481D43DCEA007734C0 /* DynamicListResp.swift */; };
+		D819924B1D448EAD007734C0 /* TalentListResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819924A1D448EAD007734C0 /* TalentListResp.swift */; };
+		D819924D1D44930A007734C0 /* TalentDtailResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819924C1D44930A007734C0 /* TalentDtailResp.swift */; };
+		D819924F1D4497F4007734C0 /* FollowDynamicResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819924E1D4497F4007734C0 /* FollowDynamicResp.swift */; };
+		D81992521D449C50007734C0 /* FindNoticeDetailResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992511D449C50007734C0 /* FindNoticeDetailResp.swift */; };
+		D81992541D449E52007734C0 /* FindHotmanResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992531D449E52007734C0 /* FindHotmanResp.swift */; };
+		D81992561D44A045007734C0 /* PersonFilesReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992551D44A045007734C0 /* PersonFilesReq.swift */; };
+		D81992581D44A5D6007734C0 /* PersonFilesResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992571D44A5D6007734C0 /* PersonFilesResp.swift */; };
+		D819925A1D44AA85007734C0 /* HotmanAuthShowResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992591D44AA85007734C0 /* HotmanAuthShowResp.swift */; };
+		D819925C1D44AB68007734C0 /* CommitEnrollGetUserTalentResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819925B1D44AB68007734C0 /* CommitEnrollGetUserTalentResp.swift */; };
+		D819925E1D44AC77007734C0 /* CommitEnrollReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819925D1D44AC77007734C0 /* CommitEnrollReq.swift */; };
+		D81992601D44AE45007734C0 /* CircularEnrollPersonResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819925F1D44AE45007734C0 /* CircularEnrollPersonResp.swift */; };
+		D81992621D44AF9A007734C0 /* ParticipateCircularResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992611D44AF9A007734C0 /* ParticipateCircularResp.swift */; };
+		D81992641D44B1B1007734C0 /* MyFollowResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992631D44B1B1007734C0 /* MyFollowResp.swift */; };
+		D81992661D44B431007734C0 /* MyFansResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992651D44B431007734C0 /* MyFansResp.swift */; };
+		D81992681D44B517007734C0 /* GetPicAndVideoResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992671D44B517007734C0 /* GetPicAndVideoResp.swift */; };
+		D819926A1D44B6B2007734C0 /* AvatarAndNameResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81992691D44B6B2007734C0 /* AvatarAndNameResp.swift */; };
+		D819926C1D44B7C6007734C0 /* AddworksReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819926B1D44B7C6007734C0 /* AddworksReq.swift */; };
+		D819926E1D44B890007734C0 /* GetWorksResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819926D1D44B890007734C0 /* GetWorksResp.swift */; };
+		D81992701D44B956007734C0 /* RecruitInformationResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819926F1D44B956007734C0 /* RecruitInformationResp.swift */; };
 		D81F44F71D118D15004D9192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */; };
 		D81F44F81D118D15004D9192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81F44F51D118D15004D9192 /* Main.storyboard */; };
 		D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F44F91D118D43004D9192 /* CGRect+EX.swift */; };
@@ -70,7 +89,7 @@
 		D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DDD1D2804B300A24CDB /* UITableView-EX.swift */; };
 		D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE11D28172D00A24CDB /* MBProgressHUD.m */; };
 		D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE31D28373400A24CDB /* BaseResponse.swift */; };
-		D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE41D28373400A24CDB /* FindNoticeList.swift */; };
+		D82F8DE81D28373400A24CDB /* FindNoticeListResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE41D28373400A24CDB /* FindNoticeListResp.swift */; };
 		D82F8DE91D28373400A24CDB /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE51D28373400A24CDB /* Server.swift */; };
 		D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DE61D28373400A24CDB /* StringResponse.swift */; };
 		D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */; };
@@ -297,6 +316,25 @@
 		D81992441D43CCCA007734C0 /* EditCircularRecruitResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditCircularRecruitResp.swift; path = OutLookers/EditCircularRecruitResp.swift; sourceTree = SOURCE_ROOT; };
 		D81992461D43D7B0007734C0 /* DynamicDetailResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicDetailResp.swift; path = OutLookers/DynamicDetailResp.swift; sourceTree = SOURCE_ROOT; };
 		D81992481D43DCEA007734C0 /* DynamicListResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicListResp.swift; path = OutLookers/DynamicListResp.swift; sourceTree = SOURCE_ROOT; };
+		D819924A1D448EAD007734C0 /* TalentListResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentListResp.swift; path = OutLookers/TalentListResp.swift; sourceTree = SOURCE_ROOT; };
+		D819924C1D44930A007734C0 /* TalentDtailResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentDtailResp.swift; path = OutLookers/TalentDtailResp.swift; sourceTree = SOURCE_ROOT; };
+		D819924E1D4497F4007734C0 /* FollowDynamicResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowDynamicResp.swift; path = OutLookers/FollowDynamicResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992511D449C50007734C0 /* FindNoticeDetailResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindNoticeDetailResp.swift; path = OutLookers/FindNoticeDetailResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992531D449E52007734C0 /* FindHotmanResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindHotmanResp.swift; path = OutLookers/FindHotmanResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992551D44A045007734C0 /* PersonFilesReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonFilesReq.swift; path = OutLookers/PersonFilesReq.swift; sourceTree = SOURCE_ROOT; };
+		D81992571D44A5D6007734C0 /* PersonFilesResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonFilesResp.swift; path = OutLookers/PersonFilesResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992591D44AA85007734C0 /* HotmanAuthShowResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HotmanAuthShowResp.swift; path = OutLookers/HotmanAuthShowResp.swift; sourceTree = SOURCE_ROOT; };
+		D819925B1D44AB68007734C0 /* CommitEnrollGetUserTalentResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommitEnrollGetUserTalentResp.swift; path = OutLookers/CommitEnrollGetUserTalentResp.swift; sourceTree = SOURCE_ROOT; };
+		D819925D1D44AC77007734C0 /* CommitEnrollReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommitEnrollReq.swift; path = OutLookers/CommitEnrollReq.swift; sourceTree = SOURCE_ROOT; };
+		D819925F1D44AE45007734C0 /* CircularEnrollPersonResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularEnrollPersonResp.swift; path = OutLookers/CircularEnrollPersonResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992611D44AF9A007734C0 /* ParticipateCircularResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParticipateCircularResp.swift; path = OutLookers/ParticipateCircularResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992631D44B1B1007734C0 /* MyFollowResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyFollowResp.swift; path = OutLookers/MyFollowResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992651D44B431007734C0 /* MyFansResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyFansResp.swift; path = OutLookers/MyFansResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992671D44B517007734C0 /* GetPicAndVideoResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetPicAndVideoResp.swift; path = OutLookers/GetPicAndVideoResp.swift; sourceTree = SOURCE_ROOT; };
+		D81992691D44B6B2007734C0 /* AvatarAndNameResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarAndNameResp.swift; path = OutLookers/AvatarAndNameResp.swift; sourceTree = SOURCE_ROOT; };
+		D819926B1D44B7C6007734C0 /* AddworksReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddworksReq.swift; path = OutLookers/AddworksReq.swift; sourceTree = SOURCE_ROOT; };
+		D819926D1D44B890007734C0 /* GetWorksResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetWorksResp.swift; path = OutLookers/GetWorksResp.swift; sourceTree = SOURCE_ROOT; };
+		D819926F1D44B956007734C0 /* RecruitInformationResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecruitInformationResp.swift; path = OutLookers/RecruitInformationResp.swift; sourceTree = SOURCE_ROOT; };
 		D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OutLookers/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F51D118D15004D9192 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = OutLookers/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OutLookers-Bridging-Header.h"; path = "OutLookers/OutLookers-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -344,7 +382,7 @@
 		D82F8DE01D28172D00A24CDB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = OutLookers/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		D82F8DE11D28172D00A24CDB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = OutLookers/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		D82F8DE31D28373400A24CDB /* BaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseResponse.swift; path = OutLookers/BaseResponse.swift; sourceTree = SOURCE_ROOT; };
-		D82F8DE41D28373400A24CDB /* FindNoticeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindNoticeList.swift; path = OutLookers/FindNoticeList.swift; sourceTree = SOURCE_ROOT; };
+		D82F8DE41D28373400A24CDB /* FindNoticeListResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindNoticeListResp.swift; path = OutLookers/FindNoticeListResp.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DE51D28373400A24CDB /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = OutLookers/Server.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DE61D28373400A24CDB /* StringResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringResponse.swift; path = OutLookers/StringResponse.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistDetailInfo.swift; path = OutLookers/ArtistDetailInfo.swift; sourceTree = SOURCE_ROOT; };
@@ -700,10 +738,30 @@
 		D819923B1D43C205007734C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D82F8DE41D28373400A24CDB /* FindNoticeListResp.swift */,
 				D819923C1D43C218007734C0 /* SearchTalent.swift */,
 				D81992401D43CA9C007734C0 /* ReleaseTalentSelectType.swift */,
 				D81992461D43D7B0007734C0 /* DynamicDetailResp.swift */,
 				D81992481D43DCEA007734C0 /* DynamicListResp.swift */,
+				D819924A1D448EAD007734C0 /* TalentListResp.swift */,
+				D819924C1D44930A007734C0 /* TalentDtailResp.swift */,
+				D819924E1D4497F4007734C0 /* FollowDynamicResp.swift */,
+				D81992511D449C50007734C0 /* FindNoticeDetailResp.swift */,
+				D81992531D449E52007734C0 /* FindHotmanResp.swift */,
+				D81992551D44A045007734C0 /* PersonFilesReq.swift */,
+				D81992571D44A5D6007734C0 /* PersonFilesResp.swift */,
+				D81992591D44AA85007734C0 /* HotmanAuthShowResp.swift */,
+				D819925B1D44AB68007734C0 /* CommitEnrollGetUserTalentResp.swift */,
+				D819925D1D44AC77007734C0 /* CommitEnrollReq.swift */,
+				D819925F1D44AE45007734C0 /* CircularEnrollPersonResp.swift */,
+				D81992611D44AF9A007734C0 /* ParticipateCircularResp.swift */,
+				D81992631D44B1B1007734C0 /* MyFollowResp.swift */,
+				D81992651D44B431007734C0 /* MyFansResp.swift */,
+				D81992671D44B517007734C0 /* GetPicAndVideoResp.swift */,
+				D81992691D44B6B2007734C0 /* AvatarAndNameResp.swift */,
+				D819926B1D44B7C6007734C0 /* AddworksReq.swift */,
+				D819926D1D44B890007734C0 /* GetWorksResp.swift */,
+				D819926F1D44B956007734C0 /* RecruitInformationResp.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1226,7 +1284,6 @@
 				D82F8DEB1D28375300A24CDB /* ArtistDetailInfo.swift */,
 				D82F8DEC1D28375300A24CDB /* ArtistInfo.swift */,
 				D82F8DE31D28373400A24CDB /* BaseResponse.swift */,
-				D82F8DE41D28373400A24CDB /* FindNoticeList.swift */,
 				D82F8DE51D28373400A24CDB /* Server.swift */,
 				D82F8DE61D28373400A24CDB /* StringResponse.swift */,
 				D81F452D1D11A2E4004D9192 /* API.swift */,
@@ -1725,9 +1782,11 @@
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D8B6414C1D36A4C900DF916D /* TalentDetailCell.swift in Sources */,
 				E41B92711D3E008700749769 /* ModifyCell.swift in Sources */,
+				D81992601D44AE45007734C0 /* CircularEnrollPersonResp.swift in Sources */,
 				E41B92E61D408E9100749769 /* MCommentCell.swift in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
+				D819926E1D44B890007734C0 /* GetWorksResp.swift in Sources */,
 				E41B92D01D3F5E9600749769 /* CommentViewController.swift in Sources */,
 				D81992081D3BBE2D007734C0 /* AuthenticationViewController.swift in Sources */,
 				E446FA111D2E10E1003DFC1E /* TalentWorksCollectionCell.swift in Sources */,
@@ -1767,6 +1826,7 @@
 				D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */,
 				E446FA091D261647003DFC1E /* UIFont+EX.swift in Sources */,
 				D8AA10091D1DA0220038EE73 /* TZImagePickerController.m in Sources */,
+				D81992541D449E52007734C0 /* FindHotmanResp.swift in Sources */,
 				E4473EB91D36298A000CEEF2 /* SettingCoverController.swift in Sources */,
 				D81F45051D118D43004D9192 /* InterfaceBuiderEX.swift in Sources */,
 				D819923F1D43C6BE007734C0 /* ReleaseTalentReq.swift in Sources */,
@@ -1782,10 +1842,12 @@
 				D8B641461D367F1300DF916D /* Util.swift in Sources */,
 				D81992431D43CC12007734C0 /* EditCircularRecruitReq.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
+				D81992701D44B956007734C0 /* RecruitInformationResp.swift in Sources */,
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
 				E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */,
 				E4E5DECB1D179BD200CB8535 /* ArrowEditCell.swift in Sources */,
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
+				D819925E1D44AC77007734C0 /* CommitEnrollReq.swift in Sources */,
 				D819920A1D3BC3AE007734C0 /* OrganizeAuthViewController.swift in Sources */,
 				E4E5DECF1D179BD200CB8535 /* WorkDetailCell.swift in Sources */,
 				D8AA100D1D1DA0220038EE73 /* TZVideoPlayerController.m in Sources */,
@@ -1794,7 +1856,8 @@
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
 				E41B92E01D407CB800749769 /* MessageViewController.swift in Sources */,
 				E45BFF791D41C3D50013356C /* InvitationDetailViewController.swift in Sources */,
-				D82F8DE81D28373400A24CDB /* FindNoticeList.swift in Sources */,
+				D82F8DE81D28373400A24CDB /* FindNoticeListResp.swift in Sources */,
+				D819924B1D448EAD007734C0 /* TalentListResp.swift in Sources */,
 				D83087801D27B400009CFE03 /* MessageCell.swift in Sources */,
 				D8B641401D354FBE00DF916D /* TaJoinViewController.swift in Sources */,
 				D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */,
@@ -1829,15 +1892,18 @@
 				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,
 				E41B92EC1D40916C00749769 /* MPraiseViewController.swift in Sources */,
 				D81992311D3D2E5A007734C0 /* MyAccountViewController.swift in Sources */,
+				D81992681D44B517007734C0 /* GetPicAndVideoResp.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
 				D870C7471D3B8170003B7A09 /* PersonCharacter.swift in Sources */,
 				E41DD9271D3CA86200E5E7E9 /* IsAuthResp.swift in Sources */,
 				E45BFF7F1D41E9A10013356C /* InvitationToolView.swift in Sources */,
+				D819926C1D44B7C6007734C0 /* AddworksReq.swift in Sources */,
 				E4E5DECC1D179BD200CB8535 /* NoArrowEditCell.swift in Sources */,
 				D870C7431D3B5300003B7A09 /* PersonCharacterViewController.swift in Sources */,
 				D81F451B1D118D63004D9192 /* YGTabbarButton.swift in Sources */,
 				E41B92E21D408ACB00749769 /* MessageSectionCell.swift in Sources */,
+				D81992621D44AF9A007734C0 /* ParticipateCircularResp.swift in Sources */,
 				D8C167371D1AFCE100C50EB7 /* EditSkillViewController.swift in Sources */,
 				D830877D1D27A60A009CFE03 /* FindViewController.swift in Sources */,
 				E41B92791D3E162C00749769 /* AliPutCashViewController.swift in Sources */,
@@ -1847,8 +1913,10 @@
 				E41B92E81D40912300749769 /* MPraiseCell.swift in Sources */,
 				D870C7491D3B99BF003B7A09 /* DynamicDetailViewController.swift in Sources */,
 				E4E5DED11D179BE100CB8535 /* ProtocolViewController.swift in Sources */,
+				D819925A1D44AA85007734C0 /* HotmanAuthShowResp.swift in Sources */,
 				D82F8DCB1D27CB6400A24CDB /* SDCollectionViewCell.m in Sources */,
 				E41DD9231D3C944400E5E7E9 /* TalentAuthViewController.swift in Sources */,
+				D819925C1D44AB68007734C0 /* CommitEnrollGetUserTalentResp.swift in Sources */,
 				D81992271D3D14F3007734C0 /* MyEnterCell.swift in Sources */,
 				D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */,
 				E45BFF831D41ED8F0013356C /* InvitationTalentCell.swift in Sources */,
@@ -1857,6 +1925,7 @@
 				E47ADF6C1D1D051D00A2F4BD /* YGShareHandler.swift in Sources */,
 				E41B92D61D3F719100749769 /* Comment2ViewController.swift in Sources */,
 				D8B641481D36A06D00DF916D /* TalentDetailViewController.swift in Sources */,
+				D81992561D44A045007734C0 /* PersonFilesReq.swift in Sources */,
 				E41B92771D3E13C100749769 /* PutCashViewController.swift in Sources */,
 				D870C73A1D3932D7003B7A09 /* HotmanCell.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
@@ -1910,9 +1979,11 @@
 				D82F8E201D30F4E200A24CDB /* OGCircularViewController.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				E41B92CD1D3F56F900749769 /* HCSStarRatingView.m in Sources */,
+				D81992521D449C50007734C0 /* FindNoticeDetailResp.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 				D82F8E0A1D2C0D9400A24CDB /* TYSlidePageScrollViewController.m in Sources */,
 				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,
+				D81992641D44B1B1007734C0 /* MyFollowResp.swift in Sources */,
 				E45BFF7B1D41CAED0013356C /* InvitationHeadCell.swift in Sources */,
 				E41B926F1D3DFFDD00749769 /* ModifyPasswordViewController.swift in Sources */,
 				D819920C1D3BC699007734C0 /* BusinessLicenceCell.swift in Sources */,
@@ -1926,13 +1997,17 @@
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 				E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */,
 				E41DD9291D3CBBD000E5E7E9 /* MyTalentViewController.swift in Sources */,
+				D81992581D44A5D6007734C0 /* PersonFilesResp.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
 				D82F8E1A1D30ED9200A24CDB /* OrganizationViewController.swift in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
 				E45BFF891D422F8D0013356C /* CircularDetailViewController.swift in Sources */,
+				D819926A1D44B6B2007734C0 /* AvatarAndNameResp.swift in Sources */,
 				D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */,
 				D870C74B1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift in Sources */,
+				D81992661D44B431007734C0 /* MyFansResp.swift in Sources */,
 				E4473EB71D3625C7000CEEF2 /* YKVideoTrimmer.swift in Sources */,
+				D819924F1D4497F4007734C0 /* FollowDynamicResp.swift in Sources */,
 				E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */,
 				D819908F1D3BA8F3007734C0 /* CommentCell.swift in Sources */,
 				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
@@ -1940,6 +2015,7 @@
 				D870C7331D392B24003B7A09 /* SquareViewController.swift in Sources */,
 				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,
 				D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */,
+				D819924D1D44930A007734C0 /* TalentDtailResp.swift in Sources */,
 				D870C7451D3B5473003B7A09 /* PersonCharacterHeadView.swift in Sources */,
 				E41DD9211D38E5E700E5E7E9 /* PersonFile.swift in Sources */,
 				E45BFF8B1D422FCF0013356C /* CircularRecruitCell.swift in Sources */,

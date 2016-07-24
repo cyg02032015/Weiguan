@@ -11,26 +11,35 @@ import SwiftyJSON
 
 class ReleaseTalentSelectType: BaseResponse {
 
-   	var id : Int!
-    var name : String!
-    var pid : Int!
-    var result: [ReleaseTalentSelectType]!
+    var result: [TalentSelectTypeList]!
     
     override init(fromJson json: JSON!){
         super.init(fromJson: json)
         if json == nil{
             return
         }
-        id = json["id"].intValue
-        name = json["name"].stringValue
-        pid = json["pid"].intValue
         
-        result = [ReleaseTalentSelectType]()
+        result = [TalentSelectTypeList]()
         guard let resultArray = json["result"].dictionaryValue["list"]?.arrayValue else { return }
         for resultJson in resultArray {
-            let value = ReleaseTalentSelectType(fromJson: resultJson)
+            let value = TalentSelectTypeList(fromJson: resultJson)
             result.append(value)
         }
     }
+}
 
+class TalentSelectTypeList {
+    
+   	var id : Int!
+    var name : String!
+    var pid : Int!
+    
+    init(fromJson json: JSON!) {
+        if json == nil{
+            return
+        }
+        id = json["id"].intValue
+        name = json["name"].stringValue
+        pid = json["pid"].intValue
+    }
 }

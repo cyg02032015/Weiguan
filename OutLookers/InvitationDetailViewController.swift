@@ -23,9 +23,6 @@ class InvitationDetailViewController: YGBaseViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        backImgView.image = UIImage(named: "back-1")
-//        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
