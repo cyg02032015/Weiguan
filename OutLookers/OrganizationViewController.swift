@@ -18,17 +18,47 @@ class OrganizationViewController: YGBaseViewController {
     var slidePageScrollView: TYSlidePageScrollView!
     var toolView: OGToolView!
     var rightNaviButton: UIButton!
+    var delta: CGFloat = 0
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: animated)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        willSetNavigation(animated)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        viewWillDisappearSetNavigation(animated)
+    }
+    
+    func willSetNavigation(animated: Bool) {
+        slidePageScrollView.isDealloc = false
+        let color = UIColor(r: 255, g: 255, b: 255, a: 1.0)
+        if delta > 0 {
+            backImgView.image = UIImage(named: "back-1")
+            rightNaviButton.setImage(UIImage(named: "more1"), forState: .Normal)
+            UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: animated)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
+            navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(delta / 100))
+        } else {
+            backImgView.image = UIImage(named: "back1")
+            rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
+            UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: animated)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
+            navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(delta / 100))
+        }
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    func viewWillDisappearSetNavigation(animated: Bool) {
+        slidePageScrollView.isDealloc = true
+        backImgView.image = UIImage(named: "back-1")
+        rightNaviButton.setImage(UIImage(named: "more1"), forState: .Normal)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
+        //        navigationController?.navigationBar.lt_setBackgroundColor(UIColor(r: 255, g: 255, b: 255, a: 1.0).colorWithAlphaComponent(1.0))
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.navigationBar.lt_reset()
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
     
@@ -138,7 +168,7 @@ extension OrganizationViewController: TYSlidePageScrollViewDataSource, TYSlidePa
         let headerContentViewHeight = -slidePageScrollView.headerView.gg_height + slidePageScrollView.pageTabBar.gg_height
         let offsetY = pageScrollView.contentOffset.y
         LogInfo(offsetY - headerContentViewHeight)
-        let delta = offsetY - headerContentViewHeight
+        delta = offsetY - headerContentViewHeight
         if delta > 0 {
             backImgView.image = UIImage(named: "back-1")
             rightNaviButton.setImage(UIImage(named: "more1"), forState: .Normal)
