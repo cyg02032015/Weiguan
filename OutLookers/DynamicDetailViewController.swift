@@ -29,7 +29,14 @@ class DynamicDetailViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "动态详情"
-        tableView = UITableView()
+        let toolbarHeight = DXMessageToolBar.defaultHeight()
+        let toolbar = DXMessageToolBar(frame: CGRect(x: 0, y: view.gg_height - toolbarHeight, width: ScreenWidth, height: toolbarHeight))
+        toolbar.autoresizingMask = [.FlexibleTopMargin, .FlexibleRightMargin]
+        toolbar.delegate = self
+        view.addSubview(toolbar)
+        
+        tableView = UITableView(frame: CGRect(x: 0, y: NaviHeight, width: ScreenWidth, height: ScreenHeight - NaviHeight - toolbarHeight), style: .Plain)
+        tableView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(DynamicDetailVideoCell.self, forCellReuseIdentifier: dynamicDetailCellId)
@@ -37,9 +44,25 @@ class DynamicDetailViewController: YGBaseViewController {
         tableView.separatorStyle = .None
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(tableView.superview!)
+    }
+    
+    func scrollViewToBottom(animated: Bool) {
+        if tableView.contentSize.height > tableView.gg_height {
+            let offset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.gg_height)
+            tableView.setContentOffset(offset, animated: animated)
         }
+    }
+}
+
+extension DynamicDetailViewController: DXMessageToolBarDelegate {
+    func didChangeFrameToHeight(toHeight: CGFloat) {
+        UIView.animateWithDuration(0.3) { 
+            var rect = self.tableView.frame
+            rect.origin.y = NaviHeight
+            rect.size.height = self.view.gg_height - toHeight - NaviHeight
+            self.tableView.frame = rect
+        }
+        scrollViewToBottom(false)
     }
 }
 

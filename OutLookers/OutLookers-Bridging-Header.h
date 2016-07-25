@@ -21,3 +21,8 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaSSOHandler.h"
+
+// 环信
+#import "EMSDK.h"
+#import "EaseUI.h"
+#import "DXMessageToolBar.h"
