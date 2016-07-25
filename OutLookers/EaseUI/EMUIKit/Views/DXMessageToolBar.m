@@ -12,6 +12,8 @@
 
 #import "DXMessageToolBar.h"
 
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+
 @interface DXMessageToolBar()<UITextViewDelegate>
 {
     CGFloat _previousTextViewContentHeight;//上一次inputTextView的contentSize.height
@@ -32,6 +34,7 @@
 @property (strong, nonatomic) UIButton *styleChangeButton;
 @property (strong, nonatomic) UIButton *moreButton;
 @property (strong, nonatomic) UIButton *faceButton;
+@property (strong, nonatomic) UIButton *sendButton;
 
 /**
  *  底部扩展页面
@@ -257,14 +260,19 @@
  */
 - (void)setupConfigure
 {
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 1)];
+    line.backgroundColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0];
+    [self addSubview:line];
+    
     self.version = [[[UIDevice currentDevice] systemVersion] floatValue];
     
     self.maxTextInputViewHeight = kInputTextViewMaxHeight;
     
     self.activityButtomView = nil;
     self.isShowButtomView = NO;
-    self.backgroundImageView.image = [[UIImage imageNamed:@"messageToolbarBg"] stretchableImageWithLeftCapWidth:0.5 topCapHeight:10];
-    [self addSubview:self.backgroundImageView];
+    self.backgroundColor = [UIColor whiteColor];
+//    self.backgroundImageView.image = [[UIImage imageNamed:@"messageToolbarBg"] stretchableImageWithLeftCapWidth:0.5 topCapHeight:10];
+//    [self addSubview:self.backgroundImageView];
     
     self.toolbarView.frame = CGRectMake(0, 0, self.frame.size.width, kVerticalPadding * 2 + kInputTextViewMinHeight);
     self.toolbarBackgroundImageView.frame = self.toolbarView.bounds;
@@ -314,7 +322,14 @@
 //    CGFloat width = CGRectGetWidth(self.bounds) - (allButtonWidth ? allButtonWidth : (textViewLeftMargin * 2));
     // 初始化输入框
     
-    self.inputTextView = [[XHMessageTextView  alloc] initWithFrame:CGRectMake(15, kVerticalPadding, CGRectGetWidth(self.frame) - 85, kInputTextViewMinHeight)];
+    self.sendButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 16 - 60, kVerticalPadding, 60, kInputTextViewMinHeight)];
+    _sendButton.layer.cornerRadius = kInputTextViewMinHeight/2;
+    _sendButton.backgroundColor = [UIColor colorWithRed:100/255.0 green:184/255.0 blue:255/255.0 alpha:1.0];
+    [_sendButton setTitle:@"发送" forState:UIControlStateNormal];
+    [_sendButton addTarget:self action:@selector(sendButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.sendButton];
+    
+    self.inputTextView = [[XHMessageTextView  alloc] initWithFrame:CGRectMake(15, kVerticalPadding, CGRectGetWidth(self.frame) - CGRectGetWidth(_sendButton.frame) - 9 - 15 - 16, kInputTextViewMinHeight)];
     self.inputTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 //    self.inputTextView.contentMode = UIViewContentModeCenter;
     _inputTextView.scrollEnabled = YES;
@@ -368,6 +383,14 @@
 //    [self.toolbarView addSubview:self.faceButton];
     [self.toolbarView addSubview:self.inputTextView];
 //    [self.toolbarView addSubview:self.recordButton];
+}
+
+- (void)sendButtonClick:(UIButton *)btn {
+    if ([self.delegate respondsToSelector:@selector(didSendText:)]) {
+        [self.delegate didSendText:_inputTextView.text];
+        self.inputTextView.text = @"";
+        [self willShowInputTextViewToHeight:[self getTextViewContentH:self.inputTextView]];
+    }
 }
 
 #pragma mark - change frame

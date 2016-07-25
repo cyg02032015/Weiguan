@@ -757,5 +757,59 @@ class Server {
         }
     }
 
+    /// 编辑资料
+    class func informationUpdate(req: EditDataReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "id" : UserSingleton.sharedInstance.userId,
+            "sex" : req.sex,
+            "nickname" : req.nickname,
+            "birthday" : req.birthday,
+            "province" : req.province,
+            "city" : req.city,
+            "introduction" : req.introduction,
+            "headImgUrl" : req.headImgUrl
+            ]
+        HttpTool.post(API.informationUpdate, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 查看资料
+    class func informationUpdate(handler: (success: Bool, msg: String?, value: UserData?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.informationGet, parameters: parameters, complete: { (response) in
+            let info = UserDataResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 首页推荐红人
+    class func homeRecommendHotman(handler: (success: Bool, msg: String?, value: [HotmanList]?)->Void) {
+        HttpTool.post(API.recommentHotman, parameters: nil, complete: { (response) in
+            let info = RecommendHotmanResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
     
 }

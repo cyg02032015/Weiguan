@@ -93,5 +93,13 @@ struct API {
     static let getworks = baseURL + "/api/release/v1/works/select"
     /// 通告-招募信息
     static let circularRecruitInformation = baseURL + "/api/release/v1/recruitment/list"
+    /// 用户与用户是否是关注状态
+    static let isFollowStatus = baseURL + "/api/authentication/v1/follow/each"
+    /// 编辑资料
+    static let informationUpdate = baseURL + "/api/authentication/v1/information/update"
+    /// 查看基本资料
+    static let informationGet = baseURL + "/api/authentication/v1/information/get"
+    /// 首页-推荐红人
+    static let recommentHotman = baseURL + "/api/authentication/v1/recommendRed/get"
     
 }

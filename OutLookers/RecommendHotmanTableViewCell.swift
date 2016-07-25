@@ -37,11 +37,11 @@ class RecommendHotmanTableViewCell: UITableViewCell {
         }
     }
     
-    func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) {
+    func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) -> UICollectionView {
         collectionView.delegate = delegate
         collectionView.dataSource = delegate
         collectionView.reloadData()
-        
+        return collectionView
     }
     
     required init?(coder aDecoder: NSCoder) {

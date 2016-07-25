@@ -31,11 +31,12 @@ class DynamicDetailViewController: YGBaseViewController {
         title = "动态详情"
         let toolbarHeight = DXMessageToolBar.defaultHeight()
         let toolbar = DXMessageToolBar(frame: CGRect(x: 0, y: view.gg_height - toolbarHeight, width: ScreenWidth, height: toolbarHeight))
+        toolbar.maxTextInputViewHeight = 80
         toolbar.autoresizingMask = [.FlexibleTopMargin, .FlexibleRightMargin]
         toolbar.delegate = self
         view.addSubview(toolbar)
         
-        tableView = UITableView(frame: CGRect(x: 0, y: NaviHeight, width: ScreenWidth, height: ScreenHeight - NaviHeight - toolbarHeight), style: .Plain)
+        tableView = UITableView(frame: CGRect(x: 0, y: NaviHeight, width: ScreenWidth, height: ScreenHeight - NaviHeight - toolbarHeight), style: .Grouped)
         tableView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         tableView.delegate = self
         tableView.dataSource = self
@@ -63,6 +64,10 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
             self.tableView.frame = rect
         }
         scrollViewToBottom(false)
+    }
+    
+    func didSendText(text: String!) {
+        LogInfo("send --- = \(text)")
     }
 }
 
@@ -94,6 +99,14 @@ extension DynamicDetailViewController {
             return kHeight(561)
         } else {
             return kHeight(61)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return kHeight(10)
+        } else {
+            return 0.01
         }
     }
     

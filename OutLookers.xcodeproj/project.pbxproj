@@ -123,6 +123,9 @@
 		D83087801D27B400009CFE03 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D830877F1D27B400009CFE03 /* MessageCell.swift */; };
 		D83087821D27B805009CFE03 /* MineCollectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83087811D27B805009CFE03 /* MineCollectCell.swift */; };
 		D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83087831D27B958009CFE03 /* MineCollectionCell.swift */; };
+		D84D98501D4661B0007CCD6E /* RecommendHotmanResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D984F1D4661B0007CCD6E /* RecommendHotmanResp.swift */; };
+		D84D98521D466496007CCD6E /* EditDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98511D466496007CCD6E /* EditDataReq.swift */; };
+		D84D98541D466624007CCD6E /* UserDataResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98531D466624007CCD6E /* UserDataResp.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
 		D87049441D2152A7008FB780 /* VideoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87049431D2152A7008FB780 /* VideoTool.swift */; };
@@ -546,6 +549,9 @@
 		D830877F1D27B400009CFE03 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = OutLookers/MessageCell.swift; sourceTree = SOURCE_ROOT; };
 		D83087811D27B805009CFE03 /* MineCollectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineCollectCell.swift; path = OutLookers/MineCollectCell.swift; sourceTree = SOURCE_ROOT; };
 		D83087831D27B958009CFE03 /* MineCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MineCollectionCell.swift; path = OutLookers/MineCollectionCell.swift; sourceTree = SOURCE_ROOT; };
+		D84D984F1D4661B0007CCD6E /* RecommendHotmanResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendHotmanResp.swift; path = OutLookers/RecommendHotmanResp.swift; sourceTree = SOURCE_ROOT; };
+		D84D98511D466496007CCD6E /* EditDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditDataReq.swift; path = OutLookers/EditDataReq.swift; sourceTree = SOURCE_ROOT; };
+		D84D98531D466624007CCD6E /* UserDataResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDataResp.swift; path = OutLookers/UserDataResp.swift; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D87049431D2152A7008FB780 /* VideoTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoTool.swift; path = OutLookers/VideoTool.swift; sourceTree = SOURCE_ROOT; };
@@ -1195,6 +1201,9 @@
 				D819926B1D44B7C6007734C0 /* AddworksReq.swift */,
 				D819926D1D44B890007734C0 /* GetWorksResp.swift */,
 				D819926F1D44B956007734C0 /* RecruitInformationResp.swift */,
+				D84D984F1D4661B0007CCD6E /* RecommendHotmanResp.swift */,
+				D84D98511D466496007CCD6E /* EditDataReq.swift */,
+				D84D98531D466624007CCD6E /* UserDataResp.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3033,6 +3042,7 @@
 				E45BFF811D41ED7D0013356C /* InvitationCircularCell.swift in Sources */,
 				D82F8DCC1D27CB6400A24CDB /* SDCycleScrollView.m in Sources */,
 				D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */,
+				D84D98521D466496007CCD6E /* EditDataReq.swift in Sources */,
 				E4A3E5D81D45ECE90045202B /* MJRefreshComponent.m in Sources */,
 				E4473EB31D337BF5000CEEF2 /* OGToolView.swift in Sources */,
 				E4A3E61A1D45ECE90045202B /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
@@ -3098,6 +3108,7 @@
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
 				D87049441D2152A7008FB780 /* VideoTool.swift in Sources */,
 				D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */,
+				D84D98501D4661B0007CCD6E /* RecommendHotmanResp.swift in Sources */,
 				E4473EC31D38C94F000CEEF2 /* BWHTableViewCell.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
 				D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */,
@@ -3167,6 +3178,7 @@
 				D8B6414A1D36A1AD00DF916D /* TalentDetailHeadCell.swift in Sources */,
 				D82F8DF81D2AABE000A24CDB /* PHViewController.swift in Sources */,
 				E41B92D41D3F6FE200749769 /* CommentHead2View.swift in Sources */,
+				D84D98541D466624007CCD6E /* UserDataResp.swift in Sources */,
 				D82F8E201D30F4E200A24CDB /* OGCircularViewController.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				E4A3E6291D45ECE90045202B /* EaseCustomMessageCell.m in Sources */,

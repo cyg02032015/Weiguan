@@ -18,6 +18,8 @@ class HomeViewController: YGBaseViewController {
     var infos = [BannerInfo]()
     var urls = [String]()
     var statusView: UIView!
+    lazy var hotmanList = [HotmanList]()
+    var collectionView: UICollectionView!
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,10 +35,22 @@ class HomeViewController: YGBaseViewController {
         super.viewDidLoad()
         
         setupSubViews()
+        loadRecommendHotmanData()
+    }
+    
+    func loadRecommendHotmanData() {
+        Server.homeRecommendHotman { (success, msg, value) in
+            if success {
+                guard let list = value else { return }
+                self.hotmanList = list
+                self.collectionView.reloadData()
+            } else {
+                LogError(msg)
+            }
+        }
     }
     
     func setupSubViews() {
-        
         
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
@@ -97,7 +111,9 @@ extension HomeViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(recommendHotmanTableViewCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanTableViewCell
-            cell.collectionViewSetDelegate(self, indexPath: indexPath)
+            if collectionView == nil {
+                self.collectionView = cell.collectionViewSetDelegate(self, indexPath: indexPath)
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCell
@@ -144,13 +160,12 @@ extension HomeViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return hotmanList.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(recommendHotmanCollectionCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanCollectionCell
-        cell.nameLabel.text = "刘亚倩"
-        cell.jobLabel.text = "车模"
+        cell.info = hotmanList[indexPath.item]
         return cell
     }
     

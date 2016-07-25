@@ -23,8 +23,8 @@
 #define kHorizontalPadding 8
 #define kVerticalPadding 5
 
-#define kTouchToRecord NSLocalizedString(@"message.toolBar.record.touch", @"hold down to talk")
-#define kTouchToFinish NSLocalizedString(@"message.toolBar.record.send", @"loosen to send")
+//#define kTouchToRecord NSLocalizedString(@"message.toolBar.record.touch", @"hold down to talk")
+//#define kTouchToFinish NSLocalizedString(@"message.toolBar.record.send", @"loosen to send")
 
 
 /**
@@ -173,6 +173,11 @@
  *  当手指再次进入按钮的范围内时，主要也是为了通知外部的HUD
  */
 - (void)didDragInsideAction:(UIView *)recordView;
+
+/**
+ *  发送按钮点击
+ */
+- (void)didSendButtonClick:(UIButton *)sendButton;
 
 @required
 /**
