@@ -12,7 +12,7 @@ pod 'SDWebImage', '~> 3.8.1'
 pod 'IQKeyboardManagerSwift', '~> 4.0.3'
 pod 'RxSwift', '~> 2.5.0'
 pod 'RxCocoa', '~> 2.5.0'
-pod 'UMengSocialCOM', '~> 5.2.1'
+#pod 'UMengSocialCOM', '~> 5.2.1'
 pod 'CocoaLumberjack/Swift'
 pod "Device", '~> 1.0.1'
 end

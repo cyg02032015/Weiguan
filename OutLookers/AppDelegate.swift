@@ -9,27 +9,12 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-@UIApplicationMain
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func testAPI() {
-        var req = AddworksReq()
-        req.talentId = "1"
-        req.text = "累死哥了"
-        req.worksIds = "11"
-        Server.dynamicDetail("1") {(success, msg, value) in
-            LogInfo(value)
-            LogError(msg)
-        }
-        
-        
-    }
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        testAPI()
-        
         #if DEBUG
         configCocoaLumberjack()
         #endif
@@ -44,11 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        let result = UMSocialSnsService.handleOpenURL(url)
-        if result == false {
-            // 设置微信支付宝等
-        }
-        return result
+//        let result = UMSocialSnsService.handleOpenURL(url)
+//        if result == false {
+//            // 设置微信支付宝等
+//        }
+//        return result
+        return false
     }
     
     func applicationWillResignActive(application: UIApplication) {

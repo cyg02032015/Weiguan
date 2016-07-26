@@ -267,7 +267,7 @@ class YGLogView: UIView {
                 }
             }
         }
-        
+        				
         container.snp.updateConstraints { (make) in
             make.centerY.equalTo(container.superview!).offset(ScreenHeight)
         }

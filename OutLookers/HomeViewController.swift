@@ -23,13 +23,7 @@ class HomeViewController: YGBaseViewController {
     var log: YGLogView!
 
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {

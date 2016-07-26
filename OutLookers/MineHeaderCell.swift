@@ -28,7 +28,7 @@ class MineHeaderCell: UITableViewCell {
     
     var header: IconHeaderView!
     var name: UILabel!
-    var friend: UILabel!
+    var _dynamic: UILabel!
     var follow: UILabel!
     var fans: UILabel!
     
@@ -116,41 +116,41 @@ class MineHeaderCell: UITableViewCell {
         }
         
         // 好友
-        let friendContainer = UIView()
-        toolContainer.addSubview(friendContainer)
+        let dynamicContainer = UIView()
+        toolContainer.addSubview(dynamicContainer)
         
         let tapFriend = UITapGestureRecognizer(target: self, action: .tapFriends)
-        friendContainer.addGestureRecognizer(tapFriend)
+        dynamicContainer.addGestureRecognizer(tapFriend)
         
-        friend = UILabel()
-        friend.text = "123"
-        friend.textAlignment = .Center
-        friend.font = UIFont.customFontOfSize(16)
-        friendContainer.addSubview(friend)
+        _dynamic = UILabel()
+        _dynamic.text = "123"
+        _dynamic.textAlignment = .Center
+        _dynamic.font = UIFont.customFontOfSize(16)
+        dynamicContainer.addSubview(_dynamic)
         
-        let friendLabel = UILabel()
-        friendLabel.text = "好友"
-        friendLabel.font = UIFont.customFontOfSize(12)
-        friendLabel.textAlignment = .Center
-        friendLabel.textColor = UIColor(hex: 0x999999)
-        friendContainer.addSubview(friendLabel)
+        let dynamicLabel = UILabel()
+        dynamicLabel.text = "动态"
+        dynamicLabel.font = UIFont.customFontOfSize(12)
+        dynamicLabel.textAlignment = .Center
+        dynamicLabel.textColor = UIColor(hex: 0x999999)
+        dynamicContainer.addSubview(dynamicLabel)
         
-        friendContainer.snp.makeConstraints { (make) in
+        dynamicContainer.snp.makeConstraints { (make) in
             make.top.equalTo(toolContainer)
-            make.left.equalTo(friendContainer.superview!)
-            make.width.equalTo(friendContainer.superview!).multipliedBy(1.0/3.0)
+            make.left.equalTo(dynamicContainer.superview!)
+            make.width.equalTo(dynamicContainer.superview!).multipliedBy(1.0/3.0)
             make.height.equalTo(toolContainer)
         }
         
-        friend.snp.makeConstraints { (make) in
-            make.left.right.equalTo(friend.superview!)
-            make.top.equalTo(friend.superview!).offset(kScale(8))
+        _dynamic.snp.makeConstraints { (make) in
+            make.left.right.equalTo(_dynamic.superview!)
+            make.top.equalTo(_dynamic.superview!).offset(kScale(8))
             make.height.equalTo(kScale(19))
         }
         
-        friendLabel.snp.makeConstraints { (make) in
-            make.left.right.equalTo(friendLabel.superview!)
-            make.top.equalTo(friend.snp.bottom)
+        dynamicLabel.snp.makeConstraints { (make) in
+            make.left.right.equalTo(dynamicLabel.superview!)
+            make.top.equalTo(_dynamic.snp.bottom)
             make.height.equalTo(kScale(12))
         }
         
@@ -159,7 +159,7 @@ class MineHeaderCell: UITableViewCell {
         toolContainer.addSubview(verticalLine1)
         
         verticalLine1.snp.makeConstraints { (make) in
-            make.left.equalTo(friendContainer.snp.right)
+            make.left.equalTo(dynamicContainer.snp.right)
             make.size.equalTo(CGSize(width: 1, height: 24))
             make.centerY.equalTo(verticalLine1.superview!)
         }
@@ -186,8 +186,8 @@ class MineHeaderCell: UITableViewCell {
         
         followContainer.snp.makeConstraints { (make) in
             make.top.equalTo(toolContainer)
-            make.left.equalTo(friendContainer.snp.right)
-            make.width.equalTo(friendContainer)
+            make.left.equalTo(dynamicContainer.snp.right)
+            make.width.equalTo(dynamicContainer)
             make.height.equalTo(toolContainer)
         }
         

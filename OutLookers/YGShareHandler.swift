@@ -33,7 +33,7 @@ class YGShareHandler {
      - returns: 返回一个元组 (选中的图片， 没选中的图片， 标题)
      */
     class func handleShareInstalled() -> (images: [UIImage], unSelectedImages: [UIImage], titles: [String]) {
-        if YGWXApi.isWXAppInstalled() && QQApi.isQQAppInstalled() {
+        if YGWXApi.isWXAppInstalled() && YGQQApi.isQQAppInstalled() {
             let images = [UIImage(named: kSelectedTimeline)!,
                           UIImage(named: kSelectedWechat)!,
                           UIImage(named: kSelectedSina)!,
@@ -46,7 +46,7 @@ class YGShareHandler {
                                     UIImage(named: kUnSelectedQQ)!]
             let titles = [kTitleTimeline, kTitleWechat, kTitleSina, kTitleQzone, kTitleQQ]
             return (images, unSelectedImages, titles)
-        } else if YGWXApi.isWXAppInstalled() && !QQApi.isQQAppInstalled() {
+        } else if YGWXApi.isWXAppInstalled() && !YGQQApi.isQQAppInstalled() {
             let images = [UIImage(named: kSelectedTimeline)!,
                           UIImage(named: kSelectedWechat)!,
                           UIImage(named: kSelectedSina)!]
@@ -55,7 +55,7 @@ class YGShareHandler {
                                     UIImage(named: kUnSelectedSina)!]
             let titles = [kTitleTimeline, kTitleWechat, kTitleSina]
             return (images, unSelectedImages, titles)
-        } else if !YGWXApi.isWXAppInstalled() && QQApi.isQQAppInstalled() {
+        } else if !YGWXApi.isWXAppInstalled() && YGQQApi.isQQAppInstalled() {
             let images = [UIImage(named: kSelectedSina)!,
                           UIImage(named: kSelectedQzone)!,
                           UIImage(named: kSelectedQQ)!]
@@ -74,7 +74,7 @@ class YGShareHandler {
 }
 
 // 判断用户安装木有qq
-class QQApi {
+class YGQQApi {
     class func isQQAppInstalled() -> Bool {
         if UIApplication.sharedApplication().canOpenURL(NSURL(string: "mqq://")!) {
             return true

@@ -16,13 +16,13 @@
 #import "HCSStarRatingView.h"
 #import "UINavigationBar+Awesome.h"
 // 友盟头文件桥接
-#import "UMSocial.h"
-#import "WXApi.h"
-#import "UMSocialWechatHandler.h"
-#import "UMSocialQQHandler.h"
-#import "UMSocialSinaSSOHandler.h"
+//#import "UMSocial.h"
+//#import "WXApi.h"
+//#import "UMSocialWechatHandler.h"
+//#import "UMSocialQQHandler.h"
+//#import "UMSocialSinaSSOHandler.h"
 
 // 环信
-#import "EMSDK.h"
-#import "EaseUI.h"
+//#import "EMSDK.h"
+//#import "EaseUI.h"
 #import "DXMessageToolBar.h"

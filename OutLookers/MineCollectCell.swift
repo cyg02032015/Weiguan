@@ -21,35 +21,19 @@ class MineCollectCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        let lineV = UIView()
-        lineV.backgroundColor = kLineColor
-        contentView.addSubview(lineV)
-        lineV.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(lineV.superview!)
-            make.height.equalTo(0.5)
-        }
-        let lineBottom = UIView()
-        lineBottom.backgroundColor = kLineColor
-        contentView.addSubview(lineBottom)
-        lineBottom.snp.makeConstraints { (make) in
-            make.bottom.equalTo(lineBottom.superview!)
-            make.height.equalTo(0.5)
-            make.left.right.equalTo(lineBottom.superview!)
-        }
+        
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (ScreenWidth - 2) / 4, height: kHeight(103))
-        layout.minimumLineSpacing = 0.25
+        layout.itemSize = CGSize(width: ScreenWidth / 4, height: kHeight(104))
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = kLineColor
+        collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.scrollEnabled = false
         contentView.addSubview(collectionView)
         collectionView.registerClass(MineCollectionCell.self, forCellWithReuseIdentifier: mineCollectionCellIdentifier)
         
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(lineV.snp.bottom)
-            make.left.right.equalTo(collectionView.superview!)
-            make.bottom.equalTo(lineBottom.snp.top)
+            make.edges.equalTo(collectionView.superview!)
         }
     }
     

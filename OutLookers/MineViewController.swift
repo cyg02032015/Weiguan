@@ -12,6 +12,7 @@ private let mineHeaderidentifier = "mineHeaderId"
 private let messageCellIdentifier = "messageCellId"
 private let mineCollectCellIdentifier = "mineCollectId"
 
+
 class MineViewController: YGBaseViewController {
     
     var images = ["Order", "account", "score1", "talent", "Group 5", "authentication", "feedback", ""]
@@ -23,10 +24,12 @@ class MineViewController: YGBaseViewController {
         super.viewDidLoad()
         title = "我"
         
+        let setting = setRightNaviItem()
+        setting.setImage(UIImage(named: "gear"), forState: .Normal)
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = kBackgoundColor
+        tableView.backgroundColor = UIColor.whiteColor()
         tableView.registerClass(MineHeaderCell.self, forCellReuseIdentifier: mineHeaderidentifier)
         tableView.registerClass(MessageCell.self, forCellReuseIdentifier: messageCellIdentifier)
         tableView.registerClass(MineCollectCell.self, forCellReuseIdentifier: mineCollectCellIdentifier)
@@ -38,6 +41,12 @@ class MineViewController: YGBaseViewController {
             make.edges.equalTo(tableView.superview!)
         }
     }
+    
+    override func tapMoreButton(sender: UIButton) {
+        let vc = SettingViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 // MARK: - UITableViewDelegate,UITableViewDataSource
@@ -100,13 +109,11 @@ extension MineViewController {
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
-    }
-    
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = kBackgoundColor
-        return view
+        if section == 2 {
+            return 0.01
+        } else {
+            return kHeight(10)
+        }
     }
 }
 
