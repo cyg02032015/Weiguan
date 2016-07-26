@@ -20,6 +20,7 @@ class HomeViewController: YGBaseViewController {
     var statusView: UIView!
     lazy var hotmanList = [HotmanList]()
     var collectionView: UICollectionView!
+    var log: YGLogView!
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,6 +34,20 @@ class HomeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        log = YGLogView(frame: CGRectZero)
+        log.tapLogViewClosure { (type) in
+            switch type {
+            case .Wechat:
+                let vc = LogViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                LogInfo("微信登录")
+            case .QQ: LogInfo("QQ登录")
+            case .Weibo: LogInfo("微博登录")
+            case .Phone: LogInfo("手机登录")
+            case .Iagree: LogInfo("同意协议")
+            case .Register: LogInfo("注册")
+            }
+        }
         
         setupSubViews()
         loadRecommendHotmanData()
@@ -105,9 +120,6 @@ extension HomeViewController {
         return 2
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(recommendHotmanTableViewCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanTableViewCell
@@ -119,6 +131,10 @@ extension HomeViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCell
             return cell
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        log.animation()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

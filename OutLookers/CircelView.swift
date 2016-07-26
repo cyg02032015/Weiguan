@@ -34,6 +34,28 @@ class CircelView: UIView {
         }
     }
     
+    convenience init(logCircleframe: CGRect, imgname: String, title: String) {
+        self.init(frame: logCircleframe)
+        let imgView = UIImageView(image: UIImage(named: imgname))
+        imgView.layer.cornerRadius = kScale(50/2)
+        addSubview(imgView)
+        imgView.snp.makeConstraints { (make) in
+            make.left.right.top.equalTo(imgView.superview!)
+            make.height.equalTo(kScale(50))
+        }
+        
+        let label = UILabel.createLabel(12)
+        label.textAlignment = .Center
+        label.text = title
+        addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.top.equalTo(imgView.snp.bottom).offset(kScale(12))
+            make.left.right.equalTo(label.superview!)
+            make.height.equalTo(kScale(12))
+        }
+    }
+
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

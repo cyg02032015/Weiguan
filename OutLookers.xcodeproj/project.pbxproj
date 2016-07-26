@@ -378,6 +378,7 @@
 		E4A3E63E1D45EF100045202B /* libHyphenateSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A3E49C1D45EBDB0045202B /* libHyphenateSDK.a */; };
 		E4A3E6411D45F8DE0045202B /* DXMessageToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A3E6401D45F8DE0045202B /* DXMessageToolBar.m */; };
 		E4A3E6441D45F9D80045202B /* XHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A3E6431D45F9D80045202B /* XHMessageTextView.m */; };
+		E4A3E6461D4714840045202B /* YGLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A3E6451D4714840045202B /* YGLogView.swift */; };
 		E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC01D179BB900CB8535 /* RecruitInformationViewController.swift */; };
 		E4E5DEC41D179BB900CB8535 /* ReleaseNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC11D179BB900CB8535 /* ReleaseNoticeViewController.swift */; };
 		E4E5DEC51D179BB900CB8535 /* SelectSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DEC21D179BB900CB8535 /* SelectSkillViewController.swift */; };
@@ -996,6 +997,7 @@
 		E4A3E6401D45F8DE0045202B /* DXMessageToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXMessageToolBar.m; sourceTree = "<group>"; };
 		E4A3E6421D45F9D80045202B /* XHMessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMessageTextView.h; sourceTree = "<group>"; };
 		E4A3E6431D45F9D80045202B /* XHMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMessageTextView.m; sourceTree = "<group>"; };
+		E4A3E6451D4714840045202B /* YGLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGLogView.swift; path = OutLookers/YGLogView.swift; sourceTree = SOURCE_ROOT; };
 		E4C9761C1D45E04D000357A0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E4C9761E1D45E057000357A0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		E4C976201D45E0C2000357A0 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -1485,6 +1487,7 @@
 				D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */,
 				E47ADF6B1D1D051D00A2F4BD /* YGShareHandler.swift */,
 				D8B641451D367F1300DF916D /* Util.swift */,
+				E4A3E6451D4714840045202B /* YGLogView.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -3103,6 +3106,7 @@
 				E41B92771D3E13C100749769 /* PutCashViewController.swift in Sources */,
 				E4A3E6281D45ECE90045202B /* EaseBaseMessageCell.m in Sources */,
 				D870C73A1D3932D7003B7A09 /* HotmanCell.swift in Sources */,
+				E4A3E6461D4714840045202B /* YGLogView.swift in Sources */,
 				E4A3E5F01D45ECE90045202B /* MWZoomingScrollView.m in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
