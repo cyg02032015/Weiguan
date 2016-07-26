@@ -131,6 +131,7 @@
 		D84D98691D47AD1B007CCD6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D98681D47AD1B007CCD6E /* main.m */; };
 		D84D986E1D47AD39007CCD6E /* DXMessageToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986B1D47AD39007CCD6E /* DXMessageToolBar.m */; };
 		D84D986F1D47AD39007CCD6E /* XHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */; };
+		D84D98721D47AE47007CCD6E /* UIButton+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98711D47AE47007CCD6E /* UIButton+EX.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
 		D87049441D2152A7008FB780 /* VideoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87049431D2152A7008FB780 /* VideoTool.swift */; };
@@ -442,6 +443,7 @@
 		D84D986B1D47AD39007CCD6E /* DXMessageToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXMessageToolBar.m; sourceTree = "<group>"; };
 		D84D986C1D47AD39007CCD6E /* XHMessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMessageTextView.h; sourceTree = "<group>"; };
 		D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMessageTextView.m; sourceTree = "<group>"; };
+		D84D98711D47AE47007CCD6E /* UIButton+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+EX.swift"; path = "OutLookers/UIButton+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D87049431D2152A7008FB780 /* VideoTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoTool.swift; path = OutLookers/VideoTool.swift; sourceTree = SOURCE_ROOT; };
@@ -1245,6 +1247,7 @@
 		E41C6C5B1D113F350013031D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D84D98711D47AE47007CCD6E /* UIButton+EX.swift */,
 				E4E5DED41D179BFD00CB8535 /* YKToast.swift */,
 				D81F44F91D118D43004D9192 /* CGRect+EX.swift */,
 				D81F44FA1D118D43004D9192 /* InterfaceBuiderEX.swift */,
@@ -2020,6 +2023,7 @@
 				D8C167331D1AFCC500C50EB7 /* ReleaseVideoViewController.swift in Sources */,
 				E4473EBF1D37A472000CEEF2 /* PersonFileViewController.swift in Sources */,
 				E45BFF7D1D41D2890013356C /* InvitationAddCell.swift in Sources */,
+				D84D98721D47AE47007CCD6E /* UIButton+EX.swift in Sources */,
 				D82F8DEE1D28375300A24CDB /* ArtistInfo.swift in Sources */,
 				D81F452E1D11A2E4004D9192 /* API.swift in Sources */,
 				E4E5DECE1D179BD200CB8535 /* SelectPhotoCell.swift in Sources */,
