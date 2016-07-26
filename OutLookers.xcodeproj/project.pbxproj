@@ -128,7 +128,6 @@
 		D84D98541D466624007CCD6E /* UserDataResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98531D466624007CCD6E /* UserDataResp.swift */; };
 		D84D98651D47AD02007CCD6E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98641D47AD02007CCD6E /* SettingViewController.swift */; };
 		D84D98671D47AD10007CCD6E /* LogButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98661D47AD10007CCD6E /* LogButtonCell.swift */; };
-		D84D98691D47AD1B007CCD6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D98681D47AD1B007CCD6E /* main.m */; };
 		D84D986E1D47AD39007CCD6E /* DXMessageToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986B1D47AD39007CCD6E /* DXMessageToolBar.m */; };
 		D84D986F1D47AD39007CCD6E /* XHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */; };
 		D84D98721D47AE47007CCD6E /* UIButton+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98711D47AE47007CCD6E /* UIButton+EX.swift */; };
@@ -438,7 +437,6 @@
 		D84D98531D466624007CCD6E /* UserDataResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDataResp.swift; path = OutLookers/UserDataResp.swift; sourceTree = SOURCE_ROOT; };
 		D84D98641D47AD02007CCD6E /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = OutLookers/SettingViewController.swift; sourceTree = SOURCE_ROOT; };
 		D84D98661D47AD10007CCD6E /* LogButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogButtonCell.swift; path = OutLookers/LogButtonCell.swift; sourceTree = SOURCE_ROOT; };
-		D84D98681D47AD1B007CCD6E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OutLookers/main.m; sourceTree = "<group>"; };
 		D84D986A1D47AD39007CCD6E /* DXMessageToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXMessageToolBar.h; sourceTree = "<group>"; };
 		D84D986B1D47AD39007CCD6E /* DXMessageToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXMessageToolBar.m; sourceTree = "<group>"; };
 		D84D986C1D47AD39007CCD6E /* XHMessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMessageTextView.h; sourceTree = "<group>"; };
@@ -1171,7 +1169,6 @@
 		E41C22CC1D113B9500F58250 = {
 			isa = PBXGroup;
 			children = (
-				D84D98681D47AD1B007CCD6E /* main.m */,
 				E41C22D71D113B9500F58250 /* OutLookers */,
 				E41C22EC1D113B9500F58250 /* OutLookersTests */,
 				E41C22F71D113B9500F58250 /* OutLookersUITests */,
@@ -2074,7 +2071,6 @@
 				D83087841D27B958009CFE03 /* MineCollectionCell.swift in Sources */,
 				D82F8DE91D28373400A24CDB /* Server.swift in Sources */,
 				D870C7331D392B24003B7A09 /* SquareViewController.swift in Sources */,
-				D84D98691D47AD1B007CCD6E /* main.m in Sources */,
 				D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */,
 				D82F8DED1D28375300A24CDB /* ArtistDetailInfo.swift in Sources */,
 				D819924D1D44930A007734C0 /* TalentDtailResp.swift in Sources */,
@@ -2222,7 +2218,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = OutLookers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2324,7 +2320,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = OutLookers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
