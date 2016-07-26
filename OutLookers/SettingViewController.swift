@@ -21,7 +21,7 @@ class SettingViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        title = "sdfssssss"
+        title = "设置"
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
