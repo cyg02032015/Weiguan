@@ -812,4 +812,38 @@ class Server {
         }
     }
     
+    /// 全局常量
+    class func globleDefine(handler: (success: Bool, msg: String?, value: GlobleDeineAPI?)->Void) {
+        let url = NSURL(string: API.globleDefine)!
+        let request = NSMutableURLRequest(URL: url, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 60)
+        request.HTTPMethod = "POST"
+        let str = "type=focus-c"
+        let data = str.dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = data
+        do {
+            let received = try NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
+            let info = GlobleDefineResp(fromJson: JSON(data: received))
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        } catch let error as NSError {
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+
+    /// 上传token获取
+    class func getUpdateFileToken(handler: (success: Bool, msg: String?, value: GetToken?)->Void) {
+        HttpTool.post(API.getToken, parameters: nil, complete: { (response) in
+            let info = GetTokenResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
 }

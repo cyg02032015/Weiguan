@@ -33,6 +33,11 @@ let kSinaAppkey = "126663232"
 let kSinaAppSecret = "d39969613faa5fcc75859cf8406649eb"
 let kSinaRedirectUrl = "http://sns.whalecloud.com/sina2/callback" // 分享回调地址
 
+let kOSSEndPoint = "http://oss-cn-hangzhou.aliyuncs.com/"
+
+// placeholder
+let kPlaceholder = UIImage(named: "Combined Shape Copy")
+
 // 正则表达
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 

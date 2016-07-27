@@ -178,6 +178,11 @@
 		D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */; };
 		D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */; };
 		D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */; };
+		D8EB0EB61D48E18F002E36F8 /* GetTokenResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */; };
+		D8EB0EB81D48E569002E36F8 /* GlobleDefineResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */; };
+		D8EB0EBA1D48E603002E36F8 /* GlobleDefineSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */; };
+		D8EB0EBC1D48F3E7002E36F8 /* YGImageSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */; };
+		D8EB0EBE1D490EAC002E36F8 /* OSSImageUploder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EBD1D490EAC002E36F8 /* OSSImageUploder.swift */; };
 		D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A41D154CEB000C8F91 /* LogViewController.swift */; };
 		D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A81D1566B7000C8F91 /* StringDefine.swift */; };
 		D8F526AB1D15691F000C8F91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F526AA1D15691F000C8F91 /* InfoPlist.strings */; };
@@ -498,6 +503,11 @@
 		D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate-EX.swift"; path = "OutLookers/NSDate-EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImagePickerController+EX.swift"; path = "OutLookers/UIImagePickerController+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPhotoKitController.swift; path = OutLookers/YGPhotoKitController.swift; sourceTree = SOURCE_ROOT; };
+		D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetTokenResp.swift; path = OutLookers/GetTokenResp.swift; sourceTree = SOURCE_ROOT; };
+		D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineResp.swift; path = OutLookers/GlobleDefineResp.swift; sourceTree = SOURCE_ROOT; };
+		D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineSingle.swift; path = OutLookers/GlobleDefineSingle.swift; sourceTree = SOURCE_ROOT; };
+		D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGImageSave.swift; path = OutLookers/YGImageSave.swift; sourceTree = SOURCE_ROOT; };
+		D8EB0EBD1D490EAC002E36F8 /* OSSImageUploder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSSImageUploder.swift; path = OutLookers/OSSImageUploder.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A41D154CEB000C8F91 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogViewController.swift; path = OutLookers/LogViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A81D1566B7000C8F91 /* StringDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDefine.swift; path = OutLookers/StringDefine.swift; sourceTree = SOURCE_ROOT; };
 		D8F526AA1D15691F000C8F91 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = OutLookers/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
@@ -794,6 +804,8 @@
 				D84D984F1D4661B0007CCD6E /* RecommendHotmanResp.swift */,
 				D84D98511D466496007CCD6E /* EditDataReq.swift */,
 				D84D98531D466624007CCD6E /* UserDataResp.swift */,
+				D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */,
+				D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1082,6 +1094,8 @@
 				E47ADF6B1D1D051D00A2F4BD /* YGShareHandler.swift */,
 				D8B641451D367F1300DF916D /* Util.swift */,
 				E4A3E6451D4714840045202B /* YGLogView.swift */,
+				D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */,
+				D8EB0EBD1D490EAC002E36F8 /* OSSImageUploder.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -1111,6 +1125,7 @@
 			isa = PBXGroup;
 			children = (
 				E41B926C1D3DFB6700749769 /* UserSingle.swift */,
+				D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */,
 			);
 			name = Single;
 			sourceTree = "<group>";
@@ -1830,6 +1845,7 @@
 				D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */,
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D8B6414C1D36A4C900DF916D /* TalentDetailCell.swift in Sources */,
+				D8EB0EB61D48E18F002E36F8 /* GetTokenResp.swift in Sources */,
 				E41B92711D3E008700749769 /* ModifyCell.swift in Sources */,
 				D81992601D44AE45007734C0 /* CircularEnrollPersonResp.swift in Sources */,
 				E41B92E61D408E9100749769 /* MCommentCell.swift in Sources */,
@@ -1940,6 +1956,7 @@
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
 				E41B92601D3DE30A00749769 /* GetVerifyViewController.swift in Sources */,
 				D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */,
+				D8EB0EBA1D48E603002E36F8 /* GlobleDefineSingle.swift in Sources */,
 				D82F8DEA1D28373400A24CDB /* StringResponse.swift in Sources */,
 				E41B92EC1D40916C00749769 /* MPraiseViewController.swift in Sources */,
 				D81992311D3D2E5A007734C0 /* MyAccountViewController.swift in Sources */,
@@ -1987,6 +2004,7 @@
 				D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */,
 				D84D98501D4661B0007CCD6E /* RecommendHotmanResp.swift in Sources */,
 				E4473EC31D38C94F000CEEF2 /* BWHTableViewCell.swift in Sources */,
+				D8EB0EBC1D48F3E7002E36F8 /* YGImageSave.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
 				D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */,
 				D82F8E1E1D30EFB100A24CDB /* OGDataTableViewCell.swift in Sources */,
@@ -1996,6 +2014,7 @@
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
 				E446FA151D2E29E6003DFC1E /* TouchLabel.swift in Sources */,
 				D8AA10071D1DA0220038EE73 /* TZImageManager.m in Sources */,
+				D8EB0EBE1D490EAC002E36F8 /* OSSImageUploder.swift in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
 				D82F8E221D30F4F600A24CDB /* OGCircularCell.swift in Sources */,
 				D82F8DDC1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift in Sources */,
@@ -2064,6 +2083,7 @@
 				D870C74B1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift in Sources */,
 				D81992661D44B431007734C0 /* MyFansResp.swift in Sources */,
 				D84D98671D47AD10007CCD6E /* LogButtonCell.swift in Sources */,
+				D8EB0EB81D48E569002E36F8 /* GlobleDefineResp.swift in Sources */,
 				E4473EB71D3625C7000CEEF2 /* YKVideoTrimmer.swift in Sources */,
 				D819924F1D4497F4007734C0 /* FollowDynamicResp.swift in Sources */,
 				E446FA191D2E6181003DFC1E /* ScrollVerticalDelegate.swift in Sources */,

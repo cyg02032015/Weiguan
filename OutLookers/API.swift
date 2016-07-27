@@ -101,5 +101,8 @@ struct API {
     static let informationGet = baseURL + "/api/authentication/v1/information/get"
     /// 首页-推荐红人
     static let recommentHotman = baseURL + "/api/authentication/v1/recommendRed/get"
-    
+    /// 全局常量
+    static let globleDefine = baseURL + "/api/system/v1/constants"
+    /// token
+    static let getToken = baseURL + "/api/file/v1/getAppToken"
 }

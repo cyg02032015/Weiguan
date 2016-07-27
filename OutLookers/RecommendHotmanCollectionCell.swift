@@ -12,7 +12,7 @@ class RecommendHotmanCollectionCell: UICollectionViewCell {
     
     var info: HotmanList! {
         didSet {
-//            imgView.sd_setImageWithURL(NSURL(string: info.headImgUrl), placeholderImage: UIImage(named: ""))
+            imgView.sd_setImageWithURL(NSURL(string: info.headImgUrl), placeholderImage: kPlaceholder)
             nameLabel.text = info.name
             jobLabel.text = info.nickname
         }
