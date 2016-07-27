@@ -29,11 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-//        let result = UMSocialSnsService.handleOpenURL(url)
-//        if result == false {
-//            // 设置微信支付宝等
-//        }
-//        return result
+        let result = UMSocialSnsService.handleOpenURL(url)
+        if result == false {
+            // 设置微信支付宝等
+        }
+        return result
         return false
     }
     

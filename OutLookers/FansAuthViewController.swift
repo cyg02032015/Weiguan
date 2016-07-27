@@ -21,16 +21,12 @@ class FansAuthViewController: YGBaseViewController {
     
     func setupSubViews() {
         title = "粉丝认证"
-        let commitButton = Util.createReleaseButton("提交")
-        view.addSubview(commitButton)
-        commitButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(commitButton.superview!)
-            make.height.equalTo(kScale(44))
-        }
-        
+        let commit = setRightNaviItem()
+        commit.setTitle("提交", forState: .Normal)
         let layout = UICollectionViewFlowLayout()
         layout.headerReferenceSize = CGSize(width: ScreenWidth, height: kScale(60))
         layout.itemSize = CGSize(width: (ScreenWidth - 2) / 3, height: kHeight(100))
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 0
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
@@ -41,9 +37,12 @@ class FansAuthViewController: YGBaseViewController {
         collectionView.registerClass(FansAuthCell.self, forCellWithReuseIdentifier: fansAuthCellId)
         collectionView.registerClass(FansHeadReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: fansHeadViewId)
         collectionView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(collectionView.superview!)
-            make.bottom.equalTo(commitButton.snp.top)
+            make.edges.equalTo(collectionView.superview!)
         }
+    }
+    
+    override func tapMoreButton(sender: UIButton) {
+        LogInfo("提交")
     }
 }
 

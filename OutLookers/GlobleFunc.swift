@@ -62,7 +62,7 @@ func configNavigation() {
 }
 
 func configUMeng() {
-//    UMSocialData.setAppKey(kUmengAppkey)
+    UMSocialData.setAppKey(kUmengAppkey)
     #if DEBUG
 //    UMSocialData.openLog(true)
     #endif
