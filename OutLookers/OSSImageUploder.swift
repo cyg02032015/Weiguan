@@ -9,6 +9,7 @@
 import UIKit
 import AliyunOSSiOS
 import SwiftyJSON
+import Alamofire
 
 enum UploadImageState: Int {
     case Failed = 0
@@ -101,23 +102,31 @@ class OSSImageUploader {
         let url: NSURL = NSURL(string: "http://" + object.region + ".aliyuncs.com")!
         let request: NSURLRequest = NSURLRequest(URL: url)
         let tcs: OSSTaskCompletionSource = OSSTaskCompletionSource()
-        let session: NSURLSession = NSURLSession.sharedSession()
-        let sessionTask: NSURLSessionTask = session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        Alamofire.request(.POST, "http://" + object.region + ".aliyuncs.com",encoding: .JSON).response { (request, response, data:NSData?, error) in
             if error != nil {
                 tcs.setError(error!)
                 return
             }
             tcs.setResult(data)
-        })
-        sessionTask.resume()
+        }
+//        let session: NSURLSession = NSURLSession.sharedSession()
+//        let sessionTask: NSURLSessionTask = session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+//            if error != nil {
+//                tcs.setError(error!)
+//                return
+//            }
+//            tcs.setResult(data)
+//        })
+//        sessionTask.resume()
         tcs.task.waitUntilFinished()
         if tcs.task.error != nil {
             return nil
         } else {
-            guard let data = tcs.task.result as? NSData else {
-                LogError("tcs.task.result == nil")
-                return nil
-            }
+//            guard let data = tcs.task.result as? NSData else {
+//                LogError("tcs.task.result == nil")
+//                return nil
+//            }
+            let data: NSData = tcs.task.result as! NSData
             let object = JSON(data: data)
             let token: OSSFederationToken = OSSFederationToken()
             token.tAccessKey = object["AccessKeyId"].stringValue
