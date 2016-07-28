@@ -40,6 +40,7 @@ class EditSkillViewController: YGBaseViewController {
     var setCoverButton: UIButton!
     var addVideoButton: UIButton!
     var isSelectPhotos: Bool = false // 是否选取多张
+    lazy var req = ReleaseTalentReq()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,15 +52,15 @@ class EditSkillViewController: YGBaseViewController {
         title = "编辑动态"
         setupSubViews()
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
-        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
+        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"]
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
+        req.unit = UnitType.YuanHour.rawValue
     }
     
     func setupSubViews() {
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.backgroundColor = kBackgoundColor
-//        tableView.separatorStyle = .None
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -280,6 +281,7 @@ extension EditSkillViewController: UIActionSheetDelegate {
                     mediaTypes.append(kUTTypeImage as String)
                     controller.mediaTypes = mediaTypes
                     controller.delegate = self
+                    controller.allowsEditing = true
                     presentViewController(controller, animated: true, completion: {})
                 }
             }
@@ -293,12 +295,12 @@ extension EditSkillViewController: UIActionSheetDelegate {
 // MARK: - UIImagePickerControllerDelegate
 extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate,TZImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
-        picker.dismissViewControllerAnimated(true) {
-            let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - ScreenWidth/2, width: ScreenWidth, height: ScreenWidth), limitScaleRatio: 3)
-            imgCropper.delegate = self
-            self.presentViewController(imgCropper, animated: true, completion: {})
-        }
+        let originalImg = info["UIImagePickerControllerEditedImage"] as! UIImage
+        originalImg.resetSizeOfImageData(originalImg, maxSize: 300, compeleted: { [weak self](data) in
+            guard let s = self else { return }
+            s.setCoverButton.setImage(UIImage(data: data)!, forState: .Normal)
+            s.dismissViewControllerAnimated(true) { }
+            })
     }
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
@@ -316,23 +318,6 @@ extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigation
     }
 }
 
-// MARK: - VPImageCropperDelegate
-extension EditSkillViewController: VPImageCropperDelegate {
-    func imageCropperDidCancel(cropperViewController: VPImageCropperViewController!) {
-        dismissViewControllerAnimated(true) { }//TODO
-    }
-    
-    func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
-        if photoType == .Some(.SetCover) {
-            editedImage.resetSizeOfImageData(editedImage, maxSize: 300, compeleted: { [weak self](data) in
-                guard let s = self else { return }
-                s.setCoverButton.setImage(UIImage(data: data)!, forState: .Normal)
-                s.dismissViewControllerAnimated(true) { }
-            })
-        }
-    }
-}
-
 extension EditSkillViewController: YGPickerViewDelegate {
     func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
         if isProvincePicker {
@@ -343,7 +328,19 @@ extension EditSkillViewController: YGPickerViewDelegate {
             let skillUnit = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
             cell.button.selected = true
-            cell.setButtonText(skillUnit!)
+            guard let unit = skillUnit else { fatalError("picker skill unit nil") }
+            cell.setButtonText(unit)
+            //"元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"
+            switch unit {
+            case "元/小时": req.unit = UnitType.YuanHour.rawValue
+            case "元/场": req.unit = UnitType.YuanRound.rawValue
+            case "元/次": req.unit = UnitType.YuanOnce.rawValue
+            case "元/半天": req.unit = UnitType.YuanHalfday.rawValue
+            case "元/月": req.unit = UnitType.YuanMonth.rawValue
+            case "元/年": req.unit = UnitType.YuanYear.rawValue
+            default: ""
+            }
+
         }
     }
 }

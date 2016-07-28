@@ -188,7 +188,6 @@ extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCel
         case "元/年": req.unit = UnitType.YuanYear.rawValue
         default: ""
         }
-        
     }
 }
 
