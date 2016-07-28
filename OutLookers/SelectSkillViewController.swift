@@ -18,13 +18,14 @@ enum SelectSkillType: Int {
 class SelectSkillViewController: YGBaseViewController {
 
     
-    typealias TapItemClosure = (text: String) -> Void
+    typealias TapItemClosure = (item: PersonCharaterModel) -> Void
     var tapItem: TapItemClosure!
     var collectionView: UICollectionView!
     var type: SelectSkillType!
-    lazy var imgStrings = ["help", "teach ", "accompany"]
-    lazy var titleStrings = ["帮帮我", "教教我", "陪陪我"]
-    
+    lazy var imgStrings = ["help", "teach ", "accompany", "", ""]
+    lazy var rowArray = [PersonCharaterModel]()
+    lazy var selects = [Int]()
+    lazy var skillButton = UIButton()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,14 +34,11 @@ class SelectSkillViewController: YGBaseViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "选择才艺类型"
         setupSubViews()
+        loadTalentType()
     }
     
     func setupSubViews() {
@@ -63,6 +61,44 @@ class SelectSkillViewController: YGBaseViewController {
         }
     }
     
+    func loadTalentType() {
+        Server.releaseTalentSelectType { (success, msg, value) in
+            if success {
+                guard let data = value else { return }
+                var pid1 = [PersonCharaterModel]()
+                var pid2 = [PersonCharaterModel]()
+                var pid3 = [PersonCharaterModel]()
+                var pid4 = [PersonCharaterModel]()
+                for character in data {
+                    if character.pid == 1 {
+                        pid1.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name))
+                    } else if character.pid == 2 {
+                        pid2.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name))
+                    } else if character.pid == 3 {
+                        pid3.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name))
+                    } else if character.pid == 4 {
+                        pid4.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name))
+                    }
+                }
+                for character in data {
+                    if character.id == 1 {
+                        self.rowArray.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name, result: pid1))
+                    } else if character.id == 2 {
+                        self.rowArray.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name, result: pid2))
+                    } else if character.id == 3 {
+                        self.rowArray.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name, result: pid3))
+                    } else if character.id == 4 {
+                        self.rowArray.append(PersonCharaterModel(pid: character.pid, id: character.id, name: character.name, result: pid4))
+                    }
+                }
+                self.collectionView.reloadData()
+            } else {
+                LogError(msg!)
+            }
+
+        }
+    }
+    
     func tapItemInCollection(closure: TapItemClosure) {
         self.tapItem = closure
     }
@@ -70,31 +106,41 @@ class SelectSkillViewController: YGBaseViewController {
 
 extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 3
+        return rowArray.count
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return rowArray[section].result.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillIdentifier, forIndexPath: indexPath) as! SkillCell
+        let item = rowArray[indexPath.section].result[indexPath.row]
+        cell.skill.setTitle(item.name, forState: .Normal)
+        if self.selects.contains(item.id) {
+            cell.skill.selected = true
+            cell.skill.backgroundColor = kCommonColor
+            self.skillButton = cell.skill
+        } else {
+            cell.skill.selected = false
+            cell.skill.backgroundColor = kButtonGrayColor
+        }
         return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        // 单选
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SkillCell
-        cell.skill.backgroundColor = UIColor(hex: 0xC8C8C8)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SkillCell
-        cell.skill.backgroundColor = kCommonColor
+        let item = rowArray[indexPath.section].result[indexPath.item]
+        skillButton.selected = false
+        skillButton.backgroundColor = kButtonGrayColor
+        skillButton = cell.skill
+        skillButton.selected = true
+        skillButton.backgroundColor = kCommonColor
+        selects.removeAll()
+        selects.append(item.id)
         if type == SelectSkillType.Back {
             if tapItem != nil {
-                guard let t = cell.skill.titleLabel?.text else { fatalError("text nil") }
-                self.tapItem(text: t)
+                self.tapItem(item: item)
             }
             delay (0.3) {
                 self.navigationController?.popViewControllerAnimated(true)
@@ -110,7 +156,7 @@ extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: SkillHeaderIdentifier, forIndexPath: indexPath) as! SkillHeaderReusableView
         headerView.imgView.image = UIImage(named: imgStrings[indexPath.section])
-        headerView.label.text = titleStrings[indexPath.section]
+        headerView.label.text = rowArray[indexPath.section].name
         return headerView
     }
 }

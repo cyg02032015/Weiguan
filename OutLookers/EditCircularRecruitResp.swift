@@ -15,7 +15,7 @@ class EditCircularRecruitResp: BaseResponse {
     var categoryName : String!
     var id : Int!
     var number : Int!
-    var price : Float!
+    var price : Int!
     var unit : String!
     var userId : Int!
     var result: EditCircularRecruitResp!
@@ -29,7 +29,7 @@ class EditCircularRecruitResp: BaseResponse {
         categoryName = json["categoryName"].stringValue
         id = json["id"].intValue
         number = json["number"].intValue
-        price = json["price"].floatValue
+        price = json["price"].intValue
         unit = json["unit"].stringValue
         userId = json["userId"].intValue
         

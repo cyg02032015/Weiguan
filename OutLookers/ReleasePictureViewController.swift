@@ -21,7 +21,6 @@ class ReleasePictureViewController: YGBaseViewController {
 
     var tableView: UITableView!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
-    lazy var pictures = [UIImage]()
     lazy var photos = [UIImage]()
     lazy var originPhotos = [AnyObject]()
     var releaseButton: UIButton!
@@ -31,7 +30,6 @@ class ReleasePictureViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "编辑才艺"
-        pictures = [UIImage(named: "release_announcement_Add pictures")!]
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
         getToken()
@@ -282,7 +280,6 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                     LogInfo(value!)
                     self.dismissViewControllerAnimated(true, completion: { [unowned self] in
                         self.photos.removeAll()
-                        self.pictures.removeAll()
                         self.originPhotos.removeAll()
                         })
                 } else {

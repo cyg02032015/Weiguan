@@ -32,7 +32,6 @@ class PersonCharacterViewController: YGBaseViewController {
     var collectionView: UICollectionView!
     lazy var imgStrings = ["help", "teach ", "accompany"]
     lazy var optionTitles = ["（可多选）", "（可多选）", "", "（可多选）", "", ""]
-    lazy var dataSources = [PersonCharacter]()
     lazy var rowArray = [PersonCharaterModel]()
     
     override func viewWillAppear(animated: Bool) {
@@ -116,30 +115,22 @@ extension PersonCharacterViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var sectionModel = rowArray[section]
-        if section == 0 && sectionModel.result[0].pid == 1 {
-            return sectionModel.result.count
-        } else if section == 1 && sectionModel.result[1].pid == 2 {
-            return sectionModel.result.count
-        } else if section == 2 && sectionModel.result[2].pid == 3 {
-            return sectionModel.result.count
-        } else {
-            return sectionModel.result.count
-        }
+        return rowArray[section].result.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillIdentifier, forIndexPath: indexPath) as! SkillCell
         var sectionModel = rowArray[indexPath.section]
-        if indexPath.section == 0 {
-            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-        } else if indexPath.section == 1 {
-            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-        } else if indexPath.section == 2 {
-            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-        } else {
-            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-        }
+        cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
+//        if indexPath.section == 0 {
+//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
+//        } else if indexPath.section == 1 {
+//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
+//        } else if indexPath.section == 2 {
+//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
+//        } else {
+//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
+//        }
         cell.row = indexPath.item
         cell.section == indexPath.section
         return cell

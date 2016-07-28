@@ -102,8 +102,8 @@ class Server {
             "categoryId" : request.categoryId,
             "categoryName" : request.categoryName,
             "number" : request.number,
-            "unit" : request.unit,
-            "price" : request.price
+            "unit" : request.unit ?? "",
+            "price" : request.price ?? ""
             ]
         HttpTool.post(API.editNoticeRecruitNeeds, parameters: parameters, complete: { (response) in
             let info = EditCircularRecruitResp(fromJson: response)

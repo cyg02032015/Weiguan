@@ -16,6 +16,16 @@ private extension Selector {
     static let tapReleaseButton = #selector(RecruitInformationViewController.tapReleaseButton(_:))
 }
 
+enum UnitType: String {
+    case YuanHour = "1"
+    case YuanRound = "2"
+    case YuanOnce = "3"
+    case YuanHalfday = "4"
+    case YuanDay = "5"
+    case YuanMonth = "6"
+    case YuanYear = "7"
+}
+
 protocol RecruitInformationDelegate: class {
     func recruitInformationSureWithParams(recruit: Recruit)
 }
@@ -27,6 +37,7 @@ class RecruitInformationViewController: YGBaseViewController {
     lazy var skillUnitPickerArray = [String]()
     weak var delegate: RecruitInformationDelegate!
     var rightButton: UIButton!
+    lazy var req = EditCircularRecruitReq()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +66,11 @@ class RecruitInformationViewController: YGBaseViewController {
             make.bottom.equalTo(rightButton.snp.top)
         }
         
-        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天"]
+        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"]
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.titleLabel.text = "才艺标价单位"
         pickerView.delegate = self
+        req.unit = UnitType.YuanHour.rawValue
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -98,8 +110,11 @@ extension RecruitInformationViewController {
             let selectSkill = SelectSkillViewController()
             selectSkill.type = SelectSkillType.Back
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
-            selectSkill.tapItemInCollection({ (text) in
-                cell.tf.text = text
+            selectSkill.tapItemInCollection({ [unowned self](item) in
+                cell.tf.text = item.name
+                self.req.categoryId = "\(item.id)"
+                self.req.categoryName = item.name
+                self.checkParameters()
             })
             navigationController?.pushViewController(selectSkill, animated: true)
         }
@@ -117,24 +132,40 @@ extension RecruitInformationViewController {
 // MARK: -点击按钮 & NoArrowEditCellDelegate
 extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCellDelegate, NoArrowEditCellDelegate {
 
-    func tapReleaseButton(sender: UIButton) {
-        let cell0 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? ArrowEditCell
-        let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as? NoArrowEditCell
-        let cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as? BudgetPriceCell
-        if isEmptyString(cell0?.tf.text) {
-            YKToast.makeText("请选择才艺类型")
-            return
-        } else if isEmptyString(cell1?.tf.text) {
-            YKToast.makeText("请选择招募数量")
+    func checkParameters() {
+        guard !isEmptyString(req.categoryId) && !isEmptyString(req.categoryName) && !isEmptyString(req.number) else {
+            rightButton.backgroundColor = kGrayColor
+            rightButton.userInteractionEnabled = false
             return
         }
-        let recruit = Recruit(skill: cell0!.tf.text!, recruitCount: cell1!.tf.text!, budgetPrice: cell2!.tf.text)
-        delegate.recruitInformationSureWithParams(recruit)
-        navigationController?.popViewControllerAnimated(true)
+        rightButton.backgroundColor = kCommonColor
+        rightButton.userInteractionEnabled = true
+    }
+    
+    func tapReleaseButton(sender: UIButton) {
+        Server.editNoticeRecruitNeeds(req) { [unowned self](success, msg, value) in
+            if success {
+                guard let object = value else { return }
+                let price = object.price == 0 ? "" : "\(object.price)"
+                let recruit = Recruit(id: "\(object.id)", skill: object.categoryName, recruitCount: "\(object.number)", budgetPrice: price)
+                self.delegate.recruitInformationSureWithParams(recruit)
+                self.navigationController?.popViewControllerAnimated(true)
+            } else {
+                LogError(msg)
+            }
+        }
     }
     
     func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int)) {
-        
+        switch tuple {
+        case (0,1): req.number = text
+        default: ""
+        }
+        checkParameters()
+    }
+    
+    func textFieldReturnText(text: String) {
+        req.price = text
     }
     
     func budgetPriceButtonTap(sender: UIButton) {
@@ -147,6 +178,17 @@ extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCel
         cell.button.selected = true
         guard let unit = skillUnit else { fatalError("picker skill unit nil") }
         cell.setButtonText(unit)
+        //"元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"
+        switch unit {
+        case "元/小时": req.unit = UnitType.YuanHour.rawValue
+        case "元/场": req.unit = UnitType.YuanRound.rawValue
+        case "元/次": req.unit = UnitType.YuanOnce.rawValue
+        case "元/半天": req.unit = UnitType.YuanHalfday.rawValue
+        case "元/月": req.unit = UnitType.YuanMonth.rawValue
+        case "元/年": req.unit = UnitType.YuanYear.rawValue
+        default: ""
+        }
+        
     }
 }
 

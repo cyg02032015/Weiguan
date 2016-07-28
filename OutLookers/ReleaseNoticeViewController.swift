@@ -20,17 +20,18 @@ private extension Selector {
 }
 
 class ReleaseNoticeViewController: YGBaseViewController {
-
+    
     var tableView: UITableView!
     var selectDatePicker: YGSelectDateView!
     var pickerView: YGPickerView!
     lazy var recruits: [Recruit] = [Recruit]()
     lazy var provinceTitles = NSArray()
-    var photoArray: [UIImage]!
+    lazy var photoArray = [UIImage]()
     var req = ReleaseNoticeRequest()
     var releaseButton: UIButton!
     lazy var cityResp: CityResp = YGCityData.loadCityData()
     var tokenObject: GetToken!
+    var provinceInt: Int = 0
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,13 +42,13 @@ class ReleaseNoticeViewController: YGBaseViewController {
         super.viewDidLoad()
         title = "编辑通告"
         setupSubViews()
+        getToken()
         selectDatePicker = YGSelectDateView()
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
     }
-
+    
     func setupSubViews() {
-        photoArray = [UIImage(named: "release_announcement_Addpictures")!]
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.backgroundColor = kBackgoundColor
         tableView.separatorStyle = .None
@@ -78,7 +79,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     }
     
     func getToken() {
-        Server.getUpdateFileToken { (success, msg, value) in
+        Server.getUpdateFileToken { [unowned self](success, msg, value) in
             guard let object = value else {
                 LogError("获取token失败")
                 return
@@ -144,14 +145,16 @@ extension ReleaseNoticeViewController {
                 selectDatePicker.tapSureClosure({ [unowned self](date) in
                     cell.tf.text = date.stringFromDate()
                     self.req.startTime = date.stringFromDateWith("yyyy-MM-dd")
-                })
+                    self.checkParameters()
+                    })
                 
             } else { // 工作结束时间
                 let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)) as! ArrowEditCell
                 selectDatePicker.animation()
-                selectDatePicker.tapSureClosure({ (date) in
+                selectDatePicker.tapSureClosure({ [unowned self](date) in
                     cell.tf.text = date.stringFromDate()
                     self.req.endTime = date.stringFromDateWith("yyyy-MM-dd")
+                    self.checkParameters()
                 })
             }
         }
@@ -159,9 +162,10 @@ extension ReleaseNoticeViewController {
         if indexPath.section == 3 { // 报名截止日期
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! ArrowEditCell
             selectDatePicker.animation()
-            selectDatePicker.tapSureClosure({ (date) in
+            selectDatePicker.tapSureClosure({ [unowned self](date) in
                 cell.tf.text = date.stringFromDate()
                 self.req.register = date.stringFromDateWith("yyyy-MM-dd")
+                self.checkParameters()
             })
         }
         
@@ -191,7 +195,7 @@ extension ReleaseNoticeViewController {
         case 0, 2, 3, 4: return kHeight(56)
         case 5: return kHeight(155) // 工作详情
         case 6:
-            return kHeight(177 + CGFloat((photoArray.count - 1) / 3 * 65)) // 宣传图片
+            return kHeight(177 + CGFloat((photoArray.count / 3 == 3 ? 2 : photoArray.count / 3) * 65)) // 宣传图片
         default:
             return 0
         }
@@ -216,46 +220,53 @@ extension ReleaseNoticeViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.photoArray.count > 9 ? self.photoArray.count - 1 : self.photoArray.count
+        return self.photoArray.count == 9 ? self.photoArray.count : self.photoArray.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoCollectionIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
-        cell.img = photoArray[indexPath.item]
+        if photoArray.count == indexPath.item {
+            cell.img = UIImage(named: "release_announcement_Addpictures")
+        } else {
+            cell.img = photoArray[indexPath.item]
+        }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionCell
-        guard let image = cell.imgView.image else { return }
-        if image == photoArray[photoArray.count - 1] {
+        //        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionCell
+        if indexPath.item == photoArray.count {
             let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let camera = UIAlertAction(title: "拍照", style: .Default, handler: { (action) in
-                    let vc = Util.actionSheetImagePicker(isCamera: true)
+            let camera = UIAlertAction(title: "拍照", style: .Default, handler: { [unowned self](action) in
+                let vc = Util.actionSheetImagePicker(isCamera: true)
                 guard let v = vc else { return }
-                    v.delegate = self
-                    self.presentViewController(v, animated: true, completion: nil)
-                })
-            let library = UIAlertAction(title: "从相册中选取", style: .Default, handler: { (action) in
-                let vc = Util.actionSheetImagePicker(isCamera: false)
-                guard let v = vc else { return }
+                v.allowsEditing = false
                 v.delegate = self
                 self.presentViewController(v, animated: true, completion: nil)
-                })
+            })
+            let library = UIAlertAction(title: "从相册中选取", style: .Default, handler: { [unowned self](action) in
+                let vc = Util.actionSheetImagePicker(isCamera: false)
+                guard let v = vc else { return }
+                v.allowsEditing = false
+                v.delegate = self
+                self.presentViewController(v, animated: true, completion: nil)
+            })
             let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
             sheet.addAction(camera)
             sheet.addAction(library)
             sheet.addAction(cancel)
             self.presentViewController(sheet, animated: true, completion: nil)
+        } else {
+            
         }
     }
 }
 
-// MARK: - UIImagePickerControllerDelegate 
+// MARK: - UIImagePickerControllerDelegate
 extension ReleaseNoticeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let originalImg = info["UIImagePickerControllerOriginalImage"] as! UIImage
-        picker.dismissViewControllerAnimated(true) {
+        picker.dismissViewControllerAnimated(true) { [unowned self] in
             let imgCropper = VPImageCropperViewController(image: originalImg, cropFrame: CGRect(x: 0, y: self.view.center.y - (ScreenWidth * 9/16)/2, width: ScreenWidth, height: ScreenWidth * 9/16), limitScaleRatio: 3)
             imgCropper.delegate = self
             self.presentViewController(imgCropper, animated: true, completion: {
@@ -276,8 +287,9 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
     }
     
     func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
-        editedImage.resetSizeOfImageData(editedImage, maxSize: 300) { (data) in
-            self.photoArray.insert(editedImage, atIndex: self.photoArray.count - 1)
+        editedImage.resetSizeOfImageData(editedImage, maxSize: 300) { [unowned self](data) in
+            self.photoArray.insert(editedImage, atIndex: self.photoArray.count)
+            self.checkParameters()
             let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 6)) as! SelectPhotoCell
             cell.collectionView.reloadData()
             if self.photoArray.count / 3 >= 1 {
@@ -298,7 +310,7 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     }
     
     func checkParameters() {
-        guard tooManyCheck()  && !isEmptyString(req.picture) else {
+        guard tooManyCheck()  && photoArray.count > 0 else {
             releaseButton.backgroundColor = kGrayColor
             releaseButton.userInteractionEnabled = false
             return
@@ -308,15 +320,26 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     }
     // MARK: 发布按钮
     func tapReleaseButton(sender: UIButton) {
-        self.view.endEditing(true)
-        Server.getReleaseNotice(req) { (success, msg, value) in
-            if success {
-                LogInfo(value)
+        OSSImageUploader.asyncUploadImages(tokenObject, images: photoArray) { [unowned self](names, state) in
+            if state == .Success {
+                self.req.picture = names.joinWithSeparator(",")
+                self.req.cover = names[0]
+                Server.getReleaseNotice(self.req) { [unowned self](success, msg, value) in
+                    if success {
+                        LogInfo(value)
+                        self.dismissViewControllerAnimated(true, completion: {
+                            self.photoArray.removeAll()
+                        })
+                    } else {
+                        LogError(msg)
+                        YKToast.makeText(msg!)
+                    }
+                }
             } else {
-                LogError(msg)
-                YKToast.makeText(msg!)
+                LogError("上传图片失败")
             }
         }
+        
     }
     
     func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int)) {
@@ -326,10 +349,12 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
         case (4,1): req.adds = t
         default: fatalError("switch default")
         }
+        checkParameters()
     }
     
     func workDetailCellReturnText(text: String) {
         req.details = text
+        checkParameters()
     }
     
     func recruitNeedsAddRecruite(sender: UIButton) {
@@ -339,12 +364,10 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     }
     
     func recruitInformationSureWithParams(recruit: Recruit) {
-        //MARK: 添加招募需求request
-        req.recruitment = "11,14,12"
+        req.recruitment = recruit.id
         recruits.append(recruit)
         tableView.reloadData()
-//        let range = NSMakeRange(1, 1)
-//        tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
+        checkParameters()
     }
     
 }
@@ -356,8 +379,8 @@ extension ReleaseNoticeViewController: UIPickerViewDelegate, UIPickerViewDataSou
         let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
         cell.tf.text = city
-        // MARK: 选择城市request
-        req.city = city
+        req.city = "\(cityResp.province[provinceInt].citys[pickerView.selectedRowInComponent(1)].id)"
+        checkParameters()
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
@@ -384,6 +407,8 @@ extension ReleaseNoticeViewController: UIPickerViewDelegate, UIPickerViewDataSou
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
+            LogVerbose(row)
+            provinceInt = row
             pickerView.reloadComponent(1)
         }
     }

@@ -16,7 +16,7 @@ struct EditCircularRecruitReq {
     /// 招募人数
     var number : String!
     /// 价钱
-    var price : String!
+    var price : String?
     /// 价钱单位 1：元/小时，2：元/场:3：元/次:4：元/半天:5：元/天:6：元/月:7：元/年
-    var unit : String!
+    var unit : String?
 }

@@ -218,6 +218,10 @@ extension EditSkillViewController: BudgetPriceCellDelegate {
         }
     }
     
+    func textFieldReturnText(text: String) {
+        
+    }
+    
     func budgetPriceButtonTap(sender: UIButton) {
         isProvincePicker = false
         pickerView.picker.reloadAllComponents()

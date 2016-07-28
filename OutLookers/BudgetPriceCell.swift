@@ -14,13 +14,14 @@ private extension Selector {
 
 protocol BudgetPriceCellDelegate: class {
     func budgetPriceButtonTap(sender: UIButton)
+    func textFieldReturnText(text: String)
 }
 
 class BudgetPriceCell: UITableViewCell {
 
     var label: UILabel!
     var tf: UITextField!
-    var button: BudgetButton!
+    var button: UIButton!
     weak var delegate: BudgetPriceCellDelegate!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -35,11 +36,12 @@ class BudgetPriceCell: UITableViewCell {
         contentView.addSubview(label)
         
         tf = UITextField()
+        tf.delegate = self
         tf.font = UIFont.customFontOfSize(14)
         tf.textAlignment = .Right
         contentView.addSubview(tf)
         
-        button = BudgetButton()
+        button = UIButton()
         button.titleLabel?.font = UIFont.customFontOfSize(14)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -18)
         button.setTitleColor(UIColor(hex: 0x777777), forState: .Normal)
@@ -69,7 +71,9 @@ class BudgetPriceCell: UITableViewCell {
     
     func tapBudget(sender: UIButton) {
         tf.resignFirstResponder()
-        delegate.budgetPriceButtonTap(sender)
+        if delegate != nil {
+            delegate.budgetPriceButtonTap(sender)
+        }
     }
     
     func setTextInCell(text: String, placeholder: String, buttonText: String) {
@@ -87,7 +91,10 @@ class BudgetPriceCell: UITableViewCell {
     }
 }
 
-class BudgetButton: UIButton {
-    override var highlighted: Bool { set {} get { return false}
+extension BudgetPriceCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(textField: UITextField) {
+        if delegate != nil {
+            delegate.textFieldReturnText(textField.text ?? "")
+        }
     }
 }
