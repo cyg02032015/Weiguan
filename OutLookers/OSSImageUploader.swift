@@ -77,7 +77,7 @@ class OSSImageUploader {
                 })
                 putTask.waitUntilFinished()
                 if putTask.error == nil {
-                    LogInfo("upload object success!")
+                    LogInfo("upload object success! = \(imageName)")
                 } else {
                     LogError("upload object failed, error: \(putTask.error!)")
                 }

@@ -131,6 +131,7 @@
 		D84D986E1D47AD39007CCD6E /* DXMessageToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986B1D47AD39007CCD6E /* DXMessageToolBar.m */; };
 		D84D986F1D47AD39007CCD6E /* XHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */; };
 		D84D98721D47AE47007CCD6E /* UIButton+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98711D47AE47007CCD6E /* UIButton+EX.swift */; };
+		D85B72C11D4A3EBC005EECE6 /* OSSVideoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B72C01D4A3EBC005EECE6 /* OSSVideoUploader.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
 		D87049441D2152A7008FB780 /* VideoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87049431D2152A7008FB780 /* VideoTool.swift */; };
@@ -182,7 +183,7 @@
 		D8EB0EB81D48E569002E36F8 /* GlobleDefineResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */; };
 		D8EB0EBA1D48E603002E36F8 /* GlobleDefineSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */; };
 		D8EB0EBC1D48F3E7002E36F8 /* YGImageSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */; };
-		D8EB0EBE1D490EAC002E36F8 /* OSSImageUploder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EBD1D490EAC002E36F8 /* OSSImageUploder.swift */; };
+		D8EB0EBE1D490EAC002E36F8 /* OSSImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EBD1D490EAC002E36F8 /* OSSImageUploader.swift */; };
 		D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A41D154CEB000C8F91 /* LogViewController.swift */; };
 		D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A81D1566B7000C8F91 /* StringDefine.swift */; };
 		D8F526AB1D15691F000C8F91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F526AA1D15691F000C8F91 /* InfoPlist.strings */; };
@@ -449,6 +450,7 @@
 		D84D986C1D47AD39007CCD6E /* XHMessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMessageTextView.h; sourceTree = "<group>"; };
 		D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMessageTextView.m; sourceTree = "<group>"; };
 		D84D98711D47AE47007CCD6E /* UIButton+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+EX.swift"; path = "OutLookers/UIButton+EX.swift"; sourceTree = SOURCE_ROOT; };
+		D85B72C01D4A3EBC005EECE6 /* OSSVideoUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSSVideoUploader.swift; path = OutLookers/OSSVideoUploader.swift; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D87049431D2152A7008FB780 /* VideoTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoTool.swift; path = OutLookers/VideoTool.swift; sourceTree = SOURCE_ROOT; };
@@ -509,7 +511,7 @@
 		D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineResp.swift; path = OutLookers/GlobleDefineResp.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineSingle.swift; path = OutLookers/GlobleDefineSingle.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGImageSave.swift; path = OutLookers/YGImageSave.swift; sourceTree = SOURCE_ROOT; };
-		D8EB0EBD1D490EAC002E36F8 /* OSSImageUploder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSSImageUploder.swift; path = OutLookers/OSSImageUploder.swift; sourceTree = SOURCE_ROOT; };
+		D8EB0EBD1D490EAC002E36F8 /* OSSImageUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSSImageUploader.swift; path = OutLookers/OSSImageUploader.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A41D154CEB000C8F91 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogViewController.swift; path = OutLookers/LogViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A81D1566B7000C8F91 /* StringDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDefine.swift; path = OutLookers/StringDefine.swift; sourceTree = SOURCE_ROOT; };
 		D8F526AA1D15691F000C8F91 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = OutLookers/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
@@ -1100,7 +1102,8 @@
 				D8B641451D367F1300DF916D /* Util.swift */,
 				E4A3E6451D4714840045202B /* YGLogView.swift */,
 				D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */,
-				D8EB0EBD1D490EAC002E36F8 /* OSSImageUploder.swift */,
+				D8EB0EBD1D490EAC002E36F8 /* OSSImageUploader.swift */,
+				D85B72C01D4A3EBC005EECE6 /* OSSVideoUploader.swift */,
 				E44861831D49D5380034208D /* YGCityData.swift */,
 			);
 			name = YKLib;
@@ -1925,6 +1928,7 @@
 				D8AA100D1D1DA0220038EE73 /* TZVideoPlayerController.m in Sources */,
 				E41B925E1D3DCF4D00749769 /* BindAccountViewController.swift in Sources */,
 				D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */,
+				D85B72C11D4A3EBC005EECE6 /* OSSVideoUploader.swift in Sources */,
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
 				E41B92E01D407CB800749769 /* MessageViewController.swift in Sources */,
 				E45BFF791D41C3D50013356C /* InvitationDetailViewController.swift in Sources */,
@@ -2021,7 +2025,7 @@
 				D81F451A1D118D63004D9192 /* YGTabbar.swift in Sources */,
 				E446FA151D2E29E6003DFC1E /* TouchLabel.swift in Sources */,
 				D8AA10071D1DA0220038EE73 /* TZImageManager.m in Sources */,
-				D8EB0EBE1D490EAC002E36F8 /* OSSImageUploder.swift in Sources */,
+				D8EB0EBE1D490EAC002E36F8 /* OSSImageUploader.swift in Sources */,
 				D81F450D1D118D43004D9192 /* UIImage+EX.swift in Sources */,
 				D82F8E221D30F4F600A24CDB /* OGCircularCell.swift in Sources */,
 				D82F8DDC1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift in Sources */,

@@ -24,6 +24,9 @@ class ReleaseVideoViewController: YGBaseViewController {
     var videoUrl: NSURL!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     var releaseButton: UIButton!
+    lazy var req = ReleasePicAndVideoReq()
+    var coverImage: UIImage!
+    var tokenObject: GetToken!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,6 +38,8 @@ class ReleaseVideoViewController: YGBaseViewController {
         title = "编辑动态"
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
+        getToken()
+        
         
     }
     
@@ -63,6 +68,16 @@ class ReleaseVideoViewController: YGBaseViewController {
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(tableView.superview!)
             make.bottom.equalTo(releaseButton.snp.top)
+        }
+    }
+    
+    func getToken() {
+        Server.getUpdateFileToken { (success, msg, value) in
+            guard let object = value else {
+                LogError("获取token失败")
+                return
+            }
+            self.tokenObject = object
         }
     }
     
@@ -103,6 +118,7 @@ extension ReleaseVideoViewController {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(editTextViewIdentifier, forIndexPath: indexPath) as! EditTextViewCell
+                cell.delegate = self
                 return cell
             }
         } else if indexPath.section == 1 {
@@ -135,11 +151,62 @@ extension ReleaseVideoViewController {
 }
 
 // MARK: - 按钮点击&响应
-extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate {
+extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate, EditTextViewCellDelegate {
+    
+    func checkParamers() {
+        req.isVideo = "2"
+        if videoUrl != nil {
+            releaseButton.backgroundColor = kCommonColor
+            releaseButton.userInteractionEnabled = true
+        } else {
+            releaseButton.backgroundColor = kGrayColor
+            releaseButton.userInteractionEnabled = false
+        }
+    }
+    
+    func textViewCellReturnText(text: String) {
+        req.text = text
+    }
     
     func tapReleaseButton(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let group = dispatch_group_create()
+        
+        dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_enter(group)
+            OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoUrl) { (id, state) in
+                dispatch_group_leave(group)
+                if state == .Success {
+                    self.req.picture = id
+                } else {
+                    LogError("上传视频失败")
+                }
+            }
+        }
+        dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_enter(group)
+            OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.coverImage, complete: { (names, state) in
+                dispatch_group_leave(group)
+                if state == .Success {
+                    self.req.cover = names[0]
+                } else {
+                    LogError("上传cover失败")
+                }
+            })
+        }
+        dispatch_group_notify(group, queue) { [unowned self] in
+            Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
+                if success {
+                    LogInfo(value!)
+                    self.dismissViewControllerAnimated(true, completion: { 
+                        
+                    })
+                } else {
+                    LogError("提交失败 = \(msg)")
+                }
+            })
+        }
+}
     
     func videoCoverImageViewTap() {
         selectVideo()
@@ -163,6 +230,7 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate 
 
 extension ReleaseVideoViewController: SettingCoverControllerDelegate {
     func settingCoverSendCover(image: UIImage) {
+        coverImage = image
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! VideoCoverCell
         cell.imgView.image = image
     }
@@ -176,8 +244,9 @@ extension ReleaseVideoViewController: UIImagePickerControllerDelegate, UINavigat
             LogInfo(info[UIImagePickerControllerMediaType])
             guard let url = info[UIImagePickerControllerMediaURL] as? NSURL else { fatalError("获取视频 URL 失败")}
             videoUrl = url
-            let thumbleImg = VideoTool.getThumbleImage(url)
-            cell.imgView.image = thumbleImg
+            coverImage = VideoTool.getThumbleImage(url)
+            cell.imgView.image = coverImage
+            checkParamers()
             dismissViewControllerAnimated(true, completion: {})
         }
     }

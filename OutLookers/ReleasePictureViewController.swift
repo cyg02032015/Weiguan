@@ -34,14 +34,7 @@ class ReleasePictureViewController: YGBaseViewController {
         pictures = [UIImage(named: "release_announcement_Add pictures")!]
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
-        
-        Server.getUpdateFileToken { (success, msg, value) in
-            guard let object = value else {
-                LogError("获取token失败")
-                return
-            }
-            self.tokenObject = object
-        }
+        getToken()
     }
     
     func setupSubViews() {
@@ -70,7 +63,16 @@ class ReleasePictureViewController: YGBaseViewController {
             make.bottom.equalTo(releaseButton.snp.top)
         }
     }
-
+    
+    func getToken() {
+        Server.getUpdateFileToken { (success, msg, value) in
+            guard let object = value else {
+                LogError("获取token失败")
+                return
+            }
+            self.tokenObject = object
+        }
+    }
 }
 
 extension ReleasePictureViewController {
@@ -96,6 +98,7 @@ extension ReleasePictureViewController {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(editTextViewIdentifier, forIndexPath: indexPath) as! EditTextViewCell
+                cell.delegate = self
                 return cell
             }
         } else if indexPath.section == 1 {
@@ -224,7 +227,7 @@ extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavig
 }
 
 // MARK: - 按钮点击&响应
-extension ReleasePictureViewController: ShareCellDelegate {
+extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDelegate {
     
     func checkParams() {
         req.isVideo = "1"
@@ -237,6 +240,10 @@ extension ReleasePictureViewController: ShareCellDelegate {
         }
     }
     
+    func textViewCellReturnText(text: String) {
+        req.text = text
+    }
+    
     func tapReleaseButton(sender: UIButton) {
 
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
@@ -246,10 +253,11 @@ extension ReleasePictureViewController: ShareCellDelegate {
             LogWarn("group cover")
             dispatch_group_enter(group)
             OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.photos[0], complete: { (names, state) in
+                dispatch_group_leave(group)
                 if state == .Success {
-                    self.req.cover = names.first ?? ""
-                    dispatch_group_leave(group)
+                    self.req.cover = names.first
                 } else {
+                    self.req.cover = ""
                     LogError("上传封面失败")
                 }
             })
@@ -258,10 +266,11 @@ extension ReleasePictureViewController: ShareCellDelegate {
             LogWarn("group images")
             dispatch_group_enter(group)
             OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photos, complete: { (names, state) in
+                dispatch_group_leave(group)
                 if state == .Success {
                     self.req.picture = names.joinWithSeparator(",")
-                    dispatch_group_leave(group)
                 } else {
+                    self.req.picture = ""
                     LogError("上传图片门失败")
                 }
             })
