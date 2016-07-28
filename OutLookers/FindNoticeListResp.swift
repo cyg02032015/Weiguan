@@ -61,6 +61,7 @@ class FindNotice {
     var state : String!
     var theme : String!
     var userId : Int!
+    var cover: String!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -79,5 +80,6 @@ class FindNotice {
         state = json["state"].stringValue
         theme = json["theme"].stringValue
         userId = json["userId"].intValue
+        cover = json["cover"].stringValue
     }
 }
