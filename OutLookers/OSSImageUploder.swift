@@ -35,7 +35,6 @@ class OSSImageUploader {
     }
     
     class func uploadImages(object:GetToken, images: [UIImage], isAsync: Bool, complete: (names: [String], state: UploadImageState) -> Void) {
-//        OSSLog.enableLog()
         let credential = OSSFederationCredentialProvider { () -> OSSFederationToken! in
             return self.getToken(object)
         }

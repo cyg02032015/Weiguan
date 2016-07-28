@@ -36,7 +36,11 @@ class ReleasePictureViewController: YGBaseViewController {
         setupSubViews()
         
         Server.getUpdateFileToken { (success, msg, value) in
-            
+            guard let object = value else {
+                LogError("获取token失败")
+                return
+            }
+            self.tokenObject = object
         }
     }
     
@@ -241,43 +245,42 @@ extension ReleasePictureViewController: ShareCellDelegate {
         dispatch_group_async(group, queue) { [unowned self] in
             LogWarn("group cover")
             dispatch_group_enter(group)
-            OSSImageUploader.asyncUploadImage(self.photos[0]) { (names, state) in
+            OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.photos[0], complete: { (names, state) in
                 if state == .Success {
                     self.req.cover = names.first ?? ""
                     dispatch_group_leave(group)
                 } else {
                     LogError("上传封面失败")
                 }
-            }
+            })
         }
         dispatch_group_async(group, queue) { [unowned self] in
             LogWarn("group images")
             dispatch_group_enter(group)
-            OSSImageUploader.asyncUploadImages(self.photos) { (names, state) in
+            OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photos, complete: { (names, state) in
                 if state == .Success {
                     self.req.picture = names.joinWithSeparator(",")
                     dispatch_group_leave(group)
                 } else {
                     LogError("上传图片门失败")
                 }
-            }
+            })
         }
-        dispatch_group_notify(group, queue) { 
+        dispatch_group_notify(group, queue) { [unowned self] in
             LogWarn("group notify")
             Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
                 if success {
                     LogInfo(value!)
+                    self.dismissViewControllerAnimated(true, completion: { [unowned self] in
+                        self.photos.removeAll()
+                        self.pictures.removeAll()
+                        self.originPhotos.removeAll()
+                        })
                 } else {
                     LogError("提交失败 = \(msg)")
                 }
             })
         }
-        
-        dismissViewControllerAnimated(true, completion: { [unowned self] in
-            self.photos.removeAll()
-            self.pictures.removeAll()
-            self.originPhotos.removeAll()
-        })
     }
     
     func shareCellReturnsShareTitle(text: String) {

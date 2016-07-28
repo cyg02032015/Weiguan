@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol EditTextViewCellDelegate: class {
+    func textViewCellReturnText(text: String)
+}
+
 class EditTextViewCell: UITableViewCell {
 
+    weak var delegate: EditTextViewCellDelegate!
     var textView: UITextView!
     var placeholderLabel: UILabel!
     
@@ -52,5 +57,8 @@ class EditTextViewCell: UITableViewCell {
 extension EditTextViewCell: UITextViewDelegate {
     func textViewDidChange(textView: UITextView) {
         placeholderLabel.hidden = textView.text.characters.count > 0
+        if delegate != nil {
+            delegate.textViewCellReturnText(textView.text)
+        }
     }
 }
