@@ -15,7 +15,7 @@
 #import "TYTitlePageTabBar.h"
 #import "HCSStarRatingView.h"
 #import "UINavigationBar+Awesome.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import <YYWebImage/YYWebImage.h>
 // 友盟头文件桥接
 #import "UMSocial.h"
 #import "WXApi.h"

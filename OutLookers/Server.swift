@@ -22,6 +22,7 @@ class Server {
             "isVideo" : request.isVideo,
             "picture" : request.picture
         ]
+        LogWarn("parameters = \(parameters)")
         HttpTool.post(API.releasePicVideo, parameters: parameters, complete: { (response) in
             let info = StringResponse(fromJson: response)
             if info.success == true {

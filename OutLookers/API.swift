@@ -8,7 +8,7 @@
 
 import Foundation
 
-let baseURL = "http://60.205.15.7"
+let baseURL = "http://api.dev.chunyangapp.com"
 
 struct API {
     /// 发布图片视频

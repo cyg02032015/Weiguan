@@ -40,7 +40,7 @@ class HotmanList {
         if json == nil{
             return
         }
-        headImgUrl = globleSingle.imagePath + "\(json["headImgUrl"].stringValue)"
+        headImgUrl = "\(json["headImgUrl"].stringValue)"
         name = json["name"].stringValue
         nickname = json["nickname"].stringValue
     }

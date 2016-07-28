@@ -22,14 +22,11 @@ class ReleasePictureViewController: YGBaseViewController {
     var tableView: UITableView!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     lazy var pictures = [UIImage]()
-    lazy var photos = NSMutableArray()
-    lazy var originPhotos = NSMutableArray()
+    lazy var photos = [UIImage]()
+    lazy var originPhotos = [AnyObject]()
     var releaseButton: UIButton!
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
+    lazy var req = ReleasePicAndVideoReq()
+    var tokenObject: GetToken!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +34,10 @@ class ReleasePictureViewController: YGBaseViewController {
         pictures = [UIImage(named: "release_announcement_Add pictures")!]
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
+        
+        Server.getUpdateFileToken { (success, msg, value) in
+            
+        }
     }
     
     func setupSubViews() {
@@ -133,7 +134,7 @@ extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionVi
         if photos.count == indexPath.item {
             cell.img = UIImage(named: "release_picture_Add pictures")!
         } else {
-            cell.img = (photos[indexPath.item] as! UIImage)
+            cell.img = photos[indexPath.item]
         }
         return cell
     }
@@ -149,10 +150,11 @@ extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionVi
             vc.photos = self.photos
             vc.originPhotos = self.originPhotos
             vc.didFinishPickingPhotos({ (photos, originPhotos) in
-                self.originPhotos.setArray(originPhotos as [AnyObject])
-                self.photos.setArray(photos as [AnyObject])
+                self.originPhotos = originPhotos
+                self.photos = photos
                 cell.collectionView.reloadData()
                 self.tableView.reloadData()
+                self.checkParams()
             })
             presentViewController(vc, animated: true, completion: nil)
         }
@@ -180,7 +182,7 @@ extension ReleasePictureViewController: UIActionSheetDelegate {
                 let tz = TZImagePickerController(maxImagesCount: 9, delegate: self)
                 tz.allowTakePicture = false
                 tz.allowPickingVideo = false
-                tz.selectedAssets = originPhotos
+                tz.selectedAssets = NSMutableArray(array: originPhotos)
                 presentViewController(tz, animated: true, completion: nil)
             break
         default: LogWarn("switch default")
@@ -188,6 +190,7 @@ extension ReleasePictureViewController: UIActionSheetDelegate {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate, TZImagePickerControllerDelegate
 extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, TZImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -197,13 +200,18 @@ extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavig
         
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PictureSelectCell
-        self.photos.setArray(photos)
-        self.originPhotos.setArray(assets)
+        self.photos = photos
+        self.originPhotos = assets
         cell.collectionView.reloadData()
         if self.photos.count/4 >= 1 {
             let range = NSMakeRange(0, 0)
             tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
         }
+        checkParams()
+    }
+    
+    func tz_imagePickerControllerDidCancel(picker: TZImagePickerController!) {
+        dismissViewControllerAnimated(true) { }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -214,11 +222,61 @@ extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavig
 // MARK: - 按钮点击&响应
 extension ReleasePictureViewController: ShareCellDelegate {
     
+    func checkParams() {
+        req.isVideo = "1"
+        if self.photos.count > 0 {
+            releaseButton.backgroundColor = kCommonColor
+            releaseButton.userInteractionEnabled = true
+        } else {
+            releaseButton.backgroundColor = kGrayColor
+            releaseButton.userInteractionEnabled = false
+        }
+    }
+    
     func tapReleaseButton(sender: UIButton) {
+
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let group = dispatch_group_create()
+        
+        dispatch_group_async(group, queue) { [unowned self] in
+            LogWarn("group cover")
+            dispatch_group_enter(group)
+            OSSImageUploader.asyncUploadImage(self.photos[0]) { (names, state) in
+                if state == .Success {
+                    self.req.cover = names.first ?? ""
+                    dispatch_group_leave(group)
+                } else {
+                    LogError("上传封面失败")
+                }
+            }
+        }
+        dispatch_group_async(group, queue) { [unowned self] in
+            LogWarn("group images")
+            dispatch_group_enter(group)
+            OSSImageUploader.asyncUploadImages(self.photos) { (names, state) in
+                if state == .Success {
+                    self.req.picture = names.joinWithSeparator(",")
+                    dispatch_group_leave(group)
+                } else {
+                    LogError("上传图片门失败")
+                }
+            }
+        }
+        dispatch_group_notify(group, queue) { 
+            LogWarn("group notify")
+            Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
+                if success {
+                    LogInfo(value!)
+                } else {
+                    LogError("提交失败 = \(msg)")
+                }
+            })
+        }
+        
         dismissViewControllerAnimated(true, completion: { [unowned self] in
-            self.photos.removeAllObjects()
+            self.photos.removeAll()
             self.pictures.removeAll()
-            self.originPhotos.removeAllObjects()
+            self.originPhotos.removeAll()
         })
     }
     

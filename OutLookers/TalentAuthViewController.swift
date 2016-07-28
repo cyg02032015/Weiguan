@@ -12,8 +12,8 @@ class TalentAuthViewController: YGBaseViewController {
 
     var scrollView: UIScrollView!
     var collectionView: UICollectionView!
-    lazy var photos = NSMutableArray()
-    lazy var originPhotos = NSMutableArray()
+    lazy var photos = [UIImage]()
+    lazy var originPhotos = [AnyObject]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -162,7 +162,7 @@ extension TalentAuthViewController: UICollectionViewDelegate, UICollectionViewDa
         if photos.count == indexPath.item {
             cell.img = UIImage(named: "release_picture_Add pictures")!
         } else {
-            cell.img = (photos[indexPath.item] as! UIImage)
+            cell.img = photos[indexPath.item]
         }
         return cell
     }
@@ -180,7 +180,7 @@ extension TalentAuthViewController: UICollectionViewDelegate, UICollectionViewDa
                 let tz = TZImagePickerController(maxImagesCount: 9, delegate: self)
                 tz.allowTakePicture = false
                 tz.allowPickingVideo = false
-                tz.selectedAssets = self.originPhotos
+                tz.selectedAssets = NSMutableArray(array: self.originPhotos)
                 self.presentViewController(tz, animated: true, completion: nil)
             })
             let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
@@ -194,8 +194,8 @@ extension TalentAuthViewController: UICollectionViewDelegate, UICollectionViewDa
             vc.photos = self.photos
             vc.originPhotos = self.originPhotos
             vc.didFinishPickingPhotos({ (photos, originPhotos) in
-                self.originPhotos.setArray(originPhotos as [AnyObject])
-                self.photos.setArray(photos as [AnyObject])
+                self.originPhotos = originPhotos
+                self.photos = photos
                 self.collectionView.reloadData()
             })
             presentViewController(vc, animated: true, completion: nil)
@@ -211,8 +211,8 @@ extension TalentAuthViewController: UIImagePickerControllerDelegate, UINavigatio
     }
     
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
-        self.photos.setArray(photos)
-        self.originPhotos.setArray(assets)
+        self.photos = photos
+        self.originPhotos = assets
         collectionView.reloadData()
     }
     

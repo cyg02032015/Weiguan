@@ -17,11 +17,11 @@ private extension Selector {
 }
 
 class YKPhotoPreviewController: YGBaseViewController {
-    typealias didFinishPickImage = (photos: NSMutableArray, originPhotos: NSMutableArray) -> Void
+    typealias didFinishPickImage = (photos: [UIImage], originPhotos: [AnyObject]) -> Void
     var didFinishPickClousure: didFinishPickImage!
     var collectionView: UICollectionView!
-    lazy var photos = NSMutableArray()
-    lazy var originPhotos = NSMutableArray()
+    lazy var photos = [UIImage]()
+    lazy var originPhotos = [AnyObject]()
     var naviBar: UIView!
     var titleLabel: UILabel!
     var toolBar: UIView!
@@ -30,10 +30,10 @@ class YKPhotoPreviewController: YGBaseViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-        if iOS7Later {
-            UIApplication.sharedApplication().statusBarHidden = true
-        }
+//        navigationController?.setNavigationBarHidden(true, animated: animated)
+//        if iOS7Later {
+//            UIApplication.sharedApplication().statusBarHidden = true
+//        }
         if currentIndex != nil {
             collectionView.setContentOffset(CGPoint(x: view.gg_width * CGFloat(currentIndex), y: 0), animated: false)
         }
@@ -107,7 +107,7 @@ extension YKPhotoPreviewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoPreviewCellIdentifier, forIndexPath: indexPath) as! YKPhotoPreviewCell
-        cell.img = photos[indexPath.item] as! UIImage
+        cell.img = photos[indexPath.item]
         cell.delegate = self
         return cell
     }
@@ -161,8 +161,8 @@ extension YKPhotoPreviewController: UIAlertViewDelegate {
         switch buttonIndex {
         case 0:
             if photos.count > 0 {
-                photos.removeObjectAtIndex(currentIndex)
-                originPhotos.removeObjectAtIndex(currentIndex)
+                self.photos.removeAtIndex(currentIndex)
+                self.originPhotos.removeAtIndex(currentIndex)
                 if currentIndex >= 1 {
                     currentIndex = currentIndex - 1
                 } else {

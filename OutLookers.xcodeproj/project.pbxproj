@@ -251,6 +251,8 @@
 		E4473EC11D38C4CA000CEEF2 /* PersonFileHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EC01D38C4CA000CEEF2 /* PersonFileHeadView.swift */; };
 		E4473EC31D38C94F000CEEF2 /* BWHTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EC21D38C94F000CEEF2 /* BWHTableViewCell.swift */; };
 		E4473EC51D38CE80000CEEF2 /* PersonStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */; };
+		E44861841D49D5380034208D /* YGCityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44861831D49D5380034208D /* YGCityData.swift */; };
+		E44861861D49D5940034208D /* CityResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44861851D49D5940034208D /* CityResp.swift */; };
 		E45BFF791D41C3D50013356C /* InvitationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF781D41C3D50013356C /* InvitationDetailViewController.swift */; };
 		E45BFF7B1D41CAED0013356C /* InvitationHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF7A1D41CAED0013356C /* InvitationHeadCell.swift */; };
 		E45BFF7D1D41D2890013356C /* InvitationAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF7C1D41D2890013356C /* InvitationAddCell.swift */; };
@@ -587,6 +589,8 @@
 		E4473EC01D38C4CA000CEEF2 /* PersonFileHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonFileHeadView.swift; path = OutLookers/PersonFileHeadView.swift; sourceTree = SOURCE_ROOT; };
 		E4473EC21D38C94F000CEEF2 /* BWHTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BWHTableViewCell.swift; path = OutLookers/BWHTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonStyleCell.swift; path = OutLookers/PersonStyleCell.swift; sourceTree = SOURCE_ROOT; };
+		E44861831D49D5380034208D /* YGCityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGCityData.swift; path = OutLookers/YGCityData.swift; sourceTree = SOURCE_ROOT; };
+		E44861851D49D5940034208D /* CityResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityResp.swift; path = OutLookers/CityResp.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF781D41C3D50013356C /* InvitationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationDetailViewController.swift; path = OutLookers/InvitationDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF7A1D41CAED0013356C /* InvitationHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationHeadCell.swift; path = OutLookers/InvitationHeadCell.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF7C1D41D2890013356C /* InvitationAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationAddCell.swift; path = OutLookers/InvitationAddCell.swift; sourceTree = SOURCE_ROOT; };
@@ -806,6 +810,7 @@
 				D84D98531D466624007CCD6E /* UserDataResp.swift */,
 				D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */,
 				D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */,
+				E44861851D49D5940034208D /* CityResp.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1096,6 +1101,7 @@
 				E4A3E6451D4714840045202B /* YGLogView.swift */,
 				D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */,
 				D8EB0EBD1D490EAC002E36F8 /* OSSImageUploder.swift */,
+				E44861831D49D5380034208D /* YGCityData.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -2003,6 +2009,7 @@
 				D87049441D2152A7008FB780 /* VideoTool.swift in Sources */,
 				D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */,
 				D84D98501D4661B0007CCD6E /* RecommendHotmanResp.swift in Sources */,
+				E44861841D49D5380034208D /* YGCityData.swift in Sources */,
 				E4473EC31D38C94F000CEEF2 /* BWHTableViewCell.swift in Sources */,
 				D8EB0EBC1D48F3E7002E36F8 /* YGImageSave.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
@@ -2022,6 +2029,7 @@
 				D82F8DF61D29130B00A24CDB /* RecommendHeaderView.swift in Sources */,
 				D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */,
 				D81992491D43DCEA007734C0 /* DynamicListResp.swift in Sources */,
+				E44861861D49D5940034208D /* CityResp.swift in Sources */,
 				D84D98651D47AD02007CCD6E /* SettingViewController.swift in Sources */,
 				E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */,
 				E4E5DED31D179BEF00CB8535 /* YGSelectDateView.swift in Sources */,

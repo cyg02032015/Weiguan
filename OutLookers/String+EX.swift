@@ -31,4 +31,8 @@ extension String {
         let noChangLine = self.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
         return noChangLine
     }
+    
+    func addImagePath(size: CGSize) -> NSURL {
+        return NSURL(string: globleSingle.imagePath + self + "@\(Int(size.width))h_\(Int(size.height))w.webp")!
+    }
 }

@@ -9,6 +9,8 @@
 import UIKit
 import Accelerate
 import CocoaLumberjack
+import Alamofire
+import SwiftyJSON
 
 func LogInfo<T>(message: T) {
     #if DEBUG
@@ -133,4 +135,34 @@ func boxBlurImage(image: UIImage, withBlurNumber blur: CGFloat) -> UIImage {
     free(pixelBuffer)
     
     return returnImage
+}
+
+func configGlobleDefine() {
+    // 获取全局变量是同步获取  会阻塞线程
+    Server.globleDefine { (success, msg, value) in
+        if success {
+            guard let item = value else {return}
+            LogDebug(item.imageUrlPrefix)
+            globleSingle.version = item.citiesUrlVersion
+            globleSingle.vedioPath = item.videoUrlPrefix
+            globleSingle.imagePath = item.imageUrlPrefix
+            globleSingle.citiesUrl = item.citiesUrl
+            if YGCityVersion.loadCityVersion() == "" || YGCityVersion.loadCityVersion() != item.citiesUrlVersion { // 如果版本不存在或者版本不一致
+                let version = YGCityVersion(version: item.citiesUrlVersion) // 保存版本号
+                version.saveCityVersion()
+                Alamofire.request(.GET, item.citiesUrl, parameters: nil, encoding: .JSON).responseData(completionHandler: { (response) in
+                    switch response.result {
+                    case .Success(let value):
+                        let cityData = YGCityData(data: value)
+                        cityData.saveCityData()
+                    case .Failure(let error):
+                        LogError("获取城市列表失败 \(error)")
+                    }
+                })
+            }
+        } else {
+            LogError(msg)
+        }
+    }
+
 }

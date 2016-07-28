@@ -32,13 +32,16 @@ class YGBaseViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
         if self.tabBarController?.tabBar.subviews.count > 2 {
             for child in self.tabBarController!.tabBar.subviews {
                 if child.isKindOfClass(UIControl.self) {
                     child.removeFromSuperview()
                 }
             }
+        }
+        guard let naviHidden = navigationController?.navigationBarHidden else {return}
+        if naviHidden {
+            navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }
     

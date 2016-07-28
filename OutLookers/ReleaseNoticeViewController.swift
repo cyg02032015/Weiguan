@@ -29,6 +29,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     var photoArray: [UIImage]!
     var request = ReleaseNoticeRequest()
     var releaseButton: UIButton!
+    lazy var cityResp: CityResp = YGCityData.loadCityData()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,7 +41,6 @@ class ReleaseNoticeViewController: YGBaseViewController {
         title = "编辑通告"
         setupSubViews()
         selectDatePicker = YGSelectDateView()
-        provinceTitles = CitiesData.sharedInstance().provinceTitle()
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
     }
@@ -283,7 +283,7 @@ extension ReleaseNoticeViewController: VPImageCropperDelegate {
 }
 
 // MARK: - RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate
-extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, YGPickerViewDelegate, NoArrowEditCellDelegate, WorkDetailCellDelegate {
+extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformationDelegate, NoArrowEditCellDelegate, WorkDetailCellDelegate {
     // MARK: 发布按钮
     func tapReleaseButton(sender: UIButton) {
         self.view.endEditing(true)
@@ -370,6 +370,11 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
 //        tableView.reloadSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Automatic)
     }
     
+}
+
+// MARK: - UIPickerViewDelegate, UIPickerViewDataSource
+extension ReleaseNoticeViewController: UIPickerViewDelegate, UIPickerViewDataSource, YGPickerViewDelegate {
+    
     func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
         let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! ArrowEditCell
@@ -377,31 +382,26 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
         // MARK: 选择城市request
         request.city = city
     }
-}
-
-// MARK: - UIPickerViewDelegate, UIPickerViewDataSource
-extension ReleaseNoticeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return provinceTitles.count
+            return self.cityResp.province.count
         } else {
-            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-            return cities.count > 0 ? cities.count : 0
+            let province = self.cityResp.province[pickerView.selectedRowInComponent(0)]
+            return province.citys.count
         }
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
-            return (provinceTitles[row] as! String)
+            return self.cityResp.province[row].name
         } else {
-            let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-            let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-            return cities.count > row ? (cities[row] as! String) : ""
+            let province = self.cityResp.province[pickerView.selectedRowInComponent(0)]
+            let city = province.citys[row]
+            return city.name
         }
     }
     

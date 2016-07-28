@@ -34,8 +34,8 @@ class EditSkillViewController: YGBaseViewController {
     lazy var provinceTitles = NSArray()
     lazy var skillUnitPickerArray = [String]()
     var isProvincePicker = false  // 区分PickerView数据源
-    lazy var photoArray = NSMutableArray()
-    lazy var originPhotoArray = NSMutableArray()
+    lazy var photoArray = [UIImage]()
+    lazy var originPhotoArray = [AnyObject]()
     var photoType: PhotoSelectType!
     var setCoverButton: UIButton!
     var addVideoButton: UIButton!
@@ -182,7 +182,7 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
         if indexPath.item == photoArray.count {
             cell.img = UIImage(named: "release_announcement_Add pictures")!
         } else {
-            cell.img = (photoArray[indexPath.item] as! UIImage)
+            cell.img = photoArray[indexPath.item]
         }
         return cell
     }
@@ -200,8 +200,8 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
             vc.photos = self.photoArray
             vc.originPhotos = self.originPhotoArray
             vc.didFinishPickingPhotos({ (photos, originPhotos) in
-                self.originPhotoArray.setArray(originPhotos as [AnyObject])
-                self.photoArray.setArray(photos as [AnyObject])
+                self.originPhotoArray = originPhotos
+                self.photoArray = photos
                 cell.collectionView.reloadData()
                 self.tableView.reloadData()
             })
@@ -213,7 +213,8 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
 extension EditSkillViewController: BudgetPriceCellDelegate {
     func tapReleaseButton(sender: UIButton) {
         dismissViewControllerAnimated(true) { [unowned self] in
-            self.photoArray.removeAllObjects()
+            self.photoArray.removeAll()
+            self.originPhotoArray.removeAll()
         }
     }
     
@@ -265,7 +266,7 @@ extension EditSkillViewController: UIActionSheetDelegate {
                 let tz = TZImagePickerController(maxImagesCount: 9, delegate: self)
                 tz.allowTakePicture = false
                 tz.allowPickingVideo = false
-                tz.selectedAssets = originPhotoArray
+                tz.selectedAssets = NSMutableArray(array: originPhotoArray)
                 presentViewController(tz, animated: true, completion: nil)
             } else {
                 if UIImagePickerController.isAvailablePhotoLibrary() {
@@ -297,8 +298,8 @@ extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigation
     }
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
-        self.photoArray.setArray(photos)
-        self.originPhotoArray.setArray(assets)
+        self.photoArray = photos
+        self.originPhotoArray = assets
         cell.collectionView.reloadData()
         if self.photoArray.count/5 >= 1 {
             let range = NSMakeRange(2, 0)

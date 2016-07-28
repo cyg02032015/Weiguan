@@ -35,8 +35,7 @@ class OSSImageUploader {
     }
     
     class func uploadImages(object:GetToken, images: [UIImage], isAsync: Bool, complete: (names: [String], state: UploadImageState) -> Void) {
-        OSSLog.enableLog()
-        //        let credential = OSSStsTokenCredentialProvider(accessKeyId: object.accessKeyId, secretKeyId: object.accessKeySecret, securityToken: object.securityToken)
+//        OSSLog.enableLog()
         let credential = OSSFederationCredentialProvider { () -> OSSFederationToken! in
             return self.getToken(object)
         }
@@ -49,7 +48,7 @@ class OSSImageUploader {
         let clinet = OSSClient(endpoint: endpoint, credentialProvider: credential, clientConfiguration: config)
         let queue = NSOperationQueue()
         var names = [String]()
-        for image in images {
+        for (var i, image) in images.enumerate() {
             let operation = NSBlockOperation(block: {
                 let put = OSSPutObjectRequest()
                 put.bucketName = object.bucket
@@ -61,7 +60,6 @@ class OSSImageUploader {
                     "callbackUrl": object.callbackUrl,
                     "callbackBody": object.callbackBody
                 ]
-                names.append(imageName)
                 let data = UIImagePNGRepresentation(image)
                 put.uploadingData = data
                 let putTask = clinet.putObject(put)
@@ -69,8 +67,12 @@ class OSSImageUploader {
                     if task.error != nil {
                         LogError(task.error!)
                     } else {
-                        let result = OSSPutObjectResult()
-                        LogDebug("\(result.serverReturnJsonString)")
+                        let result = task.result!
+                        let json = JSON.parse(result.serverReturnJsonString)
+                        names.append(json["result"].stringValue)
+                        if images.count == i {
+                            complete(names: names, state: .Success)
+                        }
                     }
                     return nil
                 })
@@ -80,13 +82,8 @@ class OSSImageUploader {
                 } else {
                     LogError("upload object failed, error: \(putTask.error!)")
                 }
-                if isAsync {
-                    if image == images.last {
-                        LogDebug("upload object Finished")
-                    }
-                    complete(names: names, state: .Success)
-                }
             })
+            i = i + 1
             if queue.operations.count != 0 {
                 operation.addDependency(queue.operations.last!)
             }
@@ -98,65 +95,12 @@ class OSSImageUploader {
         }
     }
     
-    class func getToken(object: GetToken) -> OSSFederationToken? {
-        let url: NSURL = NSURL(string: "http://" + object.region + ".aliyuncs.com")!
-        let request: NSURLRequest = NSURLRequest(URL: url)
-        let tcs: OSSTaskCompletionSource = OSSTaskCompletionSource()
-        Alamofire.request(.POST, "http://" + object.region + ".aliyuncs.com",encoding: .JSON).response { (request, response, data:NSData?, error) in
-            if error != nil {
-                tcs.setError(error!)
-                return
-            }
-            tcs.setResult(data)
-        }
-//        let session: NSURLSession = NSURLSession.sharedSession()
-//        let sessionTask: NSURLSessionTask = session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-//            if error != nil {
-//                tcs.setError(error!)
-//                return
-//            }
-//            tcs.setResult(data)
-//        })
-//        sessionTask.resume()
-        tcs.task.waitUntilFinished()
-        if tcs.task.error != nil {
-            return nil
-        } else {
-//            guard let data = tcs.task.result as? NSData else {
-//                LogError("tcs.task.result == nil")
-//                return nil
-//            }
-            let data: NSData = tcs.task.result as! NSData
-            let object = JSON(data: data)
+    class func getToken(object: GetToken) -> OSSFederationToken! {
             let token: OSSFederationToken = OSSFederationToken()
-            token.tAccessKey = object["AccessKeyId"].stringValue
-            token.tSecretKey = object["AccessKeySecret"].stringValue
-            token.tToken = object["SecurityToken"].stringValue
-            token.expirationTimeInGMTFormat = object["Expiration"].stringValue
-            print("AccessKey: \(token.tAccessKey) \n SecretKey: \(token.tSecretKey) \n Token:\(token.tToken) expirationTime: \(token.expirationTimeInGMTFormat) \n")
+            token.tAccessKey = object.accessKeyId
+            token.tSecretKey = object.accessKeySecret
+            token.tToken = object.securityToken
+            token.expirationTimeInGMTFormat = object.expiration
             return token
-        }
-//        do {
-//            if tcs.task.error != nil {
-//                return nil
-//            }
-//            else {guard let data = tcs.task.result as? NSData else {
-//                LogError("tcs.task.result == nil")
-//                return nil
-//                }
-//                let object = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-//                let token: OSSFederationToken = OSSFederationToken()
-//                token.tAccessKey = (object["AccessKeyId"] as! String)
-//                token.tSecretKey = (object["AccessKeySecret"] as! String)
-//                token.tToken = (object["SecurityToken"] as! String)
-//                token.expirationTimeInGMTFormat = (object["Expiration"] as! String)
-//                print("AccessKey: \(token.tAccessKey) \n SecretKey: \(token.tSecretKey) \n Token:\(token.tToken) expirationTime: \(token.expirationTimeInGMTFormat) \n")
-//                return token
-//            }
-//        }
-//        catch let error {
-//            LogError(error)
-//        }
-//        return nil
     }
 }
