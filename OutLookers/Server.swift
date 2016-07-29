@@ -69,6 +69,7 @@ class Server {
             "pictureText": request.pictureText ?? "",
             "price" : request.price
             ]
+        LogError(parameters)
         HttpTool.post(API.releaseTalent, parameters: parameters, complete: { (response) in
             let info = StringResponse(fromJson: response)
             if info.success == true {
@@ -175,7 +176,7 @@ class Server {
     }
     
     /// 动态列表
-    class func dynamicList(pageNo: Int, state: Int, isPerson: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
+    class func dynamicList(pageNo: Int, state: Int, isPerson: Bool, isHome: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
         var parameters = [
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
@@ -183,6 +184,9 @@ class Server {
             ]
         if isPerson {
             parameters["userId"] = UserSingleton.sharedInstance.userId
+        }
+        if isHome {
+            parameters["isRecommend"] = "1"
         }
         HttpTool.post(API.dynamicList, parameters: parameters, complete: { (response) in
             let info = DynamicListResp(fromJson: response)
@@ -815,23 +819,33 @@ class Server {
     
     /// 全局常量
     class func globleDefine(handler: (success: Bool, msg: String?, value: GlobleDeineAPI?)->Void) {
-        let url = NSURL(string: API.globleDefine)!
-        let request = NSMutableURLRequest(URL: url, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 60)
-        request.HTTPMethod = "POST"
-        let str = "type=focus-c"
-        let data = str.dataUsingEncoding(NSUTF8StringEncoding)
-        request.HTTPBody = data
-        do {
-            let received = try NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
-            let info = GlobleDefineResp(fromJson: JSON(data: received))
+        HttpTool.post(API.globleDefine, parameters: nil, complete: { (response) in
+            let info = GlobleDefineResp(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)
             } else {
                 handler(success: false, msg: info.msg, value: nil)
             }
-        } catch let error as NSError {
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            }) { (error) in
+                handler(success: false, msg: error.localizedDescription, value: nil)
         }
+//        let url = NSURL(string: API.globleDefine)!
+//        let request = NSMutableURLRequest(URL: url, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 60)
+//        request.HTTPMethod = "POST"
+//        let str = "type=focus-c"
+//        let data = str.dataUsingEncoding(NSUTF8StringEncoding)
+//        request.HTTPBody = data
+//        do {
+//            let received = try NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
+//            let info = GlobleDefineResp(fromJson: JSON(data: received))
+//            if info.success == true {
+//                handler(success: true, msg: nil, value: info.result)
+//            } else {
+//                handler(success: false, msg: info.msg, value: nil)
+//            }
+//        } catch let error as NSError {
+//            handler(success: false, msg: error.localizedDescription, value: nil)
+//        }
     }
 
     /// 上传token获取

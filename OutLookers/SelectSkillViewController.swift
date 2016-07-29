@@ -147,6 +147,7 @@ extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewD
             }
         } else if type == SelectSkillType.Tovc {
             let vc = EditSkillViewController()
+            vc.skillType = item
             navigationController?.pushViewController(vc, animated: true)
         } else {
             

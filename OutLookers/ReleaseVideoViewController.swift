@@ -171,7 +171,7 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
     func tapReleaseButton(sender: UIButton) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
-        
+        SVToast.showWithSuccess("正在上传视频")
         dispatch_group_async(group, queue) { [unowned self] in
             dispatch_group_enter(group)
             OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoUrl) { (id, state) in
@@ -179,7 +179,8 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
                 if state == .Success {
                     self.req.picture = id
                 } else {
-                    LogError("上传视频失败")
+                    SVToast.dismiss()
+                    SVToast.showWithError("上传视频失败")
                 }
             }
         }
@@ -190,19 +191,23 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
                 if state == .Success {
                     self.req.cover = names[0]
                 } else {
-                    LogError("上传cover失败")
+                    SVToast.dismiss()
+                    SVToast.showWithError("上传封面失败")
                 }
             })
         }
         dispatch_group_notify(group, queue) { [unowned self] in
+            if isEmptyString(self.req.cover) || isEmptyString(self.req.picture) {
+                return
+            }
             Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
+                SVToast.dismiss()
                 if success {
                     LogInfo(value!)
-                    self.dismissViewControllerAnimated(true, completion: { 
-                        
+                    self.dismissViewControllerAnimated(true, completion: {
                     })
                 } else {
-                    LogError("提交失败 = \(msg)")
+                    SVToast.showWithError(msg!)
                 }
             })
         }

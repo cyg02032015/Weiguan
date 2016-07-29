@@ -24,6 +24,7 @@ class SkillSetCell: UITableViewCell {
 
     weak var delegate: SkillSetCellDelegate!
     var collectionView: UICollectionView!
+    var videoButton: UIButton!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,7 +61,7 @@ class SkillSetCell: UITableViewCell {
         addVideoLabel.font = UIFont.customFontOfSize(16)
         contentView.addSubview(addVideoLabel)
         
-        let videoButton = UIButton()
+        videoButton = UIButton()
         videoButton.setImage(UIImage(named: "release_announcement_Add video"), forState: .Normal)
         videoButton.addTarget(self, action: .tapAddVideo, forControlEvents: .TouchUpInside)
         contentView.addSubview(videoButton)

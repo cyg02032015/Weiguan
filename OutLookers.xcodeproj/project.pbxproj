@@ -232,6 +232,11 @@
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
 		E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */; };
+		E43F0ACB1D4B5BD700D20FB3 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E43F0AC21D4B5BD700D20FB3 /* SVIndefiniteAnimatedView.m */; };
+		E43F0ACC1D4B5BD700D20FB3 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E43F0AC41D4B5BD700D20FB3 /* SVProgressAnimatedView.m */; };
+		E43F0ACD1D4B5BD700D20FB3 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E43F0AC61D4B5BD700D20FB3 /* SVProgressHUD.bundle */; };
+		E43F0ACE1D4B5BD700D20FB3 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E43F0AC81D4B5BD700D20FB3 /* SVProgressHUD.m */; };
+		E43F0ACF1D4B5BD700D20FB3 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E43F0ACA1D4B5BD700D20FB3 /* SVRadialGradientLayer.m */; };
 		E446F9FD1D24EE44003DFC1E /* FollowPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */; };
 		E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */; };
 		E446FA051D2612D7003DFC1E /* IconHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E446FA021D2612D7003DFC1E /* IconHeaderView.swift */; };
@@ -254,6 +259,7 @@
 		E4473EC51D38CE80000CEEF2 /* PersonStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */; };
 		E44861841D49D5380034208D /* YGCityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44861831D49D5380034208D /* YGCityData.swift */; };
 		E44861861D49D5940034208D /* CityResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44861851D49D5940034208D /* CityResp.swift */; };
+		E44861881D4B038E0034208D /* SkillTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44861871D4B038E0034208D /* SkillTypeCell.swift */; };
 		E45BFF791D41C3D50013356C /* InvitationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF781D41C3D50013356C /* InvitationDetailViewController.swift */; };
 		E45BFF7B1D41CAED0013356C /* InvitationHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF7A1D41CAED0013356C /* InvitationHeadCell.swift */; };
 		E45BFF7D1D41D2890013356C /* InvitationAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45BFF7C1D41D2890013356C /* InvitationAddCell.swift */; };
@@ -571,6 +577,16 @@
 		E4272E061D19328D00BE4053 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = OutLookers/VPImageCropper/VPImageCropperViewController.h; sourceTree = SOURCE_ROOT; };
 		E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPImageCropperViewController.m; path = OutLookers/VPImageCropper/VPImageCropperViewController.m; sourceTree = SOURCE_ROOT; };
 		E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewCell.swift; path = OutLookers/YKPhotoPreviewCell.swift; sourceTree = SOURCE_ROOT; };
+		E43F0AC11D4B5BD700D20FB3 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		E43F0AC21D4B5BD700D20FB3 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		E43F0AC31D4B5BD700D20FB3 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		E43F0AC41D4B5BD700D20FB3 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		E43F0AC51D4B5BD700D20FB3 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		E43F0AC61D4B5BD700D20FB3 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		E43F0AC71D4B5BD700D20FB3 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		E43F0AC81D4B5BD700D20FB3 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		E43F0AC91D4B5BD700D20FB3 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		E43F0ACA1D4B5BD700D20FB3 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowPeopleViewController.swift; path = OutLookers/FollowPeopleViewController.swift; sourceTree = SOURCE_ROOT; };
 		E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowPeopleCell.swift; path = OutLookers/FollowPeopleCell.swift; sourceTree = SOURCE_ROOT; };
 		E446FA021D2612D7003DFC1E /* IconHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconHeaderView.swift; path = OutLookers/IconHeaderView.swift; sourceTree = SOURCE_ROOT; };
@@ -593,6 +609,7 @@
 		E4473EC41D38CE80000CEEF2 /* PersonStyleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonStyleCell.swift; path = OutLookers/PersonStyleCell.swift; sourceTree = SOURCE_ROOT; };
 		E44861831D49D5380034208D /* YGCityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGCityData.swift; path = OutLookers/YGCityData.swift; sourceTree = SOURCE_ROOT; };
 		E44861851D49D5940034208D /* CityResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityResp.swift; path = OutLookers/CityResp.swift; sourceTree = SOURCE_ROOT; };
+		E44861871D4B038E0034208D /* SkillTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillTypeCell.swift; path = OutLookers/SkillTypeCell.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF781D41C3D50013356C /* InvitationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationDetailViewController.swift; path = OutLookers/InvitationDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF7A1D41CAED0013356C /* InvitationHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationHeadCell.swift; path = OutLookers/InvitationHeadCell.swift; sourceTree = SOURCE_ROOT; };
 		E45BFF7C1D41D2890013356C /* InvitationAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitationAddCell.swift; path = OutLookers/InvitationAddCell.swift; sourceTree = SOURCE_ROOT; };
@@ -1090,6 +1107,7 @@
 		D8F526CD1D16CAD1000C8F91 /* YKLib */ = {
 			isa = PBXGroup;
 			children = (
+				E4E5DED41D179BFD00CB8535 /* YKToast.swift */,
 				E41B92671D3DF09500749769 /* ZSPasswordView.swift */,
 				E446FA141D2E29E6003DFC1E /* TouchLabel.swift */,
 				E4473EB61D3625C7000CEEF2 /* YKVideoTrimmer.swift */,
@@ -1269,7 +1287,6 @@
 			isa = PBXGroup;
 			children = (
 				D84D98711D47AE47007CCD6E /* UIButton+EX.swift */,
-				E4E5DED41D179BFD00CB8535 /* YKToast.swift */,
 				D81F44F91D118D43004D9192 /* CGRect+EX.swift */,
 				D81F44FA1D118D43004D9192 /* InterfaceBuiderEX.swift */,
 				D81F44FB1D118D43004D9192 /* NSString+EX.swift */,
@@ -1328,6 +1345,7 @@
 		E41C6C5F1D113F350013031D /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				E43F0AC01D4B5BD700D20FB3 /* SVProgressHUD */,
 				E41B92C91D3F56F900749769 /* HCSStarRatingView */,
 				D82F8DFD1D2C0D9400A24CDB /* TYSlidePageScrollView */,
 				D82F8DDF1D28171A00A24CDB /* MBProgressHUD */,
@@ -1417,6 +1435,24 @@
 			name = VPImageCropper;
 			path = "../../../../Downloads/VPImageCropper-master/VPImageCropperDemo/VPImageCropper";
 			sourceTree = "<group>";
+		};
+		E43F0AC01D4B5BD700D20FB3 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E43F0AC11D4B5BD700D20FB3 /* SVIndefiniteAnimatedView.h */,
+				E43F0AC21D4B5BD700D20FB3 /* SVIndefiniteAnimatedView.m */,
+				E43F0AC31D4B5BD700D20FB3 /* SVProgressAnimatedView.h */,
+				E43F0AC41D4B5BD700D20FB3 /* SVProgressAnimatedView.m */,
+				E43F0AC51D4B5BD700D20FB3 /* SVProgressHUD-Prefix.pch */,
+				E43F0AC61D4B5BD700D20FB3 /* SVProgressHUD.bundle */,
+				E43F0AC71D4B5BD700D20FB3 /* SVProgressHUD.h */,
+				E43F0AC81D4B5BD700D20FB3 /* SVProgressHUD.m */,
+				E43F0AC91D4B5BD700D20FB3 /* SVRadialGradientLayer.h */,
+				E43F0ACA1D4B5BD700D20FB3 /* SVRadialGradientLayer.m */,
+			);
+			name = SVProgressHUD;
+			path = OutLookers/SVProgressHUD;
+			sourceTree = SOURCE_ROOT;
 		};
 		E446F9F61D24ED1A003DFC1E /* Controller */ = {
 			isa = PBXGroup;
@@ -1521,6 +1557,7 @@
 				D8D81ED31D183C3700A00AA7 /* SkillHeaderReusableView.swift */,
 				D8C167381D1AFCF100C50EB7 /* SkillSetCell.swift */,
 				D8D81ED21D183C3700A00AA7 /* SkillCell.swift */,
+				E44861871D4B038E0034208D /* SkillTypeCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1679,6 +1716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E41B92CE1D3F56F900749769 /* Info.plist in Resources */,
+				E43F0ACD1D4B5BD700D20FB3 /* SVProgressHUD.bundle in Resources */,
 				D81F44F81D118D15004D9192 /* Main.storyboard in Resources */,
 				D8F526AC1D1569D3000C8F91 /* Localizable.strings in Resources */,
 				E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */,
@@ -1897,6 +1935,7 @@
 				D819920E1D3BD0F2007734C0 /* OrganizeRequest.swift in Sources */,
 				D8AA10061D1DA0220038EE73 /* TZAssetModel.m in Sources */,
 				D81F45041D118D43004D9192 /* CGRect+EX.swift in Sources */,
+				E43F0ACF1D4B5BD700D20FB3 /* SVRadialGradientLayer.m in Sources */,
 				D8D81ED51D183C3700A00AA7 /* SkillHeaderReusableView.swift in Sources */,
 				E446FA091D261647003DFC1E /* UIFont+EX.swift in Sources */,
 				D8AA10091D1DA0220038EE73 /* TZImagePickerController.m in Sources */,
@@ -1909,11 +1948,13 @@
 				D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */,
 				D82F8E2A1D33E83D00A24CDB /* ReleaseTalentCell.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
+				E44861881D4B038E0034208D /* SkillTypeCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
 				D819923A1D43BF7C007734C0 /* ReleasePicAndVideoReq.swift in Sources */,
 				D84D986F1D47AD39007CCD6E /* XHMessageTextView.m in Sources */,
 				E4473EC51D38CE80000CEEF2 /* PersonStyleCell.swift in Sources */,
 				D8B6414E1D36B12500DF916D /* EditDataViewController.swift in Sources */,
+				E43F0ACE1D4B5BD700D20FB3 /* SVProgressHUD.m in Sources */,
 				D8B641461D367F1300DF916D /* Util.swift in Sources */,
 				D81992431D43CC12007734C0 /* EditCircularRecruitReq.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
@@ -2014,6 +2055,7 @@
 				D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */,
 				D84D98501D4661B0007CCD6E /* RecommendHotmanResp.swift in Sources */,
 				E44861841D49D5380034208D /* YGCityData.swift in Sources */,
+				E43F0ACC1D4B5BD700D20FB3 /* SVProgressAnimatedView.m in Sources */,
 				E4473EC31D38C94F000CEEF2 /* BWHTableViewCell.swift in Sources */,
 				D8EB0EBC1D48F3E7002E36F8 /* YGImageSave.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
@@ -2034,6 +2076,7 @@
 				D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */,
 				D81992491D43DCEA007734C0 /* DynamicListResp.swift in Sources */,
 				E44861861D49D5940034208D /* CityResp.swift in Sources */,
+				E43F0ACB1D4B5BD700D20FB3 /* SVIndefiniteAnimatedView.m in Sources */,
 				D84D98651D47AD02007CCD6E /* SettingViewController.swift in Sources */,
 				E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */,
 				E4E5DED31D179BEF00CB8535 /* YGSelectDateView.swift in Sources */,

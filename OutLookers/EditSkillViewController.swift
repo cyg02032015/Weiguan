@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 
+private let skillTypeCellId = "skillTypeCellId"
 private let noArrowIdentifier = "noArrowId"
 private let arrowIdentifier = "arrowId"
 private let workDetailIdentifier = "workDetailId"
@@ -27,6 +28,7 @@ private extension Selector {
 
 class EditSkillViewController: YGBaseViewController {
 
+    var skillType: PersonCharaterModel!
     var tableView: UITableView!
     var releaseButton: UIButton!
     var pickerView: YGPickerView!
@@ -41,6 +43,11 @@ class EditSkillViewController: YGBaseViewController {
     var addVideoButton: UIButton!
     var isSelectPhotos: Bool = false // 是否选取多张
     lazy var req = ReleaseTalentReq()
+    var coverImage: UIImage!
+    lazy var cityResp = YGCityData.loadCityData()
+    var provinceInt: Int = 0
+    var tokenObject: GetToken!
+    var videoURL: NSURL!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,13 +56,20 @@ class EditSkillViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "编辑动态"
+        title = "编辑才艺"
         setupSubViews()
+        getToken()
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
         skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"]
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
+        
+        if skillType != nil {
+            req.categoryId = "\(skillType.id)"
+            req.categoryName = skillType.name
+        }
         req.unit = UnitType.YuanHour.rawValue
+        
     }
     
     func setupSubViews() {
@@ -66,6 +80,7 @@ class EditSkillViewController: YGBaseViewController {
         tableView.dataSource = self
         tableView.separatorColor = kLineColor
         tableView.tableFooterView = UIView()
+        tableView.registerClass(SkillTypeCell.self, forCellReuseIdentifier: skillTypeCellId)
         tableView.registerClass(NoArrowEditCell.self, forCellReuseIdentifier: noArrowIdentifier)
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowIdentifier)
         tableView.registerClass(WorkDetailCell.self, forCellReuseIdentifier: workDetailIdentifier)
@@ -86,8 +101,14 @@ class EditSkillViewController: YGBaseViewController {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        view.endEditing(true)
+    func getToken() {
+        Server.getUpdateFileToken { [unowned self](success, msg, value) in
+            guard let object = value else {
+                LogError("获取token失败")
+                return
+            }
+            self.tokenObject = object
+        }
     }
 }
 
@@ -97,12 +118,13 @@ extension EditSkillViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
-                cell.textFieldEnable = false
-                cell.setTextInCell("才艺类型", placeholder: "")
+                let cell = tableView.dequeueReusableCellWithIdentifier(skillTypeCellId, forIndexPath: indexPath) as! SkillTypeCell
+                cell.setTextInCell("才艺类型", placeholder: skillType.name)
                 return cell
             } else if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
+                cell.indexPath = indexPath
+                cell.delegate = self
                 cell.setTextInCell("才艺名称", placeholder: "请输入才艺名称")
                 return cell
             } else if indexPath.row == 2 {
@@ -117,6 +139,7 @@ extension EditSkillViewController {
             }
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(workDetailIdentifier, forIndexPath: indexPath) as! WorkDetailCell
+            cell.delegate = self
             cell.setTextInCell("才艺详情", placeholder: "请输入与您才艺相关的介绍")
             return cell
         } else {
@@ -211,16 +234,102 @@ extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 }
 
-extension EditSkillViewController: BudgetPriceCellDelegate {
+extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDelegate, WorkDetailCellDelegate {
+    
+    func checkParameters() {
+        LogDebug(req)
+        guard !isEmptyString(req.name) && !isEmptyString(req.categoryId) && !isEmptyString(req.categoryName) && !isEmptyString(req.details) && !isEmptyString(req.unit) && !isEmptyString(req.price) else {
+            releaseButton.backgroundColor = kGrayColor
+            releaseButton.userInteractionEnabled = false
+            return
+        }
+        releaseButton.backgroundColor = kCommonColor
+        releaseButton.userInteractionEnabled = true
+    }
+    
     func tapReleaseButton(sender: UIButton) {
-        dismissViewControllerAnimated(true) { [unowned self] in
-            self.photoArray.removeAll()
-            self.originPhotoArray.removeAll()
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let group = dispatch_group_create()
+        
+        // 上传作品集封面
+        if coverImage != nil {
+            dispatch_group_async(group, queue) { [unowned self] in
+                LogWarn("group cover")
+                dispatch_group_enter(group)
+                OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.coverImage, complete: { (names, state) in
+                    dispatch_group_leave(group)
+                    if state == .Success {
+                        self.req.worksCover = names.first
+                    } else {
+                        self.req.worksCover = ""
+                        LogError("上传封面失败")
+                    }
+                })
+            }
+        }
+        
+        if videoURL != nil {
+            dispatch_group_async(group, queue, { [unowned self] in
+                LogWarn("group video")
+                dispatch_group_enter(group)
+                OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoURL, complete: { (id, state) in
+                    dispatch_group_leave(group)
+                    if state == .Success {
+                        self.req.worksVideo = id
+                    } else {
+                        LogError("上传视频失败")
+                    }
+                })
+            })
+        }
+        
+        if self.photoArray.count > 0 {
+            dispatch_group_async(group, queue) { [unowned self] in
+                LogWarn("group images")
+                dispatch_group_enter(group)
+                OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photoArray, complete: { (names, state) in
+                    dispatch_group_leave(group)
+                    if state == .Success {
+                        self.req.worksPicture = names.joinWithSeparator(",")
+                    } else {
+                        LogError("上传图片门失败")
+                    }
+                })
+            }
+        }
+        
+        dispatch_group_notify(group, queue) { [unowned self] in
+            Server.releaseTalent(self.req, handler: { (success, msg, value) in
+                if success {
+                    LogInfo(value!)
+                    self.dismissViewControllerAnimated(true, completion: { [unowned self] in
+                        self.photoArray.removeAll()
+                        self.originPhotoArray.removeAll()
+                        })
+                } else {
+                    LogError("提交失败 = \(msg)")
+                }
+
+            })
         }
     }
     
+    func workDetailCellReturnText(text: String) {
+        req.details = text
+        checkParameters()
+    }
+    
+    func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int)) {
+        switch tuple {
+        case (0,1): req.name = text
+        default: ""
+        }
+        checkParameters()
+    }
+    
     func textFieldReturnText(text: String) {
-        
+        req.price = text
+        checkParameters()
     }
     
     func budgetPriceButtonTap(sender: UIButton) {
@@ -232,6 +341,7 @@ extension EditSkillViewController: BudgetPriceCellDelegate {
 
 // MARK: - PhotoCollectionCellDelegate
 extension EditSkillViewController: SkillSetCellDelegate {
+    
     // 设置封面
     func skillSetTapSetCover(sender: UIButton) {
         isSelectPhotos = false
@@ -245,6 +355,15 @@ extension EditSkillViewController: SkillSetCellDelegate {
     func skillSetTapAddVideo(sender: UIButton) {
         photoType = .Some(.AddVideo)
         addVideoButton = sender
+        if UIImagePickerController.isAvailablePhotoLibrary() {
+            let controller = UIImagePickerController()
+            controller.sourceType = .PhotoLibrary
+            var mediaTypes = [String]()
+            mediaTypes.append(kUTTypeMovie as String)
+            controller.mediaTypes = mediaTypes
+            controller.delegate = self
+            presentViewController(controller, animated: true, completion: {})
+        }
     }
 }
 
@@ -295,12 +414,26 @@ extension EditSkillViewController: UIActionSheetDelegate {
 // MARK: - UIImagePickerControllerDelegate
 extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate,TZImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let originalImg = info["UIImagePickerControllerEditedImage"] as! UIImage
-        originalImg.resetSizeOfImageData(originalImg, maxSize: 300, compeleted: { [weak self](data) in
-            guard let s = self else { return }
-            s.setCoverButton.setImage(UIImage(data: data)!, forState: .Normal)
-            s.dismissViewControllerAnimated(true) { }
-            })
+        if photoType == .Some(.AddVideo) {
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
+            let mediaType = info[UIImagePickerControllerMediaType] as! String
+            if mediaType == kUTTypeMovie as String {
+                guard let url = info[UIImagePickerControllerMediaURL] as? NSURL else { fatalError("获取视频 URL 失败")}
+                videoURL = url
+                let img = VideoTool.getThumbleImage(url)
+                cell.videoButton.setImage(img, forState: .Normal)
+                dismissViewControllerAnimated(true, completion: {})
+            }
+
+        } else {
+            let originalImg = info["UIImagePickerControllerEditedImage"] as! UIImage
+            originalImg.resetSizeOfImageData(originalImg, maxSize: 300, compeleted: { [weak self](data) in
+                guard let s = self else { return }
+                s.coverImage = UIImage(data: data)
+                s.setCoverButton.setImage(s.coverImage, forState: .Normal)
+                s.dismissViewControllerAnimated(true) { }
+                })
+        }
     }
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! SkillSetCell
@@ -324,13 +457,13 @@ extension EditSkillViewController: YGPickerViewDelegate {
             let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! ArrowEditCell
             cell.tf.text = city
+            req.city = "\(cityResp.province[provinceInt].citys[pickerView.selectedRowInComponent(1)].id)"
         } else {
             let skillUnit = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
             cell.button.selected = true
             guard let unit = skillUnit else { fatalError("picker skill unit nil") }
             cell.setButtonText(unit)
-            //"元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"
             switch unit {
             case "元/小时": req.unit = UnitType.YuanHour.rawValue
             case "元/场": req.unit = UnitType.YuanRound.rawValue
@@ -340,8 +473,8 @@ extension EditSkillViewController: YGPickerViewDelegate {
             case "元/年": req.unit = UnitType.YuanYear.rawValue
             default: ""
             }
-
         }
+        checkParameters()
     }
 }
 
@@ -358,11 +491,10 @@ extension EditSkillViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if isProvincePicker {
             if component == 0 {
-                return provinceTitles.count
+                return cityResp.province.count
             } else {
-                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-                return cities.count > 0 ? cities.count : 0
+                let province = cityResp.province[pickerView.selectedRowInComponent(0)]
+                return province.citys.count
             }
         } else {
             return skillUnitPickerArray.count
@@ -372,11 +504,10 @@ extension EditSkillViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if isProvincePicker {
             if component == 0 {
-                return (provinceTitles[row] as! String)
+                return cityResp.province[row].name
             } else {
-                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-                return cities.count > row ? (cities[row] as! String) : ""
+                let province = cityResp.province[pickerView.selectedRowInComponent(0)]
+                return province.citys[row].name
             }
         } else {
             return skillUnitPickerArray[row]
@@ -386,6 +517,7 @@ extension EditSkillViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if isProvincePicker {
             if component == 0 {
+                provinceInt = row
                 pickerView.reloadComponent(1)
             }
         }

@@ -13,12 +13,17 @@ import SwiftyJSON
 private let recommendHotmanTableViewCellIdentifier = "recommendHotmanTableViewCellId"
 private let homeCellId = "homeCellId"
 
+private extension Selector {
+    static let loadRecommendHotmanData = #selector(HomeViewController.loadRecommendHotmanData)
+}
+
 class HomeViewController: YGBaseViewController {
     var tableView: UITableView!
     var infos = [BannerInfo]()
     var urls = [String]()
     var statusView: UIView!
     lazy var hotmanList = [HotmanList]()
+    var recommendObj: DynamicListResp!
     var collectionView: UICollectionView!
     var log: YGLogView!
 
@@ -42,18 +47,28 @@ class HomeViewController: YGBaseViewController {
             case .Register: LogInfo("注册")
             }
         }
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: .loadRecommendHotmanData, name: kRecieveGlobleDefineNotification, object: nil)
         setupSubViews()
-        loadRecommendHotmanData()
     }
     
     func loadRecommendHotmanData() {
-        Server.homeRecommendHotman { (success, msg, value) in
+        Server.dynamicList(1, state: 2, isPerson: false, isHome: true) { (success, msg, value) in
             if success {
-                guard let list = value else { return }
-                self.hotmanList = list
-                self.collectionView.reloadData()
+                Server.homeRecommendHotman { (success, msg, value) in
+                    SVToast.dismiss()
+                    if success {
+                        guard let list = value else { return }
+                        self.hotmanList = list
+                        self.collectionView.reloadData()
+                    } else {
+                        LogError(msg)
+                    }
+                }
+                guard let object = value else { return }
+                self.recommendObj = object
+                self.tableView.reloadData()
             } else {
+                SVToast.dismiss()
                 LogError(msg)
             }
         }
@@ -102,6 +117,10 @@ class HomeViewController: YGBaseViewController {
         statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: 0.0)
         view.addSubview(statusView)
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
 
 extension HomeViewController: SDCycleScrollViewDelegate {
@@ -111,7 +130,7 @@ extension HomeViewController: SDCycleScrollViewDelegate {
 // MARK: - UITableViewDelegate,UITableViewDataSource
 extension HomeViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return recommendObj == nil ? 0 : recommendObj.list.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -123,6 +142,7 @@ extension HomeViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCell
+            cell.info = recommendObj.list[indexPath.section]
             return cell
         }
     }

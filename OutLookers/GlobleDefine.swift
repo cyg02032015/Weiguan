@@ -41,6 +41,9 @@ let kPlaceholder = UIImage(named: "Combined Shape Copy")
 // 正则表达
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
+// 通知
+let kRecieveGlobleDefineNotification = "recieveGlobleDefine"
+
 func kScale(a: CGFloat) -> CGFloat {
     if Device.size() == .Screen5_5Inch {
         return a * scale

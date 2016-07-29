@@ -37,6 +37,9 @@ class OSSVideoUploader {
             "callbackBody": object.callbackBody
         ]
         put.uploadingFileURL = videoURL
+        put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
+            LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
+        }
         let putTask = clinet.putObject(put)
         putTask.continueWithBlock({ (task) in
             if task.error != nil {
@@ -50,7 +53,7 @@ class OSSVideoUploader {
         })
         putTask.waitUntilFinished()
         if putTask.error == nil {
-            LogInfo("upload video success! = \(videoURL)")
+            LogInfo("upload video success! = \(videoName)")
         } else {
             LogError("upload video failed, error: \(putTask.error!)")
         }

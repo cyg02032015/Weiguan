@@ -19,31 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     func testUpload() {
-//        Server.getUpdateFileToken { (success, msg, value) in
-//            if success {
-//                guard let object = value else {return}
-//                OSSImageUploader.asyncUploadImages(object, images: [UIImage(named: "open")!,UIImage(named: "open")!,UIImage(named: "open")!], complete: { (names, state) in
-//                    if state == .Success {
-//                        LogDebug("\(names)")
-//                    } else {
-//                        LogError("upload Failure")
-//                    }
-//                })
-//            } else {
-//                LogError(msg)
-//            }
-//        }
     }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         #if DEBUG
             configCocoaLumberjack()
         #endif
         testUpload()
-        LogInfo(YYImageWebPAvailable())
+        
+        // 键盘
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-        
+        // 初始化配置SVProgressHUD
+        SVToast.initialize()
         configNavigation()
         configUMeng()
         configGlobleDefine()

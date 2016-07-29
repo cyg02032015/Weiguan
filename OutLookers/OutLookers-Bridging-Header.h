@@ -11,6 +11,7 @@
 #import "UIBarButtonItem+Badge.h"
 #import "SDCycleScrollView.h"
 #import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 #import "TYSlidePageScrollViewController.h"
 #import "TYTitlePageTabBar.h"
 #import "HCSStarRatingView.h"

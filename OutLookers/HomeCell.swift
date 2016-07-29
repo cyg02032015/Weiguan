@@ -16,6 +16,15 @@ class HomeCell: UITableViewCell {
     var zanButton: UIButton!
     var commentButton: UIButton!
     var detailLabel: UILabel!
+    var info: DynamicResult! {
+        didSet {
+            backImgView.yy_setImageWithURL(info.cover.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
+            headImgView.yy_setImageWithURL(info.photo.addImagePath(kSize(36, height: 36)), placeholder: kPlaceholder)
+            nameLabel.text = info.name
+            detailLabel.text = info.text
+            
+        }
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,6 +41,7 @@ class HomeCell: UITableViewCell {
         }
         
         headImgView = TouchImageView()
+        headImgView.clipsToBounds = true
         headImgView.layer.borderWidth = 2
         headImgView.layer.borderColor = UIColor.whiteColor().CGColor
         headImgView.layer.cornerRadius = kScale(36/2)
@@ -92,12 +102,12 @@ class HomeCell: UITableViewCell {
             make.bottom.lessThanOrEqualTo(grayView.superview!)
         }
         
-        backImgView.backgroundColor = UIColor.yellowColor()
-        headImgView.backgroundColor = UIColor.redColor()
-        nameLabel.text = "晨曦"
-        zanButton.setTitle("12", forState: .Normal)
-        commentButton.setTitle("123", forState: .Normal)
-        detailLabel.text = "描述详情，最多三行，富余的用...描述详情，最多三行，富余的用...描述详情，最多三行，富余的用...描述详情，最多三行，富余的用..."
+        zanButton.setTitle("赞TA", forState: .Normal)
+        commentButton.setTitle("评论", forState: .Normal)
+//        backImgView.backgroundColor = UIColor.yellowColor()
+//        headImgView.backgroundColor = UIColor.redColor()
+//        nameLabel.text = "晨曦"
+//        detailLabel.text = "描述详情，最多三行，富余的用...描述详情，最多三行，富余的用...描述详情，最多三行，富余的用...描述详情，最多三行，富余的用..."
         
     }
     

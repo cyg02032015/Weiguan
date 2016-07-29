@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import MBProgressHUD
 
 class YKToast {
     
@@ -41,5 +40,39 @@ class YKToast {
             fatalError("view is nil")
         }
         MBProgressHUD.hideAllHUDsForView(v, animated: true)
+    }
+}
+
+class SVToast {
+    
+    class func initialize() {
+        SVProgressHUD.setDefaultStyle(.Dark) //#64B8FF, 100%
+        SVProgressHUD.setBackgroundColor(UIColor(r: 1, g: 1, b: 1, a: 0.6))
+    }
+    
+    class func show() {
+        SVProgressHUD.show()
+    }
+    
+    class func showWithStatus(message: String) {
+        SVProgressHUD.showWithStatus(message)
+    }
+    
+    class func showWithError(message: String) {
+        delay(0.5) {
+            SVProgressHUD.setMinimumDismissTimeInterval(0.8)
+            SVProgressHUD.showErrorWithStatus(message)
+        }
+    }
+    
+    class func showWithSuccess(message: String) {
+        delay(0.5) {
+            SVProgressHUD.setMinimumDismissTimeInterval(0.8)
+            SVProgressHUD.showSuccessWithStatus(message)
+        }
+    }
+    
+    class func dismiss() {
+        SVProgressHUD.dismiss()
     }
 }

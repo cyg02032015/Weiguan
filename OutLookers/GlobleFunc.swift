@@ -139,14 +139,15 @@ func boxBlurImage(image: UIImage, withBlurNumber blur: CGFloat) -> UIImage {
 
 func configGlobleDefine() {
     // 获取全局变量是同步获取  会阻塞线程
+    SVToast.show()
     Server.globleDefine { (success, msg, value) in
         if success {
             guard let item = value else {return}
-            LogDebug(item.imageUrlPrefix)
             globleSingle.version = item.citiesUrlVersion
             globleSingle.vedioPath = item.videoUrlPrefix
             globleSingle.imagePath = item.imageUrlPrefix
             globleSingle.citiesUrl = item.citiesUrl
+            NSNotificationCenter.defaultCenter().postNotificationName(kRecieveGlobleDefineNotification, object: nil, userInfo: nil)
             if YGCityVersion.loadCityVersion() == "" || YGCityVersion.loadCityVersion() != item.citiesUrlVersion { // 如果版本不存在或者版本不一致
                 let version = YGCityVersion(version: item.citiesUrlVersion) // 保存版本号
                 version.saveCityVersion()
@@ -161,7 +162,8 @@ func configGlobleDefine() {
                 })
             }
         } else {
-            LogError(msg)
+            SVToast.dismiss()
+            SVToast.showWithError(msg!)
         }
     }
 
