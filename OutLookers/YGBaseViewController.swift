@@ -71,6 +71,7 @@ class YGBaseViewController: UIViewController {
     }
     
     deinit {
+        SVToast.dismiss()
         print("\(NSStringFromClass(self.dynamicType))被销毁")
     }
 }

@@ -54,7 +54,7 @@ class SVToast {
         SVProgressHUD.show()
     }
     
-    class func showWithStatus(message: String) {
+    class func show(message: String) {
         SVProgressHUD.showWithStatus(message)
     }
     
