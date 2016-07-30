@@ -16,13 +16,12 @@ import UIKit
 
 private let talentCellIdentifier = "talentCellId"
 
-
-
 class TalentViewController: YGBaseViewController {
 
     lazy var data = [String]()
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate!
+    lazy var talentLists = [TalentResult]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -31,7 +30,22 @@ class TalentViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LogWarn("viewdidload")
+        setupSubViews()
+        loadData()
+    }
+    
+    func loadData() {
+        Server.talentList(1, state: 1) { (success, msg, value) in
+            if success {
+                guard let object = value else {return}
+                self.talentLists = object.list
+            } else {
+                SVToast.showWithError(msg!)
+            }
+        }
+    }
+    
+    func setupSubViews() {
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,19 +69,12 @@ extension TalentViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(talentCellIdentifier, forIndexPath: indexPath) as! TalentTableViewCell
-        cell.collectionViewSetDelegate(self, indexPath: indexPath)
-        if indexPath.section == 0 {
-            cell.detailsLabel.text = "afaslfkjs;lfkasjdflaskfjlsa;fkasfl;askhgaslgkhasglsakhgsaklghaskgljahsgklsjghsakghsakgjahsgkasjghaklsgjhaskdgsahjgksajghaksghjsadkgjhasgkajshgdksadjghsakgjhaskghasgkhasgkashgk"
-        } else if indexPath.section == 1 {
-            cell.detailsLabel.text = "afaslfkjs;lfkasjdflaskfjlsa;fkasfl;"
-        } else {
-            cell.detailsLabel.text = "afaslfkjs;lfkasjdflaskfjlsa;fkasfl;asdfasdfsadfsafasldfksajflsafjas;flasjfalfj"
-        }
+//        cell.collectionViewSetDelegate(self, indexPath: indexPath)
         return cell
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return talentLists.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,25 +100,25 @@ extension TalentViewController {
     }
 }
 
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension TalentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(talentWorksCollectionCellIdentifier, forIndexPath: indexPath)
-        return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let vc = TalentDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        LogInfo("\(collectionView.tag)     \(indexPath.item)")
-    }
-}
+//// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+//extension TalentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+//    
+//    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 3
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(talentWorksCollectionCellIdentifier, forIndexPath: indexPath)
+//        return cell
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        let vc = TalentDetailViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+//        LogInfo("\(collectionView.tag)     \(indexPath.item)")
+//    }
+//}

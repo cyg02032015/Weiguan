@@ -54,7 +54,7 @@ class TalentResult {
     var price : Float!
     var province : String!
     var state : String!
-    var unit : Int!
+    var unit : String!
     var userId : Int!
     var worksCover : String!
     
@@ -71,7 +71,7 @@ class TalentResult {
         price = json["price"].floatValue
         province = json["province"].stringValue
         state = json["state"].stringValue
-        unit = json["unit"].intValue
+        unit = json["unit"].stringValue
         userId = json["userId"].intValue
         worksCover = json["worksCover"].stringValue
     }

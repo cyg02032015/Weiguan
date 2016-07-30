@@ -5,8 +5,8 @@ use_frameworks!
 
 target 'OutLookers' do
 #pod 'Cosmos', '~> 3.0.0'
-pod 'AliyunOSSiOS'
 pod 'Alamofire', '~> 3.4.1'
+pod 'AliyunOSSiOS', '~> 2.5.0'
 pod 'SwiftyJSON', '~> 2.3.2'
 pod 'SnapKit', '~> 0.30.0.beta1'
 pod 'IQKeyboardManagerSwift', '~> 4.0.3'

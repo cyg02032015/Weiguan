@@ -14,6 +14,18 @@ public class HttpTool {
     
     typealias Success = (response: JSON) -> ()
     typealias Failure = (error: NSError) -> ()
+    static var manager: Manager!
+    static let alamofireManager: Manager = {
+        if manager != nil {
+            return manager
+        } else {
+            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            config.timeoutIntervalForRequest = 10
+            let manager = Alamofire.Manager(configuration: config)
+            return manager
+        }
+    }()
+    
     func get(url: String) -> Void {
         Alamofire.request(.GET, url).responseJSON { (response) in
             
@@ -21,7 +33,7 @@ public class HttpTool {
     }
     
     class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
-        Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers: nil).responseJSON { (response) in
+        alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: nil).responseJSON { (response) in
             LogVerbose("url = \(url)")
             if let p = parameters {
                 LogWarn("parameters = \(p)")

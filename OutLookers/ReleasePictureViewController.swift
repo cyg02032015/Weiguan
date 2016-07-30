@@ -216,7 +216,7 @@ extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavig
     }
     
     func tz_imagePickerControllerDidCancel(picker: TZImagePickerController!) {
-        dismissViewControllerAnimated(true) { }
+//        dismissViewControllerAnimated(true) { }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

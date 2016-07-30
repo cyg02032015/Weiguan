@@ -57,17 +57,17 @@ class Util {
         viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: back)
         return (back, imgView)
     }
-    /*
-     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-     backButton.frame = CGRectMake(0, 0, 45, 49);
-     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
-     [backButton addSubview:imageView];
-     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-     make.left.equalTo(imageView.superview);
-     make.centerY.equalTo(imageView.superview);
-     make.size.mas_equalTo(CGSizeMake(16, 16));
-     }];
-     vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-     return backButton;
-     */
+    
+    class func unit(type: String) -> String {
+        switch type {
+        case "1": return UnitType.YuanHour.rawValue
+            case "2": return UnitType.YuanRound.rawValue
+            case "3": return UnitType.YuanOnce.rawValue
+            case "4": return UnitType.YuanHalfday.rawValue
+            case "5": return UnitType.YuanDay.rawValue
+            case "6": return UnitType.YuanMonth.rawValue
+            case "7": return UnitType.YuanYear.rawValue
+        default: return ""
+        }
+    }
 }

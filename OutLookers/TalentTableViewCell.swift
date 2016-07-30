@@ -12,9 +12,19 @@ public let talentWorksCollectionCellIdentifier = "talentWorksCollectionCellId"
 
 class TalentTableViewCell: UITableViewCell {
 
+    var info: TalentResult! {
+        didSet {
+            talentLabel.text = info.name
+            moneyDayLabel.text = Util.unit(info.unit)
+            detailsLabel.text = info.details
+            works = info.worksCover
+            
+        }
+    }
+    lazy var works = [String]()
     var talentLabel: UILabel!       //  时装模特
     var moneyDayLabel: UILabel!     //  1000/天
-    var introLabel: UILabel!        //  才艺介绍
+//    var introLabel: UILabel!        //  才艺介绍
     var detailsLabel: UILabel!      //  3行字
     var collectionView: UICollectionView!
     var seeDetail: UIButton!        //  查看详情
@@ -66,7 +76,7 @@ class TalentTableViewCell: UITableViewCell {
             make.size.equalTo(kSize(62, height: 2))
         }
         
-        introLabel = UILabel()
+        let introLabel = UILabel()
         introLabel.font = UIFont.customFontOfSize(14)
         contentView.addSubview(introLabel)
         introLabel.snp.makeConstraints { (make) in
@@ -152,7 +162,6 @@ class TalentTableViewCell: UITableViewCell {
         
         talentLabel.text = "时装模特"
         moneyDayLabel.text = "1000/天"
-        introLabel.text = "才艺介绍"
         detailsLabel.text = "才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍"
         worksLabel.text = "才艺作品集"
         
@@ -168,5 +177,28 @@ class TalentTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+extension TalentTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(talentWorksCollectionCellIdentifier, forIndexPath: indexPath)
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        let vc = TalentDetailViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+//        LogInfo("\(collectionView.tag)     \(indexPath.item)")
     }
 }
