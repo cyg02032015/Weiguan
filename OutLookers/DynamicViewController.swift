@@ -22,9 +22,26 @@ class DynamicViewController: YGBaseViewController {
     
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate!
+    lazy var dynamicLists = [DynamicResult]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        LogWarn("viewdidload")
+        setupSubViews()
+        loadData()
+    }
+    
+    func loadData() {
+        Server.dynamicList(1, state: 1, isPerson: false, isHome: false) { (success, msg, value) in
+            if success {
+                guard let object = value else {return}
+                self.dynamicLists = object.list
+                self.tableView.reloadData()
+            } else {
+                SVToast.showWithError(msg!)
+            }
+        }
+    }
+    
+    func setupSubViews() {
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,27 +62,18 @@ class DynamicViewController: YGBaseViewController {
 extension DynamicViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return dynamicLists.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellIdentifier, forIndexPath: indexPath) as! DynamicCell
-        if indexPath.section == 0 {
-            cell.details.text = "afaslfkjs;lfkasjdflaskfjlsa;fkasfl;askhgaslgkhasglsakhgsaklghaskgljahsgklsjghsakghsakgjahsgkasjghaklsgjhaskdgsahjgksajghaksghjsadkgjhasgkajshgdksadjghsakgjhaskghasgkhasgkashgk"
-        } else if indexPath.section == 1 {
-            cell.details.text = "afaslfkjs;lfkasjdflaskfjlsa;fkasfl;"
-        } else {
-            cell.details.text = "afaslfkjs;lfkasjdflaskfjlsa;fkasfl;asdfasdfsadfsafasldfksajflsafjas;flasjfalfj"
-        }
+        cell.followButton.hidden = true
+        cell.info = dynamicLists[indexPath.section]
         return cell
-    }
-    
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {

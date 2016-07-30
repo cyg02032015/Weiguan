@@ -39,6 +39,7 @@ class TalentViewController: YGBaseViewController {
             if success {
                 guard let object = value else {return}
                 self.talentLists = object.list
+                self.tableView.reloadData()
             } else {
                 SVToast.showWithError(msg!)
             }
@@ -69,6 +70,7 @@ extension TalentViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(talentCellIdentifier, forIndexPath: indexPath) as! TalentTableViewCell
+        cell.info = talentLists[indexPath.section]
 //        cell.collectionViewSetDelegate(self, indexPath: indexPath)
         return cell
     }

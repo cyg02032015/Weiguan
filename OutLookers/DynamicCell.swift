@@ -10,6 +10,37 @@ import UIKit
 
 class DynamicCell: UITableViewCell {
 
+    var info: DynamicResult! {
+        didSet {
+            headImgView.iconURL = info.photo
+            headImgView.setVimage(Util.userType(info.detailsType))
+            nameLabel.text = info.name
+            timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
+            bigImgView.yy_setImageWithURL(info.cover.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
+            details.text = info.text
+            if info.isLike == true {
+                praiseBtn.selected = true
+            } else {
+                praiseBtn.selected = false
+            }
+            if info.likeCount > 0 {
+                praiseBtn.setTitle("\(info.likeCount)", forState: .Normal)
+            } else {
+                praiseBtn.setTitle("赞TA", forState: .Normal)
+            }
+            if info.replyCount > 0 {
+                commentBtn.setTitle("\(info.replyCount)", forState: .Normal)
+            } else {
+                commentBtn.setTitle("评论", forState: .Normal)
+            }
+            if info.isVideo == 1 { // 不是视频
+                
+            } else {
+                
+            }
+        }
+    }
+    
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
     var timeLabel: UILabel!
@@ -17,6 +48,8 @@ class DynamicCell: UITableViewCell {
     var details: UILabel!
     var releaseLabel: UILabel!  // 发布了动态
     var followButton: UIButton!
+    var praiseBtn: UIButton!
+    var commentBtn: UIButton!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -127,9 +160,9 @@ class DynamicCell: UITableViewCell {
         // 赞TA
         let praiseTAContainer = UIView()
         toolContainer.addSubview(praiseTAContainer)
-        
-        let praiseBtn = UIButton()
+        praiseBtn = UIButton()
         praiseBtn.setImage(UIImage(named: "like_normal"), forState: .Normal)
+        praiseBtn.setImage(UIImage(named: "like_chosen"), forState: .Selected)
         praiseBtn.setTitle("赞TA", forState: .Normal)
         praiseBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         praiseBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -160,7 +193,7 @@ class DynamicCell: UITableViewCell {
         let commentContainer = UIView()
         toolContainer.addSubview(commentContainer)
         
-        let commentBtn = UIButton()
+        commentBtn = UIButton()
         commentBtn.setImage(UIImage(named: "dis"), forState: .Normal)
         commentBtn.setTitle("评论", forState: .Normal)
         commentBtn.titleLabel!.font = UIFont.customFontOfSize(18)
@@ -201,7 +234,7 @@ class DynamicCell: UITableViewCell {
         
         let shareBtn = UIButton()
         shareBtn.setImage(UIImage(named: "share"), forState: .Normal)
-        shareBtn.setTitle("评论", forState: .Normal)
+        shareBtn.setTitle("分享", forState: .Normal)
         shareBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         shareBtn.setTitleColor(kGrayColor, forState: .Normal)
         shareContainer.addSubview(shareBtn)
@@ -209,13 +242,6 @@ class DynamicCell: UITableViewCell {
         shareBtn.snp.makeConstraints { (make) in
             make.edges.equalTo(shareBtn.superview!)
         }
-
-        nameLabel.text = "晨曦"
-        timeLabel.text = "15:02"
-        headImgView.backgroundColor = UIColor.redColor()
-        bigImgView.backgroundColor = UIColor.grayColor()
-        details.text = "asdfaslfkasjdfsalfkhasglsakghaskgdfsalfkhasglsakghaskgdfsalfkhasglsakghaskgjahgwoeiurtqwporiewyuotpqiwytqwoptiyq"
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

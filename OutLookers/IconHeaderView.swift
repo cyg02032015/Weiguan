@@ -14,6 +14,12 @@ class IconHeaderView: UIView {
     var closure: HeaderClosure!
     var iconView: UIImageView!
     var vImgView: UIImageView!
+    
+    var iconURL: String! {
+        didSet {
+            iconView.yy_setImageWithURL(iconURL.addImagePath(CGSize(width: iconView.gg_width, height: iconView.gg_height)), placeholder: kPlaceholder)
+        }
+    }
     private var _customCornerRadius: CGFloat = kScale(50/2)
     var customCornerRadius: CGFloat! {
         set {
@@ -30,7 +36,7 @@ class IconHeaderView: UIView {
         super.init(frame: frame)
         setupSubViews()
     }
-
+    
     func setupSubViews() {
         iconView = UIImageView()
         iconView.userInteractionEnabled = true
@@ -44,9 +50,6 @@ class IconHeaderView: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(IconHeaderView.tapHeader))
         self.addGestureRecognizer(tap)
         
-        iconView.backgroundColor = UIColor.yellowColor()
-        vImgView.backgroundColor = UIColor.redColor()
-        
         iconView.snp.makeConstraints { (make) in
             make.edges.equalTo(iconView.superview!)
         }
@@ -55,6 +58,16 @@ class IconHeaderView: UIView {
             make.bottom.equalTo(vImgView.superview!)
             make.right.equalTo(vImgView.superview!)
             make.size.equalTo(kSize(12, height: 12))
+        }
+        layoutIfNeeded()
+    }
+    
+    func setVimage(type: UserType) {
+        switch type {
+        case .HotMan: vImgView.image = UIImage(named: "Red")
+        case .Organization: vImgView.image = UIImage(named: "blue")
+        case .Fans: vImgView.image = UIImage(named: "Green")
+        default: ""
         }
     }
     

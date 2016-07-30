@@ -174,7 +174,6 @@ extension PHViewController: TYSlidePageScrollViewDataSource, TYSlidePageScrollVi
         let color = UIColor(r: 255, g: 255, b: 255, a: 1.0)
         let headerContentViewHeight = -slidePageScrollView.headerView.gg_height + slidePageScrollView.pageTabBar.gg_height
         let offsetY = pageScrollView.contentOffset.y
-        LogInfo(offsetY - headerContentViewHeight)
         delta = offsetY - headerContentViewHeight
         if delta > 0 {
             backImgView.image = UIImage(named: "back-1")

@@ -15,9 +15,9 @@ class TalentTableViewCell: UITableViewCell {
     var info: TalentResult! {
         didSet {
             talentLabel.text = info.name
-            moneyDayLabel.text = Util.unit(info.unit)
+            moneyDayLabel.text = "\(info.price)\(Util.unit(info.unit))"
             detailsLabel.text = info.details
-            works = info.worksCover
+//            works = info.worksCover
             
         }
     }
@@ -121,6 +121,8 @@ class TalentTableViewCell: UITableViewCell {
         layout.scrollDirection = .Horizontal
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         contentView.addSubview(collectionView)
         collectionView.registerClass(TalentWorksCollectionCell.self, forCellWithReuseIdentifier: talentWorksCollectionCellIdentifier)
@@ -159,7 +161,7 @@ class TalentTableViewCell: UITableViewCell {
             make.size.equalTo(seeDetail)
             make.left.equalTo(seeDetail.snp.right).offset(kScale(20))
         }
-        
+        introLabel.text = "才艺介绍"
         talentLabel.text = "时装模特"
         moneyDayLabel.text = "1000/天"
         detailsLabel.text = "才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍"

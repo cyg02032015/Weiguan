@@ -60,14 +60,24 @@ class Util {
     
     class func unit(type: String) -> String {
         switch type {
-        case "1": return UnitType.YuanHour.rawValue
-            case "2": return UnitType.YuanRound.rawValue
-            case "3": return UnitType.YuanOnce.rawValue
-            case "4": return UnitType.YuanHalfday.rawValue
-            case "5": return UnitType.YuanDay.rawValue
-            case "6": return UnitType.YuanMonth.rawValue
-            case "7": return UnitType.YuanYear.rawValue
+        case "1": return "/小时"
+            case "2": return "/场"
+            case "3": return "/次"
+            case "4": return "/半天"
+            case "5": return "/天"
+            case "6": return "/月"
+            case "7": return "/年"
         default: return ""
+        }
+    }
+    
+    class func userType(type: Int) -> UserType {
+        switch type {
+        case 0: return UserType.Tourist
+        case 1: return UserType.HotMan
+        case 2: return UserType.Organization
+        case 3: return UserType.Fans
+        default: return UserType.Tourist
         }
     }
 }

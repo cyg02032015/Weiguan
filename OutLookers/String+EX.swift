@@ -35,4 +35,15 @@ extension String {
     func addImagePath(size: CGSize) -> NSURL {
         return NSURL(string: globleSingle.imagePath + self + "@\(Int(size.width))h_\(Int(size.height))w.webp")!
     }
+    
+    func dateFromString(format: String = "yyyy-MM-dd HH:mm:ss.S") -> NSDate? {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = NSTimeZone.systemTimeZone()
+        let date = formatter.dateFromString(self) ?? NSDate()
+        return date
+
+    }
+    
+    
 }

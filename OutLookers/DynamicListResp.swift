@@ -48,25 +48,35 @@ class DynamicListResp: BaseResponse {
 class DynamicResult {
     var cover : String!
     var createTime : String!
+    var detailsType : Int!
+    var follow : Int!
     var id : Int!
+    var isLike : Bool!
     var isVideo : Int!
+    var likeCount : Int!
     var name : String!
     var photo : String!
     var picture : String!
+    var replyCount : Int!
     var text : String!
     var userId : Int!
-    init(fromJson json: JSON!) {
+    
+    init(fromJson json: JSON!){
         if json == nil{
             return
         }
         cover = json["cover"].stringValue
         createTime = json["createTime"].stringValue
+        detailsType = json["detailsType"].intValue
+        follow = json["follow"].intValue
         id = json["id"].intValue
+        isLike = json["isLike"].boolValue
         isVideo = json["isVideo"].intValue
+        likeCount = json["likeCount"].intValue
         name = json["name"].stringValue
         photo = json["photo"].stringValue
         picture = json["picture"].stringValue
+        replyCount = json["replyCount"].intValue
         text = json["text"].stringValue
         userId = json["userId"].intValue
-    }
-}
+    }}
