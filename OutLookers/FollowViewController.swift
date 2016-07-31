@@ -59,6 +59,11 @@ extension FollowViewController {
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = FriendViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return UITableViewAutomaticDimension
