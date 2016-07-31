@@ -16,7 +16,7 @@ private let mineCollectCellIdentifier = "mineCollectId"
 class MineViewController: YGBaseViewController {
     
     var images = ["Order", "account", "score1", "talent", "Group 5", "authentication", "feedback", ""]
-    var titles = ["订单量", "账户", "综合评分", "才艺", "通告", "认证", "意见反馈", ""]
+    var titles = ["订单量", "钱包", "综合评分", "才艺", "邀约", "认证", "意见反馈", ""]
     
     var tableView: UITableView!
     
@@ -133,25 +133,26 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.item == 0 {
+        if indexPath.item == 0 {  // 订单
             
-        } else if indexPath.item == 1 {
+        } else if indexPath.item == 1 { // 账户
             let vc = MyAccountViewController()
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 2 {
+        } else if indexPath.item == 2 { // 综合评价
             let vc = Comment2ViewController()     // Comment2ViewController    MyCommentViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 3 {
+        } else if indexPath.item == 3 { // 才艺
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 4 {
+        } else if indexPath.item == 4 { // 通告
             let vc = MyCircularViewController()
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 5 {
+        } else if indexPath.item == 5 { // 认证
             let vc = AuthenticationViewController()
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 6 {
-            
+        } else if indexPath.item == 6 { // 意见反馈
+            let vc = FeedbackViewController()
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

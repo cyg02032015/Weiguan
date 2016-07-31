@@ -11,6 +11,7 @@ import MobileCoreServices
 
 class Util {
     
+    /// 获取发布按钮
     class func createReleaseButton(title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, forState: .Normal)
@@ -48,6 +49,7 @@ class Util {
         }
     }
     
+    /// 获取导航栏左侧按钮tuple （UIButton，UIImageView）
     class func setupLeftBarButtonItemOfViewController(viewController: UIViewController, imgName: String) -> (UIButton, UIImageView) {
         let back = UIButton(type: .Custom)
         back.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
@@ -58,6 +60,7 @@ class Util {
         return (back, imgView)
     }
     
+    /// 根据unit获取对应字符串
     class func unit(type: String) -> String {
         switch type {
         case "1": return "/小时"
@@ -71,6 +74,7 @@ class Util {
         }
     }
     
+    /// 获取用户类型
     class func userType(type: Int) -> UserType {
         switch type {
         case 0: return UserType.Tourist
@@ -79,5 +83,16 @@ class Util {
         case 3: return UserType.Fans
         default: return UserType.Tourist
         }
+    }
+    
+    /// 获取应用版本号
+    class func appVersion() -> String {
+        guard let info = NSBundle.mainBundle().infoDictionary else {
+            fatalError("info is nil")
+        }
+        guard let version = info["CFBundleShortVersionString"] as? String else {
+            fatalError("version is nil")
+        }
+        return version
     }
 }

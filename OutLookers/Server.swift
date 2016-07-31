@@ -817,6 +817,175 @@ class Server {
         }
     }
     
+    /// 点赞
+    class func like(dynamicId: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "dynamicId" : dynamicId
+        ]
+        HttpTool.post(API.like, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 取消点赞
+    class func cancelLike(dynamicId: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "dynamicId" : dynamicId
+        ]
+        HttpTool.post(API.cancelLike, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 点赞列表
+    class func likeList(pageNo: Int, dynamicId: String?, handler: (success: Bool, msg: String?, value: LikeListResp?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "dynamicId" : dynamicId ?? "",
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)"
+        ]
+        HttpTool.post(API.likeList, parameters: parameters, complete: { (response) in
+            let info = LikeListResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 发表评论
+    class func replyComment(req: ReplyCommentReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "dynamicId" : req.dynamicId,
+            "replyId" : req.replyId ?? "0",
+            "text" : req.text
+        ]
+        HttpTool.post(API.replyComment, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 评论列表
+    class func commentList(pageNo: Int, dynamicId: String?, handler: (success: Bool, msg: String?, value: CommentListResp?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "dynamicId" : dynamicId ?? "",  // 个人信息请求值为0
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)"
+        ]
+        HttpTool.post(API.commentList, parameters: parameters, complete: { (response) in
+            let info = CommentListResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 获取个人动态，关注，粉丝数量
+    class func getDynamicFollowFansCount(handler: (success: Bool, msg: String?, value: GetContent?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.getDynamicFollowFansCount, parameters: parameters, complete: { (response) in
+            let info = GetContentResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 是否点赞
+    class func isLike(dynamicId: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "dynamicId" : dynamicId
+        ]
+        HttpTool.post(API.isLike, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 机构个人信息
+    class func organizationInformation(handler: (success: Bool, msg: String?, value: OGInfomation?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId
+        ]
+        HttpTool.post(API.organizationInformation, parameters: parameters, complete: { (response) in
+            let info = OrganizeInformationResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 修改机构信息
+    class func modifyOrganization(req: ModifyOGReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "type" : req.type,
+            "name" : req.name,
+            "adds" : req.adds,
+            "introduction" : req.introduction
+        ]
+        HttpTool.post(API.modifyOrganization, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
     /// 全局常量
     class func globleDefine(handler: (success: Bool, msg: String?, value: GlobleDeineAPI?)->Void) {
         HttpTool.post(API.globleDefine, parameters: nil, complete: { (response) in
@@ -829,23 +998,6 @@ class Server {
             }) { (error) in
                 handler(success: false, msg: error.localizedDescription, value: nil)
         }
-//        let url = NSURL(string: API.globleDefine)!
-//        let request = NSMutableURLRequest(URL: url, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 60)
-//        request.HTTPMethod = "POST"
-//        let str = "type=focus-c"
-//        let data = str.dataUsingEncoding(NSUTF8StringEncoding)
-//        request.HTTPBody = data
-//        do {
-//            let received = try NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
-//            let info = GlobleDefineResp(fromJson: JSON(data: received))
-//            if info.success == true {
-//                handler(success: true, msg: nil, value: info.result)
-//            } else {
-//                handler(success: false, msg: info.msg, value: nil)
-//            }
-//        } catch let error as NSError {
-//            handler(success: false, msg: error.localizedDescription, value: nil)
-//        }
     }
 
     /// 上传token获取

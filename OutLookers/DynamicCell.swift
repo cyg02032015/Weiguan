@@ -8,6 +8,18 @@
 
 import UIKit
 
+private extension Selector {
+    static let tapPraise = #selector(DynamicCell.tapPraise(_:))
+    static let tapComment = #selector(DynamicCell.tapComment(_:))
+    static let tapShare = #selector(DynamicCell.tapShare(_:))
+}
+
+protocol DynamicCellDelegate: class {
+    func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath)
+    func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath)
+    func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath)
+}
+
 class DynamicCell: UITableViewCell {
 
     var info: DynamicResult! {
@@ -40,7 +52,8 @@ class DynamicCell: UITableViewCell {
             }
         }
     }
-    
+    var indexPath: NSIndexPath!
+    weak var delegate: DynamicCellDelegate!
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
     var timeLabel: UILabel!
@@ -163,6 +176,7 @@ class DynamicCell: UITableViewCell {
         praiseBtn = UIButton()
         praiseBtn.setImage(UIImage(named: "like_normal"), forState: .Normal)
         praiseBtn.setImage(UIImage(named: "like_chosen"), forState: .Selected)
+        praiseBtn.addTarget(self, action: .tapPraise, forControlEvents: .TouchUpInside)
         praiseBtn.setTitle("赞TA", forState: .Normal)
         praiseBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         praiseBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -195,6 +209,7 @@ class DynamicCell: UITableViewCell {
         
         commentBtn = UIButton()
         commentBtn.setImage(UIImage(named: "dis"), forState: .Normal)
+        commentBtn.addTarget(self, action: .tapComment, forControlEvents: .TouchUpInside)
         commentBtn.setTitle("评论", forState: .Normal)
         commentBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         commentBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -234,6 +249,7 @@ class DynamicCell: UITableViewCell {
         
         let shareBtn = UIButton()
         shareBtn.setImage(UIImage(named: "share"), forState: .Normal)
+        shareBtn.addTarget(self, action: .tapShare, forControlEvents: .TouchUpInside)
         shareBtn.setTitle("分享", forState: .Normal)
         shareBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         shareBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -241,6 +257,24 @@ class DynamicCell: UITableViewCell {
 
         shareBtn.snp.makeConstraints { (make) in
             make.edges.equalTo(shareBtn.superview!)
+        }
+    }
+    
+    func tapPraise(sender: UIButton) {
+        if delegate != nil {
+            delegate.dynamicCellTapPraise(sender, indexPath: indexPath)
+        }
+    }
+    
+    func tapComment(sender: UIButton) {
+        if delegate != nil {
+            delegate.dynamicCellTapComment(sender, indexPath: indexPath)
+        }
+    }
+    
+    func tapShare(sender: UIButton) {
+        if delegate != nil {
+            delegate.dynamicCellTapShare(sender, indexPath: indexPath)
         }
     }
     

@@ -66,6 +66,21 @@ extension SettingViewController {
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.section {
+        case 0:
+            let vc = AccountViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case 1: ""
+        case 2:
+            let vc = AboutViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case 3: ""
+        case 4: ""
+        default:""
+        }
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return kHeight(50)
     }

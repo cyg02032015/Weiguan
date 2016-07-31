@@ -101,6 +101,24 @@ struct API {
     static let informationGet = baseURL + "/api/authentication/v1/information/get"
     /// 首页-推荐红人
     static let recommentHotman = baseURL + "/api/authentication/v1/recommendRed/get"
+    /// 点赞
+    static let like = baseURL + "/api/release/v1/like/create"
+    /// 取消点赞 
+    static let cancelLike = baseURL + "/api/release/v1/like/delete"
+    /// 点赞列表
+    static let likeList = baseURL + "/api/release/v1/likeList/get"
+    /// 发表评论
+    static let replyComment = baseURL + "/api/release/v1/reply/create"
+    /// 评论列表
+    static let commentList = baseURL + "/api/release/v1/replyList/get"
+    /// 获取个人动态，关注，粉丝数量
+    static let getDynamicFollowFansCount = baseURL + "/api/authentication/v1/content/get"
+    /// 是否点赞
+    static let isLike = baseURL + "/api/release/v1/isLike/get"
+    /// 机构个人信息
+    static let organizationInformation = baseURL + "/api/authentication/v1/agency/get"
+    /// 修改机构信息
+    static let modifyOrganization = baseURL + "/api/authentication/v1/agency/update"
     /// 全局常量
     static let globleDefine = baseURL + "/api/system/v1/constants"
     /// token
