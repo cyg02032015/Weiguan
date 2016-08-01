@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AddressBook
 
 private let friendCollectionCellId = "friendCollectionCellId"
 
@@ -22,7 +23,6 @@ class FriendViewController: YGBaseViewController {
     
     func setupSubViews() {
         title = "找好友"
-        
         let layout = UICollectionViewFlowLayout()
         let scaleSize = (ScreenWidth - 2) / 5
         layout.itemSize = CGSize(width: scaleSize, height: kScale(76))

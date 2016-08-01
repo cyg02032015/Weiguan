@@ -301,6 +301,7 @@
 		E4E5DED51D179BFD00CB8535 /* YKToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED41D179BFD00CB8535 /* YKToast.swift */; };
 		E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED61D179C0700CB8535 /* ColorDefine.swift */; };
 		E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED81D179E1000CB8535 /* YGPickerView.swift */; };
+		E4F9AFFB1D4F60FB00890948 /* YGContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9AFFA1D4F60FB00890948 /* YGContact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -673,6 +674,7 @@
 		E4E5DED41D179BFD00CB8535 /* YKToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKToast.swift; path = OutLookers/YKToast.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DED61D179C0700CB8535 /* ColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorDefine.swift; path = OutLookers/ColorDefine.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DED81D179E1000CB8535 /* YGPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPickerView.swift; path = OutLookers/YGPickerView.swift; sourceTree = SOURCE_ROOT; };
+		E4F9AFFA1D4F60FB00890948 /* YGContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGContact.swift; path = OutLookers/YGContact.swift; sourceTree = SOURCE_ROOT; };
 		E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1210,6 +1212,7 @@
 		D8F526CD1D16CAD1000C8F91 /* YKLib */ = {
 			isa = PBXGroup;
 			children = (
+				E4F9AFFA1D4F60FB00890948 /* YGContact.swift */,
 				E4E5DED41D179BFD00CB8535 /* YKToast.swift */,
 				E41B92671D3DF09500749769 /* ZSPasswordView.swift */,
 				E446FA141D2E29E6003DFC1E /* TouchLabel.swift */,
@@ -1995,6 +1998,7 @@
 				D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */,
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
 				D8B6414C1D36A4C900DF916D /* TalentDetailCell.swift in Sources */,
+				E4F9AFFB1D4F60FB00890948 /* YGContact.swift in Sources */,
 				D8EB0EB61D48E18F002E36F8 /* GetTokenResp.swift in Sources */,
 				E41B92711D3E008700749769 /* ModifyCell.swift in Sources */,
 				D81992601D44AE45007734C0 /* CircularEnrollPersonResp.swift in Sources */,
