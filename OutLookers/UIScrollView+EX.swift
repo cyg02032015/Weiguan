@@ -9,8 +9,8 @@
 import UIKit
 
 extension UIScrollView {
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.nextResponder()?.touchesBegan(touches, withEvent: event)
-        super.touchesBegan(touches, withEvent: event)
-    }
+//    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        self.nextResponder()?.touchesBegan(touches, withEvent: event)
+//        super.touchesBegan(touches, withEvent: event)
+//    }
 }

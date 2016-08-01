@@ -19,6 +19,7 @@ class YGBaseViewController: UIViewController {
     //MARK: -LifeCycle
     var back: UIButton!
     var backImgView: UIImageView!
+    var pageNo =  1
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = kBackgoundColor
@@ -53,6 +54,9 @@ class YGBaseViewController: UIViewController {
         rightNaviButton.titleLabel!.font = UIFont.systemFontOfSize(16)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightNaviButton)
         return rightNaviButton
+    }
+    
+    func loadMoreData() {
     }
     
     func tapMoreButton(sender: UIButton) {

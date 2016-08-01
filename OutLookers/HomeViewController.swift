@@ -24,6 +24,7 @@ class HomeViewController: YGBaseViewController {
     var statusView: UIView!
     lazy var hotmanList = [HotmanList]()
     var recommendObj: DynamicListResp!
+    lazy var recommends = [DynamicResult]()
     var collectionView: UICollectionView!
     var log: YGLogView!
 
@@ -49,6 +50,30 @@ class HomeViewController: YGBaseViewController {
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: .loadRecommendHotmanData, name: kRecieveGlobleDefineNotification, object: nil)
         setupSubViews()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { 
+            self.loadMoreData()
+        })
+    }
+    
+    override func loadMoreData() {
+        
+        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true) { (success, msg, value) in
+            self.tableView.mj_footer.endRefreshing()
+            if success {
+                guard let object = value else { return }
+                if object.list.count <= 0 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    return
+                }
+                self.recommendObj = object
+                self.recommends.appendContentsOf(object.list)
+                self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
     }
     
     func loadRecommendHotmanData() {
@@ -66,21 +91,25 @@ class HomeViewController: YGBaseViewController {
                 }
                 guard let object = value else { return }
                 self.recommendObj = object
+                self.recommends.appendContentsOf(object.list)
                 self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
             } else {
                 SVToast.dismiss()
-                LogError(msg)
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
             }
         }
     }
     
     func setupSubViews() {
         
-        tableView = UITableView(frame: CGRectZero, style: .Grouped)
+        tableView = UITableView(frame: CGRectZero, style: .Plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .None
         tableView.tableFooterView = UIView()
+        tableView.backgroundColor = kBackgoundColor
         tableView.estimatedRowHeight = kHeight(500)
         view.addSubview(tableView)
         tableView.registerClass(RecommendHotmanTableViewCell.self, forCellReuseIdentifier: recommendHotmanTableViewCellIdentifier)
@@ -130,7 +159,7 @@ extension HomeViewController: SDCycleScrollViewDelegate {
 // MARK: - UITableViewDelegate,UITableViewDataSource
 extension HomeViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return recommendObj == nil ? 0 : recommendObj.list.count
+        return recommends.count + 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -142,7 +171,7 @@ extension HomeViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCell
-            cell.info = recommendObj.list[indexPath.section]
+            cell.info = recommends[indexPath.section - 1]
             return cell
         }
     }
@@ -155,7 +184,7 @@ extension HomeViewController {
         if section == 0 {
             return 1
         } else {
-            return 3
+            return 1
         }
     }
     
@@ -182,20 +211,25 @@ extension HomeViewController {
         if section == 0 {
             return kHeight(43)
         } else {
-            return 0.01
+            return kHeight(10)
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hotmanList.count
+        return 10
+//        return hotmanList.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(recommendHotmanCollectionCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanCollectionCell
-        cell.info = hotmanList[indexPath.item]
+//        cell.info = hotmanList[indexPath.item]
         return cell
     }
     

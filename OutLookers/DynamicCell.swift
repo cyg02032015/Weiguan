@@ -46,9 +46,9 @@ class DynamicCell: UITableViewCell {
                 commentBtn.setTitle("评论", forState: .Normal)
             }
             if info.isVideo == 1 { // 不是视频
-                
+                videoImgView.hidden = true
             } else {
-                
+                videoImgView.hidden = false
             }
         }
     }
@@ -63,6 +63,7 @@ class DynamicCell: UITableViewCell {
     var followButton: UIButton!
     var praiseBtn: UIButton!
     var commentBtn: UIButton!
+    var videoImgView: UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -137,6 +138,16 @@ class DynamicCell: UITableViewCell {
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(10))
             make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
             make.left.equalTo(bigImgView.superview!)
+        }
+        
+        videoImgView = UIImageView()
+        videoImgView.backgroundColor = UIColor.yellowColor()
+        videoImgView.hidden = true
+        bigImgView.addSubview(videoImgView)
+        videoImgView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(videoImgView.superview!)
+            make.centerY.equalTo(videoImgView.superview!)
+            make.size.equalTo(kSize(73, height: 73))
         }
         
         details = UILabel()

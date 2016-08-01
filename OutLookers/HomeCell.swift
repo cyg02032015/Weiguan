@@ -9,13 +9,7 @@
 import UIKit
 
 class HomeCell: UITableViewCell {
-
-    var backImgView: UIImageView!
-    var headImgView: UIImageView!
-    var nameLabel: UILabel!
-    var zanButton: UIButton!
-    var commentButton: UIButton!
-    var detailLabel: UILabel!
+    
     var info: DynamicResult! {
         didSet {
             backImgView.yy_setImageWithURL(info.cover.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
@@ -25,6 +19,13 @@ class HomeCell: UITableViewCell {
             
         }
     }
+
+    var backImgView: UIImageView!
+    var headImgView: UIImageView!
+    var nameLabel: UILabel!
+    var zanButton: UIButton!
+    var commentButton: UIButton!
+    var detailLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -90,24 +91,11 @@ class HomeCell: UITableViewCell {
             make.left.equalTo(detailLabel.superview!).offset(kScale(15))
             make.right.equalTo(detailLabel.superview!).offset(kScale(-15))
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(10))
-        }
-        
-        let grayView = UIView()
-        grayView.backgroundColor = kBackgoundColor
-        contentView.addSubview(grayView)
-        grayView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(grayView.superview!)
-            make.top.equalTo(detailLabel.snp.bottom).offset(kScale(25))
-            make.height.equalTo(kScale(10))
-            make.bottom.lessThanOrEqualTo(grayView.superview!)
+            make.bottom.lessThanOrEqualTo(detailLabel.superview!).offset(kScale(-25))
         }
         
         zanButton.setTitle("赞TA", forState: .Normal)
         commentButton.setTitle("评论", forState: .Normal)
-//        backImgView.backgroundColor = UIColor.yellowColor()
-//        headImgView.backgroundColor = UIColor.redColor()
-//        nameLabel.text = "晨曦"
-//        detailLabel.text = "描述详情，最多三行，富余的用...描述详情，最多三行，富余的用...描述详情，最多三行，富余的用...描述详情，最多三行，富余的用..."
         
     }
     

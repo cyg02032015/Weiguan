@@ -17,6 +17,8 @@
 #import "HCSStarRatingView.h"
 #import "UINavigationBar+Awesome.h"
 #import <YYWebImage/YYWebImage.h>
+#import "MJRefresh.h"
+#import "MJRefreshConst.h"
 // 友盟头文件桥接
 #import "UMSocial.h"
 #import "WXApi.h"

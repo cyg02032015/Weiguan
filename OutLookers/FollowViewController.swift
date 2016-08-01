@@ -18,6 +18,13 @@ class FollowViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSubViews()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: {
+            
+        })
+    }
+    
+    func setupSubViews() {
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
