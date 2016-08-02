@@ -52,7 +52,8 @@ class InvitationDetailViewController: YGBaseViewController {
         tableView.registerClass(InvitationCircularCell.self, forCellReuseIdentifier: invitationCircularCellId)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(tableView.superview!)
+            make.left.right.equalTo(tableView.superview!)
+            make.top.equalTo(self.snp.topLayoutGuideBottom)
             make.bottom.equalTo(toolView.snp.top)
         }
         

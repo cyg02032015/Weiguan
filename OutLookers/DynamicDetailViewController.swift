@@ -35,9 +35,10 @@ class DynamicDetailViewController: YGBaseViewController {
         setupSubViews()
         loadData()
         loadMoreData()
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { 
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.loadMoreData()
         })
+        
     }
     
      func loadData() {
@@ -47,8 +48,7 @@ class DynamicDetailViewController: YGBaseViewController {
             if success {
                 guard let object = value else {return}
                 self.detailObj = object
-                let indexSet = NSIndexSet(index: 0)
-                self.tableView.reloadSections(indexSet, withRowAnimation: .None)
+                self.tableView.reloadData()
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
@@ -63,13 +63,10 @@ class DynamicDetailViewController: YGBaseViewController {
                 guard let object = value else {return}
                 if object.lists.count <= 0 {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    self.tableView.mj_footer.hidden = true
                 }
                 self.comments.appendContentsOf(object.lists)
-//                self.tableView.beginUpdates()
-                
-                let indexSet = NSIndexSet(index: 1)
-                self.tableView.reloadSections(indexSet, withRowAnimation: .None)
-//                self.tableView.endUpdates()
+                self.tableView.reloadData()
                 self.pageNo = self.pageNo + 1
             } else {
                 guard let m = msg else {return}
@@ -95,7 +92,6 @@ class DynamicDetailViewController: YGBaseViewController {
         tableView.registerClass(DynamicDetailVideoCell.self, forCellReuseIdentifier: dynamicDetailCellId)
         tableView.registerClass(CommentCell.self, forCellReuseIdentifier: commentCellId)
         tableView.separatorStyle = .None
-        tableView.tableFooterView = UIView()
         view.addSubview(tableView)
     }
     
@@ -145,8 +141,6 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
                 self.tableView.beginUpdates()
                 self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.comments.count - 1, inSection: 1)], withRowAnimation: .Automatic)
                 self.tableView.endUpdates()
-//                let indexSet = NSIndexSet(index: 1)
-//                self.tableView.reloadSections(indexSet, withRowAnimation: .Bottom)
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
