@@ -18,12 +18,13 @@ class CircularCell: UITableViewCell {
             Server.circularRecruitInformation(info.recruitment) { (success, msg, value) in
                 if success {
                     guard let list = value else {return}
-                    var str = ""
+                    var circulars = [String]()
                     list.forEach({ (information) in
-                        str = str.stringByAppendingString(information.categoryName)
+                        circulars.append(information.categoryName)
                     })
+                    
                     dispatch_async(dispatch_get_main_queue(), {
-                        self.recruitLabel.text = "招募: \(str)"
+                        self.recruitLabel.text = "招募: \(circulars.joinWithSeparator("/"))"
                     })
                 } else {
                     guard let m = msg else {return}
@@ -33,8 +34,7 @@ class CircularCell: UITableViewCell {
             
             let start = NSCalendar.currentCalendar().components([.Day, .Month], fromDate: info.startTime.dateFromString("yyyy-MM-dd")!)
             let end = NSCalendar.currentCalendar().components([.Day, .Month], fromDate: info.endTime.dateFromString("yyyy-MM-dd")!)
-            dayLabel.text = "\(start.month)月\(start.day)日-\(end.month)月\(end.day)日"
-            addressLabel.text = "\(info.province)|\(info.city)"
+            dayLabel.text = "\(start.month)月\(start.day)日-\(end.month)月\(end.day)日 \(info.province) | \(info.city)"
         }
     }
     
