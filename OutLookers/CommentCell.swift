@@ -10,6 +10,16 @@ import UIKit
 
 class CommentCell: UITableViewCell {
 
+    var info: CommentList! {
+        didSet {
+            headImgView.iconURL = info.headImgUrl
+            headImgView.setVimage(Util.userType(info.detailsType))
+            timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
+            nameLabel.text = info.nickname
+            detail.text = info.text
+        }
+    }
+    
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
     var timeLabel: UILabel!

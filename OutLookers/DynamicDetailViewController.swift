@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 private let dynamicDetailCellId = "dynamicDetailCellId"
 private let commentCellId = "commentCellId"
 
 class DynamicDetailViewController: YGBaseViewController {
 
+    var dynamicObj: DynamicResult!
     var tableView: UITableView!
-    
+    var detailObj: DynamicDetailResp!
+    lazy var comments = [CommentList]()
+    lazy var req = ReplyCommentReq()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,6 +32,53 @@ class DynamicDetailViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSubViews()
+        loadData()
+        loadMoreData()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { 
+            self.loadMoreData()
+        })
+    }
+    
+     func loadData() {
+        SVToast.show()
+        Server.dynamicDetail("\(dynamicObj.id)") { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                guard let object = value else {return}
+                self.detailObj = object
+                let indexSet = NSIndexSet(index: 0)
+                self.tableView.reloadSections(indexSet, withRowAnimation: .None)
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
+    
+    override func loadMoreData() {
+        Server.commentList(pageNo, dynamicId: "\(dynamicObj.id)") { (success, msg, value) in
+            self.tableView.mj_footer.endRefreshing()
+            if success {
+                guard let object = value else {return}
+                if object.lists.count <= 0 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                self.comments.appendContentsOf(object.lists)
+//                self.tableView.beginUpdates()
+                
+                let indexSet = NSIndexSet(index: 1)
+                self.tableView.reloadSections(indexSet, withRowAnimation: .None)
+//                self.tableView.endUpdates()
+                self.pageNo = self.pageNo + 1
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
+    
+    func setupSubViews() {
         title = "动态详情"
         let toolbarHeight = DXMessageToolBar.defaultHeight()
         let toolbar = DXMessageToolBar(frame: CGRect(x: 0, y: view.gg_height - toolbarHeight, width: ScreenWidth, height: toolbarHeight))
@@ -40,6 +91,7 @@ class DynamicDetailViewController: YGBaseViewController {
         tableView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = kHeight(561)
         tableView.registerClass(DynamicDetailVideoCell.self, forCellReuseIdentifier: dynamicDetailCellId)
         tableView.registerClass(CommentCell.self, forCellReuseIdentifier: commentCellId)
         tableView.separatorStyle = .None
@@ -66,8 +118,40 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
         scrollViewToBottom(false)
     }
     
+    func inputTextViewWillBeginEditing(messageInputTextView: XHMessageTextView!) {
+        req.dynamicId = "\(detailObj.id)"
+    }
+    
     func didSendText(text: String!) {
-        LogInfo("send --- = \(text)")
+        if isEmptyString(text) {
+            SVToast.showWithError("评论为空")
+            return
+        }
+        req.text = text
+        SVToast.show()
+        Server.replyComment(req, handler: { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                SVToast.showWithSuccess("发表成功")
+                let comment = CommentList(fromJson: JSON(nilLiteral: ()))
+                comment.createTime = NSDate().stringFromCreate()
+                comment.headImgUrl = ""
+                comment.nickname = "崔永国"
+                comment.text = self.req.text
+                comment.id = self.detailObj.id
+                comment.detailsType = 0
+                comment.replyId = self.req.replyId == nil ? 0 : Int(self.req.replyId!)
+                self.comments.append(comment)
+                self.tableView.beginUpdates()
+                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.comments.count - 1, inSection: 1)], withRowAnimation: .Automatic)
+                self.tableView.endUpdates()
+//                let indexSet = NSIndexSet(index: 1)
+//                self.tableView.reloadSections(indexSet, withRowAnimation: .Bottom)
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        })
     }
 }
 
@@ -78,25 +162,28 @@ extension DynamicDetailViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return detailObj == nil ? 0 : 1
         } else {
-            return 10
+            return comments.count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(dynamicDetailCellId, forIndexPath: indexPath) as! DynamicDetailVideoCell
+            cell.info = detailObj
+            cell.userInfo = dynamicObj
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(commentCellId, forIndexPath: indexPath) as! CommentCell
+            cell.info = comments[indexPath.row]
             return cell
         }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return kHeight(561)
+            return UITableViewAutomaticDimension
         } else {
             return kHeight(61)
         }
@@ -112,7 +199,8 @@ extension DynamicDetailViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
-            
+            let obj = comments[indexPath.row]
+            req.replyId = "\(obj.replyId)"
         }
     }
 }

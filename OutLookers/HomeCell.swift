@@ -16,7 +16,12 @@ class HomeCell: UITableViewCell {
             headImgView.yy_setImageWithURL(info.photo.addImagePath(kSize(36, height: 36)), placeholder: kPlaceholder)
             nameLabel.text = info.name
             detailLabel.text = info.text
-            
+            if info.replyCount > 0 {
+                commentButton.setTitle("\(info.replyCount)", forState: .Normal)
+            }
+            if info.likeCount > 0 {
+                zanButton.setTitle("\(info.likeCount)", forState: .Normal)
+            }
         }
     }
 

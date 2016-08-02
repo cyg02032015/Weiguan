@@ -17,6 +17,10 @@ extension NSDate {
         return formatter.stringFromDate(self)
     }
     
+    func stringFromCreate() -> String {
+        return stringFromDateWith("yyyy-MM-dd HH:mm:ss.S")
+    }
+    
     func stringFromDate() -> String {
         return stringFromDateWith("yyyy-MM-dd HH:mm")
     }
@@ -48,12 +52,12 @@ extension NSDate {
             formatterString = "昨天" + formatterString
         } else {
             //判断是否是一年内
-            formatterString = "MM-dd" + formatterString
+            formatterString = "MM-dd " + formatterString
             //判断是否是更早期
             let comps = calendar.components(NSCalendarUnit.Year, fromDate: self, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))
             
             if comps.year >= 1 {
-                formatterString = "yyyy-" + formatterString
+                formatterString = "yyyy- " + formatterString
             }
         }
         

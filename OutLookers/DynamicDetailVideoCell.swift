@@ -8,8 +8,111 @@
 
 import UIKit
 
+let talentPadding: CGFloat = 15
+
+
 class DynamicDetailVideoCell: UITableViewCell {
 
+    var info: DynamicDetailResp! {
+        didSet {
+            timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
+            let imgUrl = info.pictureList[0].url
+            bigImgView.yy_setImageWithURL(imgUrl.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
+            details.text = info.text
+            let padding: CGFloat = 8
+            let container = UIView()
+            contentView.addSubview(container)
+            container.frame = CGRect(x: talentPadding, y: details.gg_bottom + 10, width: contentView.gg_width - 2 * talentPadding, height: 0)
+            var totalWidth: CGFloat = 0
+            var totalHeight: CGFloat = 0
+            var labelX: CGFloat = 0
+            var labelY: CGFloat = 0
+            for (idx, talent) in info.talentList.enumerate() {
+                let index = CGFloat(idx)
+                let label = UILabel.createLabel(12, textColor: kGrayTextColor)
+                label.textAlignment = .Center
+                label.backgroundColor = UIColor.blackColor()
+                label.text = talent.name
+                container.addSubview(label)
+                let size = (talent.name as NSString).sizeWithFonts(12)
+                // 加边距
+                let labelW = size.width + 15
+                let labelH = size.height + 3
+                if index > 0 {
+                    labelX = totalWidth + padding
+                }
+                totalWidth = labelX + labelW
+                if container.gg_width < totalWidth {
+                    labelX = 0
+                    totalWidth = labelW// + padding
+                    labelY = labelH + padding + labelY
+                }
+                totalHeight = labelY + labelH
+                label.frame = CGRect(x: labelX, y: labelY, width: labelW, height: labelH)
+            }
+            container.gg_height = totalHeight
+            
+            let lineV = UIView()
+            lineV.backgroundColor = kLineColor
+            contentView.addSubview(lineV)
+            lineV.snp.makeConstraints { (make) in
+                make.left.equalTo(lineV.superview!).offset(kScale(15))
+                make.right.equalTo(lineV.superview!).offset(kScale(-15))
+                make.height.equalTo(1)
+                make.top.equalTo(container.snp.bottom).offset(kScale(10))
+            }
+            
+            praiseButton = UIButton()
+            praiseButton.setImage(UIImage(named: "like"), forState: .Normal)
+            praiseButton.setImage(UIImage(named: "like_chosen"), forState: .Selected)
+            contentView.addSubview(praiseButton)
+            praiseButton.snp.makeConstraints { (make) in
+                make.left.equalTo(lineV)
+                make.top.equalTo(lineV.snp.bottom).offset(kScale(10))
+                make.size.equalTo(kSize(30, height: 30))
+                make.bottom.lessThanOrEqualTo(praiseButton.superview!).offset(kScale(-15)).priorityLow()
+            }
+            
+            shareButton = UIButton()
+            shareButton.setImage(UIImage(named: "share"), forState: .Normal)
+            contentView.addSubview(shareButton)
+            shareButton.snp.makeConstraints { (make) in
+                make.right.equalTo(shareButton.superview!).offset(kScale(-15))
+                make.centerY.equalTo(praiseButton)
+                make.size.equalTo(praiseButton)
+            }
+            
+            let layout = UICollectionViewFlowLayout()
+            layout.headerReferenceSize = CGSize(width: ScreenWidth, height: kScale(60))
+            layout.itemSize = CGSize(width: (ScreenWidth - 2) / 3, height: kHeight(100))
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+            layout.minimumLineSpacing = 20
+            layout.minimumInteritemSpacing = 0
+            collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+            collectionView.backgroundColor = kBackgoundColor
+            collectionView.delegate = self
+            collectionView.dataSource = self
+            contentView.addSubview(collectionView)
+            collectionView.snp.makeConstraints { (make) in
+                make.left.equalTo(praiseButton.snp.right).offset(kScale(10))
+                make.right.equalTo(shareButton.snp.left).offset(kScale(-10))
+                make.centerY.equalTo(praiseButton)
+                make.height.equalTo(kScale(40))
+            }
+            
+        }
+    }
+    
+    var userInfo: DynamicResult! {
+        didSet {
+            headImgView.iconURL = userInfo.photo
+            headImgView.setVimage(Util.userType(userInfo.detailsType))
+            nameLabel.text = userInfo.name
+        }
+    }
+    var praiseButton: UIButton!
+    var shareButton: UIButton!
+    var collectionView: UICollectionView!
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
     var timeLabel: UILabel!
@@ -91,14 +194,20 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.right.equalTo(details.superview!).offset(kScale(-15))
             make.height.equalTo(kScale(16))
         }
-        
-        bigImgView.backgroundColor = UIColor.greenColor()
-        details.text = "sdfsdfs"
-        
+        layoutIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+extension DynamicDetailVideoCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
 }

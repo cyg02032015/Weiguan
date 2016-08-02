@@ -56,6 +56,7 @@ class CommentList {
     var replyNickname : AnyObject!
     var text : String!
     var userId : Int!
+    var detailsType: Int!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -70,5 +71,6 @@ class CommentList {
         replyNickname = json["replyNickname"].stringValue
         text = json["text"].stringValue
         userId = json["userId"].intValue
+        detailsType = json["detailsType"].intValue
     }
 }

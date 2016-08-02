@@ -77,7 +77,7 @@ class HomeViewController: YGBaseViewController {
     }
     
     func loadRecommendHotmanData() {
-        Server.dynamicList(1, state: 2, isPerson: false, isHome: true) { (success, msg, value) in
+        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true) { (success, msg, value) in
             if success {
                 Server.homeRecommendHotman { (success, msg, value) in
                     SVToast.dismiss()
@@ -177,7 +177,10 @@ extension HomeViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        log.animation()
+        let obj = recommends[indexPath.section - 1]
+        let vc = DynamicDetailViewController()
+        vc.dynamicObj = obj
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
