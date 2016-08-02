@@ -29,6 +29,7 @@ class GlobleDeineAPI {
     var citiesUrlVersion : String!
     var imageUrlPrefix : String!
     var videoUrlPrefix : String!
+    var videoSnapshotPrefix: String!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -38,5 +39,6 @@ class GlobleDeineAPI {
         citiesUrlVersion = json["citiesUrlVersion"].stringValue
         imageUrlPrefix = json["imageUrlPrefix"].stringValue
         videoUrlPrefix = json["videoUrlPrefix"].stringValue
+        videoSnapshotPrefix = json["videoSnapshotPrefix"].stringValue
     }
 }

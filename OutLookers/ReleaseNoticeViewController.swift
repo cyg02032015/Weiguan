@@ -79,7 +79,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     }
     
     func getToken() {
-        Server.getUpdateFileToken { [unowned self](success, msg, value) in
+        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
             guard let object = value else {
                 LogError("获取token失败")
                 return
@@ -320,23 +320,26 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     }
     // MARK: 发布按钮
     func tapReleaseButton(sender: UIButton) {
+        SVToast.show()
         OSSImageUploader.asyncUploadImages(tokenObject, images: photoArray) { [unowned self](names, state) in
             if state == .Success {
                 self.req.picture = names.joinWithSeparator(",")
                 self.req.cover = names[0]
                 Server.getReleaseNotice(self.req) { [unowned self](success, msg, value) in
+                    SVToast.dismiss()
                     if success {
-                        LogInfo(value)
                         self.dismissViewControllerAnimated(true, completion: {
                             self.photoArray.removeAll()
                         })
                     } else {
-                        LogError(msg)
-                        YKToast.makeText(msg!)
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
                     }
                 }
             } else {
-                LogError("上传图片失败")
+                SVToast.dismiss()
+                SVToast.showWithError("上传图片失败")
+                
             }
         }
         

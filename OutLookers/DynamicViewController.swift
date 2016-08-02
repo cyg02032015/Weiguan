@@ -88,7 +88,9 @@ extension DynamicViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let obj = dynamicLists[indexPath.section]
         let vc = DynamicDetailViewController()
+        vc.dynamicObj = obj
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -102,7 +102,7 @@ class EditSkillViewController: YGBaseViewController {
     }
     
     func getToken() {
-        Server.getUpdateFileToken { [unowned self](success, msg, value) in
+        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
             guard let object = value else {
                 LogError("获取token失败")
                 return
@@ -250,11 +250,10 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
     func tapReleaseButton(sender: UIButton) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
-        
+        SVToast.show()
         // 上传作品集封面
         if coverImage != nil {
             dispatch_group_async(group, queue) { [unowned self] in
-                LogWarn("group cover")
                 dispatch_group_enter(group)
                 OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.coverImage, complete: { (names, state) in
                     dispatch_group_leave(group)
@@ -262,7 +261,8 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
                         self.req.worksCover = names.first
                     } else {
                         self.req.worksCover = ""
-                        LogError("上传封面失败")
+                        SVToast.dismiss()
+                        SVToast.showWithError("上传封面失败")
                     }
                 })
             }
@@ -270,14 +270,14 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
         
         if videoURL != nil {
             dispatch_group_async(group, queue, { [unowned self] in
-                LogWarn("group video")
                 dispatch_group_enter(group)
                 OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoURL, complete: { (id, state) in
                     dispatch_group_leave(group)
                     if state == .Success {
                         self.req.worksVideo = id
                     } else {
-                        LogError("上传视频失败")
+                        SVToast.dismiss()
+                        SVToast.showWithError("上传视频失败")
                     }
                 })
             })
@@ -285,14 +285,14 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
         
         if self.photoArray.count > 0 {
             dispatch_group_async(group, queue) { [unowned self] in
-                LogWarn("group images")
                 dispatch_group_enter(group)
                 OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photoArray, complete: { (names, state) in
                     dispatch_group_leave(group)
                     if state == .Success {
                         self.req.worksPicture = names.joinWithSeparator(",")
                     } else {
-                        LogError("上传图片门失败")
+                        SVToast.dismiss()
+                        SVToast.showWithError("上传图片失败")
                     }
                 })
             }
@@ -300,6 +300,7 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
         
         dispatch_group_notify(group, queue) { [unowned self] in
             Server.releaseTalent(self.req, handler: { (success, msg, value) in
+                SVToast.dismiss()
                 if success {
                     LogInfo(value!)
                     self.dismissViewControllerAnimated(true, completion: { [unowned self] in
@@ -307,7 +308,8 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
                         self.originPhotoArray.removeAll()
                         })
                 } else {
-                    LogError("提交失败 = \(msg)")
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
                 }
 
             })

@@ -1001,9 +1001,25 @@ class Server {
     }
 
     /// 上传token获取
-    class func getUpdateFileToken(handler: (success: Bool, msg: String?, value: GetToken?)->Void) {
-        HttpTool.post(API.getToken, parameters: nil, complete: { (response) in
+    class func getUpdateFileToken(type: TokenType, handler: (success: Bool, msg: String?, value: GetToken?)->Void) {
+        let parameters = ["type": type.rawValue]
+        HttpTool.post(API.getToken, parameters: parameters, complete: { (response) in
             let info = GetTokenResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 获取视频截图列表
+    class func getSanpshots(id: String, handler: (success: Bool, msg: String?, value: [String]?)->Void) {
+        let parameters = ["id":id]
+        HttpTool.post(API.getSnapshots, parameters: parameters, complete: { (response) in
+            let info = SnapshotsResp(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)
             } else {

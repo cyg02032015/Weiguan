@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 let talentPadding: CGFloat = 15
 
@@ -15,10 +16,39 @@ class DynamicDetailVideoCell: UITableViewCell {
 
     var info: DynamicDetailResp! {
         didSet {
+            guard let url = info.pictureList.first?.url else {return}
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
-            let imgUrl = info.pictureList[0].url
-            bigImgView.yy_setImageWithURL(imgUrl.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
+            bigImgView.yy_setImageWithURL(url.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
             details.text = info.text
+            
+            if shareButton != nil {
+                return
+            }
+
+            // 图片还是视频
+            if info.isVideo == "1" {  // 图片
+                bigImgView.hidden = false
+                player.hidden = true
+            } else { // 视频
+                bigImgView.hidden = true
+                player.hidden = false
+                Server.getSanpshots("\(info.cover)", handler: { [unowned self](success, msg, value) in
+                    if success {
+                        guard let object = value else {return}
+                        let item = self.preparePlayerItem(object[0].addSnapshots(), url: url.addVideoPath())
+                        self.player.playWithPlayerItem(item)
+                        LogDebug(url.addVideoPath())
+                    } else {
+                        let item = self.preparePlayerItem("http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E5%9B%BE%E7%89%87&hs=0&pn=0&spn=0&di=125546894880&pi=&rn=1&tn=baiduimagedetail&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=1003704465%2C1400426357&os=4246966059%2C4277404619&simid=4210997991%2C798394471&adpicid=0&ln=30&fr=ala&fm=&sme=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fpic25.nipic.com%2F20121112%2F5955207_224247025000_2.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bgtrtv_z%26e3Bv54AzdH3Ffi5oAzdH3FnAzdH3F0nAzdH3F0al8l0mhdj9v1c9n_z%26e3Bip4s&gsm=0", url: url.addVideoPath())
+                        LogDebug(url.addVideoPath())
+                        self.player.playWithPlayerItem(item)
+                        LogError("获取视频截图失败 = \(msg)")
+                    }
+                })
+            }
+            
+            
+            // talent tags 实现
             let padding: CGFloat = 8
             let container = UIView()
             contentView.addSubview(container)
@@ -52,6 +82,7 @@ class DynamicDetailVideoCell: UITableViewCell {
             }
             container.gg_height = totalHeight
             
+            // 线条底部布局
             let lineV = UIView()
             lineV.backgroundColor = kLineColor
             contentView.addSubview(lineV)
@@ -110,6 +141,7 @@ class DynamicDetailVideoCell: UITableViewCell {
             nameLabel.text = userInfo.name
         }
     }
+    var player: BMPlayer!
     var praiseButton: UIButton!
     var shareButton: UIButton!
     var collectionView: UICollectionView!
@@ -179,11 +211,26 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
         
         bigImgView = UIImageView()
+        bigImgView.hidden = true
         contentView.addSubview(bigImgView)
         bigImgView.snp.makeConstraints { (make) in
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
             make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
             make.left.equalTo(bigImgView.superview!)
+        }
+        
+        player = BMPlayer()
+        player.hidden = true
+        BMPlayerConf.allowLog = false
+        BMPlayerConf.shouldAutoPlay = true
+        BMPlayerConf.tintColor = UIColor.whiteColor()
+        BMPlayerConf.topBarShowInCase = .None
+        BMPlayerConf.loaderType  = NVActivityIndicatorType.BallRotateChase
+        contentView.addSubview(player)
+        player.snp.makeConstraints { (make) in
+            make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
+            make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
+            make.left.equalTo(player.superview!)
         }
         
         details = UILabel.createLabel(16, textColor: UIColor(hex: 0x666666))
@@ -196,6 +243,21 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
         layoutIfNeeded()
     }
+    
+    func preparePlayerItem(cover: String, url: String) -> BMPlayerItem {
+        let resource0 = BMPlayerItemDefinitionItem(url: NSURL(string: url)!,
+                                                   definitionName: "高清")
+        
+        let item    = BMPlayerItem(title: "",
+                                   resource: [resource0,],
+                                   cover: cover)
+        return item
+    }
+    
+    deinit {
+        player.prepareToDealloc()
+    }
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

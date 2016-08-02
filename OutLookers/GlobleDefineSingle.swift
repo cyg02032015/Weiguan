@@ -18,4 +18,5 @@ class GlobleDefineSingle {
     var vedioPath: String!
     var citiesUrl: String!
     var version: String!
+    var videoSnapshotPrefix: String!
 }

@@ -32,6 +32,14 @@ extension String {
         return noChangLine
     }
     
+    func addSnapshots() -> String {
+        return globleSingle.videoSnapshotPrefix + self
+    }
+    
+    func addVideoPath() -> String {
+        return globleSingle.vedioPath + self
+    }
+    
     func addImagePath(size: CGSize) -> NSURL {
         return NSURL(string: globleSingle.imagePath + self + "@\(Int(size.width))h_\(Int(size.height))w.webp")!
     }

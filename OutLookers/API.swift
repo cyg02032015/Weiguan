@@ -123,4 +123,6 @@ struct API {
     static let globleDefine = baseURL + "/api/system/v1/constants"
     /// token
     static let getToken = baseURL + "/api/file/v1/getAppToken"
+    /// 获取视频截图列表
+    static let getSnapshots = baseURL + "/api/file/v1/getSnapshots"
 }

@@ -19,6 +19,7 @@ class DynamicDetailViewController: YGBaseViewController {
     var detailObj: DynamicDetailResp!
     lazy var comments = [CommentList]()
     lazy var req = ReplyCommentReq()
+    var toolbar: DXMessageToolBar!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,7 +36,7 @@ class DynamicDetailViewController: YGBaseViewController {
         setupSubViews()
         loadData()
         loadMoreData()
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
         })
         
@@ -78,7 +79,7 @@ class DynamicDetailViewController: YGBaseViewController {
     func setupSubViews() {
         title = "动态详情"
         let toolbarHeight = DXMessageToolBar.defaultHeight()
-        let toolbar = DXMessageToolBar(frame: CGRect(x: 0, y: view.gg_height - toolbarHeight, width: ScreenWidth, height: toolbarHeight))
+        toolbar = DXMessageToolBar(frame: CGRect(x: 0, y: view.gg_height - toolbarHeight, width: ScreenWidth, height: toolbarHeight))
         toolbar.maxTextInputViewHeight = 80
         toolbar.autoresizingMask = [.FlexibleTopMargin, .FlexibleRightMargin]
         toolbar.delegate = self
@@ -146,6 +147,7 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
                 SVToast.showWithError(m)
             }
         })
+        toolbar.endEditing(true)
     }
 }
 

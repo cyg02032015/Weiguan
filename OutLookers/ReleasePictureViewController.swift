@@ -63,7 +63,7 @@ class ReleasePictureViewController: YGBaseViewController {
     }
     
     func getToken() {
-        Server.getUpdateFileToken { (success, msg, value) in
+        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
             guard let object = value else {
                 LogError("获取token失败")
                 return
@@ -246,9 +246,8 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
 
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
-        
+        SVToast.show("正在上传图片")
         dispatch_group_async(group, queue) { [unowned self] in
-            LogWarn("group cover")
             dispatch_group_enter(group)
             OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.photos[0], complete: { (names, state) in
                 dispatch_group_leave(group)
@@ -256,12 +255,12 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                     self.req.cover = names.first
                 } else {
                     self.req.cover = ""
-                    LogError("上传封面失败")
+                    SVToast.dismiss()
+                    SVToast.showWithError("上传封面失败")
                 }
             })
         }
         dispatch_group_async(group, queue) { [unowned self] in
-            LogWarn("group images")
             dispatch_group_enter(group)
             OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photos, complete: { (names, state) in
                 dispatch_group_leave(group)
@@ -269,13 +268,14 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                     self.req.picture = names.joinWithSeparator(",")
                 } else {
                     self.req.picture = ""
-                    LogError("上传图片门失败")
+                    SVToast.dismiss()
+                    SVToast.showWithError("上传图片门失败")
                 }
             })
         }
         dispatch_group_notify(group, queue) { [unowned self] in
-            LogWarn("group notify")
             Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
+                SVToast.dismiss()
                 if success {
                     LogInfo(value!)
                     self.dismissViewControllerAnimated(true, completion: { [unowned self] in
@@ -283,7 +283,8 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                         self.originPhotos.removeAll()
                         })
                 } else {
-                    LogError("提交失败 = \(msg)")
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
                 }
             })
         }

@@ -14,6 +14,11 @@ private let videoCoverIdentifier = "videoCoverId"
 private let editTextViewIdentifier = "editTextViewId"
 private let shareCellIdentifier = "shareCellId"
 
+enum TokenType: String {
+    case Picture = "1"
+    case Video = "2"
+}
+
 private extension Selector {
     static let tapReleaseButton = #selector(ReleaseVideoViewController.tapReleaseButton(_:))
 }
@@ -26,7 +31,8 @@ class ReleaseVideoViewController: YGBaseViewController {
     var releaseButton: UIButton!
     lazy var req = ReleasePicAndVideoReq()
     var coverImage: UIImage!
-    var tokenObject: GetToken!
+    var videoToken: GetToken!
+    var picToken: GetToken!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -72,12 +78,19 @@ class ReleaseVideoViewController: YGBaseViewController {
     }
     
     func getToken() {
-        Server.getUpdateFileToken { (success, msg, value) in
+        Server.getUpdateFileToken(.Video) { (success, msg, value) in
             guard let object = value else {
                 LogError("获取token失败")
                 return
             }
-            self.tokenObject = object
+            self.videoToken = object
+        }
+        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
+            guard let object = value else {
+                LogError("获取token失败")
+                return
+            }
+            self.picToken = object
         }
     }
     
@@ -174,7 +187,7 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
         SVToast.show("正在上传视频")
         dispatch_group_async(group, queue) { [unowned self] in
             dispatch_group_enter(group)
-            OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoUrl) { (id, state) in
+            OSSVideoUploader.asyncUploadVideo(self.videoToken, videoURL: self.videoUrl) { (id, state) in
                 dispatch_group_leave(group)
                 if state == .Success {
                     self.req.picture = id
@@ -186,7 +199,7 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
         }
         dispatch_group_async(group, queue) { [unowned self] in
             dispatch_group_enter(group)
-            OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.coverImage, complete: { (names, state) in
+            OSSImageUploader.asyncUploadImage(self.picToken, image: self.coverImage, complete: { (names, state) in
                 dispatch_group_leave(group)
                 if state == .Success {
                     self.req.cover = names[0]

@@ -147,6 +147,7 @@ func configGlobleDefine() {
             globleSingle.vedioPath = item.videoUrlPrefix
             globleSingle.imagePath = item.imageUrlPrefix
             globleSingle.citiesUrl = item.citiesUrl
+            globleSingle.videoSnapshotPrefix = item.videoSnapshotPrefix
             NSNotificationCenter.defaultCenter().postNotificationName(kRecieveGlobleDefineNotification, object: nil, userInfo: nil)
             if YGCityVersion.loadCityVersion() == "" || YGCityVersion.loadCityVersion() != item.citiesUrlVersion { // 如果版本不存在或者版本不一致
                 let version = YGCityVersion(version: item.citiesUrlVersion) // 保存版本号
