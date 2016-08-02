@@ -87,5 +87,9 @@ extension FindViewController: TYSlidePageScrollViewDataSource, TYSlidePageScroll
     func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, horizenScrollViewDidEndDecelerating scrollView: UIScrollView!) {
         LogInfo("end")
     }
+    
+    func slidePageScrollView(slidePageScrollView: TYSlidePageScrollView!, horizenScrollToPageIndex index: Int) {
+        LogInfo(index)
+    }
 }
 

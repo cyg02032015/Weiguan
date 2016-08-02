@@ -13,9 +13,32 @@ private let circularCellId = "circularCellId"
 class CircularViewController: YGBaseViewController {
 
     var tableView: UITableView!
+    lazy var circulars = [FindNotice]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        loadMoreData()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
+            self.loadMoreData()
+        })
+    }
+    
+    override func loadMoreData() {
+        Server.getFindNoticeList(pageNo, state: 1, isPerson: false) { (success, msg, value) in
+            self.tableView.mj_footer.endRefreshing()
+            if success {
+                guard let object = value else {return}
+                if object.findNoticeResult.count <= 0 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                self.circulars.appendContentsOf(object.findNoticeResult)
+                self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
     }
     
     func setupSubViews() {
@@ -35,7 +58,7 @@ class CircularViewController: YGBaseViewController {
 
 extension CircularViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return circulars.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,6 +67,7 @@ extension CircularViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(circularCellId, forIndexPath: indexPath) as! CircularCell
+        cell.info = circulars[indexPath.section]
         return cell
     }
 }

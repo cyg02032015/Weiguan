@@ -10,6 +10,16 @@ import UIKit
 
 class HotmanCell: UITableViewCell {
 
+    var info: FindeHotman! {
+        didSet {
+            imgView.yy_setImageWithURL(info.headImgUrl.addImagePath(CGSize(width: imgView.gg_width, height: imgView.gg_height)), placeholder: kPlaceholder)
+            nameLabel.text = info.nickname
+            jobLabel.text = "没有字段"
+            picCount.text = "0"
+            videoCount.text = "0"
+        }
+    }
+    
     var imgView: UIImageView!
     var nameLabel: UILabel!
     var jobLabel: UILabel!
@@ -88,12 +98,9 @@ class HotmanCell: UITableViewCell {
             make.centerY.equalTo(pic)
             make.height.equalTo(picCount)
         }
-        
-        imgView.backgroundColor = UIColor.yellowColor()
-        nameLabel.text = "晨曦"
-        jobLabel.text = "爆款模特"
-        picCount.text = "9"
-        videoCount.text = "9"
+        layoutIfNeeded()
+//        picCount.text = "9"
+//        videoCount.text = "9"
         
     }
     

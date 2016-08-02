@@ -224,7 +224,7 @@ class DynamicDetailVideoCell: UITableViewCell {
         BMPlayerConf.allowLog = false
         BMPlayerConf.shouldAutoPlay = true
         BMPlayerConf.tintColor = UIColor.whiteColor()
-        BMPlayerConf.topBarShowInCase = .None
+        BMPlayerConf.topBarShowInCase = .HorizantalOnly
         BMPlayerConf.loaderType  = NVActivityIndicatorType.BallRotateChase
         contentView.addSubview(player)
         player.snp.makeConstraints { (make) in

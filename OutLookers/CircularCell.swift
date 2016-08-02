@@ -10,6 +10,34 @@ import UIKit
 
 class CircularCell: UITableViewCell {
 
+    var info: FindNotice! {
+        didSet {
+            imgView.yy_setImageWithURL(info.picture.addImagePath(CGSize(width: ScreenWidth, height: kScale(210))), placeholder: kPlaceholder)
+            subjectLabel.text = info.theme
+            
+            Server.circularRecruitInformation(info.recruitment) { (success, msg, value) in
+                if success {
+                    guard let list = value else {return}
+                    var str = ""
+                    list.forEach({ (information) in
+                        str = str.stringByAppendingString(information.categoryName)
+                    })
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.recruitLabel.text = "招募: \(str)"
+                    })
+                } else {
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
+                }
+            }
+            
+            let start = NSCalendar.currentCalendar().components([.Day, .Month], fromDate: info.startTime.dateFromString("yyyy-MM-dd")!)
+            let end = NSCalendar.currentCalendar().components([.Day, .Month], fromDate: info.endTime.dateFromString("yyyy-MM-dd")!)
+            dayLabel.text = "\(start.month)月\(start.day)日-\(end.month)月\(end.day)日"
+            addressLabel.text = "\(info.province)|\(info.city)"
+        }
+    }
+    
     var imgView: UIImageView!
     var subjectLabel: UILabel!
     var recruitLabel: UILabel!

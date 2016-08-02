@@ -13,9 +13,31 @@ private let hotmanCellId = "hotmanCellId"
 class HotManViewController: YGBaseViewController {
 
     var tableView: UITableView!
+    lazy var hotmans = [FindeHotman]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        loadMoreData()
+//        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
+//            self.loadMoreData()
+//        })
+    }
+    
+    override func loadMoreData() {
+        Server.findHotman { (success, msg, value) in
+//            self.tableView.mj_footer.endRefreshing()
+            if success {
+                guard let list = value else {return}
+//                if list.count <= 0 {
+//                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+//                }
+                self.hotmans.appendContentsOf(list)
+                self.tableView.reloadData()
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
     }
     
     func setupSubViews() {
@@ -35,7 +57,7 @@ class HotManViewController: YGBaseViewController {
 
 extension HotManViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return hotmans.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,11 +66,12 @@ extension HotManViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(hotmanCellId, forIndexPath: indexPath) as! HotmanCell
+        cell.info = hotmans[indexPath.section]
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = DynamicDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = DynamicDetailViewController()
+//        navigationController?.pushViewController(vc, animated: true)
     }
 }

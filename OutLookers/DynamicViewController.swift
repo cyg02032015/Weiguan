@@ -33,7 +33,9 @@ class DynamicViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
+        SVToast.show()
         Server.dynamicList(pageNo, state: 1, isPerson: false, isHome: false) { (success, msg, value) in
+            SVToast.dismiss()
             self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else {return}
