@@ -247,33 +247,43 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
         SVToast.show("正在上传图片")
-        dispatch_group_async(group, queue) { [unowned self] in
-            dispatch_group_enter(group)
-            OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.photos[0], complete: { (names, state) in
-                dispatch_group_leave(group)
-                if state == .Success {
-                    self.req.cover = names.first
-                } else {
-                    self.req.cover = ""
-                    SVToast.dismiss()
-                    SVToast.showWithError("上传封面失败")
-                }
-            })
+        if self.photos.count > 0 {
+            LogInfo(self.photos)
+            dispatch_group_async(group, queue) {
+                dispatch_group_enter(group)
+                OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.photos[0], complete: { (names, state) in
+                    dispatch_group_leave(group)
+                    LogDebug("进入上传封面")
+                    if state == .Success {
+                        self.req.cover = names.first
+                    } else {
+                        SVToast.dismiss()
+                        SVToast.showWithError("上传封面失败")
+                    }
+                })
+            }
+            
+            dispatch_group_async(group, queue) {
+                dispatch_group_enter(group)
+                OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photos, complete: { (names, state) in
+                    dispatch_group_leave(group)
+                    LogDebug("进入上传图片")
+                    if state == .Success {
+                        self.req.picture = names.joinWithSeparator(",")
+                    } else {
+                        SVToast.dismiss()
+                        SVToast.showWithError("上传图片失败")
+                    }
+                })
+            }
         }
-        dispatch_group_async(group, queue) { [unowned self] in
-            dispatch_group_enter(group)
-            OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photos, complete: { (names, state) in
-                dispatch_group_leave(group)
-                if state == .Success {
-                    self.req.picture = names.joinWithSeparator(",")
-                } else {
-                    self.req.picture = ""
-                    SVToast.dismiss()
-                    SVToast.showWithError("上传图片门失败")
-                }
-            })
-        }
+        
+        
         dispatch_group_notify(group, queue) { [unowned self] in
+            if isEmptyString(self.req.picture) && isEmptyString(self.req.cover) {
+                SVToast.showWithError("图片或者封面id为空")
+                return
+            }
             Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
                 SVToast.dismiss()
                 if success {

@@ -59,7 +59,12 @@ class OSSImageUploader {
                     "callbackUrl": object.callbackUrl,
                     "callbackBody": object.callbackBody
                 ]
-                let data = UIImagePNGRepresentation(image)
+                LogDebug(images)
+                var data: NSData?
+//                autoreleasepool({
+                    data = UIImagePNGRepresentation(image)
+//                })
+//                let data = UIImageJPEGRepresentation(image, 1.0)
                 put.uploadingData = data
                 let putTask = clinet.putObject(put)
                 putTask.continueWithBlock({ (task) in
