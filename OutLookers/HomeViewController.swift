@@ -103,7 +103,7 @@ class HomeViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        
+//        self.automaticallyAdjustsScrollViewInsets = false // the behavior of the UICollectionViewFlowLayout is not defined because: fix
         tableView = UITableView(frame: CGRectZero, style: .Plain)
         tableView.delegate = self
         tableView.dataSource = self
@@ -224,7 +224,7 @@ extension HomeViewController {
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
 //        return hotmanList.count
@@ -249,6 +249,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
         }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return kSize(150, height: 200)
     }
 }
 

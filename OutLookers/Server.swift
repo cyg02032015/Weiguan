@@ -521,8 +521,8 @@ class Server {
     }
     
     /// 红人认证
-    class func hotmanAuth(photo: String,handler: (success: Bool, msg: String?, value: String?)->Void) {
-        let parameters = ["userId":UserSingleton.sharedInstance.userId, "photo":photo]
+    class func hotmanAuth(req: HotmanAuthReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = ["userId":UserSingleton.sharedInstance.userId, "photo":req.photo, "name":req.name]
         HttpTool.post(API.hotmanAuth, parameters: parameters, complete: { (response) in
             let info = StringResponse(fromJson: response)
             if info.success == true {

@@ -11,33 +11,47 @@ import UIKit
 private let noarrowCellId = "noarrowCellId"
 private let businessLicenceId = "businessLicenceId"
 
-private extension Selector {
-    static let tapCommit = #selector(OrganizeAuthViewController.tapCommit(_:))
-}
-
 class OrganizeAuthViewController: YGBaseViewController {
 
     var tableView: UITableView!
     var typePickerView: YGPickerView!
     lazy var types = ["演出公司", "经纪公司", "唱片公司", "演出器材", "模特公司", "婚庆礼仪公司", "影视公司", "影视制作", "娱乐场所", "演出场馆", "剧组", "培训机构", "文化公司", "排练室", "录音棚", "乐器行", "发行公司", "工作室", "其他"]
     var pickerView: YGPickerView!
-    lazy var provinceTitles = NSArray()
     var imgButton: TouchImageView!
     var desc: UILabel!
     var commitButton: UIButton!
-    lazy var organizeRequest = OrganizeRequest()
+    lazy var req = OrganizeRequest()
+    var picToken: GetToken!
+    var img: UIImage!
+    lazy var cityResp: CityResp = YGCityData.loadCityData()
+    var provinceInt = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        provinceTitles = CitiesData.sharedInstance().provinceTitle()
+        getToken()
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
         typePickerView = YGPickerView(frame: CGRectZero, delegate: self)
         typePickerView.delegate = self
     }
+    
+    func getToken() {
+        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
+            if success {
+                guard let obj = value else {return}
+                self.picToken = obj
+            } else {
+                LogError(msg)
+            }
+        }
+    }
 
     func setupSubViews() {
         title = "机构认证"
+        
+        commitButton = setRightNaviItem()
+        commitButton.setTitle("提交", forState: .Normal)
+        
         tableView = UITableView()
         tableView.backgroundColor = kBackgoundColor
         tableView.delegate = self
@@ -48,44 +62,54 @@ class OrganizeAuthViewController: YGBaseViewController {
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
-        commitButton = Util.createReleaseButton("提交")
-        commitButton.userInteractionEnabled = true
-        commitButton.addTarget(self, action: .tapCommit, forControlEvents: .TouchUpInside)
-        view.addSubview(commitButton)
-        commitButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(commitButton.superview!)
-            make.height.equalTo(kScale(44))
-        }
-        
         tableView.snp.makeConstraints { (make) in
-            make.left.right.top.equalTo(tableView.superview!)
-            make.bottom.equalTo(commitButton.snp.top)
+            make.edges.equalTo(tableView.superview!)
         }
     }
     
-    func tapCommit(sender: UIButton) {
-        YKToast.show("正在提交")
-        Server.organizationAuth(organizeRequest) { [unowned self](success, msg, value) in
-            YKToast.dismiss()
-            if success {
-                LogInfo(value!)
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            } else {
-                LogError(msg!)
+    override func tapMoreButton(sender: UIButton) {
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let group = dispatch_group_create()
+        SVToast.show()
+        dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_enter(group)
+            OSSImageUploader.asyncUploadImage(self.picToken, image: self.img, complete: { (names, state) in
+                dispatch_group_leave(group)
+                if state == .Success {
+                    self.req.photo = names.first
+                } else {
+                    self.req.photo = ""
+                    SVToast.dismiss()
+                    SVToast.showWithError("上传图片失败")
+                }
+            })
+        }
+        dispatch_group_notify(group, queue) { [unowned self] in
+            if isEmptyString(self.req.photo) {
+                return
+            }
+            Server.organizationAuth(self.req) { (success, msg, value) in
+                if success {
+                    SVToast.showWithSuccess(value!)
+                    delay(1, task: { 
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                    })
+                } else {
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
+                }
             }
         }
     }
     
     func checkRequest() {
         // TODO
-        if !isEmptyString(UserSingleton.sharedInstance.userId) && !isEmptyString(organizeRequest.type) && !isEmptyString(organizeRequest.name) && !isEmptyString(organizeRequest.license) && !isEmptyString(organizeRequest.adds) && !isEmptyString(organizeRequest.linkman) && !isEmptyString(organizeRequest.phone) {
-            if !isEmptyString(organizeRequest.photo) {
-                self.commitButton.userInteractionEnabled = true
-                self.commitButton.backgroundColor = kCommonColor
-            }
+        if !isEmptyString(UserSingleton.sharedInstance.userId) && !isEmptyString(req.type) && !isEmptyString(req.name) && !isEmptyString(req.license) && !isEmptyString(req.adds) && !isEmptyString(req.linkman) && !isEmptyString(req.phone) && img != nil {
+            self.commitButton.userInteractionEnabled = true
+            self.commitButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         } else {
             self.commitButton.userInteractionEnabled = false
-            self.commitButton.backgroundColor = kGrayColor
+            self.commitButton.setTitleColor(kGrayTextColor, forState: .Normal)
         }
     }
     
@@ -164,10 +188,10 @@ extension OrganizeAuthViewController: BusinessLicenceCellDelegate, NoArrowEditCe
     
     func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int)) {
         switch tuple {
-        case (0,1): organizeRequest.name = text
-        case (0,2): organizeRequest.license = text
-        case (0,4): organizeRequest.linkman = text
-        case (0,5): organizeRequest.phone = text
+        case (0,1): req.name = text
+        case (0,2): req.license = text
+        case (0,4): req.linkman = text
+        case (0,5): req.phone = text
         default: ""
         }
         checkRequest()
@@ -206,7 +230,7 @@ extension OrganizeAuthViewController: UIImagePickerControllerDelegate, UINavigat
             self.desc.hidden = true
             self.imgButton.image = UIImage(data: data)
             // TODO
-            self.organizeRequest.photo = "1"
+            self.img = UIImage(data: data)
             self.checkRequest()
         }
     }
@@ -231,11 +255,10 @@ extension OrganizeAuthViewController: UIPickerViewDelegate, UIPickerViewDataSour
             return types.count
         } else {
             if component == 0 {
-                return provinceTitles.count
+                return cityResp.province.count
             } else {
-                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-                return cities.count > 0 ? cities.count : 0
+                let province = cityResp.province[pickerView.selectedRowInComponent(0)]
+                return province.citys.count
             }
         }
     }
@@ -245,11 +268,11 @@ extension OrganizeAuthViewController: UIPickerViewDelegate, UIPickerViewDataSour
             return types[row]
         } else {
             if component == 0 {
-                return (provinceTitles[row] as! String)
+                return cityResp.province[row].name
             } else {
-                let province = provinceTitles[pickerView.selectedRowInComponent(0)]
-                let cities = CitiesData.sharedInstance().citiesWithProvinceName(province as! String)
-                return cities.count > row ? (cities[row] as! String) : ""
+                let province = self.cityResp.province[pickerView.selectedRowInComponent(0)]
+                let city = province.citys[row]
+                return city.name
             }
         }
     }
@@ -257,6 +280,7 @@ extension OrganizeAuthViewController: UIPickerViewDelegate, UIPickerViewDataSour
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == self.pickerView.picker {
             if component == 0 {
+                provinceInt = row
                 pickerView.reloadComponent(1)
             }
         }
@@ -267,12 +291,12 @@ extension OrganizeAuthViewController: UIPickerViewDelegate, UIPickerViewDataSour
             let type = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! NoArrowEditCell
             cell.tf.text = type
-            organizeRequest.type = type
+            req.type = type
         } else {
             let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! NoArrowEditCell
             cell.tf.text = city
-            organizeRequest.adds = city
+            req.adds = "\(cityResp.province[provinceInt].citys[pickerView.selectedRowInComponent(1)].id)"
         }
         checkRequest()
     }

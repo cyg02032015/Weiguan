@@ -14,27 +14,53 @@ class TalentAuthViewController: YGBaseViewController {
     var collectionView: UICollectionView!
     lazy var photos = [UIImage]()
     lazy var originPhotos = [AnyObject]()
+    var commitButton: UIButton!
+    var textField: UITextField!
+    var picToken: GetToken!
+    lazy var req = HotmanAuthReq()
+    var authShow: HotmanAuthShowResp!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupSubViews()
+        title = "艺人认证"
+        loadData()
+        getToken()
+    }
+    
+    func loadData() {
+        Server.hotmanAuthShow { (success, msg, value) in
+            if success {
+                guard let obj = value else {return}
+                self.authShow = obj
+                self.setupSubViews()
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
+    
+    func getToken() {
+        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
+            if success {
+                guard let obj = value else {return}
+                self.picToken = obj
+            } else {
+                LogError(msg)
+            }
+        }
     }
     
     func setupSubViews() {
-        title = "艺人认证"
-        let commitButton = Util.createReleaseButton("提交")
-        view.addSubview(commitButton)
-        commitButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(commitButton.superview!)
-            make.height.equalTo(kScale(44))
-        }
+        
+        commitButton = setRightNaviItem()
+        commitButton.setTitle("提交", forState: .Normal)
         
         scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(scrollView.superview!)
-            make.bottom.equalTo(commitButton.snp.top)
+            make.bottom.left.right.equalTo(scrollView.superview!)
+            make.top.equalTo(self.snp.topLayoutGuideBottom)
         }
         
         
@@ -50,7 +76,8 @@ class TalentAuthViewController: YGBaseViewController {
         custom1.topLabel.text = "绑定手机"
         custom1.centerButton.setImage(UIImage(named: "phone"), forState: .Normal)
         custom1.centerButton.setImage(UIImage(named: "phone-1"), forState: .Selected)
-        custom1.bottomLabel.text = "未完成"
+        custom1.bottomLabel.text = authShow.mobile == false ? "未完成" : "已完成"
+        custom1.centerButton.selected = authShow.mobile
         container.addSubview(custom1)
         custom1.snp.makeConstraints { (make) in
             make.top.left.equalTo(custom1.superview!)
@@ -62,7 +89,8 @@ class TalentAuthViewController: YGBaseViewController {
         custom2.topLabel.text = "完善个人档案"
         custom2.centerButton.setImage(UIImage(named: "archives"), forState: .Normal)
         custom2.centerButton.setImage(UIImage(named: "archives-1"), forState: .Selected)
-        custom2.bottomLabel.text = "未完成"
+        custom2.bottomLabel.text = authShow.archives == false ? "未完成" : "已完成"
+        custom2.centerButton.selected = authShow.archives
         container.addSubview(custom2)
         custom2.snp.makeConstraints { (make) in
             make.left.equalTo(custom1.snp.right)
@@ -75,7 +103,8 @@ class TalentAuthViewController: YGBaseViewController {
         custom3.topLabel.text = "发布动态三个以上"
         custom3.centerButton.setImage(UIImage(named: "dynamic"), forState: .Normal)
         custom3.centerButton.setImage(UIImage(named: "dynamic-1"), forState: .Selected)
-        custom3.bottomLabel.text = "未完成"
+        custom3.bottomLabel.text = authShow.dynamic == false ? "未完成" : "已完成"
+        custom3.centerButton.selected = authShow.dynamic
         container.addSubview(custom3)
         custom3.snp.makeConstraints { (make) in
             make.centerX.equalTo(custom1)
@@ -88,7 +117,8 @@ class TalentAuthViewController: YGBaseViewController {
         custom4.topLabel.text = "发布才艺一个以上"
         custom4.centerButton.setImage(UIImage(named: "skill"), forState: .Normal)
         custom4.centerButton.setImage(UIImage(named: "skill-1"), forState: .Selected)
-        custom4.bottomLabel.text = "未完成"
+        custom4.bottomLabel.text = authShow.talent == false ? "未完成" : "已完成"
+        custom4.centerButton.selected = authShow.talent
         container.addSubview(custom4)
         custom4.snp.makeConstraints { (make) in
             make.centerX.equalTo(custom2)
@@ -126,7 +156,7 @@ class TalentAuthViewController: YGBaseViewController {
             make.height.equalTo(kScale(80))
         }
         
-        let textField = UITextField()
+        textField = UITextField()
         textField.textAlignment = .Center
         textField.placeholder = "请输入想认证的角色"
         textField.font = UIFont.customFontOfSize(14)
@@ -148,6 +178,44 @@ class TalentAuthViewController: YGBaseViewController {
         
         container.snp.makeConstraints { (make) in
             make.bottom.equalTo(lineV.snp.bottom).offset(kScale(18))
+        }
+    }
+    
+    override func tapMoreButton(sender: UIButton) {
+        if authShow != nil && authShow.talent && authShow.archives && authShow.dynamic && authShow.mobile && !isEmptyString(textField.text) && self.photos.count > 0 {
+            req.name = textField.text!
+            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+            let group = dispatch_group_create()
+            SVToast.show()
+            dispatch_group_async(group, queue) { [unowned self] in
+                dispatch_group_enter(group)
+                OSSImageUploader.asyncUploadImages(self.picToken, images: self.photos, complete: { (names, state) in
+                    dispatch_group_leave(group)
+                    if state == .Success {
+                        self.req.photo = names.joinWithSeparator(",")
+                    } else {
+                        self.req.photo = ""
+                        SVToast.dismiss()
+                        SVToast.showWithError("上传图片失败")
+                    }
+                })
+            }
+            dispatch_group_notify(group, queue) { [unowned self] in
+                if isEmptyString(self.req.photo) {
+                    return
+                }
+                Server.hotmanAuth(self.req, handler: { (success, msg, value) in
+                    if success {
+                        SVToast.showWithSuccess(value!)
+                        delay(1, task: { 
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        })
+                    } else {
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
+                    }
+                })
+            }
         }
     }
 }

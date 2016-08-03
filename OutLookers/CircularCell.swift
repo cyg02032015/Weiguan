@@ -22,7 +22,6 @@ class CircularCell: UITableViewCell {
                     list.forEach({ (information) in
                         circulars.append(information.categoryName)
                     })
-                    
                     dispatch_async(dispatch_get_main_queue(), {
                         self.recruitLabel.text = "招募: \(circulars.joinWithSeparator("/"))"
                     })

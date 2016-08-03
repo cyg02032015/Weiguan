@@ -8,22 +8,30 @@
 
 import UIKit
 
-private extension Selector {
-    static let tapTalent = #selector(AuthenticationViewController.tapTalent(_:))
-    static let tapFans = #selector(AuthenticationViewController.tapFans(_:))
-    static let tapOrganization = #selector(AuthenticationViewController.tapOrganization(_:))
+enum GotoType: Int {
+    case Talent = 0
+    case Organize = 1
+    case Fans = 2
 }
 
 class AuthenticationViewController: YGBaseViewController {
-
+    
+    var authObj: IsAuthResp!
+    var gotoVC: GotoType!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSubViews()
+        //        setupSubViews()
+        SVToast.show()
         Server.isAuth { (success, msg, value) in
+            SVToast.dismiss()
             if success {
-                LogInfo("\(value!.authentication)   \(value!.type)")
+                guard let object = value else {return}
+                self.authObj = object
+                self.setupSubViews()
             } else {
-                LogError(msg!)
+                guard let m = msg else {return}
+                self.setupSubViews()
+                SVToast.showWithError(m)
             }
         }
     }
@@ -34,7 +42,6 @@ class AuthenticationViewController: YGBaseViewController {
         talent.setTitle("艺人认证", forState: .Normal)
         talent.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         talent.backgroundColor = UIColor(hex: 0xff4e4e)
-        talent.addTarget(self, action: .tapTalent, forControlEvents: .TouchUpInside)
         talent.titleLabel!.font = UIFont.customFontOfSize(16)
         talent.layer.cornerRadius = kScale(48/2)
         view.addSubview(talent)
@@ -48,7 +55,6 @@ class AuthenticationViewController: YGBaseViewController {
         organization.setTitle("机构认证", forState: .Normal)
         organization.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         organization.backgroundColor = UIColor(hex: 0x0fddec)
-        organization.addTarget(self, action: .tapOrganization, forControlEvents: .TouchUpInside)
         organization.titleLabel!.font = UIFont.customFontOfSize(16)
         organization.layer.cornerRadius = kScale(48/2)
         view.addSubview(organization)
@@ -62,7 +68,6 @@ class AuthenticationViewController: YGBaseViewController {
         fans.setTitle("粉丝认证", forState: .Normal)
         fans.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         fans.backgroundColor = UIColor(hex: 0xabd815)
-        fans.addTarget(self, action: .tapFans, forControlEvents: .TouchUpInside)
         fans.titleLabel!.font = UIFont.customFontOfSize(16)
         fans.layer.cornerRadius = kScale(48/2)
         view.addSubview(fans)
@@ -71,39 +76,66 @@ class AuthenticationViewController: YGBaseViewController {
             make.size.equalTo(talent)
             make.top.equalTo(organization.snp.bottom).offset(kScale(40))
         }
-    }
-    
-    func tapTalent(sender: UIButton) {
-        let vc = TalentAuthViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func tapOrganization(sender: UIButton) {
-        let vc = OrganizeAuthViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func tapFans(sender: UIButton) {
-        let vc = FansAuthViewController()
-        navigationController?.pushViewController(vc, animated: true)
-//        showAlertController()
+        talent.rx_tap.subscribeNext { [unowned self] in
+            if self.authObj == nil {return}
+            self.gotoVC = .Talent
+            if self.authObj.type == .HotMan || self.authObj.type == .Tourist {
+                let vc = TalentAuthViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.showAlertController()
+            }
+            
+            }.addDisposableTo(disposeBag)
+        
+        organization.rx_tap.subscribeNext { [unowned self] in
+            if self.authObj == nil {return}
+            self.gotoVC = .Organize
+            if self.authObj.type == .Organization || self.authObj.type == .Tourist {
+                let vc = OrganizeAuthViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.showAlertController()
+            }
+            }.addDisposableTo(disposeBag)
+        
+        fans.rx_tap.subscribeNext { [unowned self] in
+            if self.authObj == nil {return}
+            self.gotoVC = .Fans
+            if self.authObj.type == .Fans || self.authObj.type == .Tourist {
+                let vc = FansAuthViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.showAlertController()
+            }
+            }.addDisposableTo(disposeBag)
     }
     
     func showAlertController() {
         let alert = UIAlertController(title: "提示", message: "每个用户只能认证一种角色，您当前已通过粉丝认证，若继续认证则视为放弃粉丝认证", preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
-        let continued = UIAlertAction(title: "继续认证", style: .Default) { (action) in
-        Server.modifyAuth({ (success, msg, value) in
+        let continued = UIAlertAction(title: "继续认证", style: .Default) { [unowned self](action) in
+            Server.modifyAuth({ (success, msg, value) in
                 if success {
-                    // TODO
-                    LogInfo(value!)
+                    guard let _ = value else {return}
+                    if self.gotoVC == .Talent {
+                        let vc = TalentAuthViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    } else if self.gotoVC == .Organize {
+                        let vc = OrganizeAuthViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        let vc = FansAuthViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 } else {
-                    LogError(msg!)
-                }
-            })
-        }
-        alert.addAction(cancel)
-        alert.addAction(continued)
-        presentViewController(alert, animated: true, completion: nil)
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        })
     }
+    alert.addAction(cancel)
+    alert.addAction(continued)
+    presentViewController(alert, animated: true, completion: nil)
+}
 }

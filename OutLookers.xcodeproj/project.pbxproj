@@ -139,6 +139,7 @@
 		D825EEBA1D50E78A00AF94AF /* BMPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EE9F1D50E78A00AF94AF /* BMPlayerManager.swift */; };
 		D825EEBB1D50E78A00AF94AF /* BMPlayerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEA01D50E78A00AF94AF /* BMPlayerProtocols.swift */; };
 		D825EEBD1D50EB7600AF94AF /* SnapshotsResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEBC1D50EB7600AF94AF /* SnapshotsResp.swift */; };
+		D825EEBF1D524F9000AF94AF /* HotmanAuthReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEBE1D524F9000AF94AF /* HotmanAuthReq.swift */; };
 		D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */; };
 		D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBC1D27CB6400A24CDB /* TAAnimatedDotView.m */; };
 		D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBE1D27CB6400A24CDB /* TADotView.m */; };
@@ -527,6 +528,7 @@
 		D825EE9F1D50E78A00AF94AF /* BMPlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMPlayerManager.swift; sourceTree = "<group>"; };
 		D825EEA01D50E78A00AF94AF /* BMPlayerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMPlayerProtocols.swift; sourceTree = "<group>"; };
 		D825EEBC1D50EB7600AF94AF /* SnapshotsResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotsResp.swift; path = OutLookers/SnapshotsResp.swift; sourceTree = SOURCE_ROOT; };
+		D825EEBE1D524F9000AF94AF /* HotmanAuthReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HotmanAuthReq.swift; path = OutLookers/HotmanAuthReq.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DB91D27CB6400A24CDB /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
 		D82F8DBB1D27CB6400A24CDB /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
@@ -1137,6 +1139,7 @@
 				D812A8B91D4CEE5B00186564 /* OrganizeInformationResp.swift */,
 				D812A8BB1D4CEED800186564 /* ModifyOGReq.swift */,
 				D825EEBC1D50EB7600AF94AF /* SnapshotsResp.swift */,
+				D825EEBE1D524F9000AF94AF /* HotmanAuthReq.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2544,6 +2547,7 @@
 				D812A8B21D4CE9AD00186564 /* LikeListResp.swift in Sources */,
 				D81992241D3D146D007734C0 /* MyEnterViewController.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
+				D825EEBF1D524F9000AF94AF /* HotmanAuthReq.swift in Sources */,
 				D812A90C1D4FA69D00186564 /* MJRefreshAutoStateFooter.m in Sources */,
 				E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */,
 				E41DD9291D3CBBD000E5E7E9 /* MyTalentViewController.swift in Sources */,

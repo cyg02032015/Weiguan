@@ -23,15 +23,15 @@ class RecommendHotmanTableViewCell: UITableViewCell {
     func setupSubViews() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Horizontal
-        layout.itemSize = CGSize(width: kScale(150), height: kHeight(200))
+//        layout.itemSize = CGSize(width: kScale(150), height: kHeight(200))
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 15)
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsHorizontalScrollIndicator = false
-        contentView.addSubview(collectionView)
         collectionView.registerClass(RecommendHotmanCollectionCell.self, forCellWithReuseIdentifier: recommendHotmanCollectionCellIdentifier)
+        contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(collectionView.superview!)
         }
