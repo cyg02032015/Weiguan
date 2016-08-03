@@ -36,7 +36,7 @@ class DynamicDetailViewController: YGBaseViewController {
         setupSubViews()
         loadData()
         loadMoreData()
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [unowned self] in
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
         })
         
@@ -59,19 +59,21 @@ class DynamicDetailViewController: YGBaseViewController {
     
     override func loadMoreData() {
         Server.commentList(pageNo, dynamicId: "\(dynamicObj.id)") { (success, msg, value) in
-            self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else {return}
-                if object.lists.count <= 0 {
-                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
-                    self.tableView.mj_footer.hidden = true
-                }
                 self.comments.appendContentsOf(object.lists)
-                self.tableView.reloadData()
+                if object.lists.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    return
+                }
+                self.tableView.mj_footer.endRefreshing()
+                let indexSet = NSIndexSet(index: 1)
+                self.tableView.reloadSections(indexSet, withRowAnimation: .Automatic)
                 self.pageNo = self.pageNo + 1
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
+                self.tableView.mj_footer.endRefreshing()
             }
         }
     }

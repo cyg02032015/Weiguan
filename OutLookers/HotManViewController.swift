@@ -18,19 +18,12 @@ class HotManViewController: YGBaseViewController {
         super.viewDidLoad()
         setupSubViews()
         loadMoreData()
-//        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
-//            self.loadMoreData()
-//        })
     }
     
     override func loadMoreData() {
         Server.findHotman { (success, msg, value) in
-//            self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let list = value else {return}
-//                if list.count <= 0 {
-//                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
-//                }
                 self.hotmans.appendContentsOf(list)
                 self.tableView.reloadData()
             } else {

@@ -39,22 +39,22 @@ class HotmanCell: UITableViewCell {
             make.edges.equalTo(imgView.superview!)
         }
         
-        nameLabel = UILabel.createLabel(16, textColor: UIColor.whiteColor())
-        nameLabel.textAlignment = .Center
-        contentView.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { (make) in
-            make.left.right.equalTo(nameLabel.superview!)
-            make.top.equalTo(nameLabel.superview!).offset(kScale(324))
-            make.height.equalTo(kScale(16))
-        }
-        
         jobLabel = UILabel.createLabel(14, textColor: UIColor.whiteColor())
         jobLabel.textAlignment = .Center
         contentView.addSubview(jobLabel)
         jobLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(jobLabel.superview!)
-            make.top.equalTo(nameLabel.snp.bottom).offset(kScale(6))
+            make.bottom.equalTo(jobLabel.superview!).offset(kScale(-15))
             make.height.equalTo(kScale(14))
+        }
+        
+        nameLabel = UILabel.createLabel(16, textColor: UIColor.whiteColor())
+        nameLabel.textAlignment = .Center
+        contentView.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { (make) in
+            make.left.right.equalTo(nameLabel.superview!)
+            make.bottom.equalTo(jobLabel.snp.top).offset(kScale(-6))
+            make.height.equalTo(kScale(16))
         }
         
         let view = UIView()
