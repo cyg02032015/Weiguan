@@ -121,12 +121,14 @@ extension DynamicViewController: DynamicCellDelegate {
                 if success {
                     LogInfo("取消点赞")
                     object.likeCount = object.likeCount - 1
+                    object.isLike = false
                     sender.selected = false
                     if object.likeCount <= 0 {
                         sender.setTitle("赞TA", forState: .Normal)
                     } else {
                         sender.setTitle("\(object.likeCount)", forState: .Normal)
                     }
+                    self.dynamicLists[indexPath.section] = object
                 } else {
                     SVToast.showWithError(msg!)
                 }
@@ -136,8 +138,10 @@ extension DynamicViewController: DynamicCellDelegate {
                 if success {
                     LogInfo("点赞成功")
                     object.likeCount = object.likeCount + 1
+                    object.isLike = true
                     sender.selected = true
                     sender.setTitle("\(object.likeCount)", forState: .Normal)
+                    self.dynamicLists[indexPath.section] = object
                 } else {
                     SVToast.showWithError(msg!)
                 }

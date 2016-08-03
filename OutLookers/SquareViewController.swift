@@ -70,7 +70,61 @@ extension SquareViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellId, forIndexPath: indexPath) as! DynamicCell
         cell.isSquare = true
+        cell.indexPath = indexPath
         cell.info = sqaureLists[indexPath.section]
+        cell.delegate = self
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let obj = sqaureLists[indexPath.section]
+        let vc = DynamicDetailViewController()
+        vc.dynamicObj = obj
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension SquareViewController: DynamicCellDelegate {
+    func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
+        LogInfo("\(sender)   分享")
+    }
+    
+    func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {
+        let object = sqaureLists[indexPath.section]
+        if sender.selected {
+            Server.cancelLike("\(object.id)", handler: { (success, msg, value) in
+                if success {
+                    LogInfo("取消点赞")
+                    object.likeCount = object.likeCount - 1
+                    object.isLike = false
+                    sender.selected = false
+                    if object.likeCount <= 0 {
+                        sender.setTitle("赞TA", forState: .Normal)
+                    } else {
+                        sender.setTitle("\(object.likeCount)", forState: .Normal)
+                    }
+                    self.sqaureLists[indexPath.section] = object
+                } else {
+                    SVToast.showWithError(msg!)
+                }
+            })
+        } else {
+            Server.like("\(object.id)", handler: { (success, msg, value) in
+                if success {
+                    LogInfo("点赞成功")
+                    object.likeCount = object.likeCount + 1
+                    object.isLike = true
+                    sender.selected = true
+                    sender.setTitle("\(object.likeCount)", forState: .Normal)
+                    self.sqaureLists[indexPath.section] = object
+                } else {
+                    SVToast.showWithError(msg!)
+                }
+            })
+        }
+    }
+    
+    func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath) {
+        LogInfo("评论点击")
     }
 }
