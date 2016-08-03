@@ -64,6 +64,7 @@ class PHViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        SVToast.show()  // 注意
     }
     
     func setupSubViews() {

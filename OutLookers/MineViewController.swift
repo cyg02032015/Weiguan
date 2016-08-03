@@ -70,13 +70,16 @@ extension MineViewController {
                 let vc = EditDataViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            cell.tapFriendsClosure {
-                LogInfo("好友")
+            cell.tapFriendsClosure { [unowned self] in
+                let vc = DynamicViewController()
+                vc.isPerson = true
+                vc.title = "动态"
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            cell.tapFollowClosure {
+            cell.tapFollowClosure { [unowned self] in
                 LogInfo("关注")
             }
-            cell.tapFanClosure {
+            cell.tapFanClosure { [unowned self] in
                 LogInfo("粉丝")
             }
             return cell

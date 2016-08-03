@@ -57,7 +57,7 @@ class HomeViewController: YGBaseViewController {
     
     override func loadMoreData() {
         
-        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true) { (success, msg, value) in
+        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
             self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else { return }
@@ -77,7 +77,7 @@ class HomeViewController: YGBaseViewController {
     }
     
     func loadRecommendHotmanData() {
-        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true) { (success, msg, value) in
+        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
             if success {
                 Server.homeRecommendHotman { (success, msg, value) in
                     SVToast.dismiss()

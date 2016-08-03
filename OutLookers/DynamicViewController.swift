@@ -23,31 +23,31 @@ class DynamicViewController: YGBaseViewController {
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate!
     lazy var dynamicLists = [DynamicResult]()
+    var isPerson: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
         loadMoreData()
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { 
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
         })
     }
     
     override func loadMoreData() {
-        SVToast.show()
-        Server.dynamicList(pageNo, state: 1, isPerson: false, isHome: false) { (success, msg, value) in
+        Server.dynamicList(pageNo, state: 1, isPerson: isPerson, isHome: false, isSquare: false) { (success, msg, value) in
             SVToast.dismiss()
-            self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else {return}
-                if object.list.count <= 0 {
-                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
-                    return
-                }
                 self.dynamicLists.appendContentsOf(object.list)
+                self.tableView.mj_footer.endRefreshing()
                 self.tableView.reloadData()
                 self.pageNo = self.pageNo + 1
+                if object.list.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
             } else {
                 SVToast.showWithError(msg!)
+                self.tableView.mj_footer.endRefreshing()
             }
         }
     }

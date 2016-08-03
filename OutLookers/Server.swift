@@ -176,7 +176,7 @@ class Server {
     }
     
     /// 动态列表
-    class func dynamicList(pageNo: Int, state: Int, isPerson: Bool, isHome: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
+    class func dynamicList(pageNo: Int, state: Int, isPerson: Bool, isHome: Bool, isSquare: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
         var parameters = [
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
@@ -187,6 +187,9 @@ class Server {
         }
         if isHome {
             parameters["isRecommend"] = "1"
+        }
+        if isSquare {
+            parameters["square"] = "1"
         }
         HttpTool.post(API.dynamicList, parameters: parameters, complete: { (response) in
             let info = DynamicListResp(fromJson: response)

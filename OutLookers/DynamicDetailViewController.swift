@@ -62,14 +62,12 @@ class DynamicDetailViewController: YGBaseViewController {
             if success {
                 guard let object = value else {return}
                 self.comments.appendContentsOf(object.lists)
+                self.tableView.mj_footer.endRefreshing()
+                self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
                 if object.lists.count < 10 {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
-                    return
                 }
-                self.tableView.mj_footer.endRefreshing()
-                let indexSet = NSIndexSet(index: 1)
-                self.tableView.reloadSections(indexSet, withRowAnimation: .Automatic)
-                self.pageNo = self.pageNo + 1
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
