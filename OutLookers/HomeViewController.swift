@@ -250,10 +250,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
         }
     }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return kSize(150, height: 200)
-    }
 }
 
 extension HomeViewController {
