@@ -7,12 +7,8 @@
 //
 
 import UIKit
-
-private extension Selector {
-    static let tapPraise = #selector(DynamicCell.tapPraise(_:))
-    static let tapComment = #selector(DynamicCell.tapComment(_:))
-    static let tapShare = #selector(DynamicCell.tapShare(_:))
-}
+import RxSwift
+import RxCocoa
 
 protocol DynamicCellDelegate: class {
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath)
@@ -50,8 +46,16 @@ class DynamicCell: UITableViewCell {
             } else {
                 videoImgView.hidden = false
             }
+            if isSquare {
+                if info.follow == 1 { // 已关注
+                    followButton.hidden = true
+                } else {
+                    followButton.hidden = false
+                }
+            }
         }
     }
+    var isSquare: Bool = false
     var indexPath: NSIndexPath!
     weak var delegate: DynamicCellDelegate!
     var headImgView: IconHeaderView!
@@ -125,6 +129,11 @@ class DynamicCell: UITableViewCell {
         followButton.layer.cornerRadius = kScale(23/2)
         followButton.layer.borderColor = kCommonColor.CGColor
         followButton.layer.borderWidth = 1
+        followButton.rx_tap.subscribeNext { (sender) in
+            LogInfo(sender)
+            LogInfo("我是rx_tap")
+        }.addDisposableTo(disposeBag)
+//        followButton.addTarget(self, action: .tapFollow, forControlEvents: .TouchUpInside)
         contentView.addSubview(followButton)
         followButton.snp.makeConstraints { (make) in
             make.right.equalTo(followButton.superview!).offset(kScale(-16))
@@ -187,7 +196,6 @@ class DynamicCell: UITableViewCell {
         praiseBtn = UIButton()
         praiseBtn.setImage(UIImage(named: "like_normal"), forState: .Normal)
         praiseBtn.setImage(UIImage(named: "like_chosen"), forState: .Selected)
-        praiseBtn.addTarget(self, action: .tapPraise, forControlEvents: .TouchUpInside)
         praiseBtn.setTitle("赞TA", forState: .Normal)
         praiseBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         praiseBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -220,7 +228,6 @@ class DynamicCell: UITableViewCell {
         
         commentBtn = UIButton()
         commentBtn.setImage(UIImage(named: "dis"), forState: .Normal)
-        commentBtn.addTarget(self, action: .tapComment, forControlEvents: .TouchUpInside)
         commentBtn.setTitle("评论", forState: .Normal)
         commentBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         commentBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -260,7 +267,6 @@ class DynamicCell: UITableViewCell {
         
         let shareBtn = UIButton()
         shareBtn.setImage(UIImage(named: "share"), forState: .Normal)
-        shareBtn.addTarget(self, action: .tapShare, forControlEvents: .TouchUpInside)
         shareBtn.setTitle("分享", forState: .Normal)
         shareBtn.titleLabel!.font = UIFont.customFontOfSize(18)
         shareBtn.setTitleColor(kGrayColor, forState: .Normal)
@@ -269,24 +275,24 @@ class DynamicCell: UITableViewCell {
         shareBtn.snp.makeConstraints { (make) in
             make.edges.equalTo(shareBtn.superview!)
         }
-    }
-    
-    func tapPraise(sender: UIButton) {
-        if delegate != nil {
-            delegate.dynamicCellTapPraise(sender, indexPath: indexPath)
-        }
-    }
-    
-    func tapComment(sender: UIButton) {
-        if delegate != nil {
-            delegate.dynamicCellTapComment(sender, indexPath: indexPath)
-        }
-    }
-    
-    func tapShare(sender: UIButton) {
-        if delegate != nil {
-            delegate.dynamicCellTapShare(sender, indexPath: indexPath)
-        }
+        
+        praiseBtn.rx_tap.subscribeNext {
+            if self.delegate != nil {
+                self.delegate.dynamicCellTapPraise(self.praiseBtn, indexPath: self.indexPath)
+            }
+        }.addDisposableTo(disposeBag)
+        
+        commentBtn.rx_tap.subscribeNext {
+            if self.delegate != nil {
+                self.delegate.dynamicCellTapComment(self.commentBtn, indexPath: self.indexPath)
+            }
+        }.addDisposableTo(disposeBag)
+        
+        shareBtn.rx_tap.subscribeNext {
+            if self.delegate != nil {
+                self.delegate.dynamicCellTapShare(shareBtn, indexPath: self.indexPath)
+            }
+        }.addDisposableTo(disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {

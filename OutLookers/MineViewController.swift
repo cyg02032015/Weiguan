@@ -75,6 +75,7 @@ extension MineViewController {
                 vc.isPerson = true
                 vc.title = "动态"
                 self.navigationController?.pushViewController(vc, animated: true)
+                SVToast.show()
             }
             cell.tapFollowClosure { [unowned self] in
                 LogInfo("关注")

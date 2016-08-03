@@ -111,7 +111,7 @@ extension DynamicViewController {
 
 extension DynamicViewController: DynamicCellDelegate {
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
-        
+        LogInfo("\(sender)   分享")
     }
     
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {
@@ -146,6 +146,6 @@ extension DynamicViewController: DynamicCellDelegate {
     }
     
     func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath) {
-        
+        LogInfo("评论点击")
     }
 }

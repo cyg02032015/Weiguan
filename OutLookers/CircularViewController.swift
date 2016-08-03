@@ -28,12 +28,12 @@ class CircularViewController: YGBaseViewController {
             self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else {return}
-                if object.findNoticeResult.count <= 0 {
-                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
-                }
                 self.circulars.appendContentsOf(object.findNoticeResult)
                 self.tableView.reloadData()
                 self.pageNo = self.pageNo + 1
+                if object.findNoticeResult.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
