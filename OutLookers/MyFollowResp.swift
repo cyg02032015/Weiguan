@@ -51,6 +51,7 @@ class FollowList {
     var name : String!
     var photo : String!
     var userId : Int!
+    var detailsType: Int!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -62,5 +63,6 @@ class FollowList {
         name = json["name"].stringValue
         photo = json["photo"].stringValue
         userId = json["userId"].intValue
+        detailsType = json["detailsType"].intValue
     }
 }

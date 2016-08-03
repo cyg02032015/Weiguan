@@ -14,11 +14,37 @@ import UIKit
 
 class FollowPeopleCell: UITableViewCell {
 
+    var info: FollowList! {
+        didSet {
+            header.iconURL = info.photo
+            header.setVimage(Util.userType(info.detailsType))
+            nameLabel.text = info.name
+            
+            if info.fan == 0 { // 非互相关注
+                if showType == .Follow {
+                    followButton.hidden = true
+                } else {
+                    followButton.hidden = false
+                }
+                followButton.selected = false
+                followButton.snp.updateConstraints(closure: { (make) in
+                    make.size.equalTo(kSize(60, height: 24))
+                })
+            } else {
+                followButton.hidden = false
+                followButton.selected = true
+                followButton.snp.updateConstraints(closure: { (make) in
+                    make.size.equalTo(kSize(87, height: 24))
+                })
+            }
+            
+            
+        }
+    }
+    var showType: ShowType!
     var header: IconHeaderView!
     var nameLabel: UILabel!
-    var plusImageView: UIImageView!
-    var followLabel: UILabel!
-    var followContainer: UIView!
+    var followButton: UIButton!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,57 +58,34 @@ class FollowPeopleCell: UITableViewCell {
         header.layer.cornerRadius = kScale(50/2)
         header.clipsToBounds = true
         contentView.addSubview(header)
-        
-        nameLabel = UILabel()
-        nameLabel.font = UIFont.customFontOfSize(16)
-        contentView.addSubview(nameLabel)
-        
-        followContainer = UIView()
-        followContainer.layer.cornerRadius = kScale(24/2)
-        followContainer.layer.borderColor = kCommonColor.CGColor
-        followContainer.layer.borderWidth = 1
-        contentView.addSubview(followContainer)
-        
-        plusImageView = UIImageView()
-        followContainer.addSubview(plusImageView)
-        
-        followLabel = UILabel()
-        followLabel.font = UIFont.customFontOfSize(12)
-        followLabel.textColor = kCommonColor
-        followContainer.addSubview(followLabel)
-        
-        nameLabel.text = "我的关注"
-        plusImageView.backgroundColor = UIColor.yellowColor()
-        followLabel.text = "关注"
-        
         header.snp.makeConstraints { (make) in
             make.left.equalTo(header.superview!).offset(kScale(15))
             make.centerY.equalTo(header.superview!)
             make.size.equalTo(kSize(50, height: 50))
         }
         
+        followButton = UIButton()
+        followButton.setImage(UIImage(named: "follow11"), forState: .Normal)
+        followButton.setImage(UIImage(named: "mutualFollow"), forState: .Selected)
+        contentView.addSubview(followButton)
+        followButton.snp.makeConstraints { (make) in
+            make.right.equalTo(followButton.superview!).offset(kScale(-15))
+            make.centerY.equalTo(followButton.superview!)
+            make.size.equalTo(kSize(60, height: 24)).priorityLow()
+        }
+        
+        nameLabel = UILabel()
+        nameLabel.font = UIFont.customFontOfSize(16)
+        contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(header.snp.right).offset(kScale(15))
             make.centerY.equalTo(nameLabel.superview!)
+            make.right.equalTo(followButton.snp.left).offset(kScale(-15))
         }
         
-        followContainer.snp.makeConstraints { (make) in
-            make.right.equalTo(followContainer.superview!).offset(kScale(-15))
-            make.centerY.equalTo(followContainer.superview!)
-            make.size.equalTo(kSize(60, height: 24))
-        }
-        
-        plusImageView.snp.makeConstraints { (make) in
-            make.size.equalTo(kSize(12, height: 12))
-            make.centerY.equalTo(plusImageView.superview!)
-            make.left.equalTo(plusImageView.superview!).offset(kScale(9))
-        }
-        
-        followLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(plusImageView.snp.right).offset(kScale(5))
-            make.centerY.equalTo(followLabel.superview!)
-            make.right.equalTo(followLabel.superview!).offset(kScale(-5))
-        }
+        followButton.rx_tap.subscribeNext {
+            LogInfo("关注点击")
+        }.addDisposableTo(disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {

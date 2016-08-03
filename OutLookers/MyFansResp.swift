@@ -15,7 +15,7 @@ class MyFansResp: BaseResponse {
     var orderBy : String!
     var pageNo : Int!
     var pageSize : Int!
-    var list : [FansList]!
+    var list : [FollowList]!
     var totalCount : Int!
     var result: MyFansResp!
     
@@ -34,10 +34,10 @@ class MyFansResp: BaseResponse {
         pageNo = json["pageNo"].intValue
         pageSize = json["pageSize"].intValue
         
-        list = [FansList]()
+        list = [FollowList]()
         let resultArray = json["result"].arrayValue
         for resultJson in resultArray{
-            let value = FansList(fromJson: resultJson)
+            let value = FollowList(fromJson: resultJson)
             list.append(value)
         }
         totalCount = json["totalCount"].intValue
@@ -51,6 +51,7 @@ class FansList {
     var name : String!
     var photo : String!
     var userId : Int!
+    var detailsType: Int!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -62,5 +63,6 @@ class FansList {
         name = json["name"].stringValue
         photo = json["photo"].stringValue
         userId = json["userId"].intValue
+        detailsType = json["detailsType"].intValue
     }
 }

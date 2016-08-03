@@ -10,10 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol DynamicCellDelegate: class {
+@objc protocol DynamicCellDelegate: class {
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath)
     func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath)
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath)
+    optional
+    func dynamicCellTapFollow(sender: UIButton, indexPath: NSIndexPath)
 }
 
 class DynamicCell: UITableViewCell {
@@ -291,6 +293,12 @@ class DynamicCell: UITableViewCell {
         shareBtn.rx_tap.subscribeNext {
             if self.delegate != nil {
                 self.delegate.dynamicCellTapShare(shareBtn, indexPath: self.indexPath)
+            }
+        }.addDisposableTo(disposeBag)
+        
+        followButton.rx_tap.subscribeNext {
+            if self.delegate != nil && self.followButton.hidden == false {
+                self.delegate.dynamicCellTapFollow!(self.followButton, indexPath: self.indexPath)
             }
         }.addDisposableTo(disposeBag)
     }

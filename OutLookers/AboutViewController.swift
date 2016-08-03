@@ -23,7 +23,7 @@ class AboutViewController: YGBaseViewController {
     func setupSubViews() {
         title = "关于纯氧"
         
-        let imgView = UIImageView(image: UIImage(named: ""))
+        let imgView = UIImageView(image: UIImage(named: "cy"))
         view.addSubview(imgView)
         imgView.snp.makeConstraints { (make) in
             make.top.equalTo(self.snp.topLayoutGuideBottom).offset(kScale(60))
@@ -70,7 +70,6 @@ class AboutViewController: YGBaseViewController {
             make.height.equalTo(kScale(14))
         }
         
-        imgView.backgroundColor = UIColor.yellowColor()
         name.text = "纯氧"
         version.text = "版本\(Util.appVersion())"
         company.text = "北京围观信息技术有限公司"

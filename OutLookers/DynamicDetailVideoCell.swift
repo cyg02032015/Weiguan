@@ -39,9 +39,6 @@ class DynamicDetailVideoCell: UITableViewCell {
                         self.player.playWithPlayerItem(item)
                         LogDebug(url.addVideoPath())
                     } else {
-                        let item = self.preparePlayerItem("http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E5%9B%BE%E7%89%87&hs=0&pn=0&spn=0&di=125546894880&pi=&rn=1&tn=baiduimagedetail&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=1003704465%2C1400426357&os=4246966059%2C4277404619&simid=4210997991%2C798394471&adpicid=0&ln=30&fr=ala&fm=&sme=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fpic25.nipic.com%2F20121112%2F5955207_224247025000_2.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bgtrtv_z%26e3Bv54AzdH3Ffi5oAzdH3FnAzdH3F0nAzdH3F0al8l0mhdj9v1c9n_z%26e3Bip4s&gsm=0", url: url.addVideoPath())
-                        LogDebug(url.addVideoPath())
-                        self.player.playWithPlayerItem(item)
                         LogError("获取视频截图失败 = \(msg)")
                     }
                 })
@@ -139,6 +136,7 @@ class DynamicDetailVideoCell: UITableViewCell {
             headImgView.iconURL = userInfo.photo
             headImgView.setVimage(Util.userType(userInfo.detailsType))
             nameLabel.text = userInfo.name
+            followButton.hidden = userInfo.follow == 1 ? true : false
         }
     }
     var player: BMPlayer!
@@ -242,6 +240,10 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.height.equalTo(kScale(16))
         }
         layoutIfNeeded()
+        
+        followButton.rx_tap.subscribeNext {
+            LogInfo("点击关注")
+        }.addDisposableTo(disposeBag)
     }
     
     func preparePlayerItem(cover: String, url: String) -> BMPlayerItem {

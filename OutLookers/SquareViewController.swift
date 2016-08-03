@@ -127,4 +127,20 @@ extension SquareViewController: DynamicCellDelegate {
     func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath) {
         LogInfo("评论点击")
     }
+    
+    func dynamicCellTapFollow(sender: UIButton, indexPath: NSIndexPath) {
+        LogInfo("关注")
+        let object = sqaureLists[indexPath.section]
+        Server.followUser("\(object.userId)") { (success, msg, value) in
+            if success {
+                SVToast.showWithSuccess("关注成功")
+                sender.hidden = true
+                object.follow = 1
+                self.sqaureLists[indexPath.section] = object
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
 }

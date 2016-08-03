@@ -15,7 +15,7 @@ private let mineCollectCellIdentifier = "mineCollectId"
 
 class MineViewController: YGBaseViewController {
     
-    var images = ["Order", "account", "score1", "talent", "Group 5", "authentication", "feedback", ""]
+    var images = ["Order", "account", "score1", "talent", "invitation", "authentication", "feedback", ""]
     var titles = ["订单量", "钱包", "综合评分", "才艺", "邀约", "认证", "意见反馈", ""]
     
     var tableView: UITableView!
@@ -78,10 +78,16 @@ extension MineViewController {
                 SVToast.show()
             }
             cell.tapFollowClosure { [unowned self] in
-                LogInfo("关注")
+                let vc = FollowPeopleViewController()
+                vc.showType = .Follow
+                vc.title = "我关注的人"
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             cell.tapFanClosure { [unowned self] in
-                LogInfo("粉丝")
+                let vc = FollowPeopleViewController()
+                vc.showType = .Fan
+                vc.title = "我的粉丝"
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             return cell
         } else if indexPath.section == 1 {

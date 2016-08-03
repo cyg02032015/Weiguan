@@ -1317,8 +1317,9 @@
 		D82F8E251D33E35000A24CDB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D812A8CF1D4E46BC00186564 /* Friend */,
 				D81F45251D118F50004D9192 /* FollowViewController.swift */,
+				E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */,
+				D812A8CF1D4E46BC00186564 /* Friend */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1326,6 +1327,7 @@
 		D82F8E261D33E35F00A24CDB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */,
 				D812A8D01D4E46CF00186564 /* Friend */,
 				D82F8E271D33E47300A24CDB /* ReleaseNoticeCell.swift */,
 				D82F8E291D33E83D00A24CDB /* ReleaseTalentCell.swift */,
@@ -1685,8 +1687,6 @@
 			children = (
 				E446F9FE1D24EE76003DFC1E /* View */,
 				D81F452F1D12CF45004D9192 /* Controller */,
-				E446F9FC1D24EE44003DFC1E /* FollowPeopleViewController.swift */,
-				E446FA001D2612BC003DFC1E /* FollowPeopleCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
