@@ -10,6 +10,14 @@ import UIKit
 
 class FansAuthCell: UICollectionViewCell {
     
+    var info: FollowList! {
+        didSet {
+            imgView.yy_setImageWithURL(info.photo.addImagePath(kSize(72, height: 72)), placeholder: kPlaceholder)
+            name.text = info.name
+            setVimage(Util.userType(info.detailsType))
+        }
+    }
+    
     var imgView: UIImageView!
     var selectButton: UIButton!
     var name: UILabel!
@@ -34,6 +42,7 @@ class FansAuthCell: UICollectionViewCell {
     func setupSubViews() {
         imgView = UIImageView()
         imgView.layer.cornerRadius = kScale(72/2)
+        imgView.clipsToBounds = true
         contentView.addSubview(imgView)
         imgView.snp.makeConstraints { (make) in
             make.size.equalTo(kSize(72, height: 72))
@@ -67,10 +76,15 @@ class FansAuthCell: UICollectionViewCell {
             make.right.equalTo(imgView)
             make.bottom.equalTo(imgView)
         }
-        
-        imgView.backgroundColor = UIColor.yellowColor()
-        name.text = "qwqeqe"
-        vImgView.backgroundColor = UIColor.blackColor()
+    }
+    
+    func setVimage(type: UserType) {
+        switch type {
+        case .HotMan: vImgView.image = UIImage(named: "Red")
+        case .Organization: vImgView.image = UIImage(named: "blue")
+        case .Fans: vImgView.image = UIImage(named: "Green")
+        default: ""
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

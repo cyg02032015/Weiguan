@@ -13,10 +13,36 @@ private let fansHeadViewId = "fansHeadViewId"
 
 class FansAuthViewController: YGBaseViewController {
 
+    lazy var fans = [FollowList]()
+    lazy var selects = [Int]()
     var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        SVToast.show()
+        loadMoreData()
+        collectionView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
+        })
+    }
+    
+    override func loadMoreData() {
+        Server.myFans(pageNo) { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                guard let object = value else {return}
+                self.fans.appendContentsOf(object.list)
+                self.collectionView.mj_footer.endRefreshing()
+                self.collectionView.reloadData()
+//                self.pageNo = self.pageNo + 1
+                if object.list.count < 10 {
+                    self.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
     }
     
     func setupSubViews() {
@@ -52,21 +78,35 @@ extension FansAuthViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return fans.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(fansAuthCellId, forIndexPath: indexPath) as! FansAuthCell
+        cell.info = fans[indexPath.item]
+        if selects.contains(fans[indexPath.item].followUserId) {
+            cell.isSelect = true
+        } else {
+            cell.isSelect = false
+        }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! FansAuthCell
+        let info = fans[indexPath.item]
         if cell.isSelect == true {
             cell.isSelect = !cell.isSelect
+            selects.removeObject(info.followUserId)
         } else {
+            if selects.count >= 3 {
+                LogInfo("最多选3个")
+                return
+            }
             cell.isSelect = true
+            selects.append(info.followUserId)
         }
+        
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {

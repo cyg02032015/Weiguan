@@ -26,14 +26,14 @@ class FollowPeopleViewController: YGBaseViewController {
         setupSubViews()
         SVToast.show()
         loadMoreData()
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
-            self.loadMoreData()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
         })
     }
     
     override func loadMoreData() {
         if showType == .Follow {
-            Server.myFollow(pageNo) { [unowned self](success, msg, value) in
+            Server.myFollow(pageNo) { [unowned self] (success, msg, value) in
                 SVToast.dismiss()
                 if success {
                     guard let object = value else {return}

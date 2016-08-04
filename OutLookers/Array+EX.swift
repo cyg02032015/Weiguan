@@ -8,7 +8,13 @@
 
 import UIKit
 
-extension Array {
+extension Array where Element: Equatable {
+    
+    mutating func removeObject(object: Element) {
+        if let index = indexOf(object) {
+            removeAtIndex(index)
+        }
+    }
     
     func dataWithImages() -> [NSData] {
         var datas = [NSData]()
