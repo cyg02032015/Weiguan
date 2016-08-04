@@ -349,6 +349,7 @@
 		E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED61D179C0700CB8535 /* ColorDefine.swift */; };
 		E4E5DED91D179E1000CB8535 /* YGPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5DED81D179E1000CB8535 /* YGPickerView.swift */; };
 		E4F9AFFB1D4F60FB00890948 /* YGContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9AFFA1D4F60FB00890948 /* YGContact.swift */; };
+		E4F9B0001D5320E600890948 /* Array+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9AFFF1D5320E600890948 /* Array+EX.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -787,6 +788,7 @@
 		E4E5DED61D179C0700CB8535 /* ColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorDefine.swift; path = OutLookers/ColorDefine.swift; sourceTree = SOURCE_ROOT; };
 		E4E5DED81D179E1000CB8535 /* YGPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPickerView.swift; path = OutLookers/YGPickerView.swift; sourceTree = SOURCE_ROOT; };
 		E4F9AFFA1D4F60FB00890948 /* YGContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGContact.swift; path = OutLookers/YGContact.swift; sourceTree = SOURCE_ROOT; };
+		E4F9AFFF1D5320E600890948 /* Array+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+EX.swift"; path = "OutLookers/Array+EX.swift"; sourceTree = SOURCE_ROOT; };
 		E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1671,6 +1673,7 @@
 				E446FA081D261647003DFC1E /* UIFont+EX.swift */,
 				D82F8DDD1D2804B300A24CDB /* UITableView-EX.swift */,
 				D82F8E231D31070400A24CDB /* UILabel+EX.swift */,
+				E4F9AFFF1D5320E600890948 /* Array+EX.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2397,6 +2400,7 @@
 				E41B92681D3DF09500749769 /* ZSPasswordView.swift in Sources */,
 				D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
+				E4F9B0001D5320E600890948 /* Array+EX.swift in Sources */,
 				D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */,
 				E45BFF811D41ED7D0013356C /* InvitationCircularCell.swift in Sources */,
 				D82F8DCC1D27CB6400A24CDB /* SDCycleScrollView.m in Sources */,

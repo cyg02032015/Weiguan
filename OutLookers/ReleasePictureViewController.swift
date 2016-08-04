@@ -18,7 +18,6 @@ private extension Selector {
 }
 
 class ReleasePictureViewController: YGBaseViewController {
-
     var tableView: UITableView!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     lazy var photos = [UIImage]()
@@ -26,6 +25,7 @@ class ReleasePictureViewController: YGBaseViewController {
     var releaseButton: UIButton!
     lazy var req = ReleasePicAndVideoReq()
     var tokenObject: GetToken!
+    lazy var imageData = [NSData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,6 +185,7 @@ extension ReleasePictureViewController: UIActionSheetDelegate {
             break
         case 2:// 相册
                 let tz = TZImagePickerController(maxImagesCount: 9, delegate: self)
+//                tz.photoWidth = ScreenWidth
                 tz.allowTakePicture = false
                 tz.allowPickingVideo = false
                 tz.selectedAssets = NSMutableArray(array: originPhotos)
@@ -206,6 +207,7 @@ extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavig
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PictureSelectCell
         self.photos = photos
+        self.imageData = photos.dataWithImages()
         self.originPhotos = assets
         cell.collectionView.reloadData()
         if self.photos.count/4 >= 1 {
@@ -248,12 +250,10 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
         let group = dispatch_group_create()
         SVToast.show("正在上传图片")
         if self.photos.count > 0 {
-            LogInfo(self.photos)
-            dispatch_group_async(group, queue) {
+            dispatch_group_async(group, queue) { [unowned self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.photos[0], complete: { (names, state) in
+                OSSImageUploader.asyncUploadImageData(self.tokenObject, data: self.imageData[0], complete: { (names, state) in
                     dispatch_group_leave(group)
-                    LogDebug("进入上传封面")
                     if state == .Success {
                         self.req.cover = names.first
                     } else {
@@ -263,17 +263,17 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                 })
             }
             
-            dispatch_group_async(group, queue) {
+            dispatch_group_async(group, queue) { [unowned self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photos, complete: { (names, state) in
+                OSSImageUploader.uploadImageDatas(self.tokenObject, datas: self.imageData, isAsync: true, complete: { (names, state) in
                     dispatch_group_leave(group)
-                    LogDebug("进入上传图片")
-                    if state == .Success {
-                        self.req.picture = names.joinWithSeparator(",")
-                    } else {
-                        SVToast.dismiss()
-                        SVToast.showWithError("上传图片失败")
-                    }
+                        if state == .Success {
+                            self.req.picture = names.joinWithSeparator(",")
+                        } else {
+                            self.req.picture = ""
+                            SVToast.dismiss()
+                            SVToast.showWithError("上传图片失败")
+                        }
                 })
             }
         }

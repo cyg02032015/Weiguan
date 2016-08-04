@@ -426,7 +426,6 @@ extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigation
                 cell.videoButton.setImage(img, forState: .Normal)
                 dismissViewControllerAnimated(true, completion: {})
             }
-
         } else {
             let originalImg = info["UIImagePickerControllerEditedImage"] as! UIImage
             originalImg.resetSizeOfImageData(originalImg, maxSize: 300, compeleted: { [weak self](data) in
