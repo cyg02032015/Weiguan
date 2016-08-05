@@ -17,7 +17,13 @@ class IconHeaderView: UIView {
     
     var iconURL: String! {
         didSet {
-            iconView.yy_setImageWithURL(iconURL.addImagePath(CGSize(width: iconView.gg_width, height: iconView.gg_height)), placeholder: kPlaceholder)
+            iconView.yy_setImageWithURL(iconURL.addImagePath(CGSize(width: iconView.gg_width, height: iconView.gg_height)), placeholder: kHeadPlaceholder)
+        }
+    }
+    
+    var iconPlaceholder: UIImage! {
+        didSet {
+            iconView.image = iconPlaceholder
         }
     }
     private var _customCornerRadius: CGFloat = kScale(50/2)

@@ -25,6 +25,10 @@ extension NSDate {
         return stringFromDateWith("yyyy-MM-dd HH:mm")
     }
     
+    func stringFromNowDate() -> String {
+        return stringFromDateWith("yyyy-MM-dd HH:mm:ss")
+    }
+    
     func getShowFormat() -> String {
         
         //获取当前时间
@@ -71,5 +75,27 @@ extension NSDate {
         
         //格式化
         return formatter.stringFromDate(self)
+    }
+    
+    func ageWithDateOfBirth() -> String {
+        // 出生日期转换 年月日
+        let components1 = NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: self);
+        let brithDateYear  = components1.year;
+        let brithDateDay   = components1.day;
+        let brithDateMonth = components1.month;
+        
+        // 获取系统当前 年月日
+        let components2 = NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: NSDate())
+        let currentDateYear  = components2.year;
+        let currentDateDay   = components2.day;
+        let currentDateMonth = components2.month;
+        
+        // 计算年龄
+        var iAge = currentDateYear - brithDateYear - 1;
+        if ((currentDateMonth > brithDateMonth) || (currentDateMonth == brithDateMonth && currentDateDay >= brithDateDay)) {
+            iAge = iAge + 1
+        }  
+        
+        return "\(iAge)";
     }
 }

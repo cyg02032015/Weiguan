@@ -15,9 +15,10 @@ private let mineCollectCellIdentifier = "mineCollectId"
 
 class MineViewController: YGBaseViewController {
     
-    var images = ["Order", "account", "score1", "talent", "invitation", "authentication", "feedback", ""]
-    var titles = ["订单量", "钱包", "综合评分", "才艺", "邀约", "认证", "意见反馈", ""]
-    
+//    var images = ["Order", "account", "score1", "talent", "invitation", "authentication", "feedback", ""]
+//    var titles = ["订单量", "钱包", "综合评分", "才艺", "邀约", "认证", "意见反馈", ""]
+    var images = ["talent", "invitation", "authentication", "feedback", ""]
+    var titles = ["才艺", "邀约", "认证", "意见反馈", ""]
     var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -129,38 +130,36 @@ extension MineViewController {
 
 extension MineViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return 4
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(mineCollectionCellIdentifier, forIndexPath: indexPath) as! MineCollectionCell
-        if indexPath.item == 0 {
-            cell.imgButton.badgeValue = "40"
-        }
         cell.imgButton.setImage(UIImage(named: images[indexPath.item]), forState: .Normal)
         cell.label.text = titles[indexPath.item]
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.item == 0 {  // 订单
-            
-        } else if indexPath.item == 1 { // 账户
-            let vc = MyAccountViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 2 { // 综合评价
-            let vc = Comment2ViewController()     // Comment2ViewController    MyCommentViewController
-            navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 3 { // 才艺
+//        if indexPath.item == 0 {  // 订单
+//            
+//        } else if indexPath.item == 1 { // 账户
+//            let vc = MyAccountViewController()
+//            navigationController?.pushViewController(vc, animated: true)
+//        } else if indexPath.item == 2 { // 综合评价
+//            let vc = Comment2ViewController()     // Comment2ViewController    MyCommentViewController
+//            navigationController?.pushViewController(vc, animated: true)
+//        } else
+        if indexPath.item == 0 { // 才艺
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 4 { // 通告
+        } else if indexPath.item == 1 { // 通告
             let vc = MyCircularViewController()
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 5 { // 认证
+        } else if indexPath.item == 2 { // 认证
             let vc = AuthenticationViewController()
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 6 { // 意见反馈
+        } else if indexPath.item == 3 { // 意见反馈
             let vc = FeedbackViewController()
             navigationController?.pushViewController(vc, animated: true)
         }

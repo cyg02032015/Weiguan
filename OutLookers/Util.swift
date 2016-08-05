@@ -20,6 +20,18 @@ class Util {
         return button
     }
     
+    /// 下一步按钮 custom
+    class func customCornerButton(title: String) -> UIButton {
+        let button = UIButton()
+        button.userInteractionEnabled = false
+        button.setTitle(title, forState: .Normal)
+        button.backgroundColor = kLightGrayColor
+        button.titleLabel!.font = UIFont.customFontOfSize(16)
+        button.layer.cornerRadius = kScale(22)
+        return button
+    }
+    
+    /// 封装ActionSheet  for imagepicker
     class func actionSheetImagePicker(isCamera camera: Bool) -> UIImagePickerController? {
         if camera {
             if UIImagePickerController.isAvailableCamera() && UIImagePickerController.isSupportTakingPhotos(){
@@ -58,6 +70,22 @@ class Util {
         imgView.frame = CGRect(x: 0, y: back.gg_midY - 10, width: 12, height: 20)
         viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: back)
         return (back, imgView)
+    }
+    
+    class func logViewTap(controller: UIViewController, type: LogViewTapType) {
+        switch type {
+        case .Wechat:
+            let vc = LogViewController()
+            controller.navigationController?.pushViewController(vc, animated: true)
+            LogInfo("微信登录")
+        case .QQ: LogInfo("QQ登录")
+        case .Weibo: LogInfo("微博登录")
+        case .Phone: LogInfo("手机登录")
+        case .Iagree: LogInfo("同意协议")
+        case .Register:
+            let vc = Register1ViewController()
+            controller.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     /// 根据unit获取对应字符串

@@ -181,6 +181,7 @@ class Server {
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
+            "time" : NSDate().stringFromNowDate()
             ]
         if isPerson {
             parameters["userId"] = UserSingleton.sharedInstance.userId
@@ -209,7 +210,8 @@ class Server {
             "userId" : UserSingleton.sharedInstance.userId,
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
-            "state" : "\(state)"
+            "state" : "\(state)",
+            "time" : NSDate().stringFromNowDate()
             ]
         HttpTool.post(API.talentList, parameters: parameters, complete: { (response) in
             let info = TalentListResp(fromJson: response)
@@ -296,6 +298,7 @@ class Server {
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
+            "time" : NSDate().stringFromNowDate()
             ]
         if isPerson {
             parameters["userId"] = UserSingleton.sharedInstance.userId
@@ -777,6 +780,7 @@ class Server {
             "introduction" : req.introduction,
             "headImgUrl" : req.headImgUrl
             ]
+        LogError(parameters)
         HttpTool.post(API.informationUpdate, parameters: parameters, complete: { (response) in
             let info = StringResponse(fromJson: response)
             if info.success == true {
@@ -790,9 +794,9 @@ class Server {
     }
     
     /// 查看资料
-    class func informationUpdate(handler: (success: Bool, msg: String?, value: UserData?)->Void) {
+    class func showInformation(handler: (success: Bool, msg: String?, value: UserData?)->Void) {
         let parameters = [
-            "userId" : UserSingleton.sharedInstance.userId
+            "id" : UserSingleton.sharedInstance.userId
         ]
         HttpTool.post(API.informationGet, parameters: parameters, complete: { (response) in
             let info = UserDataResp(fromJson: response)
@@ -862,7 +866,8 @@ class Server {
             "userId" : UserSingleton.sharedInstance.userId,
             "dynamicId" : dynamicId ?? "",
             "pageNo" : "\(pageNo)",
-            "pageSize" : "\(pageSize)"
+            "pageSize" : "\(pageSize)",
+            "time" : NSDate().stringFromNowDate()
         ]
         HttpTool.post(API.likeList, parameters: parameters, complete: { (response) in
             let info = LikeListResp(fromJson: response)

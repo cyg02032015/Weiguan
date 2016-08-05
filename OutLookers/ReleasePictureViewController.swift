@@ -253,12 +253,14 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
             dispatch_group_async(group, queue) { [unowned self] in
                 dispatch_group_enter(group)
                 OSSImageUploader.asyncUploadImageData(self.tokenObject, data: self.imageData[0], complete: { (names, state) in
-                    dispatch_group_leave(group)
                     if state == .Success {
+                        LogInfo("图片们上传完成")
                         self.req.cover = names.first
+                        dispatch_group_leave(group)
                     } else {
                         SVToast.dismiss()
                         SVToast.showWithError("上传封面失败")
+                        dispatch_group_leave(group)
                     }
                 })
             }
@@ -266,13 +268,16 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
             dispatch_group_async(group, queue) { [unowned self] in
                 dispatch_group_enter(group)
                 OSSImageUploader.uploadImageDatas(self.tokenObject, datas: self.imageData, isAsync: true, complete: { (names, state) in
-                    dispatch_group_leave(group)
                         if state == .Success {
+                            LogWarn("pictures = \(names.joinWithSeparator(","))")
+                            LogInfo("图片们上传完成")
                             self.req.picture = names.joinWithSeparator(",")
+                            dispatch_group_leave(group)
                         } else {
                             self.req.picture = ""
                             SVToast.dismiss()
                             SVToast.showWithError("上传图片失败")
+                            dispatch_group_leave(group)
                         }
                 })
             }
@@ -284,10 +289,11 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                 SVToast.showWithError("图片或者封面id为空")
                 return
             }
+            LogInfo("")
+            LogInfo("picture = \(self.req.picture)")
             Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
                 SVToast.dismiss()
                 if success {
-                    LogInfo(value!)
                     self.dismissViewControllerAnimated(true, completion: { [unowned self] in
                         self.photos.removeAll()
                         self.originPhotos.removeAll()

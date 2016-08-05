@@ -36,17 +36,7 @@ class HomeViewController: YGBaseViewController {
         super.viewDidLoad()
         log = YGLogView(frame: CGRectZero)
         log.tapLogViewClosure { (type) in
-            switch type {
-            case .Wechat:
-                let vc = LogViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                LogInfo("微信登录")
-            case .QQ: LogInfo("QQ登录")
-            case .Weibo: LogInfo("微博登录")
-            case .Phone: LogInfo("手机登录")
-            case .Iagree: LogInfo("同意协议")
-            case .Register: LogInfo("注册")
-            }
+            Util.logViewTap(self, type: type)
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: .loadRecommendHotmanData, name: kRecieveGlobleDefineNotification, object: nil)
         setupSubViews()
@@ -177,6 +167,7 @@ extension HomeViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         let obj = recommends[indexPath.section - 1]
         let vc = DynamicDetailViewController()
         vc.dynamicObj = obj
@@ -248,6 +239,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let vc = OrganizationViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
+            log.animation()
         }
     }
 }

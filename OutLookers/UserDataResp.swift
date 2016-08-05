@@ -32,7 +32,7 @@ class UserData {
     var introduction : String!
     var nickname : String!
     var province : String!
-    var sex : Int!
+    var sex : String!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -45,6 +45,6 @@ class UserData {
         introduction = json["introduction"].stringValue
         nickname = json["nickname"].stringValue
         province = json["province"].stringValue
-        sex = json["sex"].intValue
+        sex = json["sex"].stringValue
     }
 }

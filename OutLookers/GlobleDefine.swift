@@ -36,7 +36,8 @@ let kSinaRedirectUrl = "http://sns.whalecloud.com/sina2/callback" // 分享回�
 let kOSSEndPoint = "http://oss-cn-hangzhou.aliyuncs.com/"
 
 // placeholder
-let kPlaceholder = UIImage(named: "Combined Shape Copy")
+let kPlaceholder = UIImage(named: "Group 4123")
+let kHeadPlaceholder = UIImage(named: "关注列表默认头像default")
 
 // 正则表达
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"

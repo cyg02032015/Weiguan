@@ -76,6 +76,7 @@ class LogViewController: YGBaseViewController {
         container.addSubview(mobileContainer)
         
         mobileTF = getTextField("请输入手机号")
+        mobileTF.delegate = self
         mobileContainer.addSubview(mobileTF)
         
         verifyButton = UIButton()
@@ -91,6 +92,7 @@ class LogViewController: YGBaseViewController {
         container.addSubview(verifyContainer)
         
         verifyTF = getTextField("请输入验证码")
+        verifyTF.delegate = self
         verifyContainer.addSubview(verifyTF)
         
         // 用户协议和按钮
@@ -191,24 +193,6 @@ class LogViewController: YGBaseViewController {
             make.top.equalTo(submitButton.snp.bottom).offset(10)
         }
     }
-    
-    func textFieldContainer() -> UIView {
-        let c = UIView()
-        c.layer.borderWidth = 1
-        c.layer.borderColor = kGrayColor.CGColor
-        c.layer.cornerRadius = kScale(23)
-        c.clipsToBounds = true
-        return c
-    }
-    
-    func getTextField(placeHolder: String) -> UITextField {
-        let tf = UITextField()
-        tf.placeholder = placeHolder
-        tf.delegate = self
-        tf.keyboardType = .NumberPad
-        tf.font = UIFont.customFontOfSize(16)
-        return tf
-    }
 }
 
 // MARK: -按钮点击方法
@@ -281,4 +265,23 @@ extension LogViewController: UITextFieldDelegate {
         }
     }
 }
+
+func textFieldContainer() -> UIView {
+    let c = UIView()
+    c.layer.borderWidth = 1
+    c.layer.borderColor = UIColor(hex: 0xE5E5E5).CGColor
+    c.layer.cornerRadius = kScale(23)
+    c.clipsToBounds = true
+    c.backgroundColor = UIColor.whiteColor()
+    return c
+}
+
+func getTextField(placeHolder: String) -> UITextField {
+    let tf = UITextField()
+    tf.placeholder = placeHolder
+    tf.keyboardType = .NumberPad
+    tf.font = UIFont.customFontOfSize(16)
+    return tf
+}
+
 

@@ -8,6 +8,10 @@
 
 import UIKit
 
+private extension Selector {
+    static let textFieldEdit = #selector(NoArrowEditCell.textFieldEditChanged(_:))
+}
+
 protocol NoArrowEditCellDelegate:class {
     func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int))
 }
@@ -68,8 +72,8 @@ class NoArrowEditCell: UITableViewCell {
         
         tf = UITextField()
         tf.textAlignment = .Right
+        tf.addTarget(self, action: .textFieldEdit, forControlEvents: .EditingChanged)
         tf.font = UIFont.customFontOfSize(14)
-        tf.delegate = self
         contentView.addSubview(tf)
         
         label.snp.makeConstraints { (make) in
@@ -91,16 +95,13 @@ class NoArrowEditCell: UITableViewCell {
         tf.placeholder = placeholder
     }
     
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension NoArrowEditCell: UITextFieldDelegate {
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldEditChanged(textField: UITextField) {
         if delegate != nil {
             delegate.noarrowCellReturnText(textField.text, tuple: (indexPath.section, indexPath.row))
         }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

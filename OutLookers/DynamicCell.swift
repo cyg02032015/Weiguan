@@ -132,10 +132,8 @@ class DynamicCell: UITableViewCell {
         followButton.layer.borderColor = kCommonColor.CGColor
         followButton.layer.borderWidth = 1
         followButton.rx_tap.subscribeNext { (sender) in
-            LogInfo(sender)
             LogInfo("我是rx_tap")
         }.addDisposableTo(disposeBag)
-//        followButton.addTarget(self, action: .tapFollow, forControlEvents: .TouchUpInside)
         contentView.addSubview(followButton)
         followButton.snp.makeConstraints { (make) in
             make.right.equalTo(followButton.superview!).offset(kScale(-16))
@@ -151,8 +149,7 @@ class DynamicCell: UITableViewCell {
             make.left.equalTo(bigImgView.superview!)
         }
         
-        videoImgView = UIImageView()
-        videoImgView.backgroundColor = UIColor.yellowColor()
+        videoImgView = UIImageView(image: UIImage(named: "play"))
         videoImgView.hidden = true
         bigImgView.addSubview(videoImgView)
         videoImgView.snp.makeConstraints { (make) in
