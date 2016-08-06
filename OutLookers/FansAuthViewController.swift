@@ -14,8 +14,10 @@ private let fansHeadViewId = "fansHeadViewId"
 class FansAuthViewController: YGBaseViewController {
 
     lazy var fans = [FollowList]()
-    lazy var selects = [Int]()
+    lazy var selects = [String]()
     var collectionView: UICollectionView!
+    var commit: UIButton!
+    var fansId: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
@@ -34,7 +36,7 @@ class FansAuthViewController: YGBaseViewController {
                 self.fans.appendContentsOf(object.list)
                 self.collectionView.mj_footer.endRefreshing()
                 self.collectionView.reloadData()
-//                self.pageNo = self.pageNo + 1
+                self.pageNo = self.pageNo + 1
                 if object.list.count < 10 {
                     self.collectionView.mj_footer.endRefreshingWithNoMoreData()
                 }
@@ -47,7 +49,7 @@ class FansAuthViewController: YGBaseViewController {
     
     func setupSubViews() {
         title = "粉丝认证"
-        let commit = setRightNaviItem()
+        commit = setRightNaviItem()
         commit.setTitle("提交", forState: .Normal)
         let layout = UICollectionViewFlowLayout()
         layout.headerReferenceSize = CGSize(width: ScreenWidth, height: kScale(60))
@@ -68,7 +70,29 @@ class FansAuthViewController: YGBaseViewController {
     }
     
     override func tapMoreButton(sender: UIButton) {
-        LogInfo("提交")
+        SVToast.show()
+        Server.fansAuth(fansId) { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                SVToast.showWithSuccess("认证成功")
+                delay(1) {
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                }
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
+    
+    func checkParameters() {
+        if !isEmptyString(fansId) {
+            commit.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            commit.userInteractionEnabled = true
+        } else {
+            commit.setTitleColor(kGrayTextColor, forState: .Normal)
+            commit.userInteractionEnabled = false
+        }
     }
 }
 
@@ -84,7 +108,7 @@ extension FansAuthViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(fansAuthCellId, forIndexPath: indexPath) as! FansAuthCell
         cell.info = fans[indexPath.item]
-        if selects.contains(fans[indexPath.item].followUserId) {
+        if selects.contains("\(fans[indexPath.item].followUserId)") {
             cell.isSelect = true
         } else {
             cell.isSelect = false
@@ -97,16 +121,17 @@ extension FansAuthViewController: UICollectionViewDelegate, UICollectionViewData
         let info = fans[indexPath.item]
         if cell.isSelect == true {
             cell.isSelect = !cell.isSelect
-            selects.removeObject(info.followUserId)
+            selects.removeObject("\(info.followUserId)")
         } else {
             if selects.count >= 3 {
                 LogInfo("最多选3个")
                 return
             }
             cell.isSelect = true
-            selects.append(info.followUserId)
+            selects.append("\(info.followUserId)")
         }
-        
+        fansId = selects.joinWithSeparator(",")
+        checkParameters()
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {

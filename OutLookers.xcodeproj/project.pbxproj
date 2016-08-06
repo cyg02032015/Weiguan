@@ -143,6 +143,8 @@
 		D825EEC11D548F5D00AF94AF /* Register1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC01D548F5D00AF94AF /* Register1ViewController.swift */; };
 		D825EEC41D549DDD00AF94AF /* Register2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC31D549DDD00AF94AF /* Register2ViewController.swift */; };
 		D825EEC61D54A96E00AF94AF /* Register3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC51D54A96E00AF94AF /* Register3ViewController.swift */; };
+		D825EEC81D55EBDC00AF94AF /* FeedbackReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC71D55EBDC00AF94AF /* FeedbackReq.swift */; };
+		D825EECA1D55EE2200AF94AF /* TalentList4Resp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC91D55EE2200AF94AF /* TalentList4Resp.swift */; };
 		D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */; };
 		D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBC1D27CB6400A24CDB /* TAAnimatedDotView.m */; };
 		D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBE1D27CB6400A24CDB /* TADotView.m */; };
@@ -536,6 +538,8 @@
 		D825EEC01D548F5D00AF94AF /* Register1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Register1ViewController.swift; path = OutLookers/Register1ViewController.swift; sourceTree = SOURCE_ROOT; };
 		D825EEC31D549DDD00AF94AF /* Register2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Register2ViewController.swift; path = OutLookers/Register2ViewController.swift; sourceTree = SOURCE_ROOT; };
 		D825EEC51D54A96E00AF94AF /* Register3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Register3ViewController.swift; path = OutLookers/Register3ViewController.swift; sourceTree = SOURCE_ROOT; };
+		D825EEC71D55EBDC00AF94AF /* FeedbackReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackReq.swift; path = OutLookers/FeedbackReq.swift; sourceTree = SOURCE_ROOT; };
+		D825EEC91D55EE2200AF94AF /* TalentList4Resp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentList4Resp.swift; path = OutLookers/TalentList4Resp.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DB91D27CB6400A24CDB /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
 		D82F8DBB1D27CB6400A24CDB /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
@@ -1148,6 +1152,8 @@
 				D812A8BB1D4CEED800186564 /* ModifyOGReq.swift */,
 				D825EEBC1D50EB7600AF94AF /* SnapshotsResp.swift */,
 				D825EEBE1D524F9000AF94AF /* HotmanAuthReq.swift */,
+				D825EEC71D55EBDC00AF94AF /* FeedbackReq.swift */,
+				D825EEC91D55EE2200AF94AF /* TalentList4Resp.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2392,6 +2398,7 @@
 				D85B72C11D4A3EBC005EECE6 /* OSSVideoUploader.swift in Sources */,
 				E47ADF701D1D101C00A2F4BD /* ShareCell.swift in Sources */,
 				E41B92E01D407CB800749769 /* MessageViewController.swift in Sources */,
+				D825EECA1D55EE2200AF94AF /* TalentList4Resp.swift in Sources */,
 				E45BFF791D41C3D50013356C /* InvitationDetailViewController.swift in Sources */,
 				D82F8DE81D28373400A24CDB /* FindNoticeListResp.swift in Sources */,
 				D819924B1D448EAD007734C0 /* TalentListResp.swift in Sources */,
@@ -2435,6 +2442,7 @@
 				D81992681D44B517007734C0 /* GetPicAndVideoResp.swift in Sources */,
 				E4E5DED71D179C0700CB8535 /* ColorDefine.swift in Sources */,
 				D812A9071D4FA69D00186564 /* MJRefreshComponent.m in Sources */,
+				D825EEC81D55EBDC00AF94AF /* FeedbackReq.swift in Sources */,
 				E47ADF681D1BEF0300A2F4BD /* PictureSelectCell.swift in Sources */,
 				D870C7471D3B8170003B7A09 /* PersonCharacter.swift in Sources */,
 				E41DD9271D3CA86200E5E7E9 /* IsAuthResp.swift in Sources */,

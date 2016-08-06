@@ -77,11 +77,14 @@ extension WorkDetailCell: UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         placeholderLabel.hidden = textView.text.characters.count > 0
-    }
-    
-    func textViewDidEndEditing(textView: UITextView) {
         if delegate != nil {
             delegate.workDetailCellReturnText(textView.text)
         }
     }
+    
+//    func textViewDidEndEditing(textView: UITextView) {
+//        if delegate != nil {
+//            delegate.workDetailCellReturnText(textView.text)
+//        }
+//    }
 }

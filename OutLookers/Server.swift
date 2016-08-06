@@ -1037,4 +1037,46 @@ class Server {
             handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
+    /// 意见反馈
+    class func feedback(req: FeedbackReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId" : UserSingleton.sharedInstance.userId,
+            "text" : req.text,
+            "contact" : req.contact
+        ]
+        HttpTool.post(API.feedback, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 才艺列表（4张图）
+    class func talentList4(pageNo: Int, state: Int, handler: (success: Bool, msg: String?, value: [Result]?)->Void) {
+        var parameters = [
+            "pageNo" : "\(pageNo)",
+            "pageSize" : "\(pageSize)",
+            "state" : "\(state)",
+            "userId" : UserSingleton.sharedInstance.userId,
+        ]
+        if pageNo == 1 {
+            parameters["time"] = NSDate().stringFromNowDate()
+        }
+        HttpTool.post(API.talentListFourPic, parameters: parameters, complete: { (response) in
+            let info = TalentList4Resp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
 }

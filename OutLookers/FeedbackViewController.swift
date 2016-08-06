@@ -14,6 +14,7 @@ class FeedbackViewController: YGBaseViewController {
 
     var send: UIButton!
     var tableView: UITableView!
+    lazy var req = FeedbackReq()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
@@ -39,7 +40,29 @@ class FeedbackViewController: YGBaseViewController {
     }
     
     override func tapMoreButton(sender: UIButton) {
-        LogInfo("发送")
+        SVToast.show()
+        Server.feedback(req) { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                SVToast.showWithSuccess("发送成功")
+                delay(1) {
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
+    
+    func checkParameters() {
+        if !isEmptyString(req.text) && !isEmptyString(req.contact) {
+            send.userInteractionEnabled = true
+            send.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        } else {
+            send.userInteractionEnabled = false
+            send.setTitleColor(kGrayTextColor, forState: .Normal)
+        }
     }
 }
 
@@ -61,10 +84,12 @@ extension FeedbackViewController {
 
 extension FeedbackViewController: FeedBackCellDelegate {
     func feedBackCellReturnTextFieldText(text: String) {
-        LogInfo("textField`  = \(text)")
+        req.contact = text
+        checkParameters()
     }
     
     func feedBackCellReturnTextViewText(text: String) {
-        LogInfo("textView = \(text)")
+        req.text = text
+        checkParameters()
     }
 }

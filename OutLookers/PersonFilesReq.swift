@@ -9,6 +9,7 @@
 import UIKit
 
 struct PersonFilesReq {
+    var array : [String]!
     var bust : String!
     var characteristics : String!
     var constellation : String!

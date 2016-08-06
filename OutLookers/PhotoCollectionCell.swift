@@ -10,6 +10,17 @@ import UIKit
 
 class PhotoCollectionCell: UICollectionViewCell {
     
+    var info: List! {
+        didSet {
+            imgView.yy_setImageWithURL(info.url.addImagePath(kSize(imgView.gg_width, height: imgView.gg_height)), placeholder: kPlaceholder)
+            if info.type == 1 {
+                imgVideoCover.hidden = true
+            } else {
+                imgVideoCover.hidden = false
+            }
+        }
+    }
+    
     var imgView: UIImageView!
     var img: UIImage? {
         didSet {
@@ -45,7 +56,7 @@ class PhotoCollectionCell: UICollectionViewCell {
             make.centerX.equalTo(imgVideoCover.superview!)
             make.size.equalTo(kSize(30, height: 30))
         }
-        
+        layoutIfNeeded()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

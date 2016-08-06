@@ -27,4 +27,6 @@ extension Array where Element: Equatable {
         }
         return datas
     }
+    
+    
 }

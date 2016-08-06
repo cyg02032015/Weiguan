@@ -56,11 +56,6 @@ class PersonStyleCell: UITableViewCell {
             make.height.equalTo(shape)
             make.right.equalTo(shape)
         }
-        
-        style.text = "风格特色：欧美 日韩 街头 性感 中国风"
-        appearance.text = "外貌特色：短发 骨感 双眼皮"
-        shape.text = "体型特色：瘦"
-        charm.text = "魅力部位：眼睛 腿部"
     }
     
     required init?(coder aDecoder: NSCoder) {

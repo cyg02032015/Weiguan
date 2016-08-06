@@ -22,6 +22,15 @@ protocol MyTalentCellDelegate: class {
 
 class MyTalentCell: UITableViewCell {
 
+    var info: Result! {
+        didSet {
+            nameLabel.text = info.name
+            moneyLabel.text = "\(info.price)" + Util.unit(info.unit)
+            desc.text = info.details
+            collectionView.reloadData()
+        }
+    }
+    
     weak var delegate: MyTalentCellDelegate!
     var nameLabel: UILabel!
     var moneyLabel: UILabel!
@@ -83,6 +92,8 @@ class MyTalentCell: UITableViewCell {
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.scrollEnabled = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
         contentView.addSubview(collectionView)
         collectionView.registerClass(PhotoCollectionCell.self, forCellWithReuseIdentifier: releasePictureCollectionCellIdentifier)
         collectionView.snp.makeConstraints { (make) in
@@ -152,11 +163,12 @@ class MyTalentCell: UITableViewCell {
         desc.text = "才艺名称才艺详情介绍才艺详情介绍才艺详情介绍才艺才艺名称才艺详情介绍才艺详情介绍才艺详情介绍才艺"        
     }
     
-    func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) {
+    func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) -> UICollectionView {
         collectionView.delegate = delegate
         collectionView.dataSource = delegate
         collectionView.tag = indexPath.section
         collectionView.reloadData()
+        return collectionView
     }
     
     func tapDelete(sender: UIButton) {
@@ -179,5 +191,18 @@ class MyTalentCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MyTalentCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return info.list.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(releasePictureCollectionCellIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
+        cell.backgroundColor = UIColor.grayColor()
+        cell.info = info.list[indexPath.item]
+        return cell
     }
 }

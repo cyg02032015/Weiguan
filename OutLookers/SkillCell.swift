@@ -13,8 +13,8 @@ class SkillCell: UICollectionViewCell {
     var skill: UIButton!
     var section: Int = 0
     var row: Int = 0
-    var _isSelected: Bool!
-    var isSelected: Bool! {
+    var _isSelected: Bool = false
+    var isSelect: Bool! {
         get {
             return _isSelected
         }

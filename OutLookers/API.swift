@@ -125,4 +125,8 @@ struct API {
     static let getToken = baseURL + "/api/file/v1/getAppToken"
     /// 获取视频截图列表
     static let getSnapshots = baseURL + "/api/file/v1/getSnapshots"
+    /// 意见反馈
+    static let feedback = baseURL + "/api/authentication/v1/feedback/create"
+    /// 才艺列表（4张图）
+    static let talentListFourPic = baseURL + "/api/release/v1/userTalent/get"
 }

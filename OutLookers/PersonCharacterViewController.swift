@@ -15,7 +15,7 @@ struct PersonCharaterModel {
     var pid: Int!
     var id: Int!
     var name: String!
-    lazy var result = [PersonCharaterModel]()
+    var result = [PersonCharaterModel]()
     init(pid: Int, id: Int, name: String, result: [PersonCharaterModel] = []) {
         self.pid = pid
         self.id = id
@@ -24,15 +24,53 @@ struct PersonCharaterModel {
     }
 }
 
+extension PersonCharaterModel: Equatable {}
+
+func ==(lhs: PersonCharaterModel, rhs: PersonCharaterModel) -> Bool {
+    return lhs.pid == rhs.pid && lhs.id == rhs.id && lhs.name == rhs.name && lhs.result == lhs.result
+}
+
+protocol PersonCharacterDelegate: class {
+    func characterSendValue(obj: [String:[PersonCharaterModel]])
+}
+
 class PersonCharacterViewController: YGBaseViewController {
     
-    
+    weak var delegate: PersonCharacterDelegate!
     typealias TapItemClosure = (text: String) -> Void
     var tapItem: TapItemClosure!
     var collectionView: UICollectionView!
     lazy var imgStrings = ["help", "teach ", "accompany"]
     lazy var optionTitles = ["（可多选）", "（可多选）", "", "（可多选）", "", ""]
     lazy var rowArray = [PersonCharaterModel]()
+    lazy var selectStyles = [PersonCharaterModel]()
+    lazy var selectLooks = [PersonCharaterModel]()
+    lazy var selectShape = [PersonCharaterModel]()
+    lazy var selectCharm = [PersonCharaterModel]()
+    lazy var shapeButton = UIButton()
+    var save: UIButton!
+    var selectParam: [String: [PersonCharaterModel]]! {
+        get {
+            return [
+            "1": selectStyles,
+            "2": selectLooks,
+            "3": selectShape,
+            "4": selectCharm
+            ]
+        }
+        set {
+            selectStyles = newValue["1"]!
+            selectLooks = newValue["2"]!
+            selectShape = newValue["3"]!
+            selectCharm = newValue["4"]!
+            [
+                "1": selectStyles,
+                "2": selectLooks,
+                "3": selectShape,
+                "4": selectCharm
+            ]
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,8 +83,11 @@ class PersonCharacterViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "选择才艺类型"
-        
         setupSubViews()
+        loadData()
+    }
+    
+    func loadData() {
         Server.getPersonCharacter { (success, msg, value) in
             if success {
                 guard let data = value else { return }
@@ -84,6 +125,17 @@ class PersonCharacterViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
+        save = setRightNaviItem()
+        save.setTitle("保存", forState: .Normal)
+        save.userInteractionEnabled = true
+        save.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        save.rx_tap.subscribeNext { [unowned self] in
+            if self.delegate != nil {
+                self.delegate.characterSendValue(self.selectParam)
+            }
+            self.navigationController?.popViewControllerAnimated(true)
+        }.addDisposableTo(disposeBag)
+        
         let layout = UICollectionViewFlowLayout()
         layout.headerReferenceSize = CGSize(width: ScreenWidth, height: kHeight(60))
         layout.itemSize = CGSize(width: (ScreenWidth - 30 - 45) / 4, height: kScale(24))
@@ -121,24 +173,94 @@ extension PersonCharacterViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillIdentifier, forIndexPath: indexPath) as! SkillCell
         var sectionModel = rowArray[indexPath.section]
-        cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-//        if indexPath.section == 0 {
-//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-//        } else if indexPath.section == 1 {
-//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-//        } else if indexPath.section == 2 {
-//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-//        } else {
-//            cell.skill.setTitle(sectionModel.result[indexPath.item].name, forState: .Normal)
-//        }
+        let rowModel = sectionModel.result[indexPath.item]
+        let id = "\(sectionModel.id)"
+        cell.skill.setTitle(rowModel.name, forState: .Normal)
         cell.row = indexPath.item
         cell.section == indexPath.section
+        
+        if let styles = selectParam[id] where id == "1" {
+            if styles.contains(rowModel) {
+                cell.isSelect = true
+            } else {
+                cell.isSelect = false
+            }
+        } else if let looks = selectParam[id] where id == "2" {
+            if looks.contains(rowModel) {
+                cell.isSelect = true
+            } else {
+                cell.isSelect = false
+            }
+        } else if let shapes = selectParam[id] where id == "3" {
+            if shapes.contains(rowModel) {
+                cell.isSelect = true
+            } else {
+                cell.isSelect = false
+            }
+        } else {
+            if selectParam[id]!.contains(rowModel) {
+                cell.isSelect = true
+            } else {
+                cell.isSelect = false
+            }
+        }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SkillCell
-        cell.skill.backgroundColor = kCommonColor
+        var section = rowArray[indexPath.section]
+        let id = "\(section.id)"
+        let info = section.result[indexPath.row]
+        if var styles = selectParam[id] where id == "1" {
+            if cell.isSelect == true {
+                cell.isSelect = !cell.isSelect
+                styles.removeObject(info)
+                selectParam[id] = styles
+            } else {
+                if styles.count >= 3 {
+                    return
+                }
+                cell.isSelect = true
+                styles.append(info)
+                selectParam[id] = styles
+            }
+        } else if var looks = selectParam[id] where id == "2" {
+            if cell.isSelect == true {
+                cell.isSelect = !cell.isSelect
+                looks.removeObject(info)
+                selectParam[id] = looks
+            } else {
+                if looks.count >= 3 {
+                    return
+                }
+                cell.isSelect = true
+                looks.append(info)
+                selectParam[id] = looks
+            }
+        } else if var shapes = selectParam[id] where id == "3" {
+            shapeButton.selected = false
+            shapeButton.backgroundColor = kLightGrayColor
+            shapeButton = cell.skill
+            cell.skill.selected = true
+            cell.skill.backgroundColor = kCommonColor
+            shapes.removeAll()
+            shapes.append(info)
+            selectParam[id] = shapes
+        } else if var charms = selectParam[id] where id == "4" {
+            if cell.isSelect == true {
+                cell.isSelect = !cell.isSelect
+                charms.removeObject(info)
+                selectParam[id] = charms
+            } else {
+                if charms.count >= 3 {
+                    return
+                }
+                cell.isSelect = true
+                charms.append(info)
+                selectParam[id] = charms
+            }
+        }
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
