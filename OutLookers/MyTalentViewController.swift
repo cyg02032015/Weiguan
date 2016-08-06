@@ -72,8 +72,8 @@ extension MyTalentViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(myTalentCellId, forIndexPath: indexPath) as! MyTalentCell
-//        cell.collectionViewSetDelegate(self, indexPath: indexPath)
         cell.delegate = self
+        cell.info = lists[indexPath.section]
         return cell
     }
     
@@ -100,21 +100,3 @@ extension MyTalentViewController: MyTalentCellDelegate {
         LogInfo("tapDetail")
     }
 }
-
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-//extension MyTalentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 4
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(releasePictureCollectionCellIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
-//        cell.backgroundColor = UIColor.grayColor()
-//        if collectionView.tag == 1 && indexPath.item == 2 {
-//            cell.imgVideoCover.hidden = false
-//        } else {
-//            cell.imgVideoCover.hidden = true
-//        }
-//        return cell
-//    }
-//}

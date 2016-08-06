@@ -13,6 +13,7 @@ let kSelectedWechat = "wechat_c"
 let kSelectedSina = "sina_weibo_c"
 let kSelectedQzone = "qzone_c"
 let kSelectedQQ = "qq_c"
+let kDeleteImg = "delete  copy 4"
 
 let kUnSelectedTimeline = "wechat_moment－Unchecked"
 let kUnSelectedWechat = "wechat_Unchecked"
@@ -25,6 +26,9 @@ let kTitleWechat = "微信"
 let kTitleSina = "微博"
 let kTitleQzone = "空间"
 let kTitleQQ = "QQ"
+let kDelete = "删除"
+let kHome = "返回首页"
+let kReport = "举报"
 
 class YGShareHandler {
     /**

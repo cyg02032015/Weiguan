@@ -54,6 +54,27 @@ class CircelView: UIView {
             make.height.equalTo(kScale(12))
         }
     }
+    
+    convenience init(sharedFrame: CGRect, img: UIImage, title: String) {
+        self.init(frame: sharedFrame)
+        let imgView = UIImageView(image: img)
+        imgView.layer.cornerRadius = kScale(50/2)
+        addSubview(imgView)
+        imgView.snp.makeConstraints { (make) in
+            make.left.right.top.equalTo(imgView.superview!)
+            make.height.equalTo(kScale(50))
+        }
+        
+        let label = UILabel.createLabel(10)
+        label.textAlignment = .Center
+        label.text = title
+        addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.top.equalTo(imgView.snp.bottom).offset(kScale(7))
+            make.left.right.equalTo(label.superview!)
+            make.height.equalTo(kScale(10))
+        }
+    }
 
     
     required init?(coder aDecoder: NSCoder) {

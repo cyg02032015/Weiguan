@@ -145,6 +145,7 @@
 		D825EEC61D54A96E00AF94AF /* Register3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC51D54A96E00AF94AF /* Register3ViewController.swift */; };
 		D825EEC81D55EBDC00AF94AF /* FeedbackReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC71D55EBDC00AF94AF /* FeedbackReq.swift */; };
 		D825EECA1D55EE2200AF94AF /* TalentList4Resp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EEC91D55EE2200AF94AF /* TalentList4Resp.swift */; };
+		D825EECC1D55F78E00AF94AF /* YGShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825EECB1D55F78E00AF94AF /* YGShare.swift */; };
 		D82F8DC71D27CB6400A24CDB /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */; };
 		D82F8DC81D27CB6400A24CDB /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBC1D27CB6400A24CDB /* TAAnimatedDotView.m */; };
 		D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82F8DBE1D27CB6400A24CDB /* TADotView.m */; };
@@ -540,6 +541,7 @@
 		D825EEC51D54A96E00AF94AF /* Register3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Register3ViewController.swift; path = OutLookers/Register3ViewController.swift; sourceTree = SOURCE_ROOT; };
 		D825EEC71D55EBDC00AF94AF /* FeedbackReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackReq.swift; path = OutLookers/FeedbackReq.swift; sourceTree = SOURCE_ROOT; };
 		D825EEC91D55EE2200AF94AF /* TalentList4Resp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalentList4Resp.swift; path = OutLookers/TalentList4Resp.swift; sourceTree = SOURCE_ROOT; };
+		D825EECB1D55F78E00AF94AF /* YGShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGShare.swift; path = OutLookers/YGShare.swift; sourceTree = SOURCE_ROOT; };
 		D82F8DB91D27CB6400A24CDB /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		D82F8DBA1D27CB6400A24CDB /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
 		D82F8DBB1D27CB6400A24CDB /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
@@ -1517,6 +1519,7 @@
 				D8EB0EBD1D490EAC002E36F8 /* OSSImageUploader.swift */,
 				D85B72C01D4A3EBC005EECE6 /* OSSVideoUploader.swift */,
 				E44861831D49D5380034208D /* YGCityData.swift */,
+				D825EECB1D55F78E00AF94AF /* YGShare.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -2330,6 +2333,7 @@
 				E41B927B1D3E1F0200749769 /* WechatCashViewController.swift in Sources */,
 				D8AA0FCE1D1D7D9C0038EE73 /* LogFormatter.swift in Sources */,
 				E446FA131D2E26A6003DFC1E /* DynamicViewController.swift in Sources */,
+				D825EECC1D55F78E00AF94AF /* YGShare.swift in Sources */,
 				D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */,
 				D825EEB81D50E78A00AF94AF /* BMPlayerItem.swift in Sources */,
 				D812A8CE1D4E2BF000186564 /* AccountCell.swift in Sources */,

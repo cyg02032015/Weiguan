@@ -20,6 +20,9 @@ class DynamicDetailViewController: YGBaseViewController {
     lazy var comments = [CommentList]()
     lazy var req = ReplyCommentReq()
     var toolbar: DXMessageToolBar!
+    var shareView: YGShare!
+    var moreShareView: YGShare!
+    var moreButton: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,13 +36,14 @@ class DynamicDetailViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var tuple = YGShareHandler.handleShareInstalled()
+        shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
         setupSubViews()
         loadData()
         loadMoreData()
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
         })
-        
     }
     
      func loadData() {
@@ -78,6 +82,9 @@ class DynamicDetailViewController: YGBaseViewController {
     
     func setupSubViews() {
         title = "动态详情"
+        moreButton = setRightNaviItem()
+        moreButton.setImage(UIImage(named: "more1"), forState: .Normal)
+        
         let toolbarHeight = DXMessageToolBar.defaultHeight()
         toolbar = DXMessageToolBar(frame: CGRect(x: 0, y: view.gg_height - toolbarHeight, width: ScreenWidth, height: toolbarHeight))
         toolbar.maxTextInputViewHeight = 80
@@ -94,6 +101,10 @@ class DynamicDetailViewController: YGBaseViewController {
         tableView.registerClass(CommentCell.self, forCellReuseIdentifier: commentCellId)
         tableView.separatorStyle = .None
         view.addSubview(tableView)
+    }
+    
+    override func tapMoreButton(sender: UIButton) {
+        shareView.animation()
     }
     
     func scrollViewToBottom(animated: Bool) {
@@ -169,6 +180,7 @@ extension DynamicDetailViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier(dynamicDetailCellId, forIndexPath: indexPath) as! DynamicDetailVideoCell
             cell.info = detailObj
             cell.userInfo = dynamicObj
+            cell.delegate = self
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(commentCellId, forIndexPath: indexPath) as! CommentCell
@@ -198,5 +210,11 @@ extension DynamicDetailViewController {
             let obj = comments[indexPath.row]
             req.replyId = "\(obj.replyId)"
         }
+    }
+}
+
+extension DynamicDetailViewController: DynamicDetailDelegate {
+    func dynamicDetailTapShare(sender: UIButton) {
+        
     }
 }

@@ -26,7 +26,6 @@ class DataViewController: YGBaseViewController {
         super.viewDidLoad()
         title = "个人资料"
         rightButton = setRightNaviItem()
-//        rightButton.setImage(UIImage(named: "more1"), forState: .Normal)
         rightButton.setTitle("编辑", forState: .Normal)
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self

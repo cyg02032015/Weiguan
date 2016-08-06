@@ -11,6 +11,9 @@ import NVActivityIndicatorView
 
 let talentPadding: CGFloat = 15
 
+protocol DynamicDetailDelegate: class {
+    func dynamicDetailTapShare(sender: UIButton)
+}
 
 class DynamicDetailVideoCell: UITableViewCell {
 
@@ -128,6 +131,17 @@ class DynamicDetailVideoCell: UITableViewCell {
                 make.height.equalTo(kScale(40))
             }
             
+            praiseButton.rx_tap.subscribeNext { [unowned self] in
+                if self.delegate != nil {
+                    
+                }
+            }.addDisposableTo(disposeBag)
+            
+            shareButton.rx_tap.subscribeNext { [unowned self] in
+                if self.delegate != nil {
+                    self.delegate.dynamicDetailTapShare(self.shareButton)
+                }
+            }.addDisposableTo(disposeBag)
         }
     }
     
@@ -139,6 +153,7 @@ class DynamicDetailVideoCell: UITableViewCell {
             followButton.hidden = userInfo.follow == 1 ? true : false
         }
     }
+    weak var delegate: DynamicDetailDelegate!
     var player: BMPlayer!
     var praiseButton: UIButton!
     var shareButton: UIButton!
@@ -260,7 +275,6 @@ class DynamicDetailVideoCell: UITableViewCell {
         player.prepareToDealloc()
     }
 
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

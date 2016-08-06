@@ -38,6 +38,7 @@ class HomeViewController: YGBaseViewController {
         log.tapLogViewClosure { (type) in
             Util.logViewTap(self, type: type)
         }
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: .loadRecommendHotmanData, name: kRecieveGlobleDefineNotification, object: nil)
         setupSubViews()
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { 
@@ -93,7 +94,6 @@ class HomeViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-//        self.automaticallyAdjustsScrollViewInsets = false // the behavior of the UICollectionViewFlowLayout is not defined because: fix
         tableView = UITableView(frame: CGRectZero, style: .Plain)
         tableView.delegate = self
         tableView.dataSource = self
@@ -215,7 +215,7 @@ extension HomeViewController {
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
 //        return hotmanList.count
@@ -238,7 +238,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if indexPath.item == 1 {
             let vc = OrganizationViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        } else {
+        } else if indexPath.item == 2{
             log.animation()
         }
     }
