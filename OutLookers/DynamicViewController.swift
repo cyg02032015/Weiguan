@@ -150,6 +150,10 @@ extension DynamicViewController: DynamicCellDelegate {
     }
     
     func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath) {
-        LogInfo("评论点击")
+        let obj = dynamicLists[indexPath.section]
+        let vc = DynamicDetailViewController()
+        vc.dynamicObj = obj
+        vc.isComment = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

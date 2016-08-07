@@ -23,6 +23,7 @@ class DynamicDetailViewController: YGBaseViewController {
     var shareView: YGShare!
     var moreShareView: YGShare!
     var moreButton: UIButton!
+    var isComment = false
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -91,7 +92,9 @@ class DynamicDetailViewController: YGBaseViewController {
         toolbar.autoresizingMask = [.FlexibleTopMargin, .FlexibleRightMargin]
         toolbar.delegate = self
         view.addSubview(toolbar)
-        
+        if isComment {
+            toolbar.becomeFirstResponder()
+        }
         tableView = UITableView(frame: CGRect(x: 0, y: NaviHeight, width: ScreenWidth, height: ScreenHeight - NaviHeight - toolbarHeight), style: .Grouped)
         tableView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         tableView.delegate = self

@@ -14,12 +14,27 @@ private let shareCellId = "shareCellId"
 
 class TalentDetailViewController: YGBaseViewController {
 
+    var id: Int!
     var tableView: UITableView!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     override func viewDidLoad() {
         super.viewDidLoad()
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
+        loadData()
+    }
+    
+    func loadData() {
+        SVToast.show()
+        Server.talentDetail("\(id)") { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                LogInfo(value)
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
     }
     
     func setupSubViews() {
@@ -68,6 +83,10 @@ extension TalentDetailViewController {
                 return cell
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

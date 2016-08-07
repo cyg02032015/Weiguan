@@ -181,8 +181,10 @@ class Server {
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
-            "time" : NSDate().stringFromNowDate()
             ]
+        if pageNo == 1 {
+            parameters["time"] = NSDate().stringFromNowDate()
+        }
         if isPerson {
             parameters["userId"] = UserSingleton.sharedInstance.userId
         }

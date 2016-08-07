@@ -15,16 +15,16 @@ protocol ShareCellDelegate: class {
 }
 
 class ShareCell: UITableViewCell {
-
+    lazy var shareButton = UIButton()
     var collectionView: UICollectionView!
-    var lastIndexPath = NSIndexPath(forItem: 0, inSection: 0)
-    lazy var marks = NSMutableArray()
     var isFirst: Bool = true
     var tuple = ([UIImage](), [UIImage](), [String]()) {
         didSet {
             if isFirst {
                 isFirst = false
                 collectionView.reloadData()
+//                collectionView(collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+
             }
         }
     }
@@ -37,7 +37,6 @@ class ShareCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        marks.addObject(NSIndexPath(forItem: 0, inSection: 0))
         let label = UILabel()
         label.text = "同步到:"
         label.font = UIFont.customFontOfSize(16)
@@ -55,8 +54,6 @@ class ShareCell: UITableViewCell {
         collectionView.dataSource = self
         contentView.addSubview(collectionView)
         collectionView.registerClass(ShareCollectionCell.self, forCellWithReuseIdentifier: shareCollectionIdentifier)
-        collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .None)
-        
         label.snp.makeConstraints { (make) in
             make.left.equalTo(kScale(15))
             make.top.equalTo(kScale(28))
@@ -89,6 +86,9 @@ extension ShareCell: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.setDataWithShare(tuple.0[indexPath.item], unSelectImage: tuple.1[indexPath.item], title: tuple.2[indexPath.item])
         if indexPath.item == 0 {
             cell.shareButton.selected = true
+            shareButton = cell.shareButton
+            guard let title = cell.label.text else {fatalError("获取分享按钮失败")}
+            delegate.shareCellReturnsShareTitle(title)
         }
         return cell
     }
@@ -96,12 +96,19 @@ extension ShareCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ShareCollectionCell
         guard let title = cell.label.text else { LogError("获取分享按钮title nil") ; return }
-        cell.shareButton.selected = true
+        if shareButton != cell.shareButton {
+            shareButton.selected = false
+            shareButton = cell.shareButton
+            cell.shareButton.selected = true
+        } else {
+            if shareButton.selected {
+                cell.shareButton.selected = false
+                return
+            } else {
+                cell.shareButton.selected = true
+                shareButton = cell.shareButton
+            }
+        }
         delegate.shareCellReturnsShareTitle(title)
-    }
-    
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ShareCollectionCell
-        cell.shareButton.selected = false
     }
 }

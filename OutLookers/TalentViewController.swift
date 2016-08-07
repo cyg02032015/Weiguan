@@ -66,7 +66,9 @@ class TalentViewController: YGBaseViewController {
 // MARK: - UITableviewDelegate, UITableviewDatasource
 extension TalentViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let vc = TalentDetailViewController()
+        vc.id = self.talentLists[indexPath.section].id
+        navigationController?.pushViewController(vc, animated: true)
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(talentCellIdentifier, forIndexPath: indexPath) as! TalentTableViewCell
