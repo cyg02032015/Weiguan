@@ -13,7 +13,7 @@ class PhotoCollectionCell: UICollectionViewCell {
     var info: List! {
         didSet {
             imgView.yy_setImageWithURL(info.url.addImagePath(kSize(imgView.gg_width, height: imgView.gg_height)), placeholder: kPlaceholder)
-            if info.type == 1 {
+            if info.type == 0 {
                 imgVideoCover.hidden = true
             } else {
                 imgVideoCover.hidden = false
@@ -29,6 +29,14 @@ class PhotoCollectionCell: UICollectionViewCell {
     }
     
     var imgVideoCover: UIImageView!
+    var imgCoverSize: CGSize! {
+        didSet {
+            guard let cover = imgVideoCover else {return}
+            cover.snp.updateConstraints { (make) in
+                make.size.equalTo(imgCoverSize)
+            }
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubViews()
@@ -47,7 +55,7 @@ class PhotoCollectionCell: UICollectionViewCell {
             make.edges.equalTo(imgView.superview!)
         }
         
-        imgVideoCover = UIImageView(image: UIImage(named: "skill-1"))
+        imgVideoCover = UIImageView(image: UIImage(named: "play"))
         imgVideoCover.hidden = true
         imgVideoCover.userInteractionEnabled = true
         imgView.addSubview(imgVideoCover)

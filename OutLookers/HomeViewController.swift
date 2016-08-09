@@ -19,7 +19,7 @@ private extension Selector {
 
 class HomeViewController: YGBaseViewController {
     var tableView: UITableView!
-    var infos = [BannerInfo]()
+    lazy var banners = [BannerList]()
     var urls = [String]()
     var statusView: UIView!
     lazy var hotmanList = [HotmanList]()
@@ -27,6 +27,7 @@ class HomeViewController: YGBaseViewController {
     lazy var recommends = [DynamicResult]()
     var collectionView: UICollectionView!
     var log: YGLogView!
+    var banner: SDCycleScrollView!
 
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -68,6 +69,21 @@ class HomeViewController: YGBaseViewController {
     }
     
     func loadRecommendHotmanData() {
+        // MARK: banner
+        Server.banner { (success, msg, value) in
+            if success {
+                guard let list = value else {return}
+                var imgUrls = [String]()
+                for item in list {
+                    imgUrls.append(item.picture)
+                }
+                self.banner.imageURLStringsGroup = imgUrls
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+        
         Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
             if success {
                 Server.homeRecommendHotman { (success, msg, value) in
@@ -110,28 +126,13 @@ class HomeViewController: YGBaseViewController {
         }
         
         // 轮播图
-        let banner = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(210))), delegate: self, placeholderImage: UIImage(named: ""))
+        banner = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(210))), delegate: self, placeholderImage: UIImage(named: ""))
         banner.pageDotImage = UIImage(named: "home_point_normal")
         banner.currentPageDotImage = UIImage(named: "home_point_chosen")
         banner.pageControlDotSize = kSize(6, height: 6)
         banner.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
         tableView.tableHeaderView = banner
-        Alamofire.request(.GET, "http://demosjz.ethank.com.cn/api/ad/get_ad_list").responseJSON { (response) in
-            switch response.result {
-            case .Success(let value):
-                let json = JSON(value)
-                let data = json["data"].arrayObject
-                data?.forEach({ (json) in
-                    let item = BannerInfo(json: JSON(json))
-                    self.urls.append(item.cover!)
-                })
-                banner.imageURLStringsGroup = self.urls
-            case .Failure(let error):
-                LogError(error)
-            }
-        }
-        
-        
+
         statusView = UIView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: 20))
         statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: 0.0)
         view.addSubview(statusView)
@@ -217,13 +218,13 @@ extension HomeViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-//        return hotmanList.count
+//        return 10
+        return hotmanList.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(recommendHotmanCollectionCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanCollectionCell
-//        cell.info = hotmanList[indexPath.item]
+        cell.info = hotmanList[indexPath.item]
         return cell
     }
     
@@ -252,17 +253,5 @@ extension HomeViewController {
         } else {
             statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: offsetY/100)
         }
-    }
-}
-
-struct BannerInfo {
-    var cover: String?
-    var identifier: String?
-    var url: String?
-    
-    init (json: JSON) {
-        self.cover = json["cover"].string
-        self.identifier = json["id"].string
-        self.url = json["url"].string
     }
 }

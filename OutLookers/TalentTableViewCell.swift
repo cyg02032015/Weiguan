@@ -12,19 +12,22 @@ public let talentWorksCollectionCellIdentifier = "talentWorksCollectionCellId"
 
 class TalentTableViewCell: UITableViewCell {
 
-    var info: TalentResult! {
+    typealias DetailClosure = (sender: UIButton) -> Void
+    typealias ShareClosure = (sender: UIButton) -> Void
+    
+    var info: Result! {
         didSet {
             talentLabel.text = info.name
             moneyDayLabel.text = "\(info.price)\(Util.unit(info.unit))"
             detailsLabel.text = info.details
-//            works = info.worksCover
-            
+            collectionView.reloadData()
         }
     }
+    private var detailClosure: DetailClosure!
+    private var shareClosure: ShareClosure!
     lazy var works = [String]()
     var talentLabel: UILabel!       //  时装模特
     var moneyDayLabel: UILabel!     //  1000/天
-//    var introLabel: UILabel!        //  才艺介绍
     var detailsLabel: UILabel!      //  3行字
     var collectionView: UICollectionView!
     var seeDetail: UIButton!        //  查看详情
@@ -125,7 +128,7 @@ class TalentTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         contentView.addSubview(collectionView)
-        collectionView.registerClass(TalentWorksCollectionCell.self, forCellWithReuseIdentifier: talentWorksCollectionCellIdentifier)
+        collectionView.registerClass(PhotoCollectionCell.self, forCellWithReuseIdentifier: talentWorksCollectionCellIdentifier)
         
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(worksLabel.snp.bottom).offset(kScale(15))
@@ -162,19 +165,27 @@ class TalentTableViewCell: UITableViewCell {
             make.left.equalTo(seeDetail.snp.right).offset(kScale(20))
         }
         introLabel.text = "才艺介绍"
-        talentLabel.text = "时装模特"
-        moneyDayLabel.text = "1000/天"
-        detailsLabel.text = "才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍才艺介绍"
         worksLabel.text = "才艺作品集"
         
+        seeDetail.rx_tap.subscribeNext {
+            if self.detailClosure != nil {
+                self.detailClosure(sender: self.seeDetail)
+            }
+        }.addDisposableTo(disposeBag)
         
+        share.rx_tap.subscribeNext {
+            if self.shareClosure != nil {
+                self.shareClosure(sender: self.share)
+            }
+        }.addDisposableTo(disposeBag)
     }
     
-    func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) {
-        collectionView.delegate = delegate
-        collectionView.dataSource = delegate
-        collectionView.tag = indexPath.section
-        collectionView.reloadData()
+    func detailBlock(closure: DetailClosure) {
+        detailClosure = closure
+    }
+    
+    func shareBlock(closure: ShareClosure) {
+        shareClosure = closure
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -190,17 +201,13 @@ extension TalentTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return info.list.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(talentWorksCollectionCellIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(talentWorksCollectionCellIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
+        cell.imgCoverSize = kSize(73, height: 73)
+        cell.info = info.list[indexPath.item]
         return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        let vc = TalentDetailViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-//        LogInfo("\(collectionView.tag)     \(indexPath.item)")
     }
 }

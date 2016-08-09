@@ -15,11 +15,18 @@ private let mineCollectCellIdentifier = "mineCollectId"
 
 class MineViewController: YGBaseViewController {
     
-//    var images = ["Order", "account", "score1", "talent", "invitation", "authentication", "feedback", ""]
-//    var titles = ["订单量", "钱包", "综合评分", "才艺", "邀约", "认证", "意见反馈", ""]
+    //    var images = ["Order", "account", "score1", "talent", "invitation", "authentication", "feedback", ""]
+    //    var titles = ["订单量", "钱包", "综合评分", "才艺", "邀约", "认证", "意见反馈", ""]
     var images = ["talent", "invitation", "authentication", "feedback", ""]
     var titles = ["才艺", "邀约", "认证", "意见反馈", ""]
+    var countObj: GetContent!
+    lazy var avatarList = [AvatarNameList]()
     var tableView: UITableView!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        loadHeader()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +50,48 @@ class MineViewController: YGBaseViewController {
         }
     }
     
+    func loadHeader() {
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let group = dispatch_group_create()
+        
+        dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_enter(group)
+            Server.getAvatarAndName(UserSingleton.sharedInstance.userId) { (success, msg, value) in
+                if success {
+                    guard let list = value else {return}
+                    self.avatarList.removeAll()
+                    self.avatarList.appendContentsOf(list)
+                    dispatch_group_leave(group)
+                } else {
+                    guard let m = msg else {return}
+                    LogError(m)
+                    dispatch_group_leave(group)
+                }
+            }
+        }
+        
+        dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_enter(group)
+            Server.getDynamicFollowFansCount { (success, msg, value) in
+                if success {
+                    guard let obj = value else {return}
+                    self.countObj = obj
+                    dispatch_group_leave(group)
+                } else {
+                    guard let m = msg else {return}
+                    LogError(m)
+                    dispatch_group_leave(group)
+                }
+            }
+        }
+        
+        dispatch_group_notify(group, dispatch_get_main_queue()) { [weak self] in
+            self?.tableView.reloadData()
+//            let indexSet = NSIndexSet(index: 0)
+//            self?.tableView.reloadSections(indexSet, withRowAnimation: .None)
+        }
+    }
+    
     override func tapMoreButton(sender: UIButton) {
         let vc = SettingViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -61,6 +110,12 @@ extension MineViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(mineHeaderidentifier, forIndexPath: indexPath) as! MineHeaderCell
+            if countObj != nil {
+                cell.info = countObj
+            }
+            if self.avatarList.count > 0 {
+                cell.avatarInfo = self.avatarList.first
+            }
             cell.header.iconHeaderTap { [unowned self] in
                 LogInfo("头像")
                 let vc = LogViewController()
@@ -141,15 +196,15 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        if indexPath.item == 0 {  // 订单
-//            
-//        } else if indexPath.item == 1 { // 账户
-//            let vc = MyAccountViewController()
-//            navigationController?.pushViewController(vc, animated: true)
-//        } else if indexPath.item == 2 { // 综合评价
-//            let vc = Comment2ViewController()     // Comment2ViewController    MyCommentViewController
-//            navigationController?.pushViewController(vc, animated: true)
-//        } else
+        //        if indexPath.item == 0 {  // 订单
+        //
+        //        } else if indexPath.item == 1 { // 账户
+        //            let vc = MyAccountViewController()
+        //            navigationController?.pushViewController(vc, animated: true)
+        //        } else if indexPath.item == 2 { // 综合评价
+        //            let vc = Comment2ViewController()     // Comment2ViewController    MyCommentViewController
+        //            navigationController?.pushViewController(vc, animated: true)
+        //        } else
         if indexPath.item == 0 { // 才艺
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)

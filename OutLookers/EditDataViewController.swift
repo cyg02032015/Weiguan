@@ -23,9 +23,11 @@ class EditDataViewController: YGBaseViewController {
     var provinceInt = 0
     lazy var req = EditDataReq()
     var headImgData: NSData!
+    var picToken: GetToken!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getToken()
         loadData()
         setupSubViews()
         cityPickerView = YGPickerView(frame: CGRectZero, delegate: self)
@@ -33,6 +35,18 @@ class EditDataViewController: YGBaseViewController {
         ageDatePickerView = YGSelectDateView()
         ageDatePickerView.datePicker.datePickerMode = .Date
         
+    }
+    
+    func getToken() {
+        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
+            if success {
+                guard let obj = value else {return}
+                self.picToken = obj
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
     }
     
     func loadData() {
@@ -62,19 +76,39 @@ class EditDataViewController: YGBaseViewController {
         
         save = setRightNaviItem()
         save.setTitle("保存", forState: .Normal)
+        // MARK: 保存按钮
         save.rx_tap.subscribeNext { [unowned self] in
+            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+            let group = dispatch_group_create()
             SVToast.show()
-            Server.informationUpdate(self.req, handler: { (success, msg, value) in
-                SVToast.dismiss()
-                if success {
-                    SVToast.showWithSuccess(value!)
-                    delay(1) {
-                        self.navigationController?.popViewControllerAnimated(true)
+            dispatch_group_async(group, queue) { [unowned self] in
+                dispatch_group_enter(group)
+                guard let token = self.picToken else {return}
+                OSSImageUploader.asyncUploadImageData(token, data: self.headImgData, complete: { (names, state) in
+                    if state == .Success {
+                        self.req.headImgUrl = names.first
+                        dispatch_group_leave(group)
+                    } else {
+                        self.req.headImgUrl = ""
+                        SVToast.dismiss()
+                        SVToast.showWithError("上传头像失败")
+                        dispatch_group_leave(group)
                     }
-                } else {
-                    guard let m = msg else {return}
-                    SVToast.showWithError(m)
-                }
+                })
+            }
+            dispatch_group_notify(group, queue, { 
+                Server.informationUpdate(self.req, handler: { (success, msg, value) in
+                    SVToast.dismiss()
+                    if success {
+                        SVToast.showWithSuccess(value!)
+                        delay(1) {
+                            self.navigationController?.popViewControllerAnimated(true)
+                        }
+                    } else {
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
+                    }
+                })
             })
         }.addDisposableTo(disposeBag)
         
@@ -92,9 +126,6 @@ class EditDataViewController: YGBaseViewController {
     }
     
     func checkParameters() {
-        // TODO 有问题
-        self.headImgData = NSData()
-        req.headImgUrl = ""
         if !isEmptyString(req.sex) && !isEmptyString(req.nickname) && !isEmptyString(req.birthday) && !isEmptyString(req.province) && !isEmptyString(req.city) && !isEmptyString(req.introduction) && headImgData != nil {
             save.setTitleColor(UIColor.blackColor(), forState: .Normal)
             save.userInteractionEnabled = true
@@ -127,6 +158,7 @@ extension EditDataViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(headImgCellId, forIndexPath: indexPath) as! HeadImgCell
             cell.delegate = self
+            cell.info = self.req.headImgUrl
             return cell
         } else if indexPath.section == 1{
             if indexPath.row == 0 || indexPath.row == 4 {
@@ -222,7 +254,7 @@ extension EditDataViewController {
 }
 
 // MARK: - HeadImgCellDelegate, PhoneBindCellDelegate
-extension EditDataViewController: HeadImgCellDelegate, PhoneBindCellDelegate, NoArrowEditCellDelegate {
+extension EditDataViewController: HeadImgCellDelegate, NoArrowEditCellDelegate {
     func headImgTap(imgView: TouchImageView) {
         self.headImgView = imgView
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
@@ -244,10 +276,6 @@ extension EditDataViewController: HeadImgCellDelegate, PhoneBindCellDelegate, No
         sheet.addAction(cancel)
         self.presentViewController(sheet, animated: true, completion: nil)
 
-    }
-    
-    func phoneBindTapBind(sender: UIButton) {
-        LogInfo("phone bind")
     }
     
     func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int)) {

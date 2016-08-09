@@ -4,7 +4,7 @@
 //
 //  Created by C on 16/7/1.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//
+//  利用本类的需要指定size  为了获取图片的尺寸 哎
 
 import UIKit
 
@@ -14,10 +14,11 @@ class IconHeaderView: UIView {
     var closure: HeaderClosure!
     var iconView: UIImageView!
     var vImgView: UIImageView!
+    var didSetupConstraint: Bool = false
     
     var iconURL: String! {
         didSet {
-            iconView.yy_setImageWithURL(iconURL.addImagePath(CGSize(width: iconView.gg_width, height: iconView.gg_height)), placeholder: kHeadPlaceholder)
+            iconView.yy_setImageWithURL(iconURL.addImagePath(CGSize(width: self.gg_width, height: self.gg_height)), placeholder: kHeadPlaceholder)
         }
     }
     
@@ -38,6 +39,15 @@ class IconHeaderView: UIView {
         }
     }
     
+    var vImgSize: CGSize! {
+        didSet  {
+            guard let vImg = vImgView else {return}
+            vImg.snp.updateConstraints { (make) in
+                make.size.equalTo(vImgSize)
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubViews()
@@ -55,9 +65,8 @@ class IconHeaderView: UIView {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(IconHeaderView.tapHeader))
         self.addGestureRecognizer(tap)
-        
         iconView.snp.makeConstraints { (make) in
-            make.edges.equalTo(iconView.superview!)
+            make.left.right.top.bottom.equalTo(iconView.superview!)
         }
         
         vImgView.snp.makeConstraints { (make) in
@@ -65,7 +74,6 @@ class IconHeaderView: UIView {
             make.right.equalTo(vImgView.superview!)
             make.size.equalTo(kSize(12, height: 12))
         }
-        layoutIfNeeded()
     }
     
     func setVimage(type: UserType) {

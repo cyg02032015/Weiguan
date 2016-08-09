@@ -21,7 +21,7 @@ class TalentViewController: YGBaseViewController {
     lazy var data = [String]()
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate!
-    lazy var talentLists = [TalentResult]()
+    lazy var lists = [Result]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -31,17 +31,28 @@ class TalentViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        loadData()
+        SVToast.show()
+        loadMoreData()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
+            })
     }
     
-    func loadData() {
-        Server.talentList(1, state: 1) { (success, msg, value) in
+    override func loadMoreData() {
+        Server.talentList4(pageNo, state: 1) { (success, msg, value) in
+            SVToast.dismiss()
             if success {
-                guard let object = value else {return}
-                self.talentLists = object.list
+                guard let list = value else {return}
+                self.lists.appendContentsOf(list)
+                self.tableView.mj_footer.endRefreshing()
                 self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
+                if list.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
             } else {
                 SVToast.showWithError(msg!)
+                self.tableView.mj_footer.endRefreshing()
             }
         }
     }
@@ -67,18 +78,26 @@ class TalentViewController: YGBaseViewController {
 extension TalentViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = TalentDetailViewController()
-        vc.id = self.talentLists[indexPath.section].id
+        vc.id = self.lists[indexPath.section].id
         navigationController?.pushViewController(vc, animated: true)
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(talentCellIdentifier, forIndexPath: indexPath) as! TalentTableViewCell
-        cell.info = talentLists[indexPath.section]
-//        cell.collectionViewSetDelegate(self, indexPath: indexPath)
+        cell.info = lists[indexPath.section]
+        cell.detailBlock { [weak self](sender) in
+            let vc = TalentDetailViewController()
+            vc.id = self?.lists[indexPath.section].id
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        cell.shareBlock { (sender) in
+            LogInfo("分享")
+        }
         return cell
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return talentLists.count
+        return lists.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,26 +122,3 @@ extension TalentViewController {
         }
     }
 }
-
-//// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-//extension TalentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//    
-//    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 3
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(talentWorksCollectionCellIdentifier, forIndexPath: indexPath)
-//        return cell
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        let vc = TalentDetailViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-//        LogInfo("\(collectionView.tag)     \(indexPath.item)")
-//    }
-//}

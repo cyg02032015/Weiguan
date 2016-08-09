@@ -9,7 +9,7 @@
 import UIKit
 
 private let sharedGloble = GlobleDefineSingle()
-class GlobleDefineSingle {
+class GlobleDefineSingle: NSObject {
     class var sharedInstance: GlobleDefineSingle {
         return sharedGloble
     }

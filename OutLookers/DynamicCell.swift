@@ -78,7 +78,7 @@ class DynamicCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        headImgView = IconHeaderView()
+        headImgView = IconHeaderView(frame: CGRect(origin: CGPointZero, size: kSize(35, height: 35)))
         headImgView.customCornerRadius = kScale(35/2)
         contentView.addSubview(headImgView)
         headImgView.snp.makeConstraints { (make) in

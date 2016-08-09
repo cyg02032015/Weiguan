@@ -31,6 +31,7 @@ class AvatarNameList {
     var headImgUrl : String!
     var id : Int!
     var nickname : String!
+    var detailsType: Int!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -39,5 +40,6 @@ class AvatarNameList {
         headImgUrl = json["headImgUrl"].stringValue
         id = json["id"].intValue
         nickname = json["nickname"].stringValue
+        detailsType = json["detailsType"].intValue
     }
 }

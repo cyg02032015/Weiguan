@@ -14,6 +14,25 @@ class PersonStyleCell: UITableViewCell {
     var appearance: UILabel!        // 外貌
     var shape: UILabel!             // 体型
     var charm: UILabel!             // 魅力
+    
+    var info: [String]! {
+        didSet {
+            let x: CGFloat = 15
+            let padding: CGFloat = 10
+            let h: CGFloat = 16
+            var y: CGFloat = 15
+            for (idx, text) in info.enumerate() {
+                let index = CGFloat(idx)
+                let label = UILabel.createLabel(16)
+                contentView.addSubview(label)
+                if index > 0 {
+                    y = index * (h + padding) + x
+                }
+                label.frame = CGRect(x: x, y: y , width: contentView.gg_width - 30, height: h)
+                label.text = text
+            }
+        }
+    }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .None
@@ -21,41 +40,41 @@ class PersonStyleCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        style = UILabel.createLabel(16)
-        contentView.addSubview(style)
-        style.snp.makeConstraints { (make) in
-            make.left.equalTo(style.superview!).offset(kScale(15))
-            make.top.equalTo(style.superview!).offset(kScale(15))
-            make.height.equalTo(kScale(16))
-            make.right.equalTo(style.superview!).offset(kScale(-15))
-        }
-        
-        appearance = UILabel.createLabel(16)
-        contentView.addSubview(appearance)
-        appearance.snp.makeConstraints { (make) in
-            make.left.equalTo(style)
-            make.top.equalTo(style.snp.bottom).offset(kScale(10))
-            make.height.equalTo(style)
-            make.right.equalTo(style)
-        }
-        
-        shape = UILabel.createLabel(16)
-        contentView.addSubview(shape)
-        shape.snp.makeConstraints { (make) in
-            make.left.equalTo(appearance)
-            make.top.equalTo(appearance.snp.bottom).offset(kScale(10))
-            make.height.equalTo(appearance)
-            make.right.equalTo(appearance)
-        }
-        
-        charm = UILabel.createLabel(16)
-        contentView.addSubview(charm)
-        charm.snp.makeConstraints { (make) in
-            make.left.equalTo(shape)
-            make.top.equalTo(shape.snp.bottom).offset(kScale(10))
-            make.height.equalTo(shape)
-            make.right.equalTo(shape)
-        }
+//        style = UILabel.createLabel(16)
+//        contentView.addSubview(style)
+//        style.snp.makeConstraints { (make) in
+//            make.left.equalTo(style.superview!).offset(kScale(15))
+//            make.top.equalTo(style.superview!).offset(kScale(15))
+//            make.height.equalTo(kScale(16))
+//            make.right.equalTo(style.superview!).offset(kScale(-15))
+//        }
+//        
+//        appearance = UILabel.createLabel(16)
+//        contentView.addSubview(appearance)
+//        appearance.snp.makeConstraints { (make) in
+//            make.left.equalTo(style)
+//            make.top.equalTo(style.snp.bottom).offset(kScale(10))
+//            make.height.equalTo(style)
+//            make.right.equalTo(style)
+//        }
+//        
+//        shape = UILabel.createLabel(16)
+//        contentView.addSubview(shape)
+//        shape.snp.makeConstraints { (make) in
+//            make.left.equalTo(appearance)
+//            make.top.equalTo(appearance.snp.bottom).offset(kScale(10))
+//            make.height.equalTo(appearance)
+//            make.right.equalTo(appearance)
+//        }
+//        
+//        charm = UILabel.createLabel(16)
+//        contentView.addSubview(charm)
+//        charm.snp.makeConstraints { (make) in
+//            make.left.equalTo(shape)
+//            make.top.equalTo(shape.snp.bottom).offset(kScale(10))
+//            make.height.equalTo(shape)
+//            make.right.equalTo(shape)
+//        }
     }
     
     required init?(coder aDecoder: NSCoder) {

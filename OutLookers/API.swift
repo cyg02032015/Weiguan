@@ -129,4 +129,6 @@ struct API {
     static let feedback = baseURL + "/api/authentication/v1/feedback/create"
     /// 才艺列表（4张图）
     static let talentListFourPic = baseURL + "/api/release/v1/userTalent/get"
+    /// banner
+    static let banner = baseURL + "/api/authentication/v1/banner/get"
 }

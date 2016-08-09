@@ -18,6 +18,12 @@ protocol HeadImgCellDelegate: class {
 
 class HeadImgCell: UITableViewCell {
 
+    var info: String! {
+        didSet {
+            imgView.yy_setImageWithURL(info.addImagePath(kSize(82, height: 82)), placeholder: UIImage(named: "upload"))
+        }
+    }
+    
     weak var delegate: HeadImgCellDelegate!
     var imgView: TouchImageView!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

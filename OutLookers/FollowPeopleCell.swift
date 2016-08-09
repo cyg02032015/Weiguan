@@ -56,7 +56,6 @@ class FollowPeopleCell: UITableViewCell {
         
         header = IconHeaderView()
         header.layer.cornerRadius = kScale(50/2)
-        header.clipsToBounds = true
         contentView.addSubview(header)
         header.snp.makeConstraints { (make) in
             make.left.equalTo(header.superview!).offset(kScale(15))

@@ -54,9 +54,11 @@ class PersonFileViewController: YGBaseViewController {
                 self.req.constellation = obj.constellation
                 self.req.experience = obj.experience
                 self.req.height = obj.height
+                self.req.weight = obj.weight
                 self.req.hipline = obj.hipline
                 self.req.waist = obj.waist
                 self.req.array = obj.array
+                self.req.userId = "\(obj.id)"
                 self.tableView.reloadData()
             } else {
                 guard let m = msg else {return}
@@ -157,10 +159,11 @@ extension PersonFileViewController {
             }
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(personStyleCellId, forIndexPath: indexPath) as! PersonStyleCell
-            cell.style.text = req.array[0]
+            cell.info = req.array
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(workDetailCellId, forIndexPath: indexPath) as! WorkDetailCell
+            cell.placeholderLabel.hidden = req.experience.characters.count > 0
             cell.tv.text = req.experience
             cell.delegate = self
             return cell

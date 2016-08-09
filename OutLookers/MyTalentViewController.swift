@@ -72,9 +72,39 @@ extension MyTalentViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(myTalentCellId, forIndexPath: indexPath) as! MyTalentCell
-        cell.delegate = self
         cell.info = lists[indexPath.section]
+        // 查看详情
+        cell.detailBlock { [weak self](sender) in
+            let vc = TalentDetailViewController()
+            vc.id = self?.lists[indexPath.section].id
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        // 编辑
+        cell.editBlock { (sender) in
+            LogInfo("编辑")
+        }
+        
+        // 删除
+        cell.deleteBlock { [weak self](sender) in
+            Server.deleteTalent("\(self?.lists[indexPath.section].id ?? 0)", handler: { (success, msg, value) in
+                if success {
+                    self?.lists.removeAtIndex(indexPath.section)
+                    self?.tableView.reloadData()
+                    SVToast.showWithSuccess("删除成功")
+                } else {
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
+                }
+            })
+        }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = TalentDetailViewController()
+        vc.id = self.lists[indexPath.section].id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -83,20 +113,5 @@ extension MyTalentViewController {
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kHeight(10)
-    }
-}
-
-// MARK: - MyTalentCellDelegate
-extension MyTalentViewController: MyTalentCellDelegate {
-    func myTalentTapEdit(sender: UIButton) {
-        LogInfo("tapEdit")
-    }
-    
-    func myTalentTapDelete(sender: UIButton) {
-        LogInfo("tapDelete")
-    }
-    
-    func myTalentTapDetail(sender: UIButton) {
-        LogInfo("tapDetail")
     }
 }

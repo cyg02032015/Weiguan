@@ -34,6 +34,7 @@
 #import "UIView+SDExtension.h"
 #import "TAPageControl.h"
 #import <YYWebImage/YYWebImage.h>
+#import "OutLookers-Swift.h"
 //#import "SDImageCache.h"
 
 #define kCycleScrollViewInitialPageControlDotSize CGSizeMake(10, 10)
@@ -545,11 +546,10 @@ NSString * const ID = @"cycleCell";
     long itemIndex = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
     
     NSString *imagePath = self.imagePathsGroup[itemIndex];
-    
     if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
-        if ([imagePath hasPrefix:@"http"]) {
-            [cell.imageView yy_setImageWithURL:[NSURL URLWithString:imagePath] placeholder:self.placeholderImage];
-//            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:self.placeholderImage];
+        if ([imagePath hasSuffix:@".jpg"]) {
+            NSString *imgUrl = [NSString stringWithFormat:@"%@%@@%dh_%dw.webp", [[GlobleDefineSingle sharedInstance] imagePath], imagePath, (int)self.frame.size.width, (int)self.frame.size.height];
+            [cell.imageView yy_setImageWithURL:[NSURL URLWithString:imgUrl] placeholder:self.placeholderImage];
         } else {
             UIImage *image = [UIImage imageNamed:imagePath];
             if (!image) {

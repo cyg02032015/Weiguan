@@ -14,12 +14,6 @@ private extension Selector {
     static let tapDetail = #selector(MyTalentCell.tapDetail(_:))
 }
 
-protocol MyTalentCellDelegate: class {
-    func myTalentTapDelete(sender: UIButton)
-    func myTalentTapEdit(sender: UIButton)
-    func myTalentTapDetail(sender: UIButton)
-}
-
 class MyTalentCell: UITableViewCell {
 
     var info: Result! {
@@ -31,7 +25,12 @@ class MyTalentCell: UITableViewCell {
         }
     }
     
-    weak var delegate: MyTalentCellDelegate!
+    typealias DeleteClosure = (sender: UIButton) -> Void
+    typealias EditClosure = (sender: UIButton) -> Void
+    typealias DetailClosure = (sender: UIButton) -> Void
+    private var deleteClosure: DeleteClosure!
+    private var editClosure: EditClosure!
+    private var detailClosure: DetailClosure!
     var nameLabel: UILabel!
     var moneyLabel: UILabel!
     var desc: UILabel!
@@ -94,6 +93,7 @@ class MyTalentCell: UITableViewCell {
         collectionView.scrollEnabled = false
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.userInteractionEnabled = false   // 屏蔽掉collectionview与用户交互
         contentView.addSubview(collectionView)
         collectionView.registerClass(PhotoCollectionCell.self, forCellWithReuseIdentifier: releasePictureCollectionCellIdentifier)
         collectionView.snp.makeConstraints { (make) in
@@ -157,36 +157,36 @@ class MyTalentCell: UITableViewCell {
             make.centerY.equalTo(deleteButton)
             make.size.equalTo(deleteButton)
         }
-        
-        nameLabel.text = "才艺名臣"
-        moneyLabel.text = "1000/元"
-        desc.text = "才艺名称才艺详情介绍才艺详情介绍才艺详情介绍才艺才艺名称才艺详情介绍才艺详情介绍才艺详情介绍才艺"        
-    }
-    
-    func collectionViewSetDelegate(delegate: protocol<UICollectionViewDelegate, UICollectionViewDataSource>, indexPath: NSIndexPath) -> UICollectionView {
-        collectionView.delegate = delegate
-        collectionView.dataSource = delegate
-        collectionView.tag = indexPath.section
-        collectionView.reloadData()
-        return collectionView
     }
     
     func tapDelete(sender: UIButton) {
-        if delegate != nil {
-            delegate.myTalentTapDelete(sender)
+        if deleteClosure != nil {
+            deleteClosure(sender: sender)
         }
     }
     
     func tapEdit(sender: UIButton) {
-        if delegate != nil {
-            delegate.myTalentTapEdit(sender)
+        if editClosure != nil {
+            editClosure(sender: sender)
         }
     }
     
     func tapDetail(sender: UIButton) {
-        if delegate != nil {
-            delegate.myTalentTapDetail(sender)
+        if detailClosure != nil {
+            detailClosure(sender: sender)
         }
+    }
+    
+    func deleteBlock(closure: DeleteClosure) {
+        deleteClosure = closure
+    }
+    
+    func editBlock(closure: EditClosure) {
+        editClosure = closure
+    }
+    
+    func detailBlock(closure: DetailClosure) {
+        detailClosure = closure
     }
     
     required init?(coder aDecoder: NSCoder) {

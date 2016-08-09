@@ -82,10 +82,10 @@ extension DynamicViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellIdentifier, forIndexPath: indexPath) as! DynamicCell
+        cell.info = dynamicLists[indexPath.section]
         cell.indexPath = indexPath
         cell.delegate = self
         cell.followButton.hidden = true
-        cell.info = dynamicLists[indexPath.section]
         return cell
     }
     

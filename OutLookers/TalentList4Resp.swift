@@ -27,7 +27,7 @@ class TalentList4Resp: BaseResponse {
         pageNo = json["pageNo"].intValue
         pageSize = json["pageSize"].intValue
         result = [Result]()
-        let resultArray = json["result"].arrayValue
+        let resultArray = json["page"]["result"].arrayValue
         for resultJson in resultArray{
             let value = Result(fromJson: resultJson)
             result.append(value)

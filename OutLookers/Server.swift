@@ -1081,4 +1081,18 @@ class Server {
             handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
+    /// banner
+    class func banner(handler: (success: Bool, msg: String?, value: [BannerList]?)->Void) {
+        HttpTool.post(API.banner, parameters: nil, complete: { (response) in
+            let info = BannerResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
 }

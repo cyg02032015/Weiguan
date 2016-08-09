@@ -26,6 +26,21 @@ class MineHeaderCell: UITableViewCell {
     var followClosure: TapFollowClosure!
     var fanClosure: TapFanClosure!
     
+    var info: GetContent! {
+        didSet {
+            _dynamic.text = "\(info.dynamic)"
+            follow.text = "\(info.follow)"
+            fans.text = "\(info.fan)"
+        }
+    }
+    
+    var avatarInfo: AvatarNameList! {
+        didSet {
+            header.iconURL = avatarInfo.headImgUrl
+            header.setVimage(Util.userType(avatarInfo.detailsType))
+            name.text = avatarInfo.nickname
+        }
+    }
     var header: IconHeaderView!
     var name: UILabel!
     var _dynamic: UILabel!
@@ -43,6 +58,7 @@ class MineHeaderCell: UITableViewCell {
         header = IconHeaderView()
         header.iconPlaceholder = kHeadPlaceholder
         header.customCornerRadius = kScale(59/2)
+        header.vImgSize = kSize(21, height: 19)
         contentView.addSubview(header)
         
         name = UILabel()
