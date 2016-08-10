@@ -98,6 +98,7 @@ class Util {
             case "5": return "/天"
             case "6": return "/月"
             case "7": return "/年"
+            case "8": return "/人"
         default: return ""
         }
     }

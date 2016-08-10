@@ -46,7 +46,8 @@ class ReleaseTalentCell: UITableViewCell {
         releaseLabel = UILabel.createLabel(14, textColor: UIColor(hex: 0xc0c0c0))
         contentView.addSubview(releaseLabel)
         releaseLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(releaseLabel.superview!).offset(kScale(22))
+//            make.bottom.equalTo(nameLabel.snp.bottom)
+            make.centerY.equalTo(nameLabel)
             make.left.equalTo(nameLabel.snp.right).offset(kScale(20))
             make.height.equalTo(14)
             make.right.lessThanOrEqualTo(releaseLabel.superview!).offset(kScale(-15))

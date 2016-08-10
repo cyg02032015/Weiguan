@@ -43,7 +43,7 @@ class FollowViewController: YGBaseViewController {
 
 extension FollowViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,19 +51,19 @@ extension FollowViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+//        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellIdentifier, forIndexPath: indexPath) as! DynamicCell
             cell.releaseLabel.text = "发布了动态"
             return cell
-        } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(releaseNoticeIdentifier, forIndexPath: indexPath) as! ReleaseNoticeCell
-            cell.releaseLabel.text = "发布了通告"
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(releaseTalentIdentifier, forIndexPath: indexPath) as! ReleaseTalentCell
-            cell.releaseLabel.text = "发布了才艺"
-            return cell
-        }
+//        } else if indexPath.section == 1 {
+//            let cell = tableView.dequeueReusableCellWithIdentifier(releaseNoticeIdentifier, forIndexPath: indexPath) as! ReleaseNoticeCell
+//            cell.releaseLabel.text = "发布了通告"
+//            return cell
+//        } else {
+//            let cell = tableView.dequeueReusableCellWithIdentifier(releaseTalentIdentifier, forIndexPath: indexPath) as! ReleaseTalentCell
+//            cell.releaseLabel.text = "发布了才艺"
+//            return cell
+//        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -72,12 +72,12 @@ extension FollowViewController {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+//        if indexPath.section == 0 {
             return UITableViewAutomaticDimension
-        } else if indexPath.section == 1 {
-            return kHeight(352)
-        } else {
-            return kScale(330)
-        }
+//        } else if indexPath.section == 1 {
+//            return kHeight(352)
+//        } else {
+//            return kScale(330)
+//        }
     }
 }

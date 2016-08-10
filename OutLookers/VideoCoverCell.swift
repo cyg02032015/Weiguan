@@ -10,17 +10,16 @@ import UIKit
 
 private extension Selector {
     static let tapImgView = #selector(VideoCoverCell.tapImgView)
-    static let tapSettingCover = #selector(VideoCoverCell.tapSettingCover)
 }
 
 protocol VideoCoverCellDelegate: class {
     func videoCoverImageViewTap()
-    func videoCoverTapSettingCover()
 }
 
 class VideoCoverCell: UITableViewCell {
     
     var imgView: TouchImageView!
+    var settingV: UIView!
     weak var delegate: VideoCoverCellDelegate!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -35,20 +34,20 @@ class VideoCoverCell: UITableViewCell {
         imgView.addTarget(self, action: .tapImgView)
         contentView.addSubview(imgView);
         
-        let v = TouchView()
-        v.backgroundColor = UIColor(r: 254, g: 78, b: 78, a: 0.7)
-        v.addTarget(self, action: .tapSettingCover)
-        imgView.addSubview(v)
+        settingV = UIView()
+        settingV.hidden = true
+        settingV.backgroundColor = UIColor(r: 254, g: 78, b: 78, a: 0.7)
+        imgView.addSubview(settingV)
         
         let smlImg = UIImageView(image: UIImage(named: "Set cover"))
-        v.addSubview(smlImg)
+        settingV.addSubview(smlImg)
         
         let label = UILabel()
         label.textAlignment = .Center
         label.font = UIFont.customFontOfSize(12)
         label.text = "设置封面";
         label.textColor = UIColor.whiteColor()
-        v.addSubview(label)
+        settingV.addSubview(label)
         
         let lineV = UIView()
         lineV.backgroundColor = UIColor(hex: 0xE4E4E4)
@@ -60,8 +59,8 @@ class VideoCoverCell: UITableViewCell {
             make.size.equalTo(kSize(82, height: 82))
         }
         
-        v.snp.makeConstraints { (make) in
-            make.bottom.left.right.equalTo(v.superview!);
+        settingV.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(settingV.superview!);
             make.height.equalTo(kScale(20))
         }
         
@@ -86,12 +85,6 @@ class VideoCoverCell: UITableViewCell {
     func tapImgView() {
         if delegate != nil {
             delegate.videoCoverImageViewTap()
-        }
-    }
-    
-    func tapSettingCover() {
-        if delegate != nil {
-            delegate.videoCoverTapSettingCover()
         }
     }
     

@@ -123,7 +123,7 @@ extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewD
             self.skillButton = cell.skill
         } else {
             cell.skill.selected = false
-            cell.skill.backgroundColor = kButtonGrayColor
+            cell.skill.backgroundColor = kLineColor
         }
         return cell
     }
@@ -132,7 +132,7 @@ extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SkillCell
         let item = rowArray[indexPath.section].result[indexPath.item]
         skillButton.selected = false
-        skillButton.backgroundColor = kButtonGrayColor
+        skillButton.backgroundColor = kLineColor
         skillButton = cell.skill
         skillButton.selected = true
         skillButton.backgroundColor = kCommonColor

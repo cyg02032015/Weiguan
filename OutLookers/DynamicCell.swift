@@ -99,7 +99,7 @@ class DynamicCell: UITableViewCell {
         releaseLabel = UILabel.createLabel(14, textColor: UIColor(hex: 0xc0c0c0))
         contentView.addSubview(releaseLabel)
         releaseLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(releaseLabel.superview!).offset(kScale(22))
+            make.centerY.equalTo(nameLabel)
             make.left.equalTo(nameLabel.snp.right).offset(kScale(20))
             make.height.equalTo(14)
             make.right.lessThanOrEqualTo(releaseLabel.superview!).offset(kScale(-15))
@@ -196,7 +196,8 @@ class DynamicCell: UITableViewCell {
         praiseBtn.setImage(UIImage(named: "like_normal"), forState: .Normal)
         praiseBtn.setImage(UIImage(named: "like_chosen"), forState: .Selected)
         praiseBtn.setTitle("赞TA", forState: .Normal)
-        praiseBtn.titleLabel!.font = UIFont.customFontOfSize(18)
+        praiseBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        praiseBtn.titleLabel!.font = UIFont.customFontOfSize(16)
         praiseBtn.setTitleColor(kGrayColor, forState: .Normal)
         praiseTAContainer.addSubview(praiseBtn)
         
@@ -228,7 +229,8 @@ class DynamicCell: UITableViewCell {
         commentBtn = UIButton()
         commentBtn.setImage(UIImage(named: "dis"), forState: .Normal)
         commentBtn.setTitle("评论", forState: .Normal)
-        commentBtn.titleLabel!.font = UIFont.customFontOfSize(18)
+        commentBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        commentBtn.titleLabel!.font = UIFont.customFontOfSize(16)
         commentBtn.setTitleColor(kGrayColor, forState: .Normal)
         commentContainer.addSubview(commentBtn)
         
@@ -267,7 +269,8 @@ class DynamicCell: UITableViewCell {
         let shareBtn = UIButton()
         shareBtn.setImage(UIImage(named: "share"), forState: .Normal)
         shareBtn.setTitle("分享", forState: .Normal)
-        shareBtn.titleLabel!.font = UIFont.customFontOfSize(18)
+        shareBtn.titleLabel!.font = UIFont.customFontOfSize(16)
+        shareBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         shareBtn.setTitleColor(kGrayColor, forState: .Normal)
         shareContainer.addSubview(shareBtn)
 

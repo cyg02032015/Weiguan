@@ -40,7 +40,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "编辑通告"
+        title = "发布邀约"
         setupSubViews()
         getToken()
         selectDatePicker = YGSelectDateView()

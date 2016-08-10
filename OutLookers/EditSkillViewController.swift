@@ -56,7 +56,7 @@ class EditSkillViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "编辑才艺"
+        title = "发布才艺"
         setupSubViews()
         getToken()
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
@@ -110,6 +110,19 @@ class EditSkillViewController: YGBaseViewController {
             self.tokenObject = object
         }
     }
+    
+    // MARK: 返回
+    override func backButtonPressed(sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: "确认放弃发布视频吗?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: { [weak self](action) in
+            self?.dismissViewControllerAnimated(true) { [weak self] in
+                self?.photoArray.removeAll()
+                self?.originPhotoArray.removeAll()
+            }
+            }))
+        alert.addAction(UIAlertAction(title: "点错了", style: .Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -129,6 +142,7 @@ extension EditSkillViewController {
                 return cell
             } else if indexPath.row == 2 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(budgetCellIdentifier, forIndexPath: indexPath) as! BudgetPriceCell
+                cell.tf.keyboardType = .NumberPad
                 cell.delegate = self
                 cell.setTextInCell("才艺标价", placeholder: "请输入才艺标价", buttonText: "元/小时")
                 return cell
@@ -198,7 +212,7 @@ extension EditSkillViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension EditSkillViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.photoArray.count + 1
+        return photoArray.count >= 9 ? photoArray.count : photoArray.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -452,12 +466,19 @@ extension EditSkillViewController: UIImagePickerControllerDelegate, UINavigation
     }
 }
 
-extension EditSkillViewController: YGPickerViewDelegate {
+// MARK: - UIPickerViewDelegate, UIPickerViewDataSource, YGPickerViewDelegate
+extension EditSkillViewController: UIPickerViewDelegate, UIPickerViewDataSource, YGPickerViewDelegate {
     func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
         if isProvincePicker {
+            let province = cityResp.province[provinceInt]
             let city = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(1), forComponent: 1)
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! ArrowEditCell
-            cell.tf.text = city
+            if province.name == "不限" {
+                cell.tf.text = province.name
+            } else {
+                guard let c = city else {fatalError("city 为空")}
+                cell.tf.text = "\(province.name) \(c)"
+            }
             req.city = "\(cityResp.province[provinceInt].citys[pickerView.selectedRowInComponent(1)].id)"
         } else {
             let skillUnit = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
@@ -477,10 +498,7 @@ extension EditSkillViewController: YGPickerViewDelegate {
         }
         checkParameters()
     }
-}
-
-// MARK: - UIPickerViewDelegate, UIPickerViewDataSource
-extension EditSkillViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         if isProvincePicker {
             return 2

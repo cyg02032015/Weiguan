@@ -126,7 +126,7 @@ class HomeViewController: YGBaseViewController {
         }
         
         // 轮播图
-        banner = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(210))), delegate: self, placeholderImage: UIImage(named: ""))
+        banner = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenWidth * 2 / 3)), delegate: self, placeholderImage: UIImage(named: ""))
         banner.pageDotImage = UIImage(named: "home_point_normal")
         banner.currentPageDotImage = UIImage(named: "home_point_chosen")
         banner.pageControlDotSize = kSize(6, height: 6)
@@ -218,8 +218,7 @@ extension HomeViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 10
-        return hotmanList.count
+        return hotmanList.count > 8 ? 8 : hotmanList.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

@@ -99,8 +99,9 @@ class HotmanCell: UITableViewCell {
             make.height.equalTo(picCount)
         }
         layoutIfNeeded()
-//        picCount.text = "9"
-//        videoCount.text = "9"
+        
+        // TODO
+        view.hidden = true
         
     }
     

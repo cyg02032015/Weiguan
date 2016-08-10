@@ -41,7 +41,7 @@ class ReleaseVideoViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "编辑动态"
+        title = "发布视频"
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
         getToken()
@@ -104,6 +104,17 @@ class ReleaseVideoViewController: YGBaseViewController {
             controller.delegate = self
             presentViewController(controller, animated: true, completion: {})
         }
+    }
+    
+    // MARK: 返回
+    override func backButtonPressed(sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: "确认放弃发布视频吗?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: { [weak self](action) in
+            self?.dismissViewControllerAnimated(true) {
+            }
+            }))
+        alert.addAction(UIAlertAction(title: "点错了", style: .Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }
 
@@ -229,10 +240,6 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
 }
     
     func videoCoverImageViewTap() {
-        selectVideo()
-    }
-    
-    func videoCoverTapSettingCover() {
         if videoUrl == nil {
             selectVideo()
         } else {
@@ -266,6 +273,9 @@ extension ReleaseVideoViewController: UIImagePickerControllerDelegate, UINavigat
             videoUrl = url
             coverImage = VideoTool.getThumbleImage(url)
             cell.imgView.image = coverImage
+            if videoUrl != nil && coverImage != nil {
+                cell.settingV.hidden = false
+            }
             checkParamers()
             dismissViewControllerAnimated(true, completion: {})
         }

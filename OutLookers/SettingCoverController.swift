@@ -86,7 +86,9 @@ class SettingCoverController: YGBaseViewController {
         generator.appliesPreferredTrackTransform = true
         var halfWayImage: CGImageRef?
         do {
-            halfWayImage = try generator.copyCGImageAtTime(changePoint, actualTime: nil)
+            let seconds = CMTimeGetSeconds(changePoint)
+            let time = CMTimeMakeWithSeconds(seconds, 60)
+            halfWayImage = try generator.copyCGImageAtTime(time, actualTime: nil)
         } catch let e {
             LogError("\(e)")
             halfWayImage = nil

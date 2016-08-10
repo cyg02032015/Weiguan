@@ -24,6 +24,7 @@ enum UnitType: String {
     case YuanDay = "5"
     case YuanMonth = "6"
     case YuanYear = "7"
+    case YuanPeople = "8"
 }
 
 protocol RecruitInformationDelegate: class {
@@ -33,8 +34,6 @@ protocol RecruitInformationDelegate: class {
 class RecruitInformationViewController: YGBaseViewController {
 
     var tableView: UITableView!
-    var pickerView: YGPickerView!
-    lazy var skillUnitPickerArray = [String]()
     weak var delegate: RecruitInformationDelegate!
     var rightButton: UIButton!
     lazy var req = EditCircularRecruitReq()
@@ -65,12 +64,7 @@ class RecruitInformationViewController: YGBaseViewController {
             make.top.left.right.equalTo(tableView.superview!)
             make.bottom.equalTo(rightButton.snp.top)
         }
-        
-        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"]
-        pickerView = YGPickerView(frame: CGRectZero, delegate: self)
-        pickerView.titleLabel.text = "才艺标价单位"
-        pickerView.delegate = self
-        req.unit = UnitType.YuanHour.rawValue
+        req.unit = UnitType.YuanPeople.rawValue
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -99,7 +93,6 @@ extension RecruitInformationViewController {
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(budgetPriceIdentifier, forIndexPath: indexPath) as! BudgetPriceCell
             cell.tf.keyboardType = .NumberPad
-            cell.delegate = self
             cell.setTextInCell("预算价格 (选填)", placeholder: "请输入整数", buttonText: "元/人")
             return cell
         }
@@ -130,7 +123,7 @@ extension RecruitInformationViewController {
 }
 
 // MARK: -点击按钮 & NoArrowEditCellDelegate
-extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCellDelegate, NoArrowEditCellDelegate {
+extension RecruitInformationViewController: NoArrowEditCellDelegate {
 
     func checkParameters() {
         guard !isEmptyString(req.categoryId) && !isEmptyString(req.categoryName) && !isEmptyString(req.number) else {
@@ -167,41 +160,4 @@ extension RecruitInformationViewController: YGPickerViewDelegate, BudgetPriceCel
     func textFieldReturnText(text: String) {
         req.price = text
     }
-    
-    func budgetPriceButtonTap(sender: UIButton) {
-        pickerView.animation()
-    }
-    
-    func pickerViewSelectedSure(sender: UIButton, pickerView: UIPickerView) {
-        let skillUnit = pickerView.delegate!.pickerView!(pickerView, titleForRow: pickerView.selectedRowInComponent(0), forComponent: 0)
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! BudgetPriceCell
-        cell.button.selected = true
-        guard let unit = skillUnit else { fatalError("picker skill unit nil") }
-        cell.setButtonText(unit)
-        //"元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"
-        switch unit {
-        case "元/小时": req.unit = UnitType.YuanHour.rawValue
-        case "元/场": req.unit = UnitType.YuanRound.rawValue
-        case "元/次": req.unit = UnitType.YuanOnce.rawValue
-        case "元/半天": req.unit = UnitType.YuanHalfday.rawValue
-        case "元/月": req.unit = UnitType.YuanMonth.rawValue
-        case "元/年": req.unit = UnitType.YuanYear.rawValue
-        default: ""
-        }
-    }
-}
-
-extension RecruitInformationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return skillUnitPickerArray.count
-    }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return skillUnitPickerArray[row]
-    }
-    
 }

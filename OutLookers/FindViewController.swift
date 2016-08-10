@@ -33,7 +33,7 @@ class FindViewController: YGBaseViewController {
         slidePageScrollView.delegate = self
         view.addSubview(slidePageScrollView)
         
-        let titlePageTabbar = TYTitlePageTabBar(titleArray: ["广场", "红人", "通告"])
+        let titlePageTabbar = TYTitlePageTabBar(titleArray: ["广场", "才艺", "邀约"])
         titlePageTabbar.frame = CGRect(origin: CGPointZero, size: CGSize(width: CGRectGetWidth(slidePageScrollView.frame), height: 64))
         titlePageTabbar.edgeInset = UIEdgeInsets(top: 25, left: 70, bottom: 0, right: 70)
         titlePageTabbar.horIndicatorSpacing = 10

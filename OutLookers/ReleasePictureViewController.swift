@@ -29,7 +29,7 @@ class ReleasePictureViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "编辑才艺"
+        title = "发布图片"
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
         getToken()
@@ -70,6 +70,19 @@ class ReleasePictureViewController: YGBaseViewController {
             }
             self.tokenObject = object
         }
+    }
+    
+    // MARK: 返回
+    override func backButtonPressed(sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: "确认放弃发布图片吗?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: { [weak self](action) in
+            self?.dismissViewControllerAnimated(true) {
+                self?.photos.removeAll()
+                self?.originPhotos.removeAll()
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "点错了", style: .Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }
 
@@ -131,7 +144,7 @@ extension ReleasePictureViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count + 1
+        return photos.count >= 9 ? photos.count : photos.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

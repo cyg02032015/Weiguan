@@ -146,6 +146,7 @@ extension YKPhotoPreviewController: YKPhotoPreviewCellDelegate {
     
     func tapDeletButton(sender: UIButton) {
         let alert = UIAlertView(title: "", message: "确定删除该图片吗?", delegate: self, cancelButtonTitle: "确定", otherButtonTitles: "点错了")
+
         alert.show()
 
     }
