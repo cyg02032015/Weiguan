@@ -14,6 +14,9 @@ let kSelectedSina = "sina_weibo_c"
 let kSelectedQzone = "qzone_c"
 let kSelectedQQ = "qq_c"
 let kDeleteImg = "delete  copy 4"
+let kEditImg = ""
+let kHomeImg = ""
+let kReportImg = ""
 
 let kUnSelectedTimeline = "wechat_moment－Unchecked"
 let kUnSelectedWechat = "wechat_Unchecked"
@@ -29,6 +32,7 @@ let kTitleQQ = "QQ"
 let kDelete = "删除"
 let kHome = "返回首页"
 let kReport = "举报"
+let kEdit = "编辑"
 
 class YGShareHandler {
     /**
@@ -36,7 +40,7 @@ class YGShareHandler {
      
      - returns: 返回一个元组 (选中的图片， 没选中的图片， 标题)
      */
-    class func handleShareInstalled() -> (images: [UIImage], unSelectedImages: [UIImage], titles: [String]) {
+    static func handleShareInstalled() -> (images: [UIImage], unSelectedImages: [UIImage], titles: [String]) {
         if YGWXApi.isWXAppInstalled() && YGQQApi.isQQAppInstalled() {
             let images = [UIImage(named: kSelectedTimeline)!,
                           UIImage(named: kSelectedWechat)!,

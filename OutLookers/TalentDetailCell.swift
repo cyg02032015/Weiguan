@@ -10,9 +10,22 @@ import UIKit
 
 class TalentDetailCell: UITableViewCell {
 
+    var info: TalentDtailResp! {
+        didSet {
+            jobLabel.text = info.name
+            moneyLabel.text = "\(info.price)" + Util.unit(info.unit)
+            styleLabel.text = info.details
+            // TODO
+            dateLabel.text = "5月19号"
+            imgView.yy_setImageWithURL(info.worksCover.addImagePath(CGSize(width: ScreenWidth, height: kScale(285))), placeholder: kPlaceholder)
+        }
+    }
     var jobLabel: UILabel!      // 时装模特
     var moneyLabel: UILabel!
     var styleLabel: UILabel!    // 风格特征
+    var dateLabel: UILabel!
+    var label: UILabel!         // 我是小包子，我为自己代言
+    var imgView: UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -88,12 +101,37 @@ class TalentDetailCell: UITableViewCell {
             make.top.equalTo(descLabel.snp.bottom).offset(kScale(10))
         }
         
-        let view1 = UIView()
-        view1.backgroundColor = UIColor.yellowColor()
-        contentView.addSubview(view1)
-        view1.snp.makeConstraints { (make) in
-            make.left.right.equalTo(view1.superview!)
-            make.top.equalTo(styleLabel.snp.bottom).offset(kScale(7))
+        let lineV = UIView()
+        lineV.backgroundColor = kLineColor
+        contentView.addSubview(lineV)
+        lineV.snp.makeConstraints { (make) in
+            make.left.right.equalTo(lineV.superview!)
+            make.top.equalTo(styleLabel.snp.bottom).offset(kScale(16))
+            make.height.equalTo(0.5)
+        }
+        
+        dateLabel = UILabel.createLabel(16, textColor: UIColor(hex: 0x434343))
+        contentView.addSubview(dateLabel)
+        dateLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(styleLabel)
+            make.top.equalTo(lineV.snp.bottom).offset(kScale(10))
+            make.height.equalTo(kScale(19))
+        }
+        
+        label = UILabel.createLabel(14, textColor: UIColor(hex: 0x434343))
+        contentView.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.top.equalTo(dateLabel.snp.bottom).offset(kScale(7))
+            make.left.equalTo(dateLabel)
+            make.height.equalTo(kScale(14))
+            make.right.equalTo(label.superview!).offset(kScale(-15))
+        }
+        
+        imgView = UIImageView()
+        contentView.addSubview(imgView)
+        imgView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(imgView.superview!)
+            make.top.equalTo(label.snp.bottom).offset(kScale(7))
             make.height.equalTo(kScale(285))
         }
         
@@ -102,14 +140,12 @@ class TalentDetailCell: UITableViewCell {
         contentView.addSubview(view2)
         view2.snp.makeConstraints { (make) in
             make.left.right.equalTo(view2.superview!)
-            make.top.equalTo(view1.snp.bottom).offset(kScale(5.2))
+            make.top.equalTo(imgView.snp.bottom).offset(kScale(5.2))
             make.height.equalTo(kScale(548))
             make.bottom.lessThanOrEqualTo(view2.superview!)
         }
-        
-        jobLabel.text = "时装模特"
-        moneyLabel.text = "1000元/天"
-        styleLabel.text = "风格特征：欧美 日韩 街头 性感 中国风欧美 日韩 街头 性感 中国风欧美 日韩 街头 性感 中国风欧美 日韩 街头 性感 中国风欧美 日韩 街头 性感 "
+        // TODO
+        label.text = "我是小包子，我为自己代言"
         
     }
     

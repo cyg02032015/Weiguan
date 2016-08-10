@@ -10,6 +10,14 @@ import UIKit
 
 class TalentDetailHeadCell: UITableViewCell {
 
+    var info: TalentDtailResp! {
+        didSet {
+            headImgView.iconURL = info.headImgUrl
+//            headImgView.setVimage(Util.userType(info.))
+            nameLabel.text = info.nickname
+            
+        }
+    }
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
     var button: UIButton!
@@ -22,6 +30,7 @@ class TalentDetailHeadCell: UITableViewCell {
     
     func setupSubViews() {
         headImgView = IconHeaderView()
+        headImgView.customCornerRadius = kScale(35/2)
         contentView.addSubview(headImgView)
         headImgView.snp.makeConstraints { (make) in
             make.left.equalTo(headImgView.superview!).offset(kScale(15))
@@ -31,6 +40,7 @@ class TalentDetailHeadCell: UITableViewCell {
         
         button = UIButton()
         button.setImage(UIImage(named: ""), forState: .Normal)
+        button.hidden = true
         contentView.addSubview(button)
         button.snp.makeConstraints { (make) in
             make.right.equalTo(button.superview!).offset(kScale(-15))
@@ -46,10 +56,6 @@ class TalentDetailHeadCell: UITableViewCell {
             make.height.equalTo(kScale(16))
             make.right.equalTo(button.snp.left).offset(kScale(-10))
         }
-        
-        headImgView.backgroundColor = UIColor.yellowColor()
-        button.backgroundColor = UIColor.redColor()
-        nameLabel.text = "sdfsdfsd"
     }
     
     required init?(coder aDecoder: NSCoder) {

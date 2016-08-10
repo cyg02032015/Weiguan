@@ -12,11 +12,12 @@ private let shareVcellId = "shareVcellId"
 
 private extension Selector {
     static let tapView = #selector(YGShare.tapView(_:))
-    static let tapCancel = #selector(YGShare.tapCancel(_:))
+    static let tapCancel = #selector(YGShare.tapCancel)
 }
 
 class YGShare: UIView {
-
+    typealias ShareClosure = (title: String) -> Void
+    private var shareClosure: ShareClosure!
     var container: UIView!
     var cancel: UIButton!
     var collectionView: UICollectionView!
@@ -38,6 +39,7 @@ class YGShare: UIView {
         
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
         let tap = UITapGestureRecognizer(target: self, action: .tapView)
+        tap.delegate = self
         addGestureRecognizer(tap)
         
         if titles.count <= 4 {
@@ -114,7 +116,7 @@ class YGShare: UIView {
         
     }
     
-    func tapCancel(sender: UIButton) {
+    func tapCancel() {
         if self.superview == nil {
             LogError("picker does not superview")
             return
@@ -122,25 +124,6 @@ class YGShare: UIView {
         container.snp.updateConstraints { (make) in
             make.bottom.equalTo(container.superview!).offset(containerHeight)
         }
-        setNeedsUpdateConstraints()
-        updateConstraints()
-        UIView.animateWithDuration(0.3, animations: {
-            self.layoutIfNeeded()
-            self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-        }) { (isCompleted) in
-            self.removeFromSuperview()
-        }
-    }
-    
-    func tapSure(sender: UIButton) {
-        if self.superview == nil {
-            LogError("picker does not superview")
-            return
-        }
-        container.snp.updateConstraints { (make) in
-            make.bottom.equalTo(container.superview!).offset(containerHeight)
-        }
-
         setNeedsUpdateConstraints()
         updateConstraints()
         UIView.animateWithDuration(0.3, animations: {
@@ -169,9 +152,18 @@ class YGShare: UIView {
         }
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension YGShare: UIGestureRecognizerDelegate {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        if touch.view == container || touch.view == collectionView {
+            return false
+        } else {
+            return true
+        }
     }
 }
 
@@ -190,12 +182,23 @@ extension YGShare: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(shareVcellId, forIndexPath: indexPath) as! ShareVCell
         cell.shareButton.setImage(self.imgs[indexPath.item], forState: .Normal)
         cell.label.text = self.titles[indexPath.item]
+        cell.shareBlock { [unowned self](sender) in
+            if self.shareClosure != nil {
+                self.tapCancel()
+                self.shareClosure(title: self.titles[indexPath.item])
+            }
+        }
         return cell
+    }
+    
+    func shareBlock(closure: ShareClosure) {
+        shareClosure = closure
     }
 }
 
 class ShareVCell: UICollectionViewCell {
-    
+    typealias ShareClosure = (sender: UIButton) -> Void
+    private var shareClosure: ShareClosure!
     var shareButton: UIButton!
     var label: UILabel!
     
@@ -211,8 +214,12 @@ class ShareVCell: UICollectionViewCell {
     
     func setupSubViews() {
         shareButton = UIButton()
-        shareButton.userInteractionEnabled = false
         contentView.addSubview(shareButton)
+        shareButton.rx_tap.subscribeNext { [unowned self] in
+            if self.shareClosure != nil {
+                self.shareClosure(sender: self.shareButton)
+            }
+        }.addDisposableTo(disposeBag)
         
         label = UILabel()
         label.textAlignment = .Center
@@ -231,6 +238,10 @@ class ShareVCell: UICollectionViewCell {
             make.top.equalTo(shareButton.snp.bottom).offset(kScale(7))
             make.height.equalTo(kScale(10))
         }
+    }
+    
+    func shareBlock(closure: ShareClosure) {
+        shareClosure = closure
     }
     
     required init?(coder aDecoder: NSCoder) {

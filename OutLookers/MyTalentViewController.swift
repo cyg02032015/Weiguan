@@ -77,6 +77,7 @@ extension MyTalentViewController {
         cell.detailBlock { [weak self](sender) in
             let vc = TalentDetailViewController()
             vc.id = self?.lists[indexPath.section].id
+            vc.isPerson = true
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -104,6 +105,7 @@ extension MyTalentViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = TalentDetailViewController()
         vc.id = self.lists[indexPath.section].id
+        vc.isPerson = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

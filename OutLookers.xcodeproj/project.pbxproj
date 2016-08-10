@@ -1517,11 +1517,11 @@
 				D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */,
 				E47ADF6B1D1D051D00A2F4BD /* YGShareHandler.swift */,
 				D8B641451D367F1300DF916D /* Util.swift */,
-				E4A3E6451D4714840045202B /* YGLogView.swift */,
 				D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */,
 				D8EB0EBD1D490EAC002E36F8 /* OSSImageUploader.swift */,
 				D85B72C01D4A3EBC005EECE6 /* OSSVideoUploader.swift */,
 				E44861831D49D5380034208D /* YGCityData.swift */,
+				E4A3E6451D4714840045202B /* YGLogView.swift */,
 				D825EECB1D55F78E00AF94AF /* YGShare.swift */,
 			);
 			name = YKLib;

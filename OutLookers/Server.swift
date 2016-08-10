@@ -403,6 +403,7 @@ class Server {
         }
     }
     
+    /// 绑定手机
     class func bindPhone(phone: String,smsCode: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
         let parameters = [
             "userId" : UserSingleton.sharedInstance.userId,
@@ -439,7 +440,7 @@ class Server {
         }
     }
     
-    /// 个人资料-查看
+    /// 个人档案-查看
     class func showPersonFiles(handler: (success: Bool, msg: String?, value: PersonFilesResp?)->Void) {
         let parameters = [
             "userId" : UserSingleton.sharedInstance.userId

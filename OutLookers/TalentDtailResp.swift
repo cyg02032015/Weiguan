@@ -19,10 +19,10 @@ class TalentDtailResp: BaseResponse {
     var id : Int!
     var name : String!
     var nickname : String!
-    var price : Float!
+    var price : Int!
     var province : String!
     var state : String!
-    var unit : Int!
+    var unit : String!
     var userId : Int!
     var worksCover : String!
     var result: TalentDtailResp!
@@ -45,10 +45,10 @@ class TalentDtailResp: BaseResponse {
         id = json["id"].intValue
         name = json["name"].stringValue
         nickname = json["nickname"].stringValue
-        price = json["price"].floatValue
+        price = json["price"].intValue
         province = json["province"].stringValue
         state = json["state"].stringValue
-        unit = json["unit"].intValue
+        unit = json["unit"].stringValue
         userId = json["userId"].intValue
         worksCover = json["worksCover"].stringValue
     }

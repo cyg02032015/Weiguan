@@ -10,18 +10,58 @@ import UIKit
 
 private let talentDetailHeadCellId = "talentDetailHeadCellId"
 private let talentDetailCellId = "talentDetailCellId"
-private let shareCellId = "shareCellId"
 
 class TalentDetailViewController: YGBaseViewController {
 
     var id: Int!
+    var isPerson = false
     var tableView: UITableView!
-    lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
+    var talentObj: TalentDtailResp!
+    var moreButton: UIButton!
+    var share: YGShare!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.shareTuple = YGShareHandler.handleShareInstalled()
+        setupShare()
         setupSubViews()
         loadData()
+    }
+    
+    func setupShare() {
+        var collect = YGShareHandler.handleShareInstalled()
+        if isPerson {
+            collect.images.append(UIImage(named: "wechat_c")!) // 编辑
+            collect.images.append(UIImage(named: kDeleteImg)!) // 删除
+            collect.images.append(UIImage(named: "wechat_c")!) // 返回首页
+            collect.titles.append(kEdit)
+            collect.titles.append(kDelete)
+            collect.titles.append(kHome)
+            share = YGShare(frame: CGRectZero, imgs: collect.images, titles: collect.titles)
+        } else {
+            collect.images.append(UIImage(named: "wechat_c")!)
+            collect.images.append(UIImage(named: "wechat_c")!)
+            collect.titles.append(kReport)
+            collect.titles.append(kHome)
+            share = YGShare(frame: CGRectZero, imgs: collect.images, titles: collect.titles)
+        }
+        share.shareBlock { (title) in
+            switch title {
+            case kDelete:
+                SVToast.show()
+                Server.deleteTalent("\(self.id)", handler: { (success, msg, value) in
+                    SVToast.dismiss()
+                    if success {
+                        SVToast.showWithSuccess("删除成功")
+                        delay(1, task: { 
+                            self.navigationController?.popViewControllerAnimated(true)
+                        })
+                    } else {
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
+                    }
+                })
+            default:""
+            }
+        }
     }
     
     func loadData() {
@@ -29,7 +69,9 @@ class TalentDetailViewController: YGBaseViewController {
         Server.talentDetail("\(id)") { (success, msg, value) in
             SVToast.dismiss()
             if success {
-                LogInfo(value)
+                guard let obj = value else {return}
+                self.talentObj = obj
+                self.tableView.reloadData()
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
@@ -39,12 +81,17 @@ class TalentDetailViewController: YGBaseViewController {
     
     func setupSubViews() {
         title = "才艺详情"
+        moreButton = setRightNaviItem()
+        moreButton.setImage(UIImage(named: "more1"), forState: .Normal)
+        moreButton.rx_tap.subscribeNext { [weak self] in
+            self?.share.animation()
+        }.addDisposableTo(disposeBag)
+        
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(TalentDetailHeadCell.self, forCellReuseIdentifier: talentDetailHeadCellId)
         tableView.registerClass(TalentDetailCell.self, forCellReuseIdentifier: talentDetailCellId)
-        tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellId)
         tableView.estimatedRowHeight = kHeight(1000)
         tableView.separatorStyle = .None
         tableView.tableFooterView = UIView()
@@ -64,24 +111,23 @@ extension TalentDetailViewController {
         if section == 0 {
             return 1
         } else {
-            return 2
+            return 1
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(talentDetailHeadCellId, forIndexPath: indexPath) as! TalentDetailHeadCell
+            if talentObj != nil {
+                cell.info = talentObj
+            }
             return cell
         } else {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(talentDetailCellId, forIndexPath: indexPath) as! TalentDetailCell
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier(shareCellId, forIndexPath: indexPath) as! ShareCell
-                cell.tuple = shareTuple
-                cell.delegate = self
-                return cell
+            let cell = tableView.dequeueReusableCellWithIdentifier(talentDetailCellId, forIndexPath: indexPath) as! TalentDetailCell
+            if talentObj != nil {
+                cell.info = talentObj
             }
+            return cell
         }
     }
     
@@ -93,11 +139,7 @@ extension TalentDetailViewController {
         if indexPath.section == 0 {
             return kHeight(64)
         } else {
-            if indexPath.row == 0 {
-                return UITableViewAutomaticDimension
-            } else {
-                return kHeight(80)
-            }
+            return UITableViewAutomaticDimension
         }
     }
     
