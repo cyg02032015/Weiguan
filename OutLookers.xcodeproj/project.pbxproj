@@ -199,6 +199,10 @@
 		D84D986E1D47AD39007CCD6E /* DXMessageToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986B1D47AD39007CCD6E /* DXMessageToolBar.m */; };
 		D84D986F1D47AD39007CCD6E /* XHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */; };
 		D84D98721D47AE47007CCD6E /* UIButton+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98711D47AE47007CCD6E /* UIButton+EX.swift */; };
+		D8518AC31D6046B90028EC79 /* FolloButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */; };
+		D8518AC71D6054C20028EC79 /* CircleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */; };
+		D8518ACD1D606A680028EC79 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */; };
+		D8518ACF1D6070860028EC79 /* HomeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518ACE1D6070860028EC79 /* HomeCollectionCell.swift */; };
 		D85B72C11D4A3EBC005EECE6 /* OSSVideoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B72C01D4A3EBC005EECE6 /* OSSVideoUploader.swift */; };
 		D8686C161D1965BE00B3982A /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */; };
 		D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8686C171D19752300B3982A /* UIScrollView+EX.swift */; };
@@ -613,6 +617,10 @@
 		D84D986C1D47AD39007CCD6E /* XHMessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMessageTextView.h; sourceTree = "<group>"; };
 		D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMessageTextView.m; sourceTree = "<group>"; };
 		D84D98711D47AE47007CCD6E /* UIButton+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+EX.swift"; path = "OutLookers/UIButton+EX.swift"; sourceTree = SOURCE_ROOT; };
+		D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloButtonProtocol.swift; sourceTree = "<group>"; };
+		D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleHeaderView.swift; path = OutLookers/CircleHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalCollectionViewCell.swift; path = OutLookers/HorizontalCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D8518ACE1D6070860028EC79 /* HomeCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCollectionCell.swift; path = OutLookers/HomeCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D85B72C01D4A3EBC005EECE6 /* OSSVideoUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSSVideoUploader.swift; path = OutLookers/OSSVideoUploader.swift; sourceTree = SOURCE_ROOT; };
 		D8686C151D1965BE00B3982A /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionCell.swift; path = OutLookers/PhotoCollectionCell.swift; sourceTree = SOURCE_ROOT; };
 		D8686C171D19752300B3982A /* UIScrollView+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScrollView+EX.swift"; path = "OutLookers/UIScrollView+EX.swift"; sourceTree = SOURCE_ROOT; };
@@ -1174,6 +1182,9 @@
 				D82F8E191D30ED9100A24CDB /* OrganizationViewController.swift */,
 				D82F8E1B1D30EEAF00A24CDB /* OGDataViewController.swift */,
 				D82F8E1F1D30F4E200A24CDB /* OGCircularViewController.swift */,
+				D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */,
+				D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */,
+				D8518ACE1D6070860028EC79 /* HomeCollectionCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1327,7 +1338,6 @@
 				D8B641431D35535D00DF916D /* PHTaTableViewCell.swift */,
 				D8B641491D36A1AD00DF916D /* TalentDetailHeadCell.swift */,
 				D8B6414B1D36A4C900DF916D /* TalentDetailCell.swift */,
-				D8B641511D3919EB00DF916D /* HomeCell.swift */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1387,6 +1397,14 @@
 				D83087831D27B958009CFE03 /* MineCollectionCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		D8518AC11D6046930028EC79 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */,
+			);
+			name = Protocol;
 			sourceTree = "<group>";
 		};
 		D8686C191D19840800B3982A /* Skill */ = {
@@ -1642,6 +1660,7 @@
 				E41C6C5E1D113F350013031D /* Issue */,
 				E41C6C5C1D113F350013031D /* Follow */,
 				E41C6C601D113F350013031D /* Mine */,
+				D8518AC11D6046930028EC79 /* Protocol */,
 				D8F526CD1D16CAD1000C8F91 /* YKLib */,
 				E41C6C611D113F350013031D /* Service */,
 				E41C6C5B1D113F350013031D /* Extension */,
@@ -1721,6 +1740,7 @@
 			isa = PBXGroup;
 			children = (
 				E446F9FE1D24EE76003DFC1E /* View */,
+				D8B641511D3919EB00DF916D /* HomeCell.swift */,
 				D81F452F1D12CF45004D9192 /* Controller */,
 			);
 			path = Home;
@@ -2374,6 +2394,7 @@
 				D825EEC11D548F5D00AF94AF /* Register1ViewController.swift in Sources */,
 				D819923F1D43C6BE007734C0 /* ReleaseTalentReq.swift in Sources */,
 				D81F450A1D118D43004D9192 /* TimeObject.swift in Sources */,
+				D8518ACD1D606A680028EC79 /* HorizontalCollectionViewCell.swift in Sources */,
 				E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */,
 				D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */,
 				D82F8E2A1D33E83D00A24CDB /* ReleaseTalentCell.swift in Sources */,
@@ -2497,11 +2518,13 @@
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
 				D87049441D2152A7008FB780 /* VideoTool.swift in Sources */,
+				D8518AC71D6054C20028EC79 /* CircleHeaderView.swift in Sources */,
 				D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */,
 				D84D98501D4661B0007CCD6E /* RecommendHotmanResp.swift in Sources */,
 				E44861841D49D5380034208D /* YGCityData.swift in Sources */,
 				E43F0ACC1D4B5BD700D20FB3 /* SVProgressAnimatedView.m in Sources */,
 				E4473EC31D38C94F000CEEF2 /* BWHTableViewCell.swift in Sources */,
+				D8518ACF1D6070860028EC79 /* HomeCollectionCell.swift in Sources */,
 				D8EB0EBC1D48F3E7002E36F8 /* YGImageSave.swift in Sources */,
 				D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */,
 				D82F8E0C1D2C0D9400A24CDB /* UIScrollView+ty_swizzle.m in Sources */,
@@ -2585,6 +2608,7 @@
 				D812A9141D4FA69D00186564 /* MJRefreshConst.m in Sources */,
 				E41B92EA1D40916300749769 /* MCommentViewController.swift in Sources */,
 				D812A8B21D4CE9AD00186564 /* LikeListResp.swift in Sources */,
+				D8518AC31D6046B90028EC79 /* FolloButtonProtocol.swift in Sources */,
 				D81992241D3D146D007734C0 /* MyEnterViewController.swift in Sources */,
 				D8C167351D1AFCD200C50EB7 /* ReleasePictureViewController.swift in Sources */,
 				D825EEBF1D524F9000AF94AF /* HotmanAuthReq.swift in Sources */,

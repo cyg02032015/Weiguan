@@ -44,6 +44,10 @@ extension String {
         return NSURL(string: globleSingle.imagePath + self + "@\(Int(size.width))h_\(Int(size.height))w.webp")!
     }
     
+    func addImagePath() -> NSURL {
+        return NSURL(string: globleSingle.imagePath + self)!
+    }
+    
     func dateFromString(format: String = "yyyy-MM-dd HH:mm:ss.S") -> NSDate? {
         let formatter = NSDateFormatter()
         formatter.dateFormat = format

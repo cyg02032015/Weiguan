@@ -8,11 +8,15 @@
 
 import UIKit
 
+private extension Selector {
+    static let tapHeadImg = #selector(HomeCell.tapHeadImg)
+}
+
 class HomeCell: UITableViewCell {
     
     var info: DynamicResult! {
         didSet {
-            backImgView.yy_setImageWithURL(info.cover.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
+            backImgView.yy_setImageWithURL(info.cover.addImagePath(), placeholder: kPlaceholder)
             headImgView.yy_setImageWithURL(info.photo.addImagePath(kSize(36, height: 36)), placeholder: kPlaceholder)
             nameLabel.text = info.name
             detailLabel.text = info.text
@@ -24,9 +28,9 @@ class HomeCell: UITableViewCell {
             }
         }
     }
-
+    var headClosure: (()->Void)!
     var backImgView: UIImageView!
-    var headImgView: UIImageView!
+    var headImgView: TouchImageView!
     var nameLabel: UILabel!
     var zanButton: UIButton!
     var commentButton: UIButton!
@@ -51,6 +55,7 @@ class HomeCell: UITableViewCell {
         headImgView.layer.borderWidth = 2
         headImgView.layer.borderColor = UIColor.whiteColor().CGColor
         headImgView.layer.cornerRadius = kScale(36/2)
+        headImgView.addTarget(self, action: .tapHeadImg)
         contentView.addSubview(headImgView)
         headImgView.snp.makeConstraints { (make) in
             make.left.equalTo(headImgView.superview!).offset(kScale(15))
@@ -102,6 +107,16 @@ class HomeCell: UITableViewCell {
         zanButton.setTitle("赞TA", forState: .Normal)
         commentButton.setTitle("评论", forState: .Normal)
         
+    }
+    
+    func tapHeadImg() {
+        if headClosure != nil {
+            headClosure()
+        }
+    }
+    
+    func tapHeadBlock(closure:()->Void) {
+        headClosure = closure
     }
     
     required init?(coder aDecoder: NSCoder) {

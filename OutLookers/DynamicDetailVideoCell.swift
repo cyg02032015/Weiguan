@@ -13,16 +13,27 @@ let talentPadding: CGFloat = 15
 
 protocol DynamicDetailDelegate: class {
     func dynamicDetailTapShare(sender: UIButton)
+    func dynamicDetailTapFollow(sender: UIButton)
+    func dynamicDetailTapPraise(sender: UIButton)
+    func dynamicDetailTapComment(sender: UIButton)
 }
 
 class DynamicDetailVideoCell: UITableViewCell {
-
+    
     var info: DynamicDetailResp! {
         didSet {
             guard let url = info.pictureList.first?.url else {return}
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
             bigImgView.yy_setImageWithURL(url.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
             details.text = info.text
+            
+            if isEmptyString(info.text) {
+                details.snp.updateConstraints(closure: { (make) in
+                    make.top.equalTo(bigImgView.snp.bottom)
+                    make.height.equalTo(0)
+                })
+                layoutIfNeeded()
+            }
             
             if shareButton != nil {
                 return
@@ -49,38 +60,74 @@ class DynamicDetailVideoCell: UITableViewCell {
             
             
             // talent tags 实现
-            let padding: CGFloat = 8
+            let xpadding: CGFloat = 20
+            let ypadding: CGFloat = 8
             let container = UIView()
             contentView.addSubview(container)
-            container.frame = CGRect(x: talentPadding, y: details.gg_bottom + 10, width: contentView.gg_width - 2 * talentPadding, height: 0)
+            var containerY = details.gg_bottom
+            if info.talentList.count > 0 {
+                containerY = containerY + 10
+            }
+            container.frame = CGRect(x: talentPadding, y: containerY, width: contentView.gg_width - 2 * talentPadding, height: 0)
             var totalWidth: CGFloat = 0
             var totalHeight: CGFloat = 0
             var labelX: CGFloat = 0
             var labelY: CGFloat = 0
             for (idx, talent) in info.talentList.enumerate() {
                 let index = CGFloat(idx)
-                let label = UILabel.createLabel(12, textColor: kGrayTextColor)
-                label.textAlignment = .Center
-                label.backgroundColor = UIColor.blackColor()
-                label.text = talent.name
+                let label = UIButton()
+                label.titleLabel!.font = UIFont.customFontOfSize(12)
+                label.setTitleColor(UIColor(hex: 0xFA8B37), forState: .Normal)
+                label.layer.cornerRadius = kScale(20/2)
+                label.layer.borderColor = UIColor(hex: 0xFA8B37).CGColor
+                label.layer.borderWidth = 1
+                label.setTitle(talent.name, forState: .Normal)
                 container.addSubview(label)
                 let size = (talent.name as NSString).sizeWithFonts(12)
                 // 加边距
                 let labelW = size.width + 15
                 let labelH = size.height + 3
                 if index > 0 {
-                    labelX = totalWidth + padding
+                    labelX = totalWidth + xpadding
                 }
                 totalWidth = labelX + labelW
                 if container.gg_width < totalWidth {
                     labelX = 0
                     totalWidth = labelW// + padding
-                    labelY = labelH + padding + labelY
+                    labelY = labelH + ypadding + labelY
                 }
                 totalHeight = labelY + labelH
                 label.frame = CGRect(x: labelX, y: labelY, width: labelW, height: labelH)
             }
             container.gg_height = totalHeight
+            
+            let commentButton = UIButton()
+            commentButton.setImage(UIImage(named: "comment"), forState: .Normal)
+            contentView.addSubview(commentButton)
+            commentButton.snp.makeConstraints { (make) in
+                make.centerX.equalTo(commentButton.superview!)
+                make.size.equalTo(kSize(30, height: 30))
+                make.top.equalTo(container.snp.bottom).offset(kScale(13))
+            }
+            
+            let praiseButton = UIButton()
+            praiseButton.setImage(UIImage(named: " like"), forState: .Normal)
+            praiseButton.setImage(UIImage(named: " like copy"), forState: .Selected)
+            contentView.addSubview(praiseButton)
+            praiseButton.snp.makeConstraints { (make) in
+                make.right.equalTo(commentButton.snp.left).offset(kScale(-40))
+                make.size.equalTo(commentButton)
+                make.centerY.equalTo(commentButton)
+            }
+            
+            shareButton = UIButton()
+            shareButton.setImage(UIImage(named: "share"), forState: .Normal)
+            contentView.addSubview(shareButton)
+            shareButton.snp.makeConstraints { (make) in
+                make.left.equalTo(commentButton.snp.right).offset(kScale(40))
+                make.size.equalTo(commentButton)
+                make.centerY.equalTo(commentButton)
+            }
             
             // 线条底部布局
             let lineV = UIView()
@@ -90,27 +137,7 @@ class DynamicDetailVideoCell: UITableViewCell {
                 make.left.equalTo(lineV.superview!).offset(kScale(15))
                 make.right.equalTo(lineV.superview!).offset(kScale(-15))
                 make.height.equalTo(1)
-                make.top.equalTo(container.snp.bottom).offset(kScale(10))
-            }
-            
-            praiseButton = UIButton()
-            praiseButton.setImage(UIImage(named: "like"), forState: .Normal)
-            praiseButton.setImage(UIImage(named: "like_chosen"), forState: .Selected)
-            contentView.addSubview(praiseButton)
-            praiseButton.snp.makeConstraints { (make) in
-                make.left.equalTo(lineV)
-                make.top.equalTo(lineV.snp.bottom).offset(kScale(10))
-                make.size.equalTo(kSize(30, height: 30))
-                make.bottom.lessThanOrEqualTo(praiseButton.superview!).offset(kScale(-15)).priorityLow()
-            }
-            
-            shareButton = UIButton()
-            shareButton.setImage(UIImage(named: "share"), forState: .Normal)
-            contentView.addSubview(shareButton)
-            shareButton.snp.makeConstraints { (make) in
-                make.right.equalTo(shareButton.superview!).offset(kScale(-15))
-                make.centerY.equalTo(praiseButton)
-                make.size.equalTo(praiseButton)
+                make.top.equalTo(commentButton.snp.bottom).offset(kScale(15))
             }
             
             let layout = UICollectionViewFlowLayout()
@@ -125,15 +152,22 @@ class DynamicDetailVideoCell: UITableViewCell {
             collectionView.dataSource = self
             contentView.addSubview(collectionView)
             collectionView.snp.makeConstraints { (make) in
-                make.left.equalTo(praiseButton.snp.right).offset(kScale(10))
-                make.right.equalTo(shareButton.snp.left).offset(kScale(-10))
-                make.centerY.equalTo(praiseButton)
+                make.top.equalTo(lineV.snp.bottom).offset(kScale(10))
+                make.left.equalTo(collectionView.superview!).offset(kScale(15))
+                make.right.equalTo(collectionView.superview!).offset(kScale(-15))
                 make.height.equalTo(kScale(40))
+                make.bottom.lessThanOrEqualTo(collectionView.superview!).offset(kScale(-10)).priorityLow()
             }
+            
+            commentButton.rx_tap.subscribeNext { [unowned self] in
+                if self.delegate != nil {
+                    self.delegate.dynamicDetailTapComment(commentButton)
+                }
+            }.addDisposableTo(disposeBag)
             
             praiseButton.rx_tap.subscribeNext { [unowned self] in
                 if self.delegate != nil {
-                    
+                    self.delegate.dynamicDetailTapPraise(praiseButton)
                 }
             }.addDisposableTo(disposeBag)
             
@@ -209,13 +243,9 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
         
         followButton = UIButton()
-        followButton.setImage(UIImage(named: ""), forState: .Normal)
-        followButton.setTitle("关注", forState: .Normal)
+        followButton.setImage(UIImage(named: "follow11"), forState: .Normal)
         followButton.setTitleColor(kCommonColor, forState: .Normal)
         followButton.titleLabel!.font = UIFont.customFontOfSize(10)
-        followButton.layer.cornerRadius = kScale(23/2)
-        followButton.layer.borderColor = kCommonColor.CGColor
-        followButton.layer.borderWidth = 1
         contentView.addSubview(followButton)
         followButton.snp.makeConstraints { (make) in
             make.right.equalTo(followButton.superview!).offset(kScale(-16))
@@ -256,8 +286,10 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
         layoutIfNeeded()
         
-        followButton.rx_tap.subscribeNext {
-            LogInfo("点击关注")
+        followButton.rx_tap.subscribeNext { [unowned self] in
+            if self.delegate != nil {
+                self.delegate.dynamicDetailTapFollow(self.followButton)
+            }
         }.addDisposableTo(disposeBag)
     }
     

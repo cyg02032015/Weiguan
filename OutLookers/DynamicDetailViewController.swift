@@ -13,7 +13,7 @@ private let dynamicDetailCellId = "dynamicDetailCellId"
 private let commentCellId = "commentCellId"
 
 class DynamicDetailViewController: YGBaseViewController {
-
+    
     var dynamicObj: DynamicResult!
     var tableView: UITableView!
     var detailObj: DynamicDetailResp!
@@ -39,22 +39,27 @@ class DynamicDetailViewController: YGBaseViewController {
         super.viewDidLoad()
         var tuple = YGShareHandler.handleShareInstalled()
         shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
-        setupSubViews()
         loadData()
         loadMoreData()
+        setupSubViews()
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
-        })
+            })
     }
     
-     func loadData() {
+    func loadData() {
         SVToast.show()
-        Server.dynamicDetail("\(dynamicObj.id)") { (success, msg, value) in
+        Server.dynamicDetail("\(dynamicObj.id)") { [unowned self](success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
                 self.detailObj = object
                 self.tableView.reloadData()
+                delay(0.3, task: {
+                    if self.isComment {
+                        self.toolbar.inputTextView.becomeFirstResponder()
+                    }
+                })
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
@@ -92,9 +97,6 @@ class DynamicDetailViewController: YGBaseViewController {
         toolbar.autoresizingMask = [.FlexibleTopMargin, .FlexibleRightMargin]
         toolbar.delegate = self
         view.addSubview(toolbar)
-        if isComment {
-            toolbar.becomeFirstResponder()
-        }
         tableView = UITableView(frame: CGRect(x: 0, y: NaviHeight, width: ScreenWidth, height: ScreenHeight - NaviHeight - toolbarHeight), style: .Grouped)
         tableView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         tableView.delegate = self
@@ -120,7 +122,7 @@ class DynamicDetailViewController: YGBaseViewController {
 
 extension DynamicDetailViewController: DXMessageToolBarDelegate {
     func didChangeFrameToHeight(toHeight: CGFloat) {
-        UIView.animateWithDuration(0.3) { 
+        UIView.animateWithDuration(0.3) {
             var rect = self.tableView.frame
             rect.origin.y = NaviHeight
             rect.size.height = self.view.gg_height - toHeight - NaviHeight
@@ -184,6 +186,10 @@ extension DynamicDetailViewController {
             cell.info = detailObj
             cell.userInfo = dynamicObj
             cell.delegate = self
+            cell.headImgView.iconHeaderTap({ [weak self] in
+                let vc = PHViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+                })
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(commentCellId, forIndexPath: indexPath) as! CommentCell
@@ -216,8 +222,51 @@ extension DynamicDetailViewController {
     }
 }
 
-extension DynamicDetailViewController: DynamicDetailDelegate {
+extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
     func dynamicDetailTapShare(sender: UIButton) {
-        
+        shareView.animation()
+    }
+    
+    func dynamicDetailTapFollow(sender: UIButton) {
+        let object = detailObj
+        Server.followUser("\(object.userId)") { (success, msg, value) in
+            if success {
+                self.modifyFollow(sender)
+                SVToast.showWithSuccess("关注成功")
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
+    
+    func dynamicDetailTapPraise(sender: UIButton) {
+        let object = detailObj
+        if sender.selected {
+            Server.cancelLike("\(object.id)", handler: { (success, msg, value) in
+                if success {
+                    LogInfo("取消点赞")
+                    sender.selected = false
+                } else {
+                    SVToast.showWithError(msg!)
+                }
+            })
+        } else {
+            Server.like("\(object.id)", handler: { (success, msg, value) in
+                if success {
+                    LogInfo("点赞成功")
+                    sender.selected = true
+                } else {
+                    SVToast.showWithError(msg!)
+                }
+            })
+        }
+    }
+    
+    func dynamicDetailTapComment(sender: UIButton) {
+        if toolbar.inputTextView.isFirstResponder() {
+            return
+        }
+        toolbar.inputTextView.becomeFirstResponder()
     }
 }

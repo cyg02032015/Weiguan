@@ -34,7 +34,7 @@ class DynamicViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.dynamicList(pageNo, state: 1, isPerson: isPerson, isHome: false, isSquare: false) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: "1",state: 1, isPerson: isPerson, isHome: false, isSquare: false) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}

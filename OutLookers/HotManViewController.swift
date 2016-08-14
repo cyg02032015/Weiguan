@@ -64,7 +64,7 @@ extension HotManViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let vc = DynamicDetailViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = PHViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -176,11 +176,12 @@ class Server {
     }
     
     /// 动态列表
-    class func dynamicList(pageNo: Int, state: Int, isPerson: Bool, isHome: Bool, isSquare: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
+    class func dynamicList(pageNo: Int,user: String ,state: Int, isPerson: Bool, isHome: Bool, isSquare: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
         var parameters = [
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
+            "user" : user
             ]
         if pageNo == 1 {
             parameters["time"] = NSDate().stringFromNowDate()

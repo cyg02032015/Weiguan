@@ -14,17 +14,20 @@ class SquareViewController: YGBaseViewController {
 
     var tableView: UITableView!
     lazy var sqaureLists = [DynamicResult]()
+    var share: YGShare!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
         loadMoreData()
+        let sharetuple = YGShareHandler.handleShareInstalled()
+        share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
         })
     }
     
     override func loadMoreData() {
-        Server.dynamicList(pageNo, state: 1, isPerson: false, isHome: false, isSquare: true) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: "1" ,state: 1, isPerson: false, isHome: false, isSquare: true) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
@@ -73,6 +76,10 @@ extension SquareViewController {
         cell.indexPath = indexPath
         cell.info = sqaureLists[indexPath.section]
         cell.delegate = self
+        cell.headImgView.iconHeaderTap { [weak self] in
+            let vc = PHViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
         return cell
     }
     
@@ -84,9 +91,9 @@ extension SquareViewController {
     }
 }
 
-extension SquareViewController: DynamicCellDelegate {
+extension SquareViewController: DynamicCellDelegate, FollowProtocol {
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
-        LogInfo("\(sender)   分享")
+        share.animation()
     }
     
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {
@@ -125,16 +132,20 @@ extension SquareViewController: DynamicCellDelegate {
     }
     
     func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath) {
-        LogInfo("评论点击")
+        let obj = sqaureLists[indexPath.section]
+        let vc = DynamicDetailViewController()
+        vc.dynamicObj = obj
+        vc.isComment = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
+    // 关注按钮点击
     func dynamicCellTapFollow(sender: UIButton, indexPath: NSIndexPath) {
-        LogInfo("关注")
         let object = sqaureLists[indexPath.section]
         Server.followUser("\(object.userId)") { (success, msg, value) in
             if success {
+                self.modifyFollow(sender)
                 SVToast.showWithSuccess("关注成功")
-                sender.hidden = true
                 object.follow = 1
                 self.sqaureLists[indexPath.section] = object
             } else {

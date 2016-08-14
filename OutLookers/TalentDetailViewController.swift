@@ -29,16 +29,16 @@ class TalentDetailViewController: YGBaseViewController {
     func setupShare() {
         var collect = YGShareHandler.handleShareInstalled()
         if isPerson {
-            collect.images.append(UIImage(named: "wechat_c")!) // 编辑
+            collect.images.append(UIImage(named: kEditImg)!) // 编辑
             collect.images.append(UIImage(named: kDeleteImg)!) // 删除
-            collect.images.append(UIImage(named: "wechat_c")!) // 返回首页
+            collect.images.append(UIImage(named: kHomeImg)!) // 返回首页
             collect.titles.append(kEdit)
             collect.titles.append(kDelete)
             collect.titles.append(kHome)
             share = YGShare(frame: CGRectZero, imgs: collect.images, titles: collect.titles)
         } else {
-            collect.images.append(UIImage(named: "wechat_c")!)
-            collect.images.append(UIImage(named: "wechat_c")!)
+            collect.images.append(UIImage(named: kReportImg)!)
+            collect.images.append(UIImage(named: kHomeImg)!)
             collect.titles.append(kReport)
             collect.titles.append(kHome)
             share = YGShare(frame: CGRectZero, imgs: collect.images, titles: collect.titles)

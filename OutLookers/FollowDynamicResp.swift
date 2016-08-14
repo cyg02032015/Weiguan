@@ -14,7 +14,7 @@ class FollowDynamicResp: BaseResponse {
     var orderBy : String!
     var pageNo : Int!
     var pageSize : Int!
-    var list : [FollowDynamicResult]!
+    var list : [DynamicResult]!
     var totalCount : Int!
     var result: FollowDynamicResp!
     
@@ -34,39 +34,39 @@ class FollowDynamicResp: BaseResponse {
         pageSize = json["pageSize"].intValue
         
         
-        list = [FollowDynamicResult]()
+        list = [DynamicResult]()
         let resultArray = json["result"].arrayValue
         for resultJson in resultArray{
-            let value = FollowDynamicResult(fromJson: resultJson)
+            let value = DynamicResult(fromJson: resultJson)
             list.append(value)
         }
         totalCount = json["totalCount"].intValue
     }
 }
-
-class FollowDynamicResult {
-    var cover : String!
-    var createTime : String!
-    var id : Int!
-    var isVideo : Int!
-    var name : String!
-    var photo : String!
-    var picture : String!
-    var text : String!
-    var userId : Int!
-    
-    init(fromJson json: JSON!){
-        if json == nil{
-            return
-        }
-        cover = json["cover"].stringValue
-        createTime = json["createTime"].stringValue
-        id = json["id"].intValue
-        isVideo = json["isVideo"].intValue
-        name = json["name"].stringValue
-        photo = json["photo"].stringValue
-        picture = json["picture"].stringValue
-        text = json["text"].stringValue
-        userId = json["userId"].intValue
-    }
-}
+//
+//class FollowDynamicResult {
+//    var cover : String!
+//    var createTime : String!
+//    var id : Int!
+//    var isVideo : Int!
+//    var name : String!
+//    var photo : String!
+//    var picture : String!
+//    var text : String!
+//    var userId : Int!
+//    
+//    init(fromJson json: JSON!){
+//        if json == nil{
+//            return
+//        }
+//        cover = json["cover"].stringValue
+//        createTime = json["createTime"].stringValue
+//        id = json["id"].intValue
+//        isVideo = json["isVideo"].intValue
+//        name = json["name"].stringValue
+//        photo = json["photo"].stringValue
+//        picture = json["picture"].stringValue
+//        text = json["text"].stringValue
+//        userId = json["userId"].intValue
+//    }
+//}

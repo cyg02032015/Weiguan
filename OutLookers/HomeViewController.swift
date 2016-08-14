@@ -12,20 +12,23 @@ import SwiftyJSON
 
 private let recommendHotmanTableViewCellIdentifier = "recommendHotmanTableViewCellId"
 private let homeCellId = "homeCellId"
+private let headerId = "headerId"
+private let circleId = "circelId"
+private let horizontalId = "horizontalId"
+
 
 private extension Selector {
     static let loadRecommendHotmanData = #selector(HomeViewController.loadRecommendHotmanData)
 }
 
 class HomeViewController: YGBaseViewController {
-    var tableView: UITableView!
+    var collectionView: UICollectionView!
     lazy var banners = [BannerList]()
     var urls = [String]()
     var statusView: UIView!
     lazy var hotmanList = [HotmanList]()
     var recommendObj: DynamicListResp!
     lazy var recommends = [DynamicResult]()
-    var collectionView: UICollectionView!
     var log: YGLogView!
     var banner: SDCycleScrollView!
 
@@ -42,24 +45,24 @@ class HomeViewController: YGBaseViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: .loadRecommendHotmanData, name: kRecieveGlobleDefineNotification, object: nil)
         setupSubViews()
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { 
+        collectionView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: {
             self.loadMoreData()
         })
     }
     
     override func loadMoreData() {
         
-        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
-            self.tableView.mj_footer.endRefreshing()
+        Server.dynamicList(pageNo,user: "1" ,state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+            self.collectionView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else { return }
                 if object.list.count <= 0 {
-                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    self.collectionView.mj_footer.endRefreshingWithNoMoreData()
                     return
                 }
                 self.recommendObj = object
                 self.recommends.appendContentsOf(object.list)
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
                 self.pageNo = self.pageNo + 1
             } else {
                 guard let m = msg else {return}
@@ -77,14 +80,16 @@ class HomeViewController: YGBaseViewController {
                 for item in list {
                     imgUrls.append(item.picture)
                 }
-                self.banner.imageURLStringsGroup = imgUrls
+                if self.banner != nil {
+                    self.banner.imageURLStringsGroup = imgUrls
+                }
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
             }
         }
         
-        Server.dynamicList(pageNo, state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: "1",state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
             if success {
                 Server.homeRecommendHotman { (success, msg, value) in
                     SVToast.dismiss()
@@ -99,7 +104,7 @@ class HomeViewController: YGBaseViewController {
                 guard let object = value else { return }
                 self.recommendObj = object
                 self.recommends.appendContentsOf(object.list)
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
                 self.pageNo = self.pageNo + 1
             } else {
                 SVToast.dismiss()
@@ -110,29 +115,20 @@ class HomeViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
-        tableView = UITableView(frame: CGRectZero, style: .Plain)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .None
-        tableView.tableFooterView = UIView()
-        tableView.backgroundColor = kBackgoundColor
-        tableView.estimatedRowHeight = kHeight(500)
-        view.addSubview(tableView)
-        tableView.registerClass(RecommendHotmanTableViewCell.self, forCellReuseIdentifier: recommendHotmanTableViewCellIdentifier)
-        tableView.registerClass(HomeCell.self, forCellReuseIdentifier: homeCellId)
-        tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(tableView.superview!)
-            make.top.equalTo(tableView.superview!).offset(-20)
+        let layout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.registerClass(HorizontalCollectionViewCell.self, forCellWithReuseIdentifier: horizontalId)
+        collectionView.registerClass(HomeCollectionCell.self, forCellWithReuseIdentifier: homeCellId)
+        collectionView.registerClass(RecommendHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.registerClass(CircleHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: circleId)
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalTo(collectionView.superview!)
+            make.top.equalTo(collectionView.superview!).offset(-20)
         }
-        
-        // 轮播图
-        banner = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenWidth * 2 / 3)), delegate: self, placeholderImage: UIImage(named: ""))
-        banner.pageDotImage = UIImage(named: "home_point_normal")
-        banner.currentPageDotImage = UIImage(named: "home_point_chosen")
-        banner.pageControlDotSize = kSize(6, height: 6)
-        banner.pageControlAliment = SDCycleScrollViewPageContolAlimentRight
-        tableView.tableHeaderView = banner
-
         statusView = UIView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: 20))
         statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: 0.0)
         view.addSubview(statusView)
@@ -143,106 +139,103 @@ class HomeViewController: YGBaseViewController {
     }
 }
 
-extension HomeViewController: SDCycleScrollViewDelegate {
-    
-}
-
-// MARK: - UITableViewDelegate,UITableViewDataSource
-extension HomeViewController {
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return recommends.count + 1
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(recommendHotmanTableViewCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanTableViewCell
-            if collectionView == nil {
-                self.collectionView = cell.collectionViewSetDelegate(self, indexPath: indexPath)
-            }
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCell
-            cell.info = recommends[indexPath.section - 1]
-            return cell
-        }
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let obj = recommends[indexPath.section - 1]
-        let vc = DynamicDetailViewController()
-        vc.dynamicObj = obj
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return 1
-        }
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return kHeight(213)
-        } else {
-            return UITableViewAutomaticDimension
-        }
-    }
-    
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            let header = RecommendHeaderView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(43))))
-            return header
-        } else {
-            let view = UIView()
-            view.backgroundColor = kBackgoundColor
-            return view
-        }
-    }
-    
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return kHeight(43)
-        } else {
-            return kHeight(10)
-        }
-    }
-    
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
-    }
-}
-
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hotmanList.count > 8 ? 8 : hotmanList.count
+        if section == 0 {
+            return 0
+        } else if section == 1 {
+            return 1
+        } else {
+            return recommends.count
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(recommendHotmanCollectionCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanCollectionCell
-        cell.info = hotmanList[indexPath.item]
-        return cell
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        if indexPath.section == 0 {
+            return UICollectionViewCell()
+        } else if indexPath.section == 1 {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalId, forIndexPath: indexPath) as! HorizontalCollectionViewCell
+            cell.hotmanList = hotmanList
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCollectionCell
+                cell.info = recommends[indexPath.item]
+            return cell
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.item == 0 {
-            let phvc = PHViewController()
-            self.navigationController?.pushViewController(phvc, animated: true)
-        } else if indexPath.item == 1 {
-            let vc = OrganizationViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.item == 2{
-            log.animation()
+        let phvc = PHViewController()
+        self.navigationController?.pushViewController(phvc, animated: true)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        if section == 2 {
+            return UIEdgeInsets(top: 0, left: 0, bottom: TabbarHeight, right: 0)
+        } else {
+            return UIEdgeInsetsZero
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: ScreenWidth, height: ScreenWidth * 2 / 3)
+        } else {
+            return CGSize(width: ScreenWidth, height: kHeight(43))
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            return CGSizeZero
+        }
+        if indexPath.section == 1 {
+            return CGSize(width: ScreenWidth, height: kHeight(213))
+        } else {
+            return CGSize(width: (ScreenWidth - 3) / 2, height: kHeight(230))
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        } else if section == 1 {
+            return 0
+        } else {
+            return kHeight(15)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        if indexPath.section == 0 {
+            let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: circleId, forIndexPath: indexPath) as! CircleHeaderView
+            self.banner = header.banner
+            header.banner.delegate = self
+            return header
+        } else {
+            let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: headerId, forIndexPath: indexPath) as! RecommendHeaderView
+            
+            if indexPath.section == 1 {
+                header.label.text = "推荐红人"
+            } else {
+                header.label.text = "热门推荐"
+            }
+            return header
         }
     }
 }
+
+
 
 extension HomeViewController {
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -254,3 +247,8 @@ extension HomeViewController {
         }
     }
 }
+
+extension HomeViewController: SDCycleScrollViewDelegate {
+    
+}
+

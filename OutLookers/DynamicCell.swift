@@ -124,16 +124,9 @@ class DynamicCell: UITableViewCell {
         }
         
         followButton = UIButton()
-        followButton.setImage(UIImage(named: ""), forState: .Normal)
-        followButton.setTitle("关注", forState: .Normal)
+        followButton.setImage(UIImage(named: "follow11"), forState: .Normal)
         followButton.setTitleColor(kCommonColor, forState: .Normal)
         followButton.titleLabel!.font = UIFont.customFontOfSize(10)
-        followButton.layer.cornerRadius = kScale(23/2)
-        followButton.layer.borderColor = kCommonColor.CGColor
-        followButton.layer.borderWidth = 1
-        followButton.rx_tap.subscribeNext { (sender) in
-            LogInfo("我是rx_tap")
-        }.addDisposableTo(disposeBag)
         contentView.addSubview(followButton)
         followButton.snp.makeConstraints { (make) in
             make.right.equalTo(followButton.superview!).offset(kScale(-16))

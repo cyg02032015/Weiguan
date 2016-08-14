@@ -8,8 +8,9 @@
 
 import UIKit
 
-class RecommendHeaderView: UIView {
+class RecommendHeaderView: UICollectionReusableView {
 
+    var label: UILabel!
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubViews()
@@ -27,7 +28,7 @@ class RecommendHeaderView: UIView {
             make.centerY.equalTo(imgView.superview!)
         }
         
-        let label = UILabel()
+        label = UILabel()
         label.text = "推荐红人"
         label.font = UIFont.customFontOfSize(16)
         addSubview(label)

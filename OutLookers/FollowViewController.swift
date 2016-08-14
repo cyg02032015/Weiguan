@@ -15,13 +15,34 @@ private let dynamicCellIdentifier = "dynamicCellId"
 class FollowViewController: YGBaseViewController {
 
     var tableView: UITableView!
+    lazy var lists = [DynamicResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: {
-            
+        loadMoreData()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
         })
+    }
+    
+    override func loadMoreData() {
+        Server.followDynamic(pageNo) { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                guard let object = value else {return}
+                self.lists.appendContentsOf(object.list)
+                self.tableView.mj_footer.endRefreshing()
+                self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
+                if object.list.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            } else {
+                SVToast.showWithError(msg!)
+                self.tableView.mj_footer.endRefreshing()
+            }
+        }
     }
     
     func setupSubViews() {
@@ -43,7 +64,7 @@ class FollowViewController: YGBaseViewController {
 
 extension FollowViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return lists.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,19 +72,10 @@ extension FollowViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellIdentifier, forIndexPath: indexPath) as! DynamicCell
-            cell.releaseLabel.text = "发布了动态"
-            return cell
-//        } else if indexPath.section == 1 {
-//            let cell = tableView.dequeueReusableCellWithIdentifier(releaseNoticeIdentifier, forIndexPath: indexPath) as! ReleaseNoticeCell
-//            cell.releaseLabel.text = "发布了通告"
-//            return cell
-//        } else {
-//            let cell = tableView.dequeueReusableCellWithIdentifier(releaseTalentIdentifier, forIndexPath: indexPath) as! ReleaseTalentCell
-//            cell.releaseLabel.text = "发布了才艺"
-//            return cell
-//        }
+        let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellIdentifier, forIndexPath: indexPath) as! DynamicCell
+        cell.info = lists[indexPath.section]
+        cell.releaseLabel.text = "发布了动态"
+        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -72,12 +84,6 @@ extension FollowViewController {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-            return UITableViewAutomaticDimension
-//        } else if indexPath.section == 1 {
-//            return kHeight(352)
-//        } else {
-//            return kScale(330)
-//        }
+        return UITableViewAutomaticDimension
     }
 }

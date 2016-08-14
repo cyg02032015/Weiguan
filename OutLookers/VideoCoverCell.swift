@@ -30,6 +30,7 @@ class VideoCoverCell: UITableViewCell {
     
     func setupSubViews() {
         imgView = TouchImageView()
+        imgView.image = UIImage(named: "Add video")
         imgView.backgroundColor = UIColor.blackColor()
         imgView.addTarget(self, action: .tapImgView)
         contentView.addSubview(imgView);
