@@ -20,7 +20,6 @@ enum UnitType: String {
     case YuanHour = "1"
     case YuanRound = "2"
     case YuanOnce = "3"
-    case YuanHalfday = "4"
     case YuanDay = "5"
     case YuanMonth = "6"
     case YuanYear = "7"
@@ -81,14 +80,14 @@ extension RecruitInformationViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(arrowIdentifier, forIndexPath: indexPath) as! ArrowEditCell
-            cell.setTextInCell("才艺类型", placeholder: "点击选择类型")
+            cell.setTextInCell("红人类型", placeholder: "点击选择类型")
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
             cell.tf.keyboardType = .NumberPad
             cell.indexPath = indexPath
             cell.delegate = self
-            cell.setTextInCell("招募数量", placeholder: "请输入整数")
+            cell.setTextInCell("招募人数", placeholder: "请输入整数")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(budgetPriceIdentifier, forIndexPath: indexPath) as! BudgetPriceCell

@@ -13,7 +13,7 @@ private extension Selector {
 }
 
 class PHViewController: YGBaseViewController {
-
+    var user: String?
     var slidePageScrollView: TYSlidePageScrollView!
     var tableView: UITableView!
     var toolView: PHToolView!
@@ -99,10 +99,12 @@ class PHViewController: YGBaseViewController {
         slidePageScrollView.pageTabBar = titlePageTabbar
         
         let dynamicVC = DynamicViewController()
+        dynamicVC.user = user
         dynamicVC.view.frame = view.frame
         self.addChildViewController(dynamicVC)
         
         let talentVC = TalentViewController()
+        talentVC.user = user
         talentVC.view.frame = view.frame
         talentVC.delegate = self
         self.addChildViewController(talentVC)

@@ -39,7 +39,7 @@ class FeedbackCell: UITableViewCell {
         placeholderLabel = UILabel()
         placeholderLabel.numberOfLines = 0
         placeholderLabel.font = UIFont.customFontOfSize(14)
-        placeholderLabel.text = "欢迎反馈任何意见和问题，您的反馈也是我们产品进步的动力哦！"
+        placeholderLabel.text = "你的每条反馈我们都会仔细阅读，但我们无法保证每一条都能及时回复，如果你有紧急问题需要咨询，请直接到官方微博上联系我们，感谢你的理解和支持"
         placeholderLabel.textColor = UIColor.grayColor()
         contentView.addSubview(placeholderLabel)
         

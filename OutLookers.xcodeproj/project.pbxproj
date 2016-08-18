@@ -252,6 +252,8 @@
 		D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */; };
 		D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */; };
 		D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */; };
+		D8DAC59A1D66000D0009FDB9 /* KeyChainConstKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */; };
+		D8DAC59E1D6602480009FDB9 /* KeyChainSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC59D1D6602480009FDB9 /* KeyChainSingle.swift */; };
 		D8EB0EB61D48E18F002E36F8 /* GetTokenResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */; };
 		D8EB0EB81D48E569002E36F8 /* GlobleDefineResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */; };
 		D8EB0EBA1D48E603002E36F8 /* GlobleDefineSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */; };
@@ -679,6 +681,8 @@
 		D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate-EX.swift"; path = "OutLookers/NSDate-EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImagePickerController+EX.swift"; path = "OutLookers/UIImagePickerController+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPhotoKitController.swift; path = OutLookers/YGPhotoKitController.swift; sourceTree = SOURCE_ROOT; };
+		D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyChainConstKey.swift; path = OutLookers/KeyChainConstKey.swift; sourceTree = SOURCE_ROOT; };
+		D8DAC59D1D6602480009FDB9 /* KeyChainSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyChainSingle.swift; path = OutLookers/KeyChainSingle.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetTokenResp.swift; path = OutLookers/GetTokenResp.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineResp.swift; path = OutLookers/GlobleDefineResp.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineSingle.swift; path = OutLookers/GlobleDefineSingle.swift; sourceTree = SOURCE_ROOT; };
@@ -1569,6 +1573,7 @@
 		E41B926B1D3DFB5600749769 /* Single */ = {
 			isa = PBXGroup;
 			children = (
+				D8DAC59D1D6602480009FDB9 /* KeyChainSingle.swift */,
 				E41B926C1D3DFB6700749769 /* UserSingle.swift */,
 				D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */,
 			);
@@ -1828,6 +1833,7 @@
 				D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
+				D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */,
 			);
 			path = OtherSource;
 			sourceTree = "<group>";
@@ -2416,6 +2422,7 @@
 				D81F45281D118F5E004D9192 /* MineViewController.swift in Sources */,
 				E446FA1B1D2E6B44003DFC1E /* PHToolView.swift in Sources */,
 				E4E5DECB1D179BD200CB8535 /* ArrowEditCell.swift in Sources */,
+				D8DAC59A1D66000D0009FDB9 /* KeyChainConstKey.swift in Sources */,
 				E41C22D91D113B9500F58250 /* AppDelegate.swift in Sources */,
 				D819925E1D44AC77007734C0 /* CommitEnrollReq.swift in Sources */,
 				D819920A1D3BC3AE007734C0 /* OrganizeAuthViewController.swift in Sources */,
@@ -2502,6 +2509,7 @@
 				E41DD9231D3C944400E5E7E9 /* TalentAuthViewController.swift in Sources */,
 				D812A9161D4FA69D00186564 /* UIScrollView+MJExtension.m in Sources */,
 				D819925C1D44AB68007734C0 /* CommitEnrollGetUserTalentResp.swift in Sources */,
+				D8DAC59E1D6602480009FDB9 /* KeyChainSingle.swift in Sources */,
 				D81992271D3D14F3007734C0 /* MyEnterCell.swift in Sources */,
 				D82F8E0B1D2C0D9400A24CDB /* TYTitlePageTabBar.m in Sources */,
 				E45BFF831D41ED8F0013356C /* InvitationTalentCell.swift in Sources */,

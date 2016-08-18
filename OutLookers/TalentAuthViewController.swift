@@ -21,7 +21,7 @@ class TalentAuthViewController: YGBaseViewController {
     var authShow: HotmanAuthShowResp!
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "艺人认证"
+        title = "红人认证"
         loadData()
         getToken()
     }

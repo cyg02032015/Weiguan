@@ -13,7 +13,7 @@ private let ogDataCellIdentifier = "ogDataCellId"
 class OGDataViewController: YGBaseViewController {
 
     var tableView: UITableView!
-    var titles = ["围观认证", "机构类型", "所  在 地", "简      介"]
+    var titles = ["纯氧认证", "机构类型", "所  在 地", "简      介"]
     var rights = ["阿里营业官方机构", "培训机构", "北京 海淀区", "机构介绍"]
     override func viewDidLoad() {
         super.viewDidLoad()

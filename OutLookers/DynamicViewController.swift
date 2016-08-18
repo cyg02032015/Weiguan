@@ -19,7 +19,7 @@ private let dynamicCellIdentifier = "dynamicCellId"
 
 class DynamicViewController: YGBaseViewController {
 
-    
+    var user: String?
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate!
     lazy var dynamicLists = [DynamicResult]()
@@ -34,7 +34,8 @@ class DynamicViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.dynamicList(pageNo,user: "1",state: 1, isPerson: isPerson, isHome: false, isSquare: false) { (success, msg, value) in
+        guard let user = self.user else {return}
+        Server.dynamicList(pageNo,user: user,state: 1, isPerson: isPerson, isHome: false, isSquare: false) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}

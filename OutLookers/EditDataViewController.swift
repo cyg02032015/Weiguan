@@ -170,7 +170,7 @@ extension EditDataViewController {
                     cell.setTextInCell("昵   称", placeholder: "请输入昵称")
                     cell.tf.text = self.req.nickname
                 } else {
-                    cell.setTextInCell("简   介", placeholder: "未填写")
+                    cell.setTextInCell("签 名档", placeholder: "未填写")
                     cell.tf.text = self.req.introduction
                 }
                 return cell

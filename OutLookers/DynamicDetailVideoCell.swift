@@ -23,6 +23,7 @@ class DynamicDetailVideoCell: UITableViewCell {
     var info: DynamicDetailResp! {
         didSet {
             guard let url = info.pictureList.first?.url else {return}
+            LogWarn("viedeoURL = \(url.addVideoPath())")
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
             bigImgView.yy_setImageWithURL(url.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
             details.text = info.text
@@ -46,16 +47,8 @@ class DynamicDetailVideoCell: UITableViewCell {
             } else { // 视频
                 bigImgView.hidden = true
                 player.hidden = false
-                Server.getSanpshots("\(info.cover)", handler: { [unowned self](success, msg, value) in
-                    if success {
-                        guard let object = value else {return}
-                        let item = self.preparePlayerItem(object[0].addSnapshots(), url: url.addVideoPath())
-                        self.player.playWithPlayerItem(item)
-                        LogDebug(url.addVideoPath())
-                    } else {
-                        LogError("获取视频截图失败 = \(msg)")
-                    }
-                })
+                let item = self.preparePlayerItem(info.cover.addImagePath().absoluteString, url: url.addVideoPath())
+                self.player.playWithPlayerItem(item)
             }
             
             

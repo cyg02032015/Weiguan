@@ -87,8 +87,6 @@ class MineViewController: YGBaseViewController {
         
         dispatch_group_notify(group, dispatch_get_main_queue()) { [weak self] in
             self?.tableView.reloadData()
-//            let indexSet = NSIndexSet(index: 0)
-//            self?.tableView.reloadSections(indexSet, withRowAnimation: .None)
         }
     }
     
@@ -117,9 +115,11 @@ extension MineViewController {
                 cell.avatarInfo = self.avatarList.first
             }
             cell.header.iconHeaderTap { [unowned self] in
-                LogInfo("头像")
-                let vc = LogViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                let view = YGLogView()
+                view.animation()
+                view.tapLogViewClosure({ (type) in
+                    Util.logViewTap(self, type: type)
+                })
             }
             cell.tapEditDataClosure { [unowned self] in
                 LogInfo("编辑资料")
@@ -196,15 +196,6 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //        if indexPath.item == 0 {  // 订单
-        //
-        //        } else if indexPath.item == 1 { // 账户
-        //            let vc = MyAccountViewController()
-        //            navigationController?.pushViewController(vc, animated: true)
-        //        } else if indexPath.item == 2 { // 综合评价
-        //            let vc = Comment2ViewController()     // Comment2ViewController    MyCommentViewController
-        //            navigationController?.pushViewController(vc, animated: true)
-        //        } else
         if indexPath.item == 0 { // 才艺
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)

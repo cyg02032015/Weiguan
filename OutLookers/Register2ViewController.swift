@@ -105,6 +105,9 @@ class Register2ViewController: YGBaseViewController {
             self.verifyButton.userInteractionEnabled = false
             self.countDownTimer()
             self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: .countDownTimer, userInfo: nil, repeats: true)
+//            Server.getVerifyCode(phone, handler: { (success, msg, value) in
+            
+//            })
         }.addDisposableTo(disposeBag)
         
         nextButton.rx_tap.subscribeNext {

@@ -277,7 +277,7 @@ class DataTableViewCell: UITableViewCell {
         appearance.text = "外貌特征：短发 骨感 双眼皮短发 骨感 双眼皮短发 骨感"
         shape.text = "体型特征：瘦短发 骨感 双眼皮短发 骨感 双眼皮短发短"
         charm.text = "魅力部位：眼睛 腿部眼睛 腿部眼睛 腿部。"
-        experenceLabel.text = "通告经验"
+        experenceLabel.text = "才艺经历"
         experence.text = "曾任《男人装》御用模特。"
     }
     

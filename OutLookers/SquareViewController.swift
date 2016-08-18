@@ -145,7 +145,6 @@ extension SquareViewController: DynamicCellDelegate, FollowProtocol {
         Server.followUser("\(object.userId)") { (success, msg, value) in
             if success {
                 self.modifyFollow(sender)
-                SVToast.showWithSuccess("关注成功")
                 object.follow = 1
                 self.sqaureLists[indexPath.section] = object
             } else {

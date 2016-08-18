@@ -18,6 +18,7 @@ private let talentCellIdentifier = "talentCellId"
 
 class TalentViewController: YGBaseViewController {
 
+    var user: String?
     lazy var data = [String]()
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate!
@@ -39,7 +40,8 @@ class TalentViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.talentList4(pageNo, state: 1) { (success, msg, value) in
+        guard let user = self.user else {return}
+        Server.talentList4(pageNo, state: 1, user: user) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let list = value else {return}

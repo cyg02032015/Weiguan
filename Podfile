@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'OutLookers' do
 pod 'Alamofire', '~> 3.4.1'
+pod 'KeychainAccess'
 pod 'NVActivityIndicatorView', '~> 2.8'
 pod 'AliyunOSSiOS', '~> 2.5.0'
 pod 'SwiftyJSON', '~> 2.3.2'

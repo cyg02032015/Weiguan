@@ -116,7 +116,7 @@ class PHHeaderView: UIView {
         headImgView.image = UIImage(named: "back.png")
         follow.text = "155 关注"
         fans.text = "234 粉丝"
-        firstLabel.text = "围观认证：男人装御用模特"
+        firstLabel.text = "纯氧认证：男人装御用模特"
         vImageView.backgroundColor = UIColor.yellowColor()
         secondLabel.text = "欧美 日韩 街头 性感 中国风 欧美 日韩 街头 性感 中国风日韩 街头 性感 中国风"
 

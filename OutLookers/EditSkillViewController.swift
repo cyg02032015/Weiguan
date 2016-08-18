@@ -60,7 +60,7 @@ class EditSkillViewController: YGBaseViewController {
         setupSubViews()
         getToken()
         provinceTitles = CitiesData.sharedInstance().provinceTitle()
-        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/半天", "元/天", "元/月", "元/年"]
+        skillUnitPickerArray = ["元/小时", "元/场", "元/次", "元/天", "元/月", "元/年"]
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
         
@@ -490,7 +490,6 @@ extension EditSkillViewController: UIPickerViewDelegate, UIPickerViewDataSource,
             case "元/小时": req.unit = UnitType.YuanHour.rawValue
             case "元/场": req.unit = UnitType.YuanRound.rawValue
             case "元/次": req.unit = UnitType.YuanOnce.rawValue
-            case "元/半天": req.unit = UnitType.YuanHalfday.rawValue
             case "元/月": req.unit = UnitType.YuanMonth.rawValue
             case "元/年": req.unit = UnitType.YuanYear.rawValue
             default: ""

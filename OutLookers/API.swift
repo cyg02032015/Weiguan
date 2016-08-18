@@ -54,7 +54,7 @@ struct API {
     /// 手机号绑定
     static let phoneBind = baseURL + "/api/personal/v1/mobile/binding"
     /// 发送获取验证码
-    static let getVerifyCode = baseURL + "/api/personal/v1/mobile/verify"
+    static let getVerifyCode = baseURL + "/api/login/v1/code"
     /// 个人档案-查看
     static let showPersonFiles = baseURL + "/api/personal/v1/archives/select"
     /// 变更角色-删除原有认证

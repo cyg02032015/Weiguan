@@ -11,7 +11,8 @@ import UIKit
 private let recommendHotmanTableViewCellIdentifier = "recommendHotmanTableViewCellId"
 
 class HorizontalCollectionViewCell: UICollectionViewCell {
-    
+    typealias CollectionViewSelectClosure = (collectionView: UICollectionView, indexPath: NSIndexPath) -> Void
+    var collectionViewDidSelectedItem: CollectionViewSelectClosure!
     var hotmanList: [HotmanList]! {
         didSet {
             LogDebug(hotmanList)
@@ -58,5 +59,11 @@ extension HorizontalCollectionViewCell: UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(recommendHotmanCollectionCellIdentifier, forIndexPath: indexPath) as! RecommendHotmanCollectionCell
         cell.info = hotmanList[indexPath.item]
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if self.collectionViewDidSelectedItem != nil {
+            collectionViewDidSelectedItem(collectionView: collectionView, indexPath: indexPath)
+        }
     }
 }

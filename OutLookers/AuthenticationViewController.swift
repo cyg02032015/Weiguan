@@ -39,7 +39,7 @@ class AuthenticationViewController: YGBaseViewController {
     func setupSubViews() {
         title = "认证"
         let talent = UIButton()
-        talent.setTitle("艺人认证", forState: .Normal)
+        talent.setTitle("红人认证", forState: .Normal)
         talent.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         talent.backgroundColor = UIColor(hex: 0xff4e4e)
         talent.titleLabel!.font = UIFont.customFontOfSize(16)
@@ -112,7 +112,7 @@ class AuthenticationViewController: YGBaseViewController {
     }
     
     func showAlertController() {
-        let alert = UIAlertController(title: "提示", message: "每个用户只能认证一种角色，您当前已通过粉丝认证，若继续认证则视为放弃粉丝认证", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "提示", message: "每个用户只能认证一种角色，要继续认证则视为放弃原认证", preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
         let continued = UIAlertAction(title: "继续认证", style: .Default) { [unowned self](action) in
             Server.modifyAuth({ (success, msg, value) in

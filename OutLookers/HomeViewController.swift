@@ -52,7 +52,7 @@ class HomeViewController: YGBaseViewController {
     
     override func loadMoreData() {
         
-        Server.dynamicList(pageNo,user: "1" ,state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
             self.collectionView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else { return }
@@ -162,6 +162,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalId, forIndexPath: indexPath) as! HorizontalCollectionViewCell
             cell.hotmanList = hotmanList
+            cell.collectionViewDidSelectedItem = { [weak self](view, idPath) in
+                let vc = PHViewController()
+                vc.user = self?.hotmanList[idPath.item].userId
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCollectionCell
@@ -171,8 +176,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let phvc = PHViewController()
-        self.navigationController?.pushViewController(phvc, animated: true)
+        if indexPath.section == 2 {
+            let obj = recommends[indexPath.section]
+            let vc = DynamicDetailViewController()
+            vc.dynamicObj = obj
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -226,7 +235,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: headerId, forIndexPath: indexPath) as! RecommendHeaderView
             
             if indexPath.section == 1 {
-                header.label.text = "推荐红人"
+                header.label.text = "红人推荐"
             } else {
                 header.label.text = "热门推荐"
             }

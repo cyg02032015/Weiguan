@@ -232,7 +232,6 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
         Server.followUser("\(object.userId)") { (success, msg, value) in
             if success {
                 self.modifyFollow(sender)
-                SVToast.showWithSuccess("关注成功")
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)

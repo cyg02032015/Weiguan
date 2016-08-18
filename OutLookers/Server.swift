@@ -427,7 +427,7 @@ class Server {
     class func getVerifyCode(phone: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
         let parameters = [
             "userPhone" : phone,
-            "userId" : UserSingleton.sharedInstance.userId
+            "deviceId": "123456789"
         ]
         HttpTool.post(API.getVerifyCode, parameters: parameters, complete: { (response) in
             let info = StringResponse(fromJson: response)
@@ -1062,12 +1062,12 @@ class Server {
     }
     
     /// 才艺列表（4张图）
-    class func talentList4(pageNo: Int, state: Int, handler: (success: Bool, msg: String?, value: [Result]?)->Void) {
+    class func talentList4(pageNo: Int, state: Int, user: String, handler: (success: Bool, msg: String?, value: [Result]?)->Void) {
         var parameters = [
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
-            "userId" : UserSingleton.sharedInstance.userId,
+            "userId" : user,
         ]
         if pageNo == 1 {
             parameters["time"] = NSDate().stringFromNowDate()

@@ -35,11 +35,13 @@ class HotmanList {
     var name : String!
     /// 昵称
     var nickname : String!
+    var userId: String!
     
     init(fromJson json: JSON!){
         if json == nil{
             return
         }
+        userId = json["userId"].stringValue
         headImgUrl = "\(json["headImgUrl"].stringValue)"
         name = json["name"].stringValue
         nickname = json["nickname"].stringValue

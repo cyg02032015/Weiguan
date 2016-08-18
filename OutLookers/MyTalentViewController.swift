@@ -26,7 +26,7 @@ class MyTalentViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.talentList4(pageNo, state: 1) { (success, msg, value) in
+        Server.talentList4(pageNo, state: 1, user: UserSingleton.sharedInstance.userId) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let list = value else {return}

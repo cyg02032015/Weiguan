@@ -19,4 +19,6 @@ class GlobleDefineSingle: NSObject {
     var citiesUrl: String!
     var version: String!
     var videoSnapshotPrefix: String!
+    
+    var deviceId: String!
 }

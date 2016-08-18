@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class DynamicDetailResp: BaseResponse {
 
-    var cover : Int!
+    var cover : String!
     var id : Int!
     var isVideo : String!
     var picture : String!
@@ -33,7 +33,7 @@ class DynamicDetailResp: BaseResponse {
             result = DynamicDetailResp(fromJson: resultJson)
             return
         }
-        cover = json["cover"].intValue
+        cover = json["cover"].stringValue
         id = json["id"].intValue
         isVideo = json["isVideo"].stringValue
         picture = json["picture"].stringValue

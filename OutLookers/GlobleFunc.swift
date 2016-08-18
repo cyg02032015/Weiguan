@@ -11,6 +11,7 @@ import Accelerate
 import CocoaLumberjack
 import Alamofire
 import SwiftyJSON
+import KeychainAccess
 
 func LogInfo<T>(message: T) {
     #if DEBUG
@@ -167,5 +168,15 @@ func configGlobleDefine() {
             SVToast.showWithError(msg!)
         }
     }
+}
 
+func keyChainGetDeviceId() {
+    let keychain = KeyChainSingle.sharedInstance.keychain
+    if keychain[kUUID] == nil {
+        let uuid = NSUUID().UUIDString
+        keychain[kUUID] = uuid
+        globleSingle.deviceId = uuid
+    } else {
+        globleSingle.deviceId = keychain[kUUID]
+    }
 }

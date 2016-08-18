@@ -12,6 +12,7 @@ import AliyunOSSiOS
 import Alamofire
 import SwiftyJSON
 import YYWebImage
+import KeychainAccess
 
 var globleSingle = GlobleDefineSingle.sharedInstance
 @UIApplicationMain
@@ -25,12 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             configCocoaLumberjack()
         #endif
         testUpload()
-        
+
         // 键盘
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         // 初始化配置SVProgressHUD
+        keyChainGetDeviceId()  // 获取设备号
+        LogError(globleSingle.deviceId)
         SVToast.initialize()
         configNavigation()
         configUMeng()
