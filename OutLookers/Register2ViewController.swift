@@ -115,8 +115,19 @@ class Register2ViewController: YGBaseViewController {
         
         // 下一步
         nextButton.rx_tap.subscribeNext { [unowned self] in
-            Server.registerPhone(self.phone, code: self.verifyTF.text!, pwd: self.pwd.myMD5, handler: { (success, msg, value) in
-                
+            SVToast.show("正在注册...")
+            Server.registerPhone(self.phone, code: self.verifyTF.text!, pwd: (self.pwd + "a").myMD5, handler: { (success, msg, value) in
+                SVToast.dismiss()
+                if success {
+                    SVToast.showWithSuccess("注册成功")
+                    delay(1, task: {
+                        let vc = Register3ViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    })
+                } else {
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
+                }
             })
         }.addDisposableTo(disposeBag)
     }

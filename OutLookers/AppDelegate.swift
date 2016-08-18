@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             configCocoaLumberjack()
         #endif
         testUpload()
-
         // 键盘
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false

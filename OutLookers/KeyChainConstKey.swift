@@ -9,3 +9,9 @@
 import Foundation
 
 let kUUID = "uuidString"
+
+let kToken = "token"
+
+let kToken2 = "token2"
+
+let kUserId = "userId"

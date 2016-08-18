@@ -1826,6 +1826,7 @@
 		E41C6C631D113F510013031D /* OtherSource */ = {
 			isa = PBXGroup;
 			children = (
+				D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */,
 				E4272DDC1D17F25B00BE4053 /* area.plist */,
 				E4E5DED61D179C0700CB8535 /* ColorDefine.swift */,
 				D81F45391D143934004D9192 /* YKBannerView.swift */,
@@ -1836,7 +1837,6 @@
 				D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
-				D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */,
 			);
 			path = OtherSource;
 			sourceTree = "<group>";

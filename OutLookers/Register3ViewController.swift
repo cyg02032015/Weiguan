@@ -27,8 +27,5 @@ class Register3ViewController: YGBaseViewController {
             make.top.equalTo(self.snp.topLayoutGuideBottom).offset(kScale(30))
             make.size.equalTo(kSize(72, height: 72))
         }
-        
-        
     }
-
 }

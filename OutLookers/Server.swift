@@ -1109,6 +1109,7 @@ class Server {
         HttpTool.post(API.registerPhone, parameters: parameters, complete: { (response) in
             let info = RegisterResp(fromJson: response)
             if info.success == true {
+                KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
                 handler(success: true, msg: nil, value: info.result)
             } else {
                 handler(success: false, msg: info.msg, value: nil)
