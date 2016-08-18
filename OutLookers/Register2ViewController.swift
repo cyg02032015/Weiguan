@@ -15,6 +15,7 @@ private extension Selector {
 class Register2ViewController: YGBaseViewController {
 
     var phone: String!
+    var pwd: String!
     var verifyButton: UIButton!
     var verifyTF: UITextField!
     var nextButton: UIButton!
@@ -105,13 +106,18 @@ class Register2ViewController: YGBaseViewController {
             self.verifyButton.userInteractionEnabled = false
             self.countDownTimer()
             self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: .countDownTimer, userInfo: nil, repeats: true)
-//            Server.getVerifyCode(phone, handler: { (success, msg, value) in
-            
-//            })
+            Server.getVerifyCode(self.phone, handler: { (success, msg, value) in
+                if (!success) {
+                    LogError("发送验证码失败")
+                }
+            })
         }.addDisposableTo(disposeBag)
         
-        nextButton.rx_tap.subscribeNext {
-            
+        // 下一步
+        nextButton.rx_tap.subscribeNext { [unowned self] in
+            Server.registerPhone(self.phone, code: self.verifyTF.text!, pwd: self.pwd.myMD5, handler: { (success, msg, value) in
+                
+            })
         }.addDisposableTo(disposeBag)
     }
     

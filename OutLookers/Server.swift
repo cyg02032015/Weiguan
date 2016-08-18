@@ -426,8 +426,8 @@ class Server {
     /// 发送获取验证码
     class func getVerifyCode(phone: String, handler: (success: Bool, msg: String?, value: String?)->Void) {
         let parameters = [
-            "userPhone" : phone,
-            "deviceId": "123456789"
+            "phone" : phone,
+            "deviceId": globleSingle.deviceId
         ]
         HttpTool.post(API.getVerifyCode, parameters: parameters, complete: { (response) in
             let info = StringResponse(fromJson: response)
@@ -1088,6 +1088,26 @@ class Server {
     class func banner(handler: (success: Bool, msg: String?, value: [BannerList]?)->Void) {
         HttpTool.post(API.banner, parameters: nil, complete: { (response) in
             let info = BannerResp(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 手机号注册
+    class func registerPhone(phone: String, code: String, pwd: String, handler: (success: Bool, msg: String?, value: RegisterObj?)->Void) {
+        let parameters = [
+            "phone": phone,
+            "deviceId": globleSingle.deviceId,
+            "code": code,
+            "passWd": pwd
+        ]
+        HttpTool.post(API.registerPhone, parameters: parameters, complete: { (response) in
+            let info = RegisterResp(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)
             } else {

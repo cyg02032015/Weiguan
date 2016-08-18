@@ -109,6 +109,7 @@ class Register1ViewController: YGBaseViewController {
         nextButton.rx_tap.subscribeNext { [unowned self] in
             let vc = Register2ViewController()
             vc.phone = self.phoneTF.text
+            vc.pwd = self.passTF.text
             self.navigationController?.pushViewController(vc, animated: true)
         }.addDisposableTo(disposeBag)
     }

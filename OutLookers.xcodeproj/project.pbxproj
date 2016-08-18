@@ -254,6 +254,7 @@
 		D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */; };
 		D8DAC59A1D66000D0009FDB9 /* KeyChainConstKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */; };
 		D8DAC59E1D6602480009FDB9 /* KeyChainSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC59D1D6602480009FDB9 /* KeyChainSingle.swift */; };
+		D8DAC5A01D6606CE0009FDB9 /* RegisterResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC59F1D6606CE0009FDB9 /* RegisterResp.swift */; };
 		D8EB0EB61D48E18F002E36F8 /* GetTokenResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */; };
 		D8EB0EB81D48E569002E36F8 /* GlobleDefineResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */; };
 		D8EB0EBA1D48E603002E36F8 /* GlobleDefineSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */; };
@@ -683,6 +684,7 @@
 		D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPhotoKitController.swift; path = OutLookers/YGPhotoKitController.swift; sourceTree = SOURCE_ROOT; };
 		D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyChainConstKey.swift; path = OutLookers/KeyChainConstKey.swift; sourceTree = SOURCE_ROOT; };
 		D8DAC59D1D6602480009FDB9 /* KeyChainSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyChainSingle.swift; path = OutLookers/KeyChainSingle.swift; sourceTree = SOURCE_ROOT; };
+		D8DAC59F1D6606CE0009FDB9 /* RegisterResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResp.swift; path = OutLookers/RegisterResp.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EB51D48E18F002E36F8 /* GetTokenResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetTokenResp.swift; path = OutLookers/GetTokenResp.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EB71D48E569002E36F8 /* GlobleDefineResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineResp.swift; path = OutLookers/GlobleDefineResp.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EB91D48E603002E36F8 /* GlobleDefineSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefineSingle.swift; path = OutLookers/GlobleDefineSingle.swift; sourceTree = SOURCE_ROOT; };
@@ -1171,6 +1173,7 @@
 				D825EEC71D55EBDC00AF94AF /* FeedbackReq.swift */,
 				D825EEC91D55EE2200AF94AF /* TalentList4Resp.swift */,
 				D88FC4131D5A400C00EAF269 /* BannerResp.swift */,
+				D8DAC59F1D6606CE0009FDB9 /* RegisterResp.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2527,6 +2530,7 @@
 				D81F45101D118D50004D9192 /* HttpTool.swift in Sources */,
 				D87049441D2152A7008FB780 /* VideoTool.swift in Sources */,
 				D8518AC71D6054C20028EC79 /* CircleHeaderView.swift in Sources */,
+				D8DAC5A01D6606CE0009FDB9 /* RegisterResp.swift in Sources */,
 				D82F8E161D2EA48900A24CDB /* DataSecondCell.swift in Sources */,
 				D84D98501D4661B0007CCD6E /* RecommendHotmanResp.swift in Sources */,
 				E44861841D49D5380034208D /* YGCityData.swift in Sources */,

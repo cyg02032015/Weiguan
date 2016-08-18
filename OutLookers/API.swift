@@ -131,4 +131,6 @@ struct API {
     static let talentListFourPic = baseURL + "/api/release/v1/userTalent/get"
     /// banner
     static let banner = baseURL + "/api/authentication/v1/banner/get"
+    /// 手机号注册
+    static let registerPhone = baseURL + "/api/login/v1/register"
 }
