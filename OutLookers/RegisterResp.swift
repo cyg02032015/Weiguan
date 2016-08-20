@@ -28,6 +28,7 @@ class RegisterObj {
     var token : String!
     var token2 : String!
     var userId : String!
+    var nickname: String?
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -36,5 +37,6 @@ class RegisterObj {
         token = json["token"].stringValue
         token2 = json["token2"].stringValue
         userId = json["userId"].stringValue
+        nickname = json["nickname"].stringValue
     }
 }

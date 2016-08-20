@@ -75,12 +75,12 @@ class Util {
     class func logViewTap(controller: UIViewController, type: LogViewTapType) {
         switch type {
         case .Wechat:
-            let vc = LogViewController()
-            controller.navigationController?.pushViewController(vc, animated: true)
             LogInfo("微信登录")
         case .QQ: LogInfo("QQ登录")
         case .Weibo: LogInfo("微博登录")
-        case .Phone: LogInfo("手机登录")
+        case .Phone:
+            let vc = LogViewController()
+            controller.navigationController?.pushViewController(vc, animated: true)
         case .Iagree: LogInfo("同意协议")
         case .Register:
             let vc = Register1ViewController()

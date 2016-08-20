@@ -135,4 +135,8 @@ struct API {
     static let registerPhone = baseURL + "/api/login/v1/register"
     /// 完善用户信息
     static let perfectInformation = baseURL + "/api/login/v1/userinfo"
+    /// 手机号登录
+    static let phoneLogin = baseURL + "/api/login/v1/login"
+    /// 令牌登录 
+    static let tokenLogin = baseURL + "/api/login/v1/tokenin"
 }

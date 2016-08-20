@@ -27,22 +27,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         testUpload()
         
-        if !UserSingleton.sharedInstance.isLogin() {
-            LogInfo("用户未登录")
-        }
+//        try! KeyChainSingle.sharedInstance.keychain.removeAll()
         
         // 键盘
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        keyboardSetting()
         // 初始化配置SVProgressHUD
         keyChainGetDeviceId()  // 获取设备号
-        LogError(globleSingle.deviceId)
         SVToast.initialize()
         configNavigation()
         configUMeng()
         configGlobleDefine()
+        tokenLogin()
+        isLogin()
         return true
+    }
+    
+    func isLogin() {
+        if !UserSingleton.sharedInstance.isLogin() {
+            LogInfo("用户未登录")
+        }
+    }
+    
+    func tokenLogin() {
+        if TokenTool.isCookieExpired() {
+            if !isEmptyString(KeyChainSingle.sharedInstance.keychain[kToken]) {
+                Server.tokenLogin { (success, msg, value) in
+                    LogDebug("token login = \(value)\n\(msg)")
+                }
+            } else {
+                LogError("token is nil")
+            }
+        } else {
+            LogDebug("cookie 没有过期")
+        }
+    }
+    
+    func keyboardSetting() {
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

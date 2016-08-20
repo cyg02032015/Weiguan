@@ -12,244 +12,156 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 
-private extension Selector {
-    static let tapSubmit = #selector(LogViewController.submitButtonClick(_:))
-    static let tapCorner = #selector(LogViewController.protocolButtonClick(_:))
-    static let tapVerify = #selector(LogViewController.tapVerifyButton(_:))
-    static let countDownTimer = #selector(LogViewController.countDownTimer)
-    static let tapProtocolButton = #selector(LogViewController.tapProtocolButton(_:))
-    static let tapArroundMore = #selector(LogViewController.tapArroundMore(_:))
-}
-
 class LogViewController: YGBaseViewController {
     
-    var mobileTF: UITextField!
-    var verifyTF: UITextField!
-    var submitButton: UIButton!
-    var verifyButton: UIButton!
-    var timer: NSTimer!
-    var countDown: Int = 60
+    var phoneTF: UITextField!
+    var passTF: UITextField!
+    var nextButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = LocalizedString("accountCheck")
-        
         setupSubViews()
-        
-        let mobileValid = mobileTF.rx_text.map {
+        let mobileValid = phoneTF.rx_text.map {
             $0.characters.count == 11
-        }.shareReplay(1)
+            }.shareReplay(1)
         
-        let verifyValid = verifyTF.rx_text.map {
-            $0.characters.count == 6
-        }.shareReplay(1)
+        let verifyValid = passTF.rx_text.map {
+            $0.characters.count >= 6
+            }.shareReplay(1)
         
         let everthingValid = Observable.combineLatest(mobileValid, verifyValid) { mobile, verify in
             return mobile && verify
-        }.shareReplay(1)
+            }.shareReplay(1)
         
-        everthingValid.bindTo(submitButton.rx_enabled).addDisposableTo(disposeBag)
+        everthingValid.bindTo(nextButton.rx_enabled).addDisposableTo(disposeBag)
         everthingValid.subscribe { [weak self](event) in
             guard let weakSelf = self else { return }
-            if let _ = event.element where event.element == true {
-                weakSelf.submitButton.backgroundColor = kCommonColor
+            if event.element == true {
+                weakSelf.nextButton.userInteractionEnabled = true
+                weakSelf.nextButton.backgroundColor = kCommonColor
             } else {
-                weakSelf.submitButton.backgroundColor = kGrayColor
+                weakSelf.nextButton.userInteractionEnabled = false
+                weakSelf.nextButton.backgroundColor = kLightGrayColor
             }
-        }.addDisposableTo(disposeBag)
+            }.addDisposableTo(disposeBag)
         
         
         
     }
 
     func setupSubViews() {
-        let container = UIView()
-        view.addSubview(container)
-        
-        let topLabel = UILabel()
-        topLabel.textAlignment = .Center
-        topLabel.text = "为保证你的账户安全, 请先绑定手机"
-        topLabel.font = UIFont.customFontOfSize(16)
-        container.addSubview(topLabel)
-        
-        // 手机号
-        let mobileContainer = textFieldContainer()
-        container.addSubview(mobileContainer)
-        
-        mobileTF = getTextField("请输入手机号")
-        mobileTF.delegate = self
-        mobileContainer.addSubview(mobileTF)
-        
-        verifyButton = UIButton()
-        verifyButton.setTitle("获取验证码", forState: .Normal)
-        verifyButton.titleLabel?.font = UIFont.customFontOfSize(13)
-        verifyButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        verifyButton.backgroundColor = kCommonColor
-        verifyButton.addTarget(self, action: .tapVerify, forControlEvents: .TouchUpInside)
-        mobileContainer.addSubview(verifyButton)
-        
-        // 验证码
-        let verifyContainer = textFieldContainer()
-        container.addSubview(verifyContainer)
-        
-        verifyTF = getTextField("请输入验证码")
-        verifyTF.delegate = self
-        verifyContainer.addSubview(verifyTF)
-        
-        // 用户协议和按钮
-        let cornerButton = UIButton()
-        cornerButton.setImage(UIImage(named: "disagree"), forState: .Normal)
-        cornerButton.setImage(UIImage(named: "agree"), forState: .Selected)
-        cornerButton.addTarget(self, action: .tapCorner, forControlEvents: .TouchUpInside)
-        container.addSubview(cornerButton)
-        
-        let protocleButton = UIButton()
-        protocleButton.titleLabel?.font = UIFont.customFontOfSize(12)
-        protocleButton.setTitle("我同意围观平台的用户协议", forState: .Normal)
-        protocleButton.setTitleColor(kGrayColor, forState: .Normal)
-        protocleButton.addTarget(self, action: .tapProtocolButton, forControlEvents: .TouchUpInside)
-        container.addSubview(protocleButton)
-        
-        // 提交按钮
-        submitButton = UIButton()
-        submitButton.layer.cornerRadius = 23
-        submitButton.setTitle("提交", forState: .Normal)
-        submitButton.backgroundColor = kGrayColor
-        submitButton.addTarget(self, action: .tapSubmit, forControlEvents: .TouchUpInside)
-        container.addSubview(submitButton)
-        
-        // 再去逛逛
-        let aroundButton = UIButton()
-        aroundButton.setTitle("再去逛逛", forState: .Normal)
-        aroundButton.titleLabel?.font = UIFont.customFontOfSize(14)
-        aroundButton.setTitleColor(UIColor(hex: 0x777777), forState: .Normal)
-        aroundButton.addTarget(self, action: .tapArroundMore, forControlEvents: .TouchUpInside)
-        container.addSubview(aroundButton)
-        
-        container.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.topLayoutGuideBottom)
-            make.left.right.equalTo(container.superview!)
-            make.height.equalTo(400)
-        }
-        
-        topLabel.snp.makeConstraints { make in
-            make.top.equalTo(80)
-            make.left.right.equalTo(topLabel.superview!)
-            make.height.equalTo(16)
-        }
-        
-        mobileContainer.snp.makeConstraints { make in
-            make.left.equalTo(38)
-            make.right.equalTo(-38)
-            make.height.equalTo(46)
-            make.top.equalTo(topLabel.snp.bottom).offset(20)
-        }
-        
-        verifyButton.snp.makeConstraints { make in
-            make.right.equalTo(verifyButton.superview!)
-            make.top.bottom.equalTo(verifyButton.superview!)
-            make.width.equalTo(100)
-        }
-        
-        mobileTF.snp.makeConstraints { make in
-            make.left.equalTo(22)
-            make.centerY.equalTo(mobileTF.superview!)
-            make.right.equalTo(verifyButton.snp.left)
-            make.height.equalTo(30)
-        }
-        
-        verifyContainer.snp.makeConstraints { (make) in
-            make.left.right.height.equalTo(mobileContainer)
-            make.top.equalTo(mobileContainer.snp.bottom).offset(15)
-        }
-        
-        verifyTF.snp.makeConstraints { make in
-            make.left.height.equalTo(mobileTF)
-            make.centerY.equalTo(verifyContainer)
-            make.right.equalTo(verifyTF.superview!).offset(-20)
-        }
-        
-        cornerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(68)
-            make.top.equalTo(verifyContainer.snp.bottom).offset(10)
-            make.size.equalTo(CGSize(width: 12, height: 12))
-        }
-        
-        protocleButton.snp.makeConstraints { (make) in
-            make.left.equalTo(cornerButton.snp.right).offset(3)
-            make.centerY.equalTo(cornerButton)
-            make.height.equalTo(12)
-        }
-        
-        submitButton.snp.makeConstraints { (make) in
-            make.left.right.equalTo(mobileContainer)
-            make.top.equalTo(protocleButton.snp.bottom).offset(32)
-            make.height.equalTo(46)
-        }
-        
-        aroundButton.snp.makeConstraints { (make) in
-            make.right.equalTo(aroundButton.superview!).offset(-59)
-            make.height.equalTo(14)
-            make.width.equalTo(56)
-            make.top.equalTo(submitButton.snp.bottom).offset(10)
-        }
-    }
-}
+        title = "手机号登录"
+        let register = setRightNaviItem()
+        register.setTitle("注册", forState: .Normal)
+        register.setTitleColor(UIColor(hex: 0xFF6464), forState: .Normal)
 
-// MARK: -按钮点击方法
-extension LogViewController {
-    
-    func protocolButtonClick(sender: UIButton) {
-        sender.selected = !sender.selected
-        submitButton.selected = sender.selected
-        
-    }
-    
-    func submitButtonClick(sender: UIButton) {
-        /*
-            手机号格式错误
-            验证码已发送
-            验证码无效,请重新获取
-            验证码输入错误
-            绑定成功
-         */
-        view.endEditing(true)
-        if !submitButton.selected {
-            YKToast.makeText("请选择用户协议")
+        let accountView = textFieldContainer()
+        view.addSubview(accountView)
+        accountView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(accountView.superview!)
+            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(kScale(40))
+            make.size.equalTo(kSize(220, height: 44))
         }
-        if mobileTF.text! =~ kMobileNumberReg {
-            
-        } else {
-            YKToast.makeText("手机号格式错误")
-        }
-    }
-    
-    func tapVerifyButton(sender: UIButton) {
-        verifyButton.userInteractionEnabled = false
-        countDownTimer()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: .countDownTimer, userInfo: nil, repeats: true)
         
-    }
-    
-    func countDownTimer() {
-        if countDown == 0 {
-            timer.invalidate()
-            verifyButton.userInteractionEnabled = true
-            verifyButton.setTitle("获取验证码", forState: .Normal)
-            verifyButton.backgroundColor = kCommonColor
-        } else {
-            verifyButton.setTitle("\(countDown)s", forState: .Normal)
-            verifyButton.backgroundColor = kGrayColor
+        let phoneImg = UIImageView(image: UIImage(named: "phone"))
+        accountView.addSubview(phoneImg)
+        phoneImg.snp.makeConstraints { (make) in
+            make.size.equalTo(kSize(10, height: 18))
+            make.left.equalTo(phoneImg.superview!).offset(kScale(20))
+            make.centerY.equalTo(phoneImg.superview!)
         }
-        countDown -= 1
-    }
-    
-    func tapProtocolButton(sender: UIButton) {
-        let protocolVC = ProtocolViewController()
-        navigationController?.pushViewController(protocolVC, animated: true)
-    }
-    
-    func tapArroundMore(sender: UIButton) {
         
+        phoneTF = getTextField("请输入手机号")
+        phoneTF.delegate = self
+        accountView.addSubview(phoneTF)
+        phoneTF.snp.makeConstraints { (make) in
+            make.left.equalTo(phoneImg.snp.right).offset(kScale(10))
+            make.right.equalTo(phoneTF.superview!).offset(kScale(-5))
+            make.centerY.equalTo(phoneImg)
+            make.height.equalTo(kScale(30))
+        }
+        
+        let passView = textFieldContainer()
+        view.addSubview(passView)
+        passView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(accountView)
+            make.size.equalTo(accountView)
+            make.top.equalTo(accountView.snp.bottom).offset(kScale(10))
+        }
+        
+        let passImg = UIImageView(image: UIImage(named: "Password"))
+        passView.addSubview(passImg)
+        passImg.snp.makeConstraints { (make) in
+            make.size.equalTo(kSize(16, height: 16))
+            make.left.equalTo(passImg.superview!).offset(kScale(16))
+            make.centerY.equalTo(passImg.superview!)
+        }
+        
+        passTF = getTextField("请输入密码")
+        passTF.keyboardType = .ASCIICapable
+        passTF.secureTextEntry = true
+        passTF.delegate = self
+        passView.addSubview(passTF)
+        passTF.snp.makeConstraints { (make) in
+            make.left.equalTo(passImg.snp.right).offset(kScale(7))
+            make.right.equalTo(passTF.superview!).offset(kScale(-5))
+            make.centerY.equalTo(passImg)
+            make.height.equalTo(phoneTF)
+        }
+        
+        nextButton = Util.customCornerButton("登录")
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints { (make) in
+            make.centerX.equalTo(accountView)
+            make.size.equalTo(accountView)
+            make.top.equalTo(passView.snp.bottom).offset(kScale(40))
+        }
+        
+        let forget = UIButton()
+        let attributeText = NSMutableAttributedString(string: "忘记密码？")
+        let range = NSRange(location: 0, length: attributeText.length)
+        attributeText.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(integer:NSUnderlineStyle.StyleSingle.rawValue), range:range)
+        attributeText.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: 0x999999), range: range)
+        forget.setAttributedTitle(attributeText, forState: .Normal)
+        forget.titleLabel!.font = UIFont.customFontOfSize(12)
+        view.addSubview(forget)
+        forget.snp.makeConstraints { (make) in
+            make.centerX.equalTo(forget.superview!)
+            make.top.equalTo(nextButton.snp.bottom).offset(kScale(20))
+            make.size.equalTo(kSize(60, height: 20))
+        }
+        
+        forget.rx_tap.subscribeNext {
+            LogInfo("忘记密码")
+        }.addDisposableTo(disposeBag)
+        
+        register.rx_tap.subscribeNext { [weak self] in
+            let vc = Register1ViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }.addDisposableTo(disposeBag)
+        
+        nextButton.rx_tap.subscribeNext { [unowned self] in
+            if self.phoneTF.text! =~ kMobileNumberReg {
+                SVToast.show("正在登录")
+                Server.phoneLogin(self.phoneTF.text!, pwd: (self.passTF.text! + "a").myMD5, handler: { (success, msg, value) in
+                    SVToast.dismiss()
+                    if success {
+                        if isEmptyString(UserSingleton.sharedInstance.nickname) {
+                            let vc = Register3ViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        } else {
+                            delay(0.5, task: {
+                                self.navigationController?.popToRootViewControllerAnimated(true)
+                            })
+                        }
+                    } else {
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
+                    }
+                })
+            } else {
+                SVToast.showWithError("手机号码格式错误")
+            }
+        }.addDisposableTo(disposeBag)
     }
 }
 
@@ -258,10 +170,10 @@ extension LogViewController: UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let str = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        if textField == mobileTF {
+        if textField == phoneTF {
             return str.characters.count <= 11
         } else {
-            return str.characters.count <= 6
+            return true
         }
     }
 }

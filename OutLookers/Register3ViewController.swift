@@ -29,7 +29,7 @@ class Register3ViewController: YGBaseViewController {
     }
     
     func getToken() {
-        Server.getUpdateFileToken(.Picture) { (success, msg, value) in
+        Server.getUpdateFileToken(.Picture) { [unowned self](success, msg, value) in
             if success {
                 guard let obj = value else {return}
                 self.picToken = obj

@@ -25,6 +25,7 @@ class UserSingleton {
     var originPwd: String!
     var newPwd: String!
     var userId: String = ""
+    var nickname: String = ""
     
     func isLogin() -> Bool {
         if let userid = KeyChainSingle.sharedInstance.getUserId() {

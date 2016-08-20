@@ -1107,40 +1107,22 @@ class Server {
             "code": code,
             "passWd": pwd
         ]
-        let header: [String : String] = [
-            "X-X-M": Util.getCurrentTimestamp(),
-            "X-X-D": globleSingle.deviceId,
-            "X-X-A": Util.getXXA(pwd)
-        ]
-        LogWarn("parameters = \(parameters)")
-        LogInfo("header = \(header)")
-        LogVerbose("url = \(API.registerPhone)")
-        Alamofire.request(.POST, API.registerPhone, parameters: parameters, encoding: .JSON, headers: header).responseJSON { (response) in
-            switch response.result {
-            case .Success(let Value):
-                LogDebug("response = \(JSON(Value))")
-                let info = RegisterResp(fromJson: JSON(Value))
-                if info.success == true {
-                    if let headerFields = response.response?.allHeaderFields as? [String: String], URL = response.request?.URL {
-                        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
-                        for cookie in cookies {
-                            LogInfo("cookie value = \(cookie.value)")
-                            LogInfo("cookies = \(cookie)")
-                            let array = cookie.value.componentsSeparatedByString("|")
-                            KeyChainSingle.sharedInstance.keychain[kExpiresDate] = array[1]
-                            KeyChainSingle.sharedInstance.keychain[kCookie] = cookie.value
-                        }
-                    }
-                    LogInfo("response header = \(response.response!.allHeaderFields)")
-                    KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
-                    UserSingleton.sharedInstance.userId = info.result.userId
-                    handler(success: true, msg: nil, value: info.result)
-                } else {
-                    handler(success: false, msg: info.msg, value: nil)
+        HttpTool.registerLogPost(API.registerPhone, parameters: parameters, pwdOrToken: pwd, complete: { (request, response, value) in
+            let info = RegisterResp(fromJson: value)
+            if info.success == true {
+                if let headerFields = response?.allHeaderFields as? [String: String], URL = request?.URL {
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
+                    TokenTool.saveCookieAndExpired(cookies)
                 }
-            case .Failure(let Error):
-                handler(success: false, msg: Error.localizedDescription, value: nil)
+                KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
+                UserSingleton.sharedInstance.userId = info.result.userId
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
             }
+
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
     
@@ -1165,4 +1147,53 @@ class Server {
             handler(success: false, msg: error.localizedDescription, value: nil)
         }
     }
+    
+    /// 手机号登录
+    class func phoneLogin(phone: String, pwd: String, handler: (success: Bool, msg: String?, value: RegisterObj?)->Void) {
+        let parameters = [
+            "phone": phone,
+            "passWd": pwd,
+            "deviceId": globleSingle.deviceId
+        ]
+        HttpTool.registerLogPost(API.phoneLogin, parameters: parameters, pwdOrToken: pwd, complete: { (request, response, value) in
+            let info = RegisterResp(fromJson: value)
+            if info.success == true {
+                if let headerFields = response?.allHeaderFields as? [String: String], URL = request?.URL {
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
+                    TokenTool.saveCookieAndExpired(cookies)
+                }
+                KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
+                UserSingleton.sharedInstance.userId = info.result.userId
+                UserSingleton.sharedInstance.nickname = info.result.nickname ?? ""
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+    
+    /// 令牌登录
+    class func tokenLogin(handler: (success: Bool, msg: String?, value: RegisterObj?)->Void) {
+        guard let token = KeyChainSingle.sharedInstance.keychain[kToken] else {return}
+        let parameters = [
+            "token": token,
+            "deviceId": globleSingle.deviceId
+        ]
+        HttpTool.registerLogPost(API.tokenLogin, parameters: parameters, pwdOrToken: token, complete: { (request, response, value) in
+            let info = RegisterResp(fromJson: value)
+            if info.success == true {
+                KeyChainSingle.sharedInstance.keychain[kUserId] = info.result.userId
+                UserSingleton.sharedInstance.userId = info.result.userId
+                UserSingleton.sharedInstance.nickname = info.result.nickname ?? ""
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+
 }

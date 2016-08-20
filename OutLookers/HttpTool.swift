@@ -13,6 +13,7 @@ import SwiftyJSON
 public class HttpTool {
     
     typealias Success = (response: JSON) -> ()
+    typealias LogRegSuccess = (request: NSURLRequest?,response: NSHTTPURLResponse?, value: JSON) -> Void
     typealias Failure = (error: NSError) -> ()
     static var manager: Manager!
     static let alamofireManager: Manager = {
@@ -57,5 +58,27 @@ public class HttpTool {
                 fail(error: Error)
             }
         }
+    }
+    
+    class func registerLogPost(url: String, parameters: [String: AnyObject]?, pwdOrToken: String , complete: LogRegSuccess, fail: Failure) {
+        let headers: [String : String] = [
+            "X-X-M": Util.getCurrentTimestamp(),
+            "X-X-D": globleSingle.deviceId,
+            "X-X-A": Util.getXXA(pwdOrToken)
+        ]
+        alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
+            LogVerbose("url = \(url)")
+            if let p = parameters {
+                LogWarn("parameters = \(p)")
+            }
+            switch response.result {
+            case .Success(let Value):
+                LogDebug("response = \(JSON(Value))")
+                complete(request: response.request,response: response.response, value: JSON(Value))
+            case .Failure(let Error):
+                fail(error: Error)
+            }
+        }
+
     }
 }

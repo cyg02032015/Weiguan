@@ -29,7 +29,6 @@ class HomeViewController: YGBaseViewController {
     lazy var hotmanList = [HotmanList]()
     var recommendObj: DynamicListResp!
     lazy var recommends = [DynamicResult]()
-    var log: YGLogView!
     var banner: SDCycleScrollView!
 
     override func viewWillAppear(animated: Bool) {
@@ -38,16 +37,37 @@ class HomeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        log = YGLogView(frame: CGRectZero)
-        log.tapLogViewClosure { (type) in
-            Util.logViewTap(self, type: type)
-        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: .loadRecommendHotmanData, name: kRecieveGlobleDefineNotification, object: nil)
         setupSubViews()
-        collectionView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: {
-            self.loadMoreData()
+        
+        collectionView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
+            self?.loadNewData()
         })
+        collectionView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
+        })
+    }
+    
+    func loadNewData() {
+        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+            if success {
+                guard let object = value else { return }
+                self.recommendObj = object
+                self.recommends.removeAll()
+                self.recommends.appendContentsOf(object.list)
+                self.collectionView.reloadData()
+                if object.list.count <= 0 {
+                    self.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                self.collectionView.mj_header.endRefreshing()
+            } else {
+                self.collectionView.mj_header.endRefreshing()
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+
     }
     
     override func loadMoreData() {
