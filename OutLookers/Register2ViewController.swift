@@ -19,7 +19,6 @@ class Register2ViewController: YGBaseViewController {
     var verifyButton: UIButton!
     var verifyTF: UITextField!
     var nextButton: UIButton!
-//    var 
     var timer: NSTimer!
     var countDown: Int = 60
     
@@ -152,7 +151,7 @@ extension Register2ViewController: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let str = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
         if textField == verifyTF {
-            return str.characters.count <= 11
+            return str.characters.count <= 6
         }
         return true
     }

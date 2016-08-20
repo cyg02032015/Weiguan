@@ -8,6 +8,11 @@
 
 import UIKit
 
-class PerfectInfomationReq: BaseResponse {
-
+struct PerfectInfomationReq {
+    var city : String!
+    var headImgUrl : String!
+    var nickname : String!
+    var province : String!
+    var sex : String!
+    var userId : String!
 }

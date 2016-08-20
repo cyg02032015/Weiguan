@@ -23,5 +23,9 @@ class KeyChainSingle {
         keychain[kToken2] = info.token2
         keychain[kUserId] = info.userId
     }
+    
+    func getUserId() -> String? {
+        return keychain[kUserId]
+    }
 }
 

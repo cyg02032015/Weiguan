@@ -15,3 +15,7 @@ let kToken = "token"
 let kToken2 = "token2"
 
 let kUserId = "userId"
+
+let kCookie = "cookie"
+/// 过期时间
+let kExpiresDate = "expiresDate"

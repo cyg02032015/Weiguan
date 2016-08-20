@@ -89,6 +89,7 @@ class Register1ViewController: YGBaseViewController {
         
         passTF = getTextField("请输入密码，6-16位字符")
         passTF.keyboardType = .ASCIICapable
+        passTF.secureTextEntry = true
         passTF.delegate = self
         passView.addSubview(passTF)
         passTF.snp.makeConstraints { (make) in
@@ -107,10 +108,15 @@ class Register1ViewController: YGBaseViewController {
         }
         
         nextButton.rx_tap.subscribeNext { [unowned self] in
-            let vc = Register2ViewController()
-            vc.phone = self.phoneTF.text
-            vc.pwd = self.passTF.text
-            self.navigationController?.pushViewController(vc, animated: true)
+            if self.phoneTF.text! =~ kMobileNumberReg {
+                let vc = Register2ViewController()
+                vc.phone = self.phoneTF.text
+                vc.pwd = self.passTF.text
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                SVToast.showWithError("手机号码格式错误")
+            }
+            
         }.addDisposableTo(disposeBag)
     }
 }

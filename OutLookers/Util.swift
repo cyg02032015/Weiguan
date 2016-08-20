@@ -124,4 +124,17 @@ class Util {
         }
         return version
     }
+    
+    /// 获取13位时间戳
+    class func getCurrentTimestamp() -> String {
+        let date = NSDate(timeIntervalSinceNow: 0)
+        let interval = date.timeIntervalSince1970 * 1000
+        return "\(Int(interval))"
+    }
+    
+    /// XXA算法   param 手机号登录和注册时的最终passWd、令牌登录时的token
+    class func getXXA(param: String) -> String {
+        LogInfo("XXA拼接 \(globleSingle.deviceId + self.getCurrentTimestamp() + param + "d")")
+        return (globleSingle.deviceId + self.getCurrentTimestamp() + param + "d").myMD5
+    }
 }

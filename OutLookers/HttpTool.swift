@@ -33,7 +33,18 @@ public class HttpTool {
     }
     
     class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
-        alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: nil).responseJSON { (response) in
+        var headers: [String:String]?
+        if let cookie = KeyChainSingle.sharedInstance.keychain[kCookie] {
+            headers = [
+                "X-X-T" : cookie,
+                "X-X-D" : globleSingle.deviceId,
+                "X-X-U" : cookie
+            ]
+            LogInfo("请求中的headers = \(headers)")
+        } else {
+            LogError("cookie is nil")
+        }
+        alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
             LogVerbose("url = \(url)")
             if let p = parameters {
                 LogWarn("parameters = \(p)")

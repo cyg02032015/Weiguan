@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             configCocoaLumberjack()
         #endif
         testUpload()
+        
+        if !UserSingleton.sharedInstance.isLogin() {
+            LogInfo("用户未登录")
+        }
+        
         // 键盘
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false

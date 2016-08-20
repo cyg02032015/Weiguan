@@ -17,13 +17,46 @@ class FollowViewController: YGBaseViewController {
     var tableView: UITableView!
     lazy var lists = [DynamicResult]()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if UserSingleton.sharedInstance.isLogin() {
+            if self.lists.count == 0 {
+                tableView.mj_header.beginRefreshing()
+            }
+        } else {
+            LogError("未登录无法获取关注用户")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        loadMoreData()
+        tableView.mj_header = MJRefreshHeader(refreshingBlock: { [weak self] in
+            self?.loadNewData()
+        })
+            
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
             self?.loadMoreData()
         })
+    }
+    
+    func loadNewData() {
+        Server.followDynamic(1) { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                guard let object = value else {return}
+                self.lists.removeAll()
+                self.lists.appendContentsOf(object.list)
+                self.tableView.mj_header.endRefreshing()
+                self.tableView.reloadData()
+                if object.list.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            } else {
+                SVToast.showWithError(msg!)
+                self.tableView.mj_header.endRefreshing()
+            }
+        }
     }
     
     override func loadMoreData() {

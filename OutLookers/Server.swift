@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Alamofire
 
 let pageSize = 10
 
@@ -1106,10 +1107,56 @@ class Server {
             "code": code,
             "passWd": pwd
         ]
-        HttpTool.post(API.registerPhone, parameters: parameters, complete: { (response) in
-            let info = RegisterResp(fromJson: response)
+        let header: [String : String] = [
+            "X-X-M": Util.getCurrentTimestamp(),
+            "X-X-D": globleSingle.deviceId,
+            "X-X-A": Util.getXXA(pwd)
+        ]
+        LogWarn("parameters = \(parameters)")
+        LogInfo("header = \(header)")
+        LogVerbose("url = \(API.registerPhone)")
+        Alamofire.request(.POST, API.registerPhone, parameters: parameters, encoding: .JSON, headers: header).responseJSON { (response) in
+            switch response.result {
+            case .Success(let Value):
+                LogDebug("response = \(JSON(Value))")
+                let info = RegisterResp(fromJson: JSON(Value))
+                if info.success == true {
+                    if let headerFields = response.response?.allHeaderFields as? [String: String], URL = response.request?.URL {
+                        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
+                        for cookie in cookies {
+                            LogInfo("cookie value = \(cookie.value)")
+                            LogInfo("cookies = \(cookie)")
+                            let array = cookie.value.componentsSeparatedByString("|")
+                            KeyChainSingle.sharedInstance.keychain[kExpiresDate] = array[1]
+                            KeyChainSingle.sharedInstance.keychain[kCookie] = cookie.value
+                        }
+                    }
+                    LogInfo("response header = \(response.response!.allHeaderFields)")
+                    KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
+                    UserSingleton.sharedInstance.userId = info.result.userId
+                    handler(success: true, msg: nil, value: info.result)
+                } else {
+                    handler(success: false, msg: info.msg, value: nil)
+                }
+            case .Failure(let Error):
+                handler(success: false, msg: Error.localizedDescription, value: nil)
+            }
+        }
+    }
+    
+    /// 完善用户信息
+    class func perfectInformation(req: PerfectInfomationReq, handler: (success: Bool, msg: String?, value: String?)->Void) {
+        let parameters = [
+            "userId": UserSingleton.sharedInstance.userId,
+            "sex": req.sex,
+            "nickname": req.nickname,
+            "province": req.province,
+            "city": req.city,
+            "headImgUrl": req.headImgUrl
+        ]
+        HttpTool.post(API.perfectInformation, parameters: parameters, complete: { (response) in
+            let info = StringResponse(fromJson: response)
             if info.success == true {
-                KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
                 handler(success: true, msg: nil, value: info.result)
             } else {
                 handler(success: false, msg: info.msg, value: nil)

@@ -24,5 +24,18 @@ class UserSingleton {
     var isSetPassword: Bool = false
     var originPwd: String!
     var newPwd: String!
-    var userId: String = "1"
+    var userId: String = ""
+    
+    func isLogin() -> Bool {
+        if let userid = KeyChainSingle.sharedInstance.getUserId() {
+            self.userId = userid
+            if userid.characters.count > 0 {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
 }

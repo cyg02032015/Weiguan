@@ -69,4 +69,11 @@ func kHeight(a: CGFloat) -> CGFloat {
     }
 }
 
+/// 性别
+enum SexType: String {
+    case None = "0"
+    case Male = "1"
+    case Female = "2"
+}
+
 

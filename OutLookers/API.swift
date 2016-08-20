@@ -133,4 +133,6 @@ struct API {
     static let banner = baseURL + "/api/authentication/v1/banner/get"
     /// 手机号注册
     static let registerPhone = baseURL + "/api/login/v1/register"
+    /// 完善用户信息
+    static let perfectInformation = baseURL + "/api/login/v1/userinfo"
 }

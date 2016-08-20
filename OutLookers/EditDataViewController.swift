@@ -189,9 +189,9 @@ extension EditDataViewController {
                     cell.tf.text = req.birthday.dateFromString("yyyy-MM-dd")?.ageWithDateOfBirth()
                 } else {
                     cell.setTextInCell("性   别", placeholder: "请选择性别")
-                    if req.sex == "1" {
+                    if req.sex == SexType.Male.rawValue {
                         cell.tf.text = "男"
-                    } else if req.sex == "2" {
+                    } else if req.sex == SexType.Female.rawValue {
                         cell.tf.text = "女"
                     } else {
                         cell.tf.text = "未知"
@@ -224,12 +224,12 @@ extension EditDataViewController {
                 let sheet = UIAlertController(title: "请选择性别", message: nil, preferredStyle: .ActionSheet)
                 let male = UIAlertAction(title: "男", style: .Default, handler: { [unowned cell](action) in
                     cell.tf.text = action.title
-                    self.req.sex = "1"
+                    self.req.sex = SexType.Male.rawValue
                     self.checkParameters()
                 })
                 let female = UIAlertAction(title: "女", style: .Default, handler: { [unowned cell](action) in
                     cell.tf.text = action.title
-                    self.req.sex = "2"
+                    self.req.sex = SexType.Female.rawValue
                     self.checkParameters()
                 })
                 let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)

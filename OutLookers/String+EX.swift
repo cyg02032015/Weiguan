@@ -19,11 +19,12 @@ extension String {
                          result[4], result[5], result[6], result[7],
                          result[8], result[9], result[10], result[11],
                          result[12], result[13], result[14], result[15])
+        LogDebug("转换前 \(md5)")
         let index = md5.startIndex.advancedBy(3)
         let firstThree = md5.substringToIndex(index)  // md5 取前3到后3
         let last = md5.substringFromIndex(index)
         md5 = last + firstThree
-        LogDebug(md5)
+        LogDebug("转换后 \(md5)")
         return md5
     }
     
