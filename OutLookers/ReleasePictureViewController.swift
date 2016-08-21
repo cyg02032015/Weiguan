@@ -163,7 +163,7 @@ extension ReleasePictureViewController {
             if contentHeight != nil {
                 return contentHeight
             } else {
-                return kScale(10)
+                return kScale(90)
             }
         case 2: return kHeight(81)
         default:
