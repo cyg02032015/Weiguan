@@ -45,11 +45,11 @@ class TalentListResp: BaseResponse {
 
 
 class TalentResult {
-    var categoryId : Int!
+    var categoryId : String!
     var categoryName : String!
     var city : String!
     var details : String!
-    var id : Int!
+    var id : String!
     var name : String!
     var price : Int!
     var province : String!
@@ -62,11 +62,11 @@ class TalentResult {
         if json == nil{
             return
         }
-        categoryId = json["categoryId"].intValue
+        categoryId = json["categoryId"].stringValue
         categoryName = json["categoryName"].stringValue
         city = json["city"].stringValue
         details = json["details"].stringValue
-        id = json["id"].intValue
+        id = json["id"].stringValue
         name = json["name"].stringValue
         price = json["price"].intValue
         province = json["province"].stringValue

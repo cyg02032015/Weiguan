@@ -12,6 +12,7 @@ import MobileCoreServices
 private let pictureSelectIdentifier = "pictureSelectIdentifier"
 private let editTextViewIdentifier = "editTextViewIdentifier"
 private let shareCellIdentifier = "shareCellId"
+private let issueTalentListId = "issueTalentListId"
 
 private extension Selector {
     static let tapReleaseButton = #selector(ReleasePictureViewController.tapReleaseButton(_:))
@@ -26,6 +27,9 @@ class ReleasePictureViewController: YGBaseViewController {
     lazy var req = ReleasePicAndVideoReq()
     var tokenObject: GetToken!
     lazy var imageData = [NSData]()
+    lazy var talentLists = [TalentResult]()
+    var contentHeight: CGFloat!
+    var isReload = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,7 @@ class ReleasePictureViewController: YGBaseViewController {
         self.shareTuple = YGShareHandler.handleShareInstalled()
         setupSubViews()
         getToken()
+        loadData()
     }
     
     func setupSubViews() {
@@ -45,6 +50,7 @@ class ReleasePictureViewController: YGBaseViewController {
         tableView.separatorStyle = .None
         tableView.registerClass(PictureSelectCell.self, forCellReuseIdentifier: pictureSelectIdentifier)
         tableView.registerClass(EditTextViewCell.self, forCellReuseIdentifier: editTextViewIdentifier)
+        tableView.registerClass(IssueTalenListCell.self, forCellReuseIdentifier: issueTalentListId)
         
         tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
@@ -59,6 +65,19 @@ class ReleasePictureViewController: YGBaseViewController {
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(tableView.superview!)
             make.bottom.equalTo(releaseButton.snp.top)
+        }
+    }
+    
+    func loadData() {
+        Server.talentList(pageNo, state: 2) { (success, msg, value) in
+            if success {
+                guard let obj = value else {return}
+                self.talentLists.appendContentsOf(obj.list)
+                self.tableView.reloadData()
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
         }
     }
     
@@ -113,7 +132,22 @@ extension ReleasePictureViewController {
                 return cell
             }
         } else if indexPath.section == 1 {
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCellWithIdentifier(issueTalentListId, forIndexPath: indexPath) as! IssueTalenListCell
+            cell.info = self.talentLists
+            if isReload == false {
+                cell.heightBlock = { [weak self, weak cell] height in
+                    guard let weakSelf = self else {return}
+                    weakSelf.contentHeight = height
+                    tableView.reloadData()
+                    weakSelf.isReload = true
+                    cell?.heightBlock = nil
+                }
+            }
+            cell.categoryIdsBlock = { [weak self] ids in
+                guard let weakSelf = self else {return}
+                weakSelf.req.talent = ids
+            }
+            return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(shareCellIdentifier, forIndexPath: indexPath) as! ShareCell
             cell.tuple = shareTuple
@@ -125,7 +159,12 @@ extension ReleasePictureViewController {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
         case 0: return indexPath.row == 0 ? kHeight(293) : kHeight(72)
-        case 1: return kHeight(257)
+        case 1:
+            if contentHeight != nil {
+                return contentHeight
+            } else {
+                return kScale(10)
+            }
         case 2: return kHeight(81)
         default:
             return 0

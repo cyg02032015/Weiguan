@@ -19,6 +19,7 @@
 #import <YYWebImage/YYWebImage.h>
 #import "MJRefresh.h"
 #import "MJRefreshConst.h"
+#import "UICollectionViewLeftAlignedLayout.h"
 // 友盟头文件桥接
 #import "UMSocial.h"
 #import "WXApi.h"

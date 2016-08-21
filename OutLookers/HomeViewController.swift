@@ -196,8 +196,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            let vc = PHViewController()
+            vc.user = hotmanList[indexPath.item].userId
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         if indexPath.section == 2 {
-            let obj = recommends[indexPath.section]
+            let obj = recommends[indexPath.item]
             let vc = DynamicDetailViewController()
             vc.dynamicObj = obj
             navigationController?.pushViewController(vc, animated: true)

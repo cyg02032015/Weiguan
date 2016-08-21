@@ -42,7 +42,6 @@ class SkillCell: UICollectionViewCell {
         skill.titleLabel?.font = UIFont.customFontOfSize(14)
         skill.userInteractionEnabled = false
         contentView.addSubview(skill)
-        
         skill.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalTo(skill.superview!)
         }

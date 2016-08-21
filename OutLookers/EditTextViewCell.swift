@@ -37,11 +37,14 @@ class EditTextViewCell: UITableViewCell {
         contentView.addSubview(placeholderLabel)
         
         textView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets(top: 8, left: 11, bottom: 15, right: 15))
+            make.top.equalTo(textView.superview!).offset(kScale(8))
+            make.left.equalTo(textView.superview!).offset(kScale(11))
+            make.right.equalTo(textView.superview!).offset(kScale(-15))
+            make.bottom.lessThanOrEqualTo(textView.superview!).offset(-15)
         }
         
         placeholderLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(placeholderLabel.superview!).offset(kScale(15))
+            make.right.equalTo(placeholderLabel.superview!).offset(kScale(-15))
             make.left.equalTo(placeholderLabel.superview!).offset(kScale(15))
             make.height.equalTo(kScale(16))
             make.top.equalTo(placeholderLabel.superview!).offset(kScale(15))
