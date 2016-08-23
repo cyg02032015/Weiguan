@@ -85,12 +85,12 @@ extension YGTabbarController: YGTabbarDelegate {
             } else {
                 let logView = YGLogView()
                 logView.animation()
-                logView.tapLogViewClosure({ (type) in
-                    LogInfo(UIApplication.sharedApplication().keyWindow?.rootViewController)
-                    guard let controller = self.tabBar else {return}
-                        let navi = YGNavigationController(rootViewController: controller)
-                        Util.logViewTap(navi, type: type)
-                })
+//                logView.tapLogViewClosure({ (type) in
+//                    LogInfo(UIApplication.sharedApplication().keyWindow?.rootViewController)
+//                    guard let controller = self.tabBar else {return}
+//                        let navi = YGNavigationController(rootViewController: controller)
+//                        Util.logViewTap(navi, type: type)
+//                })
             }
 //            navi.view.backgroundColor = UIColor(r: 0, g: 0, b: 0, a: 0.4)
 //            self.definesPresentationContext = true
