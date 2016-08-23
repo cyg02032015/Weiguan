@@ -116,45 +116,61 @@ extension DynamicViewController: DynamicCellDelegate {
     }
     
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {
-        let object = dynamicLists[indexPath.section]
-        if sender.selected {
-            Server.cancelLike("\(object.id)", handler: { (success, msg, value) in
-                if success {
-                    LogInfo("取消点赞")
-                    object.likeCount = object.likeCount - 1
-                    object.isLike = false
-                    sender.selected = false
-                    if object.likeCount <= 0 {
-                        sender.setTitle("赞TA", forState: .Normal)
+        if UserSingleton.sharedInstance.isLogin() {
+            let object = dynamicLists[indexPath.section]
+            if sender.selected {
+                Server.cancelLike("\(object.id)", handler: { (success, msg, value) in
+                    if success {
+                        LogInfo("取消点赞")
+                        object.likeCount = object.likeCount - 1
+                        object.isLike = false
+                        sender.selected = false
+                        if object.likeCount <= 0 {
+                            sender.setTitle("赞TA", forState: .Normal)
+                        } else {
+                            sender.setTitle("\(object.likeCount)", forState: .Normal)
+                        }
+                        self.dynamicLists[indexPath.section] = object
                     } else {
-                        sender.setTitle("\(object.likeCount)", forState: .Normal)
+                        SVToast.showWithError(msg!)
                     }
-                    self.dynamicLists[indexPath.section] = object
-                } else {
-                    SVToast.showWithError(msg!)
-                }
-            })
+                })
+            } else {
+                Server.like("\(object.id)", handler: { (success, msg, value) in
+                    if success {
+                        LogInfo("点赞成功")
+                        object.likeCount = object.likeCount + 1
+                        object.isLike = true
+                        sender.selected = true
+                        sender.setTitle("\(object.likeCount)", forState: .Normal)
+                        self.dynamicLists[indexPath.section] = object
+                    } else {
+                        SVToast.showWithError(msg!)
+                    }
+                })
+            }
         } else {
-            Server.like("\(object.id)", handler: { (success, msg, value) in
-                if success {
-                    LogInfo("点赞成功")
-                    object.likeCount = object.likeCount + 1
-                    object.isLike = true
-                    sender.selected = true
-                    sender.setTitle("\(object.likeCount)", forState: .Normal)
-                    self.dynamicLists[indexPath.section] = object
-                } else {
-                    SVToast.showWithError(msg!)
-                }
+            let logView = YGLogView()
+            logView.animation()
+            logView.tapLogViewClosure({ (type) in
+                Util.logViewTap(self, type: type)
             })
         }
     }
     
     func dynamicCellTapComment(sender: UIButton, indexPath: NSIndexPath) {
-        let obj = dynamicLists[indexPath.section]
-        let vc = DynamicDetailViewController()
-        vc.dynamicObj = obj
-        vc.isComment = true
-        navigationController?.pushViewController(vc, animated: true)
+        if UserSingleton.sharedInstance.isLogin() {
+            let obj = dynamicLists[indexPath.section]
+            let vc = DynamicDetailViewController()
+            vc.dynamicObj = obj
+            vc.isComment = true
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let logView = YGLogView()
+            logView.animation()
+            logView.tapLogViewClosure({ (type) in
+                Util.logViewTap(self, type: type)
+            })
+        }
     }
 }

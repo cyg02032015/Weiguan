@@ -61,7 +61,11 @@ extension SettingViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(logButtonCellId, forIndexPath: indexPath) as! LogButtonCell
-            cell.label.text = "立即登录"
+            if UserSingleton.sharedInstance.isLogin() {
+                cell.label.text = "退出登录"
+            } else {
+                cell.label.text = "立即登录"
+            }
             return cell
         }
     }
@@ -69,14 +73,33 @@ extension SettingViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 0:
-            let vc = AccountViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            if UserSingleton.sharedInstance.isLogin() {
+                let vc = AccountViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let logView = YGLogView()
+                logView.animation()
+                logView.tapLogViewClosure({ (type) in
+                    Util.logViewTap(self, type: type)
+                })
+            }
+            
         case 1: ""
         case 2:
             let vc = AboutViewController()
             navigationController?.pushViewController(vc, animated: true)
         case 3: ""
-        case 4: ""
+        case 4:
+            if UserSingleton.sharedInstance.isLogin() {
+                KeyChainSingle.sharedInstance.logOut()
+            } else {
+                let logView = YGLogView()
+                logView.animation()
+                logView.tapLogViewClosure({ (type) in
+                    Util.logViewTap(self, type: type)
+                })
+            }
+            tableView.reloadData()
         default:""
         }
     }

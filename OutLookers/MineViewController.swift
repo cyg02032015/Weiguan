@@ -99,8 +99,16 @@ class MineViewController: YGBaseViewController {
 extension MineViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
-            let vc = MessageViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            if UserSingleton.sharedInstance.isLogin() {
+                let vc = MessageViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let logView = YGLogView()
+                logView.animation()
+                logView.tapLogViewClosure({ (type) in
+                    Util.logViewTap(self, type: type)
+                })
+            }
         }
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -113,35 +121,70 @@ extension MineViewController {
                 cell.avatarInfo = self.avatarList.first
             }
             cell.header.iconHeaderTap { [unowned self] in
-                let view = YGLogView()
-                view.animation()
-                view.tapLogViewClosure({ (type) in
-                    Util.logViewTap(self, type: type)
-                })
+                if UserSingleton.sharedInstance.isLogin() {
+                    
+                } else {
+                    let view = YGLogView()
+                    view.animation()
+                    view.tapLogViewClosure({ (type) in
+                        Util.logViewTap(self, type: type)
+                    })
+                }
             }
             cell.tapEditDataClosure { [unowned self] in
-                LogInfo("编辑资料")
-                let vc = EditDataViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                if UserSingleton.sharedInstance.isLogin() {
+                    let vc = EditDataViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let logView = YGLogView()
+                    logView.animation()
+                    logView.tapLogViewClosure({ (type) in
+                        Util.logViewTap(self, type: type)
+                    })
+                }
             }
             cell.tapFriendsClosure { [unowned self] in
-                let vc = DynamicViewController()
-                vc.isPerson = true
-                vc.title = "动态"
-                self.navigationController?.pushViewController(vc, animated: true)
-                SVToast.show()
+                if UserSingleton.sharedInstance.isLogin() {
+                    let vc = DynamicViewController()
+                    vc.isPerson = true
+                    vc.title = "动态"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    SVToast.show()
+                } else {
+                    let logView = YGLogView()
+                    logView.animation()
+                    logView.tapLogViewClosure({ (type) in
+                        Util.logViewTap(self, type: type)
+                    })
+                }
             }
             cell.tapFollowClosure { [unowned self] in
-                let vc = FollowPeopleViewController()
-                vc.showType = .Follow
-                vc.title = "我关注的人"
-                self.navigationController?.pushViewController(vc, animated: true)
+                if UserSingleton.sharedInstance.isLogin() {
+                    let vc = FollowPeopleViewController()
+                    vc.showType = .Follow
+                    vc.title = "我关注的人"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let logView = YGLogView()
+                    logView.animation()
+                    logView.tapLogViewClosure({ (type) in
+                        Util.logViewTap(self, type: type)
+                    })
+                }
             }
             cell.tapFanClosure { [unowned self] in
-                let vc = FollowPeopleViewController()
-                vc.showType = .Fan
-                vc.title = "我的粉丝"
-                self.navigationController?.pushViewController(vc, animated: true)
+                if UserSingleton.sharedInstance.isLogin() {
+                    let vc = FollowPeopleViewController()
+                    vc.showType = .Fan
+                    vc.title = "我的粉丝"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let logView = YGLogView()
+                    logView.animation()
+                    logView.tapLogViewClosure({ (type) in
+                        Util.logViewTap(self, type: type)
+                    })
+                }
             }
             return cell
         } else if indexPath.section == 1 {
@@ -194,6 +237,14 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if !UserSingleton.sharedInstance.isLogin() {
+            let logView = YGLogView()
+            logView.animation()
+            logView.tapLogViewClosure({ (type) in
+                Util.logViewTap(self, type: type)
+            })
+            return
+        }
         if indexPath.item == 0 { // 才艺
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)

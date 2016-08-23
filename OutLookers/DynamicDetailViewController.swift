@@ -228,44 +228,70 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
     }
     
     func dynamicDetailTapFollow(sender: UIButton) {
-        let object = detailObj
-        Server.followUser("\(object.userId)") { (success, msg, value) in
-            if success {
-                self.modifyFollow(sender)
-            } else {
-                guard let m = msg else {return}
-                SVToast.showWithError(m)
+        if UserSingleton.sharedInstance.isLogin() {
+            let object = detailObj
+            Server.followUser("\(object.userId)") { (success, msg, value) in
+                if success {
+                    self.modifyFollow(sender)
+                } else {
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
+                }
             }
+        } else {
+            let logView = YGLogView()
+            logView.animation()
+            logView.tapLogViewClosure({ (type) in
+                Util.logViewTap(self, type: type)
+            })
         }
+
     }
     
     func dynamicDetailTapPraise(sender: UIButton) {
-        let object = detailObj
-        if sender.selected {
-            Server.cancelLike("\(object.id)", handler: { (success, msg, value) in
-                if success {
-                    LogInfo("取消点赞")
-                    sender.selected = false
-                } else {
-                    SVToast.showWithError(msg!)
-                }
-            })
+        if UserSingleton.sharedInstance.isLogin() {
+            let object = detailObj
+            if sender.selected {
+                Server.cancelLike("\(object.id)", handler: { (success, msg, value) in
+                    if success {
+                        LogInfo("取消点赞")
+                        sender.selected = false
+                    } else {
+                        SVToast.showWithError(msg!)
+                    }
+                })
+            } else {
+                Server.like("\(object.id)", handler: { (success, msg, value) in
+                    if success {
+                        LogInfo("点赞成功")
+                        sender.selected = true
+                    } else {
+                        SVToast.showWithError(msg!)
+                    }
+                })
+            }
         } else {
-            Server.like("\(object.id)", handler: { (success, msg, value) in
-                if success {
-                    LogInfo("点赞成功")
-                    sender.selected = true
-                } else {
-                    SVToast.showWithError(msg!)
-                }
+            let logView = YGLogView()
+            logView.animation()
+            logView.tapLogViewClosure({ (type) in
+                Util.logViewTap(self, type: type)
             })
         }
+
     }
     
     func dynamicDetailTapComment(sender: UIButton) {
-        if toolbar.inputTextView.isFirstResponder() {
-            return
+        if UserSingleton.sharedInstance.isLogin() {
+            if toolbar.inputTextView.isFirstResponder() {
+                return
+            }
+            toolbar.inputTextView.becomeFirstResponder()
+        } else {
+            let logView = YGLogView()
+            logView.animation()
+            logView.tapLogViewClosure({ (type) in
+                Util.logViewTap(self, type: type)
+            })
         }
-        toolbar.inputTextView.becomeFirstResponder()
     }
 }

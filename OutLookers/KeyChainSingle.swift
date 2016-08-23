@@ -27,5 +27,13 @@ class KeyChainSingle {
     func getUserId() -> String? {
         return keychain[kUserId]
     }
+    
+    func logOut() {
+        _ = try? keychain.remove(kToken)
+        _ = try? keychain.remove(kToken2)
+        _ = try? keychain.remove(kUserId)
+        _ = try? keychain.remove(kCookie)
+        _ = try? keychain.remove(kExpiresDate)
+    }
 }
 
