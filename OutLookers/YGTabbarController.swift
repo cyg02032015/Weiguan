@@ -22,6 +22,16 @@ class YGTabbarController: UITabBarController {
         }
     }
     
+    // iOS8以后会动态添加原声tabbaritem 而viewwillAppear不会被调用所有要写这个方法
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        for child in self.tabBar.subviews {
+            if child.isKindOfClass(UIControl.classForCoder()) {
+                child.removeFromSuperview()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTabbar()

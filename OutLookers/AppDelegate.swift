@@ -26,9 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             configCocoaLumberjack()
         #endif
         testUpload()
-        
-//        try! KeyChainSingle.sharedInstance.keychain.removeAll()
-        
+                
         // 键盘
         keyboardSetting()
         // 初始化配置SVProgressHUD
