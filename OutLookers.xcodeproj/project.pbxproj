@@ -203,6 +203,7 @@
 		D84DBBFD1D72F23000163F5E /* InvitedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */; };
 		D84DBBFF1D732C8400163F5E /* InvitedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBBFE1D732C8400163F5E /* InvitedHeaderView.swift */; };
 		D84DBC011D7332AF00163F5E /* InvitedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBC001D7332AF00163F5E /* InvitedTableViewCell.swift */; };
+		D84DBC031D73443A00163F5E /* InvitedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBC021D73443A00163F5E /* InvitedDetailTableViewCell.swift */; };
 		D8518AC31D6046B90028EC79 /* FolloButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */; };
 		D8518AC71D6054C20028EC79 /* CircleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */; };
 		D8518ACD1D606A680028EC79 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */; };
@@ -633,6 +634,7 @@
 		D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedDetailViewController.swift; path = OutLookers/InvitedDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		D84DBBFE1D732C8400163F5E /* InvitedHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedHeaderView.swift; path = OutLookers/InvitedHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D84DBC001D7332AF00163F5E /* InvitedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedTableViewCell.swift; path = OutLookers/InvitedTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D84DBC021D73443A00163F5E /* InvitedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedDetailTableViewCell.swift; path = OutLookers/InvitedDetailTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloButtonProtocol.swift; sourceTree = "<group>"; };
 		D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleHeaderView.swift; path = OutLookers/CircleHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalCollectionViewCell.swift; path = OutLookers/HorizontalCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -1465,6 +1467,7 @@
 				D84DBBFA1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift */,
 				D84DBBFE1D732C8400163F5E /* InvitedHeaderView.swift */,
 				D84DBC001D7332AF00163F5E /* InvitedTableViewCell.swift */,
+				D84DBC021D73443A00163F5E /* InvitedDetailTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2565,6 +2568,7 @@
 				D81992561D44A045007734C0 /* PersonFilesReq.swift in Sources */,
 				E41B92771D3E13C100749769 /* PutCashViewController.swift in Sources */,
 				D812A9111D4FA69D00186564 /* MJRefreshNormalHeader.m in Sources */,
+				D84DBC031D73443A00163F5E /* InvitedDetailTableViewCell.swift in Sources */,
 				D870C73A1D3932D7003B7A09 /* HotmanCell.swift in Sources */,
 				E4A3E6461D4714840045202B /* YGLogView.swift in Sources */,
 				D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */,
