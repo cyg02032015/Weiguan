@@ -146,6 +146,7 @@ extension MineViewController {
             cell.tapFriendsClosure { [unowned self] in
                 if UserSingleton.sharedInstance.isLogin() {
                     let vc = DynamicViewController()
+                    vc.user = UserSingleton.sharedInstance.userId
                     vc.isPerson = true
                     vc.title = "动态"
                     self.navigationController?.pushViewController(vc, animated: true)

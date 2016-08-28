@@ -24,6 +24,7 @@ class DynamicDetailViewController: YGBaseViewController {
     var moreShareView: YGShare!
     var moreButton: UIButton!
     var isComment = false
+    var likeListObj: LikeListResp!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,10 +55,14 @@ class DynamicDetailViewController: YGBaseViewController {
             if success {
                 guard let object = value else {return}
                 self.detailObj = object
-                self.tableView.reloadData()
-                delay(0.3, task: {
-                    if self.isComment {
-                        self.toolbar.inputTextView.becomeFirstResponder()
+                
+                Server.likeList(1, dynamicId: "\(object.id)", handler: { (success, msg, value) in
+                    if success {
+                        guard let obj = value else {return}
+                        self.likeListObj = obj
+                        self.tableView.reloadData()
+                    } else {
+                        LogError("无法获取点赞列表")
                     }
                 })
             } else {
@@ -65,6 +70,7 @@ class DynamicDetailViewController: YGBaseViewController {
                 SVToast.showWithError(m)
             }
         }
+        
     }
     
     override func loadMoreData() {
@@ -174,7 +180,11 @@ extension DynamicDetailViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return detailObj == nil ? 0 : 1
+            if detailObj == nil || likeListObj == nil {
+                return 0
+            } else {
+                return 1
+            }
         } else {
             return comments.count
         }
@@ -185,6 +195,7 @@ extension DynamicDetailViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier(dynamicDetailCellId, forIndexPath: indexPath) as! DynamicDetailVideoCell
             cell.info = detailObj
             cell.userInfo = dynamicObj
+            cell.likeListInfo = self.likeListObj
             cell.delegate = self
             cell.headImgView.iconHeaderTap({ [weak self] in
                 let vc = PHViewController()
@@ -265,6 +276,9 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
                     if success {
                         LogInfo("点赞成功")
                         sender.selected = true
+//                        let likeList = LikeList(fromJson: nil)
+//                        likeList.detailsType = UserSingleton.sharedInstance.type.rawValue
+//                        likeList.headImgUrl =
                     } else {
                         SVToast.showWithError(msg!)
                     }

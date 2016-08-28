@@ -36,7 +36,7 @@ class MineHeaderCell: UITableViewCell {
     
     var avatarInfo: AvatarNameList! {
         didSet {
-            header.iconURL = avatarInfo.headImgUrl
+            header.iconURL = avatarInfo.headImgUrl.addImagePath(kSize(59, height: 59))
             header.setVimage(Util.userType(avatarInfo.detailsType))
             name.text = avatarInfo.nickname
         }

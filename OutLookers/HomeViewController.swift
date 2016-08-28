@@ -66,7 +66,7 @@ class HomeViewController: YGBaseViewController {
                 }
             }
             
-            Server.dynamicList(self.pageNo,user: "1",state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+            Server.dynamicList(self.pageNo,user: UserSingleton.sharedInstance.userId,state: 1, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
                 if success {
                     Server.homeRecommendHotman { (success, msg, value) in
                         SVToast.dismiss()
@@ -102,7 +102,7 @@ class HomeViewController: YGBaseViewController {
     }
     
     func loadNewData() {
-        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
             if success {
                 guard let object = value else { return }
                 self.recommendObj = object
@@ -124,7 +124,7 @@ class HomeViewController: YGBaseViewController {
     
     override func loadMoreData() {
         
-        Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
             self.collectionView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else { return }

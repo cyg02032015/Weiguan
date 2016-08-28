@@ -547,8 +547,8 @@ NSString * const ID = @"cycleCell";
     
     NSString *imagePath = self.imagePathsGroup[itemIndex];
     if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
-        if ([imagePath hasSuffix:@".jpg"]) {
-            NSString *imgUrl = [NSString stringWithFormat:@"%@%@@%dh_%dw.webp", [[GlobleDefineSingle sharedInstance] imagePath], imagePath, (int)self.frame.size.width, (int)self.frame.size.height];
+        if ([imagePath hasSuffix:@".jpg"] || [imagePath hasSuffix:@".png"]) { // (int)self.frame.size.width, (int)self.frame.size.height
+            NSString *imgUrl = [NSString stringWithFormat:@"%@%@@%dh_%dw.webp", [[GlobleDefineSingle sharedInstance] imagePath], imagePath, 1080, 1080];
             [cell.imageView yy_setImageWithURL:[NSURL URLWithString:imgUrl] placeholder:self.placeholderImage];
         } else {
             UIImage *image = [UIImage imageNamed:imagePath];

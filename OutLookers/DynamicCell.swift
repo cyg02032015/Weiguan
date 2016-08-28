@@ -22,7 +22,7 @@ class DynamicCell: UITableViewCell {
 
     var info: DynamicResult! {
         didSet {
-            headImgView.iconURL = info.photo
+            headImgView.iconURL = info.photo.addImagePath(kSize(35, height: 35))
             headImgView.setVimage(Util.userType(info.detailsType))
             nameLabel.text = info.name
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()

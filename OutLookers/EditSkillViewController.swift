@@ -113,7 +113,7 @@ class EditSkillViewController: YGBaseViewController {
     
     // MARK: 返回
     override func backButtonPressed(sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: "确认放弃发布视频吗?", preferredStyle: .Alert)
+        let alert = UIAlertController(title: nil, message: "确认放弃发布才艺吗?", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: { [weak self](action) in
             self?.dismissViewControllerAnimated(true) { [weak self] in
                 self?.photoArray.removeAll()

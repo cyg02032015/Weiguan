@@ -16,9 +16,9 @@ class IconHeaderView: UIView {
     var vImgView: UIImageView!
     var didSetupConstraint: Bool = false
     
-    var iconURL: String! {
+    var iconURL: NSURL! {
         didSet {
-            iconView.yy_setImageWithURL(iconURL.addImagePath(CGSize(width: self.gg_width, height: self.gg_height)), placeholder: kHeadPlaceholder)
+            iconView.yy_setImageWithURL(iconURL, placeholder: kHeadPlaceholder)
         }
     }
     

@@ -12,7 +12,7 @@ class CommentCell: UITableViewCell {
 
     var info: CommentList! {
         didSet {
-            headImgView.iconURL = info.headImgUrl
+            headImgView.iconURL = info.headImgUrl.addImagePath(kSize(35, height: 35))
             headImgView.setVimage(Util.userType(info.detailsType))
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
             nameLabel.text = info.nickname

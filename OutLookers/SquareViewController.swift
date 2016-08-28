@@ -21,13 +21,37 @@ class SquareViewController: YGBaseViewController {
         loadMoreData()
         let sharetuple = YGShareHandler.handleShareInstalled()
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
-            self.loadMoreData()
+        
+        tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
+            self?.loadNewData()
+        })
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
         })
     }
     
+    func loadNewData() {
+        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true) { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                guard let object = value else {return}
+                self.sqaureLists.removeAll()
+                self.sqaureLists.appendContentsOf(object.list)
+                self.tableView.mj_header.endRefreshing()
+                self.tableView.reloadData()
+                if object.list.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+                self.tableView.mj_header.endRefreshing()
+            }
+        }
+    }
+    
     override func loadMoreData() {
-        Server.dynamicList(pageNo,user: "1" ,state: 1, isPerson: false, isHome: false, isSquare: true) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
@@ -39,7 +63,8 @@ class SquareViewController: YGBaseViewController {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
             } else {
-                SVToast.showWithError(msg!)
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
                 self.tableView.mj_footer.endRefreshing()
             }
         }

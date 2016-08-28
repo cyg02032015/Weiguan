@@ -29,5 +29,14 @@ extension UIView {
         border.lineDashPattern = [4,2]
         self.layer.addSublayer(border)
     }
+    
+    func getSuperController() -> UIViewController? {
+        var obj = self.nextResponder()
+        while obj != nil && !obj!.isKindOfClass(UIViewController.self) {
+            obj = obj?.nextResponder()
+        }
+        guard let controller = obj as? UIViewController else {return nil}
+        return controller
+    }
 }
 

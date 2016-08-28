@@ -16,7 +16,7 @@ class FollowPeopleCell: UITableViewCell {
 
     var info: FollowList! {
         didSet {
-            header.iconURL = info.photo
+            header.iconURL = info.photo.addImagePath(kSize(50, height: 50))
             header.setVimage(Util.userType(info.detailsType))
             nameLabel.text = info.name
             

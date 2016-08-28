@@ -12,10 +12,8 @@ class TalentDetailHeadCell: UITableViewCell {
 
     var info: TalentDtailResp! {
         didSet {
-            headImgView.iconURL = info.headImgUrl
-//            headImgView.setVimage(Util.userType(info.))
+            headImgView.iconURL = info.headImgUrl.addImagePath(kSize(35, height: 35))
             nameLabel.text = info.nickname
-            
         }
     }
     var headImgView: IconHeaderView!

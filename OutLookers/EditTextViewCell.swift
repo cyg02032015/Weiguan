@@ -40,7 +40,7 @@ class EditTextViewCell: UITableViewCell {
             make.top.equalTo(textView.superview!).offset(kScale(8))
             make.left.equalTo(textView.superview!).offset(kScale(11))
             make.right.equalTo(textView.superview!).offset(kScale(-15))
-            make.bottom.lessThanOrEqualTo(textView.superview!).offset(-15)
+            make.bottom.equalTo(textView.superview!).offset(-15)
         }
         
         placeholderLabel.snp.makeConstraints { (make) in

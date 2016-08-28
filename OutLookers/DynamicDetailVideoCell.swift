@@ -11,6 +11,8 @@ import NVActivityIndicatorView
 
 let talentPadding: CGFloat = 15
 
+let praiseListCollectionCellId = "praiseListCollectionCellId"
+
 protocol DynamicDetailDelegate: class {
     func dynamicDetailTapShare(sender: UIButton)
     func dynamicDetailTapFollow(sender: UIButton)
@@ -159,25 +161,14 @@ class DynamicDetailVideoCell: UITableViewCell {
                 make.top.equalTo(commentButton.snp.bottom).offset(kScale(15))
             }
             
-            let layout = UICollectionViewFlowLayout()
-            layout.headerReferenceSize = CGSize(width: ScreenWidth, height: kScale(60))
-            layout.itemSize = CGSize(width: (ScreenWidth - 2) / 3, height: kHeight(100))
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-            layout.minimumLineSpacing = 20
-            layout.minimumInteritemSpacing = 0
-            collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-            collectionView.backgroundColor = kBackgoundColor
-            collectionView.delegate = self
-            collectionView.dataSource = self
-            contentView.addSubview(collectionView)
             collectionView.snp.makeConstraints { (make) in
-                make.top.equalTo(lineV.snp.bottom).offset(kScale(10))
+                make.top.equalTo(lineV.snp.bottom)
                 make.left.equalTo(collectionView.superview!).offset(kScale(15))
                 make.right.equalTo(collectionView.superview!).offset(kScale(-15))
                 make.height.equalTo(kScale(40))
-                make.bottom.lessThanOrEqualTo(collectionView.superview!).offset(kScale(-10)).priorityLow()
+                make.bottom.lessThanOrEqualTo(collectionView.superview!).priorityLow()
             }
-            
+
             commentButton.rx_tap.subscribeNext { [unowned self] in
                 if self.delegate != nil {
                     self.delegate.dynamicDetailTapComment(commentButton)
@@ -200,12 +191,20 @@ class DynamicDetailVideoCell: UITableViewCell {
     
     var userInfo: DynamicResult! {
         didSet {
-            headImgView.iconURL = userInfo.photo
+            headImgView.iconURL = userInfo.photo.addImagePath(kSize(35, height: 35))
             headImgView.setVimage(Util.userType(userInfo.detailsType))
             nameLabel.text = userInfo.name
             followButton.hidden = userInfo.follow == 1 ? true : false
         }
     }
+    
+    var likeListInfo: LikeListResp! {
+        didSet {
+            self.likeLists = likeListInfo.lists
+            collectionView.reloadData()
+        }
+    }
+    lazy var likeLists = [LikeList]()
     weak var delegate: DynamicDetailDelegate!
     var player: BMPlayer!
     var praiseButton: UIButton!
@@ -271,15 +270,6 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.centerY.equalTo(headImgView)
         }
         
-//        bigImgView = UIImageView()
-//        bigImgView.hidden = true
-//        contentView.addSubview(bigImgView)
-//        bigImgView.snp.makeConstraints { (make) in
-//            make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
-//            make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
-//            make.left.equalTo(bigImgView.superview!)
-//        }
-        
         player = BMPlayer()
         player.hidden = true
         BMPlayerConf.allowLog = false
@@ -294,15 +284,18 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.left.equalTo(player.superview!)
         }
         
-//        details = UILabel.createLabel(16, textColor: UIColor(hex: 0x666666))
-//        contentView.addSubview(details)
-//        details.snp.makeConstraints { (make) in
-////            make.top.equalTo(bigImgView.snp.bottom).offset(kScale(10))
-//            make.left.equalTo(headImgView)
-//            make.right.equalTo(details.superview!).offset(kScale(-15))
-//            make.height.equalTo(kScale(16))
-//        }
-//        layoutIfNeeded()
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: kScale(24), height: kHeight(24))
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 6
+        layout.minimumInteritemSpacing = 5
+        layout.scrollDirection = .Horizontal
+        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        contentView.addSubview(collectionView)
+        collectionView.registerClass(PraiseListCollectionViewCell.self, forCellWithReuseIdentifier: praiseListCollectionCellId)
         
         followButton.rx_tap.subscribeNext { [unowned self] in
             if self.delegate != nil {
@@ -332,10 +325,17 @@ class DynamicDetailVideoCell: UITableViewCell {
 
 extension DynamicDetailVideoCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return self.likeLists.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(praiseListCollectionCellId, forIndexPath: indexPath) as! PraiseListCollectionViewCell
+        if self.likeLists.count == indexPath.item {
+            cell.showCountlabel(true, count: "\(self.likeLists.count)")
+        } else {
+            cell.info = likeLists[indexPath.item]
+            cell.showCountlabel(false, count: "")
+        }
+        return cell
     }
 }

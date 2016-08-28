@@ -51,7 +51,6 @@ class ReleasePictureViewController: YGBaseViewController {
         tableView.registerClass(PictureSelectCell.self, forCellReuseIdentifier: pictureSelectIdentifier)
         tableView.registerClass(EditTextViewCell.self, forCellReuseIdentifier: editTextViewIdentifier)
         tableView.registerClass(IssueTalenListCell.self, forCellReuseIdentifier: issueTalentListId)
-        
         tableView.registerClass(ShareCell.self, forCellReuseIdentifier: shareCellIdentifier)
         
         releaseButton = Util.createReleaseButton("发布")
