@@ -276,9 +276,6 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
                     if success {
                         LogInfo("点赞成功")
                         sender.selected = true
-//                        let likeList = LikeList(fromJson: nil)
-//                        likeList.detailsType = UserSingleton.sharedInstance.type.rawValue
-//                        likeList.headImgUrl =
                     } else {
                         SVToast.showWithError(msg!)
                     }

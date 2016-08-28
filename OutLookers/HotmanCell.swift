@@ -12,7 +12,7 @@ class HotmanCell: UITableViewCell {
 
     var info: FindeHotman! {
         didSet {
-            imgView.yy_setImageWithURL(info.headImgUrl.addImagePath(CGSize(width: imgView.gg_width, height: imgView.gg_height)), placeholder: kPlaceholder)
+            imgView.yy_setImageWithURL(info.headImgUrl.addImagePath(CGSize(width: 1080, height: 1080)), placeholder: kPlaceholder)
             nameLabel.text = info.nickname
             jobLabel.text = "没有字段"
             picCount.text = "0"

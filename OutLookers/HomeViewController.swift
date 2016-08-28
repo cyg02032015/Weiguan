@@ -37,7 +37,7 @@ class HomeViewController: YGBaseViewController {
             if UserSingleton.sharedInstance.isLogin() {
                 let issuevc = IssueViewController()
                 let navi = YGNavigationController(rootViewController: issuevc)
-                self.presentViewController(navi, animated: true, completion: {})
+                self.presentViewController(navi, animated: false, completion: {})
             } else {
                 let logView = YGLogView()
                 logView.animation()

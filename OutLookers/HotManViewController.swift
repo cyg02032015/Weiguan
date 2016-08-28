@@ -65,6 +65,8 @@ extension HotManViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = PHViewController()
+        vc.user = "\(hotmans[indexPath.row].id)"
+        vc.scrollTo = 1
         navigationController?.pushViewController(vc, animated: true)
     }
 }

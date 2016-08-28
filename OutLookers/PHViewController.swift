@@ -19,6 +19,7 @@ class PHViewController: YGBaseViewController {
     var toolView: PHToolView!
     var rightNaviButton: UIButton!
     var delta: CGFloat = 0
+    var scrollTo: Int = 0
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,6 +62,11 @@ class PHViewController: YGBaseViewController {
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        slidePageScrollView.scrollToPageIndex(scrollTo, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
@@ -96,6 +102,7 @@ class PHViewController: YGBaseViewController {
         titlePageTabbar.selectedTextColor = UIColor.blackColor()
         titlePageTabbar.textColor = kGrayTextColor
         titlePageTabbar.backgroundColor = UIColor(hex: 0xf8f8f8)
+        titlePageTabbar.switchToPageIndex(scrollTo)
         slidePageScrollView.pageTabBar = titlePageTabbar
         
         let dynamicVC = DynamicViewController()

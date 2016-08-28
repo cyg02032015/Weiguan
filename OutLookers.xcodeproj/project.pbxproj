@@ -200,6 +200,7 @@
 		D84D986F1D47AD39007CCD6E /* XHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */; };
 		D84D98721D47AE47007CCD6E /* UIButton+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98711D47AE47007CCD6E /* UIButton+EX.swift */; };
 		D84DBBFB1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBBFA1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift */; };
+		D84DBBFD1D72F23000163F5E /* InvitedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */; };
 		D8518AC31D6046B90028EC79 /* FolloButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */; };
 		D8518AC71D6054C20028EC79 /* CircleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */; };
 		D8518ACD1D606A680028EC79 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */; };
@@ -627,6 +628,7 @@
 		D84D986D1D47AD39007CCD6E /* XHMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMessageTextView.m; sourceTree = "<group>"; };
 		D84D98711D47AE47007CCD6E /* UIButton+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+EX.swift"; path = "OutLookers/UIButton+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D84DBBFA1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PraiseListCollectionViewCell.swift; path = OutLookers/PraiseListCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedDetailViewController.swift; path = OutLookers/InvitedDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloButtonProtocol.swift; sourceTree = "<group>"; };
 		D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleHeaderView.swift; path = OutLookers/CircleHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalCollectionViewCell.swift; path = OutLookers/HorizontalCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -1444,6 +1446,7 @@
 				D870C7351D393236003B7A09 /* HotManViewController.swift */,
 				D870C7371D393250003B7A09 /* CircularViewController.swift */,
 				D870C7481D3B99BF003B7A09 /* DynamicDetailViewController.swift */,
+				D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2661,6 +2664,7 @@
 				E446FA171D2E311B003DFC1E /* DynamicCell.swift in Sources */,
 				E41DD9291D3CBBD000E5E7E9 /* MyTalentViewController.swift in Sources */,
 				D812A9101D4FA69D00186564 /* MJRefreshGifHeader.m in Sources */,
+				D84DBBFD1D72F23000163F5E /* InvitedDetailViewController.swift in Sources */,
 				D81992581D44A5D6007734C0 /* PersonFilesResp.swift in Sources */,
 				D825EEB51D50E78A00AF94AF /* BMPlayer.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
