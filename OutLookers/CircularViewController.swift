@@ -70,4 +70,10 @@ extension CircularViewController {
         cell.info = circulars[indexPath.section]
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = InvitedDetailViewController()
+        vc.id = "\(circulars[indexPath.section].id)"
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

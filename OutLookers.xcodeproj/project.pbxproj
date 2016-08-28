@@ -201,6 +201,8 @@
 		D84D98721D47AE47007CCD6E /* UIButton+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84D98711D47AE47007CCD6E /* UIButton+EX.swift */; };
 		D84DBBFB1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBBFA1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift */; };
 		D84DBBFD1D72F23000163F5E /* InvitedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */; };
+		D84DBBFF1D732C8400163F5E /* InvitedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBBFE1D732C8400163F5E /* InvitedHeaderView.swift */; };
+		D84DBC011D7332AF00163F5E /* InvitedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBC001D7332AF00163F5E /* InvitedTableViewCell.swift */; };
 		D8518AC31D6046B90028EC79 /* FolloButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */; };
 		D8518AC71D6054C20028EC79 /* CircleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */; };
 		D8518ACD1D606A680028EC79 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */; };
@@ -629,6 +631,8 @@
 		D84D98711D47AE47007CCD6E /* UIButton+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+EX.swift"; path = "OutLookers/UIButton+EX.swift"; sourceTree = SOURCE_ROOT; };
 		D84DBBFA1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PraiseListCollectionViewCell.swift; path = OutLookers/PraiseListCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedDetailViewController.swift; path = OutLookers/InvitedDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		D84DBBFE1D732C8400163F5E /* InvitedHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedHeaderView.swift; path = OutLookers/InvitedHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D84DBC001D7332AF00163F5E /* InvitedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedTableViewCell.swift; path = OutLookers/InvitedTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloButtonProtocol.swift; sourceTree = "<group>"; };
 		D8518AC61D6054C20028EC79 /* CircleHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleHeaderView.swift; path = OutLookers/CircleHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D8518ACC1D606A680028EC79 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalCollectionViewCell.swift; path = OutLookers/HorizontalCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -1459,6 +1463,8 @@
 				D870C74A1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift */,
 				D819908E1D3BA8F3007734C0 /* CommentCell.swift */,
 				D84DBBFA1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift */,
+				D84DBBFE1D732C8400163F5E /* InvitedHeaderView.swift */,
+				D84DBC001D7332AF00163F5E /* InvitedTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2412,6 +2418,7 @@
 				E41B92851D3F4C6B00749769 /* MyCommentCell.swift in Sources */,
 				D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */,
 				D82F8DCA1D27CB6400A24CDB /* TAPageControl.m in Sources */,
+				D84DBC011D7332AF00163F5E /* InvitedTableViewCell.swift in Sources */,
 				E4473EBD1D375E18000CEEF2 /* PhoneBindCell.swift in Sources */,
 				D825EEBD1D50EB7600AF94AF /* SnapshotsResp.swift in Sources */,
 				D812A9151D4FA69D00186564 /* NSBundle+MJRefresh.m in Sources */,
@@ -2674,6 +2681,7 @@
 				E45BFF891D422F8D0013356C /* CircularDetailViewController.swift in Sources */,
 				D819926A1D44B6B2007734C0 /* AvatarAndNameResp.swift in Sources */,
 				D82F8E101D2D320900A24CDB /* TalentTableViewCell.swift in Sources */,
+				D84DBBFF1D732C8400163F5E /* InvitedHeaderView.swift in Sources */,
 				D870C74B1D3B9A67003B7A09 /* DynamicDetailVideoCell.swift in Sources */,
 				D8DAC5A41D684D990009FDB9 /* TokenTool.swift in Sources */,
 				D81992661D44B431007734C0 /* MyFansResp.swift in Sources */,
