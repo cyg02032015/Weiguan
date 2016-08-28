@@ -30,6 +30,7 @@ class TokenTool {
             let array = cookie.value.componentsSeparatedByString("|")
             KeyChainSingle.sharedInstance.keychain[kExpiresDate] = self.expiredDate(array[1])
             KeyChainSingle.sharedInstance.keychain[kCookie] = cookie.value
+            KeyChainSingle.sharedInstance.keychain[kCookiePath] = "X-X-U=" + cookie.value + ";" + "domin=" + cookie.domain + ";" + "path=" + cookie.path
         }
     }
 }

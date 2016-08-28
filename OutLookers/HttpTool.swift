@@ -35,11 +35,12 @@ public class HttpTool {
     
     class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
         var headers: [String:String]?
-        if let cookie = KeyChainSingle.sharedInstance.keychain[kCookie] {
+        if let cookiePath = KeyChainSingle.sharedInstance.keychain[kCookiePath], cookie = KeyChainSingle.sharedInstance.keychain[kCookie] {
             headers = [
-                "X-X-T" : cookie,
+                "X-X-M" : Util.getCurrentTimestamp(),
                 "X-X-D" : globleSingle.deviceId,
-                "X-X-U" : cookie
+                "X-X-T" : cookie,
+                "Cookie" : cookiePath
             ]
             LogInfo("请求中的headers = \(headers)")
         } else {

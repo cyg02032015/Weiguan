@@ -16,11 +16,6 @@ private let headerId = "headerId"
 private let circleId = "circelId"
 private let horizontalId = "horizontalId"
 
-
-private extension Selector {
-    static let loadRecommendHotmanData = #selector(HomeViewController.loadRecommendHotmanData)
-}
-
 class HomeViewController: YGBaseViewController {
     var collectionView: UICollectionView!
     lazy var banners = [BannerList]()
@@ -37,8 +32,65 @@ class HomeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().rx_notification(kPlusButtonClickNotification)
+        .subscribeNext { [unowned self](notification) in
+            if UserSingleton.sharedInstance.isLogin() {
+                let issuevc = IssueViewController()
+                let navi = YGNavigationController(rootViewController: issuevc)
+                self.presentViewController(navi, animated: true, completion: {})
+            } else {
+                let logView = YGLogView()
+                logView.animation()
+                logView.tapLogViewClosure({ (type) in
+                    Util.logViewTap(self, type: type)
+                })
+            }
+        }.addDisposableTo(disposeBag)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: .loadRecommendHotmanData, name: kRecieveGlobleDefineNotification, object: nil)
+        NSNotificationCenter.defaultCenter().rx_notification(kRecieveGlobleDefineNotification)
+        .subscribeNext { [unowned self](notification) in
+            // MARK: banner
+            Server.banner { (success, msg, value) in
+                if success {
+                    guard let list = value else {return}
+                    var imgUrls = [String]()
+                    for item in list {
+                        imgUrls.append(item.picture)
+                    }
+                    if self.banner != nil {
+                        self.banner.imageURLStringsGroup = imgUrls
+                    }
+                } else {
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
+                }
+            }
+            
+            Server.dynamicList(self.pageNo,user: "1",state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+                if success {
+                    Server.homeRecommendHotman { (success, msg, value) in
+                        SVToast.dismiss()
+                        if success {
+                            guard let list = value else { return }
+                            self.hotmanList = list
+                            self.collectionView.reloadData()
+                        } else {
+                            LogError(msg)
+                        }
+                    }
+                    guard let object = value else { return }
+                    self.recommendObj = object
+                    self.recommends.appendContentsOf(object.list)
+                    self.collectionView.reloadData()
+                    self.pageNo = self.pageNo + 1
+                } else {
+                    SVToast.dismiss()
+                    guard let m = msg else {return}
+                    SVToast.showWithError(m)
+                }
+            }
+        }.addDisposableTo(disposeBag)
+        
         setupSubViews()
         
         collectionView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
@@ -85,49 +137,6 @@ class HomeViewController: YGBaseViewController {
                 self.collectionView.reloadData()
                 self.pageNo = self.pageNo + 1
             } else {
-                guard let m = msg else {return}
-                SVToast.showWithError(m)
-            }
-        }
-    }
-    
-    func loadRecommendHotmanData() {
-        // MARK: banner
-        Server.banner { (success, msg, value) in
-            if success {
-                guard let list = value else {return}
-                var imgUrls = [String]()
-                for item in list {
-                    imgUrls.append(item.picture)
-                }
-                if self.banner != nil {
-                    self.banner.imageURLStringsGroup = imgUrls
-                }
-            } else {
-                guard let m = msg else {return}
-                SVToast.showWithError(m)
-            }
-        }
-        
-        Server.dynamicList(pageNo,user: "1",state: 2, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
-            if success {
-                Server.homeRecommendHotman { (success, msg, value) in
-                    SVToast.dismiss()
-                    if success {
-                        guard let list = value else { return }
-                        self.hotmanList = list
-                        self.collectionView.reloadData()
-                    } else {
-                        LogError(msg)
-                    }
-                }
-                guard let object = value else { return }
-                self.recommendObj = object
-                self.recommends.appendContentsOf(object.list)
-                self.collectionView.reloadData()
-                self.pageNo = self.pageNo + 1
-            } else {
-                SVToast.dismiss()
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
             }
@@ -196,11 +205,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 {
-            let vc = PHViewController()
-            vc.user = hotmanList[indexPath.item].userId
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
         if indexPath.section == 2 {
             let obj = recommends[indexPath.item]
             let vc = DynamicDetailViewController()

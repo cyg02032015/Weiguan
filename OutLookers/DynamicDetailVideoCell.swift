@@ -19,45 +19,71 @@ protocol DynamicDetailDelegate: class {
 }
 
 class DynamicDetailVideoCell: UITableViewCell {
-    
+    var lastImgView: UIImageView!
     var info: DynamicDetailResp! {
         didSet {
             guard let url = info.pictureList.first?.url else {return}
-            LogWarn("viedeoURL = \(url.addVideoPath())")
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
-            bigImgView.yy_setImageWithURL(url.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
-            details.text = info.text
-            
-            if isEmptyString(info.text) {
-                details.snp.updateConstraints(closure: { (make) in
-                    make.top.equalTo(bigImgView.snp.bottom)
-                    make.height.equalTo(0)
-                })
-                layoutIfNeeded()
-            }
             
             if shareButton != nil {
                 return
             }
-
             // 图片还是视频
+            var imgView: UIImageView!
             if info.isVideo == "1" {  // 图片
-                bigImgView.hidden = false
                 player.hidden = true
+                if info.pictureList.count > 0 {
+                    for obj in info.pictureList {
+                        imgView = UIImageView()
+                        imgView.yy_setImageWithURL(obj.url.addImagePath(CGSize(width: 1080, height: 1080)), placeholder: kPlaceholder)
+                        contentView.addSubview(imgView)
+                        imgView.snp.makeConstraints(closure: { (make) in
+                            make.top.equalTo(self.lastImgView == nil ? headImgView.snp.bottom : self.lastImgView.snp.bottom).offset(self.lastImgView == nil ? kScale(14) : 10)
+                            make.left.right.equalTo(imgView.superview!)
+                            make.height.equalTo(obj.height)
+                        })
+                        lastImgView = imgView
+                    }
+                }
             } else { // 视频
-                bigImgView.hidden = true
                 player.hidden = false
                 let item = self.preparePlayerItem(info.cover.addImagePath().absoluteString, url: url.addVideoPath())
                 self.player.playWithPlayerItem(item)
             }
+
+            if !isEmptyString(info.text) {
+                details = UILabel.createLabel(16, textColor: UIColor(hex: 0x666666))
+                contentView.addSubview(details)
+                details.text = info.text
+                details.snp.makeConstraints(closure: { (make) in
+                    make.left.equalTo(details.superview!).offset(kScale(15))
+                    make.right.equalTo(details.superview!).offset(kScale(-15))
+                    if info.isVideo == "1" {
+                        make.top.equalTo(imgView.snp.bottom).offset(kScale(8))
+                    } else {
+                        make.top.equalTo(player.snp.bottom).offset(kScale(8))
+                    }
+                    make.height.equalTo(kScale(16))
+                })
+            }
             
+            layoutIfNeeded()
             
             // talent tags 实现
             let xpadding: CGFloat = 20
             let ypadding: CGFloat = 8
             let container = UIView()
             contentView.addSubview(container)
-            var containerY = details.gg_bottom
+            var containerY: CGFloat!
+            if details == nil {
+                if info.isVideo == "1" {
+                    containerY = imgView.gg_bottom
+                } else {
+                    containerY = player.gg_bottom
+                }
+            } else {
+                containerY = details.gg_bottom
+            }
             if info.talentList.count > 0 {
                 containerY = containerY + 10
             }
@@ -188,7 +214,6 @@ class DynamicDetailVideoCell: UITableViewCell {
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
     var timeLabel: UILabel!
-    var bigImgView: UIImageView!
     var details: UILabel!
     var followButton: UIButton!
     
@@ -246,14 +271,14 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.centerY.equalTo(headImgView)
         }
         
-        bigImgView = UIImageView()
-        bigImgView.hidden = true
-        contentView.addSubview(bigImgView)
-        bigImgView.snp.makeConstraints { (make) in
-            make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
-            make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
-            make.left.equalTo(bigImgView.superview!)
-        }
+//        bigImgView = UIImageView()
+//        bigImgView.hidden = true
+//        contentView.addSubview(bigImgView)
+//        bigImgView.snp.makeConstraints { (make) in
+//            make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
+//            make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
+//            make.left.equalTo(bigImgView.superview!)
+//        }
         
         player = BMPlayer()
         player.hidden = true
@@ -269,15 +294,15 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.left.equalTo(player.superview!)
         }
         
-        details = UILabel.createLabel(16, textColor: UIColor(hex: 0x666666))
-        contentView.addSubview(details)
-        details.snp.makeConstraints { (make) in
-            make.top.equalTo(bigImgView.snp.bottom).offset(kScale(10))
-            make.left.equalTo(headImgView)
-            make.right.equalTo(details.superview!).offset(kScale(-15))
-            make.height.equalTo(kScale(16))
-        }
-        layoutIfNeeded()
+//        details = UILabel.createLabel(16, textColor: UIColor(hex: 0x666666))
+//        contentView.addSubview(details)
+//        details.snp.makeConstraints { (make) in
+////            make.top.equalTo(bigImgView.snp.bottom).offset(kScale(10))
+//            make.left.equalTo(headImgView)
+//            make.right.equalTo(details.superview!).offset(kScale(-15))
+//            make.height.equalTo(kScale(16))
+//        }
+//        layoutIfNeeded()
         
         followButton.rx_tap.subscribeNext { [unowned self] in
             if self.delegate != nil {

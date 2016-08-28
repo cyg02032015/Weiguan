@@ -62,6 +62,8 @@ class PictureList {
     
     var id : Int!
     var url : String!
+    var width: Int!
+    var height: Int!
     
     init(fromJson json: JSON!){
         if json == nil{
@@ -69,6 +71,8 @@ class PictureList {
         }
         id = json["id"].intValue
         url = json["url"].stringValue
+        width = json["width"].intValue
+        height = json["height"].intValue
     }
 }
 

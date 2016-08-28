@@ -19,3 +19,5 @@ let kUserId = "userId"
 let kCookie = "cookie"
 /// 过期时间
 let kExpiresDate = "expiresDate"
+
+let kCookiePath = "cookiePath"

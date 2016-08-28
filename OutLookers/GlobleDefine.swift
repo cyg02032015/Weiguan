@@ -44,6 +44,7 @@ let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
 // 通知
 let kRecieveGlobleDefineNotification = "recieveGlobleDefine"
+let kPlusButtonClickNotification = "PlusButtonClick"
 
 func kScale(a: CGFloat) -> CGFloat {
     if Device.size() == .Screen5_5Inch {

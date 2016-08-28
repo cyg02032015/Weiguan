@@ -49,7 +49,7 @@ func configCocoaLumberjack() {
     DDTTYLogger.sharedInstance().colorsEnabled = true
     DDTTYLogger.sharedInstance().setForegroundColor(UIColor.yellowColor(), backgroundColor: nil, forFlag: .Info)
     DDTTYLogger.sharedInstance().setForegroundColor(UIColor.cyanColor(), backgroundColor: nil, forFlag: .Debug)
-    DDTTYLogger.sharedInstance().setForegroundColor(UIColor.blueColor(), backgroundColor: nil, forFlag: .Verbose)
+    DDTTYLogger.sharedInstance().setForegroundColor(UIColor.greenColor(), backgroundColor: nil, forFlag: .Verbose)
     DDTTYLogger.sharedInstance().logFormatter = LogFormatter()
 }
 
