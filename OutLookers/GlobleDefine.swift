@@ -19,19 +19,28 @@ let TabbarHeight: CGFloat  = 49
 let NavibarHeight: CGFloat = 44
 
 /// 各种key
-let kUmengAppkey = "576c94eee0f55a2551000538"
-
-let kWechatAppId = "wxd930ea5d5a258f4f"
-let kWechatSecret = "db426a9829e4b49a0dcac7b4162da6b6"
+let kWechatAppId = "wx72e48cccc64e7dc4"
+let kWechatSecret = "0eb8c7bf207fc3f7ae1d252b9f72ee8c"
 let kWechatUrl = "http://www.umeng.com/social" // 分享地址
 
-let kQQAppId = "100424468"
-let kQQAppSecret = "c7394704798a158208a74ab60104f0ba"
+let kQQAppId = "1105476799"
+let kQQAppSecret = "Q7VOdh5Em7ugARP7"
 let kQQUrl = "http://www.umeng.com/social" // 分享地址
 
-let kSinaAppkey = "126663232"
-let kSinaAppSecret = "d39969613faa5fcc75859cf8406649eb"
-let kSinaRedirectUrl = "http://sns.whalecloud.com/sina2/callback" // 分享回调地址
+#if DEBUG
+    let kUmengAppkey = "576c94eee0f55a2551000538"
+    let kSinaAppkey = "821223363"
+    let kSinaAppSecret = "02008c2efb2c66bb458ee04a46917b66"
+    let sharePrefix = "http://h5.dev.chunyangapp.com"
+    let base = "http://api.dev.chunyangapp.com/api"
+#else
+    let kUmengAppkey = "57c2b739e0f55a4825001914"
+    let kSinaAppkey = "3982685003"
+    let kSinaAppSecret = "271a0f8dd5f04648d80f6dbca3e7bf4d"
+    let sharePrefix = "http://h5.chunyangapp.com"
+    let base = "http://api1.chunyangapp.com/api"
+#endif
+let kSinaRedirectUrl = base + "/api/sina/callback" // 分享回调地址
 
 let kOSSEndPoint = "http://oss-cn-hangzhou.aliyuncs.com/"
 

@@ -248,4 +248,22 @@ class ShareVCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func shareToPlatform(title: String, shareUrl: String, subject: String, desc: String) {
+        switch title {
+        case kTitleWechat:
+            UMSocialData.defaultData().extConfig.wechatSessionData.url = sharePrefix + shareUrl
+            UMSocialData.defaultData().extConfig.wechatSessionData.title = subject
+            
+        case kTitleTimeline:
+            UMSocialData.defaultData().extConfig.wechatTimelineData.url = sharePrefix + shareUrl
+            UMSocialData.defaultData().extConfig.wechatTimelineData.title = subject
+//        case kTitleQQ:
+//            UMSocialData.defaultData().extConfig
+//        case kTitleQzone:
+//            UMSocialData.defaultData().extConfig
+//        case kTitleSina:
+//            UMSocialData.defaultData().extConfig
+        default: ""
+        }
+    }
 }

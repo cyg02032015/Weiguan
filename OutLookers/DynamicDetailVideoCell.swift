@@ -42,7 +42,7 @@ class DynamicDetailVideoCell: UITableViewCell {
                         imgView.snp.makeConstraints(closure: { (make) in
                             make.top.equalTo(self.lastImgView == nil ? headImgView.snp.bottom : self.lastImgView.snp.bottom).offset(self.lastImgView == nil ? kScale(14) : 10)
                             make.left.right.equalTo(imgView.superview!)
-                            make.height.equalTo(obj.height)
+                            make.height.equalTo(ScreenWidth * CGFloat(obj.height) / CGFloat(obj.width))
                         })
                         lastImgView = imgView
                     }
