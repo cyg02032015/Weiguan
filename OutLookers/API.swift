@@ -139,4 +139,6 @@ struct API {
     static let phoneLogin = baseURL + "/api/login/v1/login"
     /// 令牌登录 
     static let tokenLogin = baseURL + "/api/login/v1/tokenin"
+    /// 停止招募
+    static let stopRecruit = baseURL + "/api/release/v1/announcement/stop"
 }

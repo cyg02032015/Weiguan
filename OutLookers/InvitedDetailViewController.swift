@@ -18,7 +18,7 @@ class InvitedDetailViewController: YGBaseViewController {
     var noticeObj: FindNoticeDetailResp!
     var header: InvitedHeaderView!
     var rightNaviButton: UIButton!
-    var delta: CGFloat!
+    var delta: CGFloat = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
@@ -57,28 +57,30 @@ class InvitedDetailViewController: YGBaseViewController {
     func viewWillDisappearSetNavigation(animated: Bool) {
         backImgView.image = UIImage(named: "back-1")
         rightNaviButton.setImage(UIImage(named: "more1"), forState: .Normal)
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
         navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationController?.navigationBar.lt_reset()
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
 
+    deinit {
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
+
+    }
     
     func loadData() {
-        Server.findNoticeDetail(id) { (success, msg, value) in
+        Server.findNoticeDetail(id) { [weak self](success, msg, value) in
             if success {
-                guard let obj = value else {return}
-                self.noticeObj = obj
+                guard let obj = value, ws = self else {return}
+                ws.noticeObj = obj
                 var imgUrls = [String]()
                 obj.pictureList.forEach({ (list) in
                     imgUrls.append(list.url)
                 })
-                if self.header != nil {
-                    self.header.cycleView
+                if ws.header != nil {
+                    ws.header.cycleView
                     .imageURLStringsGroup = imgUrls
                 }
-                self.tableView.reloadData()
+                ws.tableView.reloadData()
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
@@ -99,7 +101,7 @@ class InvitedDetailViewController: YGBaseViewController {
         tableView.estimatedRowHeight = kScale(100)
         tableView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(tableView.superview!)
-            make.top.equalTo(self.snp.topLayoutGuideTop).offset(-NaviHeight)
+            make.top.equalTo(snp.topLayoutGuideTop).offset(-NaviHeight)
         }
         
         header = InvitedHeaderView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: kScale(180)))

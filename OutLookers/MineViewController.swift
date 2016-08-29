@@ -250,7 +250,7 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
             let vc = MyTalentViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 1 { // 通告
-            let vc = MyCircularViewController()
+            let vc = MyReleaseViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 2 { // 认证
             let vc = AuthenticationViewController()

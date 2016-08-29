@@ -46,13 +46,15 @@ extension String {
         return globleSingle.vedioPath + self
     }
     
-    func addImagePath(size: CGSize) -> NSURL {
-        return NSURL(string: globleSingle.imagePath + self + "@\(Int(size.width))h_\(Int(size.height))w.webp")!
+    func addImagePath(size: CGSize = CGSize(width: 1080, height: 1080)) -> NSURL? {
+        guard let path = globleSingle.imagePath else {return nil}
+        return NSURL(string: path + self + "@\(Int(size.width))h_\(Int(size.height))w.webp")!
     }
     
-    func addImagePath() -> NSURL {
-        return NSURL(string: globleSingle.imagePath + self)!
-    }
+//    func addImagePath() -> NSURL? {
+//        guard let path = globleSingle.imagePath else {return nil}
+//        return NSURL(string: path + self)!
+//    }
     
     func dateFromString(format: String = "yyyy-MM-dd HH:mm:ss.S") -> NSDate? {
         let formatter = NSDateFormatter()

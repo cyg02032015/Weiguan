@@ -8,21 +8,36 @@
 
 import UIKit
 
-private extension Selector {
-    static let tapEdit = #selector(MyReleaseCell.tapEdit(_:))
-    static let tapStopRecruit = #selector(MyReleaseCell.tapStopRecruit(_:))
-    static let tapDetail = #selector(MyReleaseCell.tapDetail(_:))
-}
-
-protocol MyReleaseCellDelegate: class {
-    func myReleaseTapEdit(sender: UIButton)
-    func myReleaseTapStopRecruit(sender: UIButton)
-    func myReleaseTapDetail(sender: UIButton)
-}
-
 class MyReleaseCell: UITableViewCell {
 
-    weak var delegate: MyReleaseCellDelegate!
+    var info: FindNotice! {
+        didSet {
+            imgView.yy_setImageWithURL(info.picture.addImagePath(), placeholder: kPlaceholder)
+            subjectLabel.text = info.theme
+            if info.isRun == true {
+                recruit.text = "停止招募"
+                stopRecruit.hidden = true
+                detailButton.snp.updateConstraints(closure: { (make) in
+                    make.right.equalTo(editButton.snp.left).offset(kScale(-6))
+                    make.size.equalTo(kSize(80, height: 28))
+                })
+            } else {
+                stopRecruit.hidden = false
+                recruit.text = "招募进行中"
+                detailButton.snp.updateConstraints { (make) in
+                    make.right.equalTo(stopRecruit.snp.left).offset(kScale(-6))
+                    make.size.equalTo(kSize(80, height: 28))
+                }
+            }
+            
+            if info.num > 0 {
+                enterCount.text = "报名人数：" + "\(info.num)"
+            }
+        }
+    }
+    var editBlock: ((btn: UIButton)->Void)!
+    var stopBlock: ((btn: UIButton)->Void)!
+    var detailBlock: ((btn: UIButton)->Void)!
     var imgView: UIImageView!
     var subjectLabel: UILabel!
     var enterCount: UILabel!    // 报名人数
@@ -84,7 +99,6 @@ class MyReleaseCell: UITableViewCell {
         editButton = UIButton()
         editButton.setTitle("编辑", forState: .Normal)
         editButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        editButton.addTarget(self, action: .tapEdit, forControlEvents: .TouchUpInside)
         editButton.layer.borderColor = UIColor.blackColor().CGColor
         editButton.layer.borderWidth = 1
         editButton.layer.cornerRadius = kScale(4)
@@ -100,58 +114,50 @@ class MyReleaseCell: UITableViewCell {
         stopRecruit = UIButton()
         stopRecruit.setTitle("停止招募", forState: .Normal)
         stopRecruit.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        stopRecruit.addTarget(self, action: .tapStopRecruit, forControlEvents: .TouchUpInside)
         stopRecruit.layer.borderColor = UIColor.blackColor().CGColor
         stopRecruit.layer.borderWidth = 1
         stopRecruit.layer.cornerRadius = kScale(4)
         stopRecruit.titleLabel!.font = UIFont.customFontOfSize(14)
         contentView.addSubview(stopRecruit)
         stopRecruit.snp.makeConstraints { (make) in
-            make.right.equalTo(editButton.snp.left).offset(kScale(-6))
+            make.right.equalTo(editButton.snp.left).offset(kScale(-6)).priorityMedium()
             make.centerY.equalTo(editButton)
-            make.size.equalTo(editButton)
+            make.size.equalTo(editButton).priorityMedium()
         }
         
         detailButton = UIButton()
         detailButton.setTitle("查看详情", forState: .Normal)
         detailButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        detailButton.addTarget(self, action: .tapDetail, forControlEvents: .TouchUpInside)
         detailButton.layer.borderColor = UIColor.blackColor().CGColor
         detailButton.layer.borderWidth = 1
         detailButton.layer.cornerRadius = kScale(4)
         detailButton.titleLabel!.font = UIFont.customFontOfSize(14)
         contentView.addSubview(detailButton)
         detailButton.snp.makeConstraints { (make) in
-            make.right.equalTo(stopRecruit.snp.left).offset(kScale(-6))
+            make.right.equalTo(stopRecruit.snp.left).offset(kScale(-6)).priorityMedium()
             make.centerY.equalTo(editButton)
-            make.size.equalTo(editButton)
+            make.size.equalTo(editButton).priorityMedium()
         }
         
-        imgView.backgroundColor = UIColor.yellowColor()
-        subjectLabel.text = "通告主题"
-        enterCount.text = "报名人数：12"
-        recruit.text = "招募进行中"
+        editButton.rx_tap.subscribeNext { [unowned self] in
+            if self.editBlock != nil {
+                self.editBlock(btn: self.editButton)
+            }
+        }.addDisposableTo(disposeBag)
         
+        stopRecruit.rx_tap.subscribeNext { [unowned self] in
+            if self.stopBlock != nil {
+                self.stopBlock(btn: self.stopRecruit)
+            }
+        }.addDisposableTo(disposeBag)
+        
+        detailButton.rx_tap.subscribeNext { [unowned self] in
+            if self.detailBlock != nil {
+                self.detailBlock(btn: self.detailButton)
+            }
+        }.addDisposableTo(disposeBag)
     }
-    
-    func tapEdit(sender: UIButton) {
-        if delegate != nil {
-            delegate.myReleaseTapEdit(sender)
-        }
-    }
-    
-    func tapStopRecruit(sender: UIButton) {
-        if delegate != nil {
-            delegate.myReleaseTapStopRecruit(sender)
-        }
-    }
-    
-    func tapDetail(sender: UIButton) {
-        if delegate != nil {
-            delegate.myReleaseTapDetail(sender)
-        }
-    }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

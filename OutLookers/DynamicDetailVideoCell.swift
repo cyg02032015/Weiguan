@@ -49,8 +49,10 @@ class DynamicDetailVideoCell: UITableViewCell {
                 }
             } else { // 视频
                 player.hidden = false
-                let item = self.preparePlayerItem(info.cover.addImagePath().absoluteString, url: url.addVideoPath())
-                self.player.playWithPlayerItem(item)
+                if let path = info.cover.addImagePath() {
+                    let item = self.preparePlayerItem(path.absoluteString, url: url.addVideoPath())
+                    self.player.playWithPlayerItem(item)
+                }
             }
 
             if !isEmptyString(info.text) {
