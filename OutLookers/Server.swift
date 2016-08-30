@@ -1184,6 +1184,10 @@ class Server {
         HttpTool.registerLogPost(API.tokenLogin, parameters: parameters, pwdOrToken: token, complete: { (request, response, value) in
             let info = RegisterResp(fromJson: value)
             if info.success == true {
+                if let headerFields = response?.allHeaderFields as? [String: String], URL = request?.URL {
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
+                    TokenTool.saveCookieAndExpired(cookies)
+                }
                 KeyChainSingle.sharedInstance.keychain[kUserId] = info.result.userId
                 UserSingleton.sharedInstance.userId = info.result.userId
                 UserSingleton.sharedInstance.nickname = info.result.nickname ?? ""

@@ -34,6 +34,9 @@ public class HttpTool {
     }
     
     class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
+        tokenLogin(success: nil, failure: {
+            KeyChainSingle.sharedInstance.logOut()
+        })
         var headers: [String:String]?
         if let cookiePath = KeyChainSingle.sharedInstance.keychain[kCookiePath], cookie = KeyChainSingle.sharedInstance.keychain[kCookie] {
             headers = [

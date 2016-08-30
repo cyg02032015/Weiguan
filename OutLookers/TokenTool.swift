@@ -12,7 +12,6 @@ class TokenTool {
     
     class func isCookieExpired() -> Bool {
         guard let tokendate = Int(KeyChainSingle.sharedInstance.keychain[kExpiresDate] ?? "0"), currentTimestamp = Int(Util.getCurrentTimestamp()) else {fatalError("无法获取时间戳")}
-        LogVerbose("token \(tokendate)  current \(currentTimestamp)")
         if tokendate < currentTimestamp { // 如果存储的时间戳小于当前时间戳过期  -- 过期
             return true
         } else {
@@ -22,7 +21,7 @@ class TokenTool {
     
     class func expiredDate(tokenDate: String) -> String {
         guard let tokendate = Int(tokenDate) else {fatalError("无法获取时间戳")}
-        return "\(tokendate + 24 * 60 * 60 * 1000)" // cookie 一天过期
+        return "\(tokendate + 23 * 60 * 60 * 1000)" // cookie 一天过期
     }
     
     class func saveCookieAndExpired(cookies: [NSHTTPCookie]) {

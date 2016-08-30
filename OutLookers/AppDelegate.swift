@@ -46,20 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func tokenLogin() {
-        if TokenTool.isCookieExpired() {
-            if !isEmptyString(KeyChainSingle.sharedInstance.keychain[kToken]) {
-                Server.tokenLogin { (success, msg, value) in
-                    LogDebug("token login = \(value)\n\(msg)")
-                }
-            } else {
-                LogError("token is nil")
-            }
-        } else {
-            LogDebug("cookie 没有过期")
-        }
-    }
-    
     func keyboardSetting() {
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false

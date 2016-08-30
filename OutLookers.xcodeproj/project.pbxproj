@@ -111,6 +111,7 @@
 		D81F452E1D11A2E4004D9192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452D1D11A2E4004D9192 /* API.swift */; };
 		D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45391D143934004D9192 /* YKBannerView.swift */; };
 		D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */; };
+		D82417351D75C7CA002138A2 /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82417341D75C7CA002138A2 /* LogHelper.swift */; };
 		D825EEA11D50E78A00AF94AF /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = D825EE851D50E78A00AF94AF /* .gitkeep */; };
 		D825EEA21D50E78A00AF94AF /* BMPlayer_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D825EE861D50E78A00AF94AF /* BMPlayer_back@2x.png */; };
 		D825EEA31D50E78A00AF94AF /* BMPlayer_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D825EE871D50E78A00AF94AF /* BMPlayer_back@3x.png */; };
@@ -525,6 +526,7 @@
 		D81F452D1D11A2E4004D9192 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = OutLookers/API.swift; sourceTree = SOURCE_ROOT; };
 		D81F45391D143934004D9192 /* YKBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKBannerView.swift; path = OutLookers/YKBannerView.swift; sourceTree = SOURCE_ROOT; };
 		D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewController.swift; path = OutLookers/YKPhotoPreviewController.swift; sourceTree = SOURCE_ROOT; };
+		D82417341D75C7CA002138A2 /* LogHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogHelper.swift; path = OutLookers/LogHelper.swift; sourceTree = "<group>"; };
 		D825EE851D50E78A00AF94AF /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		D825EE861D50E78A00AF94AF /* BMPlayer_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BMPlayer_back@2x.png"; sourceTree = "<group>"; };
 		D825EE871D50E78A00AF94AF /* BMPlayer_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BMPlayer_back@3x.png"; sourceTree = "<group>"; };
@@ -1239,6 +1241,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		D82417331D75C7B7002138A2 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D82417341D75C7CA002138A2 /* LogHelper.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		D825EE831D50E78A00AF94AF /* BMPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1677,6 +1687,7 @@
 		E41C22CC1D113B9500F58250 = {
 			isa = PBXGroup;
 			children = (
+				D82417331D75C7B7002138A2 /* Helper */,
 				E41C22D71D113B9500F58250 /* OutLookers */,
 				E41C22EC1D113B9500F58250 /* OutLookersTests */,
 				E41C22F71D113B9500F58250 /* OutLookersUITests */,
@@ -2680,6 +2691,7 @@
 				D825EEB51D50E78A00AF94AF /* BMPlayer.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
 				D82F8E1A1D30ED9200A24CDB /* OrganizationViewController.swift in Sources */,
+				D82417351D75C7CA002138A2 /* LogHelper.swift in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,
 				D812A8C11D4E18FF00186564 /* FeedbackViewController.swift in Sources */,
 				E45BFF891D422F8D0013356C /* CircularDetailViewController.swift in Sources */,

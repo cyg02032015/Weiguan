@@ -8,50 +8,9 @@
 
 import UIKit
 import Accelerate
-import CocoaLumberjack
 import Alamofire
 import SwiftyJSON
 import KeychainAccess
-
-func LogInfo<T>(message: T) {
-    #if DEBUG
-    DDLogInfo("\(message)")
-    #endif
-}
-
-func LogVerbose<T>(message: T) {
-    #if DEBUG
-        DDLogVerbose("\(message)")
-    #endif
-}
-
-func LogError<T>(message: T) {
-    #if DEBUG
-        DDLogError("\(message)")
-    #endif
-}
-
-func LogWarn<T>(message: T) {
-    #if DEBUG
-        DDLogWarn("\(message)")
-    #endif
-}
-
-func LogDebug<T>(message: T) {
-    #if DEBUG
-        DDLogDebug("\(message)")
-    #endif
-}
-
-func configCocoaLumberjack() {
-    DDLog.addLogger(DDTTYLogger.sharedInstance())
-    setenv("XcodeColors", "YES", 0)
-    DDTTYLogger.sharedInstance().colorsEnabled = true
-    DDTTYLogger.sharedInstance().setForegroundColor(UIColor.yellowColor(), backgroundColor: nil, forFlag: .Info)
-    DDTTYLogger.sharedInstance().setForegroundColor(UIColor.cyanColor(), backgroundColor: nil, forFlag: .Debug)
-    DDTTYLogger.sharedInstance().setForegroundColor(UIColor.greenColor(), backgroundColor: nil, forFlag: .Verbose)
-    DDTTYLogger.sharedInstance().logFormatter = LogFormatter()
-}
 
 func LocalizedString(text: String) -> String {
     return NSLocalizedString(text, comment: "")
@@ -67,7 +26,7 @@ func configNavigation() {
 func configUMeng() {
     UMSocialData.setAppKey(kUmengAppkey)
     #if DEBUG
-    UMSocialData.openLog(true)
+//    UMSocialData.openLog(true)
     #endif
     //设置微信AppId、appSecret，分享url
     UMSocialWechatHandler.setWXAppId(kWechatAppId, appSecret: kWechatSecret, url: kWechatUrl)
@@ -138,8 +97,8 @@ func boxBlurImage(image: UIImage, withBlurNumber blur: CGFloat) -> UIImage {
     return returnImage
 }
 
+/// 获取全局变量  当获取成功后会通知首页加载数据
 func configGlobleDefine() {
-    // 获取全局变量是同步获取  会阻塞线程
     SVToast.show()
     Server.globleDefine { (success, msg, value) in
         if success {
@@ -170,6 +129,39 @@ func configGlobleDefine() {
     }
 }
 
+/// 令牌登录
+// 每一次的网络请求都要判断cookie是否过期   如果cookie过期有token 则token登录
+// 在token 登录失败的情况下删除用户的数据   让用户重新手动登录
+func tokenLogin(success succ: (()->Void)? = nil, failure fail: (()->Void)? = nil) {
+    if TokenTool.isCookieExpired() {
+        if !isEmptyString(KeyChainSingle.sharedInstance.keychain[kToken]) {
+            Server.tokenLogin { (success, msg, value) in
+                LogVerbose("============================")
+                LogDebug("秘钥登录 = \(value)\n\(msg)")
+                LogVerbose("============================")
+                if let s = succ {
+                    s()
+                }
+            }
+        } else {
+            LogVerbose("============================")
+            LogError("秘钥登录失败")
+            LogVerbose("============================")
+            if let f = fail {
+                f()
+            }
+        }
+    } else {
+        LogVerbose("*****************************************")
+        LogDebug("cookie 没有过期")
+        LogVerbose("*****************************************")
+        if let s = succ {
+            s()
+        }
+    }
+}
+
+/// 获取设备唯一ID -- 存储在keychain里  当用户还原出厂配置时会干掉
 func keyChainGetDeviceId() {
     let keychain = KeyChainSingle.sharedInstance.keychain
     if keychain[kUUID] == nil {
