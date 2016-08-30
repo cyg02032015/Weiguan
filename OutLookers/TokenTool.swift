@@ -21,7 +21,7 @@ class TokenTool {
     
     class func expiredDate(tokenDate: String) -> String {
         guard let tokendate = Int(tokenDate) else {fatalError("无法获取时间戳")}
-        return "\(tokendate + 23 * 60 * 60 * 1000)" // cookie 一天过期
+        return "\(tokendate + 23 * 60 * 60 * 1000)" // cookie 一天过期  提前一小时刷新
     }
     
     class func saveCookieAndExpired(cookies: [NSHTTPCookie]) {

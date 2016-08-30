@@ -58,7 +58,11 @@ class IssueTalenListCell: UITableViewCell {
 
 extension IssueTalenListCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateLeftAlignedLayout {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.info.count
+        if self.info != nil {
+            return self.info.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

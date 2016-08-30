@@ -152,6 +152,35 @@ class YGShare: UIView {
         }
     }
     
+    func selectItem(cell: ShareVCell) {
+        cell.shareBlock { [weak self] (sender) in
+            guard let ws = self else {return}
+            var platFormType = [String]()
+            switch cell.label.text! {
+            case kTitleTimeline:
+                platFormType.append(UMShareToWechatTimeline)
+            case kTitleWechat:
+                platFormType.append(UMShareToWechatSession)
+            case kTitleSina:
+                platFormType.append(UMShareToSina)
+            case kTitleQzone:
+                platFormType.append(UMShareToQzone)
+            case kTitleQzone:
+                platFormType.append(UMShareToQQ)
+            default:""
+            }
+            
+            ws.tapCancel()
+            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=")//(self.detailObj.id)"
+            
+            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: "分享 “ 户昵称”的纯氧作品, 起来看~", image: UIImage(named: "open"), location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+                if response.responseCode == UMSResponseCodeSuccess {
+                    print("分享成功！")
+                }
+            })
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -182,12 +211,7 @@ extension YGShare: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(shareVcellId, forIndexPath: indexPath) as! ShareVCell
         cell.shareButton.setImage(self.imgs[indexPath.item], forState: .Normal)
         cell.label.text = self.titles[indexPath.item]
-        cell.shareBlock { [unowned self](sender) in
-            if self.shareClosure != nil {
-                self.tapCancel()
-                self.shareClosure(title: self.titles[indexPath.item])
-            }
-        }
+        selectItem(cell)
         return cell
     }
     
@@ -251,9 +275,12 @@ class ShareVCell: UICollectionViewCell {
     func shareToPlatform(title: String, shareUrl: String, subject: String, desc: String) {
         switch title {
         case kTitleWechat:
-            UMSocialData.defaultData().extConfig.wechatSessionData.url = sharePrefix + shareUrl
-            UMSocialData.defaultData().extConfig.wechatSessionData.title = subject
-            
+            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=")//(self.detailObj.id)"
+            UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: "分享 “ 户昵称”的纯氧作品, 起来看~", image: UIImage(named: "open"), location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+                if response.responseCode == UMSResponseCodeSuccess {
+                    print("分享成功！")
+                }
+            })
         case kTitleTimeline:
             UMSocialData.defaultData().extConfig.wechatTimelineData.url = sharePrefix + shareUrl
             UMSocialData.defaultData().extConfig.wechatTimelineData.title = subject

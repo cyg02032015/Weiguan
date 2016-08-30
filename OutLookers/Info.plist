@@ -16,7 +16,7 @@
 		<string>zh_CN</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>纯氧</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

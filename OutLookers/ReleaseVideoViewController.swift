@@ -46,10 +46,10 @@ class ReleaseVideoViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "发布视频"
-        self.shareTuple = YGShareHandler.handleShareInstalled()
-        setupSubViews()
         getToken()
         loadData()
+        self.shareTuple = YGShareHandler.handleShareInstalled()
+        setupSubViews()
     }
     
     func setupSubViews() {

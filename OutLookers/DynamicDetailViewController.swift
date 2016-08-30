@@ -38,7 +38,7 @@ class DynamicDetailViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var tuple = YGShareHandler.handleShareInstalled()
+        let tuple = YGShareHandler.handleShareInstalled()
         shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
         loadData()
         loadMoreData()
@@ -200,16 +200,7 @@ extension DynamicDetailViewController {
             cell.headImgView.iconHeaderTap({ [weak self] in
                 let vc = PHViewController()
                 self?.navigationController?.pushViewController(vc, animated: true)
-                })
-            
-            shareView.shareBlock { (title) in
-                let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=\(self.detailObj.id)")
-                UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: "分享 “ 户昵称”的纯氧作品, 起来看~", image: UIImage(named: "open"), location: nil, urlResource: rc, presentedController: self, completion: { (response) in
-                    if response.responseCode == UMSResponseCodeSuccess {
-                        print("分享成功！")
-                    }
-                })
-            }
+            })
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(commentCellId, forIndexPath: indexPath) as! CommentCell
