@@ -35,7 +35,8 @@ public class HttpTool {
     
     class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
         tokenLogin(success: nil, failure: {
-            KeyChainSingle.sharedInstance.logOut()
+            UserSingleton.sharedInstance.logOut()
+            TokenTool.removeCookies()
         })
         var headers: [String:String]?
         if let cookiePath = KeyChainSingle.sharedInstance.keychain[kCookiePath], cookie = KeyChainSingle.sharedInstance.keychain[kCookie] {
@@ -65,6 +66,7 @@ public class HttpTool {
     }
     
     class func registerLogPost(url: String, parameters: [String: AnyObject]?, pwdOrToken: String , complete: LogRegSuccess, fail: Failure) {
+        TokenTool.removeCookies()
         let headers: [String : String] = [
             "X-X-M": Util.getCurrentTimestamp(),
             "X-X-D": globleSingle.deviceId,

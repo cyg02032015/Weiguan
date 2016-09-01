@@ -91,7 +91,7 @@ extension SettingViewController {
         case 3: ""
         case 4:
             if UserSingleton.sharedInstance.isLogin() {
-                KeyChainSingle.sharedInstance.logOut()
+                UserSingleton.sharedInstance.logOut()
             } else {
                 let logView = YGLogView()
                 logView.animation()

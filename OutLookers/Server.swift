@@ -1114,7 +1114,7 @@ class Server {
                     let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
                     TokenTool.saveCookieAndExpired(cookies)
                 }
-                KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
+                UserSingleton.sharedInstance.saveTokenUserid(info.result)
                 UserSingleton.sharedInstance.userId = info.result.userId
                 handler(success: true, msg: nil, value: info.result)
             } else {
@@ -1162,7 +1162,7 @@ class Server {
                     let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
                     TokenTool.saveCookieAndExpired(cookies)
                 }
-                KeyChainSingle.sharedInstance.saveTokenUserid(info.result)
+                UserSingleton.sharedInstance.saveTokenUserid(info.result)
                 UserSingleton.sharedInstance.userId = info.result.userId
                 UserSingleton.sharedInstance.nickname = info.result.nickname ?? ""
                 handler(success: true, msg: nil, value: info.result)
@@ -1188,7 +1188,7 @@ class Server {
                     let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
                     TokenTool.saveCookieAndExpired(cookies)
                 }
-                KeyChainSingle.sharedInstance.keychain[kUserId] = info.result.userId
+                UserSingleton.sharedInstance.saveUserId(info.result.userId)
                 UserSingleton.sharedInstance.userId = info.result.userId
                 UserSingleton.sharedInstance.nickname = info.result.nickname ?? ""
                 handler(success: true, msg: nil, value: info.result)

@@ -32,4 +32,10 @@ class TokenTool {
             KeyChainSingle.sharedInstance.keychain[kCookiePath] = "X-X-U=" + cookie.value + ";" + "domin=" + cookie.domain + ";" + "path=" + cookie.path
         }
     }
+    
+    class func removeCookies() {
+        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kCookie)
+        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kExpiresDate)
+        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kCookiePath)
+    }
 }

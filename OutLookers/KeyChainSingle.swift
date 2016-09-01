@@ -17,23 +17,5 @@ class KeyChainSingle {
     class var sharedInstance: KeyChainSingle {
         return sharedKeyChain
     }
-    
-    func saveTokenUserid(info: RegisterObj) {
-        keychain[kToken] = info.token
-        keychain[kToken2] = info.token2
-        keychain[kUserId] = info.userId
-    }
-    
-    func getUserId() -> String? {
-        return keychain[kUserId]
-    }
-    
-    func logOut() {
-        _ = try? keychain.remove(kToken)
-        _ = try? keychain.remove(kToken2)
-        _ = try? keychain.remove(kUserId)
-        _ = try? keychain.remove(kCookie)
-        _ = try? keychain.remove(kExpiresDate)
-    }
 }
 

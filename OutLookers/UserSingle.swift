@@ -28,7 +28,7 @@ class UserSingleton {
     var nickname: String = ""
     
     func isLogin() -> Bool {
-        if let userid = KeyChainSingle.sharedInstance.getUserId() {
+        if let userid = self.getUserId() {
             self.userId = userid
             if userid.characters.count > 0 {
                 return true
@@ -38,5 +38,26 @@ class UserSingleton {
         } else {
             return false
         }
+    }
+    
+    func saveUserId(userid: String) {
+        KeyChainSingle.sharedInstance.keychain[kUserId] = userid
+    }
+    
+    
+    func saveTokenUserid(info: RegisterObj) {
+        KeyChainSingle.sharedInstance.keychain[kToken] = info.token
+        KeyChainSingle.sharedInstance.keychain[kToken2] = info.token2
+        KeyChainSingle.sharedInstance.keychain[kUserId] = info.userId
+    }
+    
+    func getUserId() -> String? {
+        return KeyChainSingle.sharedInstance.keychain[kUserId]
+    }
+    
+    func logOut() {
+        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kToken)
+        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kToken2)
+        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kUserId)
     }
 }
