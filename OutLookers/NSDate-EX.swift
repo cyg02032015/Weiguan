@@ -77,6 +77,7 @@ extension NSDate {
         return formatter.stringFromDate(self)
     }
     
+    /// 2015-05-05 -> 18岁
     func ageWithDateOfBirth() -> String {
         // 出生日期转换 年月日
         let components1 = NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: self);

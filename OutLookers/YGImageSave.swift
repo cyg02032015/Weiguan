@@ -4,7 +4,7 @@
 //
 //  Created by C on 16/7/27.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//
+//  储存照片
 
 import UIKit
 

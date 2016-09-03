@@ -16,6 +16,7 @@ extension Array where Element: Equatable {
         }
     }
     
+    /// 传入images -> NSData数组
     func dataWithImages() -> [NSData] {
         var datas = [NSData]()
         for img in self {
@@ -27,6 +28,4 @@ extension Array where Element: Equatable {
         }
         return datas
     }
-    
-    
 }

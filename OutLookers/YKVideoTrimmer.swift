@@ -4,7 +4,7 @@
 //
 //  Created by Youngkook on 16/6/27.
 //  Copyright © 2016年 youngkook. All rights reserved.
-//
+//  视频设置封面
 
 import UIKit
 import AVFoundation

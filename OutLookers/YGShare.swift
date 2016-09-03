@@ -272,25 +272,25 @@ class ShareVCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func shareToPlatform(title: String, shareUrl: String, subject: String, desc: String) {
-        switch title {
-        case kTitleWechat:
-            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=")//(self.detailObj.id)"
-            UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: "分享 “ 户昵称”的纯氧作品, 起来看~", image: UIImage(named: "open"), location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
-                if response.responseCode == UMSResponseCodeSuccess {
-                    print("分享成功！")
-                }
-            })
-        case kTitleTimeline:
-            UMSocialData.defaultData().extConfig.wechatTimelineData.url = sharePrefix + shareUrl
-            UMSocialData.defaultData().extConfig.wechatTimelineData.title = subject
-//        case kTitleQQ:
-//            UMSocialData.defaultData().extConfig
-//        case kTitleQzone:
-//            UMSocialData.defaultData().extConfig
-//        case kTitleSina:
-//            UMSocialData.defaultData().extConfig
-        default: ""
-        }
-    }
+//    func shareToPlatform(title: String, shareUrl: String, subject: String, desc: String) {
+//        switch title {
+//        case kTitleWechat:
+//            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=")//(self.detailObj.id)"
+//            UMSocialDataService.defaultDataService().postSNSWithTypes([UMShareToWechatTimeline], content: "分享 “ 户昵称”的纯氧作品, 起来看~", image: UIImage(named: "open"), location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+//                if response.responseCode == UMSResponseCodeSuccess {
+//                    print("分享成功！")
+//                }
+//            })
+//        case kTitleTimeline:
+//            UMSocialData.defaultData().extConfig.wechatTimelineData.url = sharePrefix + shareUrl
+//            UMSocialData.defaultData().extConfig.wechatTimelineData.title = subject
+////        case kTitleQQ:
+////            UMSocialData.defaultData().extConfig
+////        case kTitleQzone:
+////            UMSocialData.defaultData().extConfig
+////        case kTitleSina:
+////            UMSocialData.defaultData().extConfig
+//        default: ""
+//        }
+//    }
 }

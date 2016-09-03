@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 关注按钮protocol
 public protocol FollowProtocol {
     func modifyFollow(sender: UIButton)
 }

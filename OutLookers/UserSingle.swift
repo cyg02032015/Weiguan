@@ -44,7 +44,6 @@ class UserSingleton {
         KeyChainSingle.sharedInstance.keychain[kUserId] = userid
     }
     
-    
     func saveTokenUserid(info: RegisterObj) {
         KeyChainSingle.sharedInstance.keychain[kToken] = info.token
         KeyChainSingle.sharedInstance.keychain[kToken2] = info.token2

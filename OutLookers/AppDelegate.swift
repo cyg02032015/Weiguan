@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func testUpload() {
     }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // 调试时想要删除keychain里的数据调用此方法
+//        _ = try? KeyChainSingle.sharedInstance.keychain.removeAll()
         #if DEBUG
             configCocoaLumberjack()
         #endif

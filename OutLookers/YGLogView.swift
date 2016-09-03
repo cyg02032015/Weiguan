@@ -4,7 +4,7 @@
 //
 //  Created by Youngkook on 16/7/26.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
-//
+//  登录弹框
 
 import UIKit
 
@@ -195,6 +195,7 @@ class YGLogView: UIView {
         self.tapClosure = closure
     }
     
+    // 调用此方法吊起弹框
     func animation() {
         guard let view = UIApplication.sharedApplication().keyWindow else {
             LogError("keyWindow is nil")

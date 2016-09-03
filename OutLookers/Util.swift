@@ -72,6 +72,7 @@ class Util {
         return (back, imgView)
     }
     
+    // 登录弹框页面跳转
     class func logViewTap(controller: UIViewController, type: LogViewTapType) {
         switch type {
         case .Wechat:
@@ -127,9 +128,12 @@ class Util {
     
     /// 获取13位时间戳
     class func getCurrentTimestamp() -> String {
-        let date = NSDate(timeIntervalSinceNow: 0)
-        let interval = date.timeIntervalSince1970 * 1000
-        return "\(Int(interval))"
+        if globleSingle.currentTime == nil {
+            let date = NSDate(timeIntervalSinceNow: 0)
+            let interval = date.timeIntervalSince1970 * 1000
+            globleSingle.currentTime = "\(Int(interval))"
+        }
+        return globleSingle.currentTime!
     }
     
     /// XXA算法   param 手机号登录和注册时的最终passWd、令牌登录时的token

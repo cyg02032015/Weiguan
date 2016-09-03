@@ -136,16 +136,22 @@ func tokenLogin(success succ: (()->Void)? = nil, failure fail: (()->Void)? = nil
     if TokenTool.isCookieExpired() {
         if !isEmptyString(KeyChainSingle.sharedInstance.keychain[kToken]) {
             Server.tokenLogin { (success, msg, value) in
-                LogVerbose("============================")
-                LogDebug("秘钥登录 = \(value)\n\(msg)")
-                LogVerbose("============================")
-                if let s = succ {
-                    s()
+                if success {
+                    LogVerbose("============================")
+                    LogDebug("秘钥登录 = \(value)\n\(msg)")
+                    LogVerbose("============================")
+                    if let s = succ {
+                        s()
+                    }
+                } else {
+                    if let f = fail {
+                        f()
+                    }
                 }
             }
         } else {
             LogVerbose("============================")
-            LogError("秘钥登录失败")
+            LogError("token is nil")
             LogVerbose("============================")
             if let f = fail {
                 f()

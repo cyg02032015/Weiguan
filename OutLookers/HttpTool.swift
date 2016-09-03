@@ -33,38 +33,51 @@ public class HttpTool {
         }
     }
     
+    
     class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
-        tokenLogin(success: nil, failure: {
-            UserSingleton.sharedInstance.logOut()
-            TokenTool.removeCookies()
-        })
-        var headers: [String:String]?
-        if let cookiePath = KeyChainSingle.sharedInstance.keychain[kCookiePath], cookie = KeyChainSingle.sharedInstance.keychain[kCookie] {
-            headers = [
-                "X-X-M" : Util.getCurrentTimestamp(),
-                "X-X-D" : globleSingle.deviceId,
-                "X-X-T" : cookie,
-                "Cookie" : cookiePath
-            ]
-            LogInfo("请求中的headers = \(headers)")
-        } else {
-            LogError("cookie is nil")
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let group = dispatch_group_create()
+            dispatch_group_async(group, queue) {
+                dispatch_group_enter(group)
+                tokenLogin(success: { 
+                    dispatch_group_leave(group)
+                    }, failure: { 
+                        dispatch_group_leave(group)
+                        UserSingleton.sharedInstance.logOut()
+                        TokenTool.removeCookies()
+                })
         }
-        alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
-            LogVerbose("url = \(url)")
-            if let p = parameters {
-                LogWarn("parameters = \(p)")
+        
+        dispatch_group_notify(group, queue) {
+            var headers: [String:String]?
+            if let cookiePath = KeyChainSingle.sharedInstance.keychain[kCookiePath], cookie = KeyChainSingle.sharedInstance.keychain[kCookie] {
+                headers = [
+                    "X-X-M" : Util.getCurrentTimestamp(),
+                    "X-X-D" : globleSingle.deviceId,
+                    "X-X-T" : cookie,
+                    "Cookie" : cookiePath
+                ]
+                LogInfo("请求中的headers = \(headers)")
             }
-            switch response.result {
-            case .Success(let Value):
-                LogDebug("response = \(JSON(Value))")
-                complete(response: JSON(Value))
-            case .Failure(let Error):
-                fail(error: Error)
+            alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
+                globleSingle.currentTime = nil
+                LogVerbose("url = \(url)")
+                if let p = parameters {
+                    LogWarn("parameters = \(p)")
+                }
+                switch response.result {
+                case .Success(let Value):
+                    LogDebug("response = \(JSON(Value))")
+                    complete(response: JSON(Value))
+                case .Failure(let Error):
+                    fail(error: Error)
+                }
             }
         }
+
     }
     
+    /// 专门用在登录注册以及忘记密码等等
     class func registerLogPost(url: String, parameters: [String: AnyObject]?, pwdOrToken: String , complete: LogRegSuccess, fail: Failure) {
         TokenTool.removeCookies()
         let headers: [String : String] = [
@@ -73,6 +86,7 @@ public class HttpTool {
             "X-X-A": Util.getXXA(pwdOrToken)
         ]
         alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
+            globleSingle.currentTime = nil
             LogVerbose("url = \(url)")
             if let p = parameters {
                 LogWarn("parameters = \(p)")
@@ -85,6 +99,5 @@ public class HttpTool {
                 fail(error: Error)
             }
         }
-
     }
 }

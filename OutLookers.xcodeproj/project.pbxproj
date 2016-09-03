@@ -109,7 +109,6 @@
 		D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45291D1198B3004D9192 /* GlobleDefine.swift */; };
 		D81F452C1D1198B3004D9192 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452A1D1198B3004D9192 /* Reachability.swift */; };
 		D81F452E1D11A2E4004D9192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F452D1D11A2E4004D9192 /* API.swift */; };
-		D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F45391D143934004D9192 /* YKBannerView.swift */; };
 		D81F453C1D143934004D9192 /* YKPhotoPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */; };
 		D82417351D75C7CA002138A2 /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82417341D75C7CA002138A2 /* LogHelper.swift */; };
 		D825EEA11D50E78A00AF94AF /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = D825EE851D50E78A00AF94AF /* .gitkeep */; };
@@ -260,7 +259,6 @@
 		D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED61D183C4800A00AA7 /* Recruit.swift */; };
 		D8D81ED91D183CAC00A00AA7 /* NSDate-EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */; };
 		D8D81EDB1D183FBE00A00AA7 /* UIImagePickerController+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */; };
-		D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */; };
 		D8DAC59A1D66000D0009FDB9 /* KeyChainConstKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */; };
 		D8DAC59E1D6602480009FDB9 /* KeyChainSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC59D1D6602480009FDB9 /* KeyChainSingle.swift */; };
 		D8DAC5A01D6606CE0009FDB9 /* RegisterResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DAC59F1D6606CE0009FDB9 /* RegisterResp.swift */; };
@@ -272,7 +270,6 @@
 		D8EB0EBC1D48F3E7002E36F8 /* YGImageSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */; };
 		D8EB0EBE1D490EAC002E36F8 /* OSSImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0EBD1D490EAC002E36F8 /* OSSImageUploader.swift */; };
 		D8F526A51D154CEB000C8F91 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A41D154CEB000C8F91 /* LogViewController.swift */; };
-		D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526A81D1566B7000C8F91 /* StringDefine.swift */; };
 		D8F526B41D156B58000C8F91 /* GlobleFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F526B31D156B58000C8F91 /* GlobleFunc.swift */; };
 		E41B925E1D3DCF4D00749769 /* BindAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B925D1D3DCF4D00749769 /* BindAccountViewController.swift */; };
 		E41B92601D3DE30A00749769 /* GetVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41B925F1D3DE30A00749769 /* GetVerifyViewController.swift */; };
@@ -313,7 +310,6 @@
 		E41DD9271D3CA86200E5E7E9 /* IsAuthResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9261D3CA86200E5E7E9 /* IsAuthResp.swift */; };
 		E41DD9291D3CBBD000E5E7E9 /* MyTalentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD9281D3CBBD000E5E7E9 /* MyTalentViewController.swift */; };
 		E41DD92B1D3CC00500E5E7E9 /* MyTalentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DD92A1D3CC00500E5E7E9 /* MyTalentCell.swift */; };
-		E4272DDD1D17F25B00BE4053 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4272DDC1D17F25B00BE4053 /* area.plist */; };
 		E4272DE81D17F60100BE4053 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272DE71D17F60100BE4053 /* CitiesData.m */; };
 		E4272E081D19328D00BE4053 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4272E071D19328D00BE4053 /* VPImageCropperViewController.m */; };
 		E43BFC5E1D225F1C0074B9FE /* YKPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43BFC5D1D225F1C0074B9FE /* YKPhotoPreviewCell.swift */; };
@@ -524,7 +520,6 @@
 		D81F45291D1198B3004D9192 /* GlobleDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleDefine.swift; path = OutLookers/GlobleDefine.swift; sourceTree = SOURCE_ROOT; };
 		D81F452A1D1198B3004D9192 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = OutLookers/Reachability.swift; sourceTree = SOURCE_ROOT; };
 		D81F452D1D11A2E4004D9192 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = OutLookers/API.swift; sourceTree = SOURCE_ROOT; };
-		D81F45391D143934004D9192 /* YKBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKBannerView.swift; path = OutLookers/YKBannerView.swift; sourceTree = SOURCE_ROOT; };
 		D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YKPhotoPreviewController.swift; path = OutLookers/YKPhotoPreviewController.swift; sourceTree = SOURCE_ROOT; };
 		D82417341D75C7CA002138A2 /* LogHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogHelper.swift; path = OutLookers/LogHelper.swift; sourceTree = "<group>"; };
 		D825EE851D50E78A00AF94AF /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
@@ -702,7 +697,6 @@
 		D8D81ED61D183C4800A00AA7 /* Recruit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recruit.swift; path = OutLookers/Recruit.swift; sourceTree = SOURCE_ROOT; };
 		D8D81ED81D183CAC00A00AA7 /* NSDate-EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate-EX.swift"; path = "OutLookers/NSDate-EX.swift"; sourceTree = SOURCE_ROOT; };
 		D8D81EDA1D183FBE00A00AA7 /* UIImagePickerController+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImagePickerController+EX.swift"; path = "OutLookers/UIImagePickerController+EX.swift"; sourceTree = SOURCE_ROOT; };
-		D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGPhotoKitController.swift; path = OutLookers/YGPhotoKitController.swift; sourceTree = SOURCE_ROOT; };
 		D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyChainConstKey.swift; path = OutLookers/KeyChainConstKey.swift; sourceTree = SOURCE_ROOT; };
 		D8DAC59D1D6602480009FDB9 /* KeyChainSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyChainSingle.swift; path = OutLookers/KeyChainSingle.swift; sourceTree = SOURCE_ROOT; };
 		D8DAC59F1D6606CE0009FDB9 /* RegisterResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResp.swift; path = OutLookers/RegisterResp.swift; sourceTree = SOURCE_ROOT; };
@@ -714,7 +708,6 @@
 		D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YGImageSave.swift; path = OutLookers/YGImageSave.swift; sourceTree = SOURCE_ROOT; };
 		D8EB0EBD1D490EAC002E36F8 /* OSSImageUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSSImageUploader.swift; path = OutLookers/OSSImageUploader.swift; sourceTree = SOURCE_ROOT; };
 		D8F526A41D154CEB000C8F91 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogViewController.swift; path = OutLookers/LogViewController.swift; sourceTree = SOURCE_ROOT; };
-		D8F526A81D1566B7000C8F91 /* StringDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDefine.swift; path = OutLookers/StringDefine.swift; sourceTree = SOURCE_ROOT; };
 		D8F526B31D156B58000C8F91 /* GlobleFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobleFunc.swift; path = OutLookers/GlobleFunc.swift; sourceTree = SOURCE_ROOT; };
 		E41B925D1D3DCF4D00749769 /* BindAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BindAccountViewController.swift; path = OutLookers/BindAccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41B925F1D3DE30A00749769 /* GetVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetVerifyViewController.swift; path = OutLookers/GetVerifyViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -762,7 +755,6 @@
 		E41DD9261D3CA86200E5E7E9 /* IsAuthResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IsAuthResp.swift; path = OutLookers/IsAuthResp.swift; sourceTree = SOURCE_ROOT; };
 		E41DD9281D3CBBD000E5E7E9 /* MyTalentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyTalentViewController.swift; path = OutLookers/MyTalentViewController.swift; sourceTree = SOURCE_ROOT; };
 		E41DD92A1D3CC00500E5E7E9 /* MyTalentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyTalentCell.swift; path = OutLookers/MyTalentCell.swift; sourceTree = SOURCE_ROOT; };
-		E4272DDC1D17F25B00BE4053 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = area.plist; path = OutLookers/area.plist; sourceTree = SOURCE_ROOT; };
 		E4272DE61D17F60100BE4053 /* CitiesData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesData.h; path = OutLookers/CitiesData.h; sourceTree = SOURCE_ROOT; };
 		E4272DE71D17F60100BE4053 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesData.m; path = OutLookers/CitiesData.m; sourceTree = SOURCE_ROOT; };
 		E4272E061D19328D00BE4053 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = OutLookers/VPImageCropper/VPImageCropperViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1461,8 +1453,6 @@
 				D870C7321D392B24003B7A09 /* SquareViewController.swift */,
 				D870C7351D393236003B7A09 /* HotManViewController.swift */,
 				D870C7371D393250003B7A09 /* CircularViewController.swift */,
-				D870C7481D3B99BF003B7A09 /* DynamicDetailViewController.swift */,
-				D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1498,6 +1488,8 @@
 				D8AA0FCF1D1D8CC50038EE73 /* BudgetPriceCell.swift */,
 				D89E63661D69C44400045868 /* IssueTalenListCell.swift */,
 				D89E63681D69F3DE00045868 /* IssueTalentListHeader.swift */,
+				D870C7481D3B99BF003B7A09 /* DynamicDetailViewController.swift */,
+				D84DBBFC1D72F23000163F5E /* InvitedDetailViewController.swift */,
 			);
 			name = Public;
 			sourceTree = "<group>";
@@ -1588,7 +1580,6 @@
 				D81F453A1D143934004D9192 /* YKPhotoPreviewController.swift */,
 				E4E5DED21D179BEF00CB8535 /* YGSelectDateView.swift */,
 				E4E5DED81D179E1000CB8535 /* YGPickerView.swift */,
-				D8D81EDC1D1846F300A00AA7 /* YGPhotoKitController.swift */,
 				E47ADF6B1D1D051D00A2F4BD /* YGShareHandler.swift */,
 				D8B641451D367F1300DF916D /* Util.swift */,
 				D8EB0EBB1D48F3E7002E36F8 /* YGImageSave.swift */,
@@ -1879,13 +1870,10 @@
 			isa = PBXGroup;
 			children = (
 				D8DAC5991D66000D0009FDB9 /* KeyChainConstKey.swift */,
-				E4272DDC1D17F25B00BE4053 /* area.plist */,
 				E4E5DED61D179C0700CB8535 /* ColorDefine.swift */,
-				D81F45391D143934004D9192 /* YKBannerView.swift */,
 				D81F45291D1198B3004D9192 /* GlobleDefine.swift */,
 				D8F526B31D156B58000C8F91 /* GlobleFunc.swift */,
 				D8AA0FCD1D1D7D9C0038EE73 /* LogFormatter.swift */,
-				D8F526A81D1566B7000C8F91 /* StringDefine.swift */,
 				D81F44F61D118D15004D9192 /* OutLookers-Bridging-Header.h */,
 				D81F44F41D118D15004D9192 /* LaunchScreen.storyboard */,
 				D81F44F51D118D15004D9192 /* Main.storyboard */,
@@ -2221,7 +2209,6 @@
 				D825EEAE1D50E78A00AF94AF /* BMPlayer_replay@2x.png in Resources */,
 				D825EEA61D50E78A00AF94AF /* BMPlayer_mask_image@2x.png in Resources */,
 				D825EEB21D50E78A00AF94AF /* BMPlayer_slider_thumb@2x.png in Resources */,
-				E4272DDD1D17F25B00BE4053 /* area.plist in Resources */,
 				D825EEB41D50E78A00AF94AF /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2387,7 +2374,6 @@
 			files = (
 				D825EEB61D50E78A00AF94AF /* BMPlayerClearityChooseButton.swift in Sources */,
 				D81F45061D118D43004D9192 /* NSString+EX.swift in Sources */,
-				D8D81EDD1D1846F300A00AA7 /* YGPhotoKitController.swift in Sources */,
 				D8B641441D35535D00DF916D /* PHTaTableViewCell.swift in Sources */,
 				D82F8DF21D28EA3100A24CDB /* RecommendHotmanCollectionCell.swift in Sources */,
 				D82F8E081D2C0D9400A24CDB /* TYBasePageTabBar.m in Sources */,
@@ -2441,7 +2427,6 @@
 				D825EEB71D50E78A00AF94AF /* BMPlayerControlView.swift in Sources */,
 				D82F8DFA1D2AAC3A00A24CDB /* PHHeaderView.swift in Sources */,
 				E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */,
-				D81F453B1D143934004D9192 /* YKBannerView.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
 				D819920E1D3BD0F2007734C0 /* OrganizeRequest.swift in Sources */,
 				D8AA10061D1DA0220038EE73 /* TZAssetModel.m in Sources */,
@@ -2502,7 +2487,6 @@
 				D82F8E281D33E47300A24CDB /* ReleaseNoticeCell.swift in Sources */,
 				D8D81ED71D183C4800A00AA7 /* Recruit.swift in Sources */,
 				D83087821D27B805009CFE03 /* MineCollectCell.swift in Sources */,
-				D8F526A91D1566B7000C8F91 /* StringDefine.swift in Sources */,
 				E41B926A1D3DF0F400749769 /* SetPasswordViewController.swift in Sources */,
 				D81F45191D118D63004D9192 /* YGNavigationController.swift in Sources */,
 				D82F8E241D31070400A24CDB /* UILabel+EX.swift in Sources */,

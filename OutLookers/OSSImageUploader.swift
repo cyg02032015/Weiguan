@@ -17,7 +17,7 @@ enum UploadImageState: Int {
 }
 
 class OSSImageUploader {
-    
+    // 最好不要用
     class func asyncUploadImage(object:GetToken, image: UIImage, complete: (names: [String], state: UploadImageState) -> Void) {
         self.uploadImages(object, images: [image], isAsync: true, complete: complete)
     }
@@ -102,6 +102,7 @@ class OSSImageUploader {
             return token
     }
     
+    // 调用此方法上传图片
     class func asyncUploadImageData(object: GetToken, data: NSData, complete: (names: [String], state: UploadImageState) -> Void) {
         self.uploadImageDatas(object, datas: [data], isAsync: true, complete: complete)
     }
