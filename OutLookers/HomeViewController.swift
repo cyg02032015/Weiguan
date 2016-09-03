@@ -32,6 +32,7 @@ class HomeViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pageNo = 0
         NSNotificationCenter.defaultCenter().rx_notification(kPlusButtonClickNotification)
         .subscribeNext { [unowned self](notification) in
             if UserSingleton.sharedInstance.isLogin() {
@@ -200,6 +201,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(homeCellId, forIndexPath: indexPath) as! HomeCollectionCell
                 cell.info = recommends[indexPath.item]
+            cell.delegate = self
             return cell
         }
     }
@@ -214,11 +216,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        if section == 2 {
-            return UIEdgeInsets(top: 0, left: 0, bottom: TabbarHeight, right: 0)
-        } else {
+//        if section == 2 {
+//            return UIEdgeInsets(top: 0, left: 0, bottom: TabbarHeight, right: 0)
+//        } else {
             return UIEdgeInsetsZero
-        }
+//        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -283,6 +285,16 @@ extension HomeViewController {
         } else {
             statusView.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: offsetY/100)
         }
+    }
+}
+
+extension HomeViewController: HeaderImageViewDelegate {
+    func touchHeaderImageView(cell: HomeCollectionCell) {
+        let indexPath = self.collectionView.indexPathForCell(cell)!
+        let obj = recommends[indexPath.item]
+        let vc = PHViewController()
+        vc.user = "\(obj.userId)"
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

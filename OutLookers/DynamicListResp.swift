@@ -65,18 +65,18 @@ class DynamicResult {
         if json == nil{
             return
         }
-        cover = json["cover"].stringValue
-        createTime = json["createTime"].stringValue
-        detailsType = json["detailsType"].intValue
-        follow = json["follow"].intValue
-        id = json["id"].intValue
+        cover = json["cover"].stringValue ?? ""
+        createTime = json["createTime"].stringValue ?? ""
+        detailsType = json["detailsType"].intValue ?? 0
+        follow = json["follow"].intValue ?? 0
+        id = json["id"].intValue ?? 0
         isLike = json["isLike"].boolValue
-        isVideo = json["isVideo"].intValue
-        likeCount = json["likeCount"].intValue
-        name = json["name"].stringValue
-        photo = json["photo"].stringValue
-        picture = json["picture"].stringValue
-        replyCount = json["replyCount"].intValue
-        text = json["text"].stringValue
-        userId = json["userId"].intValue
+        isVideo = json["isVideo"].intValue ?? 0
+        likeCount = json["likeCount"].intValue ?? 0
+        name = json["name"].stringValue ?? ""
+        photo = json["photo"].stringValue ?? ""
+        picture = json["picture"].stringValue ?? ""
+        replyCount = json["replyCount"].intValue ?? 0
+        text = json["text"].stringValue ?? ""
+        userId = json["userId"].intValue ?? 0
     }}

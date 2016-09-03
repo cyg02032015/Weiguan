@@ -155,7 +155,7 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
                 let comment = CommentList(fromJson: JSON(nilLiteral: ()))
                 comment.createTime = NSDate().stringFromCreate()
                 comment.headImgUrl = ""
-                comment.nickname = "崔永国"
+                comment.nickname = UserSingleton.sharedInstance.nickname
                 comment.text = self.req.text
                 comment.id = self.detailObj.id
                 comment.detailsType = 0

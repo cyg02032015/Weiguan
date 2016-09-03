@@ -24,7 +24,7 @@ class RecommendHeaderView: UICollectionReusableView {
         
         imgView.snp.makeConstraints { (make) in
             make.size.equalTo(kSize(4, height: 15))
-            make.left.equalTo(kScale(16))
+            make.left.equalTo(kScale(0))
             make.centerY.equalTo(imgView.superview!)
         }
         

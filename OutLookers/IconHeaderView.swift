@@ -89,7 +89,6 @@ class IconHeaderView: UIView {
         if self.closure != nil {
             self.closure()
         }
-        
     }
     
     func iconHeaderTap(closure: HeaderClosure) {

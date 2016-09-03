@@ -58,6 +58,8 @@ public class TouchImageView: UIImageView {
     private var target: AnyObject!
     private var action: Selector!
     
+    weak var cell: HomeCollectionCell!
+    
     convenience init() {
         self.init(frame: CGRectZero)
         self.userInteractionEnabled = true

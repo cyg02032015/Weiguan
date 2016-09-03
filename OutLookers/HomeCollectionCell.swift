@@ -8,8 +8,13 @@
 
 import UIKit
 private extension Selector {
-    static let tapHeadImg = #selector(HomeCell.tapHeadImg)
+    static let tapHeadImg = #selector(HomeCollectionCell.tapHeadImg)
 }
+
+protocol HeaderImageViewDelegate: class {
+    func touchHeaderImageView(cell: HomeCollectionCell) -> Void
+}
+
 class HomeCollectionCell: UICollectionViewCell {
     
     var info: DynamicResult! {
@@ -22,6 +27,7 @@ class HomeCollectionCell: UICollectionViewCell {
         }
     }
     
+    weak var delegate: HeaderImageViewDelegate?
     var backImgView: UIImageView!
     var headImgView: TouchImageView!
     var nameLabel: UILabel!
@@ -36,6 +42,8 @@ class HomeCollectionCell: UICollectionViewCell {
     
     func setupSubViews() {
         backImgView = UIImageView()
+        backImgView.contentMode = .ScaleAspectFill
+        backImgView.clipsToBounds = true
         contentView.addSubview(backImgView)
         backImgView.snp.makeConstraints { (make) in
             make.left.right.top.equalTo(backImgView.superview!)
@@ -91,7 +99,7 @@ class HomeCollectionCell: UICollectionViewCell {
     }
     
     func tapHeadImg() {
-        
+        delegate?.touchHeaderImageView(self)
     }
     
     required init?(coder aDecoder: NSCoder) {

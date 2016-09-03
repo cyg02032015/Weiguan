@@ -47,6 +47,9 @@ extension String {
     }
     
     func addImagePath(size: CGSize = CGSize(width: 1080, height: 1080)) -> NSURL? {
+        if self.lowercaseString.hasPrefix("http") {
+            return NSURL.init(string: self)
+        }
         guard let path = globleSingle.imagePath else {return nil}
         return NSURL(string: path + self + "@\(Int(size.width))h_\(Int(size.height))w.webp")!
     }

@@ -17,7 +17,16 @@ class HotManViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        loadMoreData()
+        tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
+            self?.loadNewData()
+            })
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
+            })
+    }
+    
+    func loadNewData() {
+        
     }
     
     override func loadMoreData() {

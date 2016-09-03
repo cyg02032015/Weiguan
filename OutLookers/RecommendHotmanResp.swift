@@ -37,13 +37,16 @@ class HotmanList {
     var nickname : String!
     var userId: String!
     
+    var photo: String!
+    
     init(fromJson json: JSON!){
         if json == nil{
             return
         }
-        userId = json["userId"].stringValue
-        headImgUrl = "\(json["headImgUrl"].stringValue)"
-        name = json["name"].stringValue
-        nickname = json["nickname"].stringValue
+        userId = json["userId"].stringValue ?? ""
+        headImgUrl = "\(json["headImgUrl"].stringValue ?? "")"
+        name = json["name"].stringValue ?? ""
+        nickname = json["nickname"].stringValue ?? ""
+        photo = json["photo"].stringValue ?? ""
     }
 }
