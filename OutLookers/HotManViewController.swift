@@ -95,7 +95,6 @@ extension HotManViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(hotmanCellId, forIndexPath: indexPath) as! HotmanCell
-        //cell.info = hotmans[indexPath.section]
         return cell
     }
     

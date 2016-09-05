@@ -20,6 +20,9 @@ class InvitedDetailViewController: YGBaseViewController {
     var rightNaviButton: UIButton!
     var delta: CGFloat = 0
     
+    var shareImage: UIImage!
+    
+    private var didAppear: Bool = false
     private var shareView: YGShare!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,7 @@ class InvitedDetailViewController: YGBaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         viewWillDisappearSetNavigation(animated)
+        didAppear = true
     }
     
     func willSetNavigation(animated: Bool) {
@@ -62,11 +66,7 @@ class InvitedDetailViewController: YGBaseViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
         navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationController?.navigationBar.lt_reset()
-    }
-
-    deinit {
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
-
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: animated)
     }
     
     func loadData() {
@@ -82,12 +82,30 @@ class InvitedDetailViewController: YGBaseViewController {
                     ws.header.cycleView
                     .imageURLStringsGroup = imgUrls
                 }
-                ws.tableView.reloadData()
+                
+                dispatch_async_safely_to_main_queue({ 
+                    ws.tableView.reloadData()
+                    ws.shareAction()
+                })
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
             }
         }
+    }
+    
+    func shareAction() {
+        var type: YGShareType = .CCVisitor
+        if !isEmptyString(UserSingleton.sharedInstance.userId) {
+            type = .CCHost
+        }
+        let shareModel = YGShareModel()
+        shareModel.shareID = "index.html#annunciate-details?listId=\(noticeObj.id)"
+        shareModel.shareImage = self.shareImage
+        shareModel.shareNickName = noticeObj.details
+        let tuple = YGShareHandler.handleShareInstalled(type)
+        shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
+        shareView.shareModel = shareModel
     }
     
     func setupSubViews() {
@@ -113,12 +131,14 @@ class InvitedDetailViewController: YGBaseViewController {
         rightNaviButton.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
         rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightNaviButton)
-        let tuple = YGShareHandler.handleShareInstalled(.DYVisitor)
-        shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
         //分享
-        rightNaviButton.rx_tap.subscribeNext {
-            self.shareView.animation()
+        rightNaviButton.rx_tap.subscribeNext { [weak self] in
+            self?.shareView.animation()
         }.addDisposableTo(disposeBag)
+    }
+    
+    @objc private func prepareShare() {
+        shareAction()
     }
 }
 
@@ -153,6 +173,7 @@ extension InvitedDetailViewController {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        if NSStringFromClass(self.dynamicType) == "OutLookers.InvitedDetailViewController" {
         let color = UIColor(r: 255, g: 255, b: 255, a: 1.0)
         let offsetY = scrollView.contentOffset.y
         delta = offsetY
@@ -165,9 +186,11 @@ extension InvitedDetailViewController {
         } else {
             backImgView.image = UIImage(named: "back1")
             rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
+            guard !didAppear else { return } // 控制器消失后还会走一次这个方法
             UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.clearColor(), NSFontAttributeName:UIFont.customNumFontOfSize(20)]
             navigationController?.navigationBar.lt_setBackgroundColor(color.colorWithAlphaComponent(delta / 100))
+        }
         }
 
     }

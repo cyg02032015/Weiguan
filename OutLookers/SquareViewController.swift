@@ -21,8 +21,6 @@ class SquareViewController: YGBaseViewController {
         super.viewDidLoad()
         setupSubViews()
         loadNewData()
-        let sharetuple = YGShareHandler.handleShareInstalled(.DYVisitor)
-        share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
         
         tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
             self?.loadNewData()
@@ -114,13 +112,31 @@ extension SquareViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let obj = sqaureLists[indexPath.section]
         let vc = DynamicDetailViewController()
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
         vc.dynamicObj = obj
+        vc.shareImage = cell.bigImgView.image
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension SquareViewController: DynamicCellDelegate, FollowProtocol {
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
+        let dy = self.sqaureLists[indexPath.section]
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
+        var type: YGShareType = .DYVisitor
+        let shareModel = YGShareModel()
+        shareModel.shareNickName = "分享自\(dy.name)的纯氧作品, 一起来看~"
+        if UserSingleton.sharedInstance.userId == "\(dy.userId)" {
+            type = .DYHost
+            shareModel.shareNickName = "我的纯氧作品, 一起来看~"
+        }else if !isEmptyString(UserSingleton.sharedInstance.userId) {
+            type = .DYHost
+        }
+        shareModel.shareID = "index.html#trends-details?listId=\(dy.id)"
+        shareModel.shareImage = cell.bigImgView.image
+        let sharetuple = YGShareHandler.handleShareInstalled(type)
+        share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
+        share.shareModel = shareModel
         share.animation()
     }
     

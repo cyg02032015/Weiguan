@@ -99,6 +99,7 @@ class HomeViewController: YGBaseViewController {
         
         setupSubViews()
         
+        collectionView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         collectionView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
             self?.loadNewData()
         })
@@ -131,7 +132,6 @@ class HomeViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        
         Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: true, isSquare: false, timeStr: self.timeStr) { (success, msg, value) in
             self.collectionView.mj_footer.endRefreshing()
             if success {
@@ -218,6 +218,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if indexPath.section == 2 {
             let obj = recommends[indexPath.item]
             let vc = DynamicDetailViewController()
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! HomeCollectionCell
+            vc.shareImage = cell.backImgView.image
             vc.dynamicObj = obj
             navigationController?.pushViewController(vc, animated: true)
         }

@@ -103,6 +103,8 @@ extension CircularViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = InvitedDetailViewController()
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CircularCell
+        vc.shareImage = cell.imgView.image
         vc.id = "\(circulars[indexPath.section].id)"
         navigationController?.pushViewController(vc, animated: true)
     }

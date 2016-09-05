@@ -37,9 +37,9 @@ class AvatarNameList {
         if json == nil{
             return
         }
-        headImgUrl = json["headImgUrl"].stringValue
+        headImgUrl = json["headImgUrl"].stringValue ?? ""
         id = json["id"].intValue
-        nickname = json["nickname"].stringValue
+        nickname = json["nickname"].stringValue ?? ""
         detailsType = json["detailsType"].intValue
     }
 }

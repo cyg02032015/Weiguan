@@ -25,6 +25,7 @@ class DynamicDetailViewController: YGBaseViewController {
     var moreButton: UIButton!
     var isComment = false
     var likeListObj: LikeListResp!
+    var shareImage: UIImage!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,7 +39,14 @@ class DynamicDetailViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tuple = YGShareHandler.handleShareInstalled(.DYVisitor)
+        var type: YGShareType = .DYVisitor
+        if !isEmptyString(UserSingleton.sharedInstance.userId) {
+            type = .DYHost
+        }
+        if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {
+            
+        }
+        let tuple = YGShareHandler.handleShareInstalled(type)
         shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
         loadData()
         loadMoreData()
@@ -115,6 +123,17 @@ class DynamicDetailViewController: YGBaseViewController {
     }
     
     override func tapMoreButton(sender: UIButton) {
+        let shareModel = YGShareModel()
+        shareModel.shareID = "index.html#trends-details?listId=\(dynamicObj.id)"
+        shareModel.shareImage = self.shareImage
+        
+        if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {
+            shareModel.shareNickName = "我的纯氧作品, 一起来看~"
+        }else {
+            shareModel.shareNickName = "分享自\(dynamicObj.name)的纯氧作品, 一起来看~"
+        }
+        shareModel.shareInfo = dynamicObj.text
+        shareView.shareModel = shareModel
         shareView.animation()
     }
     
@@ -157,7 +176,7 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
                 comment.headImgUrl = ""
                 comment.nickname = UserSingleton.sharedInstance.nickname
                 comment.text = self.req.text
-                comment.id = self.detailObj.id
+                comment.id = self.dynamicObj.id
                 comment.detailsType = 0
                 comment.replyId = self.req.replyId == nil ? 0 : Int(self.req.replyId!)
                 self.comments.append(comment)
@@ -235,6 +254,12 @@ extension DynamicDetailViewController {
 
 extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
     func dynamicDetailTapShare(sender: UIButton) {
+        let shareModel = YGShareModel()
+        shareModel.shareID = "index.html#trends-details?listId=\(dynamicObj.id)"
+        shareModel.shareImage = self.shareImage
+        shareModel.shareNickName = dynamicObj.name
+        shareModel.shareInfo = dynamicObj.text
+        shareView.shareModel = shareModel
         shareView.animation()
     }
     

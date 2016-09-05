@@ -15,13 +15,16 @@ private extension Selector {
     static let tapCancel = #selector(YGShare.tapCancel)
 }
 
+class YGShareModel {
+    var shareID: String? // 拼接在连接后面 url路径
+    var shareImage: UIImage? // 封面
+    var shareNickName: String? // 昵称和内容,如果是本人的为"我的纯氧作品, 一起来看~"
+    var shareInfo: String?
+}
 
 class YGShare: UIView {
-    var shareID: String?
-    var shareImage: UIImage?
-    var shareNickName: String?
-    
-    
+
+    var shareModel: YGShareModel!
     typealias ShareClosure = (title: String) -> Void
     private var shareClosure: ShareClosure!
     var container: UIView!
@@ -177,9 +180,9 @@ class YGShare: UIView {
             }
             
             ws.tapCancel()
-            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=\(self?.shareID)")//(self.detailObj.id)"
+            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/\(self?.shareModel.shareID ?? "")")//(self.detailObj.id)"
             
-            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: "分享 \(self?.shareNickName)的纯氧作品, 起来看~", image: self?.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: self?.shareModel.shareNickName, image: self?.shareModel.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
                 if response.responseCode == UMSResponseCodeSuccess {
                     print("分享成功！")
                 }
