@@ -178,7 +178,7 @@ extension SquareViewController: DynamicCellDelegate, FollowProtocol {
             let logView = YGLogView()
             logView.animation()
             logView.tapLogViewClosure({ (type) in
-                Util.logViewTap(self, type: type)
+                LogInHelper.logViewTap(self, type: type)
             })
         }
         
@@ -195,7 +195,7 @@ extension SquareViewController: DynamicCellDelegate, FollowProtocol {
             let logView = YGLogView()
             logView.animation()
             logView.tapLogViewClosure({ (type) in
-                Util.logViewTap(self, type: type)
+                LogInHelper.logViewTap(self, type: type)
             })
         }
     }
@@ -218,7 +218,7 @@ extension SquareViewController: DynamicCellDelegate, FollowProtocol {
             let logView = YGLogView()
             logView.animation()
             logView.tapLogViewClosure({ (type) in
-                Util.logViewTap(self, type: type)
+                LogInHelper.logViewTap(self, type: type)
             })
         }
     }

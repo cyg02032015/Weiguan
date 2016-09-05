@@ -141,4 +141,6 @@ struct API {
     static let tokenLogin = baseURL + "/api/login/v1/tokenin"
     /// 停止招募
     static let stopRecruit = baseURL + "/api/release/v1/announcement/stop"
+    /// 第三方登录
+    static let thirdLogin = baseURL + "/api/login/v1/otherLogin"
 }

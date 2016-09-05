@@ -21,3 +21,5 @@ let kCookie = "cookie"
 let kExpiresDate = "expiresDate"
 
 let kCookiePath = "cookiePath"
+
+let kAuthType = "authType"

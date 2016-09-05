@@ -106,7 +106,7 @@ extension MineViewController {
                 let logView = YGLogView()
                 logView.animation()
                 logView.tapLogViewClosure({ (type) in
-                    Util.logViewTap(self, type: type)
+                    LogInHelper.logViewTap(self, type: type)
                 })
             }
         }
@@ -127,7 +127,7 @@ extension MineViewController {
                     let view = YGLogView()
                     view.animation()
                     view.tapLogViewClosure({ (type) in
-                        Util.logViewTap(self, type: type)
+                        LogInHelper.logViewTap(self, type: type)
                     })
                 }
             }
@@ -139,7 +139,7 @@ extension MineViewController {
                     let logView = YGLogView()
                     logView.animation()
                     logView.tapLogViewClosure({ (type) in
-                        Util.logViewTap(self, type: type)
+                        LogInHelper.logViewTap(self, type: type)
                     })
                 }
             }
@@ -155,7 +155,7 @@ extension MineViewController {
                     let logView = YGLogView()
                     logView.animation()
                     logView.tapLogViewClosure({ (type) in
-                        Util.logViewTap(self, type: type)
+                        LogInHelper.logViewTap(self, type: type)
                     })
                 }
             }
@@ -169,7 +169,7 @@ extension MineViewController {
                     let logView = YGLogView()
                     logView.animation()
                     logView.tapLogViewClosure({ (type) in
-                        Util.logViewTap(self, type: type)
+                        LogInHelper.logViewTap(self, type: type)
                     })
                 }
             }
@@ -183,7 +183,7 @@ extension MineViewController {
                     let logView = YGLogView()
                     logView.animation()
                     logView.tapLogViewClosure({ (type) in
-                        Util.logViewTap(self, type: type)
+                        LogInHelper.logViewTap(self, type: type)
                     })
                 }
             }
@@ -242,7 +242,7 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
             let logView = YGLogView()
             logView.animation()
             logView.tapLogViewClosure({ (type) in
-                Util.logViewTap(self, type: type)
+                LogInHelper.logViewTap(self, type: type)
             })
             return
         }

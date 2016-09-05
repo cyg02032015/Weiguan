@@ -80,7 +80,7 @@ extension SettingViewController {
                 let logView = YGLogView()
                 logView.animation()
                 logView.tapLogViewClosure({ (type) in
-                    Util.logViewTap(self, type: type)
+                    LogInHelper.logViewTap(self, type: type)
                 })
             }
             
@@ -96,7 +96,7 @@ extension SettingViewController {
                 let logView = YGLogView()
                 logView.animation()
                 logView.tapLogViewClosure({ (type) in
-                    Util.logViewTap(self, type: type)
+                    LogInHelper.logViewTap(self, type: type)
                 })
             }
             tableView.reloadData()

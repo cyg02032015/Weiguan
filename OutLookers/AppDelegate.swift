@@ -45,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func isLogin() {
         if !UserSingleton.sharedInstance.isLogin() {
             LogInfo("用户未登录")
+        } else {
+            UserSingleton.sharedInstance.type = UserType(rawValue: Int(KeyChainSingle.sharedInstance.keychain[kAuthType] ?? "0")!)!
+            UserSingleton.sharedInstance.userId = KeyChainSingle.sharedInstance.keychain[kUserId] ?? ""
         }
     }
     

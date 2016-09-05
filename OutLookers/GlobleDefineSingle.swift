@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Device
 
 private let sharedGloble = GlobleDefineSingle()
 class GlobleDefineSingle: NSObject {
@@ -21,4 +22,30 @@ class GlobleDefineSingle: NSObject {
     var videoSnapshotPrefix: String!
     var deviceId: String!
     var currentTime: String?
+    /// 获取系统 “iPhone, 5S, 9.4.3”
+    var deviceDesc: String {
+        get {
+            
+            return "iPhone," + MyDevice.getSystemType() + "," + MyDevice.getSystemVersion()
+        }
+    }
+}
+
+class MyDevice {
+    /// 获取系统版本
+    static func getSystemVersion() -> String {
+        return UIDevice.currentDevice().systemVersion
+    }
+    
+    static func getSystemType() -> String {
+        if Device.version().rawValue.hasPrefix("iPhone") {
+           return (Device.version().rawValue as NSString).substringFromIndex("iPhone".characters.count)
+        } else if Device.version().rawValue.hasPrefix("iPad") {
+            return (Device.version().rawValue as NSString).substringFromIndex("iPad".characters.count)
+        } else if Device.version().rawValue.hasPrefix("iPodTouch") {
+            return (Device.version().rawValue as NSString).substringFromIndex("iPodTouch".characters.count)
+        } else {
+            return "无法获取"
+        }
+    }
 }

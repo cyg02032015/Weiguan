@@ -241,6 +241,8 @@
 		D8AA100C1D1DA0220038EE73 /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA10001D1DA0220038EE73 /* TZPhotoPreviewController.m */; };
 		D8AA100D1D1DA0220038EE73 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA10021D1DA0220038EE73 /* TZVideoPlayerController.m */; };
 		D8AA100E1D1DA0220038EE73 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AA10041D1DA0220038EE73 /* UIView+Layout.m */; };
+		D8B1961A1D7DBAF80098763D /* LogInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B196191D7DBAF80098763D /* LogInHelper.swift */; };
+		D8B1961C1D7DC8A10098763D /* ThirdLogReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1961B1D7DC8A10098763D /* ThirdLogReq.swift */; };
 		D8B6413E1D354EFC00DF916D /* PHOrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6413D1D354EFC00DF916D /* PHOrderListViewController.swift */; };
 		D8B641401D354FBE00DF916D /* TaJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6413F1D354FBE00DF916D /* TaJoinViewController.swift */; };
 		D8B641421D35500400DF916D /* TaReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B641411D35500400DF916D /* TaReleaseViewController.swift */; };
@@ -680,6 +682,8 @@
 		D8AA10021D1DA0220038EE73 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
 		D8AA10031D1DA0220038EE73 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		D8AA10041D1DA0220038EE73 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		D8B196191D7DBAF80098763D /* LogInHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInHelper.swift; path = OutLookers/LogInHelper.swift; sourceTree = "<group>"; };
+		D8B1961B1D7DC8A10098763D /* ThirdLogReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThirdLogReq.swift; path = OutLookers/ThirdLogReq.swift; sourceTree = SOURCE_ROOT; };
 		D8B6413D1D354EFC00DF916D /* PHOrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PHOrderListViewController.swift; path = OutLookers/PHOrderListViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8B6413F1D354FBE00DF916D /* TaJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaJoinViewController.swift; path = OutLookers/TaJoinViewController.swift; sourceTree = SOURCE_ROOT; };
 		D8B641411D35500400DF916D /* TaReleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaReleaseViewController.swift; path = OutLookers/TaReleaseViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -1192,6 +1196,7 @@
 				D88FC4131D5A400C00EAF269 /* BannerResp.swift */,
 				D8DAC59F1D6606CE0009FDB9 /* RegisterResp.swift */,
 				D8DAC5A11D674FA30009FDB9 /* PerfectInfomationReq.swift */,
+				D8B1961B1D7DC8A10098763D /* ThirdLogReq.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1239,8 +1244,10 @@
 			isa = PBXGroup;
 			children = (
 				D82417341D75C7CA002138A2 /* LogHelper.swift */,
+				D8B196191D7DBAF80098763D /* LogInHelper.swift */,
 			);
 			name = Helper;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		D825EE831D50E78A00AF94AF /* BMPlayer */ = {
@@ -1681,7 +1688,6 @@
 		E41C22CC1D113B9500F58250 = {
 			isa = PBXGroup;
 			children = (
-				D82417331D75C7B7002138A2 /* Helper */,
 				E41C22D71D113B9500F58250 /* OutLookers */,
 				E41C22EC1D113B9500F58250 /* OutLookersTests */,
 				E41C22F71D113B9500F58250 /* OutLookersUITests */,
@@ -1705,6 +1711,7 @@
 			isa = PBXGroup;
 			children = (
 				E41C22D81D113B9500F58250 /* AppDelegate.swift */,
+				D82417331D75C7B7002138A2 /* Helper */,
 				D870C7341D392B61003B7A09 /* Public */,
 				D8C167411D1D783C00C50EB7 /* OCFile */,
 				E41C6C5A1D113F350013031D /* BaseClass */,
@@ -2428,6 +2435,7 @@
 				E4E5DEC31D179BB900CB8535 /* RecruitInformationViewController.swift in Sources */,
 				D81992291D3D1F3A007734C0 /* MyReleaseViewController.swift in Sources */,
 				D825EEB71D50E78A00AF94AF /* BMPlayerControlView.swift in Sources */,
+				D8B1961C1D7DC8A10098763D /* ThirdLogReq.swift in Sources */,
 				D82F8DFA1D2AAC3A00A24CDB /* PHHeaderView.swift in Sources */,
 				E47ADF661D1BEEEF00A2F4BD /* VideoCoverCell.swift in Sources */,
 				D81F450E1D118D43004D9192 /* UIView+EX.swift in Sources */,
@@ -2645,6 +2653,7 @@
 				E41B92CD1D3F56F900749769 /* HCSStarRatingView.m in Sources */,
 				D81992521D449C50007734C0 /* FindNoticeDetailResp.swift in Sources */,
 				D812A9081D4FA69D00186564 /* MJRefreshFooter.m in Sources */,
+				D8B1961A1D7DBAF80098763D /* LogInHelper.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 				D84DBBFB1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift in Sources */,
 				D82F8E0A1D2C0D9400A24CDB /* TYSlidePageScrollViewController.m in Sources */,

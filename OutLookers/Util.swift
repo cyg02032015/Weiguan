@@ -72,23 +72,6 @@ class Util {
         return (back, imgView)
     }
     
-    // 登录弹框页面跳转
-    class func logViewTap(controller: UIViewController, type: LogViewTapType) {
-        switch type {
-        case .Wechat:
-            LogInfo("微信登录")
-        case .QQ: LogInfo("QQ登录")
-        case .Weibo: LogInfo("微博登录")
-        case .Phone:
-            let vc = LogViewController()
-            controller.navigationController?.pushViewController(vc, animated: true)
-        case .Iagree: LogInfo("同意协议")
-        case .Register:
-            let vc = Register1ViewController()
-            controller.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
     /// 根据unit获取对应字符串
     class func unit(type: String) -> String {
         switch type {

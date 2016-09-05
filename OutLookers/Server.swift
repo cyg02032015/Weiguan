@@ -1114,6 +1114,7 @@ class Server {
                 }
                 UserSingleton.sharedInstance.saveTokenUserid(info.result)
                 UserSingleton.sharedInstance.userId = info.result.userId
+                UserSingleton.sharedInstance.type = UserType(rawValue: info.result.authenticationType)!
                 handler(success: true, msg: nil, value: info.result)
             } else {
                 handler(success: false, msg: info.msg, value: nil)
@@ -1163,6 +1164,7 @@ class Server {
                 UserSingleton.sharedInstance.saveTokenUserid(info.result)
                 UserSingleton.sharedInstance.userId = info.result.userId
                 UserSingleton.sharedInstance.nickname = info.result.nickname ?? ""
+                UserSingleton.sharedInstance.type = UserType(rawValue: info.result.authenticationType)!
                 handler(success: true, msg: nil, value: info.result)
             } else {
                 handler(success: false, msg: info.msg, value: nil)
@@ -1189,6 +1191,7 @@ class Server {
                 UserSingleton.sharedInstance.saveUserId(info.result.userId)
                 UserSingleton.sharedInstance.userId = info.result.userId
                 UserSingleton.sharedInstance.nickname = info.result.nickname ?? ""
+                UserSingleton.sharedInstance.type = UserType(rawValue: info.result.authenticationType)!
                 handler(success: true, msg: nil, value: info.result)
             } else {
                 handler(success: false, msg: info.msg, value: nil)
@@ -1211,6 +1214,37 @@ class Server {
             } else {
                 handler(success: false, msg: info.msg, value: nil)
             }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
+
+    /// 第三方登录
+    class func thirdLogin(req: ThirdLogReq, handler: (success: Bool, msg: String?, value: RegisterObj?)->Void) {
+        let parameters = [
+            "deviceDesc": req.deviceDesc,
+            "deviceId": req.deviceId,
+            "headImgUrl": req.headImgUrl,
+            "nickname": req.nickname,
+            "openId": req.openId,
+            "type": "\(req.type)",
+            "uid": req.uid
+        ]
+        HttpTool.registerLogPost(API.registerPhone, parameters: parameters, pwdOrToken: req.uid, complete: { (request, response, value) in
+            let info = RegisterResp(fromJson: value)
+            if info.success == true {
+                if let headerFields = response?.allHeaderFields as? [String: String], URL = request?.URL {
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
+                    TokenTool.saveCookieAndExpired(cookies)
+                }
+                UserSingleton.sharedInstance.saveTokenUserid(info.result)
+                UserSingleton.sharedInstance.userId = info.result.userId
+                UserSingleton.sharedInstance.type = UserType(rawValue: info.result.authenticationType)!
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+            
         }) { (error) in
             handler(success: false, msg: error.localizedDescription, value: nil)
         }

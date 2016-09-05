@@ -48,6 +48,7 @@ class UserSingleton {
         KeyChainSingle.sharedInstance.keychain[kToken] = info.token
         KeyChainSingle.sharedInstance.keychain[kToken2] = info.token2
         KeyChainSingle.sharedInstance.keychain[kUserId] = info.userId
+        KeyChainSingle.sharedInstance.keychain[kAuthType] = "\(info.authenticationType)"
     }
     
     func getUserId() -> String? {
@@ -58,5 +59,6 @@ class UserSingleton {
         _ = try? KeyChainSingle.sharedInstance.keychain.remove(kToken)
         _ = try? KeyChainSingle.sharedInstance.keychain.remove(kToken2)
         _ = try? KeyChainSingle.sharedInstance.keychain.remove(kUserId)
+        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kAuthType)
     }
 }
