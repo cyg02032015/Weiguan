@@ -130,7 +130,7 @@ class DynamicCell: UITableViewCell {
         contentView.addSubview(followButton)
         followButton.snp.makeConstraints { (make) in
             make.right.equalTo(followButton.superview!).offset(kScale(-16))
-            make.size.equalTo(kSize(48, height: 23))
+            make.size.equalTo(kSize(50, height: 20))
             make.centerY.equalTo(headImgView)
         }
         

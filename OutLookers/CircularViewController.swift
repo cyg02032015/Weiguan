@@ -12,31 +12,61 @@ private let circularCellId = "circularCellId"
 
 class CircularViewController: YGBaseViewController {
 
+    private var timeStr: String!
+    
     var tableView: UITableView!
     lazy var circulars = [FindNotice]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        loadMoreData()
+        loadNewData()
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
         })
+        tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
+            self?.loadNewData()
+            })
     }
     
-    override func loadMoreData() {
-        Server.getFindNoticeList(pageNo, state: 1, isPerson: false) { (success, msg, value) in
+    func loadNewData() {
+        pageNo = 1
+        timeStr = NSDate().stringFromNowDate()
+        Server.getFindNoticeList(pageNo, state: 1, isPerson: false, timeStr: self.timeStr) { (success, msg, value) in
             self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else {return}
+                self.circulars.removeAll()
                 self.circulars.appendContentsOf(object.findNoticeResult)
                 self.tableView.reloadData()
                 self.pageNo = self.pageNo + 1
+                self.tableView.mj_header.endRefreshing()
                 if object.findNoticeResult.count < 10 {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
+                self.tableView.mj_header.endRefreshing()
+            }
+        }
+    }
+    
+    override func loadMoreData() {
+        Server.getFindNoticeList(pageNo, state: 1, isPerson: false, timeStr: self.timeStr) { (success, msg, value) in
+            self.tableView.mj_footer.endRefreshing()
+            if success {
+                guard let object = value else {return}
+                self.circulars.appendContentsOf(object.findNoticeResult)
+                self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
+                self.tableView.mj_footer.endRefreshing()
+                if object.findNoticeResult.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+                self.tableView.mj_footer.endRefreshing()
             }
         }
     }

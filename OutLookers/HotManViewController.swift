@@ -11,11 +11,14 @@ import UIKit
 private let hotmanCellId = "hotmanCellId"
 
 class HotManViewController: YGBaseViewController {
-
+    
+    private var timeStr: String!
+    
     var tableView: UITableView!
-    lazy var hotmans = [FindeHotman]()
+    lazy var hotmans = [TalentResult]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.timeStr = NSDate().stringFromNowDate()
         setupSubViews()
         tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
             self?.loadNewData()
@@ -26,18 +29,42 @@ class HotManViewController: YGBaseViewController {
     }
     
     func loadNewData() {
-        
+        self.hotmans.removeAll()
+        pageNo = 1
+        self.timeStr = NSDate().stringFromNowDate()
+        Server.talentList(pageNo, state: 1, timeStr: timeStr) { (success, msg, value) in
+            if success {
+                guard let listResp  = value else { return }
+                self.hotmans.appendContentsOf(listResp.list)
+                self.tableView.reloadData()
+                self.pageNo += 1
+                self.tableView.mj_header.endRefreshing()
+                if listResp.list.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            }else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+                self.tableView.mj_header.endRefreshing()
+            }
+        }
     }
     
     override func loadMoreData() {
-        Server.findHotman { (success, msg, value) in
+        Server.talentList(pageNo, state: 1, timeStr: timeStr) { (success, msg, value) in
             if success {
-                guard let list = value else {return}
-                self.hotmans.appendContentsOf(list)
+                guard let listResp  = value else { return }
+                self.hotmans.appendContentsOf(listResp.list)
+                self.pageNo += 1
                 self.tableView.reloadData()
-            } else {
+                self.tableView.mj_footer.endRefreshing()
+                if listResp.list.count < 10 {
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            }else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
+                self.tableView.mj_footer.endRefreshing()
             }
         }
     }
@@ -68,7 +95,7 @@ extension HotManViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(hotmanCellId, forIndexPath: indexPath) as! HotmanCell
-        cell.info = hotmans[indexPath.section]
+        //cell.info = hotmans[indexPath.section]
         return cell
     }
     

@@ -15,14 +15,20 @@ private extension Selector {
     static let tapCancel = #selector(YGShare.tapCancel)
 }
 
+
 class YGShare: UIView {
+    var shareID: String?
+    var shareImage: UIImage?
+    var shareNickName: String?
+    
+    
     typealias ShareClosure = (title: String) -> Void
     private var shareClosure: ShareClosure!
     var container: UIView!
     var cancel: UIButton!
     var collectionView: UICollectionView!
-    var imgs = [UIImage]()
-    var titles = [String]()
+    private var imgs = [UIImage]()
+    private var titles = [String]()
     var containerHeight: CGFloat = 0
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -163,17 +169,17 @@ class YGShare: UIView {
                 platFormType.append(UMShareToWechatSession)
             case kTitleSina:
                 platFormType.append(UMShareToSina)
+            case kTitleQQ:
+                platFormType.append(UMShareToQQ)
             case kTitleQzone:
                 platFormType.append(UMShareToQzone)
-            case kTitleQzone:
-                platFormType.append(UMShareToQQ)
             default:""
             }
             
             ws.tapCancel()
-            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=")//(self.detailObj.id)"
+            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/index.html#trends-details?listId=\(self?.shareID)")//(self.detailObj.id)"
             
-            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: "分享 “ 户昵称”的纯氧作品, 起来看~", image: UIImage(named: "open"), location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: "分享 \(self?.shareNickName)的纯氧作品, 起来看~", image: self?.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
                 if response.responseCode == UMSResponseCodeSuccess {
                     print("分享成功！")
                 }

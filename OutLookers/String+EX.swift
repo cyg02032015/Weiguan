@@ -60,7 +60,6 @@ extension String {
         formatter.timeZone = NSTimeZone.systemTimeZone()
         let date = formatter.dateFromString(self) ?? NSDate()
         return date
-
     }
     
     

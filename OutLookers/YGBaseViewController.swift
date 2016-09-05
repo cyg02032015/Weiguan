@@ -41,7 +41,7 @@ class YGBaseViewController: UIViewController {
     
     func setRightNaviItem() -> UIButton{
         let rightNaviButton = UIButton(type: .Custom)
-        rightNaviButton.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
+        rightNaviButton.frame = CGRect(x: 0, y: 0, width: 40, height: 49)
         rightNaviButton.addTarget(self, action: .tapMoreButton, forControlEvents: .TouchUpInside)
         rightNaviButton.setTitleColor(kGrayTextColor, forState: .Normal)
         rightNaviButton.titleLabel!.font = UIFont.systemFontOfSize(16)

@@ -24,9 +24,13 @@ class DynamicViewController: YGBaseViewController {
     weak var delegate: ScrollVerticalDelegate!
     lazy var dynamicLists = [DynamicResult]()
     var isPerson: Bool = false
+    
+    private var timeStr: String!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        timeStr = NSDate().stringFromNowDate()
         loadMoreData()
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
@@ -35,7 +39,7 @@ class DynamicViewController: YGBaseViewController {
     
     override func loadMoreData() {
         guard let user = self.user else {return}
-        Server.dynamicList(pageNo,user: user,state: 1, isPerson: isPerson, isHome: false, isSquare: false) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: user,state: 1, isPerson: isPerson, isHome: false, isSquare: false, timeStr: self.timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}

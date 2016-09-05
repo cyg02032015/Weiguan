@@ -38,6 +38,8 @@ class ReleaseVideoViewController: YGBaseViewController {
     var contentHeight: CGFloat!
     var isReload = false
     
+    private var timeStr: String!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -48,7 +50,7 @@ class ReleaseVideoViewController: YGBaseViewController {
         title = "发布视频"
         getToken()
         loadData()
-        self.shareTuple = YGShareHandler.handleShareInstalled()
+        self.shareTuple = YGShareHandler.handleShareInstalled(.DYVisitor)
         setupSubViews()
     }
     
@@ -82,7 +84,8 @@ class ReleaseVideoViewController: YGBaseViewController {
     }
     
     func loadData() {
-        Server.talentList(pageNo, state: 2) { (success, msg, value) in
+        timeStr = NSDate().stringFromNowDate()
+        Server.talentList(pageNo, state: 2, timeStr: self.timeStr) { (success, msg, value) in
             if success {
                 guard let obj = value else {return}
                 self.talentLists.appendContentsOf(obj.list)

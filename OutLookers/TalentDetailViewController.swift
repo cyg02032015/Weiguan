@@ -27,7 +27,7 @@ class TalentDetailViewController: YGBaseViewController {
     }
     
     func setupShare() {
-        var collect = YGShareHandler.handleShareInstalled()
+        var collect = YGShareHandler.handleShareInstalled(.DYVisitor)
         if isPerson {
             collect.images.append(UIImage(named: kEditImg)!) // 编辑
             collect.images.append(UIImage(named: kDeleteImg)!) // 删除

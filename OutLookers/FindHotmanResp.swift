@@ -34,8 +34,8 @@ class FindeHotman {
     var id : Int!
     var nickname : String!
     init (fromJson json: JSON!) {
-        headImgUrl = json["headImgUrl"].stringValue
+        headImgUrl = json["headImgUrl"].stringValue ?? ""
         id = json["id"].intValue
-        nickname = json["nickname"].stringValue
+        nickname = json["nickname"].stringValue ?? ""
     }
 }

@@ -19,6 +19,8 @@ class InvitedDetailViewController: YGBaseViewController {
     var header: InvitedHeaderView!
     var rightNaviButton: UIButton!
     var delta: CGFloat = 0
+    
+    private var shareView: YGShare!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
@@ -111,8 +113,11 @@ class InvitedDetailViewController: YGBaseViewController {
         rightNaviButton.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
         rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightNaviButton)
+        let tuple = YGShareHandler.handleShareInstalled(.DYVisitor)
+        shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
+        //分享
         rightNaviButton.rx_tap.subscribeNext {
-            
+            self.shareView.animation()
         }.addDisposableTo(disposeBag)
     }
 }

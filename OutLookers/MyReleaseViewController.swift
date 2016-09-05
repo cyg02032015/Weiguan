@@ -12,6 +12,8 @@ private let myReleaseCellId = "myReleaseCellId"
 
 class MyReleaseViewController: YGBaseViewController {
 
+    private var timeStr: String!
+    
     var tableView: UITableView!
     lazy var lists = [FindNotice]()
     override func viewDidLoad() {
@@ -27,7 +29,9 @@ class MyReleaseViewController: YGBaseViewController {
     }
     
     func loadNewData() {
-        Server.getFindNoticeList(1, state: 1, isPerson: true) { (success, msg, value) in
+        pageNo = 1
+        timeStr = NSDate().stringFromNowDate()
+        Server.getFindNoticeList(pageNo, state: 1, isPerson: true, timeStr: self.timeStr) { (success, msg, value) in
             if success {
                 guard let obj = value else {return}
                 self.lists.removeAll()
@@ -48,7 +52,7 @@ class MyReleaseViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.getFindNoticeList(pageNo, state: 1, isPerson: true) { (success, msg, value) in
+        Server.getFindNoticeList(pageNo, state: 1, isPerson: true, timeStr: self.timeStr) { (success, msg, value) in
             if success {
                 guard let obj = value else {return}
                 self.lists.appendContentsOf(obj.findNoticeResult)

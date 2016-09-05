@@ -186,7 +186,7 @@ class YGLogView: UIView {
         iagree.snp.makeConstraints { (make) in
             make.left.equalTo(iagree.superview!).offset(kScale(25))
             make.bottom.equalTo(iagree.superview!).offset(kScale(-13))
-            make.right.equalTo(register.snp.left).offset(kScale(-38))
+            make.right.equalTo(register.snp.left).offset(kScale(-18))
             make.height.equalTo(kScale(15))
         }
     }

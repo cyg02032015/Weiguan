@@ -177,16 +177,14 @@ class Server {
     }
     
     /// 动态列表
-    class func dynamicList(pageNo: Int,user: String ,state: Int, isPerson: Bool, isHome: Bool, isSquare: Bool, handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
+    class func dynamicList(pageNo: Int,user: String ,state: Int, isPerson: Bool, isHome: Bool, isSquare: Bool, timeStr: String,  handler: (success: Bool, msg: String?, value: DynamicListResp?)->Void) {
         var parameters = [
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
-            "user" : user
+            "user" : user,
+            "time" : timeStr
             ]
-        if pageNo == 1 {
-            parameters["time"] = NSDate().stringFromNowDate()
-        }
         if isPerson {
             parameters["userId"] = UserSingleton.sharedInstance.userId
         }
@@ -209,13 +207,13 @@ class Server {
     }
     
     /// 才艺列表
-    class func talentList(pageNo: Int, state: Int, handler: (success: Bool, msg: String?, value: TalentListResp?)->Void) {
+    class func talentList(pageNo: Int, state: Int, timeStr: String, handler: (success: Bool, msg: String?, value: TalentListResp?)->Void) {
         let parameters = [
             "userId" : UserSingleton.sharedInstance.userId,
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
-            "time" : NSDate().stringFromNowDate()
+            "time" : timeStr
             ]
         HttpTool.post(API.talentList, parameters: parameters, complete: { (response) in
             let info = TalentListResp(fromJson: response)
@@ -297,12 +295,12 @@ class Server {
     }
     
     /// 发现-通告列表
-    class func getFindNoticeList(pageNo: Int, state: Int, isPerson: Bool, handler: (success: Bool, msg: String?, value: FindNoticeListResp?)->Void) {
+    class func getFindNoticeList(pageNo: Int, state: Int, isPerson: Bool, timeStr: String, handler: (success: Bool, msg: String?, value: FindNoticeListResp?)->Void) {
         var parameters = [
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
-            "time" : NSDate().stringFromNowDate()
+            "time" : timeStr
             ]
         if isPerson {
             parameters["userId"] = UserSingleton.sharedInstance.userId

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
 		C8E0CF148F916A2B78E0689E /* Pods_OutLookers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */; };
@@ -393,6 +394,7 @@
 /* Begin PBXFileReference section */
 		13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289FA6413EE7BFD4DB6FC03D /* Pods-OutLookersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersTests/Pods-OutLookersTests.release.xcconfig"; sourceTree = "<group>"; };
+		2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SBThreadsafely.swift; path = OutLookers/SBThreadsafely.swift; sourceTree = SOURCE_ROOT; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E566B98D8EB14C853632E78 /* Pods-OutLookers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookers/Pods-OutLookers.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1589,6 +1591,7 @@
 				E4A3E6451D4714840045202B /* YGLogView.swift */,
 				D825EECB1D55F78E00AF94AF /* YGShare.swift */,
 				D8DAC5A31D684D990009FDB9 /* TokenTool.swift */,
+				2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -2500,6 +2503,7 @@
 				E41DD9251D3CA76E00E5E7E9 /* BaseRequest.swift in Sources */,
 				D82F8E121D2E9CC100A24CDB /* DataViewController.swift in Sources */,
 				E41B92681D3DF09500749769 /* ZSPasswordView.swift in Sources */,
+				2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */,
 				D82F8DE21D28172D00A24CDB /* MBProgressHUD.m in Sources */,
 				D81F450B1D118D43004D9192 /* UIColor+EX.swift in Sources */,
 				E4F9B0001D5320E600890948 /* Array+EX.swift in Sources */,

@@ -19,6 +19,7 @@ pod 'UMengSocialCOM', '~> 5.2.1'
 pod 'CocoaLumberjack/Swift'
 pod 'Device', '~> 1.0.1'
 pod 'Proposer', '~> 0.9.0'
+pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 end
 
 target 'OutLookersTests' do

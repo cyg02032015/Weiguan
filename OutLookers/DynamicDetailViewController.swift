@@ -38,7 +38,7 @@ class DynamicDetailViewController: YGBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tuple = YGShareHandler.handleShareInstalled()
+        let tuple = YGShareHandler.handleShareInstalled(.DYVisitor)
         shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
         loadData()
         loadMoreData()

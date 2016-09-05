@@ -31,10 +31,12 @@ class ReleasePictureViewController: YGBaseViewController {
     var contentHeight: CGFloat!
     var isReload = false
     
+    private var timeStr: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "发布图片"
-        self.shareTuple = YGShareHandler.handleShareInstalled()
+        self.shareTuple = YGShareHandler.handleShareInstalled(.DYVisitor)
         setupSubViews()
         getToken()
         loadData()
@@ -68,7 +70,8 @@ class ReleasePictureViewController: YGBaseViewController {
     }
     
     func loadData() {
-        Server.talentList(pageNo, state: 2) { (success, msg, value) in
+        timeStr = NSDate().stringFromNowDate()
+        Server.talentList(pageNo, state: 2, timeStr: self.timeStr) { (success, msg, value) in
             if success {
                 guard let obj = value else {return}
                 self.talentLists.appendContentsOf(obj.list)

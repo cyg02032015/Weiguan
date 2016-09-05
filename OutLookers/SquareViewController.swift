@@ -15,11 +15,13 @@ class SquareViewController: YGBaseViewController {
     var tableView: UITableView!
     lazy var sqaureLists = [DynamicResult]()
     var share: YGShare!
+    
+    private var timeStr: String!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        loadMoreData()
-        let sharetuple = YGShareHandler.handleShareInstalled()
+        loadNewData()
+        let sharetuple = YGShareHandler.handleShareInstalled(.DYVisitor)
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
         
         tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
@@ -31,7 +33,8 @@ class SquareViewController: YGBaseViewController {
     }
     
     func loadNewData() {
-        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true) { (success, msg, value) in
+        timeStr = NSDate().stringFromNowDate()
+        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true, timeStr: self.timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
@@ -51,7 +54,7 @@ class SquareViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true) { (success, msg, value) in
+        Server.dynamicList(pageNo, user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true, timeStr: self.timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}

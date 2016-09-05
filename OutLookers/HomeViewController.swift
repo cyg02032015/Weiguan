@@ -25,6 +25,8 @@ class HomeViewController: YGBaseViewController {
     var recommendObj: DynamicListResp!
     lazy var recommends = [DynamicResult]()
     var banner: SDCycleScrollView!
+    
+    var timeStr: String!
 
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -67,7 +69,10 @@ class HomeViewController: YGBaseViewController {
                 }
             }
             
-            Server.dynamicList(self.pageNo,user: UserSingleton.sharedInstance.userId,state: 1, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+
+            self.timeStr = NSDate().stringFromNowDate()
+            Server.dynamicList(self.pageNo,user: UserSingleton.sharedInstance.userId,state: 1, isPerson: false, isHome:
+            true, isSquare: false, timeStr: self.timeStr) { (success, msg, value) in
                 if success {
                     Server.homeRecommendHotman { (success, msg, value) in
                         SVToast.dismiss()
@@ -103,7 +108,9 @@ class HomeViewController: YGBaseViewController {
     }
     
     func loadNewData() {
-        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+        self.pageNo = 0
+        self.timeStr = NSDate().stringFromNowDate()
+        Server.dynamicList(self.pageNo, user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: true, isSquare: false, timeStr: timeStr) { (success, msg, value) in
             if success {
                 guard let object = value else { return }
                 self.recommendObj = object
@@ -125,7 +132,7 @@ class HomeViewController: YGBaseViewController {
     
     override func loadMoreData() {
         
-        Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: true, isSquare: false) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: true, isSquare: false, timeStr: self.timeStr) { (success, msg, value) in
             self.collectionView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else { return }
@@ -145,6 +152,7 @@ class HomeViewController: YGBaseViewController {
     }
     
     func setupSubViews() {
+        automaticallyAdjustsScrollViewInsets =  false
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         collectionView.dataSource = self
@@ -238,7 +246,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if indexPath.section == 1 {
             return CGSize(width: ScreenWidth, height: kHeight(213))
         } else {
-            return CGSize(width: (ScreenWidth - 3) / 2, height: kHeight(230))
+            return CGSize(width: (ScreenWidth - 3) / 2, height: kHeight(240))
         }
     }
     
