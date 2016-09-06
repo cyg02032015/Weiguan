@@ -135,6 +135,8 @@ class DynamicCell: UITableViewCell {
         }
         
         bigImgView = UIImageView()
+        bigImgView.contentMode = .ScaleAspectFill
+        bigImgView.clipsToBounds = true
         contentView.addSubview(bigImgView)
         bigImgView.snp.makeConstraints { (make) in
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(10))
