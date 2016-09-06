@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 import MediaPlayer
+import AliyunOSSiOS
 
 private let videoCoverIdentifier = "videoCoverId"
 private let editTextViewIdentifier = "editTextViewId"
@@ -37,6 +38,8 @@ class ReleaseVideoViewController: YGBaseViewController {
     lazy var talentLists = [TalentResult]()
     var contentHeight: CGFloat!
     var isReload = false
+    
+    private var uploadVideoRequst: OSSPutObjectRequest?
     
     private var timeStr: String!
     
@@ -131,6 +134,7 @@ class ReleaseVideoViewController: YGBaseViewController {
         let alert = UIAlertController(title: nil, message: "确认放弃发布视频吗?", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: { [weak self](action) in
             self?.dismissViewControllerAnimated(true) {
+                self?.uploadVideoRequst?.cancel()
             }
             }))
         alert.addAction(UIAlertAction(title: "点错了", style: .Default, handler: nil))
@@ -239,7 +243,7 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
         SVToast.show("正在上传视频")
         dispatch_group_async(group, queue) { [unowned self] in
             dispatch_group_enter(group)
-            OSSVideoUploader.asyncUploadVideo(self.videoToken, videoURL: self.videoUrl) { (id, state) in
+           self.uploadVideoRequst = OSSVideoUploader.asyncUploadVideo(self.videoToken, videoURL: self.videoUrl) { (id, state) in
                 dispatch_group_leave(group)
                 if state == .Success {
                     self.req.picture = id

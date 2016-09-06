@@ -45,7 +45,10 @@ class YGBaseViewController: UIViewController {
         rightNaviButton.addTarget(self, action: .tapMoreButton, forControlEvents: .TouchUpInside)
         rightNaviButton.setTitleColor(kGrayTextColor, forState: .Normal)
         rightNaviButton.titleLabel!.font = UIFont.systemFontOfSize(16)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightNaviButton)
+        let rightFixedSpace = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        rightFixedSpace.width = -5
+        let rightMoreItem = UIBarButtonItem(customView: rightNaviButton)
+        self.navigationItem.rightBarButtonItems = [rightFixedSpace, rightMoreItem]
         return rightNaviButton
     }
     

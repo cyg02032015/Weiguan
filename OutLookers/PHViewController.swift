@@ -80,7 +80,10 @@ class PHViewController: YGBaseViewController {
         rightNaviButton.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
         rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
         rightNaviButton.addTarget(self, action: .tapMore, forControlEvents: .TouchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightNaviButton)
+        let rightFixedSpace = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        rightFixedSpace.width = -5
+        let rightMoreItem = UIBarButtonItem(customView: rightNaviButton)
+        self.navigationItem.rightBarButtonItems = [rightFixedSpace, rightMoreItem]
         
         slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight))) // height - naviheight  偏移问题
         slidePageScrollView.pageTabBarIsStopOnTop = true

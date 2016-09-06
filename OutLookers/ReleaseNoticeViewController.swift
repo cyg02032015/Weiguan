@@ -32,10 +32,12 @@ class ReleaseNoticeViewController: YGBaseViewController {
     lazy var cityResp: CityResp = YGCityData.loadCityData()
     var tokenObject: GetToken!
     var provinceInt: Int = 0
+    var index: Int = -1 //给个标记
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -366,7 +368,22 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
         navigationController?.pushViewController(recruitInfomation, animated: true)
     }
     
+    func recruitNeedsEditRecruite(recruit: Recruit, index: Int) {
+        let recruitInfomation = RecruitInformationViewController()
+        recruitInfomation.delegate = self
+        recruitInfomation.req = EditCircularRecruitReq()
+        recruitInfomation.req!.categoryId = recruit.id
+        recruitInfomation.req!.categoryName = recruit.skill
+        recruitInfomation.req!.number = recruit.recruitCount
+        recruitInfomation.req!.price = recruit.budgetPrice
+        self.index = index
+        navigationController?.pushViewController(recruitInfomation, animated: true)
+    }
+    
     func recruitInformationSureWithParams(recruit: Recruit) {
+        if index != -1 {
+            recruits.removeAtIndex(index) //直接移除对象, 对象要遵循Equatable协议, 所有加了个index的参数
+        }
         req.recruitment = recruit.id
         recruits.append(recruit)
         tableView.reloadData()

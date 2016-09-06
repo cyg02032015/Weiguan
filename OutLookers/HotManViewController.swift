@@ -26,15 +26,16 @@ class HotManViewController: YGBaseViewController {
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
             self?.loadMoreData()
             })
+        loadNewData()
     }
     
     func loadNewData() {
-        self.hotmans.removeAll()
         pageNo = 1
         self.timeStr = NSDate().stringFromNowDate()
         Server.talentList(pageNo, state: 1, timeStr: timeStr) { (success, msg, value) in
             if success {
                 guard let listResp  = value else { return }
+                self.hotmans.removeAll()
                 self.hotmans.appendContentsOf(listResp.list)
                 self.tableView.reloadData()
                 self.pageNo += 1
@@ -95,12 +96,13 @@ extension HotManViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(hotmanCellId, forIndexPath: indexPath) as! HotmanCell
+        cell.info = hotmans[indexPath.section]
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = PHViewController()
-        vc.user = "\(hotmans[indexPath.row].id)"
+        vc.user = "\(hotmans[indexPath.row].userId)"
         vc.scrollTo = 1
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -130,7 +130,10 @@ class InvitedDetailViewController: YGBaseViewController {
         rightNaviButton = setRightNaviItem()
         rightNaviButton.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
         rightNaviButton.setImage(UIImage(named: "more"), forState: .Normal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightNaviButton)
+        let rightFixedSpace = UIBarButtonItem.init(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        rightFixedSpace.width = -5
+        let rightMoreItem = UIBarButtonItem(customView: rightNaviButton)
+        self.navigationItem.rightBarButtonItems = [rightFixedSpace, rightMoreItem]
         //分享
         rightNaviButton.rx_tap.subscribeNext { [weak self] in
             self?.shareView.animation()
@@ -157,6 +160,7 @@ extension InvitedDetailViewController {
             if self.noticeObj != nil {
                 cell.info = self.noticeObj
             }
+            tableView.bringSubviewToFront(cell)
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(invitedDetailId, forIndexPath: indexPath) as! InvitedDetailTableViewCell

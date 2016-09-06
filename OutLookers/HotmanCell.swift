@@ -10,11 +10,11 @@ import UIKit
 
 class HotmanCell: UITableViewCell {
 
-    var info: FindeHotman! {
+    var info: TalentResult! {
         didSet {
-            imgView.yy_setImageWithURL(info.headImgUrl.addImagePath(CGSize(width: 1080, height: 1080)), placeholder: kPlaceholder)
+            imgView.yy_setImageWithURL(info.worksCover.addImagePath(CGSize(width: 1080, height: 1080)), placeholder: kPlaceholder)
             nameLabel.text = info.nickname
-            jobLabel.text = "没有字段"
+            jobLabel.text = info.name
             picCount.text = "0"
             videoCount.text = "0"
         }

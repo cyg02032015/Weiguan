@@ -11,11 +11,13 @@ import AliyunOSSiOS
 import SwiftyJSON
 
 class OSSVideoUploader {
-    class func asyncUploadVideo(object:GetToken, videoURL: NSURL, complete: (id: String, state: UploadImageState) -> Void) {
-        self.uploadVideos(object, videoURL: videoURL, isAsync: true, complete: complete)
+    
+    @warn_unused_result(message="返回的OSSPutObjectRequest对象没有使用")
+    class func asyncUploadVideo(object:GetToken, videoURL: NSURL, complete: (id: String, state: UploadImageState) -> Void) -> OSSPutObjectRequest {
+        return self.uploadVideos(object, videoURL: videoURL, isAsync: true, complete: complete)
     }
     
-    class func uploadVideos(object:GetToken, videoURL: NSURL, isAsync: Bool, complete: (id: String, state: UploadImageState) -> Void) {
+    class func uploadVideos(object:GetToken, videoURL: NSURL, isAsync: Bool, complete: (id: String, state: UploadImageState) -> Void) -> OSSPutObjectRequest {
         let credential = OSSFederationCredentialProvider { () -> OSSFederationToken! in
             return self.getToken(object)
         }
@@ -57,6 +59,7 @@ class OSSVideoUploader {
         } else {
             LogError("upload video failed, error: \(putTask.error!)")
         }
+        return put
     }
     
     class func getToken(object: GetToken) -> OSSFederationToken! {

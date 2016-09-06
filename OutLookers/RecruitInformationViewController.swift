@@ -35,7 +35,7 @@ class RecruitInformationViewController: YGBaseViewController {
     var tableView: UITableView!
     weak var delegate: RecruitInformationDelegate!
     var rightButton: UIButton!
-    lazy var req = EditCircularRecruitReq()
+    var req: EditCircularRecruitReq?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,12 @@ class RecruitInformationViewController: YGBaseViewController {
             make.top.left.right.equalTo(tableView.superview!)
             make.bottom.equalTo(rightButton.snp.top)
         }
-        req.unit = UnitType.YuanPeople.rawValue
+        if var _ = req {
+            req!.unit = UnitType.YuanPeople.rawValue
+        }else {
+            req = EditCircularRecruitReq()
+            req!.unit = UnitType.YuanPeople.rawValue
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -81,6 +86,7 @@ extension RecruitInformationViewController {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(arrowIdentifier, forIndexPath: indexPath) as! ArrowEditCell
             cell.setTextInCell("红人类型", placeholder: "点击选择类型")
+            cell.tf.text = req?.categoryName ?? ""
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(noArrowIdentifier, forIndexPath: indexPath) as! NoArrowEditCell
@@ -88,11 +94,17 @@ extension RecruitInformationViewController {
             cell.indexPath = indexPath
             cell.delegate = self
             cell.setTextInCell("招募人数", placeholder: "请输入整数")
+            cell.tf.text = req?.number ?? ""
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(budgetPriceIdentifier, forIndexPath: indexPath) as! BudgetPriceCell
             cell.tf.keyboardType = .NumberPad
             cell.setTextInCell("预算价格 (选填)", placeholder: "请输入整数", buttonText: "元/人")
+            cell.tf.text = req?.price ?? ""
+            _ = cell.tf.rx_text.subscribeNext({ [weak self](text) in
+                self?.req?.price = text
+                self?.checkParameters()
+            })
             return cell
         }
     }
@@ -104,8 +116,8 @@ extension RecruitInformationViewController {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
             selectSkill.tapItemInCollection({ [unowned self](item) in
                 cell.tf.text = item.name
-                self.req.categoryId = "\(item.id)"
-                self.req.categoryName = item.name
+                self.req?.categoryId = "\(item.id)"
+                self.req?.categoryName = item.name
                 self.checkParameters()
             })
             navigationController?.pushViewController(selectSkill, animated: true)
@@ -125,7 +137,7 @@ extension RecruitInformationViewController {
 extension RecruitInformationViewController: NoArrowEditCellDelegate {
 
     func checkParameters() {
-        guard !isEmptyString(req.categoryId) && !isEmptyString(req.categoryName) && !isEmptyString(req.number) else {
+        guard !isEmptyString(req?.categoryId) && !isEmptyString(req?.categoryName) && !isEmptyString(req?.number) && !isEmptyString(req?.price) else {
             rightButton.backgroundColor = kGrayColor
             rightButton.userInteractionEnabled = false
             return
@@ -135,7 +147,7 @@ extension RecruitInformationViewController: NoArrowEditCellDelegate {
     }
     
     func tapReleaseButton(sender: UIButton) {
-        Server.editNoticeRecruitNeeds(req) { [unowned self](success, msg, value) in
+        Server.editNoticeRecruitNeeds(req!) { [unowned self](success, msg, value) in
             if success {
                 guard let object = value else { return }
                 let price = object.price == 0 ? "" : "\(object.price)"
@@ -150,13 +162,13 @@ extension RecruitInformationViewController: NoArrowEditCellDelegate {
     
     func noarrowCellReturnText(text: String?, tuple: (section: Int, row: Int)) {
         switch tuple {
-        case (0,1): req.number = text
+        case (0,1): req?.number = text
         default: ""
         }
         checkParameters()
     }
     
     func textFieldReturnText(text: String) {
-        req.price = text
+        req?.price = text
     }
 }

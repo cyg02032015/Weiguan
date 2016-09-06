@@ -13,15 +13,17 @@ private extension Selector {
     static let tapAdd = #selector(RecruitNeedsCell.tapAdd(_:))
 }
 
-@objc protocol RecruitNeedsCellDelegate: class {
-    optional func recruitNeedsAddRecruite(sender: UIButton)
+protocol RecruitNeedsCellDelegate: class {
+    func recruitNeedsEditRecruite(recruit: Recruit, index: Int)
+    func recruitNeedsAddRecruite(sender: UIButton)
 }
 
 class RecruitNeedsCell: UITableViewCell {
 
-    weak var delegate: RecruitNeedsCellDelegate!
+    weak var delegate: RecruitNeedsCellDelegate?
     var recruitLabel: UILabel!
     var addButton: UIButton!
+    var allRecruitButtons: [UIButton] = [UIButton]()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,6 +36,7 @@ class RecruitNeedsCell: UITableViewCell {
         if recruit.count <= 0 {
             return
         }
+
         for (index,r) in recruit.enumerate() {
             var price: String!
             if let p = r.budgetPrice where r.budgetPrice?.characters.count > 0 {
@@ -42,6 +45,7 @@ class RecruitNeedsCell: UITableViewCell {
                 price = "价格待定"
             }
             let button = UIButton()
+            allRecruitButtons.append(button)
             let title = "\(r.skill)-\(r.recruitCount)人-\(price)"
             let size = (title as NSString).sizeWithFonts(16)
             button.setTitle(title, forState: .Normal)
@@ -50,6 +54,12 @@ class RecruitNeedsCell: UITableViewCell {
             button.layer.cornerRadius = kScale(15)
             button.layer.borderColor = kGrayColor.CGColor
             button.layer.borderWidth = 1
+            _ = button.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
+                self.delegate?.recruitNeedsEditRecruite(r, index: index)
+                for (_, button) in self.allRecruitButtons.enumerate() {
+                    button.removeFromSuperview()
+                }
+            })
             contentView.addSubview(button)
             
             button.snp.makeConstraints(closure: { (make) in
@@ -101,7 +111,10 @@ class RecruitNeedsCell: UITableViewCell {
         })
     }
     func tapAdd(sender: UIButton) {
-        delegate.recruitNeedsAddRecruite!(sender)
+        delegate?.recruitNeedsAddRecruite(sender)
+        for (_, button) in allRecruitButtons.enumerate() {
+            button.removeFromSuperview()
+        }
     }
     
     
