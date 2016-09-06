@@ -85,6 +85,7 @@ public class HttpTool {
             "X-X-D": globleSingle.deviceId,
             "X-X-A": Util.getXXA(pwdOrToken)
         ]
+        LogDebug("login headers = \(headers)")
         alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
             globleSingle.currentTime = nil
             LogVerbose("url = \(url)")

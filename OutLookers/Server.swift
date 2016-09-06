@@ -1230,7 +1230,7 @@ class Server {
             "type": "\(req.type)",
             "uid": req.uid
         ]
-        HttpTool.registerLogPost(API.registerPhone, parameters: parameters, pwdOrToken: req.uid, complete: { (request, response, value) in
+        HttpTool.registerLogPost(API.thirdLogin, parameters: parameters, pwdOrToken: req.uid, complete: { (request, response, value) in
             let info = RegisterResp(fromJson: value)
             if info.success == true {
                 if let headerFields = response?.allHeaderFields as? [String: String], URL = request?.URL {
