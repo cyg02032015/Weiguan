@@ -35,20 +35,7 @@ class HomeViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pageNo = 0
-        NSNotificationCenter.defaultCenter().rx_notification(kPlusButtonClickNotification)
-        .subscribeNext { [unowned self](notification) in
-            if UserSingleton.sharedInstance.isLogin() {
-                let issuevc = IssueViewController()
-                let navi = YGNavigationController(rootViewController: issuevc)
-                self.presentViewController(navi, animated: false, completion: {})
-            } else {
-                let logView = YGLogView()
-                logView.animation()
-                logView.tapLogViewClosure({ (type) in
-                    LogInHelper.logViewTap(self, type: type)
-                })
-            }
-        }.addDisposableTo(disposeBag)
+
         
         NSNotificationCenter.defaultCenter().rx_notification(kRecieveGlobleDefineNotification)
         .subscribeNext { [unowned self](notification) in

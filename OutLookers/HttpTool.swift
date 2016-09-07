@@ -43,7 +43,7 @@ public class HttpTool {
                     dispatch_group_leave(group)
                     }, failure: { 
                         dispatch_group_leave(group)
-                        UserSingleton.sharedInstance.logOut()
+                        LogInHelper.logout()
                         TokenTool.removeCookies()
                 })
         }

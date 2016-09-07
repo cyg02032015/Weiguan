@@ -17,7 +17,7 @@ class MineViewController: YGBaseViewController {
     
     var images = ["talent", "invitation", "authentication", "feedback"]
     var titles = ["才艺", "邀约", "认证", "意见反馈"]
-    var countObj: GetContent!
+    var countObj: GetContent?
     lazy var avatarList = [AvatarNameList]()
     var tableView: UITableView!
     
@@ -49,42 +49,46 @@ class MineViewController: YGBaseViewController {
     }
     
     func loadHeader() {
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-        let group = dispatch_group_create()
-        
-        dispatch_group_async(group, queue) { [unowned self] in
-            dispatch_group_enter(group)
-            Server.getAvatarAndName(UserSingleton.sharedInstance.userId) { (success, msg, value) in
-                if success {
-                    guard let list = value else {return}
-                    self.avatarList.removeAll()
-                    self.avatarList.appendContentsOf(list)
-                    dispatch_group_leave(group)
-                } else {
-                    guard let m = msg else {return}
-                    LogError(m)
-                    dispatch_group_leave(group)
+        if UserSingleton.sharedInstance.isLogin() {
+            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+            let group = dispatch_group_create()
+            
+            dispatch_group_async(group, queue) { [unowned self] in
+                dispatch_group_enter(group)
+                Server.getAvatarAndName(UserSingleton.sharedInstance.userId) { (success, msg, value) in
+                    if success {
+                        guard let list = value else {return}
+                        self.avatarList.removeAll()
+                        self.avatarList.appendContentsOf(list)
+                        dispatch_group_leave(group)
+                    } else {
+                        guard let m = msg else {return}
+                        LogError(m)
+                        dispatch_group_leave(group)
+                    }
                 }
             }
-        }
-        
-        dispatch_group_async(group, queue) { [unowned self] in
-            dispatch_group_enter(group)
-            Server.getDynamicFollowFansCount { (success, msg, value) in
-                if success {
-                    guard let obj = value else {return}
-                    self.countObj = obj
-                    dispatch_group_leave(group)
-                } else {
-                    guard let m = msg else {return}
-                    LogError(m)
-                    dispatch_group_leave(group)
+            
+            dispatch_group_async(group, queue) { [unowned self] in
+                dispatch_group_enter(group)
+                Server.getDynamicFollowFansCount { (success, msg, value) in
+                    if success {
+                        guard let obj = value else {return}
+                        self.countObj = obj
+                        dispatch_group_leave(group)
+                    } else {
+                        guard let m = msg else {return}
+                        LogError(m)
+                        dispatch_group_leave(group)
+                    }
                 }
             }
-        }
-        
-        dispatch_group_notify(group, dispatch_get_main_queue()) { [weak self] in
-            self?.tableView.reloadData()
+            
+            dispatch_group_notify(group, dispatch_get_main_queue()) { [weak self] in
+                self?.tableView.reloadData()
+            }
+        } else {
+            self.tableView.reloadData()
         }
     }
     

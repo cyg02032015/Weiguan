@@ -93,7 +93,9 @@ class YGTabbarController: UITabBarController {
 extension YGTabbarController: YGTabbarDelegate {
     func tabbarDidSelect(tabbar: YGTabbar, didSelectedfrom: Int, to: Int) {
         if to == 5 {
-            NSNotificationCenter.defaultCenter().postNotificationName(kPlusButtonClickNotification, object: nil)
+            guard let vcs = self.viewControllers else {return}
+            guard let vc = (vcs[didSelectedfrom] as! YGNavigationController).topViewController else {return}
+            LogInHelper.login(vc)
         }
         self.selectedIndex = to
     }

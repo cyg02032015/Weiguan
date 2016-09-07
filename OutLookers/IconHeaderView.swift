@@ -77,11 +77,12 @@ class IconHeaderView: UIView {
     }
     
     func setVimage(type: UserType) {
+        vImgView.hidden = false
         switch type {
         case .HotMan: vImgView.image = UIImage(named: "Red")
         case .Organization: vImgView.image = UIImage(named: "blue")
         case .Fans: vImgView.image = UIImage(named: "Green")
-        default: ""
+        case .Tourist: vImgView.hidden = true
         }
     }
     

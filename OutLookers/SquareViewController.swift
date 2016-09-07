@@ -28,6 +28,10 @@ class SquareViewController: YGBaseViewController {
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
             self?.loadMoreData()
         })
+        NSNotificationCenter.defaultCenter().rx_notification(ReloadData).subscribeNext { [weak self](noti) in
+            guard let ws = self else {return}
+            ws.loadNewData()
+        }.addDisposableTo(disposeBag)
     }
     
     func loadNewData() {

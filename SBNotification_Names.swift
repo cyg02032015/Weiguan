@@ -9,10 +9,12 @@
 import UIKit
 // 通知
 let kRecieveGlobleDefineNotification = "recieveGlobleDefine"
-let kPlusButtonClickNotification = "PlusButtonClick"
 
 //离开动态详情页面
 let DynamicDetailVC_WillAppear = "DynamicDetailVC_WillAppear"
 
 //分享视图的回到首页
 let Back_HomePage = "Back_HomePage"
+
+/// 退出登录通知界面刷新数据
+let ReloadData = "ReloadData"

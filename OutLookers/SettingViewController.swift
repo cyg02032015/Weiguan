@@ -91,7 +91,8 @@ extension SettingViewController {
         case 3: ""
         case 4:
             if UserSingleton.sharedInstance.isLogin() {
-                UserSingleton.sharedInstance.logOut()
+                LogInHelper.logout()
+                NSNotificationCenter.defaultCenter().postNotificationName(ReloadData, object: nil)
             } else {
                 let logView = YGLogView()
                 logView.animation()

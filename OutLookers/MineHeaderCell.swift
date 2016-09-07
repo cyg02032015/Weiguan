@@ -28,17 +28,31 @@ class MineHeaderCell: UITableViewCell {
     
     var info: GetContent! {
         didSet {
-            _dynamic.text = "\(info.dynamic)"
-            follow.text = "\(info.follow)"
-            fans.text = "\(info.fan)"
+            if UserSingleton.sharedInstance.isLogin() {
+                _dynamic.text = "\(info.dynamic)"
+                follow.text = "\(info.follow)"
+                fans.text = "\(info.fan)"
+                editDataContainer.hidden = false
+            } else {
+                _dynamic.text = "0"
+                follow.text = "0"
+                fans.text = "0"
+                editDataContainer.hidden = true
+            }
         }
     }
     
     var avatarInfo: AvatarNameList! {
         didSet {
-            header.iconURL = avatarInfo.headImgUrl.addImagePath(kSize(59, height: 59))
-            header.setVimage(Util.userType(avatarInfo.detailsType))
-            name.text = avatarInfo.nickname
+            if UserSingleton.sharedInstance.isLogin() {
+                header.iconURL = avatarInfo.headImgUrl.addImagePath(kSize(59, height: 59))
+                header.setVimage(Util.userType(avatarInfo.detailsType))
+                name.text = avatarInfo.nickname
+            } else {
+                header.iconPlaceholder = kHeadPlaceholder
+                header.setVimage(Util.userType(0))
+                name.text = "未登录"
+            }
         }
     }
     var header: IconHeaderView!
@@ -46,6 +60,7 @@ class MineHeaderCell: UITableViewCell {
     var _dynamic: UILabel!
     var follow: UILabel!
     var fans: UILabel!
+    var editDataContainer: UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,10 +78,11 @@ class MineHeaderCell: UITableViewCell {
         
         name = UILabel()
         name.font = UIFont.customFontOfSize(16)
-        name.text = "小包子"
+        name.text = "未登录"
         contentView.addSubview(name)
         
-        let editDataContainer = UIView()
+        editDataContainer = UIView()
+        editDataContainer.hidden = true
         editDataContainer.layer.cornerRadius = kScale(25/2)
         editDataContainer.layer.borderColor = kGrayColor.CGColor
         editDataContainer.layer.borderWidth = 1
@@ -139,7 +155,7 @@ class MineHeaderCell: UITableViewCell {
         dynamicContainer.addGestureRecognizer(tapFriend)
         
         _dynamic = UILabel()
-        _dynamic.text = "123"
+        _dynamic.text = "0"
         _dynamic.textAlignment = .Center
         _dynamic.font = UIFont.customFontOfSize(16)
         dynamicContainer.addSubview(_dynamic)
@@ -188,7 +204,7 @@ class MineHeaderCell: UITableViewCell {
         followContainer.addGestureRecognizer(tapFollow)
         
         follow = UILabel()
-        follow.text = "248"
+        follow.text = "0"
         follow.textAlignment = .Center
         follow.font = UIFont.customFontOfSize(16)
         followContainer.addSubview(follow)
@@ -237,7 +253,7 @@ class MineHeaderCell: UITableViewCell {
         fansContainer.addGestureRecognizer(tapFan)
         
         fans = UILabel()
-        fans.text = "1278"
+        fans.text = "0"
         fans.textAlignment = .Center
         fans.font = UIFont.customFontOfSize(16)
         fansContainer.addSubview(fans)

@@ -25,7 +25,7 @@ class CircularViewController: YGBaseViewController {
         })
         tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
             self?.loadNewData()
-            })
+        })
     }
     
     func loadNewData() {

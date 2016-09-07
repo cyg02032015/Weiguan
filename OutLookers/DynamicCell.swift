@@ -29,11 +29,30 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
             bigImgView.yy_setImageWithURL(info.cover.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
             details.text = info.text
-            if info.isLike == true {
-                praiseBtn.selected = true
+            if UserSingleton.sharedInstance.isLogin() {
+                if info.isLike == true {
+                    praiseBtn.selected = true
+                } else {
+                    praiseBtn.selected = false
+                }
+                if isSquare {
+                    if info.follow == 1 { // 已关注
+                        followButton.hidden = true
+                    } else {
+                        followButton.hidden = false
+                    }
+                } else {
+                    followButton.hidden = true
+                }
             } else {
                 praiseBtn.selected = false
+                if isSquare {
+                    followButton.hidden = false
+                } else {
+                    followButton.hidden = true
+                }
             }
+            
             if info.likeCount > 0 {
                 praiseBtn.setTitle("\(info.likeCount)", forState: .Normal)
             } else {
@@ -49,13 +68,7 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             } else {
                 videoImgView.hidden = false
             }
-            if isSquare {
-                if info.follow == 1 { // 已关注
-                    followButton.hidden = true
-                } else {
-                    followButton.hidden = false
-                }
-            }
+            
         }
     }
     var isSquare: Bool = false

@@ -145,6 +145,7 @@ class LogViewController: YGBaseViewController {
                 Server.phoneLogin(self.phoneTF.text!, pwd: (self.passTF.text! + "a").myMD5, handler: { (success, msg, value) in
                     SVToast.dismiss()
                     if success {
+                        NSNotificationCenter.defaultCenter().postNotificationName(ReloadData, object: nil)
                         if isEmptyString(UserSingleton.sharedInstance.nickname) {
                             let vc = Register3ViewController()
                             self.navigationController?.pushViewController(vc, animated: true)

@@ -54,11 +54,4 @@ class UserSingleton {
     func getUserId() -> String? {
         return KeyChainSingle.sharedInstance.keychain[kUserId]
     }
-    
-    func logOut() {
-        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kToken)
-        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kToken2)
-        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kUserId)
-        _ = try? KeyChainSingle.sharedInstance.keychain.remove(kAuthType)
-    }
 }

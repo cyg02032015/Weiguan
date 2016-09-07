@@ -280,7 +280,7 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
 
         playerView.backgroundColor = .blackColor()
-        playerView.type = .Detail
+//        playerView.type = .Detail  // 在我这里没有type这个属性所以先注了
         contentView.addSubview(playerView)
         playerView.snp.makeConstraints { (make) in
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
