@@ -125,7 +125,7 @@ extension SquareViewController: DynamicCellDelegate, FollowProtocol {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
         var type: YGShareType = .DYVisitor
         let shareModel = YGShareModel()
-        shareModel.shareNickName = "分享自\(dy.name)的纯氧作品, 一起来看~"
+        shareModel.shareNickName = "分享自\"\(dy.name)\"的纯氧作品, 一起来看~"
         if UserSingleton.sharedInstance.userId == "\(dy.userId)" {
             type = .DYHost
             shareModel.shareNickName = "我的纯氧作品, 一起来看~"

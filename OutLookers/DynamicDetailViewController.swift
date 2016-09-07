@@ -27,6 +27,8 @@ class DynamicDetailViewController: YGBaseViewController {
     var likeListObj: LikeListResp!
     var shareImage: UIImage!
     
+    private var isSelf: Bool = false
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -44,7 +46,8 @@ class DynamicDetailViewController: YGBaseViewController {
             type = .DYHost
         }
         if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {
-            
+            // 是自己没有关注按钮
+            isSelf = true
         }
         let tuple = YGShareHandler.handleShareInstalled(type)
         shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
@@ -130,7 +133,7 @@ class DynamicDetailViewController: YGBaseViewController {
         if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {
             shareModel.shareNickName = "我的纯氧作品, 一起来看~"
         }else {
-            shareModel.shareNickName = "分享自\(dynamicObj.name)的纯氧作品, 一起来看~"
+            shareModel.shareNickName = "分享自\"\(dynamicObj.name)\"的纯氧作品, 一起来看~"
         }
         shareModel.shareInfo = dynamicObj.text
         shareView.shareModel = shareModel
@@ -212,10 +215,13 @@ extension DynamicDetailViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(dynamicDetailCellId, forIndexPath: indexPath) as! DynamicDetailVideoCell
-            cell.info = detailObj
+            cell.isSelf = self.isSelf
             cell.userInfo = dynamicObj
             cell.likeListInfo = self.likeListObj
             cell.delegate = self
+            cell.tableView = tableView
+            cell.covImageView.image = self.shareImage
+            cell.info = detailObj
             cell.headImgView.iconHeaderTap({ [weak self] in
                 let vc = PHViewController()
                 self?.navigationController?.pushViewController(vc, animated: true)

@@ -20,6 +20,7 @@ pod 'CocoaLumberjack/Swift'
 pod 'Device', '~> 1.0.1'
 pod 'Proposer', '~> 0.9.0'
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
+pod 'ZFPlayer', '~> 1.2.1'
 end
 
 target 'OutLookersTests' do

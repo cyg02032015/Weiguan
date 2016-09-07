@@ -38,6 +38,7 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.registerClass(RecommendHotmanCollectionCell.self, forCellWithReuseIdentifier: recommendHotmanCollectionCellIdentifier)
         collectionView.snp.makeConstraints { (make) in

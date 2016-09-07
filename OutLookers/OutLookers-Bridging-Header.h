@@ -31,6 +31,7 @@
 //#import "EMSDK.h"
 //#import "EaseUI.h"
 #import "DXMessageToolBar.h"
+#import <ZFPlayer/ZFPlayer.h>
 
 // 阿里上传文件
 #import <AliyunOSSiOS/OSSService.h>

@@ -38,7 +38,7 @@ extension UIFont {
             size = a * scale
         } else {
             size = a
-        }
+        }//
         return UIFont(name: "STHeitiSC-Light", size: size)!
     }
     

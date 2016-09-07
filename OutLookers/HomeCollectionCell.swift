@@ -56,7 +56,7 @@ class HomeCollectionCell: UICollectionViewCell {
         headImgView.addTarget(self, action: .tapHeadImg)
         contentView.addSubview(headImgView)
         headImgView.snp.makeConstraints { (make) in
-            make.left.equalTo(headImgView.superview!).offset(kScale(15))
+            make.left.equalTo(headImgView.superview!).offset(kScale(10))
             make.size.equalTo(kSize(32, height: 32))
             make.top.equalTo(backImgView.snp.bottom).offset(kScale(-10))
         }
@@ -82,7 +82,7 @@ class HomeCollectionCell: UICollectionViewCell {
         nameLabel = UILabel.createLabel(12, textColor: kGrayColor)
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(headImgView.snp.right).offset(kScale(10))
+            make.left.equalTo(headImgView.snp.right).offset(kScale(6))
             make.top.equalTo(backImgView.snp.bottom).offset(kScale(6))
             make.height.equalTo(kScale(12))
             make.right.equalTo(praiseImgView.snp.left).offset(kScale(-5))

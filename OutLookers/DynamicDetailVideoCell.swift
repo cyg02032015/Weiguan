@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import ZFPlayer
 
 let talentPadding: CGFloat = 15
 
@@ -22,18 +23,22 @@ protocol DynamicDetailDelegate: class {
 
 class DynamicDetailVideoCell: UITableViewCell {
     var lastImgView: UIImageView!
+    weak var tableView: UITableView!
+    var covImageView: UIImageView!
+    var isSelf: Bool = false
+    
     var info: DynamicDetailResp! {
         didSet {
             guard let url = info.pictureList.first?.url else {return}
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
-            
+            followButton.hidden = isSelf
             if shareButton != nil {
                 return
             }
             // 图片还是视频
             var imgView: UIImageView!
             if info.isVideo == "1" {  // 图片
-                player.hidden = true
+                covImageView.hidden = true
                 if info.pictureList.count > 0 {
                     for obj in info.pictureList {
                         imgView = UIImageView()
@@ -48,10 +53,14 @@ class DynamicDetailVideoCell: UITableViewCell {
                     }
                 }
             } else { // 视频
-                player.hidden = false
-                if let path = info.cover.addImagePath() {
-                    let item = self.preparePlayerItem(path.absoluteString, url: url.addVideoPath())
-                    self.player.playWithPlayerItem(item)
+                covImageView.hidden = false
+                if let _ = info.cover.addImagePath() {
+                    self.playerView.placeholderImageName = ""
+                    self.playerView.placeholderImage = self.covImageView.image
+                    self.playerView.autoPlayTheVideo()
+                    self.playerView.playerLayerGravity = .ResizeAspect
+                    self.playerView.setVideoURL(NSURL.init(string: url.addVideoPath()), withTableView: self.tableView, atIndexPath: nil, withImageViewTag: 1001)
+                    self.playerView.addPlayerToCellImageView(self.covImageView)
                 }
             }
 
@@ -60,12 +69,12 @@ class DynamicDetailVideoCell: UITableViewCell {
                 contentView.addSubview(details)
                 details.text = info.text
                 details.snp.makeConstraints(closure: { (make) in
-                    make.left.equalTo(details.superview!).offset(kScale(15))
+                make.left.equalTo(details.superview!).offset(kScale(15))
                     make.right.equalTo(details.superview!).offset(kScale(-15))
                     if info.isVideo == "1" {
                         make.top.equalTo(imgView.snp.bottom).offset(kScale(8))
                     } else {
-                        make.top.equalTo(player.snp.bottom).offset(kScale(8))
+                        make.top.equalTo(covImageView.snp.bottom).offset(kScale(8))
                     }
                     make.height.equalTo(kScale(16))
                 })
@@ -83,7 +92,7 @@ class DynamicDetailVideoCell: UITableViewCell {
                 if info.isVideo == "1" {
                     containerY = imgView.gg_bottom
                 } else {
-                    containerY = player.gg_bottom
+                    containerY = covImageView.gg_bottom
                 }
             } else {
                 containerY = details.gg_bottom
@@ -144,7 +153,7 @@ class DynamicDetailVideoCell: UITableViewCell {
             }
             
             shareButton = UIButton()
-            shareButton.setImage(UIImage(named: "share"), forState: .Normal)
+            shareButton.setImage(UIImage(named: "shareR"), forState: .Normal)
             contentView.addSubview(shareButton)
             shareButton.snp.makeConstraints { (make) in
                 make.left.equalTo(commentButton.snp.right).offset(kScale(40))
@@ -208,7 +217,7 @@ class DynamicDetailVideoCell: UITableViewCell {
     }
     lazy var likeLists = [LikeList]()
     weak var delegate: DynamicDetailDelegate!
-    var player: BMPlayer!
+    var playerView: ZFPlayerView = ZFPlayerView()
     var praiseButton: UIButton!
     var shareButton: UIButton!
     var collectionView: UICollectionView!
@@ -272,19 +281,23 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.centerY.equalTo(headImgView)
         }
         
-        player = BMPlayer()
-        player.hidden = true
-        BMPlayerConf.allowLog = false
-        BMPlayerConf.shouldAutoPlay = true
-        BMPlayerConf.tintColor = UIColor.whiteColor()
-        BMPlayerConf.topBarShowInCase = .HorizantalOnly
-        BMPlayerConf.loaderType  = NVActivityIndicatorType.BallRotateChase
-        contentView.addSubview(player)
-        player.snp.makeConstraints { (make) in
+        covImageView = UIImageView()
+        covImageView.hidden = true
+        covImageView.userInteractionEnabled = true
+        covImageView.tag = 1001
+        contentView.addSubview(covImageView)
+        covImageView.snp.makeConstraints { (make) in
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
             make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
-            make.left.equalTo(player.superview!)
+            make.left.equalTo(covImageView.superview!)
         }
+        playerView.controlView.backBtn.hidden = true
+//        contentView.addSubview(playerView)
+//        playerView.snp.makeConstraints { (make) in
+//            make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
+//            make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
+//            make.left.equalTo(playerView.superview!)
+//        }
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kScale(24), height: kHeight(24))
@@ -305,19 +318,9 @@ class DynamicDetailVideoCell: UITableViewCell {
             }
         }.addDisposableTo(disposeBag)
     }
-    
-    func preparePlayerItem(cover: String, url: String) -> BMPlayerItem {
-        let resource0 = BMPlayerItemDefinitionItem(url: NSURL(string: url)!,
-                                                   definitionName: "高清")
-        
-        let item    = BMPlayerItem(title: "",
-                                   resource: [resource0,],
-                                   cover: cover)
-        return item
-    }
-    
+
     deinit {
-        player.prepareToDealloc()
+        playerView.resetPlayer()
     }
 
     required init?(coder aDecoder: NSCoder) {
