@@ -18,8 +18,9 @@ import RxCocoa
     func dynamicCellTapFollow(sender: UIButton, indexPath: NSIndexPath)
 }
 
-class DynamicCell: UITableViewCell {
+class DynamicCell: UITableViewCell, VideoPlayerProtocol {
 
+    weak var tableView: UITableView!
     var info: DynamicResult! {
         didSet {
             headImgView.iconURL = info.photo.addImagePath(kSize(35, height: 35))
@@ -135,6 +136,7 @@ class DynamicCell: UITableViewCell {
         }
         
         bigImgView = UIImageView()
+        bigImgView.tag = 111
         bigImgView.contentMode = .ScaleAspectFill
         bigImgView.clipsToBounds = true
         contentView.addSubview(bigImgView)

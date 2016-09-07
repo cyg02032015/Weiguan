@@ -24,7 +24,6 @@ protocol DynamicDetailDelegate: class {
 class DynamicDetailVideoCell: UITableViewCell {
     var lastImgView: UIImageView!
     weak var tableView: UITableView!
-    var covImageView: UIImageView!
     var isSelf: Bool = false
     
     var info: DynamicDetailResp! {
@@ -38,7 +37,7 @@ class DynamicDetailVideoCell: UITableViewCell {
             // 图片还是视频
             var imgView: UIImageView!
             if info.isVideo == "1" {  // 图片
-                covImageView.hidden = true
+                playerView.hidden = true
                 if info.pictureList.count > 0 {
                     for obj in info.pictureList {
                         imgView = UIImageView()
@@ -53,14 +52,12 @@ class DynamicDetailVideoCell: UITableViewCell {
                     }
                 }
             } else { // 视频
-                covImageView.hidden = false
+                playerView.hidden = false
                 if let _ = info.cover.addImagePath() {
                     self.playerView.placeholderImageName = ""
-                    self.playerView.placeholderImage = self.covImageView.image
                     self.playerView.autoPlayTheVideo()
                     self.playerView.playerLayerGravity = .ResizeAspect
-                    self.playerView.setVideoURL(NSURL.init(string: url.addVideoPath()), withTableView: self.tableView, atIndexPath: nil, withImageViewTag: 1001)
-                    self.playerView.addPlayerToCellImageView(self.covImageView)
+                    self.playerView.videoURL = NSURL.init(string: url.addVideoPath())
                 }
             }
 
@@ -74,7 +71,7 @@ class DynamicDetailVideoCell: UITableViewCell {
                     if info.isVideo == "1" {
                         make.top.equalTo(imgView.snp.bottom).offset(kScale(8))
                     } else {
-                        make.top.equalTo(covImageView.snp.bottom).offset(kScale(8))
+                        make.top.equalTo(playerView.snp.bottom).offset(kScale(8))
                     }
                     make.height.equalTo(kScale(16))
                 })
@@ -92,7 +89,7 @@ class DynamicDetailVideoCell: UITableViewCell {
                 if info.isVideo == "1" {
                     containerY = imgView.gg_bottom
                 } else {
-                    containerY = covImageView.gg_bottom
+                    containerY = playerView.gg_bottom
                 }
             } else {
                 containerY = details.gg_bottom
@@ -234,6 +231,7 @@ class DynamicDetailVideoCell: UITableViewCell {
     }
     
     func setupSubViews() {
+        NSNotificationCenter.defaultCenter().addObserver(playerView, selector: #selector(ZFPlayerView.pause), name: DynamicDetailVC_WillAppear, object: nil)
         headImgView = IconHeaderView()
         headImgView.customCornerRadius = kScale(35/2)
         contentView.addSubview(headImgView)
@@ -280,24 +278,15 @@ class DynamicDetailVideoCell: UITableViewCell {
             make.size.equalTo(kSize(50, height: 20))
             make.centerY.equalTo(headImgView)
         }
-        
-        covImageView = UIImageView()
-        covImageView.hidden = true
-        covImageView.userInteractionEnabled = true
-        covImageView.tag = 1001
-        contentView.addSubview(covImageView)
-        covImageView.snp.makeConstraints { (make) in
+
+        playerView.backgroundColor = .blackColor()
+        playerView.type = .Detail
+        contentView.addSubview(playerView)
+        playerView.snp.makeConstraints { (make) in
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
             make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
-            make.left.equalTo(covImageView.superview!)
+            make.left.equalTo(playerView.superview!)
         }
-        playerView.controlView.backBtn.hidden = true
-//        contentView.addSubview(playerView)
-//        playerView.snp.makeConstraints { (make) in
-//            make.top.equalTo(headImgView.snp.bottom).offset(kScale(14))
-//            make.size.equalTo(CGSize(width: ScreenWidth, height: ScreenWidth))
-//            make.left.equalTo(playerView.superview!)
-//        }
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kScale(24), height: kHeight(24))
@@ -320,7 +309,8 @@ class DynamicDetailVideoCell: UITableViewCell {
     }
 
     deinit {
-        playerView.resetPlayer()
+        NSNotificationCenter.defaultCenter().removeObserver(playerView, name: DynamicDetailVC_WillAppear, object: nil)
+        playerView.resetPlayer() 
     }
 
     required init?(coder aDecoder: NSCoder) {

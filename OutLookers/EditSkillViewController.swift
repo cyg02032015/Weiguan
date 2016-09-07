@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import AliyunOSSiOS
 
 private let skillTypeCellId = "skillTypeCellId"
 private let noArrowIdentifier = "noArrowId"
@@ -28,6 +29,7 @@ private extension Selector {
 
 class EditSkillViewController: YGBaseViewController {
 
+    private var uploadVideoRequst: OSSPutObjectRequest?
     var skillType: PersonCharaterModel!
     var tableView: UITableView!
     var releaseButton: UIButton!
@@ -54,6 +56,10 @@ class EditSkillViewController: YGBaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    deinit {
+        uploadVideoRequst?.cancel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "发布才艺"
@@ -69,7 +75,6 @@ class EditSkillViewController: YGBaseViewController {
             req.categoryName = skillType.name
         }
         req.unit = UnitType.YuanHour.rawValue
-        
     }
     
     func setupSubViews() {
@@ -285,7 +290,7 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
         if videoURL != nil {
             dispatch_group_async(group, queue, { [unowned self] in
                 dispatch_group_enter(group)
-                OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoURL, complete: { (id, state) in
+               self.uploadVideoRequst = OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoURL, complete: { (id, state) in
                     dispatch_group_leave(group)
                     if state == .Success {
                         self.req.worksVideo = id

@@ -39,6 +39,11 @@ class YGTabbarController: UITabBarController {
         self.tabBar.translucent = false
         self.tabBar.backgroundImage = UIColor().imageWith(UIColor.clearColor())
         self.tabBar.shadowImage = UIColor().imageWith(UIColor.clearColor())
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(backHomePage), name: Back_HomePage, object: nil)
+    }
+    
+    func backHomePage() {
+        self.selectedIndex = 0
     }
 
     func addTabbar() {

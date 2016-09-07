@@ -50,9 +50,6 @@ let kHeadPlaceholder = UIImage(named: "关注列表默认头像default")
 // 正则表达
 let kMobileNumberReg: String      = "^1[3578][0-9]{9}$"
 
-// 通知
-let kRecieveGlobleDefineNotification = "recieveGlobleDefine"
-let kPlusButtonClickNotification = "PlusButtonClick"
 
 func kScale(a: CGFloat) -> CGFloat {
     if Device.size() == .Screen5_5Inch {

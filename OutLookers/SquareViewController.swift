@@ -98,9 +98,10 @@ extension SquareViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellId, forIndexPath: indexPath) as! DynamicCell
+        let info = sqaureLists[indexPath.section]
         cell.isSquare = true
         cell.indexPath = indexPath
-        cell.info = sqaureLists[indexPath.section]
+        cell.info = info
         cell.delegate = self
         cell.headImgView.iconHeaderTap { [weak self] in
             let vc = PHViewController()

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D20DF8D1D7FCFA7002E802A /* SBNotification_Names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF8C1D7FCFA7002E802A /* SBNotification_Names.swift */; };
+		2D20DF8F1D7FF028002E802A /* VideoPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF8E1D7FF028002E802A /* VideoPlayerProtocol.swift */; };
 		2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
@@ -369,6 +371,8 @@
 /* Begin PBXFileReference section */
 		13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289FA6413EE7BFD4DB6FC03D /* Pods-OutLookersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersTests/Pods-OutLookersTests.release.xcconfig"; sourceTree = "<group>"; };
+		2D20DF8C1D7FCFA7002E802A /* SBNotification_Names.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBNotification_Names.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF8E1D7FF028002E802A /* VideoPlayerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerProtocol.swift; sourceTree = SOURCE_ROOT; };
 		2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SBThreadsafely.swift; path = OutLookers/SBThreadsafely.swift; sourceTree = SOURCE_ROOT; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1494,6 +1498,8 @@
 				D825EECB1D55F78E00AF94AF /* YGShare.swift */,
 				D8DAC5A31D684D990009FDB9 /* TokenTool.swift */,
 				2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */,
+				2D20DF8C1D7FCFA7002E802A /* SBNotification_Names.swift */,
+				2D20DF8E1D7FF028002E802A /* VideoPlayerProtocol.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -2327,6 +2333,7 @@
 				D8518ACD1D606A680028EC79 /* HorizontalCollectionViewCell.swift in Sources */,
 				E446FA011D2612BC003DFC1E /* FollowPeopleCell.swift in Sources */,
 				D82F8E0E1D2C0ECD00A24CDB /* TalentViewController.swift in Sources */,
+				2D20DF8F1D7FF028002E802A /* VideoPlayerProtocol.swift in Sources */,
 				D82F8E2A1D33E83D00A24CDB /* ReleaseTalentCell.swift in Sources */,
 				D812A8CC1D4E23CF00186564 /* AccountViewController.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
@@ -2524,6 +2531,7 @@
 				D812A9081D4FA69D00186564 /* MJRefreshFooter.m in Sources */,
 				D8B1961A1D7DBAF80098763D /* LogInHelper.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
+				2D20DF8D1D7FCFA7002E802A /* SBNotification_Names.swift in Sources */,
 				D84DBBFB1D72DA9B00163F5E /* PraiseListCollectionViewCell.swift in Sources */,
 				D82F8E0A1D2C0D9400A24CDB /* TYSlidePageScrollViewController.m in Sources */,
 				D82F8DE71D28373400A24CDB /* BaseResponse.swift in Sources */,

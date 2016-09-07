@@ -37,6 +37,7 @@ class DynamicDetailViewController: YGBaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        NSNotificationCenter.defaultCenter().postNotificationName(DynamicDetailVC_WillAppear, object: nil)
     }
     
     override func viewDidLoad() {
@@ -220,7 +221,6 @@ extension DynamicDetailViewController {
             cell.likeListInfo = self.likeListObj
             cell.delegate = self
             cell.tableView = tableView
-            cell.covImageView.image = self.shareImage
             cell.info = detailObj
             cell.headImgView.iconHeaderTap({ [weak self] in
                 let vc = PHViewController()
