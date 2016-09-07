@@ -16,6 +16,7 @@ class FollowViewController: YGBaseViewController {
 
     var tableView: UITableView!
     lazy var lists = [DynamicResult]()
+    private var timeStr: String!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,7 +42,9 @@ class FollowViewController: YGBaseViewController {
     }
     
     func loadNewData() {
-        Server.followDynamic(1) { (success, msg, value) in
+        pageNo = 1
+        timeStr = NSDate().stringFromNowDate()
+        Server.followDynamic(pageNo, timeStr: timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
@@ -52,6 +55,7 @@ class FollowViewController: YGBaseViewController {
                 if object.list.count < 10 {
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
+                self.pageNo += 1
             } else {
                 SVToast.showWithError(msg!)
                 self.tableView.mj_header.endRefreshing()
@@ -60,7 +64,7 @@ class FollowViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.followDynamic(pageNo) { (success, msg, value) in
+        Server.followDynamic(pageNo,  timeStr: timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}

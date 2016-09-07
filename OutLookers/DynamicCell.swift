@@ -100,7 +100,7 @@ class DynamicCell: UITableViewCell {
         contentView.addSubview(releaseLabel)
         releaseLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(nameLabel)
-            make.left.equalTo(nameLabel.snp.right).offset(kScale(20))
+            make.left.equalTo(nameLabel.snp.right).offset(kScale(10))
             make.height.equalTo(14)
             make.right.lessThanOrEqualTo(releaseLabel.superview!).offset(kScale(-15))
         }

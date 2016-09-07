@@ -32,15 +32,14 @@ let kQQUrl = "http://www.umeng.com/social" // 分享地址
     let kSinaAppkey = "821223363"
     let kSinaAppSecret = "02008c2efb2c66bb458ee04a46917b66"
     let sharePrefix = "http://h5.dev.chunyangapp.com"
-    let base = "http://api.dev.chunyangapp.com/api"
+    let kSinaRedirectUrl = "http://api.dev.chunyangapp.com/api/sina/v1/callback"
 #else
     let kUmengAppkey = "57c2b739e0f55a4825001914"
     let kSinaAppkey = "3982685003"
     let kSinaAppSecret = "271a0f8dd5f04648d80f6dbca3e7bf4d"
     let sharePrefix = "http://h5.chunyangapp.com"
-    let base = "http://api1.chunyangapp.com/api"
+    let kSinaRedirectUrl = "http://api1.chunyangapp.com/api/sina/v1/callback"
 #endif
-let kSinaRedirectUrl = base + "/api/sina/callback" // 分享回调地址
 
 let kOSSEndPoint = "http://oss-cn-hangzhou.aliyuncs.com/"
 

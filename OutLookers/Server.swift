@@ -276,11 +276,12 @@ class Server {
     }
     
     /// 关注-动态
-    class func followDynamic(pageNo: Int, handler: (success: Bool, msg: String?, value: FollowDynamicResp?)->Void) {
+    class func followDynamic(pageNo: Int, timeStr: String, handler: (success: Bool, msg: String?, value: FollowDynamicResp?)->Void) {
         let parameters = [
             "userId" : UserSingleton.sharedInstance.userId,
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
+            "time" : timeStr
         ]
         HttpTool.post(API.followDynamic, parameters: parameters, complete: { (response) in
             let info = FollowDynamicResp(fromJson: response)
@@ -1230,7 +1231,7 @@ class Server {
             "type": "\(req.type)",
             "uid": req.uid
         ]
-        HttpTool.registerLogPost(API.registerPhone, parameters: parameters, pwdOrToken: req.uid, complete: { (request, response, value) in
+        HttpTool.registerLogPost(API.thirdLogin, parameters: parameters, pwdOrToken: req.uid, complete: { (request, response, value) in
             let info = RegisterResp(fromJson: value)
             if info.success == true {
                 if let headerFields = response?.allHeaderFields as? [String: String], URL = request?.URL {
