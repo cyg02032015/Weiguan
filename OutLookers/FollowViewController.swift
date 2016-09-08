@@ -149,8 +149,6 @@ extension FollowViewController: DynamicCellDelegate, FollowProtocol {
         if UserSingleton.sharedInstance.userId == "\(dy.userId)" {
             type = .DYHost
             shareModel.shareNickName = "我的纯氧作品, 一起来看~"
-        }else if !isEmptyString(UserSingleton.sharedInstance.userId) {
-            type = .DYHost
         }
         shareModel.shareID = "index.html#trends-details?listId=\(dy.id)"
         shareModel.shareImage = cell.bigImgView.image

@@ -43,17 +43,14 @@ class DynamicDetailViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         var type: YGShareType = .DYVisitor
-        if !isEmptyString(UserSingleton.sharedInstance.userId) {
-            type = .DYHost
-        }
         if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {
             // 是自己没有关注按钮
             isSelf = true
+            type = .DYHost
         }
         let tuple = YGShareHandler.handleShareInstalled(type)
         shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
         loadData()
-        loadMoreData()
         setupSubViews()
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
             self.loadMoreData()
@@ -72,6 +69,7 @@ class DynamicDetailViewController: YGBaseViewController {
                     if success {
                         guard let obj = value else {return}
                         self.likeListObj = obj
+                        self.loadMoreData()
                         self.tableView.reloadData()
                     } else {
                         LogError("无法获取点赞列表")
@@ -336,5 +334,16 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
                 LogInHelper.logViewTap(self, type: type)
             })
         }
+    }
+}
+
+// 屏幕方向这里还需要处理
+extension DynamicDetailViewController {
+    override func shouldAutorotate() -> Bool {
+        return dynamicObj.isVideo == 1
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return dynamicObj.isVideo == 1 ? .AllButUpsideDown : .Portrait
     }
 }

@@ -9,6 +9,9 @@
 import UIKit
 // 通知
 let kRecieveGlobleDefineNotification = "recieveGlobleDefine"
+let kMessageLikeReleaseReadNotification = "kMessageLikeReleaseReadNotification"
+let kMessageReplyReleaseReadNotification = "kMessageReplyReleaseReadNotification"
+let kMessageFollowReleaseReadNotification = "kMessageFollowReleaseReadNotification"
 
 //离开动态详情页面
 let DynamicDetailVC_WillAppear = "DynamicDetailVC_WillAppear"

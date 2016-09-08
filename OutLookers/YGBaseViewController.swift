@@ -71,6 +71,14 @@ class YGBaseViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
+    }
+    
     deinit {
         SVToast.dismiss()
         print("\(NSStringFromClass(self.dynamicType))被销毁")

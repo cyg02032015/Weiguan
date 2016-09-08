@@ -21,6 +21,7 @@ class MessageViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        addNoficationCenter()
     }
     
     func setupSubViews() {
@@ -47,7 +48,7 @@ extension MessageViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 4
+            return 3
         } else {
             return 2
         }
@@ -78,15 +79,20 @@ extension MessageViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! MessageCell
             if indexPath.row == 0 {
                 let vc = MPraiseViewController()
+                vc.num = Int(cell.badgeButton.badgeValue)
                 navigationController?.pushViewController(vc, animated: true)
             } else if indexPath.row == 1 {
                 let vc = MCommentViewController()
+                vc.num = Int(cell.badgeButton.badgeValue)
                 navigationController?.pushViewController(vc, animated: true)
             } else if indexPath.row == 2 {
-                let vc = FollowPeopleViewController()
-                navigationController?.pushViewController(vc, animated: true)
+                //有问题showType参数没有
+//                let vc = FollowPeopleViewController()
+//                vc.num = Int(cell.badgeButton.badgeValue)
+//                navigationController?.pushViewController(vc, animated: true)
             } else {
                 //TODO 通知
             }
@@ -106,6 +112,23 @@ extension MessageViewController {
             return kHeight(10)
         } else {
             return 0.01
+        }
+    }
+}
+
+extension MessageViewController {
+    func addNoficationCenter() {
+        _ = NSNotificationCenter.defaultCenter().rx_notification(kMessageLikeReleaseReadNotification).subscribeNext { (notification) in
+            self.messageNumData?.like = 0
+            self.tableView.reloadData()
+        }
+        _ = NSNotificationCenter.defaultCenter().rx_notification(kMessageReplyReleaseReadNotification).subscribeNext { (notification) in
+            self.messageNumData?.reply = 0
+            self.tableView.reloadData()
+        }
+        _ = NSNotificationCenter.defaultCenter().rx_notification(kMessageFollowReleaseReadNotification).subscribeNext { (notification) in
+            self.messageNumData?.follow = 0
+            self.tableView.reloadData()
         }
     }
 }

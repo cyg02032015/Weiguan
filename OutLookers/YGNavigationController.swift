@@ -33,6 +33,18 @@ public class YGNavigationController: UINavigationController {
         super.pushViewController(viewController, animated: true)
     }
     
+    public override func shouldAutorotate() -> Bool {
+        return self.viewControllers.last!.shouldAutorotate()
+    }
+    
+    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return self.viewControllers.last!.supportedInterfaceOrientations()
+    }
+    
+    public override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return self.viewControllers.last!.preferredInterfaceOrientationForPresentation()
+    }
+    
     public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

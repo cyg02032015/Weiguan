@@ -5,6 +5,7 @@
 #import <CommonCrypto/CommonCrypto.h>  // md5
 #import <ifaddrs.h>  // 获取ip c库
 #import "CitiesData.h"
+#import "UIImage+Blur.h"
 #import "VPImageCropperViewController.h"
 #import "TZImagePickerController.h"
 #import "UIButton+Badge.h"

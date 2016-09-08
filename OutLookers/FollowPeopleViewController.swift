@@ -16,7 +16,7 @@ enum ShowType: Int {
 }
 
 class FollowPeopleViewController: YGBaseViewController {
-    
+    var num: Int?
     var showType: ShowType!
     var tableView: UITableView!
     lazy var myFollows = [FollowList]()
@@ -29,6 +29,18 @@ class FollowPeopleViewController: YGBaseViewController {
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
             self?.loadMoreData()
         })
+        guard num != 0 else { return }
+        releaseFollow()
+    }
+    
+    func releaseFollow() {
+        HttpTool.post(API.releaseFollowRead, parameters: ["userId" : UserSingleton.sharedInstance.userId], complete: { (response) in
+            if response["success"].boolValue {
+                NSNotificationCenter.defaultCenter().postNotificationName(kMessageFollowReleaseReadNotification, object: nil)
+            }
+        }) { (error) in
+            SVToast.showWithError(error.localizedDescription)
+        }
     }
     
     override func loadMoreData() {

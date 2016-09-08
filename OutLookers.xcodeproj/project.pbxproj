@@ -18,6 +18,7 @@
 		2D20DF9D1D811933002E802A /* IsAuthDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF9C1D811933002E802A /* IsAuthDataReq.swift */; };
 		2D20DF9F1D812924002E802A /* MessageNumData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF9E1D812924002E802A /* MessageNumData.swift */; };
 		2D20DFA11D8129E7002E802A /* MessageNumDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA01D8129E7002E802A /* MessageNumDataReq.swift */; };
+		2D20DFA41D815A59002E802A /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA31D815A59002E802A /* UIImage+Blur.m */; };
 		2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
@@ -391,6 +392,8 @@
 		2D20DF9C1D811933002E802A /* IsAuthDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsAuthDataReq.swift; sourceTree = SOURCE_ROOT; };
 		2D20DF9E1D812924002E802A /* MessageNumData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNumData.swift; sourceTree = SOURCE_ROOT; };
 		2D20DFA01D8129E7002E802A /* MessageNumDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNumDataReq.swift; sourceTree = SOURCE_ROOT; };
+		2D20DFA21D815A59002E802A /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
+		2D20DFA31D815A59002E802A /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SBThreadsafely.swift; path = OutLookers/SBThreadsafely.swift; sourceTree = SOURCE_ROOT; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1477,6 +1480,8 @@
 		D8C167411D1D783C00C50EB7 /* OCFile */ = {
 			isa = PBXGroup;
 			children = (
+				2D20DFA21D815A59002E802A /* UIImage+Blur.h */,
+				2D20DFA31D815A59002E802A /* UIImage+Blur.m */,
 				D84D986A1D47AD39007CCD6E /* DXMessageToolBar.h */,
 				D84D986B1D47AD39007CCD6E /* DXMessageToolBar.m */,
 				D84D986C1D47AD39007CCD6E /* XHMessageTextView.h */,
@@ -2598,6 +2603,7 @@
 				D84DBBFD1D72F23000163F5E /* InvitedDetailViewController.swift in Sources */,
 				D81992581D44A5D6007734C0 /* PersonFilesResp.swift in Sources */,
 				D82F8DC91D27CB6400A24CDB /* TADotView.m in Sources */,
+				2D20DFA41D815A59002E802A /* UIImage+Blur.m in Sources */,
 				D82F8E1A1D30ED9200A24CDB /* OrganizationViewController.swift in Sources */,
 				D82417351D75C7CA002138A2 /* LogHelper.swift in Sources */,
 				D82F8E091D2C0D9400A24CDB /* TYSlidePageScrollView.m in Sources */,

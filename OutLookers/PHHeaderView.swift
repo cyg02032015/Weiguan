@@ -61,13 +61,13 @@ class PHHeaderView: UIView {
         backImgView.snp.makeConstraints { (make) in
             make.edges.equalTo(backImgView.superview!)
         }
-        let blurEffect = UIBlurEffect.init(style: .ExtraLight)
-        let effectView = UIVisualEffectView.init(effect: blurEffect)
-        effectView.alpha = 0.8
-        backImgView.addSubview(effectView)
-        effectView.snp.makeConstraints { (make) in
-            make.edges.equalTo(effectView.superview!)
-        }
+//        let blurEffect = UIBlurEffect.init(style: .ExtraLight)
+//        let effectView = UIVisualEffectView.init(effect: blurEffect)
+//        effectView.alpha = 0.8
+//        backImgView.addSubview(effectView)
+//        effectView.snp.makeConstraints { (make) in
+//            make.edges.equalTo(effectView.superview!)
+//        }
         headImgView = UIImageView()
         headImgView.layer.cornerRadius = kScale(80/2)
         headImgView.layer.borderWidth = 2
@@ -76,7 +76,7 @@ class PHHeaderView: UIView {
         headImgView.image = kHeadPlaceholder
         backImgView.addSubview(headImgView)
         _ = headImgView.rx_observe(UIImage.self, "image").subscribeNext { [weak self](image) in
-            self?.backImgView.image = image
+            self?.backImgView.image = image?.boxblurImageWithBlur(0.3)
         }
         headImgView.snp.makeConstraints { (make) in
             make.top.equalTo(headImgView.superview!).offset(kScale(101))

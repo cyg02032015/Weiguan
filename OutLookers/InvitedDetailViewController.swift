@@ -96,7 +96,7 @@ class InvitedDetailViewController: YGBaseViewController {
     
     func shareAction() {
         var type: YGShareType = .CCVisitor
-        if !isEmptyString(UserSingleton.sharedInstance.userId) {
+        if UserSingleton.sharedInstance.userId == "\(noticeObj.userId)" {
             type = .CCHost
         }
         let shareModel = YGShareModel()

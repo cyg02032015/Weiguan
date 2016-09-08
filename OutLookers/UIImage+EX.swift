@@ -52,7 +52,7 @@ extension UIImage {
         let avg = CGFloat(1.0/250)
         var value = avg
         
-        for var i = 250; i>=1; i-- {
+        for var i = 250; i>=1; i -= 1 {
             value = CGFloat(i)*avg
             compressionQualityArr.addObject(value)
         }

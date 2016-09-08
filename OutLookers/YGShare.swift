@@ -162,8 +162,8 @@ class YGShare: UIView {
     }
     
     func selectItem(cell: ShareVCell) {
-        cell.shareBlock { [weak self] (sender) in
-            guard let ws = self else {return}
+        cell.shareBlock { [unowned self] (sender) in
+            //guard let ws = self else {return}
             var platFormType = [String]()
             switch cell.label.text! {
             case kTitleTimeline:
@@ -179,12 +179,12 @@ class YGShare: UIView {
             default:""
             }
             
-            ws.tapCancel()
-            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/\(self?.shareModel.shareID ?? "")")//(self.detailObj.id)"
+            self.tapCancel()
+            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/\(self.shareModel.shareID ?? "")")//(self.detailObj.id)"
             
-            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: self?.shareModel.shareNickName, image: self?.shareModel.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: self.shareModel.shareNickName, image: self.shareModel.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
                 if response.responseCode == UMSResponseCodeSuccess {
-                    print("分享成功！")
+                    LogInfo("分享成功！")
                 }
             })
         }

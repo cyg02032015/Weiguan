@@ -12,10 +12,13 @@ private let mCommentCellId = "mCommentCellId"
 
 class MCommentViewController: YGBaseViewController {
 
+    var num: Int?
     var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        guard num != 0 else { return }
+        releaseReply()
     }
     
     func setupSubViews() {
@@ -29,6 +32,16 @@ class MCommentViewController: YGBaseViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
+        }
+    }
+    
+    func releaseReply() {
+        HttpTool.post(API.releaseReplyRead, parameters: ["userId" : UserSingleton.sharedInstance.userId], complete: { (response) in
+            if response["success"].boolValue {
+                NSNotificationCenter.defaultCenter().postNotificationName(kMessageReplyReleaseReadNotification, object: nil)
+            }
+        }) { (error) in
+            SVToast.showWithError(error.localizedDescription)
         }
     }
 }

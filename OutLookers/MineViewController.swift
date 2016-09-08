@@ -285,3 +285,20 @@ extension MineViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
 }
+
+extension MineViewController {
+    func addNoficationCenter() {
+        _ = NSNotificationCenter.defaultCenter().rx_notification(kMessageLikeReleaseReadNotification).subscribeNext { (notification) in
+            self.messageNumData?.like = 0
+            self.tableView.reloadData()
+        }
+        _ = NSNotificationCenter.defaultCenter().rx_notification(kMessageReplyReleaseReadNotification).subscribeNext { (notification) in
+            self.messageNumData?.reply = 0
+            self.tableView.reloadData()
+        }
+        _ = NSNotificationCenter.defaultCenter().rx_notification(kMessageFollowReleaseReadNotification).subscribeNext { (notification) in
+            self.messageNumData?.follow = 0
+            self.tableView.reloadData()
+        }
+    }
+}

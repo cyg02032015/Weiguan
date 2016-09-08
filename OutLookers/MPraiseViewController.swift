@@ -12,10 +12,12 @@ private let mPraiseCellId = "mPraiseCellId"
 
 class MPraiseViewController: YGBaseViewController {
 
+    var num: Int?
     var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        releaseLike()
     }
     
     func setupSubViews() {
@@ -29,6 +31,18 @@ class MPraiseViewController: YGBaseViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
+        }
+        guard num != 0 else { return }
+        releaseLike()
+    }
+    
+    func releaseLike() {
+        HttpTool.post(API.releaseLikeRead, parameters: ["userId" : UserSingleton.sharedInstance.userId], complete: { (response) in
+            if response["success"].boolValue {
+                NSNotificationCenter.defaultCenter().postNotificationName(kMessageLikeReleaseReadNotification, object: nil)
+            }
+            }) { (error) in
+                SVToast.showWithError(error.localizedDescription)
         }
     }
 }

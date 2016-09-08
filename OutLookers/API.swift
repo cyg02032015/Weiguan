@@ -11,6 +11,12 @@ import Foundation
 let baseURL = "http://api.dev.chunyangapp.com"
 
 struct API {
+    /// 关注已读
+    static let releaseFollowRead = baseURL + "/api/release/v1/follow/read"
+    /// 评论已读
+    static let releaseReplyRead = baseURL + "/api/release/v1/reply/read"
+    /// 点赞已读
+    static let releaseLikeRead = baseURL + "/api/release/v1/like/read"
     /// 获取消息数量
     static let getMessageNum = baseURL + "/api/release/v1/num/get"
     /// 发布图片视频

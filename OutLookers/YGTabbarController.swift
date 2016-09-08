@@ -99,4 +99,12 @@ extension YGTabbarController: YGTabbarDelegate {
         }
         self.selectedIndex = to
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
+    }
 }

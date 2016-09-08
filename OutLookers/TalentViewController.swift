@@ -23,6 +23,7 @@ class TalentViewController: YGBaseViewController {
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate?
     lazy var lists = [Result]()
+    private var shareView: YGShare!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -74,6 +75,20 @@ class TalentViewController: YGBaseViewController {
             make.edges.equalTo(tableView.superview!)
         }
     }
+    
+    func shareAction(cell: TalentTableViewCell?) {
+        var type: YGShareType = .CCVisitor
+        if UserSingleton.sharedInstance.userId == user {
+            type = .CCHost
+        }
+        let shareModel = YGShareModel()
+        shareModel.shareID = "index.html#skill-details?listId=\(cell!.info.id)"
+        shareModel.shareImage = UIImage.init(data: NSData.init(contentsOfURL: cell!.info.worksCover.addImagePath()!)!)
+        shareModel.shareNickName = cell!.info.details
+        let tuple = YGShareHandler.handleShareInstalled(type)
+        shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
+        shareView.shareModel = shareModel
+    }
 }
 
 // MARK: - UITableviewDelegate, UITableviewDatasource
@@ -92,8 +107,9 @@ extension TalentViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
-        cell.shareBlock { (sender) in
-            LogInfo("分享")
+        cell.shareBlock { [weak cell](sender) in
+            self.shareAction(cell)
+            self.shareView.animation()
         }
         return cell
     }
