@@ -13,6 +13,17 @@ private extension Selector {
 }
 
 class PHViewController: YGBaseViewController {
+    private var countObj: GetContent! {
+        didSet {
+            header.countObj = countObj
+        }
+    }
+    private var personalData: PersonalData! {
+        didSet {
+            header.personalData = personalData
+            self.title = personalData.nickname
+        }
+    }
     var user: String?
     var slidePageScrollView: TYSlidePageScrollView!
     var tableView: UITableView!
@@ -20,6 +31,7 @@ class PHViewController: YGBaseViewController {
     var rightNaviButton: UIButton!
     var delta: CGFloat = 0
     var scrollTo: Int = 0
+    let header = PHHeaderView()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -70,11 +82,12 @@ class PHViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        //SVToast.show()  // 注意
+        loadDataFans()
+        loadPersonalData()
     }
     
     func setupSubViews() {
-        self.title = "小包子"
+        self.title = ""
         
         rightNaviButton = UIButton(type: .Custom)
         rightNaviButton.frame = CGRect(x: 0, y: 0, width: 45, height: 49)
@@ -85,7 +98,7 @@ class PHViewController: YGBaseViewController {
         let rightMoreItem = UIBarButtonItem(customView: rightNaviButton)
         self.navigationItem.rightBarButtonItems = [rightFixedSpace, rightMoreItem]
         
-        slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight - NaviHeight))) // height - naviheight  偏移问题
+        slidePageScrollView = TYSlidePageScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: ScreenHeight))) // height - naviheight  偏移问题
         slidePageScrollView.pageTabBarIsStopOnTop = true
         slidePageScrollView.pageTabBarStopOnTopHeight = NaviHeight
         slidePageScrollView.parallaxHeaderEffect = false
@@ -93,7 +106,6 @@ class PHViewController: YGBaseViewController {
         slidePageScrollView.delegate = self
         view.addSubview(slidePageScrollView)
         
-        let header = PHHeaderView()
         header.frame = CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(294)))
         
         slidePageScrollView.headerView = header
@@ -110,6 +122,7 @@ class PHViewController: YGBaseViewController {
         
         let dynamicVC = DynamicViewController()
         dynamicVC.user = user
+        dynamicVC.delegate = self
         dynamicVC.view.frame = view.frame
         self.addChildViewController(dynamicVC)
         
@@ -127,10 +140,10 @@ class PHViewController: YGBaseViewController {
         toolView.clipsToBounds = true
         view.addSubview(toolView)
         toolView.snp.makeConstraints { (make) in
-            make.left.equalTo(toolView.superview!).offset(kScale(37))
-            make.right.equalTo(toolView.superview!).offset(kScale(-37))
-            make.height.equalTo(kScale(40))
-            make.bottom.equalTo(toolView.superview!).offset(kScale(-15))
+            make.width.equalTo(kScale(240))
+            make.height.equalTo(kScale(44))
+            make.centerX.equalTo(toolView.superview!)
+            make.bottom.equalTo(toolView.superview!).offset(kScale(-14))
         }
     }
     
@@ -153,21 +166,11 @@ extension PHViewController: PHToolViewDelegate {
     func toolViewTapPrivateLatter(sender: UIButton) {
         LogInfo("私信")
     }
-    
-    func toolViewTapInvitation(sender: UIButton) {
-        LogInfo("邀约")
-        let vc = InvitationDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
 extension PHViewController: ScrollVerticalDelegate {
-    func customScrollViewDidEndDecelerating(isScroll: Bool) {
-        if isScroll {
-            LogWarn("is scroll")
-        } else {
-            LogError("no scroll")
-        }
+    func customScrollViewStatus(state: ScrollState) {
+        toolViewMove(state)
     }
 }
 
@@ -206,3 +209,49 @@ extension PHViewController: TYSlidePageScrollViewDataSource, TYSlidePageScrollVi
         }
     }
 }
+
+extension PHViewController {
+    func loadDataFans() {
+        Server.getDynamicFollowFansCount(self.user!) { (success, msg, value) in
+            if success {
+                guard let obj = value else {return}
+                self.countObj = obj
+            } else {
+                guard let m = msg else {return}
+                LogError(m)
+            }
+        }
+    }
+    
+    func loadPersonalData() {
+        Server.getInformation(self.user!) { (success, msg, value) in
+            if success {
+                guard let obj = value else {return}
+                self.personalData = obj
+            } else {
+                guard let m = msg else {return}
+                LogError(m)
+            }
+        }
+    }
+}
+
+extension PHViewController {
+    func toolViewMove(state: ScrollState) {
+        switch state {
+            case .DidEndDecelerating:
+                UIView.animateWithDuration(0.3, animations: {
+                    self.toolView.transform = CGAffineTransformIdentity
+                })
+            case .BeginDragging:
+                UIView.animateWithDuration(0.3, animations: {
+                    self.toolView.transform = CGAffineTransformMakeTranslation(0, kScale(60)+30)
+                })
+            case .DidEndDragging:
+                UIView.animateWithDuration(0.3, animations: {
+                    self.toolView.transform = CGAffineTransformIdentity
+                })
+        }
+    }
+}
+

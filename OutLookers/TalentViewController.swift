@@ -21,7 +21,7 @@ class TalentViewController: YGBaseViewController {
     var user: String?
     lazy var data = [String]()
     var tableView: UITableView!
-    weak var delegate: ScrollVerticalDelegate!
+    weak var delegate: ScrollVerticalDelegate?
     lazy var lists = [Result]()
     
     override func viewWillAppear(animated: Bool) {
@@ -107,20 +107,20 @@ extension TalentViewController {
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        if delegate != nil && scrollView.isKindOfClass(UITableView.self) {
-            delegate.customScrollViewDidEndDecelerating(true)
+        if scrollView.isKindOfClass(UITableView.self) {
+            delegate?.customScrollViewStatus(.BeginDragging)
         }
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate && delegate != nil && scrollView.isKindOfClass(UITableView.self) {
-            delegate.customScrollViewDidEndDecelerating(false)
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView.isKindOfClass(UITableView.self) {
+            delegate?.customScrollViewStatus(.DidEndDragging)
         }
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        if delegate != nil && scrollView.isKindOfClass(UITableView.self) {
-            delegate.customScrollViewDidEndDecelerating(false)
+        if scrollView.isKindOfClass(UITableView.self) {
+            delegate?.customScrollViewStatus(.DidEndDecelerating)
         }
     }
 }

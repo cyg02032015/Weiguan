@@ -21,7 +21,7 @@ class DynamicViewController: YGBaseViewController {
 
     var user: String?
     var tableView: UITableView!
-    weak var delegate: ScrollVerticalDelegate!
+    weak var delegate: ScrollVerticalDelegate?
     lazy var dynamicLists = [DynamicResult]()
     var isPerson: Bool = false
     
@@ -101,16 +101,19 @@ extension DynamicViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate && delegate != nil{
-            delegate.customScrollViewDidEndDecelerating(false)
-        }
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+         delegate?.customScrollViewStatus(.BeginDragging)
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        if delegate != nil {
-            delegate.customScrollViewDidEndDecelerating(false)
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView.isKindOfClass(UITableView.self) {
+            delegate?.customScrollViewStatus(.DidEndDragging)
         }
+    }
+
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        delegate?.customScrollViewStatus(.DidEndDecelerating)
     }
 }
 

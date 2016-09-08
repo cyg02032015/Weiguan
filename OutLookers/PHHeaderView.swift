@@ -15,9 +15,21 @@ private extension Selector {
 
 class PHHeaderView: UIView {
 
+    var personalData: PersonalData! {
+        didSet {
+            headImgView.yy_setImageWithURL(personalData.headImgUrl.addImagePath(CGSize(width: kScale(80), height: kScale(80))), placeholder: kHeadPlaceholder)
+            secondLabel.text = personalData.introduction
+        }
+    }
+    
+    var countObj: GetContent! {
+        didSet {
+            follow.text = "\(countObj.follow) 关注"
+            fans.text = "\(countObj.fan) 粉丝"
+        }
+    }
     var backImgView: UIImageView!
     var headImgView: UIImageView!
-    var vImageView: UIImageView!
     var follow: TouchLabel!
     var fans: TouchLabel!
     var firstLabel: UILabel!
@@ -41,7 +53,11 @@ class PHHeaderView: UIView {
         headImgView.layer.borderWidth = 2
         headImgView.layer.borderColor = UIColor.lightGrayColor().CGColor
         headImgView.clipsToBounds = true
+        headImgView.image = kHeadPlaceholder
         backImgView.addSubview(headImgView)
+        _ = headImgView.rx_observe(UIImage.self, "image").subscribeNext { [weak self](image) in
+            self?.backImgView.image = image
+        }
         headImgView.snp.makeConstraints { (make) in
             make.top.equalTo(headImgView.superview!).offset(kScale(101))
             make.centerX.equalTo(headImgView.superview!)
@@ -91,14 +107,6 @@ class PHHeaderView: UIView {
             make.height.equalTo(kHeight(12))
         }
         
-        vImageView = UIImageView()
-        backImgView.addSubview(vImageView)
-        vImageView.snp.makeConstraints { (make) in
-            make.size.equalTo(kSize(20, height: 18))
-            make.right.equalTo(firstLabel.snp.left).offset(kScale(-5))
-            make.centerY.equalTo(firstLabel)
-        }
-        
         secondLabel = UILabel()
         secondLabel.font = UIFont.customFontOfSize(12)
         secondLabel.textColor = UIColor.whiteColor()
@@ -113,12 +121,10 @@ class PHHeaderView: UIView {
         }
         
         backImgView.image = boxBlurImage(UIImage(named: "back.png")!, withBlurNumber: 0.5)
-        headImgView.image = UIImage(named: "back.png")
-        follow.text = "155 关注"
-        fans.text = "234 粉丝"
-        firstLabel.text = "纯氧认证：男人装御用模特"
-        vImageView.backgroundColor = UIColor.yellowColor()
-        secondLabel.text = "欧美 日韩 街头 性感 中国风 欧美 日韩 街头 性感 中国风日韩 街头 性感 中国风"
+        follow.text = "-- 关注"
+        fans.text = "-- 粉丝"
+        firstLabel.text = "纯氧认证："
+        secondLabel.text = ""
 
     }
     
@@ -135,3 +141,4 @@ class PHHeaderView: UIView {
     }
     
 }
+

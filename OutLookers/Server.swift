@@ -926,9 +926,9 @@ class Server {
     }
     
     /// 获取个人动态，关注，粉丝数量
-    class func getDynamicFollowFansCount(handler: (success: Bool, msg: String?, value: GetContent?)->Void) {
+    class func getDynamicFollowFansCount(userId: String = UserSingleton.sharedInstance.userId, handler: (success: Bool, msg: String?, value: GetContent?)->Void) {
         let parameters = [
-            "userId" : UserSingleton.sharedInstance.userId
+            "userId" : userId
         ]
         HttpTool.post(API.getDynamicFollowFansCount, parameters: parameters, complete: { (response) in
             let info = GetContentResp(fromJson: response)

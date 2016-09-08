@@ -224,6 +224,7 @@ extension DynamicDetailViewController {
             cell.info = detailObj
             cell.headImgView.iconHeaderTap({ [weak self] in
                 let vc = PHViewController()
+                vc.user = "\(self?.detailObj.userId)"
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             return cell

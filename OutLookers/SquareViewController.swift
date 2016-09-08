@@ -109,6 +109,7 @@ extension SquareViewController {
         cell.delegate = self
         cell.headImgView.iconHeaderTap { [weak self] in
             let vc = PHViewController()
+            vc.user = "\(info.userId)"
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         return cell

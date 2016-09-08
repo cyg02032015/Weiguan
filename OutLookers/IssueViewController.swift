@@ -21,11 +21,12 @@ public enum BtnType: NSInteger {
 }
 
 class IssueViewController: YGBaseViewController {
-    
+    var blurImg: UIImage!
     weak var talent: CircelView!
     weak var circular: CircelView!
     weak var video: CircelView!
     weak var picture: CircelView!
+    var cancel: UIButton!
     lazy var items = [CircelView]()
     var itemSize = CGSize(width: kScale(72), height: 96)
 
@@ -42,10 +43,28 @@ class IssueViewController: YGBaseViewController {
 
     func setupSubViews() {
         let blurImgView = UIImageView()
-        blurImgView.image = boxBlurImage(UIImage(named: "video1")!, withBlurNumber: 0.3)
+        
+        let blurEffect = UIBlurEffect.init(style: .ExtraLight)
+        let effectView = UIVisualEffectView.init(effect: blurEffect)
+        
+        effectView.alpha = 1.0
+        //blurImgView.image = blurImg
+        blurImgView.image = boxBlurImage(blurImg, withBlurNumber: 1.0)
         view.addSubview(blurImgView)
         blurImgView.snp.makeConstraints { (make) in
             make.edges.equalTo(blurImgView.superview!)
+        }
+        blurImgView.addSubview(effectView)
+        effectView.snp.makeConstraints { (make) in
+            make.edges.equalTo(effectView.superview!)
+        }
+        
+        let whiteView = UIView()
+        whiteView.backgroundColor = UIColor.init(hex: 0xE8E8E8)
+        whiteView.alpha = 0.5
+        blurImgView.addSubview(whiteView)
+        whiteView.snp.makeConstraints { (make) in
+            make.edges.equalTo(whiteView.superview!)
         }
         
         let tapView = UITapGestureRecognizer(target: self, action: .tapCanceled)
@@ -88,13 +107,13 @@ class IssueViewController: YGBaseViewController {
         self.items.append(self.talent)
         self.items.append(self.circular)
         
-        let cancel = UIButton()
+        cancel = UIButton()
         cancel.setImage(UIImage(named: "Combined Shape"), forState: .Normal)
         cancel.addTarget(self, action: .tapCanceled, forControlEvents: .TouchUpInside)
         view.addSubview(cancel)
-        cancel.snp.makeConstraints { (make) in
-            make.centerX.equalTo(cancel.superview!)
-            make.bottom.equalTo(cancel.superview!).offset(kScale(-8))
+        cancel.snp.makeConstraints { [unowned self](make) in
+            make.centerX.equalTo(self.cancel.superview!)
+            make.bottom.equalTo(self.cancel.superview!).offset(kScale(-8))
             make.size.equalTo(kSize(44, height: 44))
         }
     }
@@ -108,13 +127,19 @@ class IssueViewController: YGBaseViewController {
             item.frame = CGRect(x: x, y: ScreenHeight + y - self.view.gg_y, width: w, height: h)
             item.alpha = 0
             delay(NSTimeInterval(idx) * 0.03, task: {
-                UIView.animateWithDuration(0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: .CurveEaseIn, animations: {
+                UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: .CurveEaseIn, animations: {
                     item.frame = CGRect(x: x, y: y, width: w, height: h)
                     item.alpha = 1
                     }, completion: { (completed) in
                       // 让按钮可用户点击
                 })
             })
+        }
+        cancel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_4))
+        cancel.alpha = 0
+        UIView.animateWithDuration(0.25) {
+            self.cancel.transform = CGAffineTransformIdentity
+            self.cancel.alpha = 1
         }
     }
     
@@ -125,12 +150,17 @@ class IssueViewController: YGBaseViewController {
             let w = item.gg_width
             let h = item.gg_height
             delay(NSTimeInterval(self.items.count - idx) * 0.03, task: { 
-                UIView.animateWithDuration(0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: .TransitionNone, animations: {
+                UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: .TransitionNone, animations: {
                     item.alpha = 0
                     item.frame = CGRect(x: x, y: self.view.gg_height - self.view.gg_y + y, width: w, height: h)
                     }, completion: { (completed) in
                 })
             })
+        }
+        
+        UIView.animateWithDuration(0.25) {
+            self.cancel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_4))
+            self.cancel.alpha = 0
         }
     }
 }

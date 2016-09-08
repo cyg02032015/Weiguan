@@ -7,7 +7,10 @@
 //
 
 import UIKit
+enum ScrollState: Int {
+    case DidEndDecelerating, BeginDragging, DidEndDragging
+}
 
 protocol ScrollVerticalDelegate: class {
-    func customScrollViewDidEndDecelerating(isScroll: Bool)
+    func customScrollViewStatus(state: ScrollState)
 }

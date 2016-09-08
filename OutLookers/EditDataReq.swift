@@ -9,6 +9,7 @@
 import UIKit
 
 struct EditDataReq {
+    
     /// 生日
     var birthday : String!
     /// 城市
@@ -25,4 +26,7 @@ struct EditDataReq {
     var province : String!
     /// 性别（值为1时是男性，值为2时是女性，值为0时是未知）
     var sex : String!
+
+    
+    
 }

@@ -89,6 +89,12 @@ class LogInHelper: NSObject {
     static func login(controller: UIViewController) {
         if UserSingleton.sharedInstance.isLogin() {
             let issuevc = IssueViewController()
+            let keyWindow = UIApplication.sharedApplication().keyWindow!
+            UIGraphicsBeginImageContextWithOptions(keyWindow.bounds.size, keyWindow.opaque, 0);
+            keyWindow.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+            let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            issuevc.blurImg = screenshot
             let navi = YGNavigationController(rootViewController: issuevc)
             controller.presentViewController(navi, animated: false, completion: {})
         } else {

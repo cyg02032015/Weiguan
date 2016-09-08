@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		2D20DF8D1D7FCFA7002E802A /* SBNotification_Names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF8C1D7FCFA7002E802A /* SBNotification_Names.swift */; };
 		2D20DF8F1D7FF028002E802A /* VideoPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF8E1D7FF028002E802A /* VideoPlayerProtocol.swift */; };
+		2D20DF911D801B65002E802A /* Server+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF901D801B65002E802A /* Server+EX.swift */; };
+		2D20DF931D80232D002E802A /* PersonalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF921D80232D002E802A /* PersonalData.swift */; };
+		2D20DF951D802907002E802A /* PersonalDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF941D802907002E802A /* PersonalDataReq.swift */; };
+		2D20DF971D810184002E802A /* IsFollowDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF961D810184002E802A /* IsFollowDataReq.swift */; };
+		2D20DF991D8101B9002E802A /* IsFollowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF981D8101B9002E802A /* IsFollowData.swift */; };
 		2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
@@ -373,6 +378,11 @@
 		289FA6413EE7BFD4DB6FC03D /* Pods-OutLookersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersTests/Pods-OutLookersTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D20DF8C1D7FCFA7002E802A /* SBNotification_Names.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBNotification_Names.swift; sourceTree = SOURCE_ROOT; };
 		2D20DF8E1D7FF028002E802A /* VideoPlayerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerProtocol.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF901D801B65002E802A /* Server+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Server+EX.swift"; sourceTree = SOURCE_ROOT; };
+		2D20DF921D80232D002E802A /* PersonalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalData.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF941D802907002E802A /* PersonalDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDataReq.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF961D810184002E802A /* IsFollowDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsFollowDataReq.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF981D8101B9002E802A /* IsFollowData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsFollowData.swift; sourceTree = SOURCE_ROOT; };
 		2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SBThreadsafely.swift; path = OutLookers/SBThreadsafely.swift; sourceTree = SOURCE_ROOT; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1147,6 +1157,10 @@
 				D8DAC59F1D6606CE0009FDB9 /* RegisterResp.swift */,
 				D8DAC5A11D674FA30009FDB9 /* PerfectInfomationReq.swift */,
 				D8B1961B1D7DC8A10098763D /* ThirdLogReq.swift */,
+				2D20DF921D80232D002E802A /* PersonalData.swift */,
+				2D20DF941D802907002E802A /* PersonalDataReq.swift */,
+				2D20DF981D8101B9002E802A /* IsFollowData.swift */,
+				2D20DF961D810184002E802A /* IsFollowDataReq.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1683,6 +1697,7 @@
 				D82F8DDD1D2804B300A24CDB /* UITableView-EX.swift */,
 				D82F8E231D31070400A24CDB /* UILabel+EX.swift */,
 				E4F9AFFF1D5320E600890948 /* Array+EX.swift */,
+				2D20DF901D801B65002E802A /* Server+EX.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2272,6 +2287,7 @@
 				E41B92711D3E008700749769 /* ModifyCell.swift in Sources */,
 				D81992601D44AE45007734C0 /* CircularEnrollPersonResp.swift in Sources */,
 				E41B92E61D408E9100749769 /* MCommentCell.swift in Sources */,
+				2D20DF951D802907002E802A /* PersonalDataReq.swift in Sources */,
 				D82F8DDE1D2804B300A24CDB /* UITableView-EX.swift in Sources */,
 				D81F452B1D1198B3004D9192 /* GlobleDefine.swift in Sources */,
 				D819926E1D44B890007734C0 /* GetWorksResp.swift in Sources */,
@@ -2347,6 +2363,9 @@
 				E43F0ACE1D4B5BD700D20FB3 /* SVProgressHUD.m in Sources */,
 				D8B641461D367F1300DF916D /* Util.swift in Sources */,
 				D812A90E1D4FA69D00186564 /* MJRefreshBackNormalFooter.m in Sources */,
+				2D20DF911D801B65002E802A /* Server+EX.swift in Sources */,
+				2D20DF931D80232D002E802A /* PersonalData.swift in Sources */,
+				2D20DF991D8101B9002E802A /* IsFollowData.swift in Sources */,
 				D81992431D43CC12007734C0 /* EditCircularRecruitReq.swift in Sources */,
 				D81F45261D118F50004D9192 /* FollowViewController.swift in Sources */,
 				D81992701D44B956007734C0 /* RecruitInformationResp.swift in Sources */,
@@ -2482,6 +2501,7 @@
 				D82F8E221D30F4F600A24CDB /* OGCircularCell.swift in Sources */,
 				D82F8DDC1D27FC0C00A24CDB /* ReleaseNoticeRequest.swift in Sources */,
 				E41B92D81D3F758800749769 /* FansAuthViewController.swift in Sources */,
+				2D20DF971D810184002E802A /* IsFollowDataReq.swift in Sources */,
 				D82F8DF61D29130B00A24CDB /* RecommendHeaderView.swift in Sources */,
 				D812A8D41D4E47C300186564 /* FriendCollectionCell.swift in Sources */,
 				D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */,
