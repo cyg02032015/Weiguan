@@ -47,7 +47,13 @@ class PHHeaderView: UIView {
         backImgView.snp.makeConstraints { (make) in
             make.edges.equalTo(backImgView.superview!)
         }
-        
+        let blurEffect = UIBlurEffect.init(style: .ExtraLight)
+        let effectView = UIVisualEffectView.init(effect: blurEffect)
+        effectView.alpha = 0.8
+        backImgView.addSubview(effectView)
+        effectView.snp.makeConstraints { (make) in
+            make.edges.equalTo(effectView.superview!)
+        }
         headImgView = UIImageView()
         headImgView.layer.cornerRadius = kScale(80/2)
         headImgView.layer.borderWidth = 2

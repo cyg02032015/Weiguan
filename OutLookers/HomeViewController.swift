@@ -35,8 +35,6 @@ class HomeViewController: YGBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pageNo = 0
-
-        
         NSNotificationCenter.defaultCenter().rx_notification(kRecieveGlobleDefineNotification)
         .subscribeNext { [unowned self](notification) in
             // MARK: banner
