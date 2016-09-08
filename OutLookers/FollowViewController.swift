@@ -112,10 +112,16 @@ extension FollowViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellIdentifier, forIndexPath: indexPath) as! DynamicCell
-        cell.info = lists[indexPath.section]
+        let info = lists[indexPath.section]
+        cell.info = info
         cell.releaseLabel.text = "发布了动态"
         cell.indexPath = indexPath
         cell.delegate = self
+        cell.headImgView.iconHeaderTap { [weak self] in
+            let vc = PHViewController()
+            vc.user = "\(info.userId)"
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
         return cell
     }
     

@@ -14,6 +14,10 @@
 		2D20DF951D802907002E802A /* PersonalDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF941D802907002E802A /* PersonalDataReq.swift */; };
 		2D20DF971D810184002E802A /* IsFollowDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF961D810184002E802A /* IsFollowDataReq.swift */; };
 		2D20DF991D8101B9002E802A /* IsFollowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF981D8101B9002E802A /* IsFollowData.swift */; };
+		2D20DF9B1D8116E4002E802A /* IsAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF9A1D8116E4002E802A /* IsAuthData.swift */; };
+		2D20DF9D1D811933002E802A /* IsAuthDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF9C1D811933002E802A /* IsAuthDataReq.swift */; };
+		2D20DF9F1D812924002E802A /* MessageNumData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF9E1D812924002E802A /* MessageNumData.swift */; };
+		2D20DFA11D8129E7002E802A /* MessageNumDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA01D8129E7002E802A /* MessageNumDataReq.swift */; };
 		2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
@@ -383,6 +387,10 @@
 		2D20DF941D802907002E802A /* PersonalDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDataReq.swift; sourceTree = SOURCE_ROOT; };
 		2D20DF961D810184002E802A /* IsFollowDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsFollowDataReq.swift; sourceTree = SOURCE_ROOT; };
 		2D20DF981D8101B9002E802A /* IsFollowData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsFollowData.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF9A1D8116E4002E802A /* IsAuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsAuthData.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF9C1D811933002E802A /* IsAuthDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsAuthDataReq.swift; sourceTree = SOURCE_ROOT; };
+		2D20DF9E1D812924002E802A /* MessageNumData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNumData.swift; sourceTree = SOURCE_ROOT; };
+		2D20DFA01D8129E7002E802A /* MessageNumDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNumDataReq.swift; sourceTree = SOURCE_ROOT; };
 		2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SBThreadsafely.swift; path = OutLookers/SBThreadsafely.swift; sourceTree = SOURCE_ROOT; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1161,6 +1169,10 @@
 				2D20DF941D802907002E802A /* PersonalDataReq.swift */,
 				2D20DF981D8101B9002E802A /* IsFollowData.swift */,
 				2D20DF961D810184002E802A /* IsFollowDataReq.swift */,
+				2D20DF9A1D8116E4002E802A /* IsAuthData.swift */,
+				2D20DF9C1D811933002E802A /* IsAuthDataReq.swift */,
+				2D20DF9E1D812924002E802A /* MessageNumData.swift */,
+				2D20DFA01D8129E7002E802A /* MessageNumDataReq.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2355,6 +2367,7 @@
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
 				E44861881D4B038E0034208D /* SkillTypeCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
+				2D20DF9D1D811933002E802A /* IsAuthDataReq.swift in Sources */,
 				D812A90B1D4FA69D00186564 /* MJRefreshAutoNormalFooter.m in Sources */,
 				D819923A1D43BF7C007734C0 /* ReleasePicAndVideoReq.swift in Sources */,
 				D84D986F1D47AD39007CCD6E /* XHMessageTextView.m in Sources */,
@@ -2418,6 +2431,7 @@
 				D8AA10051D1DA0220038EE73 /* TZAssetCell.m in Sources */,
 				D84D98521D466496007CCD6E /* EditDataReq.swift in Sources */,
 				E4473EB31D337BF5000CEEF2 /* OGToolView.swift in Sources */,
+				2D20DF9F1D812924002E802A /* MessageNumData.swift in Sources */,
 				D8D81ED41D183C3700A00AA7 /* SkillCell.swift in Sources */,
 				D89E63671D69C44400045868 /* IssueTalenListCell.swift in Sources */,
 				E41B92601D3DE30A00749769 /* GetVerifyViewController.swift in Sources */,
@@ -2544,11 +2558,13 @@
 				D82F8DF81D2AABE000A24CDB /* PHViewController.swift in Sources */,
 				E41B92D41D3F6FE200749769 /* CommentHead2View.swift in Sources */,
 				D84D98541D466624007CCD6E /* UserDataResp.swift in Sources */,
+				2D20DF9B1D8116E4002E802A /* IsAuthData.swift in Sources */,
 				D82F8E201D30F4E200A24CDB /* OGCircularViewController.swift in Sources */,
 				D81F45071D118D43004D9192 /* Regex.swift in Sources */,
 				E41B92CD1D3F56F900749769 /* HCSStarRatingView.m in Sources */,
 				D81992521D449C50007734C0 /* FindNoticeDetailResp.swift in Sources */,
 				D812A9081D4FA69D00186564 /* MJRefreshFooter.m in Sources */,
+				2D20DFA11D8129E7002E802A /* MessageNumDataReq.swift in Sources */,
 				D8B1961A1D7DBAF80098763D /* LogInHelper.swift in Sources */,
 				D8686C181D19752300B3982A /* UIScrollView+EX.swift in Sources */,
 				2D20DF8D1D7FCFA7002E802A /* SBNotification_Names.swift in Sources */,

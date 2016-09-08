@@ -18,7 +18,7 @@ class PHViewController: YGBaseViewController {
             header.countObj = countObj
         }
     }
-    private var personalData: PersonalData! {
+    private var personalData: IsAuthData! {
         didSet {
             header.personalData = personalData
             self.title = personalData.nickname
@@ -224,7 +224,7 @@ extension PHViewController {
     }
     
     func loadPersonalData() {
-        Server.getInformation(self.user!) { (success, msg, value) in
+        Server.isAuth(self.user!, user: UserSingleton.sharedInstance.userId) { (success, msg, value) in
             if success {
                 guard let obj = value else {return}
                 self.personalData = obj

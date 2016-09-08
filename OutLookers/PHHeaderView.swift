@@ -15,10 +15,23 @@ private extension Selector {
 
 class PHHeaderView: UIView {
 
-    var personalData: PersonalData! {
+    var personalData: IsAuthData! {
         didSet {
             headImgView.yy_setImageWithURL(personalData.headImgUrl.addImagePath(CGSize(width: kScale(80), height: kScale(80))), placeholder: kHeadPlaceholder)
             secondLabel.text = personalData.introduction
+            switch personalData.type {
+                case 1:
+                    firstLabel.text = "纯氧认证：" + personalData.name
+                    vImageView.image = UIImage.init(named: "red")
+                case 2:
+                    firstLabel.text = "纯氧认证：" + personalData.name + " 官方机构"
+                    vImageView.image = UIImage.init(named: "blue")
+                case 3:
+                    firstLabel.text = "纯氧认证：" + personalData.name
+                    vImageView.image = UIImage.init(named: "Green")
+                default:
+                    break
+            }
         }
     }
     
@@ -34,6 +47,7 @@ class PHHeaderView: UIView {
     var fans: TouchLabel!
     var firstLabel: UILabel!
     var secondLabel: UILabel!
+    var vImageView: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -103,30 +117,39 @@ class PHHeaderView: UIView {
         }
         
         firstLabel = UILabel()
-        firstLabel.font = UIFont.customFontOfSize(12)
+        firstLabel.font = UIFont.customFontOfSize(14)
         firstLabel.textColor = UIColor.whiteColor()
         firstLabel.textAlignment = .Center
+        firstLabel.numberOfLines = 2
         backImgView.addSubview(firstLabel)
         firstLabel.snp.makeConstraints { (make) in
             make.top.equalTo(lineV.snp.bottom).offset(kScale(11))
             make.centerX.equalTo(firstLabel.superview!)
-            make.height.equalTo(kHeight(12))
+            make.left.equalTo(firstLabel.superview!).offset(kScale(60))
+            make.height.equalTo(kHeight(16))
         }
         
         secondLabel = UILabel()
-        secondLabel.font = UIFont.customFontOfSize(12)
+        secondLabel.font = UIFont.customFontOfSize(14)
         secondLabel.textColor = UIColor.whiteColor()
         secondLabel.textAlignment = .Center
         secondLabel.numberOfLines = 2
         backImgView.addSubview(secondLabel)
         secondLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(firstLabel.snp.bottom).offset(kScale(10))
+            make.top.equalTo(firstLabel.snp.bottom).offset(kScale(6))
             make.left.equalTo(secondLabel.superview!).offset(kScale(60))
             make.right.equalTo(secondLabel.superview!).offset(kScale(-60))
             make.height.equalTo(kHeight(35))
         }
         
-        backImgView.image = boxBlurImage(UIImage(named: "back.png")!, withBlurNumber: 0.5)
+        //backImgView.image = boxBlurImage(UIImage(named: "back.png")!, withBlurNumber: 0.5)
+        vImageView = UIImageView()
+        vImageView.backgroundColor = UIColor.clearColor()
+        addSubview(vImageView)
+        vImageView.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(headImgView).offset(-2)
+            make.size.equalTo(kSize(18, height: 18))
+        }
         follow.text = "-- 关注"
         fans.text = "-- 粉丝"
         firstLabel.text = "纯氧认证："

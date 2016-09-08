@@ -10,6 +10,12 @@ import UIKit
 
 class MessageCell: UITableViewCell {
 
+    var messageNumData: MessageNumData! {
+        didSet {
+            guard messageNumData.like + messageNumData.reply + messageNumData.follow != 0 else { return }
+            badgeButton.badgeValue = "\(messageNumData.like + messageNumData.reply + messageNumData.follow)"
+        }
+    }
     var badgeButton: UIButton!
     var imgView: UIImageView!
     var label: UILabel!
@@ -53,12 +59,12 @@ class MessageCell: UITableViewCell {
         contentView.addSubview(badgeButton)
         
         badgeButton.snp.makeConstraints { (make) in
-            make.right.equalTo(arrow.snp.left).offset(kScale(-10))
+            make.right.equalTo(arrow.snp.left).offset(kScale(-20))
             make.size.equalTo(kSize(24, height: 16))
             make.centerY.equalTo(imgView)
         }
         layoutIfNeeded()
-        badgeButton.badgeValue = "99"
+        badgeButton.badgeValue = ""
         badgeButton.badgeOriginX = 0
         badgeButton.badgeOriginY = -3
         

@@ -13,6 +13,7 @@ private let MessageSectionCellId = "MessageSectionCellId"
 
 class MessageViewController: YGBaseViewController {
 
+    var messageNumData: MessageNumData?
     var tableView: UITableView!
     lazy var imgs = ["Praise", "news", "follow-1", "notice"]
     lazy var titles = ["赞了", "评论", "关注", "通知"]
@@ -56,6 +57,18 @@ extension MessageViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(messageCellId, forIndexPath: indexPath) as! MessageCell
                 cell.setImgAndText(imgs[indexPath.row], text: titles[indexPath.row])
+            if let _ = self.messageNumData {
+                switch indexPath.row {
+                    case 0:
+                        cell.badgeButton.badgeValue = messageNumData!.like == 0 ? "" : "\(messageNumData!.like)"
+                    case 1:
+                        cell.badgeButton.badgeValue = messageNumData!.reply == 0 ? "" : "\(messageNumData!.reply)"
+                    case 2:
+                        cell.badgeButton.badgeValue = messageNumData!.follow == 0 ? "" : "\(messageNumData!.follow)"
+                    default:
+                        break
+                }
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(MessageSectionCellId, forIndexPath: indexPath) as! MessageSectionCell

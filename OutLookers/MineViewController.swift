@@ -20,6 +20,7 @@ class MineViewController: YGBaseViewController {
     var countObj: GetContent?
     lazy var avatarList = [AvatarNameList]()
     var tableView: UITableView!
+    private var messageNumData: MessageNumData?
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -84,6 +85,21 @@ class MineViewController: YGBaseViewController {
                 }
             }
             
+            dispatch_group_async(group, queue, { 
+                dispatch_group_enter(group)
+                Server.getMessageNum(handler: { [unowned self](success, msg, value) in
+                    if success {
+                        guard let obj = value else {return}
+                        self.messageNumData = obj
+                        dispatch_group_leave(group)
+                    } else {
+                        guard let m = msg else {return}
+                        LogError(m)
+                        dispatch_group_leave(group)
+                    }
+                })
+            })
+            
             dispatch_group_notify(group, dispatch_get_main_queue()) { [weak self] in
                 self?.tableView.reloadData()
             }
@@ -105,6 +121,7 @@ extension MineViewController {
         if indexPath.section == 1 {
             if UserSingleton.sharedInstance.isLogin() {
                 let vc = MessageViewController()
+                vc.messageNumData = self.messageNumData
                 navigationController?.pushViewController(vc, animated: true)
             } else {
                 let logView = YGLogView()
@@ -194,6 +211,9 @@ extension MineViewController {
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(messageCellIdentifier, forIndexPath: indexPath) as! MessageCell
+            if let messageNum = messageNumData {
+                cell.messageNumData = messageNum
+            }
             cell.setImgAndText("news11", text: "我的消息")
             return cell
         } else {

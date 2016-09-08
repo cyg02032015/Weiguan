@@ -11,6 +11,8 @@ import Foundation
 let baseURL = "http://api.dev.chunyangapp.com"
 
 struct API {
+    /// 获取消息数量
+    static let getMessageNum = baseURL + "/api/release/v1/num/get"
     /// 发布图片视频
     static let releasePicVideo = baseURL + "/api/release/v1/dynamic/create"
     /// 查询才艺

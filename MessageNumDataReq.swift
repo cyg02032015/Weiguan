@@ -1,5 +1,5 @@
 //
-//  IsFollowDataReq.swift
+//  MessageNumDataReq.swift
 //  OutLookers
 //
 //  Created by 宋碧海 on 16/9/8.
@@ -9,8 +9,8 @@
 import UIKit
 import SwiftyJSON
 
-class IsFollowDataReq: BaseResponse {
-    var result: IsFollowData!
+class MessageNumDataReq: BaseResponse {
+    var result: MessageNumData!
     
     override init(fromJson json: JSON!) {
         super.init(fromJson: json)
@@ -20,7 +20,7 @@ class IsFollowDataReq: BaseResponse {
         
         let resultJson = json["result"]
         if resultJson != JSON.null {
-            result = IsFollowData(json: resultJson)
+            result = MessageNumData(json: resultJson)
             return
         }
     }
