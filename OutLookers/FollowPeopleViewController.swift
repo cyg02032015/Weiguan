@@ -29,7 +29,7 @@ class FollowPeopleViewController: YGBaseViewController {
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
             self?.loadMoreData()
         })
-        guard num != 0 else { return }
+        guard num != 0 else { return } //本身为0就不必去发送请求
         releaseFollow()
     }
     

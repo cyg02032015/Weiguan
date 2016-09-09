@@ -171,7 +171,9 @@ extension EditSkillViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
-            if indexPath.row == 3 {
+            if indexPath.row == 0 {
+                navigationController?.popViewControllerAnimated(true)
+            }else if indexPath.row == 3 {
                 isProvincePicker = true
                 pickerView.picker.reloadAllComponents()
                 pickerView.animation()

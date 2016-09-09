@@ -172,16 +172,19 @@ class YGShare: UIView {
                 platFormType.append(UMShareToWechatSession)
             case kTitleSina:
                 platFormType.append(UMShareToSina)
+                self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
             case kTitleQQ:
                 platFormType.append(UMShareToQQ)
+                UMSocialData.defaultData().extConfig.qqData.url = "\(sharePrefix)/\(self.shareModel.shareID!)"
+                //self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
             case kTitleQzone:
                 platFormType.append(UMShareToQzone)
+                self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
             default:""
             }
             
             self.tapCancel()
-            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/\(self.shareModel.shareID ?? "")")//(self.detailObj.id)"
-            
+            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/\(self.shareModel.shareID)")
             UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: self.shareModel.shareNickName, image: self.shareModel.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
                 if response.responseCode == UMSResponseCodeSuccess {
                     LogInfo("分享成功！")

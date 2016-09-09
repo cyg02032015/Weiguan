@@ -214,7 +214,7 @@ extension MineViewController {
             if let messageNum = messageNumData {
                 cell.messageNumData = messageNum
             }
-            cell.setImgAndText("news11", text: "我的消息")
+            cell.setImgAndText("message", text: "我的消息")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(mineCollectCellIdentifier, forIndexPath: indexPath) as! MineCollectCell

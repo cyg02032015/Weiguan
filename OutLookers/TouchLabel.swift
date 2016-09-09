@@ -8,25 +8,37 @@
 
 import UIKit
 
-public class TouchLabel: UILabel {
-    private var target: AnyObject!
-    private var action: Selector!
+class TouchLabel: UILabel {
     
-    public override init(frame: CGRect) {
+    typealias TouchClick = () -> ()
+    
+    private var tapLabelClick: TouchClick?
+    private var target: AnyObject?
+    private var action: Selector?
+    
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.userInteractionEnabled = true
     }
     
-    public func addTarget(target: AnyObject!, action: Selector) {
+    func tapLabelAction(touchclick: TouchClick?) {
+        self.tapLabelClick = touchclick
+    }
+    
+    func addTarget(target: AnyObject?, action: Selector?) {
         self.target = target
         self.action = action
     }
     
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        target.performSelector(action)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let _ = action {
+            target?.performSelector(action!)
+        }else if let _ = tapLabelClick {
+            tapLabelClick!()
+        }
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -54,9 +66,12 @@ public class TouchView: UIView {
     }
 }
 
-public class TouchImageView: UIImageView {
-    private var target: AnyObject!
-    private var action: Selector!
+class TouchImageView: UIImageView {
+    typealias TouchClick = () -> ()
+
+    private var tapImageClick: TouchClick?
+    private weak var target: AnyObject?
+    private var action: Selector?
     
     weak var cell: HomeCollectionCell!
     
@@ -65,21 +80,29 @@ public class TouchImageView: UIImageView {
         self.userInteractionEnabled = true
     }
     
-    public override init(frame: CGRect) {
+    func tapImageAction(touchclick: TouchClick?) {
+        self.tapImageClick = touchclick
+    }
+    
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.userInteractionEnabled = true
     }
     
-    public func addTarget(target: AnyObject!, action: Selector) {
+    func addTarget(target: AnyObject?, action: Selector?) {
         self.target = target
         self.action = action
     }
     
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        target.performSelector(action)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let _ = action {
+            target?.performSelector(action!)
+        }else if let _ = tapImageClick {
+            tapImageClick!()
+        }
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

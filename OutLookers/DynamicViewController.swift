@@ -23,7 +23,8 @@ class DynamicViewController: YGBaseViewController {
     var tableView: UITableView!
     weak var delegate: ScrollVerticalDelegate?
     lazy var dynamicLists = [DynamicResult]()
-    var isPerson: Bool = false
+    var isPerson: Bool = true
+    private var share: YGShare!
     
     private var timeStr: String!
 
@@ -39,7 +40,7 @@ class DynamicViewController: YGBaseViewController {
     
     override func loadMoreData() {
         guard let user = self.user else {return}
-        Server.dynamicList(pageNo,user: user,state: 1, isPerson: isPerson, isHome: false, isSquare: false, timeStr: self.timeStr) { (success, msg, value) in
+        Server.dynamicList(pageNo,user: user,state: 0, isPerson: isPerson, isHome: false, isSquare: false, timeStr: self.timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
@@ -119,7 +120,21 @@ extension DynamicViewController {
 
 extension DynamicViewController: DynamicCellDelegate {
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
-        LogInfo("\(sender)   分享")
+        let dy = self.dynamicLists[indexPath.section]
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
+        var type: YGShareType = .DYVisitor
+        let shareModel = YGShareModel()
+        shareModel.shareNickName = "分享自\"\(dy.name)\"的纯氧作品, 一起来看~"
+        if UserSingleton.sharedInstance.userId == "\(dy.userId)" {
+            type = .DYHost
+            shareModel.shareNickName = "我的纯氧作品, 一起来看~"
+        }
+        shareModel.shareID = "index.html#trends-details?listId=\(dy.id)"
+        shareModel.shareImage = cell.bigImgView.image
+        let sharetuple = YGShareHandler.handleShareInstalled(type)
+        share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
+        share.shareModel = shareModel
+        share.animation()
     }
     
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {

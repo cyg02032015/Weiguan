@@ -61,6 +61,10 @@ class DynamicResult {
     var text : String!
     var userId : Int!
     
+    init () {
+        
+    }
+    
     init(fromJson json: JSON!){
         if json == nil{
             return

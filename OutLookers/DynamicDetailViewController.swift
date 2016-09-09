@@ -134,7 +134,7 @@ class DynamicDetailViewController: YGBaseViewController {
         }else {
             shareModel.shareNickName = "分享自\"\(dynamicObj.name)\"的纯氧作品, 一起来看~"
         }
-        shareModel.shareInfo = dynamicObj.text
+        shareModel.shareInfo = detailObj.text
         shareView.shareModel = shareModel
         shareView.animation()
     }
@@ -262,8 +262,13 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
         let shareModel = YGShareModel()
         shareModel.shareID = "index.html#trends-details?listId=\(dynamicObj.id)"
         shareModel.shareImage = self.shareImage
-        shareModel.shareNickName = dynamicObj.name
-        shareModel.shareInfo = dynamicObj.text
+        
+        if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {
+            shareModel.shareNickName = "我的纯氧作品, 一起来看~"
+        }else {
+            shareModel.shareNickName = "分享自\"\(dynamicObj.name)\"的纯氧作品, 一起来看~"
+        }
+        shareModel.shareInfo = detailObj.text
         shareView.shareModel = shareModel
         shareView.animation()
     }
@@ -339,11 +344,11 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
 
 // 屏幕方向这里还需要处理
 extension DynamicDetailViewController {
-    override func shouldAutorotate() -> Bool {
-        return dynamicObj.isVideo == 1
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return dynamicObj.isVideo == 1 ? .AllButUpsideDown : .Portrait
-    }
+//    override func shouldAutorotate() -> Bool {
+//        return detailObj.isVideo == "1"
+//    }
+//    
+//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return detailObj.isVideo == "1" ? .AllButUpsideDown : .Portrait
+//    }
 }

@@ -53,24 +53,26 @@ class CommentList {
     var id : Int!
     var nickname : String!
     var replyId : Int!
-    var replyNickname : AnyObject!
+    var replyNickname : String!
     var text : String!
     var userId : Int!
     var detailsType: Int!
+    var dynamicId: Int!
     
     init(fromJson json: JSON!){
         if json == nil{
             return
         }
-        cover = json["cover"].stringValue
-        createTime = json["createTime"].stringValue
-        headImgUrl = json["headImgUrl"].stringValue
+        cover = json["cover"].stringValue ?? ""
+        createTime = json["createTime"].stringValue ?? ""
+        headImgUrl = json["headImgUrl"].stringValue ?? ""
         id = json["id"].intValue
-        nickname = json["nickname"].stringValue
+        nickname = json["nickname"].stringValue ?? ""
         replyId = json["replyId"].intValue
-        replyNickname = json["replyNickname"].stringValue
-        text = json["text"].stringValue
+        replyNickname = json["replyNickname"].stringValue ?? ""
+        text = json["text"].stringValue ?? ""
         userId = json["userId"].intValue
         detailsType = json["detailsType"].intValue
+        dynamicId = json["dynamicId"].intValue
     }
 }

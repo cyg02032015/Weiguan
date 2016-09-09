@@ -9,15 +9,18 @@
 import UIKit
 
 private let mCommentCellId = "mCommentCellId"
+private let mCommentReplyCellId = "mCommentReplyCellId"
 
 class MCommentViewController: YGBaseViewController {
 
+    private lazy var comments = [CommentList]()
     var num: Int?
     var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
-        guard num != 0 else { return }
+        loadMoreData()
+        guard num != 0 else { return } //本身为0就不必去发送请求
         releaseReply()
     }
     
@@ -28,11 +31,13 @@ class MCommentViewController: YGBaseViewController {
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.whiteColor()
         tableView.registerClass(MCommentCell.self, forCellReuseIdentifier: mCommentCellId)
+        tableView.registerClass(MCommentReplyCell.self, forCellReuseIdentifier: mCommentReplyCellId)
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
         }
+        
     }
     
     func releaseReply() {
@@ -44,16 +49,80 @@ class MCommentViewController: YGBaseViewController {
             SVToast.showWithError(error.localizedDescription)
         }
     }
+    
+    override func loadMoreData() {
+        Server.commentList(pageNo, dynamicId: "\(0)") { (success, msg, value) in
+            if success {
+                guard let object = value else {return}
+                self.comments.appendContentsOf(object.lists)
+                //self.tableView.mj_footer.endRefreshing()
+                self.tableView.reloadData()
+                self.pageNo = self.pageNo + 1
+                if object.lists.count < 10 {
+                    //self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+                //self.tableView.mj_footer.endRefreshing()
+            }
+        }
+    }
 }
 
 extension MCommentViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.comments.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(mCommentCellId, forIndexPath: indexPath) as! MCommentCell
-        return cell
+        let commtent = self.comments[indexPath.row]
+        if commtent.replyId == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(mCommentCellId, forIndexPath: indexPath) as! MCommentCell
+            cell.info = commtent
+            cell.headImgView.iconHeaderTap({ [weak self] in
+                let vc = PHViewController()
+                vc.user = "\(commtent.userId)"
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            cell.imgView.tapImageAction({ [weak self] in
+                let vc = DynamicDetailViewController()
+                let dynamic = DynamicResult()
+                dynamic.id = commtent.dynamicId
+                dynamic.name = commtent.nickname
+                dynamic.photo = commtent.headImgUrl
+                dynamic.detailsType = commtent.detailsType
+                vc.dynamicObj = dynamic
+                vc.shareImage = cell.imgView.image
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(mCommentReplyCellId, forIndexPath: indexPath) as! MCommentReplyCell
+            cell.headImgView.iconHeaderTap({ [weak self] in
+                let vc = PHViewController()
+                vc.user = "\(commtent.userId)"
+                self?.navigationController?.pushViewController(vc, animated: true)
+                })
+            cell.imgView.tapImageAction({ [weak self] in
+                let vc = DynamicDetailViewController()
+                let dynamic = DynamicResult()
+                dynamic.id = commtent.dynamicId
+                dynamic.name = commtent.nickname
+                dynamic.photo = commtent.headImgUrl
+                dynamic.detailsType = commtent.detailsType
+                vc.dynamicObj = dynamic
+                vc.shareImage = cell.imgView.image
+                self?.navigationController?.pushViewController(vc, animated: true)
+                })
+            cell.replyNameLabel.tapLabelAction({ [weak self] in
+                let vc = PHViewController()
+                vc.user = "\(commtent.replyId)"
+                self?.navigationController?.pushViewController(vc, animated: true)
+                })
+            cell.info = commtent
+            return cell
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

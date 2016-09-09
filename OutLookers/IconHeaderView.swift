@@ -11,7 +11,7 @@ import UIKit
 class IconHeaderView: UIView {
     
     typealias HeaderClosure = () -> ()
-    var closure: HeaderClosure!
+    private var closure: HeaderClosure!
     var iconView: UIImageView!
     var vImgView: UIImageView!
     var didSetupConstraint: Bool = false

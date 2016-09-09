@@ -182,11 +182,11 @@ class Server {
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
-            "user" : user,
+            "userId" : user,
             "time" : timeStr
             ]
         if isPerson {
-            parameters["userId"] = UserSingleton.sharedInstance.userId
+            parameters["user"] = UserSingleton.sharedInstance.userId
         }
         if isHome {
             parameters["isRecommend"] = "1"

@@ -19,7 +19,9 @@
 		2D20DF9F1D812924002E802A /* MessageNumData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DF9E1D812924002E802A /* MessageNumData.swift */; };
 		2D20DFA11D8129E7002E802A /* MessageNumDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA01D8129E7002E802A /* MessageNumDataReq.swift */; };
 		2D20DFA41D815A59002E802A /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA31D815A59002E802A /* UIImage+Blur.m */; };
+		2D20DFAA1D817750002E802A /* CPDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA91D817750002E802A /* CPDateUtil.swift */; };
 		2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */; };
+		2DA8FB371D825111005D7386 /* MCommentReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8FB361D825111005D7386 /* MCommentReplyCell.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
 		C8E0CF148F916A2B78E0689E /* Pods_OutLookers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */; };
@@ -394,7 +396,9 @@
 		2D20DFA01D8129E7002E802A /* MessageNumDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNumDataReq.swift; sourceTree = SOURCE_ROOT; };
 		2D20DFA21D815A59002E802A /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		2D20DFA31D815A59002E802A /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
+		2D20DFA91D817750002E802A /* CPDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPDateUtil.swift; path = OutLookers/CPDateUtil.swift; sourceTree = SOURCE_ROOT; };
 		2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SBThreadsafely.swift; path = OutLookers/SBThreadsafely.swift; sourceTree = SOURCE_ROOT; };
+		2DA8FB361D825111005D7386 /* MCommentReplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCommentReplyCell.swift; sourceTree = SOURCE_ROOT; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E566B98D8EB14C853632E78 /* Pods-OutLookers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookers/Pods-OutLookers.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1371,6 +1375,7 @@
 			isa = PBXGroup;
 			children = (
 				D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */,
+				2D20DF8E1D7FF028002E802A /* VideoPlayerProtocol.swift */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1530,7 +1535,7 @@
 				D8DAC5A31D684D990009FDB9 /* TokenTool.swift */,
 				2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */,
 				2D20DF8C1D7FCFA7002E802A /* SBNotification_Names.swift */,
-				2D20DF8E1D7FF028002E802A /* VideoPlayerProtocol.swift */,
+				2D20DFA91D817750002E802A /* CPDateUtil.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -1602,6 +1607,7 @@
 			children = (
 				E41B92E11D408ACB00749769 /* MessageSectionCell.swift */,
 				E41B92E51D408E9100749769 /* MCommentCell.swift */,
+				2DA8FB361D825111005D7386 /* MCommentReplyCell.swift */,
 				E41B92E71D40912300749769 /* MPraiseCell.swift */,
 			);
 			name = Message;
@@ -2371,6 +2377,7 @@
 				D812A8CC1D4E23CF00186564 /* AccountViewController.swift in Sources */,
 				E4E5DECD1D179BD200CB8535 /* RecruitNeedsCell.swift in Sources */,
 				E44861881D4B038E0034208D /* SkillTypeCell.swift in Sources */,
+				2DA8FB371D825111005D7386 /* MCommentReplyCell.swift in Sources */,
 				D81F45081D118D43004D9192 /* String+EX.swift in Sources */,
 				2D20DF9D1D811933002E802A /* IsAuthDataReq.swift in Sources */,
 				D812A90B1D4FA69D00186564 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -2632,6 +2639,7 @@
 				D819924D1D44930A007734C0 /* TalentDtailResp.swift in Sources */,
 				D870C7451D3B5473003B7A09 /* PersonCharacterHeadView.swift in Sources */,
 				E41DD9211D38E5E700E5E7E9 /* PersonFile.swift in Sources */,
+				2D20DFAA1D817750002E802A /* CPDateUtil.swift in Sources */,
 				E45BFF8B1D422FCF0013356C /* CircularRecruitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

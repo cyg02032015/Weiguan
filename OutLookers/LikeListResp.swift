@@ -50,18 +50,20 @@ class LikeList {
     var headImgUrl : String!
     var nickname : String!
     var userId : String!
+    var dynamicId: Int!
     
     init(fromJson json: JSON!){
         if json == nil{
             return
         }
-        cover = json["cover"].stringValue
-        createTime = json["createTime"].stringValue
+        cover = json["cover"].stringValue ?? ""
+        createTime = json["createTime"].stringValue ?? ""
         detailsType = json["detailsType"].intValue
         follow = json["follow"].intValue
-        headImgUrl = json["headImgUrl"].stringValue
-        nickname = json["nickname"].stringValue
-        userId = json["userId"].stringValue
+        headImgUrl = json["headImgUrl"].stringValue ?? ""
+        nickname = json["nickname"].stringValue ?? ""
+        userId = json["userId"].stringValue ?? ""
+        dynamicId = json["dynamicId"].intValue
     }
 
 }

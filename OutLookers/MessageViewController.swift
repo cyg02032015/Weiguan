@@ -43,21 +43,23 @@ class MessageViewController: YGBaseViewController {
 
 extension MessageViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 3
-        } else {
-            return 2
+        } else if section == 1 {
+            return 1
+        }else {
+            return 0
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(messageCellId, forIndexPath: indexPath) as! MessageCell
+        cell.setImgAndText(imgs[indexPath.row], text: titles[indexPath.row])
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(messageCellId, forIndexPath: indexPath) as! MessageCell
-                cell.setImgAndText(imgs[indexPath.row], text: titles[indexPath.row])
             if let _ = self.messageNumData {
                 switch indexPath.row {
                     case 0:
@@ -70,11 +72,10 @@ extension MessageViewController {
                         break
                 }
             }
-            return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(MessageSectionCellId, forIndexPath: indexPath) as! MessageSectionCell
-            return cell
+            cell.setImgAndText("message", text: "消息")
         }
+        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -100,11 +101,11 @@ extension MessageViewController {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return kHeight(50)
-        } else {
-            return kHeight(72)
-        }
+//        if indexPath.section == 0 {
+        return kHeight(50)
+//        } else {
+//            return kHeight(72)
+//        }
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

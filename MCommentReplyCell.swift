@@ -1,14 +1,14 @@
 //
-//  MCommentCell.swift
+//  MCommentReplyCell.swift
 //  OutLookers
 //
-//  Created by Youngkook on 16/7/21.
+//  Created by 宋碧海 on 16/9/9.
 //  Copyright © 2016年 weiguanonline. All rights reserved.
 //
 
 import UIKit
 
-class MCommentCell: UITableViewCell {
+class MCommentReplyCell: UITableViewCell {
 
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
@@ -16,6 +16,7 @@ class MCommentCell: UITableViewCell {
     var time: UILabel!
     var desc: UILabel!
     var imgView: TouchImageView!
+    var replyNameLabel: TouchLabel!
     
     var info: CommentList! {
         didSet {
@@ -25,6 +26,7 @@ class MCommentCell: UITableViewCell {
             nameLabel.text = info.nickname
             desc.text = info.text
             imgView.yy_setImageWithURL(info.cover.addImagePath(kSize(40, height: 40)), placeholder: nil)
+            replyNameLabel.text = info.replyNickname
         }
     }
     
@@ -34,8 +36,13 @@ class MCommentCell: UITableViewCell {
         setupSubViews()
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupSubViews() {
         headImgView = IconHeaderView()
+        headImgView.customCornerRadius = kScale(40/2)
         contentView.addSubview(headImgView)
         headImgView.snp.makeConstraints { (make) in
             make.top.equalTo(kScale(10))
@@ -65,17 +72,30 @@ class MCommentCell: UITableViewCell {
         comment.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel.snp.right).offset(kScale(6))
             make.centerY.equalTo(nameLabel)
-            make.height.equalTo(kScale(16))
+//            make.height.equalTo(kScale(16))
             make.width.equalTo(kScale(32))
             make.right.lessThanOrEqualTo(imgView.snp.left).offset(kScale(-5))
         }
+        
+        replyNameLabel = TouchLabel()
+        replyNameLabel.font = UIFont.customFontOfSize(16)
+        replyNameLabel.textColor = UIColor.init(hex: 0xc0c0c0)
+        contentView.addSubview(replyNameLabel)
+        replyNameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(comment.snp.right).offset(kScale(6))
+            make.centerY.equalTo(comment)
+//            make.height.equalTo(kScale(16))
+            make.right.equalTo(replyNameLabel.superview!).offset(-60)
+            make.right.lessThanOrEqualTo(imgView.snp.left).offset(kScale(-5))
+        }
+        
         
         time = UILabel.createLabel(14, textColor: UIColor(hex: 0xc8c8c8))
         contentView.addSubview(time)
         time.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel)
             make.top.equalTo(nameLabel.snp.bottom).offset(kScale(4))
-            make.height.equalTo(kScale(17))
+//            make.height.equalTo(kScale(17))
         }
         
         desc = UILabel.createLabel(16, textColor: UIColor(hex: 0x666666))
@@ -88,14 +108,22 @@ class MCommentCell: UITableViewCell {
         }
         
         headImgView.iconPlaceholder = kHeadPlaceholder
-        imgView.image = kPlaceholder
+        imgView.backgroundColor = UIColor.grayColor()
         nameLabel.text = ""
         time.text = "- :"
         desc.text = ""
-        comment.text = ""
+        comment.text = "回复"
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
+
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
 }

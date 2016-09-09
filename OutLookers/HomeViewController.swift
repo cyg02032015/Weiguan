@@ -45,6 +45,7 @@ class HomeViewController: YGBaseViewController {
                     for item in list {
                         imgUrls.append(item.picture)
                     }
+                    self.banners = value!
                     if self.banner != nil {
                         self.banner.imageURLStringsGroup = imgUrls
                     }
@@ -302,6 +303,8 @@ extension HomeViewController: HeaderImageViewDelegate {
 }
 
 extension HomeViewController: SDCycleScrollViewDelegate {
-    
+    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
+        LogInfo(index)
+    }
 }
 
