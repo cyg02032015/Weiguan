@@ -114,19 +114,19 @@ class AuthenticationViewController: YGBaseViewController {
     func showAlertController() {
         let alert = UIAlertController(title: "提示", message: "每个用户只能认证一种角色，要继续认证则视为放弃原认证", preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
-        let continued = UIAlertAction(title: "继续认证", style: .Default) { [unowned self](action) in
+        let continued = UIAlertAction(title: "继续认证", style: .Default) { [weak self](action) in
             Server.modifyAuth({ (success, msg, value) in
                 if success {
                     guard let _ = value else {return}
-                    if self.gotoVC == .Talent {
+                    if self?.gotoVC == .Talent {
                         let vc = TalentAuthViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    } else if self.gotoVC == .Organize {
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    } else if self?.gotoVC == .Organize {
                         let vc = OrganizeAuthViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        self?.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         let vc = FansAuthViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 } else {
                 guard let m = msg else {return}

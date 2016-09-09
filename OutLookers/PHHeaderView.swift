@@ -8,11 +8,6 @@
 
 import UIKit
 
-private extension Selector {
-    static let tapFans = #selector(PHHeaderView.fansLabelClick)
-    static let tapFollow = #selector(PHHeaderView.followLabelClick)
-}
-
 class PHHeaderView: UIView {
 
     var personalData: IsAuthData! {
@@ -22,13 +17,13 @@ class PHHeaderView: UIView {
             switch personalData.type {
                 case 1:
                     firstLabel.text = "纯氧认证：" + personalData.name
-                    vImageView.image = UIImage.init(named: "red")
+                    vImageView.image = UIImage(named: "Red")
                 case 2:
                     firstLabel.text = "纯氧认证：" + personalData.name + " 官方机构"
-                    vImageView.image = UIImage.init(named: "blue")
+                    vImageView.image = UIImage(named: "blue")
                 case 3:
                     firstLabel.text = "纯氧认证：" + personalData.name
-                    vImageView.image = UIImage.init(named: "Green")
+                    vImageView.image = UIImage(named: "Green")
                 default:
                     break
             }
@@ -37,10 +32,11 @@ class PHHeaderView: UIView {
     
     var countObj: GetContent! {
         didSet {
-            follow.text = "\(countObj.follow) 关注"
-            fans.text = "\(countObj.fan) 粉丝"
+            follow.text = "\(countObj.follow)"
+            fans.text = "\(countObj.fan)"
         }
     }
+
     var backImgView: UIImageView!
     var headImgView: UIImageView!
     var follow: TouchLabel!
@@ -70,17 +66,28 @@ class PHHeaderView: UIView {
 //        }
         headImgView = UIImageView()
         headImgView.layer.cornerRadius = kScale(80/2)
-        headImgView.layer.borderWidth = 2
-        headImgView.layer.borderColor = UIColor.lightGrayColor().CGColor
         headImgView.clipsToBounds = true
         headImgView.image = kHeadPlaceholder
         backImgView.addSubview(headImgView)
         _ = headImgView.rx_observe(UIImage.self, "image").subscribeNext { [weak self](image) in
             self?.backImgView.image = image?.boxblurImageWithBlur(0.3)
         }
-        headImgView.snp.makeConstraints { (make) in
-            make.top.equalTo(headImgView.superview!).offset(kScale(101))
-            make.centerX.equalTo(headImgView.superview!)
+        
+        //给头像加透明度为0.1的白色边框
+        let shapeLayer = CAShapeLayer()
+        let path = UIBezierPath()
+        path.addArcWithCenter(CGPointMake(ScreenWidth / 2 - kScale(40), kScale(141)), radius: kScale(41), startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
+        shapeLayer.path = path.CGPath
+        shapeLayer.lineWidth = 2
+        shapeLayer.opacity = 0.1
+        shapeLayer.strokeColor = UIColor.init(hex: 0xFFF).CGColor
+        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        shapeLayer.strokeEnd = 1.0
+        headImgView.layer.addSublayer(shapeLayer)
+        
+        headImgView.snp.makeConstraints { [unowned self](make) in
+            make.top.equalTo(self.headImgView.superview!).offset(kScale(101))
+            make.centerX.equalTo(self.headImgView.superview!)
             make.size.equalTo(kSize(80, height: 80))
         }
         
@@ -88,31 +95,52 @@ class PHHeaderView: UIView {
         lineV.backgroundColor = UIColor.whiteColor()
         backImgView.addSubview(lineV)
         lineV.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 2, height: 15))
+            make.size.equalTo(CGSize(width: 1/UIScreen.mainScreen().scale, height: 15))
             make.top.equalTo(headImgView.snp.bottom).offset(kScale(13))
             make.centerX.equalTo(lineV.superview!)
+        }
+        
+        let followL = UILabel()
+        followL.textColor = UIColor.whiteColor()
+        followL.text = "关注"
+        followL.font = UIFont.systemFontOfSize(kScale(16))
+        backImgView.addSubview(followL)
+        followL.snp.makeConstraints { (make) in
+            make.centerY.equalTo(lineV)
+            make.right.equalTo(lineV.snp.left).offset(kScale(-18))
+            make.height.equalTo(kHeight(16))
         }
         
         follow = TouchLabel()
         follow.font = UIFont.customNumFontOfSize(16)
         follow.textColor = UIColor.whiteColor()
         follow.textAlignment = .Right
-        follow.addTarget(self, action: .tapFollow)
         backImgView.addSubview(follow)
         follow.snp.makeConstraints { (make) in
-            make.centerY.equalTo(lineV)
-            make.right.equalTo(lineV.snp.left).offset(kScale(-18))
+            make.centerY.equalTo(followL)
+            make.right.equalTo(followL.snp.left).offset(kScale(-8))
             make.height.equalTo(kHeight(16))
         }
         
         fans = TouchLabel()
         fans.font = UIFont.customNumFontOfSize(16)
         fans.textColor = UIColor.whiteColor()
-        fans.addTarget(self, action: .tapFans)
         backImgView.addSubview(fans)
         fans.snp.makeConstraints { (make) in
             make.centerY.equalTo(lineV)
-            make.left.equalTo(lineV.snp.right).offset(kScale(20))
+            make.left.equalTo(lineV.snp.right).offset(kScale(18))
+            make.height.equalTo(kHeight(16))
+        }
+        
+        
+        let fansL = UILabel()
+        fansL.textColor = UIColor.whiteColor()
+        fansL.text = "粉丝"
+        fansL.font = UIFont.systemFontOfSize(kScale(16))
+        backImgView.addSubview(fansL)
+        fansL.snp.makeConstraints { [unowned self](make) in
+            make.centerY.equalTo(self.fans)
+            make.left.equalTo(self.fans.snp.right).offset(kScale(8))
             make.height.equalTo(kHeight(16))
         }
         
@@ -122,10 +150,10 @@ class PHHeaderView: UIView {
         firstLabel.textAlignment = .Center
         firstLabel.numberOfLines = 2
         backImgView.addSubview(firstLabel)
-        firstLabel.snp.makeConstraints { (make) in
+        firstLabel.snp.makeConstraints { [unowned self](make) in
             make.top.equalTo(lineV.snp.bottom).offset(kScale(11))
-            make.centerX.equalTo(firstLabel.superview!)
-            make.left.equalTo(firstLabel.superview!).offset(kScale(60))
+            make.centerX.equalTo(self.firstLabel.superview!)
+            make.left.equalTo(self.firstLabel.superview!).offset(kScale(60))
             make.height.equalTo(kHeight(16))
         }
         
@@ -135,34 +163,24 @@ class PHHeaderView: UIView {
         secondLabel.textAlignment = .Center
         secondLabel.numberOfLines = 2
         backImgView.addSubview(secondLabel)
-        secondLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(firstLabel.snp.bottom).offset(kScale(6))
-            make.left.equalTo(secondLabel.superview!).offset(kScale(60))
-            make.right.equalTo(secondLabel.superview!).offset(kScale(-60))
-            make.height.equalTo(kHeight(35))
+        secondLabel.snp.makeConstraints { [unowned self](make) in
+            make.top.equalTo(self.firstLabel.snp.bottom).offset(kScale(11))
+            make.left.equalTo(self.secondLabel.superview!).offset(kScale(60))
+            make.right.equalTo(self.secondLabel.superview!).offset(kScale(-60))
         }
         
-        //backImgView.image = boxBlurImage(UIImage(named: "back.png")!, withBlurNumber: 0.5)
         vImageView = UIImageView()
-        vImageView.backgroundColor = UIColor.clearColor()
         addSubview(vImageView)
-        vImageView.snp.makeConstraints { (make) in
-            make.bottom.right.equalTo(headImgView).offset(-2)
-            make.size.equalTo(kSize(18, height: 18))
+        vImageView.snp.makeConstraints { [unowned self](make) in
+            make.right.equalTo(self.headImgView).offset(-8)
+            make.bottom.equalTo(self.headImgView)
+            make.size.equalTo(kSize(15, height: 15))
         }
-        follow.text = "-- 关注"
-        fans.text = "-- 粉丝"
+        follow.text = "--"
+        fans.text = "--"
         firstLabel.text = "纯氧认证："
         secondLabel.text = ""
 
-    }
-    
-    func followLabelClick() {
-        LogWarn("follow")
-    }
-    
-    func fansLabelClick() {
-        LogWarn("fans")
     }
     
     required init?(coder aDecoder: NSCoder) {

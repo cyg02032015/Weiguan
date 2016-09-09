@@ -41,6 +41,8 @@ class PHToolView: UIView {
         follow.titleLabel?.font = UIFont.customFontOfSize(16)
         follow.setImage(UIImage(named: "follow"), forState: .Normal)
         follow.backgroundColor = kCommonColor
+        follow.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 0)
+        follow.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 2)
         addSubview(follow)
         follow.snp.makeConstraints { (make) in
             make.top.bottom.left.equalTo(follow.superview!)
@@ -54,6 +56,8 @@ class PHToolView: UIView {
         privateLatter.titleLabel?.font = UIFont.customFontOfSize(16)
         privateLatter.setImage(UIImage(named: "chat"), forState: .Normal)
         privateLatter.backgroundColor = kCommonColor
+        privateLatter.titleEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 0)
+        privateLatter.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 4)
         addSubview(privateLatter)
         privateLatter.snp.makeConstraints { (make) in
             make.left.equalTo(follow.snp.right)
@@ -66,9 +70,9 @@ class PHToolView: UIView {
         view.backgroundColor = UIColor.whiteColor()
         addSubview(view)
         view.snp.makeConstraints { (make) in
-            make.top.equalTo(view.superview!).offset(4)
-            make.bottom.equalTo(view.superview!).offset(-4)
-            make.width.equalTo(1)
+            make.top.equalTo(view.superview!).offset(8)
+            make.bottom.equalTo(view.superview!).offset(-8)
+            make.width.equalTo(1/UIScreen.mainScreen().scale)
             make.centerX.equalTo(view.superview!)
         }
 //        

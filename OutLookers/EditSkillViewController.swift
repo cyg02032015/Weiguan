@@ -274,14 +274,15 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
         SVToast.show()
         // 上传作品集封面
         if coverImage != nil {
-            dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_async(group, queue) { [weak self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.asyncUploadImage(self.tokenObject, image: self.coverImage, complete: { (names, state) in
+                guard let _ = self else { return }
+                OSSImageUploader.asyncUploadImage(self!.tokenObject, image: self!.coverImage, complete: { (names, state) in
                     dispatch_group_leave(group)
                     if state == .Success {
-                        self.req.worksCover = names.first
+                        self?.req.worksCover = names.first
                     } else {
-                        self.req.worksCover = ""
+                        self?.req.worksCover = ""
                         SVToast.dismiss()
                         SVToast.showWithError("上传封面失败")
                     }
@@ -290,12 +291,13 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
         }
         
         if videoURL != nil {
-            dispatch_group_async(group, queue, { [unowned self] in
+            dispatch_group_async(group, queue, { [weak self] in
                 dispatch_group_enter(group)
-               self.uploadVideoRequst = OSSVideoUploader.asyncUploadVideo(self.tokenObject, videoURL: self.videoURL, complete: { (id, state) in
+                guard let _ = self else { return }
+               self?.uploadVideoRequst = OSSVideoUploader.asyncUploadVideo(self!.tokenObject, videoURL: self!.videoURL, complete: { (id, state) in
                     dispatch_group_leave(group)
                     if state == .Success {
-                        self.req.worksVideo = id
+                        self?.req.worksVideo = id
                     } else {
                         SVToast.dismiss()
                         SVToast.showWithError("上传视频失败")
@@ -305,12 +307,13 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
         }
         
         if self.photoArray.count > 0 {
-            dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_async(group, queue) { [weak self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.asyncUploadImages(self.tokenObject, images: self.photoArray, complete: { (names, state) in
+                guard let _ = self else { return }
+                OSSImageUploader.asyncUploadImages(self!.tokenObject, images: self!.photoArray, complete: { (names, state) in
                     dispatch_group_leave(group)
                     if state == .Success {
-                        self.req.worksPicture = names.joinWithSeparator(",")
+                        self?.req.worksPicture = names.joinWithSeparator(",")
                     } else {
                         SVToast.dismiss()
                         SVToast.showWithError("上传图片失败")
@@ -319,14 +322,15 @@ extension EditSkillViewController: BudgetPriceCellDelegate, NoArrowEditCellDeleg
             }
         }
         
-        dispatch_group_notify(group, queue) { [unowned self] in
-            Server.releaseTalent(self.req, handler: { (success, msg, value) in
+        dispatch_group_notify(group, queue) { [weak self] in
+            guard let _ = self else { return }
+            Server.releaseTalent(self!.req, handler: { (success, msg, value) in
                 SVToast.dismiss()
                 if success {
                     LogInfo(value!)
-                    self.dismissViewControllerAnimated(true, completion: { [unowned self] in
-                        self.photoArray.removeAll()
-                        self.originPhotoArray.removeAll()
+                    self?.dismissViewControllerAnimated(true, completion: { [weak self] in
+                        self?.photoArray.removeAll()
+                        self?.originPhotoArray.removeAll()
                         })
                 } else {
                     guard let m = msg else {return}

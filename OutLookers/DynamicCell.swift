@@ -30,7 +30,7 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             bigImgView.yy_setImageWithURL(info.cover.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
             details.text = info.text
             if UserSingleton.sharedInstance.isLogin() {
-                if info.isLike == true {
+                if info.isLike == 1 {
                     praiseBtn.selected = true
                 } else {
                     praiseBtn.selected = false

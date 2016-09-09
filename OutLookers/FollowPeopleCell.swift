@@ -27,15 +27,9 @@ class FollowPeopleCell: UITableViewCell {
                     followButton.hidden = false
                 }
                 followButton.selected = false
-                followButton.snp.updateConstraints(closure: { (make) in
-                    make.size.equalTo(kSize(60, height: 24))
-                })
             } else {
                 followButton.hidden = false
                 followButton.selected = true
-                followButton.snp.updateConstraints(closure: { (make) in
-                    make.size.equalTo(kSize(87, height: 24))
-                })
             }
             
             
@@ -72,6 +66,18 @@ class FollowPeopleCell: UITableViewCell {
             make.centerY.equalTo(followButton.superview!)
             make.size.equalTo(kSize(60, height: 24)).priorityLow()
         }
+        _ = followButton.rx_observe(Bool.self, "selected").subscribeNext { [weak self](selected) in
+            guard let _ = selected else { return }
+            if selected! {
+                self?.followButton.snp.updateConstraints(closure: { (make) in
+                    make.size.equalTo(kSize(87, height: 24))
+                })
+            }else {
+                self?.followButton.snp.updateConstraints(closure: { (make) in
+                    make.size.equalTo(kSize(60, height: 24))
+                })
+            }
+        }
         
         nameLabel = UILabel()
         nameLabel.font = UIFont.customFontOfSize(16)
@@ -82,9 +88,7 @@ class FollowPeopleCell: UITableViewCell {
             make.right.equalTo(followButton.snp.left).offset(kScale(-15))
         }
         
-        followButton.rx_tap.subscribeNext {
-            LogInfo("关注点击")
-        }.addDisposableTo(disposeBag)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

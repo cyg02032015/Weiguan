@@ -166,7 +166,7 @@ extension FollowViewController: DynamicCellDelegate, FollowProtocol {
                     if success {
                         LogInfo("取消点赞")
                         object.likeCount = object.likeCount - 1
-                        object.isLike = false
+                        object.isLike = 0
                         sender.selected = false
                         if object.likeCount <= 0 {
                             sender.setTitle("赞TA", forState: .Normal)
@@ -183,7 +183,7 @@ extension FollowViewController: DynamicCellDelegate, FollowProtocol {
                     if success {
                         LogInfo("点赞成功")
                         object.likeCount = object.likeCount + 1
-                        object.isLike = true
+                        object.isLike = 1
                         sender.selected = true
                         sender.setTitle("\(object.likeCount)", forState: .Normal)
                         self.lists[indexPath.section] = object

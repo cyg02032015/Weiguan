@@ -101,10 +101,18 @@ extension YGTabbarController: YGTabbarDelegate {
     }
     
     override func shouldAutorotate() -> Bool {
+        let nav = self.viewControllers![self.selectedIndex] as! UINavigationController
+        if nav.topViewController is DynamicDetailViewController {
+            return true
+        }
         return false
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        let nav = self.viewControllers![self.selectedIndex] as! UINavigationController
+        if nav.topViewController is DynamicDetailViewController {
+            return .AllButUpsideDown
+        }
         return .Portrait
     }
 }

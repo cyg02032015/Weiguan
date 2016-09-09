@@ -139,19 +139,19 @@ class LogViewController: YGBaseViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }.addDisposableTo(disposeBag)
         
-        nextButton.rx_tap.subscribeNext { [unowned self] in
-            if self.phoneTF.text! =~ kMobileNumberReg {
+        nextButton.rx_tap.subscribeNext { [weak self] in
+            if self!.phoneTF.text! =~ kMobileNumberReg {
                 SVToast.show("正在登录")
-                Server.phoneLogin(self.phoneTF.text!, pwd: (self.passTF.text! + "a").myMD5, handler: { (success, msg, value) in
+                Server.phoneLogin(self!.phoneTF.text!, pwd: (self!.passTF.text! + "a").myMD5, handler: { (success, msg, value) in
                     SVToast.dismiss()
                     if success {
                         NSNotificationCenter.defaultCenter().postNotificationName(ReloadData, object: nil)
                         if isEmptyString(UserSingleton.sharedInstance.nickname) {
                             let vc = Register3ViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self?.navigationController?.pushViewController(vc, animated: true)
                         } else {
                             delay(0.5, task: {
-                                self.navigationController?.popToRootViewControllerAnimated(true)
+                                self?.navigationController?.popToRootViewControllerAnimated(true)
                             })
                         }
                     } else {

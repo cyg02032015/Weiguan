@@ -197,4 +197,12 @@ extension IssueViewController {
             fatalError("not tag with button type")
         }
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
+    }
 }

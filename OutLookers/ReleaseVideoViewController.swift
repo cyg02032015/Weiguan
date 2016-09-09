@@ -241,40 +241,40 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
         SVToast.show("正在上传视频")
-        dispatch_group_async(group, queue) { [unowned self] in
+        dispatch_group_async(group, queue) { [weak self] in
             dispatch_group_enter(group)
-           self.uploadVideoRequst = OSSVideoUploader.asyncUploadVideo(self.videoToken, videoURL: self.videoUrl) { (id, state) in
+           self?.uploadVideoRequst = OSSVideoUploader.asyncUploadVideo(self!.videoToken, videoURL: self!.videoUrl) { (id, state) in
                 dispatch_group_leave(group)
                 if state == .Success {
-                    self.req.picture = id
+                    self?.req.picture = id
                 } else {
                     SVToast.dismiss()
                     SVToast.showWithError("上传视频失败")
                 }
             }
         }
-        dispatch_group_async(group, queue) { [unowned self] in
+        dispatch_group_async(group, queue) { [weak self] in
             dispatch_group_enter(group)
-            OSSImageUploader.asyncUploadImage(self.picToken, image: self.coverImage, complete: { (names, state) in
+            OSSImageUploader.asyncUploadImage(self!.picToken, image: self!.coverImage, complete: { (names, state) in
                 dispatch_group_leave(group)
                 if state == .Success {
-                    self.req.cover = names[0]
+                    self?.req.cover = names[0]
                 } else {
                     SVToast.dismiss()
                     SVToast.showWithError("上传封面失败")
                 }
             })
         }
-        dispatch_group_notify(group, queue) { [unowned self] in
-            if isEmptyString(self.req.cover) || isEmptyString(self.req.picture) {
+        dispatch_group_notify(group, queue) { [weak self] in
+            if isEmptyString(self!.req.cover) || isEmptyString(self!.req.picture) {
                 return
             }
-            Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
+            Server.releasePicAndVideo(self!.req, handler: { (success, msg, value) in
                 SVToast.dismiss()
                 if success {
                     SVToast.showWithSuccess("上传视频成功")
                     delay(1, task: {
-                        self.dismissViewControllerAnimated(true, completion: {
+                        self?.dismissViewControllerAnimated(true, completion: {
                         })
                     })
                 } else {

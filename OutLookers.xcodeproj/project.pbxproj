@@ -22,6 +22,7 @@
 		2D20DFAA1D817750002E802A /* CPDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA91D817750002E802A /* CPDateUtil.swift */; };
 		2D37E6FE1D7D3A9300A1AA87 /* SBThreadsafely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */; };
 		2DA8FB371D825111005D7386 /* MCommentReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8FB361D825111005D7386 /* MCommentReplyCell.swift */; };
+		2DA8FB391D827443005D7386 /* CPAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8FB381D827443005D7386 /* CPAlertController.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
 		C8E0CF148F916A2B78E0689E /* Pods_OutLookers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */; };
@@ -399,6 +400,7 @@
 		2D20DFA91D817750002E802A /* CPDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPDateUtil.swift; path = OutLookers/CPDateUtil.swift; sourceTree = SOURCE_ROOT; };
 		2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SBThreadsafely.swift; path = OutLookers/SBThreadsafely.swift; sourceTree = SOURCE_ROOT; };
 		2DA8FB361D825111005D7386 /* MCommentReplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCommentReplyCell.swift; sourceTree = SOURCE_ROOT; };
+		2DA8FB381D827443005D7386 /* CPAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertController.swift; sourceTree = SOURCE_ROOT; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E566B98D8EB14C853632E78 /* Pods-OutLookers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookers/Pods-OutLookers.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1536,6 +1538,7 @@
 				2D37E6FD1D7D3A9300A1AA87 /* SBThreadsafely.swift */,
 				2D20DF8C1D7FCFA7002E802A /* SBNotification_Names.swift */,
 				2D20DFA91D817750002E802A /* CPDateUtil.swift */,
+				2DA8FB381D827443005D7386 /* CPAlertController.swift */,
 			);
 			name = YKLib;
 			path = Service;
@@ -2495,6 +2498,7 @@
 				D8B641481D36A06D00DF916D /* TalentDetailViewController.swift in Sources */,
 				D81992561D44A045007734C0 /* PersonFilesReq.swift in Sources */,
 				E41B92771D3E13C100749769 /* PutCashViewController.swift in Sources */,
+				2DA8FB391D827443005D7386 /* CPAlertController.swift in Sources */,
 				D812A9111D4FA69D00186564 /* MJRefreshNormalHeader.m in Sources */,
 				D84DBC031D73443A00163F5E /* InvitedDetailTableViewCell.swift in Sources */,
 				D870C73A1D3932D7003B7A09 /* HotmanCell.swift in Sources */,

@@ -158,14 +158,6 @@ class HomeViewController: YGBaseViewController {
         view.addSubview(statusView)
     }
     
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Portrait
-    }
-    
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }

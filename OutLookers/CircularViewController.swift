@@ -20,8 +20,8 @@ class CircularViewController: YGBaseViewController {
         super.viewDidLoad()
         setupSubViews()
         loadNewData()
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
-            self.loadMoreData()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
         })
         tableView.mj_header = MJRefreshStateHeader(refreshingBlock: { [weak self] in
             self?.loadNewData()

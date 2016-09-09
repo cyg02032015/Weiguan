@@ -10,6 +10,8 @@ import UIKit
 
 private extension Selector {
     static let tapMore = #selector(PHViewController.tapMore(_:))
+    static let tapFans = #selector(PHViewController.fansLabelClick)
+    static let tapFollow = #selector(PHViewController.followLabelClick)
 }
 
 class PHViewController: YGBaseViewController {
@@ -84,6 +86,7 @@ class PHViewController: YGBaseViewController {
         setupSubViews()
         loadDataFans()
         loadPersonalData()
+        toolView.hidden = user == UserSingleton.sharedInstance.userId
     }
     
     func setupSubViews() {
@@ -107,7 +110,8 @@ class PHViewController: YGBaseViewController {
         view.addSubview(slidePageScrollView)
         
         header.frame = CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: kHeight(294)))
-        
+        header.follow.addTarget(self, action: .tapFollow)
+        header.fans.addTarget(self, action: .tapFans)
         slidePageScrollView.headerView = header
         
         let titlePageTabbar = TYTitlePageTabBar(titleArray: ["动态", "才艺"])
@@ -141,7 +145,7 @@ class PHViewController: YGBaseViewController {
         view.addSubview(toolView)
         toolView.snp.makeConstraints { (make) in
             make.width.equalTo(kScale(240))
-            make.height.equalTo(kScale(44))
+            make.height.equalTo(kScale(40))
             make.centerX.equalTo(toolView.superview!)
             make.bottom.equalTo(toolView.superview!).offset(kScale(-14))
         }
@@ -238,6 +242,7 @@ extension PHViewController {
 
 extension PHViewController {
     func toolViewMove(state: ScrollState) {
+        guard user != UserSingleton.sharedInstance.userId else { return }
         switch state {
             case .DidEndDecelerating:
                 UIView.animateWithDuration(0.3, animations: {
@@ -252,6 +257,14 @@ extension PHViewController {
                     self.toolView.transform = CGAffineTransformIdentity
                 })
         }
+    }
+    
+    func followLabelClick() {
+        LogWarn("follow")
+    }
+    
+    func fansLabelClick() {
+        LogWarn("fans")
     }
 }
 

@@ -90,10 +90,10 @@ extension MessageViewController {
                 vc.num = Int(cell.badgeButton.badgeValue)
                 navigationController?.pushViewController(vc, animated: true)
             } else if indexPath.row == 2 {
-                //有问题showType参数没有
-//                let vc = FollowPeopleViewController()
-//                vc.num = Int(cell.badgeButton.badgeValue)
-//                navigationController?.pushViewController(vc, animated: true)
+                let vc = FollowPeopleViewController()
+                vc.showType = .Fan
+                vc.title = "我的粉丝"
+                self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 //TODO 通知
             }

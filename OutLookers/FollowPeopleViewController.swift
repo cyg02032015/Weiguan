@@ -45,37 +45,41 @@ class FollowPeopleViewController: YGBaseViewController {
     
     override func loadMoreData() {
         if showType == .Follow {
-            Server.myFollow(pageNo) { [unowned self] (success, msg, value) in
+            Server.myFollow(pageNo) { [weak self] (success, msg, value) in
                 SVToast.dismiss()
                 if success {
                     guard let object = value else {return}
-                    self.myFollows.appendContentsOf(object.list)
-                    self.tableView.mj_footer.endRefreshing()
-                    self.tableView.reloadData()
-                    self.pageNo = self.pageNo + 1
+                    self?.myFollows.appendContentsOf(object.list)
+                    self?.tableView.mj_footer.endRefreshing()
+                    self?.tableView.reloadData()
+                    if let _ = self {
+                        self!.pageNo = self!.pageNo + 1
+                    }
                     if object.list.count < 10 {
-                        self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }
                 } else {
-                    self.tableView.mj_footer.endRefreshing()
+                    self?.tableView.mj_footer.endRefreshing()
                     guard let m = msg else {return}
                     SVToast.showWithError(m)
                 }
             }
         } else {
-            Server.myFans(pageNo, handler: { [unowned self](success, msg, value) in
+            Server.myFans(pageNo, handler: { [weak self](success, msg, value) in
                 SVToast.dismiss()
                 if success {
                     guard let object = value else {return}
-                    self.myFollows.appendContentsOf(object.list)
-                    self.tableView.mj_footer.endRefreshing()
-                    self.tableView.reloadData()
-                    self.pageNo = self.pageNo + 1
+                    self?.myFollows.appendContentsOf(object.list)
+                    self?.tableView.mj_footer.endRefreshing()
+                    self?.tableView.reloadData()
+                    if let _ = self {
+                        self!.pageNo = self!.pageNo + 1
+                    }
                     if object.list.count < 10 {
-                        self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }
                 } else {
-                    self.tableView.mj_footer.endRefreshing()
+                    self?.tableView.mj_footer.endRefreshing()
                     guard let m = msg else {return}
                     SVToast.showWithError(m)
                 }
@@ -104,12 +108,41 @@ extension FollowPeopleViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(followCellIdentifier, forIndexPath: indexPath) as! FollowPeopleCell
-        cell.header.iconHeaderTap { 
-            LogInfo("tap header")
+        let info = myFollows[indexPath.row]
+        var id: Int
+        if self.showType == .Fan {
+            id = info.userId
+        }else {
+            id = info.followUserId
+        }
+        cell.header.iconHeaderTap { [weak self] in
+            let vc = PHViewController()
+            vc.user = "\(id)"
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         cell.showType = showType
-        cell.info = myFollows[indexPath.row]
-
+        cell.info = info
+        cell.followButton.rx_tap.subscribeNext { [weak self] in
+            if info.fan == 1 {
+                self?.showAlertController("确定不再关注？", message: "", defults: ["确定"], handler: { (index, alertAction) in
+                    if index == 0 {
+                        self?.cancelFollow("\(id)") { (success) in
+                            if success {
+                                cell.followButton.selected = !cell.followButton.selected
+                                info.fan = 0
+                            }
+                        }
+                    }
+                })
+            }else {
+                Server.followUser("\(id)", handler: { (success, msg, value) in
+                    if success {
+                        cell.followButton.selected = !cell.followButton.selected
+                        info.fan = 1
+                    }
+                })
+            }
+            }.addDisposableTo(disposeBag)
         return cell
     }
     

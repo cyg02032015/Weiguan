@@ -187,28 +187,28 @@ class TalentAuthViewController: YGBaseViewController {
             let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
             let group = dispatch_group_create()
             SVToast.show()
-            dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_async(group, queue) { [weak self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.asyncUploadImages(self.picToken, images: self.photos, complete: { (names, state) in
+                OSSImageUploader.asyncUploadImages(self!.picToken, images: self!.photos, complete: { (names, state) in
                     dispatch_group_leave(group)
                     if state == .Success {
-                        self.req.photo = names.joinWithSeparator(",")
+                        self?.req.photo = names.joinWithSeparator(",")
                     } else {
-                        self.req.photo = ""
+                        self?.req.photo = ""
                         SVToast.dismiss()
                         SVToast.showWithError("上传图片失败")
                     }
                 })
             }
-            dispatch_group_notify(group, queue) { [unowned self] in
-                if isEmptyString(self.req.photo) {
+            dispatch_group_notify(group, queue) { [weak self] in
+                if isEmptyString(self!.req.photo) {
                     return
                 }
-                Server.hotmanAuth(self.req, handler: { (success, msg, value) in
+                Server.hotmanAuth(self!.req, handler: { (success, msg, value) in
                     if success {
                         SVToast.showWithSuccess(value!)
                         delay(1, task: { 
-                            self.navigationController?.popToRootViewControllerAnimated(true)
+                            self?.navigationController?.popToRootViewControllerAnimated(true)
                         })
                     } else {
                         guard let m = msg else {return}

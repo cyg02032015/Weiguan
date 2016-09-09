@@ -77,19 +77,20 @@ class EditDataViewController: YGBaseViewController {
         save = setRightNaviItem()
         save.setTitle("保存", forState: .Normal)
         // MARK: 保存按钮
-        save.rx_tap.subscribeNext { [unowned self] in
+        save.rx_tap.subscribeNext { [weak self] in
             let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
             let group = dispatch_group_create()
             SVToast.show()
-            dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_async(group, queue) {
                 dispatch_group_enter(group)
-                guard let token = self.picToken else {return}
-                OSSImageUploader.asyncUploadImageData(token, data: self.headImgData, complete: { (names, state) in
+                guard let _ = self else { return }
+                guard let token = self?.picToken else { return }
+                OSSImageUploader.asyncUploadImageData(token, data: self!.headImgData, complete: { (names, state) in
                     if state == .Success {
-                        self.req.headImgUrl = names.first
+                        self!.req.headImgUrl = names.first
                         dispatch_group_leave(group)
                     } else {
-                        self.req.headImgUrl = ""
+                        self!.req.headImgUrl = ""
                         SVToast.dismiss()
                         SVToast.showWithError("上传头像失败")
                         dispatch_group_leave(group)
@@ -97,12 +98,12 @@ class EditDataViewController: YGBaseViewController {
                 })
             }
             dispatch_group_notify(group, queue, { 
-                Server.informationUpdate(self.req, handler: { (success, msg, value) in
+                Server.informationUpdate(self!.req, handler: { (success, msg, value) in
                     SVToast.dismiss()
                     if success {
                         SVToast.showWithSuccess(value!)
                         delay(1) {
-                            self.navigationController?.popViewControllerAnimated(true)
+                            self!.navigationController?.popViewControllerAnimated(true)
                         }
                     } else {
                         guard let m = msg else {return}

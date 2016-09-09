@@ -26,6 +26,7 @@ class PersonFileViewController: YGBaseViewController {
     var weightPickerView: YGPickerView!
     var constellationPicerkView: YGPickerView!
     lazy var req = PersonFilesReq()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         for i in 100...220 {

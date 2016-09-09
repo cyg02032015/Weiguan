@@ -182,7 +182,7 @@ class Server {
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
-            "userIdu" : user,
+            "userId" : user,
             "time" : timeStr
             ]
         if isPerson {

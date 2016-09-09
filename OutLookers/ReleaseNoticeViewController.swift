@@ -323,15 +323,15 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
     // MARK: 发布按钮
     func tapReleaseButton(sender: UIButton) {
         SVToast.show()
-        OSSImageUploader.asyncUploadImages(tokenObject, images: photoArray) { [unowned self](names, state) in
+        OSSImageUploader.asyncUploadImages(tokenObject, images: photoArray) { [weak self](names, state) in
             if state == .Success {
-                self.req.picture = names.joinWithSeparator(",")
-                self.req.cover = names[0]
-                Server.getReleaseNotice(self.req) { [unowned self](success, msg, value) in
+                self?.req.picture = names.joinWithSeparator(",")
+                self?.req.cover = names[0]
+                Server.getReleaseNotice(self!.req) { (success, msg, value) in
                     SVToast.dismiss()
                     if success {
-                        self.dismissViewControllerAnimated(true, completion: {
-                            self.photoArray.removeAll()
+                        self?.dismissViewControllerAnimated(true, completion: {
+                            self?.photoArray.removeAll()
                         })
                     } else {
                         guard let m = msg else {return}

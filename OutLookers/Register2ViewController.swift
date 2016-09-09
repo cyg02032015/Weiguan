@@ -101,11 +101,11 @@ class Register2ViewController: YGBaseViewController {
             make.top.equalTo(verifyButton.snp.bottom).offset(kScale(40))
         }
         
-        verifyButton.rx_tap.subscribeNext { [unowned self] in
-            self.verifyButton.userInteractionEnabled = false
-            self.countDownTimer()
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: .countDownTimer, userInfo: nil, repeats: true)
-            Server.getVerifyCode(self.phone, handler: { (success, msg, value) in
+        verifyButton.rx_tap.subscribeNext { [weak self] in
+            self?.verifyButton.userInteractionEnabled = false
+            self?.countDownTimer()
+            self?.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self!, selector: .countDownTimer, userInfo: nil, repeats: true)
+            Server.getVerifyCode(self!.phone, handler: { (success, msg, value) in
                 if (!success) {
                     LogError("发送验证码失败")
                 }
@@ -113,15 +113,15 @@ class Register2ViewController: YGBaseViewController {
         }.addDisposableTo(disposeBag)
         
         // 下一步
-        nextButton.rx_tap.subscribeNext { [unowned self] in
+        nextButton.rx_tap.subscribeNext { [weak self] in
             SVToast.show("正在注册...")
-            Server.registerPhone(self.phone, code: self.verifyTF.text!, pwd: (self.pwd + "a").myMD5, handler: { (success, msg, value) in
+            Server.registerPhone(self!.phone, code: self!.verifyTF.text!, pwd: (self!.pwd + "a").myMD5, handler: { (success, msg, value) in
                 SVToast.dismiss()
                 if success {
                     SVToast.showWithSuccess("注册成功")
                     delay(1, task: {
                         let vc = Register3ViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        self?.navigationController?.pushViewController(vc, animated: true)
                     })
                 } else {
                     guard let m = msg else {return}

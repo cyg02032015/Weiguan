@@ -304,12 +304,12 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
         let group = dispatch_group_create()
         SVToast.show("正在上传图片")
         if self.photos.count > 0 {
-            dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_async(group, queue) { [weak self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.asyncUploadImageData(self.tokenObject, data: self.imageData[0], complete: { (names, state) in
+                OSSImageUploader.asyncUploadImageData(self!.tokenObject, data: self!.imageData[0], complete: { (names, state) in
                     if state == .Success {
                         LogInfo("图片们上传完成")
-                        self.req.cover = names.first
+                        self?.req.cover = names.first
                         dispatch_group_leave(group)
                     } else {
                         SVToast.dismiss()
@@ -319,16 +319,16 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                 })
             }
             
-            dispatch_group_async(group, queue) { [unowned self] in
+            dispatch_group_async(group, queue) { [weak self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.uploadImageDatas(self.tokenObject, datas: self.imageData, isAsync: true, complete: { (names, state) in
+                OSSImageUploader.uploadImageDatas(self!.tokenObject, datas: self!.imageData, isAsync: true, complete: { (names, state) in
                         if state == .Success {
                             LogWarn("pictures = \(names.joinWithSeparator(","))")
                             LogInfo("图片们上传完成")
-                            self.req.picture = names.joinWithSeparator(",")
+                            self?.req.picture = names.joinWithSeparator(",")
                             dispatch_group_leave(group)
                         } else {
-                            self.req.picture = ""
+                            self?.req.picture = ""
                             SVToast.dismiss()
                             SVToast.showWithError("上传图片失败")
                             dispatch_group_leave(group)
@@ -338,19 +338,19 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
         }
         
         
-        dispatch_group_notify(group, queue) { [unowned self] in
-            if isEmptyString(self.req.picture) && isEmptyString(self.req.cover) {
+        dispatch_group_notify(group, queue) { [weak self] in
+            if isEmptyString(self!.req.picture) && isEmptyString(self!.req.cover) {
                 SVToast.showWithError("图片或者封面id为空")
                 return
             }
             LogInfo("")
-            LogInfo("picture = \(self.req.picture)")
-            Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
+            LogInfo("picture = \(self!.req.picture)")
+            Server.releasePicAndVideo(self!.req, handler: { (success, msg, value) in
                 SVToast.dismiss()
                 if success {
-                    self.dismissViewControllerAnimated(true, completion: { [unowned self] in
-                        self.photos.removeAll()
-                        self.originPhotos.removeAll()
+                    self?.dismissViewControllerAnimated(true, completion: {
+                        self?.photos.removeAll()
+                        self?.originPhotos.removeAll()
                         })
                 } else {
                     guard let m = msg else {return}

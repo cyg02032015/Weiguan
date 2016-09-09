@@ -29,10 +29,10 @@ class Register3ViewController: YGBaseViewController {
     }
     
     func getToken() {
-        Server.getUpdateFileToken(.Picture) { [unowned self](success, msg, value) in
+        Server.getUpdateFileToken(.Picture) { [weak self](success, msg, value) in
             if success {
                 guard let obj = value else {return}
-                self.picToken = obj
+                self?.picToken = obj
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)

@@ -52,25 +52,25 @@ class DynamicDetailViewController: YGBaseViewController {
         shareView = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
         loadData()
         setupSubViews()
-        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [unowned self] in
-            self.loadMoreData()
+        tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
+            self?.loadMoreData()
             })
     }
     
     func loadData() {
         SVToast.show()
-        Server.dynamicDetail("\(dynamicObj.id)") { [unowned self](success, msg, value) in
+        Server.dynamicDetail("\(dynamicObj.id)") { [weak self](success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
-                self.detailObj = object
+                self?.detailObj = object
                 
                 Server.likeList(1, dynamicId: "\(object.id)", handler: { (success, msg, value) in
                     if success {
                         guard let obj = value else {return}
-                        self.likeListObj = obj
-                        self.loadMoreData()
-                        self.tableView.reloadData()
+                        self?.likeListObj = obj
+                        self?.loadMoreData()
+                        self?.tableView.reloadData()
                     } else {
                         LogError("无法获取点赞列表")
                     }
@@ -340,15 +340,4 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
             })
         }
     }
-}
-
-// 屏幕方向这里还需要处理
-extension DynamicDetailViewController {
-//    override func shouldAutorotate() -> Bool {
-//        return detailObj.isVideo == "1"
-//    }
-//    
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        return detailObj.isVideo == "1" ? .AllButUpsideDown : .Portrait
-//    }
 }
