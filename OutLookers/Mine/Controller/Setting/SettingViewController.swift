@@ -141,13 +141,17 @@ extension SettingViewController {
             let vc = AboutViewController()
             navigationController?.pushViewController(vc, animated: true)
         case 3:
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! NoArrowEditCell
-            if clearCache() {
-                SVToast.showWithSuccess("缓存已清除")
-                cell.tf.text = "0 MB"
-            }else {
-                SVToast.showWithError("缓存清除失败")
-            }
+            self.showAlertController("确定清除缓存？", message: "", defults: ["确定"], handler: { (index, alertAction) in
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! NoArrowEditCell
+                if self.clearCache() {
+                    SVToast.showWithSuccess("缓存已清除")
+                    delay(0.9, task: {
+                        cell.tf.text = "0 MB"
+                    })
+                }else {
+                    SVToast.showWithError("缓存清除失败")
+                }
+            })
         case 4:
             if UserSingleton.sharedInstance.isLogin() {
                 LogInHelper.logout()

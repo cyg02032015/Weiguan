@@ -51,7 +51,7 @@ class TalentDetailHeadCell: UITableViewCell {
         nameLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(headImgView)
             make.left.equalTo(headImgView.snp.right).offset(kScale(10))
-            make.height.equalTo(kScale(16))
+            //make.height.equalTo(kScale(16))
             make.right.equalTo(button.snp.left).offset(kScale(-10))
         }
     }

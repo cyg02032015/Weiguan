@@ -112,6 +112,7 @@ extension RecruitInformationViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 {
             let selectSkill = SelectSkillViewController()
+            selectSkill.isSkill = false
             selectSkill.type = SelectSkillType.Back
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
             selectSkill.tapItemInCollection({ [unowned self](item) in

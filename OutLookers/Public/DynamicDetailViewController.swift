@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import ZFPlayer
+import UITableView_FDTemplateLayoutCell
 
 private let dynamicDetailCellId = "dynamicDetailCellId"
 private let commentCellId = "commentCellId"
@@ -145,6 +146,7 @@ class DynamicDetailViewController: YGBaseViewController {
         tableView.registerClass(DynamicDetailVideoCell.self, forCellReuseIdentifier: dynamicDetailCellId)
         tableView.registerClass(CommentCell.self, forCellReuseIdentifier: commentCellId)
         tableView.separatorStyle = .None
+        tableView.fd_debugLogEnabled = false
         view.addSubview(tableView)
     }
     
@@ -235,6 +237,13 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
         }
     }
     
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return UITableViewAutomaticDimension
+        }
+        return kHeight(61)
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(dynamicDetailCellId, forIndexPath: indexPath) as! DynamicDetailVideoCell
@@ -264,17 +273,33 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
             }).addDisposableTo(disposeBag)
             return cell
         } else {
+            let info = comments[indexPath.row]
             let cell = tableView.dequeueReusableCellWithIdentifier(commentCellId, forIndexPath: indexPath) as! CommentCell
-            cell.info = comments[indexPath.row]
+            cell.info = info
+            cell.headImgView.iconHeaderTap({ [unowned self] in
+                guard "\(info.userId)" == UserSingleton.sharedInstance.userId else { return }
+                let vc = PHViewController()
+                vc.user = "\(info.userId)"
+                self.navigationController?.pushViewController(vc, animated: true)
+                })
+            cell.replyNickNameLabel.tapLabelAction({ [unowned self] in
+                guard "\(info.replyId)" == UserSingleton.sharedInstance.userId else { return }
+                let vc = PHViewController()
+                vc.user = "\(info.replyId)"
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
             return cell
-        }
+           }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return UITableViewAutomaticDimension
         } else {
-            return kHeight(61)
+            return tableView.fd_heightForCellWithIdentifier(commentCellId, cacheByIndexPath: indexPath, configuration: { [unowned self](cell) in
+                let cel = cell as! CommentCell
+                cel.info = self.comments[indexPath.row]
+            })
         }
     }
     
@@ -290,6 +315,18 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
         if indexPath.section == 1 {
             let obj = comments[indexPath.row]
             req.replyId = "\(obj.replyId)"
+            if UserSingleton.sharedInstance.isLogin() {
+                if self.toolbar.inputTextView.isFirstResponder() {
+                    return
+                }
+                self.toolbar.inputTextView.becomeFirstResponder()
+            } else {
+                let logView = YGLogView()
+                logView.animation()
+                logView.tapLogViewClosure({ (type) in
+                    LogInHelper.logViewTap(self, type: type)
+                })
+            }
         }
     }
 }
@@ -369,6 +406,7 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
                 return
             }
             toolbar.inputTextView.becomeFirstResponder()
+            toolbar.inputTextView.placeholderText = "评论一下"
         } else {
             let logView = YGLogView()
             logView.animation()

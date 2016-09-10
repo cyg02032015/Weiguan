@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+
 public class HttpTool {
     
     typealias Success = (response: JSON) -> ()
@@ -85,13 +86,18 @@ public class HttpTool {
             "X-X-D": globleSingle.deviceId,
             "X-X-A": Util.getXXA(pwdOrToken)
         ]
+        var realParameters = [String: AnyObject]()
+        for (key, value) in parameters! {
+            realParameters[key] = value
+        }
+        realParameters["deviceDesc"] = deviceDesc()
+        realParameters["appVersion"] = Int(appBuild())
+        realParameters["appVersionName"] = appVersion()
         LogDebug("login headers = \(headers)")
-        alamofireManager.request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
+        alamofireManager.request(.POST, url, parameters: realParameters, encoding: .JSON, headers: headers).responseJSON { (response) in
             globleSingle.currentTime = nil
             LogVerbose("url = \(url)")
-            if let p = parameters {
-                LogWarn("parameters = \(p)")
-            }
+            LogWarn("parameters = \(realParameters)")
             switch response.result {
             case .Success(let Value):
                 LogDebug("response = \(JSON(Value))")
@@ -101,4 +107,32 @@ public class HttpTool {
             }
         }
     }
+    
+    class func deviceDesc() -> String {
+        //        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        //        let appDisplayName: String? = infoDictionary?["CFBundleDisplayName"] as! String
+        //        let majorVersion: String? = infoDictionary? ["CFBundleShortVersionString"] as! String//主程序版本号
+        //        let minorVersion: String? = infoDictionary? [kCFBundleVersionKey as String] as! String//版本号（内部标示）
+        //设备信息
+        let appVersion : String = UIDevice.currentDevice().systemVersion //ios版本
+        //        let identifierNumber = UIDevice.currentDevice().identifierForVendor //设备udid
+        let systemName = UIDevice.currentDevice().systemName //系统名称
+        //let model = UIDevice.currentDevice().model //设备型号
+        //let localizedModel = UIDevice.currentDevice().localizedModel //设备区域化型号如A1533
+        return systemName + appVersion
+    }
+    
+    class func appVersion() -> String {
+        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+    }
+    
+    class func appBuild() -> String {
+        return NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
+    }
+    
+//    class func versionBuild() -> String {
+//        let version = appVersion(), build = appBuild()
+//        
+//        return version == build ? "\(version)" : "\(version)(\(build))"
+//    }
 }

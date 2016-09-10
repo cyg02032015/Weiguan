@@ -33,6 +33,7 @@
 //#import "EaseUI.h"
 #import "DXMessageToolBar.h"
 #import <ZFPlayer/ZFPlayer.h>
+#import <UITableView_FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
 
 // 阿里上传文件
 #import <AliyunOSSiOS/OSSService.h>

@@ -50,7 +50,7 @@ class AccountCell: UITableViewCell {
         
         arrow.snp.makeConstraints { (make) in
             make.right.equalTo(arrow.superview!).offset(kScale(-15))
-            make.size.equalTo(kSize(14, height: 14))
+            make.size.equalTo(kSize(8, height: 15))
             make.centerY.equalTo(imgView)
         }
         

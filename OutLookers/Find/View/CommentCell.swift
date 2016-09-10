@@ -17,10 +17,15 @@ class CommentCell: UITableViewCell {
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
             nameLabel.text = info.nickname
             detail.text = info.text
+            replyLabel.hidden = isEmptyString(info.replyNickname)
+            replyNickNameLabel.hidden = isEmptyString(info.replyNickname)
+            replyNickNameLabel.text = info.replyNickname
         }
     }
     
     var headImgView: IconHeaderView!
+    var replyNickNameLabel: TouchLabel!
+    var replyLabel: UILabel!
     var nameLabel: UILabel!
     var timeLabel: UILabel!
     var detail: UILabel!
@@ -35,23 +40,44 @@ class CommentCell: UITableViewCell {
         headImgView = IconHeaderView()
         headImgView.customCornerRadius = kScale(35/2)
         contentView.addSubview(headImgView)
-        headImgView.snp.makeConstraints { (make) in
-            make.top.equalTo(headImgView.superview!).offset(kScale(11))
-            make.left.equalTo(headImgView.superview!).offset(kScale(15))
+        headImgView.snp.makeConstraints { [unowned self](make) in
+            make.top.equalTo(self.headImgView.superview!).offset(kScale(11))
+            make.left.equalTo(self.headImgView.superview!).offset(kScale(15))
             make.size.equalTo(kSize(35, height: 35))
         }
         
         nameLabel = UILabel()
         nameLabel.font = UIFont.customFontOfSize(14)
         contentView.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(nameLabel.superview!).offset(kScale(13))
-            make.left.equalTo(headImgView.snp.right).offset(kScale(10))
-            make.height.equalTo(kScale(14))
+        nameLabel.snp.makeConstraints { [unowned self](make) in
+            make.top.equalTo(self.nameLabel.superview!).offset(kScale(13))
+            make.left.equalTo(self.headImgView.snp.right).offset(kScale(10))
+            //make.height.equalTo(kScale(14))
+        }
+        
+        replyLabel = UILabel()
+        replyLabel.hidden = true
+        replyLabel.font = UIFont.customFontOfSize(12)
+        replyLabel.textColor = UIColor(hex: 0xc8c8c8)
+        replyLabel.text = "回复"
+        contentView.addSubview(replyLabel)
+        replyLabel.snp.makeConstraints { [unowned self](make) in
+            make.centerY.equalTo(self.nameLabel)
+            make.left.equalTo(self.nameLabel.snp.right).offset(2)
+        }
+        
+        replyNickNameLabel = TouchLabel()
+        replyNickNameLabel.hidden = true
+        replyNickNameLabel.font = UIFont.customFontOfSize(14)
+        replyNickNameLabel.text = "回复"
+        contentView.addSubview(replyNickNameLabel)
+        replyNickNameLabel.snp.makeConstraints { [unowned self](make) in
+            make.centerY.equalTo(self.nameLabel)
+            make.left.equalTo(self.replyLabel.snp.right).offset(2)
         }
         
         timeLabel = UILabel()
-        timeLabel.font = UIFont.customFontOfSize(12)
+        timeLabel.font = UIFont.customFontOfSize(14)
         timeLabel.textColor = UIColor(hex: 0xc8c8c8)
         timeLabel.textAlignment = .Right
         contentView.addSubview(timeLabel)
@@ -78,12 +104,12 @@ class CommentCell: UITableViewCell {
             make.left.equalTo(lineV.superview!).offset(kScale(15))
             make.right.equalTo(lineV.superview!).offset(kScale(-15))
             make.bottom.equalTo(lineV.superview!)
-            make.height.equalTo(1)
+            make.height.equalTo(1/UIScreen.mainScreen().scale)
         }
         
-        nameLabel.text = "adf"
-        timeLabel.text = "2016-7-10"
-        detail.text = "sdfdfsfsdfdssdfs"
+        nameLabel.text = ""
+        timeLabel.text = "--"
+        detail.text = ""
     }
     
     required init?(coder aDecoder: NSCoder) {

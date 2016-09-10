@@ -6,7 +6,7 @@ use_frameworks!
 target 'OutLookers' do
 	pod 'Alamofire', '~> 3.4.1'
 	pod 'KeychainAccess'
-	pod 'NVActivityIndicatorView', '~> 2.8'
+	pod 'NVActivityIndicatorView', '~> 2.11'
 	pod 'AliyunOSSiOS', '~> 2.5.0'
 	pod 'SwiftyJSON', '~> 2.3.2'
 	pod 'SnapKit', '~> 0.30.0.beta1'
@@ -22,6 +22,7 @@ target 'OutLookers' do
 	pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 	pod 'ZFPlayer', '~> 1.2.1'
 	pod 'AFDateHelper', '~> 3.4.2'
+    pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
 end
 
 target 'OutLookersTests' do

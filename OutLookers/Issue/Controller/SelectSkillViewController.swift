@@ -17,7 +17,7 @@ enum SelectSkillType: Int {
 
 class SelectSkillViewController: YGBaseViewController {
 
-    
+    var isSkill: Bool = true
     typealias TapItemClosure = (item: PersonCharaterModel) -> Void
     var tapItem: TapItemClosure!
     var collectionView: UICollectionView!
@@ -157,7 +157,12 @@ extension SelectSkillViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: SkillHeaderIdentifier, forIndexPath: indexPath) as! SkillHeaderReusableView
         headerView.imgView.image = UIImage(named: imgStrings[indexPath.section])
-        headerView.label.text = rowArray[indexPath.section].name
+        let strs = rowArray[indexPath.section].name.componentsSeparatedByString(",")
+        if strs.count > 1 {
+            headerView.label.text = strs[isSkill ? 0 : 1]
+        }else {
+            headerView.label.text = rowArray[indexPath.section].name
+        }
         return headerView
     }
 }

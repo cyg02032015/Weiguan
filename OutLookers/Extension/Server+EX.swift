@@ -7,8 +7,23 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 extension Server {
+    //查看账号绑定状态
+    class func checkBingState(userId: String = UserSingleton.sharedInstance.userId, handler: (success: Bool, msg: String?, value: JSON?) -> Void) {
+        let parameters = [
+            "userId" : userId
+        ]
+        HttpTool.post(API.checkBing, parameters: parameters, complete: { (response) in
+            let info = BaseResponse(fromJson: response)
+            if info.success! {
+                handler(success: true, msg: nil, value: response)
+            }
+            }) { (error) in
+                handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
     //获取消息数量
     class func getMessageNum(userId: String = UserSingleton.sharedInstance.userId, handler: (success: Bool, msg: String?, value: MessageNumData?) -> Void) {
         let parameters = [

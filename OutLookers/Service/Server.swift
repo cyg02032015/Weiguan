@@ -1104,7 +1104,7 @@ class Server {
             "phone": phone,
             "deviceId": globleSingle.deviceId,
             "code": code,
-            "passWd": pwd
+            "passWd": pwd,
         ]
         HttpTool.registerLogPost(API.registerPhone, parameters: parameters, pwdOrToken: pwd, complete: { (request, response, value) in
             let info = RegisterResp(fromJson: value)
@@ -1223,7 +1223,7 @@ class Server {
     /// 第三方登录
     class func thirdLogin(req: ThirdLogReq, handler: (success: Bool, msg: String?, value: RegisterObj?)->Void) {
         let parameters = [
-            "deviceDesc": req.deviceDesc,
+            //"deviceDesc": req.deviceDesc,
             "deviceId": req.deviceId,
             "headImgUrl": req.headImgUrl,
             "nickname": req.nickname,
