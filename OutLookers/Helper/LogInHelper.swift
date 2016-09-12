@@ -19,7 +19,6 @@ class LogInHelper: NSObject {
                     let dict = UMSocialAccountManager.socialAccountDictionary()
                     let snsAccount = dict[snsPlatform.platformName] as! UMSocialAccountEntity
                     self.serverLogin(2, uid: snsAccount.unionId, openId: snsAccount.openId, nickName: snsAccount.userName, headImgUrl: snsAccount.iconURL, userName: "")
-                    
                 } else {
                     LogError("微信登录错误 = \(response.message)")
                 }

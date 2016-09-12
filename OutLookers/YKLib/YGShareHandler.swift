@@ -40,6 +40,8 @@ enum YGShareType : Int {
     case DYHost //动态详情主人视角
     case CCVisitor //通告详情游客视角
     case CCHost //通告详情主人视角
+    case TLVisitor //才艺详情游客视角
+    case TLHost //才艺详情主人视角
     case Video //发布视频
 }
 
@@ -58,21 +60,21 @@ class YGShareHandler {
         if YGWXApi.isWXAppInstalled() && YGQQApi.isQQAppInstalled() {
             images.append(UIImage(named: kSelectedTimeline)!)
             images.append(UIImage(named: kSelectedWechat)!)
-            images.append(UIImage(named: kSelectedSina)!)
             images.append(UIImage(named: kSelectedQzone)!)
             images.append(UIImage(named: kSelectedQQ)!)
+            images.append(UIImage(named: kSelectedSina)!)
             
             unSelectedImages.append(UIImage(named: kUnSelectedTimeline)!)
             unSelectedImages.append(UIImage(named: kUnSelectedWechat)!)
-            unSelectedImages.append(UIImage(named: kUnSelectedSina)!)
             unSelectedImages.append(UIImage(named: kUnSelectedQzone)!)
             unSelectedImages.append(UIImage(named: kUnSelectedQQ)!)
+            unSelectedImages.append(UIImage(named: kUnSelectedSina)!)
 
             titles.append(kTitleTimeline)
             titles.append(kTitleWechat)
-            titles.append(kTitleSina)
             titles.append(kTitleQzone)
             titles.append(kTitleQQ)
+            titles.append(kTitleSina)
             
         } else if YGWXApi.isWXAppInstalled() && !YGQQApi.isQQAppInstalled() {
             images.append(UIImage(named: kSelectedTimeline)!)
@@ -88,17 +90,17 @@ class YGShareHandler {
             titles.append(kTitleSina)
             
         } else if !YGWXApi.isWXAppInstalled() && YGQQApi.isQQAppInstalled() {
-            images.append(UIImage(named: kSelectedSina)!)
             images.append(UIImage(named: kSelectedQzone)!)
             images.append(UIImage(named: kSelectedQQ)!)
+            images.append(UIImage(named: kSelectedSina)!)
             
-            unSelectedImages.append(UIImage(named: kUnSelectedSina)!)
             unSelectedImages.append(UIImage(named: kUnSelectedQzone)!)
             unSelectedImages.append(UIImage(named: kUnSelectedQQ)!)
+            unSelectedImages.append(UIImage(named: kUnSelectedSina)!)
             
-            titles.append(kTitleSina)
             titles.append(kTitleQzone)
             titles.append(kTitleQQ)
+            titles.append(kTitleSina)
         } else {
             images.append(UIImage(named: kSelectedSina)!)
             unSelectedImages.append(UIImage(named: kUnSelectedSina)!)
@@ -129,6 +131,7 @@ class YGShareHandler {
                 unSelectedImages.append(UIImage(named: kHomeImg)!)
                 titles.append(kHome)
             case .Video: break
+            default: ""
         }
         
         return (images, unSelectedImages, titles)

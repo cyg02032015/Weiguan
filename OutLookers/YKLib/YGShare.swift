@@ -24,6 +24,8 @@ class YGShareModel {
 
 class YGShare: UIView {
 
+    var editClick: (() -> ())?
+    var returnHomeClick: (() -> ())?
     var shareModel: YGShareModel!
     typealias ShareClosure = (title: String) -> Void
     private var shareClosure: ShareClosure!
@@ -180,7 +182,19 @@ class YGShare: UIView {
             case kTitleQzone:
                 platFormType.append(UMShareToQzone)
                 self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
-            default:""
+            case kEdit:
+                self.tapCancel()
+                if let _ = self.editClick {
+                    self.editClick!()
+                }
+                return
+            case kHome:
+                self.tapCancel()
+                if let _ = self.returnHomeClick {
+                    self.returnHomeClick!()
+                }
+                return
+            default: ""
             }
             
             self.tapCancel()

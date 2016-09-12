@@ -15,8 +15,8 @@ private let mineCollectCellIdentifier = "mineCollectId"
 
 class MineViewController: YGBaseViewController {
     
-    var images = ["talent", "invitation", "authentication", "feedback"]
-    var titles = ["才艺", "邀约", "认证", "意见反馈"]
+    private let images = ["talent", "invitation2", "authentication", "feedback"]
+    private let titles = ["才艺", "邀约", "认证", "意见反馈"]
     var countObj: GetContent?
     lazy var avatarList = [AvatarNameList]()
     var tableView: UITableView!

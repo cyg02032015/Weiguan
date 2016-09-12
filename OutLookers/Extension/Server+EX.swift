@@ -10,6 +10,30 @@ import UIKit
 import SwiftyJSON
 
 extension Server {
+    //绑定第三方
+    class func bingToAccount(userId: String = UserSingleton.sharedInstance.userId, type: Int, uid: String, openId: String, nickname: String, headImgUrl: String, userName: String, handler: (success: Bool, msg: String?, value: BingAccountData?) -> Void) {
+        let parameter: [String : AnyObject] = [
+            "userId": userId,
+            "type": type,
+            "uid": uid,
+            "openId": openId,
+            "nickname": nickname,
+            "headImgUrl": headImgUrl,
+            "userName": userName,
+            "deviceId": globleSingle.deviceId,
+            "deviceDesc": globleSingle.deviceDesc
+        ]
+        HttpTool.post(API.bingAccount, parameters: parameter, complete: { (response) in
+            let info = BingAccountDataReq(fromJson: response)
+            if info.success == true {
+                handler(success: true, msg: nil, value: info.result)
+            } else {
+                handler(success: false, msg: info.msg, value: nil)
+            }
+        }) { (error) in
+            handler(success: false, msg: error.localizedDescription, value: nil)
+        }
+    }
     //查看账号绑定状态
     class func checkBingState(userId: String = UserSingleton.sharedInstance.userId, handler: (success: Bool, msg: String?, value: JSON?) -> Void) {
         let parameters = [

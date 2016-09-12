@@ -71,7 +71,7 @@ class HomeCollectionCell: UICollectionViewCell {
         }
         
         praiseImgView = UIImageView()
-        praiseImgView.image = UIImage(named: "like")
+        praiseImgView.image = UIImage(named: "like1")
         contentView.addSubview(praiseImgView)
         praiseImgView.snp.makeConstraints { (make) in
             make.right.equalTo(praiseLabel.snp.left).offset(kScale(-4))

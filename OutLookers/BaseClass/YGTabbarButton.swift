@@ -18,7 +18,6 @@ class YGTabbarButton: UIButton {
             item.addObserver(self, forKeyPath: "selectedImage", options: .New, context: nil)
             item.addObserver(self, forKeyPath: "badgeValue", options: .New, context: nil)
             self.observeValueForKeyPath(nil, ofObject: nil, change: nil, context: nil)
-            
         }
     }
     

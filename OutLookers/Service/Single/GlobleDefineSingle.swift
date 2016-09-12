@@ -25,8 +25,8 @@ class GlobleDefineSingle: NSObject {
     /// 获取系统 “iPhone, 5S, 9.4.3”
     var deviceDesc: String {
         get {
-            
-            return "iPhone," + MyDevice.getSystemType() + "," + MyDevice.getSystemVersion()
+            //"iPhone" +
+            return MyDevice.getSystemType() + "," + MyDevice.getSystemVersion()
         }
     }
 }
@@ -39,11 +39,12 @@ class MyDevice {
     
     static func getSystemType() -> String {
         if Device.version().rawValue.hasPrefix("iPhone") {
-           return (Device.version().rawValue as NSString).substringFromIndex("iPhone".characters.count)
-        } else if Device.version().rawValue.hasPrefix("iPad") {
-            return (Device.version().rawValue as NSString).substringFromIndex("iPad".characters.count)
-        } else if Device.version().rawValue.hasPrefix("iPodTouch") {
-            return (Device.version().rawValue as NSString).substringFromIndex("iPodTouch".characters.count)
+            return Device.version().rawValue
+//           return (Device.version().rawValue as NSString).substringFromIndex("iPhone".characters.count)
+//        } else if Device.version().rawValue.hasPrefix("iPad") {
+//            return (Device.version().rawValue as NSString).substringFromIndex("iPad".characters.count)
+//        } else if Device.version().rawValue.hasPrefix("iPodTouch") {
+//            return (Device.version().rawValue as NSString).substringFromIndex("iPodTouch".characters.count)
         } else {
             return "无法获取"
         }

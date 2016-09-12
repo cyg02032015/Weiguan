@@ -45,6 +45,7 @@ class AccountViewController: YGBaseViewController {
         tableView.rowHeight = kHeight(50)
         tableView.registerClass(ArrowEditCell.self, forCellReuseIdentifier: arrowEditCellId)
         tableView.registerClass(AccountCell.self, forCellReuseIdentifier: accountCellId)
+        tableView.backgroundColor = kBackgoundColor
         tableView.separatorStyle = .SingleLine
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
@@ -91,7 +92,7 @@ extension AccountViewController {
                 }else {
                     cell.bindButton.hidden = false
                     cell.rightLabel.hidden = true
-                    cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
+                    _ = cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
                         //绑定手机号
                     })
                 }
@@ -103,8 +104,15 @@ extension AccountViewController {
                 }else {
                     cell.bindButton.hidden = false
                     cell.rightLabel.hidden = true
-                    cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
+                    _ = cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
                         //绑定微信
+                        self.logViewTap(.Wechat, handler: { (data) in
+                            if let account = data {
+                                cell.bindButton.hidden = true
+                                cell.rightLabel.hidden = false
+                                cell.rightLabel.text = account.nickname
+                            }
+                        })
                     })
                 }
             case 2:
@@ -115,8 +123,15 @@ extension AccountViewController {
                 }else {
                     cell.bindButton.hidden = false
                     cell.rightLabel.hidden = true
-                    cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
+                    _ = cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
                         //绑定QQ
+                        self.logViewTap(.QQ, handler: { (data) in
+                            if let account = data {
+                                cell.bindButton.hidden = true
+                                cell.rightLabel.hidden = false
+                                cell.rightLabel.text = account.nickname
+                            }
+                        })
                     })
                 }
             case 3:
@@ -127,8 +142,15 @@ extension AccountViewController {
                 }else {
                     cell.bindButton.hidden = false
                     cell.rightLabel.hidden = true
-                    cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
+                    _ = cell.bindButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self](sender) in
                         //绑定微博
+                        self.logViewTap(.Weibo, handler: { (data) in
+                            if let account = data {
+                                cell.bindButton.hidden = true
+                                cell.rightLabel.hidden = false
+                                cell.rightLabel.text = account.nickname
+                            }
+                        })
                     })
                 }
             default:
@@ -164,6 +186,62 @@ extension AccountViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             //修改登录密码
+        }
+    }
+}
+
+extension AccountViewController {
+    func bingAccount(type: Int, snsAccount: UMSocialAccountEntity, handler: (BingAccountData?) -> Void) {
+        var userName = ""
+        if type == 4 {
+            userName = snsAccount.userName
+        }
+        Server.bingToAccount(type: type, uid: snsAccount.usid, openId: snsAccount.openId, nickname: snsAccount.userName, headImgUrl: snsAccount.iconURL, userName: userName) { (success, msg, value) in
+            if success {
+                handler(value)
+            }else {
+                SVToast.showWithError("绑定失败")
+            }
+        }
+    }
+    
+    func logViewTap(type: LogViewTapType, handler: (BingAccountData?) -> Void) {
+        switch type {
+        case .Wechat:
+            let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+            snsPlatform.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, { [unowned self]response in
+                if response.responseCode == UMSResponseCodeSuccess {
+                    let dict = UMSocialAccountManager.socialAccountDictionary()
+                    let snsAccount = dict[snsPlatform.platformName] as! UMSocialAccountEntity
+                    self.bingAccount(2, snsAccount: snsAccount, handler: handler)
+                } else {
+                    LogError("微信登录错误 = \(response.message)")
+                }
+            })
+        case .QQ:
+            let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToQQ)
+            snsPlatform.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, { [unowned self]response in
+                if response.responseCode == UMSResponseCodeSuccess {
+                    let dict = UMSocialAccountManager.socialAccountDictionary()
+                    let snsAccount = dict[snsPlatform.platformName] as! UMSocialAccountEntity
+                    self.bingAccount(3, snsAccount: snsAccount, handler: handler)
+                } else {
+                    LogError("QQ登录错误 = \(response.message)")
+                }
+            })
+            
+        case .Weibo:
+            let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToSina)
+            snsPlatform.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, { [unowned self]response in
+                if response.responseCode == UMSResponseCodeSuccess {
+                    let dict = UMSocialAccountManager.socialAccountDictionary()
+                    let snsAccount = dict[snsPlatform.platformName] as! UMSocialAccountEntity
+                    self.bingAccount(4, snsAccount: snsAccount, handler: handler)
+                } else {
+                    LogError("微博登录错误 = \(response.message)")
+                }
+            })
+        default:""
         }
     }
 }

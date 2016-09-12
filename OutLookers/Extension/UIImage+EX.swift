@@ -51,11 +51,16 @@ extension UIImage {
         let compressionQualityArr = NSMutableArray()
         let avg = CGFloat(1.0/250)
         var value = avg
-        
-        for var i = 250; i>=1; i -= 1 {
+        var i = 250
+        while i>=1 {
             value = CGFloat(i)*avg
             compressionQualityArr.addObject(value)
+            i -= 1
         }
+//        for var i = 250; i>=1; i -= 1 {
+//            value = CGFloat(i)*avg
+//            compressionQualityArr.addObject(value)
+//        }
         
         //调整大小
         //说明：压缩系数数组compressionQualityArr是从大到小存储。

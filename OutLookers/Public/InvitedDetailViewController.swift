@@ -135,8 +135,12 @@ class InvitedDetailViewController: YGBaseViewController {
         let rightMoreItem = UIBarButtonItem(customView: rightNaviButton)
         self.navigationItem.rightBarButtonItems = [rightFixedSpace, rightMoreItem]
         //分享
-        rightNaviButton.rx_tap.subscribeNext { [weak self] in
-            self?.shareView.animation()
+        rightNaviButton.rx_tap.subscribeNext { [unowned self] in
+            self.shareView.animation()
+            self.shareView.returnHomeClick = { [unowned self] in
+                self.navigationController?.tabBarController?.selectedIndex = 0
+                self.navigationController?.popViewControllerAnimated(true)
+            }
         }.addDisposableTo(disposeBag)
     }
     

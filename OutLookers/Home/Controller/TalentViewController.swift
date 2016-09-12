@@ -108,9 +108,13 @@ extension TalentViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
-        cell.shareBlock { [weak cell](sender) in
+        cell.shareBlock { [unowned cell, unowned self](sender) in
             self.shareAction(cell)
             self.shareView.animation()
+            self.shareView.returnHomeClick = {
+                self.navigationController?.tabBarController?.selectedIndex = 0
+                self.navigationController?.popViewControllerAnimated(true)
+            }
         }
         return cell
     }

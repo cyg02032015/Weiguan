@@ -20,6 +20,7 @@ let MaxTabButtonCount: Int = 5
 
 public class YGTabbar: UIView {
 
+    var firstBtn: YGTabbarButton!
     
     public var delegate: YGTabbarDelegate!
     
@@ -94,6 +95,7 @@ public class YGTabbar: UIView {
         }
         if tabbarButtonCount == 0 {
             self.tabbarClick(btn)
+            firstBtn = btn
         }
         lastButton = btn
         btn.item = item

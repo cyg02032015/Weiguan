@@ -21,47 +21,36 @@ class TalentDetailViewController: YGBaseViewController {
     var share: YGShare!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupShare()
         setupSubViews()
         loadData()
     }
     
     func setupShare() {
-        var collect = YGShareHandler.handleShareInstalled(.DYVisitor)
+        var type: YGShareType = .CCVisitor
         if isPerson {
-            collect.images.append(UIImage(named: kEditImg)!) // 编辑
-            collect.images.append(UIImage(named: kDeleteImg)!) // 删除
-            collect.images.append(UIImage(named: kHomeImg)!) // 返回首页
-            collect.titles.append(kEdit)
-            collect.titles.append(kDelete)
-            collect.titles.append(kHome)
-            share = YGShare(frame: CGRectZero, imgs: collect.images, titles: collect.titles)
-        } else {
-            collect.images.append(UIImage(named: kReportImg)!)
-            collect.images.append(UIImage(named: kHomeImg)!)
-            collect.titles.append(kReport)
-            collect.titles.append(kHome)
-            share = YGShare(frame: CGRectZero, imgs: collect.images, titles: collect.titles)
+            type = .CCHost
         }
-        share.shareBlock { (title) in
-            switch title {
-            case kDelete:
-                SVToast.show()
-                Server.deleteTalent("\(self.id)", handler: { (success, msg, value) in
-                    SVToast.dismiss()
-                    if success {
-                        SVToast.showWithSuccess("删除成功")
-                        delay(1, task: { 
-                            self.navigationController?.popViewControllerAnimated(true)
-                        })
-                    } else {
-                        guard let m = msg else {return}
-                        SVToast.showWithError(m)
-                    }
-                })
-            default:""
-            }
-        }
+        let tuple = YGShareHandler.handleShareInstalled(type)
+        share = YGShare(frame: CGRectZero, imgs: tuple.0, titles: tuple.2)
+//        share.shareBlock { (title) in
+//            switch title {
+//            case kDelete:
+//                SVToast.show()
+//                Server.deleteTalent("\(self.id)", handler: { (success, msg, value) in
+//                    SVToast.dismiss()
+//                    if success {
+//                        SVToast.showWithSuccess("删除成功")
+//                        delay(1, task: { 
+//                            self.navigationController?.popViewControllerAnimated(true)
+//                        })
+//                    } else {
+//                        guard let m = msg else {return}
+//                        SVToast.showWithError(m)
+//                    }
+//                })
+//            default:""
+//            }
+//        }
     }
     
     func loadData() {
@@ -83,8 +72,13 @@ class TalentDetailViewController: YGBaseViewController {
         title = "才艺详情"
         moreButton = setRightNaviItem()
         moreButton.setImage(UIImage(named: "more1"), forState: .Normal)
-        moreButton.rx_tap.subscribeNext { [weak self] in
-            self?.share.animation()
+        moreButton.rx_tap.subscribeNext { [unowned self] in
+            self.setupShare()
+            self.share.returnHomeClick = {
+                self.navigationController?.tabBarController?.selectedIndex = 0
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+            self.share.animation()
         }.addDisposableTo(disposeBag)
         
         tableView = UITableView(frame: CGRectZero, style: .Grouped)

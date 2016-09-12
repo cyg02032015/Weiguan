@@ -38,19 +38,19 @@ class TalentDtailResp: BaseResponse {
             return
         }
         categoryId = json["categoryId"].intValue
-        categoryName = json["categoryName"].stringValue
-        city = json["city"].stringValue
-        details = json["details"].stringValue
-        headImgUrl = json["headImgUrl"].stringValue
+        categoryName = json["categoryName"].stringValue ?? ""
+        city = json["city"].stringValue ?? ""
+        details = json["details"].stringValue ?? ""
+        headImgUrl = json["headImgUrl"].stringValue ?? ""
         id = json["id"].intValue
-        name = json["name"].stringValue
-        nickname = json["nickname"].stringValue
+        name = json["name"].stringValue ?? ""
+        nickname = json["nickname"].stringValue ?? ""
         price = json["price"].intValue
-        province = json["province"].stringValue
-        state = json["state"].stringValue
-        unit = json["unit"].stringValue
+        province = json["province"].stringValue ?? ""
+        state = json["state"].stringValue ?? ""
+        unit = json["unit"].stringValue ?? ""
         userId = json["userId"].intValue
-        worksCover = json["worksCover"].stringValue
+        worksCover = json["worksCover"].stringValue ?? ""
     }
 }
 

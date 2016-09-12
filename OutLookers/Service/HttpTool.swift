@@ -35,7 +35,7 @@ public class HttpTool {
     }
     
     
-    class func post(url: String, parameters: [String:AnyObject]?, complete:Success, fail: Failure) {
+    class func post(url: String, parameters: [String: AnyObject]?, complete:Success, fail: Failure) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
             dispatch_group_async(group, queue) {
@@ -90,7 +90,7 @@ public class HttpTool {
         for (key, value) in parameters! {
             realParameters[key] = value
         }
-        realParameters["deviceDesc"] = deviceDesc()
+        realParameters["deviceDesc"] = globleSingle.deviceDesc
         realParameters["appVersion"] = Int(appBuild())
         realParameters["appVersionName"] = appVersion()
         LogDebug("login headers = \(headers)")
@@ -108,19 +108,19 @@ public class HttpTool {
         }
     }
     
-    class func deviceDesc() -> String {
+//    class func deviceDesc() -> String {
         //        let infoDictionary = NSBundle.mainBundle().infoDictionary
         //        let appDisplayName: String? = infoDictionary?["CFBundleDisplayName"] as! String
         //        let majorVersion: String? = infoDictionary? ["CFBundleShortVersionString"] as! String//主程序版本号
         //        let minorVersion: String? = infoDictionary? [kCFBundleVersionKey as String] as! String//版本号（内部标示）
         //设备信息
-        let appVersion : String = UIDevice.currentDevice().systemVersion //ios版本
+//        let appVersion : String = UIDevice.currentDevice().systemVersion //ios版本
         //        let identifierNumber = UIDevice.currentDevice().identifierForVendor //设备udid
-        let systemName = UIDevice.currentDevice().systemName //系统名称
+//        let systemName = UIDevice.currentDevice().systemName //系统名称
         //let model = UIDevice.currentDevice().model //设备型号
         //let localizedModel = UIDevice.currentDevice().localizedModel //设备区域化型号如A1533
-        return systemName + appVersion
-    }
+//        return systemName + appVersion
+//    }
     
     class func appVersion() -> String {
         return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String

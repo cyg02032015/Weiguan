@@ -41,3 +41,20 @@ class IsAuthData {
         follow         = json["follow"].intValue
     }
 }
+
+class IsAuthDataReq: BaseResponse {
+    var result: IsAuthData!
+    
+    override init(fromJson json: JSON!) {
+        super.init(fromJson: json)
+        if json == nil{
+            return
+        }
+        
+        let resultJson = json["result"]
+        if resultJson != JSON.null {
+            result = IsAuthData(json: resultJson)
+            return
+        }
+    }
+}

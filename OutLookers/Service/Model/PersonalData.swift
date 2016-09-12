@@ -39,3 +39,20 @@ class PersonalData {
         sex          = json["sex"].intValue
     }
 }
+
+class PersonalDataReq: BaseResponse {
+    var result: PersonalData!
+    
+    override init(fromJson json: JSON!) {
+        super.init(fromJson: json)
+        if json == nil{
+            return
+        }
+        
+        let resultJson = json["result"]
+        if resultJson != JSON.null {
+            result = PersonalData(json: resultJson)
+            return
+        }
+    }
+}

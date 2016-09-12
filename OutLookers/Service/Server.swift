@@ -209,13 +209,13 @@ class Server {
     /// 才艺列表
     class func talentList(pageNo: Int, state: Int, timeStr: String, handler: (success: Bool, msg: String?, value: TalentListResp?)->Void) {
         let parameters = [
-            "userId" : UserSingleton.sharedInstance.userId,
+            "userId" : 0,
             "pageNo" : "\(pageNo)",
             "pageSize" : "\(pageSize)",
             "state" : "\(state)",
             "time" : timeStr
             ]
-        HttpTool.post(API.talentList, parameters: parameters, complete: { (response) in
+        HttpTool.post(API.talentList, parameters: parameters as? [String : AnyObject], complete: { (response) in
             let info = TalentListResp(fromJson: response)
             if info.success == true {
                 handler(success: true, msg: nil, value: info.result)

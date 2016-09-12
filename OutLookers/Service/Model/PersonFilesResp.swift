@@ -39,15 +39,15 @@ class PersonFilesResp: BaseResponse {
         for arrayJson in arrayArray{
             array.append(arrayJson.stringValue)
         }
-        bust = json["bust"].stringValue
-        characteristics = json["characteristics"].stringValue
-        constellation = json["constellation"].stringValue
-        experience = json["experience"].stringValue
-        height = json["height"].stringValue
-        hipline = json["hipline"].stringValue
+        bust = json["bust"].stringValue ?? ""
+        characteristics = json["characteristics"].stringValue ?? ""
+        constellation = json["constellation"].stringValue ?? ""
+        experience = json["experience"].stringValue ?? ""
+        height = json["height"].stringValue ?? ""
+        hipline = json["hipline"].stringValue ?? ""
         id = json["id"].intValue
         userId = json["userId"].intValue
-        waist = json["waist"].stringValue
-        weight = json["weight"].stringValue
+        waist = json["waist"].stringValue ?? ""
+        weight = json["weight"].stringValue ?? ""
     }
 }

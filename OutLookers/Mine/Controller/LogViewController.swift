@@ -141,7 +141,6 @@ class LogViewController: YGBaseViewController {
         
         nextButton.rx_tap.subscribeNext { [weak self] in
             if self!.phoneTF.text! =~ kMobileNumberReg {
-                NSUserDefaults.standardUserDefaults().setObject(self!.phoneTF.text!, forKey: "PhoneNum")
                 SVToast.show("正在登录")
                 Server.phoneLogin(self!.phoneTF.text!, pwd: (self!.passTF.text! + "a").myMD5, handler: { (success, msg, value) in
                     SVToast.dismiss()

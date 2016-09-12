@@ -27,7 +27,7 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             headImgView.setVimage(Util.userType(info.detailsType))
             nameLabel.text = info.name
             timeLabel.text = info.createTime.dateFromString()?.getShowFormat()
-            bigImgView.yy_setImageWithURL(info.cover.addImagePath(CGSize(width: ScreenWidth, height: ScreenWidth)), placeholder: kPlaceholder)
+            bigImgView.yy_setImageWithURL(info.cover.addImagePath(), placeholder: kPlaceholder)
             details.text = info.text
             if UserSingleton.sharedInstance.isLogin() {
                 if info.isLike == 1 {

@@ -61,12 +61,9 @@
 		2D788B091D8392C900153566 /* HotmanAuthReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AD51D8392C900153566 /* HotmanAuthReq.swift */; };
 		2D788B0A1D8392C900153566 /* HotmanAuthShowResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AD61D8392C900153566 /* HotmanAuthShowResp.swift */; };
 		2D788B0B1D8392C900153566 /* IsAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AD71D8392C900153566 /* IsAuthData.swift */; };
-		2D788B0C1D8392C900153566 /* IsAuthDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AD81D8392C900153566 /* IsAuthDataReq.swift */; };
 		2D788B0D1D8392C900153566 /* IsFollowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AD91D8392C900153566 /* IsFollowData.swift */; };
-		2D788B0E1D8392C900153566 /* IsFollowDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788ADA1D8392C900153566 /* IsFollowDataReq.swift */; };
 		2D788B0F1D8392C900153566 /* LikeListResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788ADB1D8392C900153566 /* LikeListResp.swift */; };
 		2D788B101D8392C900153566 /* MessageNumData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788ADC1D8392C900153566 /* MessageNumData.swift */; };
-		2D788B111D8392C900153566 /* MessageNumDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788ADD1D8392C900153566 /* MessageNumDataReq.swift */; };
 		2D788B121D8392C900153566 /* ModifyOGReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788ADE1D8392C900153566 /* ModifyOGReq.swift */; };
 		2D788B131D8392C900153566 /* MyFansResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788ADF1D8392C900153566 /* MyFansResp.swift */; };
 		2D788B141D8392C900153566 /* MyFollowResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE01D8392C900153566 /* MyFollowResp.swift */; };
@@ -74,7 +71,6 @@
 		2D788B161D8392C900153566 /* ParticipateCircularResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE21D8392C900153566 /* ParticipateCircularResp.swift */; };
 		2D788B171D8392C900153566 /* PerfectInfomationReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE31D8392C900153566 /* PerfectInfomationReq.swift */; };
 		2D788B181D8392C900153566 /* PersonalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE41D8392C900153566 /* PersonalData.swift */; };
-		2D788B191D8392C900153566 /* PersonalDataReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE51D8392C900153566 /* PersonalDataReq.swift */; };
 		2D788B1A1D8392C900153566 /* PersonFilesReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE61D8392C900153566 /* PersonFilesReq.swift */; };
 		2D788B1B1D8392C900153566 /* PersonFilesResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE71D8392C900153566 /* PersonFilesResp.swift */; };
 		2D788B1C1D8392C900153566 /* RecommendHotmanResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788AE81D8392C900153566 /* RecommendHotmanResp.swift */; };
@@ -348,6 +344,8 @@
 		2D788D771D83AEAF00153566 /* TalentDetailHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788D621D83AEAF00153566 /* TalentDetailHeadCell.swift */; };
 		2D788D781D83AEAF00153566 /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788D631D83AEAF00153566 /* TalentTableViewCell.swift */; };
 		2D788D791D83AEAF00153566 /* TalentWorksCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788D641D83AEAF00153566 /* TalentWorksCollectionCell.swift */; };
+		2D78BD471D841D95009566C1 /* BingAccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78BD461D841D95009566C1 /* BingAccountData.swift */; };
+		2D78BD4B1D85906A009566C1 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78BD4A1D85906A009566C1 /* AgreementViewController.swift */; };
 		AB71993A686A7CBFB7629BC3 /* Pods_OutLookersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */; };
 		ACCC10B9F7501AFDB23CD841 /* Pods_OutLookersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2C713D48702FF1F0494D7 /* Pods_OutLookersTests.framework */; };
 		C8E0CF148F916A2B78E0689E /* Pods_OutLookers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75970F3276218FA35C34DF0 /* Pods_OutLookers.framework */; };
@@ -413,7 +411,7 @@
 		2D788AB21D83922900153566 /* ArtistDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistDetailInfo.swift; sourceTree = "<group>"; };
 		2D788AB31D83922900153566 /* ArtistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistInfo.swift; sourceTree = "<group>"; };
 		2D788AB41D83922900153566 /* BaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
-		2D788AB51D83922900153566 /* HttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpTool.swift; sourceTree = "<group>"; wrapsLines = 4; };
+		2D788AB51D83922900153566 /* HttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpTool.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		2D788AB61D83922900153566 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		2D788AB71D83922900153566 /* StringResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringResponse.swift; sourceTree = "<group>"; };
 		2D788AC01D8392C900153566 /* AddworksReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddworksReq.swift; sourceTree = "<group>"; };
@@ -440,12 +438,9 @@
 		2D788AD51D8392C900153566 /* HotmanAuthReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotmanAuthReq.swift; sourceTree = "<group>"; };
 		2D788AD61D8392C900153566 /* HotmanAuthShowResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotmanAuthShowResp.swift; sourceTree = "<group>"; };
 		2D788AD71D8392C900153566 /* IsAuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsAuthData.swift; sourceTree = "<group>"; };
-		2D788AD81D8392C900153566 /* IsAuthDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsAuthDataReq.swift; sourceTree = "<group>"; };
 		2D788AD91D8392C900153566 /* IsFollowData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsFollowData.swift; sourceTree = "<group>"; };
-		2D788ADA1D8392C900153566 /* IsFollowDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsFollowDataReq.swift; sourceTree = "<group>"; };
 		2D788ADB1D8392C900153566 /* LikeListResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeListResp.swift; sourceTree = "<group>"; };
 		2D788ADC1D8392C900153566 /* MessageNumData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNumData.swift; sourceTree = "<group>"; };
-		2D788ADD1D8392C900153566 /* MessageNumDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNumDataReq.swift; sourceTree = "<group>"; };
 		2D788ADE1D8392C900153566 /* ModifyOGReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyOGReq.swift; sourceTree = "<group>"; };
 		2D788ADF1D8392C900153566 /* MyFansResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFansResp.swift; sourceTree = "<group>"; };
 		2D788AE01D8392C900153566 /* MyFollowResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFollowResp.swift; sourceTree = "<group>"; };
@@ -453,7 +448,6 @@
 		2D788AE21D8392C900153566 /* ParticipateCircularResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipateCircularResp.swift; sourceTree = "<group>"; };
 		2D788AE31D8392C900153566 /* PerfectInfomationReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerfectInfomationReq.swift; sourceTree = "<group>"; };
 		2D788AE41D8392C900153566 /* PersonalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalData.swift; sourceTree = "<group>"; };
-		2D788AE51D8392C900153566 /* PersonalDataReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDataReq.swift; sourceTree = "<group>"; };
 		2D788AE61D8392C900153566 /* PersonFilesReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonFilesReq.swift; sourceTree = "<group>"; };
 		2D788AE71D8392C900153566 /* PersonFilesResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonFilesResp.swift; sourceTree = "<group>"; };
 		2D788AE81D8392C900153566 /* RecommendHotmanResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendHotmanResp.swift; sourceTree = "<group>"; };
@@ -778,6 +772,8 @@
 		2D788D621D83AEAF00153566 /* TalentDetailHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailHeadCell.swift; sourceTree = "<group>"; };
 		2D788D631D83AEAF00153566 /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
 		2D788D641D83AEAF00153566 /* TalentWorksCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentWorksCollectionCell.swift; sourceTree = "<group>"; };
+		2D78BD461D841D95009566C1 /* BingAccountData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAccountData.swift; sourceTree = "<group>"; };
+		2D78BD4A1D85906A009566C1 /* AgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
 		317978DBBE87710C975C15DF /* Pods-OutLookersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersUITests/Pods-OutLookersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4980B947CB315A8F8C2FFDBF /* Pods_OutLookersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutLookersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E566B98D8EB14C853632E78 /* Pods-OutLookers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookers/Pods-OutLookers.debug.xcconfig"; sourceTree = "<group>"; };
@@ -874,12 +870,9 @@
 				2D788AD51D8392C900153566 /* HotmanAuthReq.swift */,
 				2D788AD61D8392C900153566 /* HotmanAuthShowResp.swift */,
 				2D788AD71D8392C900153566 /* IsAuthData.swift */,
-				2D788AD81D8392C900153566 /* IsAuthDataReq.swift */,
 				2D788AD91D8392C900153566 /* IsFollowData.swift */,
-				2D788ADA1D8392C900153566 /* IsFollowDataReq.swift */,
 				2D788ADB1D8392C900153566 /* LikeListResp.swift */,
 				2D788ADC1D8392C900153566 /* MessageNumData.swift */,
-				2D788ADD1D8392C900153566 /* MessageNumDataReq.swift */,
 				2D788ADE1D8392C900153566 /* ModifyOGReq.swift */,
 				2D788ADF1D8392C900153566 /* MyFansResp.swift */,
 				2D788AE01D8392C900153566 /* MyFollowResp.swift */,
@@ -887,7 +880,6 @@
 				2D788AE21D8392C900153566 /* ParticipateCircularResp.swift */,
 				2D788AE31D8392C900153566 /* PerfectInfomationReq.swift */,
 				2D788AE41D8392C900153566 /* PersonalData.swift */,
-				2D788AE51D8392C900153566 /* PersonalDataReq.swift */,
 				2D788AE61D8392C900153566 /* PersonFilesReq.swift */,
 				2D788AE71D8392C900153566 /* PersonFilesResp.swift */,
 				2D788AE81D8392C900153566 /* RecommendHotmanResp.swift */,
@@ -1493,6 +1485,7 @@
 				2D788A951D83917E00153566 /* ShareCell.swift */,
 				2D788A961D83917E00153566 /* ShareCollectionCell.swift */,
 				2D788A971D83917E00153566 /* WorkDetailCell.swift */,
+				2D78BD4A1D85906A009566C1 /* AgreementViewController.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -1831,6 +1824,7 @@
 				2D788C441D8397EA00153566 /* PersonCharacter.swift */,
 				2D788C451D8397EA00153566 /* PersonFile.swift */,
 				2D788C461D8397EA00153566 /* VerifyRequest.swift */,
+				2D78BD461D841D95009566C1 /* BingAccountData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2203,7 +2197,6 @@
 				2D788C481D8397EA00153566 /* IsAuthResp.swift in Sources */,
 				2D788D251D83AD9600153566 /* FindViewController.swift in Sources */,
 				2D788AAE1D8391BB00153566 /* YGTabbarController.swift in Sources */,
-				2D788B0E1D8392C900153566 /* IsFollowDataReq.swift in Sources */,
 				2D788D451D83AE2E00153566 /* PHOrderListViewController.swift in Sources */,
 				2D788BE31D83944F00153566 /* TAAnimatedDotView.m in Sources */,
 				2D788AF91D8392C900153566 /* CommentListResp.swift in Sources */,
@@ -2252,7 +2245,6 @@
 				2D788C281D8394EB00153566 /* SBThreadsafely.swift in Sources */,
 				2D788C651D83985200153566 /* MyEnterCell.swift in Sources */,
 				D830877A1D278B72009CFE03 /* UIBarButtonItem+Badge.m in Sources */,
-				2D788B191D8392C900153566 /* PersonalDataReq.swift in Sources */,
 				2D788BE51D83944F00153566 /* TAPageControl.m in Sources */,
 				2D788D671D83AEAF00153566 /* DataTableViewCell.swift in Sources */,
 				2D788AA21D83917E00153566 /* ShareCell.swift in Sources */,
@@ -2276,7 +2268,6 @@
 				2D788C261D8394EB00153566 /* OSSVideoUploader.swift in Sources */,
 				2D788C2C1D8394EB00153566 /* YGCityData.swift in Sources */,
 				2D788B161D8392C900153566 /* ParticipateCircularResp.swift in Sources */,
-				2D788B111D8392C900153566 /* MessageNumDataReq.swift in Sources */,
 				2D788D441D83AE2E00153566 /* OrganizationViewController.swift in Sources */,
 				2D788BD71D83944F00153566 /* MJRefreshBackNormalFooter.m in Sources */,
 				2D788C501D83980700153566 /* FeedbackCell.swift in Sources */,
@@ -2375,12 +2366,13 @@
 				2D788C921D839ABA00153566 /* GetVerifyViewController.swift in Sources */,
 				2D788C851D839AA500153566 /* Register2ViewController.swift in Sources */,
 				2D788B041D8392C900153566 /* GetContentResp.swift in Sources */,
+				2D78BD471D841D95009566C1 /* BingAccountData.swift in Sources */,
 				2D788C4C1D8397EA00153566 /* VerifyRequest.swift in Sources */,
+				2D78BD4B1D85906A009566C1 /* AgreementViewController.swift in Sources */,
 				2D788B4D1D83930900153566 /* UIImagePickerController+EX.swift in Sources */,
 				2D788C341D8394EB00153566 /* YKPhotoPreviewCell.swift in Sources */,
 				2D788CF91D83AD1900153566 /* EditSkillViewController.swift in Sources */,
 				2D788C301D8394EB00153566 /* YGPickerView.swift in Sources */,
-				2D788B0C1D8392C900153566 /* IsAuthDataReq.swift in Sources */,
 				2D788CDC1D83AC0C00153566 /* FriendViewController.swift in Sources */,
 				2D788C7D1D83989200153566 /* MessageCell.swift in Sources */,
 				2D788BE11D83944F00153566 /* UIView+MJExtension.m in Sources */,
@@ -2621,14 +2613,7 @@
 				INFOPLIST_FILE = OutLookers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/OutLookers/EaseMobSDK/lib",
-					"$(PROJECT_DIR)/OutLookers/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
-					"$(PROJECT_DIR)/OutLookers/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
-					"$(PROJECT_DIR)/OutLookers/HyphenateSDK/lib/3rdparty",
-					"$(PROJECT_DIR)/OutLookers/HyphenateSDK/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"APOpenSdk\"",
@@ -2720,14 +2705,7 @@
 				INFOPLIST_FILE = OutLookers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/OutLookers/EaseMobSDK/lib",
-					"$(PROJECT_DIR)/OutLookers/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
-					"$(PROJECT_DIR)/OutLookers/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
-					"$(PROJECT_DIR)/OutLookers/HyphenateSDK/lib/3rdparty",
-					"$(PROJECT_DIR)/OutLookers/HyphenateSDK/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"APOpenSdk\"",

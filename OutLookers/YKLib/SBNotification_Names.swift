@@ -16,8 +16,5 @@ let kMessageFollowReleaseReadNotification = "kMessageFollowReleaseReadNotificati
 //离开动态详情页面
 let DynamicDetailVC_WillDisappear = "DynamicDetailVC_WillDisappear"
 
-//分享视图的回到首页
-let Back_HomePage = "Back_HomePage"
-
 /// 退出登录通知界面刷新数据
 let ReloadData = "ReloadData"

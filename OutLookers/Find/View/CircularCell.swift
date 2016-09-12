@@ -12,7 +12,7 @@ class CircularCell: UITableViewCell {
 
     var info: FindNotice! {
         didSet {
-            imgView.yy_setImageWithURL(info.picture.addImagePath(CGSize(width: ScreenWidth, height: kScale(210))), placeholder: kPlaceholder)
+            imgView.yy_setImageWithURL(info.picture.addImagePath(), placeholder: kPlaceholder)
             subjectLabel.text = info.theme
             
             Server.circularRecruitInformation(info.recruitment) { (success, msg, value) in

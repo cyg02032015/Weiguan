@@ -38,13 +38,13 @@ class UserData {
         if json == nil{
             return
         }
-        birthday = json["birthday"].stringValue
-        city = json["city"].stringValue
-        headImgUrl = json["headImgUrl"].stringValue
+        birthday = json["birthday"].stringValue ?? ""
+        city = json["city"].stringValue ?? ""
+        headImgUrl = json["headImgUrl"].stringValue ?? ""
         id = json["id"].intValue
-        introduction = json["introduction"].stringValue
-        nickname = json["nickname"].stringValue
-        province = json["province"].stringValue
-        sex = json["sex"].stringValue
+        introduction = json["introduction"].stringValue ?? ""
+        nickname = json["nickname"].stringValue ?? ""
+        province = json["province"].stringValue ?? ""
+        sex = json["sex"].stringValue ?? ""
     }
 }

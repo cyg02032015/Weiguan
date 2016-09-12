@@ -67,13 +67,13 @@ class Result{
             let value = List(fromJson: listJson)
             list.append(value)
         }
-        name = json["name"].stringValue
-        picture = json["picture"].stringValue
+        name = json["name"].stringValue ?? ""
+        picture = json["picture"].stringValue ?? ""
         pictureNum = json["pictureNum"].intValue
         price = json["price"].intValue
-        state = json["state"].stringValue
+        state = json["state"].stringValue ?? ""
         unit = json["unit"].stringValue
-        worksCover = json["worksCover"].stringValue
+        worksCover = json["worksCover"].stringValue ?? ""
     }
     
 }

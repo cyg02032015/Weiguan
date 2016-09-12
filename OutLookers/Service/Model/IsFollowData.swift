@@ -23,4 +23,21 @@ class IsFollowData {
         beConcerned  = json["beConcerned"].intValue
     }
 }
- 
+
+
+class IsFollowDataReq: BaseResponse {
+    var result: IsFollowData!
+    
+    override init(fromJson json: JSON!) {
+        super.init(fromJson: json)
+        if json == nil{
+            return
+        }
+        
+        let resultJson = json["result"]
+        if resultJson != JSON.null {
+            result = IsFollowData(json: resultJson)
+            return
+        }
+    }
+}

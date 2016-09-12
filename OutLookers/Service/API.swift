@@ -11,6 +11,8 @@ import Foundation
 let baseURL = "http://api.dev.chunyangapp.com"
 
 struct API {
+    /// 绑定第三方
+    static let bingAccount = baseURL + "/api/login/v1/bind"
     /// 查看账号绑定状态
     static let checkBing = baseURL + "/api/login/v1/checkBind"
     /// 他的粉丝

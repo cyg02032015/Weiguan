@@ -29,8 +29,8 @@ class MyFansResp: BaseResponse {
             result = MyFansResp(fromJson: pageJson)
             return
         }
-        order = json["order"].stringValue
-        orderBy = json["orderBy"].stringValue
+        order = json["order"].stringValue ?? ""
+        orderBy = json["orderBy"].stringValue ?? ""
         pageNo = json["pageNo"].intValue
         pageSize = json["pageSize"].intValue
         
@@ -60,8 +60,8 @@ class FansList {
         fan = json["fan"].intValue
         followUserId = json["followUserId"].intValue
         id = json["id"].intValue
-        name = json["name"].stringValue
-        photo = json["photo"].stringValue
+        name = json["name"].stringValue ?? ""
+        photo = json["photo"].stringValue ?? ""
         userId = json["userId"].intValue
         detailsType = json["detailsType"].intValue
     }

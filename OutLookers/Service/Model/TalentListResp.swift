@@ -28,8 +28,8 @@ class TalentListResp: BaseResponse {
             result = TalentListResp(fromJson: pageJson)
             return
         }
-        order = json["order"].stringValue
-        orderBy = json["orderBy"].stringValue
+        order = json["order"].stringValue ?? ""
+        orderBy = json["orderBy"].stringValue ?? ""
         pageNo = json["pageNo"].intValue
         pageSize = json["pageSize"].intValue
         

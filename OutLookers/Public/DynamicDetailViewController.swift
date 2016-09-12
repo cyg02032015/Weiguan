@@ -201,7 +201,7 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
                 SVToast.showWithSuccess("发表成功")
                 let comment = CommentList(fromJson: JSON(nilLiteral: ()))
                 comment.createTime = NSDate().stringFromCreate()
-                comment.headImgUrl = ""
+                comment.headImgUrl = UserSingleton.sharedInstance.nickname
                 comment.nickname = UserSingleton.sharedInstance.nickname
                 comment.text = self.req.text
                 comment.id = self.dynamicObj.id
@@ -253,6 +253,11 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
             cell.delegate = self
             cell.tableView = tableView
             cell.info = detailObj
+            cell.toTalentClick = { [unowned self](index) in
+                let vc = TalentDetailViewController()
+                vc.id = self.detailObj.talentList[indexPath.section].id
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             if let _ = isFollow {
                 cell.isFollow = isFollow
             }

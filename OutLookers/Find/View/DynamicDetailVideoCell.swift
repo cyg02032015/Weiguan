@@ -32,6 +32,7 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
     }
     
+    var toTalentClick: ((Int) -> Void)?
     var info: DynamicDetailResp! {
         didSet {
             guard let _ = info.pictureList.first?.url else {return}
@@ -113,6 +114,11 @@ class DynamicDetailVideoCell: UITableViewCell {
                 label.layer.borderColor = UIColor(hex: 0xFA8B37).CGColor
                 label.layer.borderWidth = 1
                 label.setTitle(talent.name, forState: .Normal)
+                _ = label.rx_tap.subscribeNext({ [unowned self](sender) in
+                    if let _ = self.toTalentClick {
+                        self.toTalentClick!(idx)
+                    }
+                })
                 container.addSubview(label)
                 let size = (talent.name as NSString).sizeWithFonts(12)
                 // 加边距

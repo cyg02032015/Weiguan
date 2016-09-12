@@ -23,3 +23,20 @@ class MessageNumData {
         follow = json["follow"].intValue
     }
 }
+
+class MessageNumDataReq: BaseResponse {
+    var result: MessageNumData!
+    
+    override init(fromJson json: JSON!) {
+        super.init(fromJson: json)
+        if json == nil{
+            return
+        }
+        
+        let resultJson = json["result"]
+        if resultJson != JSON.null {
+            result = MessageNumData(json: resultJson)
+            return
+        }
+    }
+}
