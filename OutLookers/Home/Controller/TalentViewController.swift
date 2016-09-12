@@ -98,21 +98,23 @@ extension TalentViewController {
         vc.id = self.lists[indexPath.section].id
         navigationController?.pushViewController(vc, animated: true)
     }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(talentCellIdentifier, forIndexPath: indexPath) as! TalentTableViewCell
         cell.info = lists[indexPath.section]
         cell.collectionView.contentOffset = CGPointZero
-        cell.detailBlock { [weak self](sender) in
+        cell.detailBlock { [unowned self](sender) in
             let vc = TalentDetailViewController()
-            vc.id = self?.lists[indexPath.section].id
-            self?.navigationController?.pushViewController(vc, animated: true)
+            vc.id = self.lists[indexPath.section].id
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         cell.shareBlock { [unowned cell, unowned self](sender) in
             self.shareAction(cell)
             self.shareView.animation()
             self.shareView.returnHomeClick = {
-                self.navigationController?.tabBarController?.selectedIndex = 0
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.firstBtn)
                 self.navigationController?.popViewControllerAnimated(true)
             }
         }

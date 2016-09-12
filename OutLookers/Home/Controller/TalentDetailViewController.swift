@@ -10,13 +10,15 @@ import UIKit
 
 private let talentDetailHeadCellId = "talentDetailHeadCellId"
 private let talentDetailCellId = "talentDetailCellId"
+private let talentDetailNomalCell = "talentDetailNomalCell"
 
 class TalentDetailViewController: YGBaseViewController {
 
     var id: Int!
     var isPerson = false
     var tableView: UITableView!
-    var talentObj: TalentDtailResp!
+    private var talentObj: TalentDtailResp!
+    private lazy var worksList = [WorksList]()
     var moreButton: UIButton!
     var share: YGShare!
     override func viewDidLoad() {
@@ -55,11 +57,26 @@ class TalentDetailViewController: YGBaseViewController {
     
     func loadData() {
         SVToast.show()
-        Server.talentDetail("\(id)") { (success, msg, value) in
+        Server.talentDetail("\(id)") { [weak self](success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let obj = value else {return}
-                self.talentObj = obj
+                self?.talentObj = obj
+                self?.loadWorks()
+                self?.tableView.reloadData()
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
+    }
+    
+    func loadWorks() {
+        Server.getWorks("\(id)") { (success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                guard let obj = value else {return}
+                self.worksList.appendContentsOf(obj)
                 self.tableView.reloadData()
             } else {
                 guard let m = msg else {return}
@@ -75,7 +92,8 @@ class TalentDetailViewController: YGBaseViewController {
         moreButton.rx_tap.subscribeNext { [unowned self] in
             self.setupShare()
             self.share.returnHomeClick = {
-                self.navigationController?.tabBarController?.selectedIndex = 0
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.firstBtn)
                 self.navigationController?.popViewControllerAnimated(true)
             }
             self.share.animation()
@@ -86,6 +104,7 @@ class TalentDetailViewController: YGBaseViewController {
         tableView.dataSource = self
         tableView.registerClass(TalentDetailHeadCell.self, forCellReuseIdentifier: talentDetailHeadCellId)
         tableView.registerClass(TalentDetailCell.self, forCellReuseIdentifier: talentDetailCellId)
+        tableView.registerClass(TalentDetailNomalCell.self, forCellReuseIdentifier: talentDetailNomalCell)
         tableView.estimatedRowHeight = kHeight(1000)
         tableView.separatorStyle = .None
         tableView.tableFooterView = UIView()
@@ -98,14 +117,20 @@ class TalentDetailViewController: YGBaseViewController {
 
 extension TalentDetailViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
-        } else {
+        }else if section == 1 {
             return 1
+        }else {
+            if worksList.count > 0 {
+                return worksList[0].list.count
+            }else {
+                return 0
+            }
         }
     }
     
@@ -116,11 +141,15 @@ extension TalentDetailViewController {
                 cell.info = talentObj
             }
             return cell
-        } else {
+        } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(talentDetailCellId, forIndexPath: indexPath) as! TalentDetailCell
             if talentObj != nil {
                 cell.info = talentObj
             }
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(talentDetailNomalCell, forIndexPath: indexPath) as! TalentDetailNomalCell
+            cell.info = worksList[0].list[indexPath.row]
             return cell
         }
     }
@@ -132,13 +161,15 @@ extension TalentDetailViewController {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return kHeight(64)
-        } else {
-            return UITableViewAutomaticDimension
+        } else if indexPath.section == 1 {
+            return 400
+        }else {
+            return 280
         }
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
+        if section == 0 || section == 1 {
             return kHeight(10)
         } else {
             return 0.01

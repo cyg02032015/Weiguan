@@ -36,6 +36,8 @@ class YGTabbarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addTabbar()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.customTabbar = customTabbar
         addChildViewControllers()
         self.tabBar.translucent = false
         self.tabBar.backgroundImage = UIColor().imageWith(UIColor.clearColor())
@@ -81,13 +83,6 @@ class YGTabbarController: UITabBarController {
         self.addChildViewController(navi)
     }
     
-    override var selectedIndex: Int {
-        didSet {
-            guard selectedIndex == 0 else { return }
-            customTabbar.tabbarClick(customTabbar.firstBtn)
-        }
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -99,7 +94,6 @@ extension YGTabbarController: YGTabbarDelegate {
             guard let vc = (vcs[didSelectedfrom] as! YGNavigationController).topViewController else {return}
             LogInHelper.login(vc)
         }
-        guard to != 0 else { return }
         self.selectedIndex = to
     }
     

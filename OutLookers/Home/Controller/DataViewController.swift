@@ -13,9 +13,10 @@ private let dataSecondCellIdentifier = "dataSecondId"
 
 class DataViewController: YGBaseViewController {
 
-    
-    var tableView: UITableView!
-    var rightButton: UIButton!
+    var userId: String?
+    private var req: PersonFilesReq?
+    private var tableView: UITableView!
+    private var rightButton: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,13 +42,42 @@ class DataViewController: YGBaseViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(tableView.superview!)
         }
+        loadData()
+    }
+    
+    func loadData() {
+        Server.showPersonFiles(userId) { [weak self](success, msg, value) in
+            SVToast.dismiss()
+            if success {
+                guard let obj = value else {return}
+                self?.req = PersonFilesReq()
+                self?.req!.bust = obj.bust
+                self?.req!.characteristics = obj.characteristics
+                self?.req!.constellation = obj.constellation
+                self?.req!.experience = obj.experience
+                self?.req!.height = obj.height
+                self?.req!.weight = obj.weight
+                self?.req!.hipline = obj.hipline
+                self?.req!.waist = obj.waist
+                self?.req!.array = obj.array
+                self?.req!.userId = "\(obj.id)"
+                self?.req!.sex = obj.sex
+                self?.req!.birthday = obj.birthday
+                self?.req!.province = obj.province
+                self?.req!.city = obj.city
+                self?.tableView.reloadData()
+            } else {
+                guard let m = msg else {return}
+                SVToast.showWithError(m)
+            }
+        }
     }
 }
 
 // MARK: - UITableviewDelegate, UITableviewDatasource
 extension DataViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,6 +87,9 @@ extension DataViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(dataCellIdentifier, forIndexPath: indexPath) as! DataTableViewCell
+            if let _ = req {
+                cell.req = req
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(dataSecondCellIdentifier, forIndexPath: indexPath) as! DataSecondCell
@@ -71,6 +104,10 @@ extension DataViewController {
         } else {
             return kScale(157)
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
 }
 

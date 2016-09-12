@@ -14,6 +14,9 @@ class TalentDetailHeadCell: UITableViewCell {
         didSet {
             headImgView.iconURL = info.headImgUrl.addImagePath(kSize(35, height: 35))
             nameLabel.text = info.nickname
+            if "\(info.userId)" == UserSingleton.sharedInstance.userId || info.follow == 1 {
+                button.hidden = true
+            }
         }
     }
     var headImgView: IconHeaderView!
@@ -37,7 +40,7 @@ class TalentDetailHeadCell: UITableViewCell {
         }
         
         button = UIButton()
-        button.setImage(UIImage(named: ""), forState: .Normal)
+        button.setImage(UIImage(named: "follow11"), forState: .Normal)
         button.hidden = true
         contentView.addSubview(button)
         button.snp.makeConstraints { (make) in

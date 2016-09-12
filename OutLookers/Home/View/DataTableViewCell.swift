@@ -10,6 +10,27 @@ import UIKit
 
 class DataTableViewCell: UITableViewCell {
 
+    var req: PersonFilesReq? {
+        didSet {
+            guard let _ = req else { return }
+            if req!.sex == 0 {
+                sexLabel.text = "性别: " + "未知"
+            }else if req!.sex == 1 {
+                sexLabel.text = "男"
+            }else {
+                sexLabel.text = "女"
+            }
+            ageLabel.text = CPDateUtil.stringToDate(req!.birthday).ageWithDateOfBirth()
+            addressLabel.text = req!.province + req!.city
+            heightLabel.text = req!.height
+            weightLabel.text = req!.weight
+            braLabel.text = req!.bust
+            waistlineLabel.text = req!.waist
+            hiplineLabel.text = req!.hipline
+            constellatoryLabel.text = req!.constellation
+            experence.text = req!.experience
+        }
+    }
     var sexLabel: UILabel!          // 性别
     var ageLabel: UILabel!          // 年龄
     var addressLabel: UILabel!      // 常住地
@@ -262,23 +283,23 @@ class DataTableViewCell: UITableViewCell {
         }
         
         basicDataLabel.text = "基本资料"
-        sexLabel.text = "性别：女"
-        ageLabel.text = "年龄：26"
-        addressLabel.text = "常住地：北京市"
-        heightLabel.text = "身高：178cm"
-        weightLabel.text = "体重：45kg"
-        braLabel.text = "胸围：82cm"
-        waistlineLabel.text = "腰围：60cm"
-        hiplineLabel.text = "臀围：82cm"
-        constellatoryLabel.text = "星座：天蝎座"
+        sexLabel.text = "性别："
+        ageLabel.text = "年龄："
+        addressLabel.text = "常住地："
+        heightLabel.text = "身高："
+        weightLabel.text = "体重："
+        braLabel.text = "胸围："
+        waistlineLabel.text = "腰围："
+        hiplineLabel.text = "臀围："
+        constellatoryLabel.text = "星座："
         
         featureLabel.text = "个人特征"
-        style.text = "风格特征：欧美 日韩 街头 性感 中国风日韩 街头 性感 "
-        appearance.text = "外貌特征：短发 骨感 双眼皮短发 骨感 双眼皮短发 骨感"
-        shape.text = "体型特征：瘦短发 骨感 双眼皮短发 骨感 双眼皮短发短"
-        charm.text = "魅力部位：眼睛 腿部眼睛 腿部眼睛 腿部。"
+        style.text = "风格特征："
+        appearance.text = "外貌特征："
+        shape.text = "体型特征："
+        charm.text = "魅力部位："
         experenceLabel.text = "才艺经历"
-        experence.text = "曾任《男人装》御用模特。"
+        experence.text = ""
     }
     
     required init?(coder aDecoder: NSCoder) {

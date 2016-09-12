@@ -33,15 +33,23 @@ class WorksList {
     var talentId : Int!
     var text : String!
     var worksIds : String!
+    var list: [TalentPhotoModel]!
     
     init(fromJson json: JSON!){
         if json == nil{
             return
         }
-        createTime = json["createTime"].stringValue
+        createTime = json["createTime"].stringValue ?? ""
         id = json["id"].intValue
         talentId = json["talentId"].intValue
-        text = json["text"].stringValue
-        worksIds = json["worksIds"].stringValue
+        text = json["text"].stringValue ?? ""
+        worksIds = json["worksIds"].stringValue ?? ""
+        let lists = json["list"].arrayValue
+        list = [TalentPhotoModel]()
+        for listJson in lists {
+            let model = TalentPhotoModel(json: listJson)
+            list.append(model)
+        }
+        
     }
 }

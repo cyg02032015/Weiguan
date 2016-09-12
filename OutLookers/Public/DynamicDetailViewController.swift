@@ -282,13 +282,13 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
             let cell = tableView.dequeueReusableCellWithIdentifier(commentCellId, forIndexPath: indexPath) as! CommentCell
             cell.info = info
             cell.headImgView.iconHeaderTap({ [unowned self] in
-                guard "\(info.userId)" == UserSingleton.sharedInstance.userId else { return }
+                guard "\(info.userId)" != UserSingleton.sharedInstance.userId else { return }
                 let vc = PHViewController()
                 vc.user = "\(info.userId)"
                 self.navigationController?.pushViewController(vc, animated: true)
                 })
             cell.replyNickNameLabel.tapLabelAction({ [unowned self] in
-                guard "\(info.replyId)" == UserSingleton.sharedInstance.userId else { return }
+                guard "\(info.replyId)" != UserSingleton.sharedInstance.userId else { return }
                 let vc = PHViewController()
                 vc.user = "\(info.replyId)"
                 self.navigationController?.pushViewController(vc, animated: true)

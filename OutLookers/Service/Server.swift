@@ -442,9 +442,9 @@ class Server {
     }
     
     /// 个人档案-查看
-    class func showPersonFiles(handler: (success: Bool, msg: String?, value: PersonFilesResp?)->Void) {
+    class func showPersonFiles(userId: String? = UserSingleton.sharedInstance.userId, handler: (success: Bool, msg: String?, value: PersonFilesResp?)->Void) {
         let parameters = [
-            "userId" : UserSingleton.sharedInstance.userId
+            "userId" : userId!
         ]
         HttpTool.post(API.showPersonFiles, parameters: parameters, complete: { (response) in
             let info = PersonFilesResp(fromJson: response)

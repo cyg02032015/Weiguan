@@ -158,6 +158,7 @@ class PHViewController: YGBaseViewController {
     
     func tapMore(sender: UIButton) {
         let vc = DataViewController()
+        vc.userId = user
         navigationController?.pushViewController(vc, animated: true)
     }
     

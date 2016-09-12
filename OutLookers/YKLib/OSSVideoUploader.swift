@@ -41,6 +41,8 @@ class OSSVideoUploader {
         put.uploadingFileURL = videoURL
         put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
             LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
+            let progress = Float(totalByteSent) / Float(totalBytesExpectedToSend)
+            SVProgressHUD.showProgress(progress, status: "\(Int(progress*100))%")
         }
         let putTask = clinet.putObject(put)
         putTask.continueWithBlock({ (task) in

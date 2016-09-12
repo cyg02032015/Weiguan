@@ -13,6 +13,7 @@ private let invitedDetailId = "invitedDetailId"
 
 class InvitedDetailViewController: YGBaseViewController {
 
+    private var isFollow: IsFollowData?
     var id: String = ""
     var tableView: UITableView!
     var noticeObj: FindNoticeDetailResp!
@@ -22,6 +23,7 @@ class InvitedDetailViewController: YGBaseViewController {
     
     var shareImage: UIImage!
     
+    private var headerIcon: IconHeaderView!
     private var didAppear: Bool = false
     private var shareView: YGShare!
     override func viewDidLoad() {
@@ -74,6 +76,25 @@ class InvitedDetailViewController: YGBaseViewController {
             if success {
                 guard let obj = value, ws = self else {return}
                 ws.noticeObj = obj
+                Server.getAvatarAndName("\(obj.userId)", handler: { (success, msg, value) in
+                    if success {
+                        guard let obj = value else {return}
+                        self?.headerIcon.iconURL = obj[0].headImgUrl.addImagePath(CGSize(width: 78, height: 78))
+                        self?.headerIcon.setVimage(Util.userType(obj[0].detailsType))
+//                        self.nameLabel.text = obj[0].nickname
+                    } else {
+                        guard let m = msg else {return}
+                        LogError(m)
+                    }
+                })
+                Server.isFollowStatus(UserSingleton.sharedInstance.userId, followUserId: "\(obj.userId)") { (success, msg, value) in
+                    if success {
+                        self?.isFollow = value
+                    }else {
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
+                    }
+                }
                 var imgUrls = [String]()
                 obj.pictureList.forEach({ (list) in
                     imgUrls.append(list.url)
@@ -124,7 +145,7 @@ class InvitedDetailViewController: YGBaseViewController {
             make.top.equalTo(snp.topLayoutGuideTop).offset(-NaviHeight)
         }
         
-        header = InvitedHeaderView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: kScale(180)))
+        header = InvitedHeaderView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: kScale(210)))
         tableView.tableHeaderView = header
         
         rightNaviButton = setRightNaviItem()
@@ -134,11 +155,28 @@ class InvitedDetailViewController: YGBaseViewController {
         rightFixedSpace.width = -5
         let rightMoreItem = UIBarButtonItem(customView: rightNaviButton)
         self.navigationItem.rightBarButtonItems = [rightFixedSpace, rightMoreItem]
+        
+        headerIcon = IconHeaderView()
+        headerIcon.customCornerRadius = kScale(39/2)
+        tableView.addSubview(headerIcon)
+        headerIcon.snp.makeConstraints { [unowned self](make) in
+            make.top.equalTo(self.header.snp.bottom).offset(-10)
+            make.size.equalTo(kSize(39, height: 39))
+            make.left.equalTo(self.headerIcon.superview!).offset(kScale(15))
+        }
+        headerIcon.iconHeaderTap { [unowned self] in
+            guard "\(self.noticeObj.userId)" != UserSingleton.sharedInstance.userId else { return }
+            let vc = PHViewController()
+            vc.user = "\(self.noticeObj.userId)"
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         //分享
         rightNaviButton.rx_tap.subscribeNext { [unowned self] in
             self.shareView.animation()
             self.shareView.returnHomeClick = { [unowned self] in
-                self.navigationController?.tabBarController?.selectedIndex = 0
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.firstBtn)
                 self.navigationController?.popViewControllerAnimated(true)
             }
         }.addDisposableTo(disposeBag)
@@ -149,7 +187,7 @@ class InvitedDetailViewController: YGBaseViewController {
     }
 }
 
-extension InvitedDetailViewController {
+extension InvitedDetailViewController: FollowProtocol {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
@@ -164,7 +202,19 @@ extension InvitedDetailViewController {
             if self.noticeObj != nil {
                 cell.info = self.noticeObj
             }
-            tableView.bringSubviewToFront(cell)
+            if let _ = self.isFollow {
+                cell.concerned = self.isFollow?.concerned
+            }
+            _ = cell.follow.rx_tap.subscribeNext({ [unowned self, unowned cell] in
+                Server.followUser("\(self.noticeObj.userId)") { (success, msg, value) in
+                    if success {
+                        self.modifyFollow(cell.follow)
+                    } else {
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
+                    }
+                }
+            })
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(invitedDetailId, forIndexPath: indexPath) as! InvitedDetailTableViewCell

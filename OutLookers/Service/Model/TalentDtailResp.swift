@@ -25,7 +25,9 @@ class TalentDtailResp: BaseResponse {
     var unit : String!
     var userId : Int!
     var worksCover : String!
+    var createTime: String!
     var result: TalentDtailResp!
+    var follow: Int!
     
     override init(fromJson json: JSON!){
         super.init(fromJson: json)
@@ -51,6 +53,8 @@ class TalentDtailResp: BaseResponse {
         unit = json["unit"].stringValue ?? ""
         userId = json["userId"].intValue
         worksCover = json["worksCover"].stringValue ?? ""
+        createTime = json["createTime"].stringValue ?? ""
+        follow = json["follow"].intValue
     }
 }
 

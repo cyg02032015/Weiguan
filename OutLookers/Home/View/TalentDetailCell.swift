@@ -9,15 +9,17 @@
 import UIKit
 
 class TalentDetailCell: UITableViewCell {
-
+    
+    
     var info: TalentDtailResp! {
         didSet {
             jobLabel.text = info.name
             moneyLabel.text = "\(info.price)" + Util.unit(info.unit)
             styleLabel.text = info.details
             // TODO
-            dateLabel.text = "5月19号"
+            dateLabel.text = CPDateUtil.dateToString(CPDateUtil.stringToDate(info.createTime), dateFormat: "MM-dd HH:mm")
             imgView.yy_setImageWithURL(info.worksCover.addImagePath(CGSize(width: ScreenWidth, height: kScale(285))), placeholder: kPlaceholder)
+            label.text = info.details
         }
     }
     var jobLabel: UILabel!      // 时装模特
@@ -63,7 +65,7 @@ class TalentDetailCell: UITableViewCell {
         }
         
         let descLabel = UILabel.createLabel(16, textColor: UIColor(hex: 0x434343))
-        descLabel.text = "相关介绍"
+        descLabel.text = "才艺详情"
         descLabel.textAlignment = .Center
         contentView.addSubview(descLabel)
         descLabel.snp.makeConstraints { (make) in
@@ -132,7 +134,7 @@ class TalentDetailCell: UITableViewCell {
         imgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(imgView.superview!)
             make.top.equalTo(label.snp.bottom).offset(kScale(7))
-            make.height.equalTo(kScale(285))
+            make.bottom.equalTo(contentView)
         }
         
         let view2 = UIView()
@@ -145,7 +147,7 @@ class TalentDetailCell: UITableViewCell {
             make.bottom.lessThanOrEqualTo(view2.superview!)
         }
         // TODO
-        label.text = "我是小包子，我为自己代言"
+        label.text = ""
         
     }
     

@@ -235,7 +235,7 @@ extension YGShare: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(shareVcellId, forIndexPath: indexPath) as! ShareVCell
-        cell.shareButton.setImage(self.imgs[indexPath.item], forState: .Normal)
+        cell.shareButton.setBackgroundImage(self.imgs[indexPath.item], forState: .Normal)
         cell.label.text = self.titles[indexPath.item]
         selectItem(cell)
         return cell
@@ -280,7 +280,7 @@ class ShareVCell: UICollectionViewCell {
         shareButton.snp.makeConstraints { (make) in
             make.top.equalTo(shareButton.superview!)
             make.centerX.equalTo(shareButton.superview!)
-            make.size.equalTo(kSize(50, height: 50))
+            make.size.equalTo(kSize(45, height: 45))
         }
         
         label.snp.makeConstraints { (make) in

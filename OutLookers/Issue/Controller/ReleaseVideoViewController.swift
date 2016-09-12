@@ -125,6 +125,7 @@ class ReleaseVideoViewController: YGBaseViewController {
             mediaTypes.append(kUTTypeMovie as String)
             controller.mediaTypes = mediaTypes
             controller.delegate = self
+            controller.videoQuality = .TypeMedium
             presentViewController(controller, animated: true, completion: {})
         }
     }

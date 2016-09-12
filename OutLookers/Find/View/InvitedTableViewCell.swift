@@ -10,7 +10,16 @@ import UIKit
 
 class InvitedTableViewCell: UITableViewCell {
 
-    var header: IconHeaderView!
+    var concerned: Int! {
+        didSet {
+            if let _ = info {
+                follow.hidden = "\(info!.userId)" == UserSingleton.sharedInstance.userId
+            }
+            if !follow.hidden {
+                follow.hidden = concerned == 1
+            }
+        }
+    }
     var nameLabel: UILabel!
     var follow: UIButton!
     var subject: UILabel!
@@ -20,28 +29,20 @@ class InvitedTableViewCell: UITableViewCell {
     var time1: UILabel!
     var lastLabel: UILabel!
     
-    var info: FindNoticeDetailResp! {
+    var info: FindNoticeDetailResp? {
         didSet {
-            Server.getAvatarAndName("\(info.userId)", handler: { (success, msg, value) in
-                if success {
-                    guard let obj = value else {return}
-                    self.header.iconURL = obj[0].headImgUrl.addImagePath(CGSize(width: 78, height: 78))
-                    self.header.setVimage(Util.userType(obj[0].detailsType))
-                    self.nameLabel.text = obj[0].nickname
-                } else {
-                    guard let m = msg else {return}
-                    LogError(m)
-                }
-            })
+            guard let _ = info else { return }
+            if "\(info!.userId)" == UserSingleton.sharedInstance.userId {
+                follow.hidden = true
+            }
+            subject.text = info!.theme
+            let start = CPDateUtil.dateToString(CPDateUtil.stringToDate(info!.startTime), dateFormat: "yyyy-MM-dd") ?? ""
+            let end = CPDateUtil.dateToString(CPDateUtil.stringToDate(info!.endTime), dateFormat: "yyyy-MM-dd") ?? ""
+            time.text = start + " 至 " + end
+            local.text = info!.province + info!.city + info!.adds
+            time1.text = CPDateUtil.dateToString(CPDateUtil.stringToDate(info!.register), dateFormat: "yyyy-MM-dd") ?? ""
             
-            subject.text = info.theme
-            let start = info.startTime.dateFromString()?.stringFromNowDate() ?? ""
-            let end = info.endTime.dateFromString()?.stringFromNowDate() ?? ""
-            time.text = start + "至" + end
-            local.text = info.province + info.city + info.adds
-            time1.text = info.register.dateFromString()?.stringFromNowDate()
-            
-            for (idx, obj) in info.recruitmentList.enumerate() {
+            for (idx, obj) in info!.recruitmentList.enumerate() {
                 let label = UILabel.createLabel(14)
                 label.text = obj.categoryName + "(\(obj.number)人、\(obj.price)元\(Util.unit("\(obj.unit)")))"
                 container.addSubview(label)
@@ -65,14 +66,7 @@ class InvitedTableViewCell: UITableViewCell {
     }
     
     func setupSubViews() {
-        header = IconHeaderView()
-        header.customCornerRadius = kScale(39/2)
-        contentView.addSubview(header)
-        header.snp.makeConstraints { (make) in
-            make.top.equalTo(header.superview!).offset(-10)
-            make.size.equalTo(kSize(39, height: 39))
-            make.left.equalTo(header.superview!).offset(kScale(15))
-        }
+        
         
         follow = UIButton()
         follow.setImage(UIImage(named: "follow11"), forState: .Normal)
@@ -86,7 +80,7 @@ class InvitedTableViewCell: UITableViewCell {
         nameLabel = UILabel.createLabel(16)
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(header.snp.right).offset(kScale(11))
+            make.left.equalTo(55)
             make.centerY.equalTo(follow)
             make.height.equalTo(kScale(16))
         }
@@ -128,8 +122,7 @@ class InvitedTableViewCell: UITableViewCell {
             make.height.equalTo(1)
         }
         
-        let timeImg = UIImageView(image: UIImage(named: ""))
-        timeImg.backgroundColor = UIColor.yellowColor()
+        let timeImg = UIImageView(image: UIImage(named: "Page 1"))
         contentView.addSubview(timeImg)
         timeImg.snp.makeConstraints { (make) in
             make.left.equalTo(line2)
@@ -155,8 +148,7 @@ class InvitedTableViewCell: UITableViewCell {
             make.height.equalTo(1)
         }
         
-        let localImg = UIImageView(image: UIImage(named: ""))
-        localImg.backgroundColor = UIColor.yellowColor()
+        let localImg = UIImageView(image: UIImage(named: "Group 4"))
         contentView.addSubview(localImg)
         localImg.snp.makeConstraints { (make) in
             make.left.equalTo(line3)
@@ -182,8 +174,7 @@ class InvitedTableViewCell: UITableViewCell {
             make.top.equalTo(localImg.snp.bottom).offset(kScale(15))
         }
         
-        let timeImg1 = UIImageView(image: UIImage(named: ""))
-        timeImg1.backgroundColor = UIColor.yellowColor()
+        let timeImg1 = UIImageView(image: UIImage(named: "Group 5"))
         contentView.addSubview(timeImg1)
         timeImg1.snp.makeConstraints { (make) in
             make.top.equalTo(line4.snp.bottom).offset(kScale(15))

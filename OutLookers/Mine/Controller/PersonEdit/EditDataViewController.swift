@@ -171,7 +171,7 @@ extension EditDataViewController {
                     cell.setTextInCell("昵   称", placeholder: "请输入昵称")
                     cell.tf.text = self.req.nickname
                 } else {
-                    cell.setTextInCell("签 名档", placeholder: "未填写")
+                    cell.setTextInCell("签名档", placeholder: "未填写")
                     cell.tf.text = self.req.introduction
                 }
                 return cell
@@ -221,7 +221,7 @@ extension EditDataViewController {
                     self.checkParameters()
                 })
             } else {
-                let cell = tableView.cellForRowAtIndexPath(indexPath) as! ArrowEditCell
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! NoArrowEditCell
                 let sheet = UIAlertController(title: "请选择性别", message: nil, preferredStyle: .ActionSheet)
                 let male = UIAlertAction(title: "男", style: .Default, handler: { [unowned cell](action) in
                     cell.tf.text = action.title

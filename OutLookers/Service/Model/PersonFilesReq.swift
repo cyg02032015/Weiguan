@@ -19,4 +19,8 @@ struct PersonFilesReq {
     var userId : String!
     var waist : String!
     var weight : String!
+    var sex: Int!
+    var birthday: String!
+    var city: String!
+    var province: String!
 }

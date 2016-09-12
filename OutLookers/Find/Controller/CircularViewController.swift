@@ -31,7 +31,7 @@ class CircularViewController: YGBaseViewController {
     func loadNewData() {
         pageNo = 1
         timeStr = NSDate().stringFromNowDate()
-        Server.getFindNoticeList(pageNo, state: 1, isPerson: false, timeStr: self.timeStr) { (success, msg, value) in
+        Server.getFindNoticeList(pageNo, state: 2, isPerson: false, timeStr: self.timeStr) { (success, msg, value) in
             self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else {return}
@@ -52,7 +52,7 @@ class CircularViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.getFindNoticeList(pageNo, state: 1, isPerson: false, timeStr: self.timeStr) { (success, msg, value) in
+        Server.getFindNoticeList(pageNo, state: 2, isPerson: false, timeStr: self.timeStr) { (success, msg, value) in
             self.tableView.mj_footer.endRefreshing()
             if success {
                 guard let object = value else {return}

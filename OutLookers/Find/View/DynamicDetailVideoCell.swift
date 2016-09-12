@@ -148,8 +148,8 @@ class DynamicDetailVideoCell: UITableViewCell {
             }
             
             let praiseButton = UIButton()
-            praiseButton.setImage(UIImage(named: " like"), forState: .Normal)
-            praiseButton.setImage(UIImage(named: " like copy"), forState: .Selected)
+            praiseButton.setImage(UIImage(named: "like"), forState: .Normal)
+            praiseButton.setImage(UIImage(named: "like copy"), forState: .Selected)
             contentView.addSubview(praiseButton)
             praiseButton.snp.makeConstraints { (make) in
                 make.right.equalTo(commentButton.snp.left).offset(kScale(-40))

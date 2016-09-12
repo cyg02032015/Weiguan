@@ -47,4 +47,25 @@ class CPDateUtil {
     static func componentsFromDate(date: NSDate) -> NSDateComponents{
         return calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: date)
     }
+    
+    static func ageWithDateOfBirth(date: NSDate) -> Int {
+        // 出生日期转换 年月日
+        let components1 = NSCalendar.currentCalendar().components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: date)
+        let brithDateYear  = components1.year
+        let brithDateDay   = components1.day
+        let brithDateMonth = components1.month
+        
+        // 获取系统当前 年月日
+        let components2 = NSCalendar.currentCalendar().components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: NSDate())
+        let currentDateYear  = components2.year;
+        let currentDateDay   = components2.day;
+        let currentDateMonth = components2.month;
+        
+        // 计算年龄
+        var iAge = currentDateYear - brithDateYear - 1
+        if ((currentDateMonth > brithDateMonth) || (currentDateMonth == brithDateMonth && currentDateDay >= brithDateDay)) {
+            iAge += 1
+        }
+        return iAge
+    }
 }

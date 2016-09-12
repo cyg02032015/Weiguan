@@ -22,6 +22,11 @@ class PersonFilesResp: BaseResponse {
     var waist : String!
     var weight : String!
     var result: PersonFilesResp!
+    var sex: Int!
+    var birthday: String!
+    var city: String!
+    var province: String!
+    
     override init(fromJson json: JSON!){
         super.init(fromJson: json)
         if json == nil{
@@ -49,5 +54,9 @@ class PersonFilesResp: BaseResponse {
         userId = json["userId"].intValue
         waist = json["waist"].stringValue ?? ""
         weight = json["weight"].stringValue ?? ""
+        sex = json["sex"].intValue
+        birthday = json["birthday"].stringValue ?? ""
+        city = json["cityId"].stringValue ?? ""
+        province = json["provinceId"].stringValue ?? ""
     }
 }

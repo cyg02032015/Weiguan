@@ -28,6 +28,7 @@ class SquareViewController: YGBaseViewController {
         tableView.mj_footer = MJRefreshBackStateFooter(refreshingBlock: { [weak self] in
             self?.loadMoreData()
         })
+        tableView.mj_header.beginRefreshing()
         NSNotificationCenter.defaultCenter().rx_notification(ReloadData).subscribeNext { [weak self](noti) in
             guard let ws = self else {return}
             ws.loadNewData()
@@ -36,7 +37,7 @@ class SquareViewController: YGBaseViewController {
     
     func loadNewData() {
         timeStr = NSDate().stringFromNowDate()
-        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true, timeStr: self.timeStr) { (success, msg, value) in
+        Server.dynamicList(1,user: UserSingleton.sharedInstance.userId ,state: 2, isPerson: false, isHome: false, isSquare: true, timeStr: self.timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
@@ -56,7 +57,7 @@ class SquareViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.dynamicList(pageNo, user: UserSingleton.sharedInstance.userId ,state: 1, isPerson: false, isHome: false, isSquare: true, timeStr: self.timeStr) { (success, msg, value) in
+        Server.dynamicList(pageNo, user: UserSingleton.sharedInstance.userId ,state: 2, isPerson: false, isHome: false, isSquare: true, timeStr: self.timeStr) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}

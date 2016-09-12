@@ -112,4 +112,15 @@ public class YGTabbar: UIView {
         btn.selected = true
         selectButton = btn
     }
+    
+    //让超出父视图的地方也能响应
+    public override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, withEvent: event)
+        let centerBtn = self.viewWithTag(5) as! UIButton
+        let p = centerBtn.convertPoint(point, fromView: self)
+        if centerBtn.pointInside(p, withEvent: event) {
+            return centerBtn
+        }
+        return view
+    }
 }

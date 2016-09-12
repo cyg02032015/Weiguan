@@ -18,6 +18,7 @@ var globleSingle = GlobleDefineSingle.sharedInstance
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var customTabbar: YGTabbar!
     var window: UIWindow?
     func testUpload() {
     }

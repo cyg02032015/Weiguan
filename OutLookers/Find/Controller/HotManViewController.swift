@@ -32,7 +32,7 @@ class HotManViewController: YGBaseViewController {
     func loadNewData() {
         pageNo = 1
         self.timeStr = NSDate().stringFromNowDate()
-        Server.talentList(pageNo, state: 1, timeStr: timeStr) { (success, msg, value) in
+        Server.talentList(pageNo, state: 2, timeStr: timeStr) { (success, msg, value) in
             if success {
                 guard let listResp  = value else { return }
                 self.hotmans.removeAll()
@@ -52,7 +52,7 @@ class HotManViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.talentList(pageNo, state: 1, timeStr: timeStr) { (success, msg, value) in
+        Server.talentList(pageNo, state: 2, timeStr: timeStr) { (success, msg, value) in
             if success {
                 guard let listResp  = value else { return }
                 self.hotmans.appendContentsOf(listResp.list)

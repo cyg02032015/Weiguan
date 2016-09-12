@@ -29,7 +29,7 @@ class MessageViewController: YGBaseViewController {
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = kBackgoundColor
         tableView.registerClass(MessageSectionCell.self, forCellReuseIdentifier: MessageSectionCellId)
         tableView.registerClass(MessageCell.self, forCellReuseIdentifier: messageCellId)
         tableView.tableFooterView = UIView()
