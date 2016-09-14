@@ -22,7 +22,7 @@ class OSSVideoUploader {
             return self.getToken(object)
         }
         let config = OSSClientConfiguration()
-        config.maxRetryCount = 2
+        config.maxRetryCount = 0
         config.timeoutIntervalForRequest = 30
         config.timeoutIntervalForResource  = 24 * 60 * 60
         let endpoint = "http://" + object.region + ".aliyuncs.com"
@@ -42,7 +42,9 @@ class OSSVideoUploader {
         put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
             LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
             let progress = Float(totalByteSent) / Float(totalBytesExpectedToSend)
-            SVProgressHUD.showProgress(progress, status: "\(Int(progress*100))%")
+            dispatch_async_safely_to_main_queue({
+                SVProgressHUD.showProgress(progress, status: "\(Int(progress*100))%")
+            })
         }
         let putTask = clinet.putObject(put)
         putTask.continueWithBlock({ (task) in
@@ -55,11 +57,12 @@ class OSSVideoUploader {
             }
             return nil
         })
-        putTask.waitUntilFinished()
+        //putTask.waitUntilFinished()
         if putTask.error == nil {
             LogInfo("upload video success! = \(videoName)")
         } else {
             LogError("upload video failed, error: \(putTask.error!)")
+            SVToast.showWithError(putTask.error!.localizedDescription)
         }
         return put
     }

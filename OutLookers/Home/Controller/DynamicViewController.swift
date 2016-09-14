@@ -76,7 +76,7 @@ class DynamicViewController: YGBaseViewController {
 }
 
 // MARK: - UITableviewDelegate, UITableviewDatasource
-extension DynamicViewController {
+extension DynamicViewController: VideoPlayerProtocol {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return dynamicLists.count
@@ -88,10 +88,19 @@ extension DynamicViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellIdentifier, forIndexPath: indexPath) as! DynamicCell
-        cell.info = dynamicLists[indexPath.section]
+        let info = dynamicLists[indexPath.section]
+        cell.info = info
         cell.indexPath = indexPath
         cell.delegate = self
         cell.followButton.hidden = true
+        if info.isVideo != 1 {
+            cell.bigImgView.tapImageAction({ [unowned self] in
+                let player = self.player(NSURL.init(string: info.video.addVideoPath())!, tableView: tableView, indexPath: indexPath, imageView: cell.bigImgView, tag: 111)
+                player.hidden = false
+                })
+        }else {
+            cell.bigImgView.userInteractionEnabled = false
+        }
         return cell
     }
     
@@ -130,7 +139,7 @@ extension DynamicViewController: DynamicCellDelegate {
             type = .DYHost
             shareModel.shareNickName = "我的纯氧作品, 一起来看~"
         }
-        shareModel.shareID = "index.html#trends-details?listId=\(dy.id)"
+        shareModel.shareID = "trends.html?aid=\(dy.id)"
         shareModel.shareImage = cell.bigImgView.image
         let sharetuple = YGShareHandler.handleShareInstalled(type)
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)

@@ -192,7 +192,13 @@ extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(releasePictureCollectionCellIdentifier, forIndexPath: indexPath) as! PhotoCollectionCell
         if photos.count == indexPath.item {
             cell.img = UIImage(named: "release_picture_Add pictures")!
+            cell.settingView.hidden = true
         } else {
+            if indexPath.item == 0 {
+                cell.settingView.hidden = false
+            }else {
+                cell.settingView.hidden = true
+            }
             cell.img = photos[indexPath.item]
         }
         return cell
@@ -206,6 +212,9 @@ extension ReleasePictureViewController: UICollectionViewDelegate, UICollectionVi
         } else {
             let vc = YKPhotoPreviewController()
             vc.currentIndex = indexPath.item
+            if indexPath.item == 0 {
+                vc.settingCover = true
+            }
             vc.photos = self.photos
             vc.originPhotos = self.originPhotos
             vc.didFinishPickingPhotos({ (photos, originPhotos) in
@@ -228,11 +237,12 @@ extension ReleasePictureViewController: UIActionSheetDelegate {
                 let controller = UIImagePickerController()
                 controller.sourceType = .Camera
                 if UIImagePickerController.isAvailableCameraDeviceFront() {
-                    controller.cameraDevice = .Front
+                    controller.cameraDevice = .Rear
                 }
                 var mediaTypes = [String]()
                 mediaTypes.append(kUTTypeImage as String)
                 controller.mediaTypes = mediaTypes
+                controller.allowsEditing = true
                 controller.delegate = self
                 presentViewController(controller, animated: true, completion: {})
             }
@@ -254,13 +264,18 @@ extension ReleasePictureViewController: UIActionSheetDelegate {
 extension ReleasePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, TZImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        _ = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        photos.append(info["UIImagePickerControllerOriginalImage"] as! UIImage)
+        originPhotos.append(info["UIImagePickerControllerOriginalImage"] as! UIImage)
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PictureSelectCell
+        self.imageData = photos.dataWithImages()
+        cell.collectionView.reloadData()
         picker.dismissViewControllerAnimated(true) {}
+        checkParams()
     }
         
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PictureSelectCell
-        self.photos = photos
+        self.photos.appendContentsOf(photos)
         self.imageData = photos.dataWithImages()
         self.originPhotos = assets
         cell.collectionView.reloadData()
@@ -287,10 +302,10 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
         req.isVideo = "1"
         if self.photos.count > 0 {
             releaseButton.backgroundColor = kCommonColor
-            releaseButton.userInteractionEnabled = true
+            releaseButton.enabled = true
         } else {
             releaseButton.backgroundColor = kGrayColor
-            releaseButton.userInteractionEnabled = false
+            releaseButton.enabled = false
         }
     }
     
@@ -302,13 +317,13 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
 
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
-        SVToast.show("正在上传图片")
+        SVToast.show("正在上传封面")
         if self.photos.count > 0 {
             dispatch_group_async(group, queue) { [weak self] in
                 dispatch_group_enter(group)
                 OSSImageUploader.asyncUploadImageData(self!.tokenObject, data: self!.imageData[0], complete: { (names, state) in
                     if state == .Success {
-                        LogInfo("图片们上传完成")
+                        LogInfo("封面上传完成")
                         self?.req.cover = names.first
                         dispatch_group_leave(group)
                     } else {
@@ -324,7 +339,7 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                 OSSImageUploader.uploadImageDatas(self!.tokenObject, datas: self!.imageData, isAsync: true, complete: { (names, state) in
                         if state == .Success {
                             LogWarn("pictures = \(names.joinWithSeparator(","))")
-                            LogInfo("图片们上传完成")
+                            SVToast.showWithSuccess("图片上传完成")
                             self?.req.picture = names.joinWithSeparator(",")
                             dispatch_group_leave(group)
                         } else {
@@ -337,21 +352,23 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
             }
         }
         
-        
         dispatch_group_notify(group, queue) { [weak self] in
             if isEmptyString(self!.req.picture) && isEmptyString(self!.req.cover) {
                 SVToast.showWithError("图片或者封面id为空")
                 return
             }
-            LogInfo("")
             LogInfo("picture = \(self!.req.picture)")
             Server.releasePicAndVideo(self!.req, handler: { (success, msg, value) in
-                SVToast.dismiss()
                 if success {
-                    self?.dismissViewControllerAnimated(true, completion: {
-                        self?.photos.removeAll()
-                        self?.originPhotos.removeAll()
+                    SVToast.showWithSuccess("发布成功")
+                    delay(1.0, task: {
+                        self?.dismissViewControllerAnimated(true, completion: {
+                            self?.photos.removeAll()
+                            self?.originPhotos.removeAll()
                         })
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.thridBtn)
+                    })
                 } else {
                     guard let m = msg else {return}
                     SVToast.showWithError(m)

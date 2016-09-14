@@ -18,6 +18,7 @@ private extension Selector {
 
 class YKPhotoPreviewController: YGBaseViewController {
     typealias didFinishPickImage = (photos: [UIImage], originPhotos: [AnyObject]) -> Void
+    var settingCover: Bool = false
     var didFinishPickClousure: didFinishPickImage!
     var collectionView: UICollectionView!
     lazy var photos = [UIImage]()
@@ -55,10 +56,32 @@ class YKPhotoPreviewController: YGBaseViewController {
         toolBar.alpha = 0.7
         view.addSubview(toolBar)
         
-        let deletButton = UIButton(frame: CGRect(x: view.gg_width - 50, y: 0, width: 44, height: 49))
+        let deletButton = UIButton(frame: CGRect(x: view.gg_width - 65, y: 0, width: 45, height: 49))
         deletButton.addTarget(self, action: .tapDeletButton, forControlEvents: .TouchUpInside)
-        deletButton.setTitle("de", forState: .Normal)
+        deletButton.titleLabel?.textAlignment = .Right
+        deletButton.setTitle("删除", forState: .Normal)
         toolBar.addSubview(deletButton)
+        
+        if settingCover {
+            let settingBtn = UIButton(frame: CGRect(x: 20, y: 0, width: 80, height: 49))
+            settingBtn.setTitle("设置封面", forState: .Normal)
+            settingBtn.titleLabel?.textAlignment = .Left
+            toolBar.addSubview(settingBtn)
+            _ = settingBtn.rx_tap.subscribeNext { [unowned self](sender) in
+                if self.photos.count > 0 {
+                    let image = self.photos[self.currentIndex]
+                    let originImage = self.originPhotos[self.currentIndex]
+                    self.photos.removeAtIndex(self.currentIndex)
+                    self.originPhotos.removeAtIndex(self.currentIndex)
+                    self.photos.insert(image, atIndex: 0)
+                    self.originPhotos.insert(originImage, atIndex: 0)
+                    if self.didFinishPickClousure != nil {
+                        self.didFinishPickClousure(photos: self.photos, originPhotos: self.originPhotos)
+                    }
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            }.addDisposableTo(disposeBag)
+        }
     }
     
     func configNavigationBar() {
@@ -146,9 +169,7 @@ extension YKPhotoPreviewController: YKPhotoPreviewCellDelegate {
     
     func tapDeletButton(sender: UIButton) {
         let alert = UIAlertView(title: "", message: "确定删除该图片吗?", delegate: self, cancelButtonTitle: "确定", otherButtonTitles: "点错了")
-
         alert.show()
-
     }
     
     func photoPreviewSingleTap(sender: UITapGestureRecognizer) {

@@ -10,7 +10,7 @@ import UIKit
 
 private let dynamicCellId = "dynamicCellId"
 
-class SquareViewController: YGBaseViewController {
+class SquareViewController: YGBaseViewController, VideoPlayerProtocol {
 
     var tableView: UITableView!
     lazy var sqaureLists = [DynamicResult]()
@@ -104,14 +104,24 @@ extension SquareViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(dynamicCellId, forIndexPath: indexPath) as! DynamicCell
         let info = sqaureLists[indexPath.section]
-        cell.isSquare = true
         cell.indexPath = indexPath
         cell.info = info
+        cell.isSquare = true
         cell.delegate = self
-        cell.headImgView.iconHeaderTap { [weak self] in
+        
+        if info.isVideo != 1 {
+            cell.bigImgView.userInteractionEnabled = true
+            cell.bigImgView.tapImageAction({ [unowned self] in
+                let player = self.player(NSURL.init(string: info.video.addVideoPath())!, tableView: tableView, indexPath: indexPath, imageView: cell.bigImgView, tag: 111)
+                player.hidden = false
+            })
+        }else {
+            cell.bigImgView.userInteractionEnabled = false
+        }
+        cell.headImgView.iconHeaderTap { [unowned self] in
             let vc = PHViewController()
             vc.user = "\(info.userId)"
-            self?.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         return cell
     }
@@ -136,8 +146,8 @@ extension SquareViewController: DynamicCellDelegate, FollowProtocol {
         if UserSingleton.sharedInstance.userId == "\(dy.userId)" {
             type = .DYHost
             shareModel.shareNickName = "我的纯氧作品, 一起来看~"
-        }
-        shareModel.shareID = "index.html#trends-details?listId=\(dy.id)"
+        }//http://h5.dev.chunyangapp.com/trends.html?aid=
+        shareModel.shareID = "trends.html?aid=\(dy.id)"
         shareModel.shareImage = cell.bigImgView.image
         let sharetuple = YGShareHandler.handleShareInstalled(type)
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)

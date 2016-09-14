@@ -10,11 +10,11 @@ import UIKit
 import ZFPlayer
 
 public protocol VideoPlayerProtocol {
-    func player(videoURL: NSURL, tableView: UITableView, indexPath: NSIndexPath, imageView: UIImageView, tag: Int)
+    func player(videoURL: NSURL, tableView: UITableView, indexPath: NSIndexPath, imageView: UIImageView, tag: Int) -> ZFPlayerView
 }
 
 extension VideoPlayerProtocol {
-    public func player(videoURL: NSURL, tableView: UITableView, indexPath: NSIndexPath, imageView: UIImageView, tag: Int) {
+    public func player(videoURL: NSURL, tableView: UITableView, indexPath: NSIndexPath, imageView: UIImageView, tag: Int) -> ZFPlayerView {
         let playerView = ZFPlayerView.sharedPlayerView()
         playerView.backgroundColor = UIColor.blackColor()
         playerView.placeholderImageName = ""
@@ -22,5 +22,6 @@ extension VideoPlayerProtocol {
         playerView.addPlayerToCellImageView(imageView)
         playerView.playerLayerGravity = .ResizeAspect
         playerView.autoPlayTheVideo()
+        return playerView
     }
 }

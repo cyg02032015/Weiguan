@@ -177,7 +177,7 @@ class InvitedDetailViewController: YGBaseViewController {
             self.shareView.returnHomeClick = { [unowned self] in
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.firstBtn)
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popToRootViewControllerAnimated(true)
             }
         }.addDisposableTo(disposeBag)
     }

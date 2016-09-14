@@ -22,19 +22,24 @@ class EditDataViewController: YGBaseViewController {
     lazy var cityResp = YGCityData.loadCityData()
     var provinceInt = 0
     lazy var req = EditDataReq()
-    var headImgData: NSData!
+    var headImgData: NSData?
     var picToken: GetToken!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        checkParameters()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getToken()
-        loadData()
         setupSubViews()
         cityPickerView = YGPickerView(frame: CGRectZero, delegate: self)
         cityPickerView.delegate = self
         ageDatePickerView = YGSelectDateView()
+        ageDatePickerView.maximumDate = NSDate()
         ageDatePickerView.datePicker.datePickerMode = .Date
-        
+        loadData()
     }
     
     func getToken() {
@@ -77,7 +82,22 @@ class EditDataViewController: YGBaseViewController {
         save = setRightNaviItem()
         save.setTitle("保存", forState: .Normal)
         // MARK: 保存按钮
-        save.rx_tap.subscribeNext { [weak self] in
+        save.rx_controlEvent(.TouchUpInside).subscribeNext { [weak self] in
+            if self!.headImgData == nil {
+                Server.informationUpdate(self!.req, handler: { (success, msg, value) in
+                    SVToast.dismiss()
+                    if success {
+                        SVToast.showWithSuccess(value!)
+                        delay(1) {
+                            self!.navigationController?.popViewControllerAnimated(true)
+                        }
+                    } else {
+                        guard let m = msg else {return}
+                        SVToast.showWithError(m)
+                    }
+                })
+                return
+            }
             let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
             let group = dispatch_group_create()
             SVToast.show()
@@ -85,7 +105,7 @@ class EditDataViewController: YGBaseViewController {
                 dispatch_group_enter(group)
                 guard let _ = self else { return }
                 guard let token = self?.picToken else { return }
-                OSSImageUploader.asyncUploadImageData(token, data: self!.headImgData, complete: { (names, state) in
+                OSSImageUploader.asyncUploadImageData(token, data: self!.headImgData!, complete: { (names, state) in
                     if state == .Success {
                         self!.req.headImgUrl = names.first
                         dispatch_group_leave(group)
@@ -127,12 +147,13 @@ class EditDataViewController: YGBaseViewController {
     }
     
     func checkParameters() {
-        if !isEmptyString(req.sex) && !isEmptyString(req.nickname) && !isEmptyString(req.birthday) && !isEmptyString(req.province) && !isEmptyString(req.city) && !isEmptyString(req.introduction) && headImgData != nil {
+        if !isEmptyString(req.sex) && !isEmptyString(req.nickname) && !isEmptyString(req.birthday) && !isEmptyString(req.province) && !isEmptyString(req.city) {
             save.setTitleColor(UIColor.blackColor(), forState: .Normal)
-            save.userInteractionEnabled = true
+            save.enabled = true
         } else {
             save.setTitleColor(kGrayTextColor, forState: .Normal)
-            save.userInteractionEnabled = false
+            save.alpha = 0.5
+            save.enabled = false
         }
     }
 }

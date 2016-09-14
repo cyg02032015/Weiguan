@@ -8,6 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		2D20DFA41D815A59002E802A /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D20DFA31D815A59002E802A /* UIImage+Blur.m */; };
+		2D235F021D87A60000CBDABB /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235EF71D87A60000CBDABB /* ASValuePopUpView.m */; };
+		2D235F031D87A60000CBDABB /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235EF91D87A60000CBDABB /* ASValueTrackingSlider.m */; };
+		2D235F041D87A60000CBDABB /* ZFBrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235EFB1D87A60000CBDABB /* ZFBrightnessView.m */; };
+		2D235F051D87A60000CBDABB /* ZFPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2D235EFC1D87A60000CBDABB /* ZFPlayer.bundle */; };
+		2D235F061D87A60000CBDABB /* ZFPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235EFF1D87A60000CBDABB /* ZFPlayerControlView.m */; };
+		2D235F071D87A60000CBDABB /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F011D87A60000CBDABB /* ZFPlayerView.m */; };
+		2D235F221D87A8ED00CBDABB /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F0A1D87A8ED00CBDABB /* MASCompositeConstraint.m */; };
+		2D235F231D87A8ED00CBDABB /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F0D1D87A8ED00CBDABB /* MASConstraint.m */; };
+		2D235F241D87A8ED00CBDABB /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F0F1D87A8ED00CBDABB /* MASConstraintMaker.m */; };
+		2D235F251D87A8ED00CBDABB /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F111D87A8ED00CBDABB /* MASLayoutConstraint.m */; };
+		2D235F261D87A8ED00CBDABB /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F151D87A8ED00CBDABB /* MASViewAttribute.m */; };
+		2D235F271D87A8ED00CBDABB /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F171D87A8ED00CBDABB /* MASViewConstraint.m */; };
+		2D235F281D87A8ED00CBDABB /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F191D87A8ED00CBDABB /* NSArray+MASAdditions.m */; };
+		2D235F291D87A8ED00CBDABB /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F1C1D87A8ED00CBDABB /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		2D235F2A1D87A8ED00CBDABB /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F1E1D87A8ED00CBDABB /* View+MASAdditions.m */; };
+		2D235F2B1D87A8ED00CBDABB /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D235F211D87A8ED00CBDABB /* ViewController+MASAdditions.m */; };
+		2D45742B1D8833B10022925E /* UIImageViewAddRadiusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45742A1D8833B10022925E /* UIImageViewAddRadiusProtocol.swift */; };
 		2D788A861D838FDD00153566 /* CitiesData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D788A851D838FDD00153566 /* CitiesData.m */; };
 		2D788A891D8390F000153566 /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788A871D8390F000153566 /* LogHelper.swift */; };
 		2D788A8A1D8390F000153566 /* LogInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788A881D8390F000153566 /* LogInHelper.swift */; };
@@ -387,6 +404,44 @@
 		289FA6413EE7BFD4DB6FC03D /* Pods-OutLookersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutLookersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OutLookersTests/Pods-OutLookersTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D20DFA21D815A59002E802A /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		2D20DFA31D815A59002E802A /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
+		2D235EF61D87A60000CBDABB /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
+		2D235EF71D87A60000CBDABB /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
+		2D235EF81D87A60000CBDABB /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
+		2D235EF91D87A60000CBDABB /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
+		2D235EFA1D87A60000CBDABB /* ZFBrightnessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBrightnessView.h; sourceTree = "<group>"; };
+		2D235EFB1D87A60000CBDABB /* ZFBrightnessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBrightnessView.m; sourceTree = "<group>"; };
+		2D235EFC1D87A60000CBDABB /* ZFPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZFPlayer.bundle; sourceTree = "<group>"; };
+		2D235EFD1D87A60000CBDABB /* ZFPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayer.h; sourceTree = "<group>"; };
+		2D235EFE1D87A60000CBDABB /* ZFPlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerControlView.h; sourceTree = "<group>"; };
+		2D235EFF1D87A60000CBDABB /* ZFPlayerControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerControlView.m; sourceTree = "<group>"; };
+		2D235F001D87A60000CBDABB /* ZFPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerView.h; sourceTree = "<group>"; };
+		2D235F011D87A60000CBDABB /* ZFPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerView.m; sourceTree = "<group>"; };
+		2D235F091D87A8ED00CBDABB /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
+		2D235F0A1D87A8ED00CBDABB /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
+		2D235F0B1D87A8ED00CBDABB /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
+		2D235F0C1D87A8ED00CBDABB /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
+		2D235F0D1D87A8ED00CBDABB /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
+		2D235F0E1D87A8ED00CBDABB /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
+		2D235F0F1D87A8ED00CBDABB /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
+		2D235F101D87A8ED00CBDABB /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
+		2D235F111D87A8ED00CBDABB /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
+		2D235F121D87A8ED00CBDABB /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		2D235F131D87A8ED00CBDABB /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
+		2D235F141D87A8ED00CBDABB /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
+		2D235F151D87A8ED00CBDABB /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		2D235F161D87A8ED00CBDABB /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
+		2D235F171D87A8ED00CBDABB /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
+		2D235F181D87A8ED00CBDABB /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		2D235F191D87A8ED00CBDABB /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		2D235F1A1D87A8ED00CBDABB /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		2D235F1B1D87A8ED00CBDABB /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		2D235F1C1D87A8ED00CBDABB /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		2D235F1D1D87A8ED00CBDABB /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
+		2D235F1E1D87A8ED00CBDABB /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
+		2D235F1F1D87A8ED00CBDABB /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		2D235F201D87A8ED00CBDABB /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		2D235F211D87A8ED00CBDABB /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		2D45742A1D8833B10022925E /* UIImageViewAddRadiusProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewAddRadiusProtocol.swift; sourceTree = "<group>"; };
 		2D788A841D838FDD00153566 /* CitiesData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesData.h; sourceTree = "<group>"; };
 		2D788A851D838FDD00153566 /* CitiesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesData.m; sourceTree = "<group>"; };
 		2D788A871D8390F000153566 /* LogHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogHelper.swift; sourceTree = "<group>"; };
@@ -849,6 +904,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D235EF51D87A60000CBDABB /* ZFPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				2D235EF61D87A60000CBDABB /* ASValuePopUpView.h */,
+				2D235EF71D87A60000CBDABB /* ASValuePopUpView.m */,
+				2D235EF81D87A60000CBDABB /* ASValueTrackingSlider.h */,
+				2D235EF91D87A60000CBDABB /* ASValueTrackingSlider.m */,
+				2D235EFA1D87A60000CBDABB /* ZFBrightnessView.h */,
+				2D235EFB1D87A60000CBDABB /* ZFBrightnessView.m */,
+				2D235EFC1D87A60000CBDABB /* ZFPlayer.bundle */,
+				2D235EFD1D87A60000CBDABB /* ZFPlayer.h */,
+				2D235EFE1D87A60000CBDABB /* ZFPlayerControlView.h */,
+				2D235EFF1D87A60000CBDABB /* ZFPlayerControlView.m */,
+				2D235F001D87A60000CBDABB /* ZFPlayerView.h */,
+				2D235F011D87A60000CBDABB /* ZFPlayerView.m */,
+			);
+			path = ZFPlayer;
+			sourceTree = "<group>";
+		};
+		2D235F081D87A8ED00CBDABB /* Masonry */ = {
+			isa = PBXGroup;
+			children = (
+				2D235F091D87A8ED00CBDABB /* MASCompositeConstraint.h */,
+				2D235F0A1D87A8ED00CBDABB /* MASCompositeConstraint.m */,
+				2D235F0B1D87A8ED00CBDABB /* MASConstraint+Private.h */,
+				2D235F0C1D87A8ED00CBDABB /* MASConstraint.h */,
+				2D235F0D1D87A8ED00CBDABB /* MASConstraint.m */,
+				2D235F0E1D87A8ED00CBDABB /* MASConstraintMaker.h */,
+				2D235F0F1D87A8ED00CBDABB /* MASConstraintMaker.m */,
+				2D235F101D87A8ED00CBDABB /* MASLayoutConstraint.h */,
+				2D235F111D87A8ED00CBDABB /* MASLayoutConstraint.m */,
+				2D235F121D87A8ED00CBDABB /* Masonry.h */,
+				2D235F131D87A8ED00CBDABB /* MASUtilities.h */,
+				2D235F141D87A8ED00CBDABB /* MASViewAttribute.h */,
+				2D235F151D87A8ED00CBDABB /* MASViewAttribute.m */,
+				2D235F161D87A8ED00CBDABB /* MASViewConstraint.h */,
+				2D235F171D87A8ED00CBDABB /* MASViewConstraint.m */,
+				2D235F181D87A8ED00CBDABB /* NSArray+MASAdditions.h */,
+				2D235F191D87A8ED00CBDABB /* NSArray+MASAdditions.m */,
+				2D235F1A1D87A8ED00CBDABB /* NSArray+MASShorthandAdditions.h */,
+				2D235F1B1D87A8ED00CBDABB /* NSLayoutConstraint+MASDebugAdditions.h */,
+				2D235F1C1D87A8ED00CBDABB /* NSLayoutConstraint+MASDebugAdditions.m */,
+				2D235F1D1D87A8ED00CBDABB /* View+MASAdditions.h */,
+				2D235F1E1D87A8ED00CBDABB /* View+MASAdditions.m */,
+				2D235F1F1D87A8ED00CBDABB /* View+MASShorthandAdditions.h */,
+				2D235F201D87A8ED00CBDABB /* ViewController+MASAdditions.h */,
+				2D235F211D87A8ED00CBDABB /* ViewController+MASAdditions.m */,
+			);
+			path = Masonry;
+			sourceTree = "<group>";
+		};
 		2D788ABF1D8392C900153566 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1453,6 +1559,7 @@
 			children = (
 				D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */,
 				2D788AAF1D83920E00153566 /* VideoPlayerProtocol.swift */,
+				2D45742A1D8833B10022925E /* UIImageViewAddRadiusProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1764,6 +1871,8 @@
 			isa = PBXGroup;
 			children = (
 				2D788B521D83932C00153566 /* Reachability.swift */,
+				2D235F081D87A8ED00CBDABB /* Masonry */,
+				2D235EF51D87A60000CBDABB /* ZFPlayer */,
 				2D788B581D83944F00153566 /* HCSStarRatingView */,
 				2D788B5C1D83944F00153566 /* MBProgressHUD */,
 				2D788B5F1D83944F00153566 /* MJRefresh */,
@@ -1993,6 +2102,7 @@
 				2D788BCC1D83944F00153566 /* Info.plist in Resources */,
 				2D788BEB1D83944F00153566 /* SVProgressHUD.bundle in Resources */,
 				E41C22E01D113B9500F58250 /* Assets.xcassets in Resources */,
+				2D235F051D87A60000CBDABB /* ZFPlayer.bundle in Resources */,
 				2D788C0A1D83946B00153566 /* LaunchScreen.storyboard in Resources */,
 				2D788BF61D83944F00153566 /* TZImagePickerController.bundle in Resources */,
 				2D788BDC1D83944F00153566 /* MJRefresh.bundle in Resources */,
@@ -2164,12 +2274,15 @@
 				2D788B0D1D8392C900153566 /* IsFollowData.swift in Sources */,
 				2D788AFE1D8392C900153566 /* EditDataReq.swift in Sources */,
 				2D788C381D8394EB00153566 /* ZSPasswordView.swift in Sources */,
+				2D235F261D87A8ED00CBDABB /* MASViewAttribute.m in Sources */,
 				2D788D791D83AEAF00153566 /* TalentWorksCollectionCell.swift in Sources */,
 				2D788BF11D83944F00153566 /* TYTitlePageTabBar.m in Sources */,
 				2D788BED1D83944F00153566 /* SVRadialGradientLayer.m in Sources */,
 				2D788B261D8392C900153566 /* ThirdLogReq.swift in Sources */,
 				2D788D6A1D83AEAF00153566 /* InvitationCircularCell.swift in Sources */,
+				2D235F281D87A8ED00CBDABB /* NSArray+MASAdditions.m in Sources */,
 				2D788BD01D83944F00153566 /* MJRefreshComponent.m in Sources */,
+				2D45742B1D8833B10022925E /* UIImageViewAddRadiusProtocol.swift in Sources */,
 				2D788D1F1D83AD8400153566 /* PraiseListCollectionViewCell.swift in Sources */,
 				2D788C231D8394EB00153566 /* CPAlertController.swift in Sources */,
 				2D788CA81D839AFE00153566 /* Comment2ViewController.swift in Sources */,
@@ -2185,6 +2298,7 @@
 				2D788AFD1D8392C900153566 /* DynamicListResp.swift in Sources */,
 				2D788C251D8394EB00153566 /* OSSImageUploader.swift in Sources */,
 				2D788C841D839AA500153566 /* Register1ViewController.swift in Sources */,
+				2D235F061D87A60000CBDABB /* ZFPlayerControlView.m in Sources */,
 				2D788CFB1D83AD1900153566 /* ReleaseNoticeViewController.swift in Sources */,
 				2D788B1D1D8392C900153566 /* RecruitInformationResp.swift in Sources */,
 				2D788AA11D83917E00153566 /* PhotoCollectionCell.swift in Sources */,
@@ -2193,6 +2307,7 @@
 				2D788BE21D83944F00153566 /* TAAbstractDotView.m in Sources */,
 				2D788C5E1D83982600153566 /* MyCommentCell.swift in Sources */,
 				2D788AFC1D8392C900153566 /* DynamicDetailResp.swift in Sources */,
+				2D235F2B1D87A8ED00CBDABB /* ViewController+MASAdditions.m in Sources */,
 				2D788BF21D83944F00153566 /* UIScrollView+ty_swizzle.m in Sources */,
 				2D788C971D839ABA00153566 /* TransactionDetailViewController.swift in Sources */,
 				2D788CB91D839B3B00153566 /* PersonCharacterViewController.swift in Sources */,
@@ -2241,6 +2356,7 @@
 				2D788D6F1D83AEAF00153566 /* OGDataTableViewCell.swift in Sources */,
 				2D788B1F1D8392C900153566 /* ReleaseTalentSelectType.swift in Sources */,
 				2D788CB31D839B2B00153566 /* MyEnterViewController.swift in Sources */,
+				2D235F251D87A8ED00CBDABB /* MASLayoutConstraint.m in Sources */,
 				2D788AAD1D8391BB00153566 /* YGTabbarButton.swift in Sources */,
 				2D788B511D83930900153566 /* UIView+EX.swift in Sources */,
 				2D788D3C1D83AE2E00153566 /* DataViewController.swift in Sources */,
@@ -2329,6 +2445,7 @@
 				2D788C4E1D8397F800153566 /* LogButtonCell.swift in Sources */,
 				2D788D0A1D83AD1900153566 /* SelectPhotoCell.swift in Sources */,
 				2D788AAB1D8391BB00153566 /* YGNavigationController.swift in Sources */,
+				2D235F041D87A60000CBDABB /* ZFBrightnessView.m in Sources */,
 				2D788C781D83987600153566 /* PhoneBindCell.swift in Sources */,
 				2D788C271D8394EB00153566 /* SBNotification_Names.swift in Sources */,
 				2D788D431D83AE2E00153566 /* OGDataViewController.swift in Sources */,
@@ -2359,7 +2476,10 @@
 				2D788AAA1D8391BB00153566 /* YGBaseViewController.swift in Sources */,
 				2D788D411D83AE2E00153566 /* InvitationDetailViewController.swift in Sources */,
 				2D788A9F1D83917E00153566 /* NoArrowEditCell.swift in Sources */,
+				2D235F241D87A8ED00CBDABB /* MASConstraintMaker.m in Sources */,
 				2D788C801D83989200153566 /* MineHeaderCell.swift in Sources */,
+				2D235F271D87A8ED00CBDABB /* MASViewConstraint.m in Sources */,
+				2D235F2A1D87A8ED00CBDABB /* View+MASAdditions.m in Sources */,
 				2D788BCE1D83944F00153566 /* MJRefreshAutoFooter.m in Sources */,
 				2D788B081D8392C900153566 /* GlobleDefineResp.swift in Sources */,
 				2D788C861D839AA500153566 /* Register3ViewController.swift in Sources */,
@@ -2371,6 +2491,7 @@
 				D830877B1D278B72009CFE03 /* UIButton+Badge.m in Sources */,
 				2D788B1E1D8392C900153566 /* RegisterResp.swift in Sources */,
 				2D788C351D8394EB00153566 /* YKPhotoPreviewController.swift in Sources */,
+				2D235F021D87A60000CBDABB /* ASValuePopUpView.m in Sources */,
 				2D788B121D8392C900153566 /* ModifyOGReq.swift in Sources */,
 				2D788B1A1D8392C900153566 /* PersonFilesReq.swift in Sources */,
 				2D788C241D8394EB00153566 /* CPDateUtil.swift in Sources */,
@@ -2412,6 +2533,7 @@
 				2D788C901D839ABA00153566 /* AliPutCashViewController.swift in Sources */,
 				2D788D401D83AE2E00153566 /* HorizontalCollectionViewCell.swift in Sources */,
 				2D788B4A1D83930900153566 /* UIColor+EX.swift in Sources */,
+				2D235F071D87A60000CBDABB /* ZFPlayerView.m in Sources */,
 				2D788BE81D83944F00153566 /* UIView+SDExtension.m in Sources */,
 				2D788AA31D83917E00153566 /* ShareCollectionCell.swift in Sources */,
 				2D788B0B1D8392C900153566 /* IsAuthData.swift in Sources */,
@@ -2440,6 +2562,7 @@
 				2D788D1D1D83AD8400153566 /* InvitedHeaderView.swift in Sources */,
 				2D788CFC1D83AD1900153566 /* ReleasePictureViewController.swift in Sources */,
 				2D788BFA1D83944F00153566 /* TZPhotoPreviewController.m in Sources */,
+				2D235F291D87A8ED00CBDABB /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				2D788BFB1D83944F00153566 /* TZVideoPlayerController.m in Sources */,
 				2D20DFA41D815A59002E802A /* UIImage+Blur.m in Sources */,
 				2D788D421D83AE2E00153566 /* OGCircularViewController.swift in Sources */,
@@ -2452,6 +2575,7 @@
 				2D788B461D83930900153566 /* Server+EX.swift in Sources */,
 				2D788BD41D83944F00153566 /* MJRefreshAutoNormalFooter.m in Sources */,
 				2D788D1B1D83AD8400153566 /* HotmanCell.swift in Sources */,
+				2D235F221D87A8ED00CBDABB /* MASCompositeConstraint.m in Sources */,
 				2D788D701D83AEAF00153566 /* OGToolView.swift in Sources */,
 				2D788D3E1D83AE2E00153566 /* HomeCollectionCell.swift in Sources */,
 				2D788CC11D839B4E00153566 /* OrganizeAuthViewController.swift in Sources */,
@@ -2487,8 +2611,10 @@
 				2D788C551D83981400153566 /* MCommentCell.swift in Sources */,
 				2D788C3E1D8397D200153566 /* MyAccountCell.swift in Sources */,
 				2D788D3F1D83AE2E00153566 /* HomeViewController.swift in Sources */,
+				2D235F231D87A8ED00CBDABB /* MASConstraint.m in Sources */,
 				2D788B061D8392C900153566 /* GetTokenResp.swift in Sources */,
 				2D788BD21D83944F00153566 /* MJRefreshHeader.m in Sources */,
+				2D235F031D87A60000CBDABB /* ASValueTrackingSlider.m in Sources */,
 				2D788CFD1D83AD1900153566 /* ReleaseVideoViewController.swift in Sources */,
 				2D788D6E1D83AEAF00153566 /* OGCircularCell.swift in Sources */,
 				2D788C081D83946B00153566 /* GlobleFunc.swift in Sources */,

@@ -20,7 +20,7 @@ class CPDateUtil {
      
      - returns: NSDate
      */
-    static func stringToDate(dateStr:String)->NSDate{
+    static func stringToDate(dateStr:String) -> NSDate{
         return NSDate(fromString:  dateStr, format: .ISO8601(ISO8601Format.DateTimeMilliSec))
     }
     

@@ -22,6 +22,7 @@ class DynamicDetailResp: BaseResponse {
     var userId : Int!
     var result: DynamicDetailResp!
     var createTime : String!
+    var isLike: Int!
     
     override init(fromJson json: JSON!) {
         super.init(fromJson: json)
@@ -40,6 +41,7 @@ class DynamicDetailResp: BaseResponse {
         text = json["text"].stringValue
         userId = json["userId"].intValue
         createTime = json["createTime"].stringValue
+        isLike = json["isLike"].intValue
         
         pictureList = [PictureList]()
         let pictureListArray = json["pictureList"].arrayValue

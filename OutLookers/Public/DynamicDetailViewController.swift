@@ -152,7 +152,7 @@ class DynamicDetailViewController: YGBaseViewController {
     
     override func tapMoreButton(sender: UIButton) {
         let shareModel = YGShareModel()
-        shareModel.shareID = "index.html#trends-details?listId=\(dynamicObj.id)"
+        shareModel.shareID = "trends.html?aid=\(dynamicObj.id)"
         shareModel.shareImage = self.shareImage
         
         if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {
@@ -255,7 +255,7 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
             cell.info = detailObj
             cell.toTalentClick = { [unowned self](index) in
                 let vc = TalentDetailViewController()
-                vc.id = self.detailObj.talentList[indexPath.section].id
+                vc.id = self.detailObj.talentList[index].id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             if let _ = isFollow {
@@ -273,9 +273,12 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             //播放视频
-            _ = cell.playerButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self, unowned cell](sender) in
-                self.player(NSURL(string: self.detailObj.pictureList.first!.url.addVideoPath())!, tableView: tableView, indexPath: indexPath, imageView: cell.playerView, tag: 111)
-            }).addDisposableTo(disposeBag)
+            //_ = cell.playerButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self, unowned cell](sender) in
+            if self.detailObj.isVideo != "1" {
+               let player = self.player(NSURL(string: self.detailObj.pictureList.first!.url.addVideoPath())!, tableView: tableView, indexPath: indexPath, imageView: cell.playerView, tag: 112)
+                player.hidden = false
+            }
+            //}).addDisposableTo(disposeBag)
             return cell
         } else {
             let info = comments[indexPath.row]
@@ -339,7 +342,7 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
 extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
     func dynamicDetailTapShare(sender: UIButton) {
         let shareModel = YGShareModel()
-        shareModel.shareID = "index.html#trends-details?listId=\(dynamicObj.id)"
+        shareModel.shareID = "trends.html?aid=\(dynamicObj.id)"
         shareModel.shareImage = self.shareImage
         
         if UserSingleton.sharedInstance.userId == "\(dynamicObj.userId)" {

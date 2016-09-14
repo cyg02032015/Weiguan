@@ -207,7 +207,7 @@ class TalentAuthViewController: YGBaseViewController {
                 Server.hotmanAuth(self!.req, handler: { (success, msg, value) in
                     if success {
                         SVToast.showWithSuccess(value!)
-                        delay(1, task: { 
+                        delay(1, task: {
                             self?.navigationController?.popToRootViewControllerAnimated(true)
                         })
                     } else {

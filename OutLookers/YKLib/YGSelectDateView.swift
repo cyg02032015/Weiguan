@@ -25,6 +25,16 @@ class YGSelectDateView: UIView {
     var datePicker: UIDatePicker!
     var titleLabel: UILabel!
     var container: UIView!
+    var minimumDate: NSDate? {
+        didSet {
+            self.datePicker.minimumDate = minimumDate
+        }
+    }
+    var maximumDate: NSDate? {
+        didSet {
+            self.datePicker.maximumDate = maximumDate
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,7 +72,7 @@ class YGSelectDateView: UIView {
         topContainer.addSubview(sure)
         
         titleLabel = UILabel()
-        titleLabel.text = "才艺标价单位"
+        titleLabel.text = "请选择时间"
         titleLabel.textAlignment = .Center
         titleLabel.font = UIFont.customFontOfSize(16)
         topContainer.addSubview(titleLabel)
@@ -72,7 +82,7 @@ class YGSelectDateView: UIView {
         topContainer.addSubview(lineV)
         
         datePicker = UIDatePicker()
-        datePicker.datePickerMode = .DateAndTime
+        datePicker.datePickerMode = .Date
         container.addSubview(datePicker)
         datePicker.locale = NSLocale(localeIdentifier: "zh_Hans")
         

@@ -60,6 +60,7 @@ class DynamicResult {
     var replyCount : Int!
     var text : String!
     var userId : Int!
+    var video: String!
     
     init () {
         
@@ -83,4 +84,5 @@ class DynamicResult {
         replyCount = json["replyCount"].intValue
         text = json["text"].stringValue ?? ""
         userId = json["userId"].intValue
+        video = json["video"].stringValue ?? ""
     }}

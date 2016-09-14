@@ -21,6 +21,7 @@ class PhotoCollectionCell: UICollectionViewCell {
         }
     }
     
+    var settingView: UIView!
     var imgView: UIImageView!
     var img: UIImage? {
         didSet {
@@ -63,6 +64,38 @@ class PhotoCollectionCell: UICollectionViewCell {
             make.centerY.equalTo(imgVideoCover.superview!)
             make.centerX.equalTo(imgVideoCover.superview!)
             make.size.equalTo(kSize(30, height: 30))
+        }
+        
+        settingView = UIView()
+        settingView.hidden = true
+        settingView.backgroundColor = UIColor(r: 254, g: 78, b: 78, a: 0.7)
+        imgView.addSubview(settingView)
+        
+        let smlImg = UIImageView(image: UIImage(named: "Set cover"))
+        settingView.addSubview(smlImg)
+        
+        let label = UILabel()
+        label.textAlignment = .Center
+        label.font = UIFont.customFontOfSize(12)
+        label.text = "设置封面";
+        label.textColor = UIColor.whiteColor()
+        settingView.addSubview(label)
+        
+        settingView.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(settingView.superview!);
+            make.height.equalTo(kScale(20))
+        }
+        
+        smlImg.snp.makeConstraints { (make) in
+            make.size.equalTo(kSize(20, height: 12.4))
+            make.left.equalTo(smlImg.superview!).offset(kScale(6))
+            make.centerY.equalTo(smlImg.superview!)
+        }
+        
+        label.snp.makeConstraints { (make) in
+            make.left.equalTo(smlImg.snp.right).offset(kScale(3))
+            make.centerY.equalTo(label.superview!)
+            make.height.equalTo(kScale(12))
         }
         layoutIfNeeded()
     }

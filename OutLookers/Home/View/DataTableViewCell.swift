@@ -16,19 +16,38 @@ class DataTableViewCell: UITableViewCell {
             if req!.sex == 0 {
                 sexLabel.text = "性别: " + "未知"
             }else if req!.sex == 1 {
-                sexLabel.text = "男"
+                sexLabel.text = "性别: " + "男"
             }else {
-                sexLabel.text = "女"
+                sexLabel.text = "性别：" + "女"
             }
-            ageLabel.text = CPDateUtil.stringToDate(req!.birthday).ageWithDateOfBirth()
-            addressLabel.text = req!.province + req!.city
-            heightLabel.text = req!.height
-            weightLabel.text = req!.weight
-            braLabel.text = req!.bust
-            waistlineLabel.text = req!.waist
-            hiplineLabel.text = req!.hipline
-            constellatoryLabel.text = req!.constellation
+            ageLabel.text = "年龄：" + CPDateUtil.stringToDate(req!.birthday).ageWithDateOfBirth()
+            addressLabel.text = "常住地：" + req!.province + req!.city
+            heightLabel.text = "身高：" + req!.height
+            weightLabel.text = "体重：" + req!.weight
+            braLabel.text = "胸围：" + req!.bust
+            waistlineLabel.text = "腰围：" + req!.waist
+            hiplineLabel.text = "臀围：" + req!.hipline
+            constellatoryLabel.text = "星座：" + req!.constellation
+            style.text = "风格特征："
+            appearance.text = "外貌特征: "
+            shape.text = "体型特征："
+            charm.text = "魅力部位："
+            
+            if req!.array.count > 0 {
+                setText(req!.array[0])
+            }
+            if req!.array.count > 1 {
+                setText(req!.array[1])
+            }
+            if req!.array.count > 2 {
+                setText(req!.array[2])
+            }
+            if req!.array.count > 3 {
+                setText(req!.array[3])
+            }
+            
             experence.text = req!.experience
+            
         }
     }
     var sexLabel: UILabel!          // 性别
@@ -52,6 +71,18 @@ class DataTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .None
         setupSubViews()
+    }
+    
+    private func setText(text: String) {
+        if text.hasPrefix("风格特征") {
+            style.text = text
+        }else if text.hasPrefix("外貌特征") {
+            appearance.text = text
+        }else if text.hasPrefix("体型特征") {
+            shape.text = text
+        }else if text.hasPrefix("魅力部位") {
+            charm.text = text
+        }
     }
     
     func setupSubViews() {
@@ -283,21 +314,21 @@ class DataTableViewCell: UITableViewCell {
         }
         
         basicDataLabel.text = "基本资料"
-        sexLabel.text = "性别："
-        ageLabel.text = "年龄："
-        addressLabel.text = "常住地："
-        heightLabel.text = "身高："
-        weightLabel.text = "体重："
-        braLabel.text = "胸围："
-        waistlineLabel.text = "腰围："
+        sexLabel.text = "性别: "
+        ageLabel.text = "年龄: "
+        addressLabel.text = "常住地 :"
+        heightLabel.text = "身高: "
+        weightLabel.text = "体重: "
+        braLabel.text = "胸围: "
+        waistlineLabel.text = "腰围: "
         hiplineLabel.text = "臀围："
         constellatoryLabel.text = "星座："
         
         featureLabel.text = "个人特征"
-        style.text = "风格特征："
-        appearance.text = "外貌特征："
-        shape.text = "体型特征："
-        charm.text = "魅力部位："
+        style.text = "风格特征: "
+        appearance.text = "外貌特征: "
+        shape.text = "体型特征: "
+        charm.text = "魅力部位: "
         experenceLabel.text = "才艺经历"
         experence.text = ""
     }

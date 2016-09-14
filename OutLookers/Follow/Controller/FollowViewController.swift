@@ -12,7 +12,7 @@ private let releaseNoticeIdentifier = "releaseNoticeId"
 private let releaseTalentIdentifier = "releaseTalentId"
 private let dynamicCellIdentifier = "dynamicCellId"
 
-class FollowViewController: YGBaseViewController {
+class FollowViewController: YGBaseViewController, VideoPlayerProtocol {
 
     var tableView: UITableView!
     lazy var lists = [DynamicResult]()
@@ -29,6 +29,7 @@ class FollowViewController: YGBaseViewController {
         } else {
             LogError("未登录无法获取关注用户")
         }
+        loadNewData()
     }
     
     override func viewDidLoad() {
@@ -42,6 +43,7 @@ class FollowViewController: YGBaseViewController {
             self?.loadMoreData()
         })
     }
+    
     
     func loadNewData() {
         pageNo = 1
@@ -121,6 +123,14 @@ extension FollowViewController {
             vc.user = "\(info.userId)"
             self?.navigationController?.pushViewController(vc, animated: true)
         }
+        if info.isVideo != 1 {
+            cell.bigImgView.tapImageAction({ [unowned self] in
+               let player = self.player(NSURL.init(string: info.video.addVideoPath())!, tableView: tableView, indexPath: indexPath, imageView: cell.bigImgView, tag: 111)
+                player.hidden = false
+                })
+        }else {
+            cell.bigImgView.userInteractionEnabled = false
+        }
         return cell
     }
     
@@ -149,7 +159,7 @@ extension FollowViewController: DynamicCellDelegate, FollowProtocol {
             type = .DYHost
             shareModel.shareNickName = "我的纯氧作品, 一起来看~"
         }
-        shareModel.shareID = "index.html#trends-details?listId=\(dy.id)"
+        shareModel.shareID = "trends.html?aid=\(dy.id)"
         shareModel.shareImage = cell.bigImgView.image
         let sharetuple = YGShareHandler.handleShareInstalled(type)
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)

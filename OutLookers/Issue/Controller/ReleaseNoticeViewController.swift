@@ -46,6 +46,7 @@ class ReleaseNoticeViewController: YGBaseViewController {
         setupSubViews()
         getToken()
         selectDatePicker = YGSelectDateView()
+        selectDatePicker.minimumDate = NSDate()
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
     }
@@ -385,7 +386,12 @@ extension ReleaseNoticeViewController: RecruitNeedsCellDelegate, RecruitInformat
             recruits.removeAtIndex(index) //直接移除对象, 对象要遵循Equatable协议, 所有加了个index的参数
         }
         req.recruitment = recruit.id
-        recruits.append(recruit)
+        if index != -1 {
+            recruits.insert(recruit, atIndex: index)
+        }else {
+            recruits.append(recruit)
+        }
+        index = -1
         tableView.reloadData()
         checkParameters()
     }

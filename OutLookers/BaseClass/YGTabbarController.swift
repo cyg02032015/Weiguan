@@ -95,12 +95,16 @@ extension YGTabbarController: YGTabbarDelegate {
             LogInHelper.login(vc)
         }
         self.selectedIndex = to
+        if to != 1 {
+            ZFPlayerView.sharedPlayerView().pause()
+        }
     }
     
+    //MARK: 只让有视频的页面支持横屏
     override func shouldAutorotate() -> Bool {
         guard let _ = self.viewControllers else { return false }
         let nav = self.viewControllers![self.selectedIndex] as! UINavigationController
-        if nav.topViewController is DynamicDetailViewController {
+        if nav.topViewController is DynamicDetailViewController || nav.topViewController is FindViewController {
             return !ZFBrightnessView.sharedBrightnessView().isLockScreen
         }
         return false
@@ -109,8 +113,8 @@ extension YGTabbarController: YGTabbarDelegate {
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         guard let _ = self.viewControllers else { return .Portrait }
         let nav = self.viewControllers![self.selectedIndex] as! UINavigationController
-        if nav.topViewController is DynamicDetailViewController {
-            if ZFBrightnessView.sharedBrightnessView().isLockScreen {
+        if nav.topViewController is DynamicDetailViewController || nav.topViewController is FindViewController {
+            if ZFBrightnessView.sharedBrightnessView().isAllowLandscape {
                 return .AllButUpsideDown
             }
             return .Portrait

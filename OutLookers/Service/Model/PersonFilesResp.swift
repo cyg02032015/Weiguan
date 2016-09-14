@@ -56,7 +56,7 @@ class PersonFilesResp: BaseResponse {
         weight = json["weight"].stringValue ?? ""
         sex = json["sex"].intValue
         birthday = json["birthday"].stringValue ?? ""
-        city = json["cityId"].stringValue ?? ""
-        province = json["provinceId"].stringValue ?? ""
+        city = json["city"].stringValue ?? ""
+        province = json["province"].stringValue ?? ""
     }
 }

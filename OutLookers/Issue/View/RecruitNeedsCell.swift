@@ -112,7 +112,7 @@ class RecruitNeedsCell: UITableViewCell {
     }
     func tapAdd(sender: UIButton) {
         delegate?.recruitNeedsAddRecruite(sender)
-        for (_, button) in allRecruitButtons.enumerate() {
+        for (_, button) in self.allRecruitButtons.enumerate() {
             button.removeFromSuperview()
         }
     }

@@ -39,14 +39,15 @@ class OSSImageUploader {
             return self.getToken(object)
         }
         let config = OSSClientConfiguration()
-        config.maxRetryCount = 2
+        config.maxRetryCount = 0
         config.timeoutIntervalForRequest = 30
         config.timeoutIntervalForResource  = 24 * 60 * 60
         let endpoint = "http://" + object.region + ".aliyuncs.com"
         let clinet = OSSClient(endpoint: endpoint, credentialProvider: credential, clientConfiguration: config)
         let queue = NSOperationQueue()
-        queue.maxConcurrentOperationCount = images.count
+        queue.maxConcurrentOperationCount = images.count <= 3 ? images.count : 3
         var names = [String]()
+        
         for (var i, image) in images.enumerate() {
             let operation = NSBlockOperation(block: {
                 let put = OSSPutObjectRequest()
@@ -59,12 +60,19 @@ class OSSImageUploader {
                     "callbackUrl": object.callbackUrl,
                     "callbackBody": object.callbackBody
                 ]
+                put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
+                    LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
+                    let progress = Float(totalByteSent) / Float(totalBytesExpectedToSend)
+                    dispatch_async_safely_to_main_queue({ 
+                        SVProgressHUD.showProgress(progress, status: "\(Int(progress*100))%")
+                    })
+                }
                 var data: NSData?
                 LogDebug("调试  =  \(image)")
                 data = UIImageJPEGRepresentation(image, 0.9)
                 put.uploadingData = data
                 let putTask = clinet.putObject(put)
-                putTask.waitUntilFinished()
+                //putTask.waitUntilFinished()
                 putTask.continueWithBlock({ (task) in
                     if task.error != nil {
                         LogInfo("-----上传图片\(i)失败")
@@ -136,9 +144,14 @@ class OSSImageUploader {
                     "callbackUrl": object.callbackUrl,
                     "callbackBody": object.callbackBody
                 ]
+                put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
+                    LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
+                    let progress = Float(totalByteSent) / Float(totalBytesExpectedToSend)
+                    SVProgressHUD.showProgress(progress, status: "第\(i)张: \(Int(progress*100))%")
+                }
                 put.uploadingData = data
                 let putTask = clinet.putObject(put)
-                putTask.waitUntilFinished()
+                //putTask.waitUntilFinished()
                 putTask.continueWithBlock({ (task) in
                     if task.error != nil {
                         LogInfo("-----上传图片\(i)失败")

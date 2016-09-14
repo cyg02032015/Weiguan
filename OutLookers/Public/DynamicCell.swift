@@ -18,7 +18,7 @@ import RxCocoa
     func dynamicCellTapFollow(sender: UIButton, indexPath: NSIndexPath)
 }
 
-class DynamicCell: UITableViewCell, VideoPlayerProtocol {
+class DynamicCell: UITableViewCell, VideoPlayerProtocol, UIImageViewAddRadiusProtocol {
 
     weak var tableView: UITableView!
     var info: DynamicResult! {
@@ -53,6 +53,8 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
                 }
             }
             
+            praiseBtn.selected = info.isLike == 1
+            
             if info.likeCount > 0 {
                 praiseBtn.setTitle("\(info.likeCount)", forState: .Normal)
             } else {
@@ -68,6 +70,9 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             } else {
                 videoImgView.hidden = false
             }
+            if "\(info.userId)" == UserSingleton.sharedInstance.userId {
+                followButton.hidden = true
+            }
             
         }
     }
@@ -77,7 +82,7 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
     var headImgView: IconHeaderView!
     var nameLabel: UILabel!
     var timeLabel: UILabel!
-    var bigImgView: UIImageView!
+    var bigImgView: TouchImageView!
     var details: UILabel!
     var followButton: UIButton!
     var praiseBtn: UIButton!
@@ -100,6 +105,8 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             make.size.equalTo(kSize(35, height: 35))
         }
         
+        self.addRadius(headImgView, radius: kScale(35/2), position: headImgView.center)
+        
         nameLabel = UILabel()
         nameLabel.font = UIFont.customFontOfSize(16)
         contentView.addSubview(nameLabel)
@@ -109,7 +116,7 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             make.height.equalTo(kScale(20))
         }
         
-        let timeImgView = UIImageView(image: UIImage(named: "time"))
+        let timeImgView = UIImageView(image: UIImage(named: "time1"))
         contentView.addSubview(timeImgView)
         timeImgView.snp.makeConstraints { (make) in
             make.top.equalTo(nameLabel.snp.bottom).offset(kScale(4))
@@ -138,7 +145,7 @@ class DynamicCell: UITableViewCell, VideoPlayerProtocol {
             make.centerY.equalTo(headImgView)
         }
         
-        bigImgView = UIImageView()
+        bigImgView = TouchImageView()
         bigImgView.tag = 111
         bigImgView.contentMode = .ScaleAspectFill
         bigImgView.clipsToBounds = true

@@ -21,7 +21,6 @@ target 'OutLookers' do
 	pod 'Device', '~> 1.0.1'
 	pod 'Proposer', '~> 0.9.0'
 	pod 'FLEX', '~> 2.0', :configurations => ['Debug']
-	pod 'ZFPlayer', '~> 1.2.1'
 	pod 'AFDateHelper', '~> 3.4.2'
     pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
 end

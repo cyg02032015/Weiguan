@@ -143,7 +143,9 @@ extension MineViewController {
             }
             cell.header.iconHeaderTap { [unowned self] in
                 if UserSingleton.sharedInstance.isLogin() {
-                    
+                    let vc = PHViewController()
+                    vc.user = UserSingleton.sharedInstance.userId
+                    self.navigationController?.pushViewController(vc, animated: true)
                 } else {
                     let view = YGLogView()
                     view.animation()

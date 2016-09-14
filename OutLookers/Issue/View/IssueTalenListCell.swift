@@ -82,11 +82,11 @@ extension IssueTalenListCell: UICollectionViewDelegate, UICollectionViewDataSour
         let id = info[indexPath.item].id
         if self.marks.contains(id) {
             self.marks.removeObject(id)
-            self.marks.removeObject(id)
+//            self.marks.removeObject(id)
             cell.isSelect = false
         } else {
             self.marks.append(id)
-            self.marks.append(id)
+//            self.marks.append(id)
             cell.isSelect = true
         }
         

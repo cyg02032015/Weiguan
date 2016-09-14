@@ -142,6 +142,7 @@ extension SettingViewController {
             navigationController?.pushViewController(vc, animated: true)
         case 3:
             self.showAlertController("确定清除缓存？", message: "", defults: ["确定"], handler: { (index, alertAction) in
+                SVToast.show("正在清理缓存")
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! NoArrowEditCell
                 if self.clearCache() {
                     SVToast.showWithSuccess("缓存已清除")

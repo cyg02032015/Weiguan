@@ -149,13 +149,14 @@ class DynamicDetailVideoCell: UITableViewCell {
             
             let praiseButton = UIButton()
             praiseButton.setImage(UIImage(named: "like"), forState: .Normal)
-            praiseButton.setImage(UIImage(named: "like copy"), forState: .Selected)
+            praiseButton.setImage(UIImage(named: "likecopy"), forState: .Selected)
             contentView.addSubview(praiseButton)
             praiseButton.snp.makeConstraints { (make) in
                 make.right.equalTo(commentButton.snp.left).offset(kScale(-40))
                 make.size.equalTo(commentButton)
                 make.centerY.equalTo(commentButton)
             }
+            praiseButton.selected = info.isLike == 1
             
             shareButton = UIButton()
             shareButton.setImage(UIImage(named: "shareR"), forState: .Normal)
@@ -286,7 +287,7 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
 
         playerView = UIImageView()
-        playerView.tag = 111
+        playerView.tag = 112
         playerView.userInteractionEnabled = true
         playerView.backgroundColor = .blackColor()
         contentView.addSubview(playerView)
