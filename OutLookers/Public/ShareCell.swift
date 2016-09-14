@@ -11,7 +11,7 @@ import UIKit
 let shareCollectionIdentifier = "shareCollectionId"
 
 protocol ShareCellDelegate: class {
-    func shareCellReturnsShareTitle(text: String)
+    func shareCellReturnsShareTitle(text: String, selected: Bool)
 }
 
 class ShareCell: UITableViewCell {
@@ -88,7 +88,7 @@ extension ShareCell: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.shareButton.selected = true
             shareButton = cell.shareButton
             guard let title = cell.label.text else {fatalError("获取分享按钮失败")}
-            delegate.shareCellReturnsShareTitle(title)
+            delegate.shareCellReturnsShareTitle(title, selected: true)
         }
         return cell
     }
@@ -100,15 +100,16 @@ extension ShareCell: UICollectionViewDelegate, UICollectionViewDataSource {
             shareButton.selected = false
             shareButton = cell.shareButton
             cell.shareButton.selected = true
+            delegate.shareCellReturnsShareTitle(title, selected: true)
         } else {
             if shareButton.selected {
                 cell.shareButton.selected = false
-                return
+                delegate.shareCellReturnsShareTitle(title, selected: false)
             } else {
                 cell.shareButton.selected = true
                 shareButton = cell.shareButton
+                delegate.shareCellReturnsShareTitle(title, selected: true)
             }
         }
-        delegate.shareCellReturnsShareTitle(title)
     }
 }

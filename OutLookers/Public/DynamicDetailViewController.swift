@@ -41,10 +41,12 @@ class DynamicDetailViewController: YGBaseViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         ZFPlayerView.sharedPlayerView().pause()
+        ZFPlayerView.sharedPlayerView().resetPlayer()
     }
     
     override func viewDidDisappear(animated: Bool) {
         ZFPlayerView.sharedPlayerView().pause()
+        ZFPlayerView.sharedPlayerView().resetPlayer()
     }
     
     override func viewDidLoad() {
@@ -199,18 +201,21 @@ extension DynamicDetailViewController: DXMessageToolBarDelegate {
             SVToast.dismiss()
             if success {
                 SVToast.showWithSuccess("发表成功")
-                let comment = CommentList(fromJson: JSON(nilLiteral: ()))
-                comment.createTime = NSDate().stringFromCreate()
-                comment.headImgUrl = UserSingleton.sharedInstance.nickname
-                comment.nickname = UserSingleton.sharedInstance.nickname
-                comment.text = self.req.text
-                comment.id = self.dynamicObj.id
-                comment.detailsType = 0
-                comment.replyId = self.req.replyId == nil ? 0 : Int(self.req.replyId!)
-                self.comments.append(comment)
-                self.tableView.beginUpdates()
-                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.comments.count - 1, inSection: 1)], withRowAnimation: .Automatic)
-                self.tableView.endUpdates()
+//                let comment = CommentList(fromJson: JSON(nilLiteral: ()))
+//                comment.createTime = NSDate().stringFromCreate()
+//                comment.headImgUrl = UserSingleton.sharedInstance.nickname
+//                comment.nickname = UserSingleton.sharedInstance.nickname
+//                comment.text = self.req.text
+//                comment.id = self.dynamicObj.id
+//                comment.detailsType = 0
+//                comment.replyId = self.req.replyId == nil ? 0 : Int(self.req.replyId!)
+//                self.comments.append(comment)
+//                self.tableView.beginUpdates()
+//                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.comments.count - 1, inSection: 1)], withRowAnimation: .Automatic)
+//                self.tableView.endUpdates()
+                self.comments.removeAll()
+                self.pageNo = 1
+                self.loadMoreData()
             } else {
                 guard let m = msg else {return}
                 SVToast.showWithError(m)
@@ -275,7 +280,7 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
             //播放视频
             //_ = cell.playerButton.rx_controlEvent(.TouchUpInside).subscribeNext({ [unowned self, unowned cell](sender) in
             if self.detailObj.isVideo != "1" {
-               let player = self.player(NSURL(string: self.detailObj.pictureList.first!.url.addVideoPath())!, tableView: tableView, indexPath: indexPath, imageView: cell.playerView, tag: 112)
+               let player = self.player(NSURL(string: self.detailObj.pictureList.first!.url.addVideoPath())!, tableView: tableView, indexPath: indexPath, imageView: cell.playerView, tag: 111)
                 player.hidden = false
             }
             //}).addDisposableTo(disposeBag)
@@ -339,7 +344,7 @@ extension DynamicDetailViewController: VideoPlayerProtocol {
     }
 }
 
-extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
+extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol, DeleteDynamicProtocol {
     func dynamicDetailTapShare(sender: UIButton) {
         let shareModel = YGShareModel()
         shareModel.shareID = "trends.html?aid=\(dynamicObj.id)"
@@ -353,6 +358,24 @@ extension DynamicDetailViewController: DynamicDetailDelegate, FollowProtocol {
         shareModel.shareInfo = detailObj.text
         shareView.shareModel = shareModel
         shareView.animation()
+        shareView.deleteClick = { [weak self] in
+            SVToast.show()
+            self!.deleteDynamic("\(self!.dynamicObj.id)", handler: { [weak self](success, msg) in
+                if success {
+                    self?.navigationController?.popViewControllerAnimated(true)
+                    delay(0.5, task: { 
+                        SVProgressHUD.setMinimumDismissTimeInterval(0.2)
+                        SVProgressHUD.showSuccessWithStatus("删除成功")
+                    })
+                }else {
+                    if let _ = msg {
+                        SVToast.showWithError(msg!)
+                    }else {
+                        SVToast.showWithError("删除失败")
+                    }
+                }
+                })
+        }
     }
     
     func dynamicDetailTapFollow(sender: UIButton) {

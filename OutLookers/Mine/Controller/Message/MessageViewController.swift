@@ -94,7 +94,7 @@ extension MessageViewController {
                 vc.userId = UserSingleton.sharedInstance.userId
                 vc.urlStr = API.myFans
                 vc.showType = .Fan
-                vc.title = "我的粉丝"
+                vc.title = "关注"
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 //TODO 通知

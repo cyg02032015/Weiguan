@@ -63,9 +63,7 @@ class OSSImageUploader {
                 put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
                     LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
                     let progress = Float(totalByteSent) / Float(totalBytesExpectedToSend)
-                    dispatch_async_safely_to_main_queue({ 
-                        SVProgressHUD.showProgress(progress, status: "\(Int(progress*100))%")
-                    })
+                    //NSNotificationCenter.defaultCenter().postNotificationName(kUploadImageProressNotification, object: ["\(i)" : "\(progress)"])
                 }
                 var data: NSData?
                 LogDebug("调试  =  \(image)")
@@ -77,6 +75,7 @@ class OSSImageUploader {
                     if task.error != nil {
                         LogInfo("-----上传图片\(i)失败")
                         LogError(task.error!)
+                        SVToast.showWithError(task.error!.localizedDescription)
                     } else {
                         LogInfo("-----上传图片\(i)成功")
                         let result = task.result!
@@ -132,6 +131,11 @@ class OSSImageUploader {
         let queue = NSOperationQueue()
         queue.maxConcurrentOperationCount = datas.count
         var names = [String]()
+        var dataTotalBytes: Int64 = 0
+        var dataSendBytes: Int64 = 0
+        datas.forEach { (data) in
+            dataTotalBytes += data.length
+        }
         for (var i, data) in datas.enumerate() {
             let operation = NSBlockOperation(block: {
                 let put = OSSPutObjectRequest()
@@ -146,8 +150,12 @@ class OSSImageUploader {
                 ]
                 put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
                     LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
-                    let progress = Float(totalByteSent) / Float(totalBytesExpectedToSend)
-                    SVProgressHUD.showProgress(progress, status: "第\(i)张: \(Int(progress*100))%")
+                    dataSendBytes += bytesSent
+                    SVProgressHUD.showProgress(Float(dataSendBytes)/Float(dataTotalBytes), status: "图片正在上传")
+                    if Float(dataSendBytes)/Float(dataTotalBytes) == 1 {
+                        SVProgressHUD.dismiss()
+                    }
+                    //NSNotificationCenter.defaultCenter().postNotificationName(kUploadImageProressNotification, object: ["\(i)" : "\(progress)"])
                 }
                 put.uploadingData = data
                 let putTask = clinet.putObject(put)

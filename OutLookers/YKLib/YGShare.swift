@@ -24,9 +24,10 @@ class YGShareModel {
 
 class YGShare: UIView {
 
+    var deleteClick: (() -> ())?
     var editClick: (() -> ())?
     var returnHomeClick: (() -> ())?
-    var shareModel: YGShareModel!
+    var shareModel: YGShareModel?
     typealias ShareClosure = (title: String) -> Void
     private var shareClosure: ShareClosure!
     var container: UIView!
@@ -164,6 +165,10 @@ class YGShare: UIView {
     }
     
     func selectItem(cell: ShareVCell) {
+        guard let _ = shareModel else {
+            SVToast.showWithError("分享数据准备出错")
+            return
+        }
         cell.shareBlock { [unowned self] (sender) in
             //guard let ws = self else {return}
             var platFormType = [String]()
@@ -174,14 +179,14 @@ class YGShare: UIView {
                 platFormType.append(UMShareToWechatSession)
             case kTitleSina:
                 platFormType.append(UMShareToSina)
-                self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
+                self.shareModel!.shareNickName = self.shareModel!.shareNickName! + "\(sharePrefix)/" + self.shareModel!.shareID!
             case kTitleQQ:
                 platFormType.append(UMShareToQQ)
-                UMSocialData.defaultData().extConfig.qqData.url = "\(sharePrefix)/\(self.shareModel.shareID!)"
+                UMSocialData.defaultData().extConfig.qqData.url = "\(sharePrefix)/\(self.shareModel!.shareID!)"
                 //self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
             case kTitleQzone:
                 platFormType.append(UMShareToQzone)
-                self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
+                self.shareModel!.shareNickName = self.shareModel!.shareNickName! + "\(sharePrefix)/" + self.shareModel!.shareID!
             case kEdit:
                 self.tapCancel()
                 if let _ = self.editClick {
@@ -194,17 +199,50 @@ class YGShare: UIView {
                     self.returnHomeClick!()
                 }
                 return
+            case kDelete:
+                self.tapCancel()
+                if let _ = self.deleteClick {
+                    self.deleteClick!()
+                }
             default: ""
             }
             
             self.tapCancel()
-            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/\(self.shareModel.shareID)")
-            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: self.shareModel.shareNickName, image: self.shareModel.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+            let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/" + self.shareModel!.shareID!)
+            UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: self.shareModel!.shareNickName, image: self.shareModel!.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
                 if response.responseCode == UMSResponseCodeSuccess {
                     LogInfo("分享成功！")
                 }
             })
         }
+    }
+    
+    class func shareAction(shareTitle: String, shareModel: YGShareModel) {
+        var platFormType = [String]()
+        switch shareTitle {
+            case kTitleTimeline:
+                platFormType.append(UMShareToWechatTimeline)
+            case kTitleWechat:
+                platFormType.append(UMShareToWechatSession)
+            case kTitleSina:
+                platFormType.append(UMShareToSina)
+                shareModel.shareNickName = shareModel.shareNickName! + "\(sharePrefix)/\(shareModel.shareID!)"
+            case kTitleQQ:
+                platFormType.append(UMShareToQQ)
+                UMSocialData.defaultData().extConfig.qqData.url = "\(sharePrefix)/\(shareModel.shareID!)"
+            //self.shareModel.shareNickName = self.shareModel.shareNickName! + "\(sharePrefix)/\(self.shareModel.shareID!)"
+            case kTitleQzone:
+                platFormType.append(UMShareToQzone)
+                shareModel.shareNickName = shareModel.shareNickName! + "\(sharePrefix)/\(shareModel.shareID!)"
+            default: ""
+        }
+            
+        let rc = UMSocialUrlResource(snsResourceType: UMSocialUrlResourceTypeWeb, url: "\(sharePrefix)/" + shareModel.shareID!)
+        UMSocialDataService.defaultDataService().postSNSWithTypes(platFormType, content: shareModel.shareNickName, image: shareModel.shareImage, location: nil, urlResource: rc, presentedController: nil, completion: { (response) in
+            if response.responseCode == UMSResponseCodeSuccess {
+                LogInfo("分享成功！")
+            }
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {

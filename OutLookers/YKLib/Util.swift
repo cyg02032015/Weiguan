@@ -38,7 +38,7 @@ class Util {
                 let controller = UIImagePickerController()
                 controller.sourceType = .Camera
                 if UIImagePickerController.isAvailableCameraDeviceFront() {
-                    controller.cameraDevice = .Front
+                    controller.cameraDevice = .Rear
                 }
                 var mediaTypes = [String]()
                 mediaTypes.append(kUTTypeImage as String)

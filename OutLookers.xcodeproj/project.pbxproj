@@ -363,6 +363,7 @@
 		2D788D791D83AEAF00153566 /* TalentWorksCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D788D641D83AEAF00153566 /* TalentWorksCollectionCell.swift */; };
 		2D78BD471D841D95009566C1 /* BingAccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78BD461D841D95009566C1 /* BingAccountData.swift */; };
 		2D78BD4B1D85906A009566C1 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78BD4A1D85906A009566C1 /* AgreementViewController.swift */; };
+		2D83BEC11D8956FD0057EE9A /* DeleteDynamicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D83BEC01D8956FD0057EE9A /* DeleteDynamicProtocol.swift */; };
 		2DCAB0261D86878F006AB90B /* TalentDetailNomalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCAB0251D86878F006AB90B /* TalentDetailNomalCell.swift */; };
 		2DCAB0291D869C2F006AB90B /* TalentPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCAB0281D869C2F006AB90B /* TalentPhotoModel.swift */; };
 		2DCAB02B1D86A8B9006AB90B /* String+SBAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCAB02A1D86A8B9006AB90B /* String+SBAdd.swift */; };
@@ -832,6 +833,7 @@
 		2D788D641D83AEAF00153566 /* TalentWorksCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentWorksCollectionCell.swift; sourceTree = "<group>"; };
 		2D78BD461D841D95009566C1 /* BingAccountData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAccountData.swift; sourceTree = "<group>"; };
 		2D78BD4A1D85906A009566C1 /* AgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
+		2D83BEC01D8956FD0057EE9A /* DeleteDynamicProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDynamicProtocol.swift; sourceTree = "<group>"; };
 		2DCAB0251D86878F006AB90B /* TalentDetailNomalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailNomalCell.swift; sourceTree = "<group>"; };
 		2DCAB0281D869C2F006AB90B /* TalentPhotoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentPhotoModel.swift; sourceTree = "<group>"; };
 		2DCAB02A1D86A8B9006AB90B /* String+SBAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SBAdd.swift"; sourceTree = "<group>"; };
@@ -1560,6 +1562,7 @@
 				D8518AC21D6046B90028EC79 /* FolloButtonProtocol.swift */,
 				2D788AAF1D83920E00153566 /* VideoPlayerProtocol.swift */,
 				2D45742A1D8833B10022925E /* UIImageViewAddRadiusProtocol.swift */,
+				2D83BEC01D8956FD0057EE9A /* DeleteDynamicProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -2532,6 +2535,7 @@
 				2D788BF81D83944F00153566 /* TZPhotoPickerController.m in Sources */,
 				2D788C901D839ABA00153566 /* AliPutCashViewController.swift in Sources */,
 				2D788D401D83AE2E00153566 /* HorizontalCollectionViewCell.swift in Sources */,
+				2D83BEC11D8956FD0057EE9A /* DeleteDynamicProtocol.swift in Sources */,
 				2D788B4A1D83930900153566 /* UIColor+EX.swift in Sources */,
 				2D235F071D87A60000CBDABB /* ZFPlayerView.m in Sources */,
 				2D788BE81D83944F00153566 /* UIView+SDExtension.m in Sources */,

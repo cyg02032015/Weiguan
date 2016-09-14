@@ -32,7 +32,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -49,7 +49,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -79,7 +79,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -93,7 +93,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -115,7 +115,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -142,7 +142,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
             }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+                handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -157,7 +157,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -172,7 +172,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -202,7 +202,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -223,7 +223,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -238,7 +238,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -253,7 +253,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -271,7 +271,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -291,7 +291,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -314,7 +314,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
             }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+                handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -329,7 +329,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
 
@@ -344,7 +344,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -358,7 +358,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -383,7 +383,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -400,7 +400,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -419,7 +419,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -437,7 +437,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -454,7 +454,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -469,7 +469,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -493,7 +493,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -508,7 +508,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -523,7 +523,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -538,7 +538,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -553,7 +553,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -568,7 +568,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -589,7 +589,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
 
@@ -606,7 +606,7 @@ class Server {
                 handler(success: false, msg: info.msg!, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -624,7 +624,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -643,7 +643,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -662,7 +662,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -681,7 +681,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -698,7 +698,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -715,7 +715,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -734,7 +734,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -751,7 +751,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -768,7 +768,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
 
@@ -793,7 +793,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -810,7 +810,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -824,7 +824,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -842,7 +842,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -860,7 +860,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -881,7 +881,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -901,7 +901,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -921,7 +921,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -938,7 +938,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -956,7 +956,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -973,7 +973,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -994,7 +994,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1008,7 +1008,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
             }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+                handler(success: false, msg: nil, value: nil)
         }
     }
 
@@ -1023,7 +1023,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1038,7 +1038,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1057,7 +1057,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1080,7 +1080,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1094,7 +1094,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1122,7 +1122,7 @@ class Server {
             }
 
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1144,7 +1144,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1171,7 +1171,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -1198,7 +1198,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
 
@@ -1216,7 +1216,7 @@ class Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
 
@@ -1247,7 +1247,7 @@ class Server {
             }
             
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
 

@@ -50,6 +50,7 @@ class OSSVideoUploader {
         putTask.continueWithBlock({ (task) in
             if task.error != nil {
                 LogError(task.error!)
+                SVToast.showWithError(putTask.error!.localizedDescription)
             } else {
                 let result = task.result!
                 let json = JSON.parse(result.serverReturnJsonString)

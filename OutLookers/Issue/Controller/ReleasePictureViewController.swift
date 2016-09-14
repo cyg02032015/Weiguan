@@ -20,6 +20,7 @@ private extension Selector {
 
 class ReleasePictureViewController: YGBaseViewController {
     var tableView: UITableView!
+    var shareTitle: String?
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
     lazy var photos = [UIImage]()
     lazy var originPhotos = [AnyObject]()
@@ -37,6 +38,7 @@ class ReleasePictureViewController: YGBaseViewController {
         super.viewDidLoad()
         title = "发布图片"
         self.shareTuple = YGShareHandler.handleShareInstalled(.Video)
+        shareTitle = shareTuple.2[0]
         setupSubViews()
         getToken()
         loadData()
@@ -253,6 +255,8 @@ extension ReleasePictureViewController: UIActionSheetDelegate {
                 tz.allowTakePicture = false
                 tz.allowPickingVideo = false
                 tz.selectedAssets = NSMutableArray(array: originPhotos)
+                photos.removeAll()
+                originPhotos.removeAll()
                 presentViewController(tz, animated: true, completion: nil)
             break
         default: LogWarn("switch default")
@@ -314,7 +318,9 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
     }
     
     func tapReleaseButton(sender: UIButton) {
-
+        sender.enabled = false
+        tableView.reloadData()
+        guard self.tokenObject != nil else { SVToast.showWithError("获取token失败"); return }
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
         SVToast.show("正在上传封面")
@@ -325,6 +331,7 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
                     if state == .Success {
                         LogInfo("封面上传完成")
                         self?.req.cover = names.first
+                        //SVToast.showWithSuccess("封面上传完成")
                         dispatch_group_leave(group)
                     } else {
                         SVToast.dismiss()
@@ -336,6 +343,7 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
             
             dispatch_group_async(group, queue) { [weak self] in
                 dispatch_group_enter(group)
+                SVToast.show("正在上传图片")
                 OSSImageUploader.uploadImageDatas(self!.tokenObject, datas: self!.imageData, isAsync: true, complete: { (names, state) in
                         if state == .Success {
                             LogWarn("pictures = \(names.joinWithSeparator(","))")
@@ -355,29 +363,50 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
         dispatch_group_notify(group, queue) { [weak self] in
             if isEmptyString(self!.req.picture) && isEmptyString(self!.req.cover) {
                 SVToast.showWithError("图片或者封面id为空")
+                sender.enabled = true
                 return
             }
             LogInfo("picture = \(self!.req.picture)")
             Server.releasePicAndVideo(self!.req, handler: { (success, msg, value) in
                 if success {
                     SVToast.showWithSuccess("发布成功")
-                    delay(1.0, task: {
+                    delay(1.0, task: { 
                         self?.dismissViewControllerAnimated(true, completion: {
                             self?.photos.removeAll()
                             self?.originPhotos.removeAll()
                         })
                         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                         appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.thridBtn)
+                        let shareModel = YGShareModel()
+                        let shareTitle: String? = self?.shareTitle
+                        if let _ = value {
+                            shareModel.shareID = "trends.html?aid=" + value!
+                        }
+                        shareModel.shareImage = self?.photos[0]
+                        shareModel.shareNickName = "我的纯氧作品, 一起来看~"
+                        shareModel.shareInfo = self?.req.text
+                        delay(1.0, task: {
+                            let str = shareTitle ?? ""
+                            guard !isEmptyString(shareModel.shareID) else { SVToast.showWithError("同步\(str)失败"); return }
+                            guard let _ = shareTitle else { SVToast.showWithError("同步\(str)失败"); return }
+                            YGShare.shareAction(shareTitle!, shareModel: shareModel)
+                        })
                     })
                 } else {
                     guard let m = msg else {return}
                     SVToast.showWithError(m)
+                    sender.enabled = true
                 }
             })
         }
     }
     
-    func shareCellReturnsShareTitle(text: String) {
+    func shareCellReturnsShareTitle(text: String, selected: Bool) {
         LogInfo("分享 \(text)")
+        if selected {
+            shareTitle = text
+        }else {
+            shareTitle = nil
+        }
     }
 }

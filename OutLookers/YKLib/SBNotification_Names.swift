@@ -12,6 +12,7 @@ let kRecieveGlobleDefineNotification = "recieveGlobleDefine"
 let kMessageLikeReleaseReadNotification = "kMessageLikeReleaseReadNotification"
 let kMessageReplyReleaseReadNotification = "kMessageReplyReleaseReadNotification"
 let kMessageFollowReleaseReadNotification = "kMessageFollowReleaseReadNotification"
+let kUploadImageProressNotification = "kUploadImageProressNotification"
 
 //离开动态详情页面
 let DynamicDetailVC_WillDisappear = "DynamicDetailVC_WillDisappear"

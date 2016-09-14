@@ -61,8 +61,9 @@ class FollowViewController: YGBaseViewController, VideoPlayerProtocol {
                 }
                 self.pageNo += 1
             } else {
-                SVToast.showWithError(msg!)
                 self.tableView.mj_header.endRefreshing()
+                guard let _ = msg else { return }
+                SVToast.showWithError(msg!)
             }
         }
     }

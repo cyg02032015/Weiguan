@@ -27,6 +27,7 @@ private extension Selector {
 
 class ReleaseVideoViewController: YGBaseViewController {
     
+    private var shareTitle: String?
     var tableView: UITableView!
     var videoUrl: NSURL!
     lazy var shareTuple = ([UIImage](), [UIImage](), [String]())
@@ -54,6 +55,7 @@ class ReleaseVideoViewController: YGBaseViewController {
         getToken()
         loadData()
         self.shareTuple = YGShareHandler.handleShareInstalled(.Video)
+        shareTitle = shareTuple.2[0]
         setupSubViews()
     }
     
@@ -274,9 +276,22 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
                 SVToast.dismiss()
                 if success {
                     SVToast.showWithSuccess("上传视频成功")
-                    delay(1, task: {
-                        self?.dismissViewControllerAnimated(true, completion: {
-                        })
+                    self?.dismissViewControllerAnimated(true, completion: {})
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.thridBtn)
+                    let shareModel = YGShareModel()
+                    let shareTitle: String? = self?.shareTitle
+                    if let _ = value {
+                        shareModel.shareID = "trends.html?aid=" + value!
+                    }
+                    shareModel.shareImage = self?.coverImage
+                    shareModel.shareNickName = "我的纯氧作品, 一起来看~"
+                    shareModel.shareInfo = self?.req.text
+                    delay(1.0, task: {
+                        let str = shareTitle ?? ""
+                        guard !isEmptyString(shareModel.shareID) else { SVToast.showWithError("同步\(str)失败"); return }
+                        guard let _ = shareTitle else { SVToast.showWithError("同步\(str)失败"); return }
+                        YGShare.shareAction(shareTitle!, shareModel: shareModel)
                     })
                 } else {
                     SVToast.showWithError(msg!)
@@ -296,8 +311,13 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
         }
     }
     
-    func shareCellReturnsShareTitle(text: String) {
+    func shareCellReturnsShareTitle(text: String, selected: Bool) {
         LogInfo("分享 \(text)")
+        if selected {
+            shareTitle = text
+        }else {
+            shareTitle = nil
+        }
     }
 }
 

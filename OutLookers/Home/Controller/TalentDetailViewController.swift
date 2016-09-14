@@ -179,7 +179,7 @@ extension TalentDetailViewController {
 
 // MARK: - ShareCellDelegate
 extension TalentDetailViewController: ShareCellDelegate {
-    func shareCellReturnsShareTitle(text: String) {
+    func shareCellReturnsShareTitle(text: String, selected: Bool) {
         LogInfo(text)
     }
 }

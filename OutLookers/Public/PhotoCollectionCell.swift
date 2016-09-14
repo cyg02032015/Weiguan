@@ -10,6 +10,8 @@ import UIKit
 
 class PhotoCollectionCell: UICollectionViewCell {
     
+//    var indexPath: NSIndexPath!
+//    var progerssView: UIProgressView!
     var info: List! {
         didSet {
             imgView.yy_setImageWithURL(info.url.addImagePath(kSize(imgView.gg_width, height: imgView.gg_height)), placeholder: kPlaceholder)
@@ -70,6 +72,28 @@ class PhotoCollectionCell: UICollectionViewCell {
         settingView.hidden = true
         settingView.backgroundColor = UIColor(r: 254, g: 78, b: 78, a: 0.7)
         imgView.addSubview(settingView)
+        
+//        progerssView = UIProgressView()
+//        progerssView.backgroundColor = UIColor.clearColor()
+//        progerssView.progressTintColor = UIColor(r: 254, g: 78, b: 78, a: 0.7)
+//        progerssView.trackTintColor = UIColor.clearColor()
+//        progerssView.progress = 0
+//        contentView.addSubview(progerssView)
+//        progerssView.snp.makeConstraints { (make) in
+//            make.left.bottom.right.equalTo(progerssView.superview!)
+//            make.height.equalTo(6)
+//        }
+//        _ = NSNotificationCenter.defaultCenter().rx_notification(kUploadImageProressNotification, object: nil).subscribeNext({ [weak self](notification) in
+//            if let _ = notification.object {
+//                let info = notification.object as! [String: String]
+//                for (key, value) in info {
+//                    if key == "\(self?.indexPath.item)" {
+//                        self?.progerssView.progress = Float(value)!
+//                        print("=>=>=>\(value)")
+//                    }
+//                }
+//            }
+//        })
         
         let smlImg = UIImageView(image: UIImage(named: "Set cover"))
         settingView.addSubview(smlImg)

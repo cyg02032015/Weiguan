@@ -287,7 +287,7 @@ class DynamicDetailVideoCell: UITableViewCell {
         }
 
         playerView = UIImageView()
-        playerView.tag = 112
+        playerView.tag = 111
         playerView.userInteractionEnabled = true
         playerView.backgroundColor = .blackColor()
         contentView.addSubview(playerView)

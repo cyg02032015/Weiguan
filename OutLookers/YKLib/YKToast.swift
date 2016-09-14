@@ -60,14 +60,14 @@ class SVToast {
     
     class func showWithError(message: String) {
         delay(0.5) {
-            SVProgressHUD.setMinimumDismissTimeInterval(0.8)
+            SVProgressHUD.setMinimumDismissTimeInterval(0.5)
             SVProgressHUD.showErrorWithStatus(message)
         }
     }
     
     class func showWithSuccess(message: String) {
         delay(0.5) {
-            SVProgressHUD.setMinimumDismissTimeInterval(0.8)
+            SVProgressHUD.setMinimumDismissTimeInterval(0.5)
             SVProgressHUD.showSuccessWithStatus(message)
         }
     }

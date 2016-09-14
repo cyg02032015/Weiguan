@@ -31,7 +31,7 @@ extension Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     //查看账号绑定状态
@@ -45,7 +45,7 @@ extension Server {
                 handler(success: true, msg: nil, value: response)
             }
             }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+                handler(success: false, msg: nil, value: nil)
         }
     }
     //获取消息数量
@@ -61,7 +61,7 @@ extension Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
         }) { (error) in
-            handler(success: false, msg: error.localizedDescription, value: nil)
+            handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -78,7 +78,7 @@ extension Server {
                     handler(success: false, msg: info.msg, value: nil)
                 }
             }) { (error) in
-               handler(success: false, msg: error.localizedDescription, value: nil)
+               handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -96,7 +96,7 @@ extension Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
             }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+                handler(success: false, msg: nil, value: nil)
         }
     }
     
@@ -114,7 +114,7 @@ extension Server {
                 handler(success: false, msg: info.msg, value: nil)
             }
             }) { (error) in
-                handler(success: false, msg: error.localizedDescription, value: nil)
+                handler(success: false, msg: nil, value: nil)
         }
     }
 }

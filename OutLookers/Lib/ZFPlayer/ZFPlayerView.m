@@ -699,14 +699,14 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
     if ([visableCells containsObject:cell]) {
         //在显示中
         [self updatePlayerViewToCell];
+        if (!self.isPauseByUser) {
+            [self play];
+        }
         self.hidden = NO;
     }else {
         //在底部
-        
+        [self.player pause];
         [self updatePlayerViewToBottom];
-        if (!self.isDetail) {
-            self.hidden = YES;
-        }
     }
 }
 
@@ -715,7 +715,9 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
  */
 - (void)updatePlayerViewToBottom
 {
-    if (self.isBottomVideo) { return ; }
+    if (self.isBottomVideo) {
+        return ;
+    }
     self.isBottomVideo = YES;
     if (self.playDidEnd) { //如果播放完了，滑动到小屏bottom位置时，直接resetPlayer
         self.repeatToPlay = NO;
@@ -741,6 +743,7 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
             make.bottom.mas_equalTo(-self.tableView.contentInset.bottom-10);
             make.height.equalTo(self.mas_width).multipliedBy(9.0f/16.0f).with.priority(750);
         }];
+        self.hidden = YES;
     }
     // 不显示控制层
     [self.controlView hideControlView];

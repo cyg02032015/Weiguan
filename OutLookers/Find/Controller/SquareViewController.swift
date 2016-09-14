@@ -7,6 +7,7 @@
 //  广场
 
 import UIKit
+import ZFPlayer
 
 private let dynamicCellId = "dynamicCellId"
 
@@ -131,12 +132,13 @@ extension SquareViewController {
         let vc = DynamicDetailViewController()
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
         vc.dynamicObj = obj
+        ZFPlayerView.sharedPlayerView().resetPlayer()
         vc.shareImage = cell.bigImgView.image
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension SquareViewController: DynamicCellDelegate, FollowProtocol {
+extension SquareViewController: DynamicCellDelegate, FollowProtocol, DeleteDynamicProtocol {
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
         let dy = self.sqaureLists[indexPath.section]
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
@@ -153,6 +155,25 @@ extension SquareViewController: DynamicCellDelegate, FollowProtocol {
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
         share.shareModel = shareModel
         share.animation()
+        share.deleteClick = {
+            SVToast.show()
+            self.deleteDynamic("\(dy.id)", handler: { [unowned self](success, msg) in
+                if success {
+                    SVProgressHUD.setMinimumDismissTimeInterval(0.2)
+                    SVProgressHUD.showSuccessWithStatus("删除成功")
+                    self.sqaureLists.removeAtIndex(indexPath.section)
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteSections(NSIndexSet.init(index: indexPath.section), withRowAnimation: .Left)
+                    self.tableView.endUpdates()
+                }else {
+                    if let _ = msg {
+                        SVToast.showWithError(msg!)
+                    }else {
+                        SVToast.showWithError("删除失败")
+                    }
+                }
+            })
+        }
     }
     
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {

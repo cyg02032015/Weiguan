@@ -128,11 +128,11 @@ extension DynamicViewController: VideoPlayerProtocol {
     }
 }
 
-extension DynamicViewController: DynamicCellDelegate {
+extension DynamicViewController: DynamicCellDelegate, DeleteDynamicProtocol {
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
         let dy = self.dynamicLists[indexPath.section]
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
-        var type: YGShareType = .DYVisitor
+        var type: YGShareType = .DYHost
         let shareModel = YGShareModel()
         shareModel.shareNickName = "分享自\"\(dy.name)\"的纯氧作品, 一起来看~"
         if UserSingleton.sharedInstance.userId == "\(dy.userId)" {
@@ -145,6 +145,25 @@ extension DynamicViewController: DynamicCellDelegate {
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
         share.shareModel = shareModel
         share.animation()
+        share.deleteClick = {
+            SVToast.show()
+            self.deleteDynamic("\(dy.id)", handler: { [unowned self](success, msg) in
+                if success {
+                    SVProgressHUD.setMinimumDismissTimeInterval(0.2)
+                    SVProgressHUD.showSuccessWithStatus("删除成功")
+                    self.dynamicLists.removeAtIndex(indexPath.section)
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteSections(NSIndexSet.init(index: indexPath.section), withRowAnimation: .Left)
+                    self.tableView.endUpdates()
+                }else {
+                    if let _ = msg {
+                        SVToast.showWithError(msg!)
+                    }else {
+                        SVToast.showWithError("删除失败")
+                    }
+                }
+                })
+        }
     }
     
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {

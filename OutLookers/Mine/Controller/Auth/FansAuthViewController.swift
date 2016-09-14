@@ -29,11 +29,15 @@ class FansAuthViewController: YGBaseViewController {
     }
     
     override func loadMoreData() {
-        Server.myFans(pageNo, urlStr: API.myFans) { (success, msg, value) in
+        Server.myFollow(pageNo, urlStr: API.myFollow) { (success, msg, value) in
             SVToast.dismiss()
             if success {
                 guard let object = value else {return}
-                self.fans.appendContentsOf(object.list)
+                for (_, obj) in object.list.enumerate() {
+                    if obj.detailsType == 1 || obj.detailsType == 2 {
+                        self.fans.append(obj)
+                    }
+                }
                 self.collectionView.mj_footer.endRefreshing()
                 self.collectionView.reloadData()
                 self.pageNo = self.pageNo + 1

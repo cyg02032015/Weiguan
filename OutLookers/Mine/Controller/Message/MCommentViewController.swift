@@ -79,7 +79,7 @@ extension MCommentViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let commtent = self.comments[indexPath.row]
-        if commtent.replyId == 0 {
+//        if commtent.replyId == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(mCommentCellId, forIndexPath: indexPath) as! MCommentCell
             cell.info = commtent
             cell.headImgView.iconHeaderTap({ [weak self] in
@@ -99,32 +99,32 @@ extension MCommentViewController {
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             return cell
-        }else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(mCommentReplyCellId, forIndexPath: indexPath) as! MCommentReplyCell
-            cell.headImgView.iconHeaderTap({ [weak self] in
-                let vc = PHViewController()
-                vc.user = "\(commtent.userId)"
-                self?.navigationController?.pushViewController(vc, animated: true)
-                })
-            cell.imgView.tapImageAction({ [weak self] in
-                let vc = DynamicDetailViewController()
-                let dynamic = DynamicResult()
-                dynamic.id = commtent.dynamicId
-                dynamic.name = commtent.nickname
-                dynamic.photo = commtent.headImgUrl
-                dynamic.detailsType = commtent.detailsType
-                vc.dynamicObj = dynamic
-                vc.shareImage = cell.imgView.image
-                self?.navigationController?.pushViewController(vc, animated: true)
-                })
-            cell.replyNameLabel.tapLabelAction({ [weak self] in
-                let vc = PHViewController()
-                vc.user = "\(commtent.replyId)"
-                self?.navigationController?.pushViewController(vc, animated: true)
-                })
-            cell.info = commtent
-            return cell
-        }
+//        }else {
+//            let cell = tableView.dequeueReusableCellWithIdentifier(mCommentReplyCellId, forIndexPath: indexPath) as! MCommentReplyCell
+//            cell.headImgView.iconHeaderTap({ [weak self] in
+//                let vc = PHViewController()
+//                vc.user = "\(commtent.userId)"
+//                self?.navigationController?.pushViewController(vc, animated: true)
+//                })
+//            cell.imgView.tapImageAction({ [weak self] in
+//                let vc = DynamicDetailViewController()
+//                let dynamic = DynamicResult()
+//                dynamic.id = commtent.dynamicId
+//                dynamic.name = commtent.nickname
+//                dynamic.photo = commtent.headImgUrl
+//                dynamic.detailsType = commtent.detailsType
+//                vc.dynamicObj = dynamic
+//                vc.shareImage = cell.imgView.image
+//                self?.navigationController?.pushViewController(vc, animated: true)
+//                })
+//            cell.replyNameLabel.tapLabelAction({ [weak self] in
+//                let vc = PHViewController()
+//                vc.user = "\(commtent.replyId)"
+//                self?.navigationController?.pushViewController(vc, animated: true)
+//                })
+//            cell.info = commtent
+//            return cell
+//        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
