@@ -105,7 +105,7 @@ class EditDataViewController: YGBaseViewController {
                 dispatch_group_enter(group)
                 guard let _ = self else { return }
                 guard let token = self?.picToken else { return }
-                OSSImageUploader.asyncUploadImageData(token, data: self!.headImgData!, complete: { (names, state) in
+                OSSImageUploader.asyncUploadImageData(token, data: self!.headImgData!, progress: nil, complete: { (names, state) in
                     if state == .Success {
                         self!.req.headImgUrl = names.first
                         dispatch_group_leave(group)

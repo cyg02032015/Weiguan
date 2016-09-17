@@ -264,19 +264,21 @@ extension ReleaseVideoViewController: VideoCoverCellDelegate, ShareCellDelegate,
                     self?.req.cover = names[0]
                 } else {
                     SVToast.dismiss()
-                    SVToast.showWithError("上传封面失败")
                 }
             })
         }
         dispatch_group_notify(group, queue) { [weak self] in
             if isEmptyString(self!.req.cover) || isEmptyString(self!.req.picture) {
+                SVToast.showWithError("上传封面失败")
                 return
             }
             Server.releasePicAndVideo(self!.req, handler: { (success, msg, value) in
                 SVToast.dismiss()
                 if success {
                     SVToast.showWithSuccess("上传视频成功")
-                    self?.dismissViewControllerAnimated(true, completion: {})
+                    delay(1.0, task: {
+                        self?.dismissViewControllerAnimated(true, completion: {})
+                    })
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.thridBtn)
                     let shareModel = YGShareModel()

@@ -77,13 +77,30 @@ class Register3ViewController: YGBaseViewController {
         
         register.rx_tap.subscribeNext { [weak self] in
             guard let weakSelf = self else {return}
+            let semaphore = dispatch_semaphore_create(0)
+            Server.isNicknameExists(UserSingleton.sharedInstance.userId, nickname: weakSelf.nickname.text!, handler: { (success, msg, value) in
+                if success {
+                    if let _ = value {
+                        if value!["result"].intValue == 1 {
+                            SVToast.showWithError("昵称已存在")
+                        }else {
+                            dispatch_semaphore_signal(semaphore)
+                        }
+                    }
+                }else {
+                    if let _ = msg {
+                        SVToast.showWithError(msg!)
+                    }
+                }
+            })
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
             let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
             let group = dispatch_group_create()
             SVToast.show()
             dispatch_group_async(group, queue) {
                 dispatch_group_enter(group)
                 guard let token = weakSelf.picToken else {return}
-                OSSImageUploader.asyncUploadImageData(token, data: weakSelf.imgData, complete: { (names, state) in
+                OSSImageUploader.asyncUploadImageData(token, data: weakSelf.imgData, progress: nil, complete: { (names, state) in
                     if state == .Success {
                         weakSelf.req.headImgUrl = names.first
                         dispatch_group_leave(group)

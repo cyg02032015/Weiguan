@@ -651,7 +651,7 @@ class Server {
     class func myFollow(pageNo: Int, urlStr: String, userId: String = UserSingleton.sharedInstance.userId, handler: (success: Bool, msg: String?, value: MyFollowResp?)->Void) {
         let parameters = [
             "pageNo" : "\(pageNo)",
-            "pageSize" : "\(pageSize)",
+            "pageSize" : "\(100)",
             "userId" : userId
         ]
         HttpTool.post(urlStr, parameters: parameters, complete: { (response) in

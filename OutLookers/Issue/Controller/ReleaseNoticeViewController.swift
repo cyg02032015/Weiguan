@@ -46,7 +46,6 @@ class ReleaseNoticeViewController: YGBaseViewController {
         setupSubViews()
         getToken()
         selectDatePicker = YGSelectDateView()
-        selectDatePicker.minimumDate = NSDate()
         pickerView = YGPickerView(frame: CGRectZero, delegate: self)
         pickerView.delegate = self
     }
@@ -145,18 +144,29 @@ extension ReleaseNoticeViewController {
             if indexPath.row == 0 { // 工作开始时间
                 let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) as! ArrowEditCell
                 selectDatePicker.animation()
+                self.selectDatePicker.minimumDate = NSDate()
+                if self.req.endTime != nil {
+                    self.selectDatePicker.maximumDate = self.req.endTime.dateFromString("yyyy-MM-dd HH:mm")
+                }
                 selectDatePicker.tapSureClosure({ [unowned self](date) in
-                    cell.tf.text = date.stringFromDate()
-                    self.req.startTime = date.stringFromDateWith("yyyy-MM-dd")
+                    cell.tf.text = date.stringFromDateWith("yyyy-MM-dd")
+                    self.req.startTime = date.stringFromDate()
                     self.checkParameters()
                     })
-                
             } else { // 工作结束时间
                 let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)) as! ArrowEditCell
                 selectDatePicker.animation()
+                if self.req.startTime != nil {
+                    self.selectDatePicker.minimumDate = self.req.startTime.dateFromString("yyyy-MM-dd HH:mm")
+                }else {
+                    self.selectDatePicker.minimumDate = NSDate()
+                }
+                if self.req.register != nil {
+                    self.selectDatePicker.maximumDate = self.req.register.dateFromString("yyyy-MM-dd HH:mm")
+                }
                 selectDatePicker.tapSureClosure({ [unowned self](date) in
-                    cell.tf.text = date.stringFromDate()
-                    self.req.endTime = date.stringFromDateWith("yyyy-MM-dd")
+                    cell.tf.text = date.stringFromDateWith("yyyy-MM-dd")
+                    self.req.endTime = date.stringFromDate()
                     self.checkParameters()
                 })
             }
@@ -165,9 +175,17 @@ extension ReleaseNoticeViewController {
         if indexPath.section == 3 { // 报名截止日期
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! ArrowEditCell
             selectDatePicker.animation()
+            if self.req.startTime != nil {
+                self.selectDatePicker.minimumDate = self.req.startTime.dateFromString("yyyy-MM-dd HH:mm")
+            }else {
+                self.selectDatePicker.minimumDate = NSDate()
+            }
+            if self.req.endTime != nil {
+                self.selectDatePicker.maximumDate = self.req.endTime.dateFromString("yyyy-MM-dd HH:mm")
+            }
             selectDatePicker.tapSureClosure({ [unowned self](date) in
-                cell.tf.text = date.stringFromDate()
-                self.req.register = date.stringFromDateWith("yyyy-MM-dd")
+                cell.tf.text = date.stringFromDateWith("yyyy-MM-dd")
+                self.req.register = date.stringFromDate()
                 self.checkParameters()
             })
         }

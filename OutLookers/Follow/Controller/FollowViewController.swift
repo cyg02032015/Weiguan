@@ -149,7 +149,7 @@ extension FollowViewController {
     }
 }
 
-extension FollowViewController: DynamicCellDelegate, FollowProtocol {
+extension FollowViewController: DynamicCellDelegate, FollowProtocol, DeleteDynamicProtocol {
     func dynamicCellTapShare(sender: UIButton, indexPath: NSIndexPath) {
         let dy = self.lists[indexPath.section]
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! DynamicCell
@@ -166,6 +166,25 @@ extension FollowViewController: DynamicCellDelegate, FollowProtocol {
         share = YGShare(frame: CGRectZero, imgs: sharetuple.images, titles: sharetuple.titles)
         share.shareModel = shareModel
         share.animation()
+        share.deleteClick = {
+            SVToast.show()
+            self.deleteDynamic("\(dy.id)", handler: { [unowned self](success, msg) in
+                if success {
+                    SVProgressHUD.setMinimumDismissTimeInterval(0.2)
+                    SVProgressHUD.showSuccessWithStatus("删除成功")
+                    self.lists.removeAtIndex(indexPath.section)
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteSections(NSIndexSet.init(index: indexPath.section), withRowAnimation: .Left)
+                    self.tableView.endUpdates()
+                }else {
+                    if let _ = msg {
+                        SVToast.showWithError(msg!)
+                    }else {
+                        SVToast.showWithError("删除失败")
+                    }
+                }
+                })
+        }
     }
     
     func dynamicCellTapPraise(sender: UIButton, indexPath: NSIndexPath) {

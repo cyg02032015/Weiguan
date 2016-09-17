@@ -11,6 +11,11 @@ import Foundation
 let baseURL = "http://api.dev.chunyangapp.com"
 
 struct API {
+    static let report = baseURL + "/api/authentication/v1/report/create"
+    /// 判断昵称是否存在
+    static let isNicknameExists = baseURL + "/api/login/v1/isNicknameExists"
+    /// 判断手机号是否存在
+    static let isPhoneExists = baseURL + "/api/login/v1/isPhoneExists"
     /// 绑定第三方
     static let bingAccount = baseURL + "/api/login/v1/bind"
     /// 查看账号绑定状态

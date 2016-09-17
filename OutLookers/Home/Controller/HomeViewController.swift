@@ -108,6 +108,7 @@ class HomeViewController: YGBaseViewController {
                     self.collectionView.mj_footer.endRefreshingWithNoMoreData()
                 }
                 self.collectionView.mj_header.endRefreshing()
+                self.pageNo += 1
             } else {
                 self.collectionView.mj_header.endRefreshing()
                 guard let m = msg else {return}

@@ -32,7 +32,9 @@ class YGSelectDateView: UIView {
     }
     var maximumDate: NSDate? {
         didSet {
-            self.datePicker.maximumDate = maximumDate
+            if let _ = maximumDate {
+                self.datePicker.maximumDate = maximumDate!
+            }
         }
     }
     

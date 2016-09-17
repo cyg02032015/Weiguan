@@ -10,6 +10,57 @@ import UIKit
 import SwiftyJSON
 
 extension Server {
+    //举报
+    class func report(userId: String, reportUserId: String, reportId: String, type: String, reportText: String, reportType: String, handler: (success: Bool, msg: String?, value: JSON?) -> Void) {
+        let parameter = [
+            "userId": userId,
+            "reportUserId": reportUserId,
+            "reportId": reportId,
+            "type": type,
+            "reportText": reportText,
+            "reportType": reportType
+        ]
+        HttpTool.post(API.report, parameters: parameter, complete: {
+            (response) in
+            let info = BaseResponse(fromJson: response)
+            if info.success! {
+                handler(success: true, msg: nil, value: response)
+            }
+        }) { (error) in
+            handler(success: false, msg: nil, value: nil)
+        }
+    }
+    //判断昵称是否存在
+    class func isNicknameExists(userId: String, nickname: String, handler: (success: Bool, msg: String?, value: JSON?) -> Void) {
+        let parameter: [String : AnyObject] = [
+            "userId": userId,
+            "nickname": nickname
+        ]
+        HttpTool.post(API.isNicknameExists, parameters: parameter, complete: {
+            (response) in
+            let info = BaseResponse(fromJson: response)
+            if info.success! {
+                handler(success: true, msg: nil, value: response)
+            }
+        }) { (error) in
+            handler(success: false, msg: nil, value: nil)
+        }
+    }
+    //判断手机号是否存在
+    class func isPhoneExists(phone: String, handler: (success: Bool, msg: String?, value: JSON?) -> Void) {
+        let parameter: [String : AnyObject] = [
+            "phone": phone
+        ]
+        HttpTool.post(API.isPhoneExists, parameters: parameter, complete: {
+            (response) in
+            let info = BaseResponse(fromJson: response)
+            if info.success! {
+                handler(success: true, msg: nil, value: response)
+            }
+        }) { (error) in
+            handler(success: false, msg: nil, value: nil)
+        }
+    }
     //绑定第三方
     class func bingToAccount(userId: String = UserSingleton.sharedInstance.userId, type: Int, uid: String, openId: String, nickname: String, headImgUrl: String, userName: String, handler: (success: Bool, msg: String?, value: BingAccountData?) -> Void) {
         let parameter: [String : AnyObject] = [

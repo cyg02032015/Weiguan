@@ -321,74 +321,77 @@ extension ReleasePictureViewController: ShareCellDelegate, EditTextViewCellDeleg
         sender.enabled = false
         tableView.reloadData()
         guard self.tokenObject != nil else { SVToast.showWithError("获取token失败"); return }
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
-        SVToast.show("正在上传封面")
+        //SVToast.show("正在上传封面")
         if self.photos.count > 0 {
-            dispatch_group_async(group, queue) { [weak self] in
+            dispatch_group_async(group, dispatch_get_main_queue()) { [unowned self] in
                 dispatch_group_enter(group)
-                OSSImageUploader.asyncUploadImageData(self!.tokenObject, data: self!.imageData[0], complete: { (names, state) in
+                OSSImageUploader.asyncUploadImageData(self.tokenObject, data: self.imageData[0], progress: nil, complete: { (names, state) in
                     if state == .Success {
                         LogInfo("封面上传完成")
-                        self?.req.cover = names.first
-                        //SVToast.showWithSuccess("封面上传完成")
+                        self.req.cover = names.first
                         dispatch_group_leave(group)
+                        //SVToast.showWithSuccess("封面上传完成")
                     } else {
                         SVToast.dismiss()
-                        SVToast.showWithError("上传封面失败")
+                        sender.enabled = true
                         dispatch_group_leave(group)
+                        //SVToast.showWithError("上传封面失败")
                     }
                 })
             }
-            
-            dispatch_group_async(group, queue) { [weak self] in
+//            SVToast.show("正在上传图片")
+            dispatch_group_async(group, dispatch_get_main_queue()) { [unowned self] in
                 dispatch_group_enter(group)
-                SVToast.show("正在上传图片")
-                OSSImageUploader.uploadImageDatas(self!.tokenObject, datas: self!.imageData, isAsync: true, complete: { (names, state) in
+                OSSImageUploader.uploadImageDatas(self.tokenObject, datas: self.imageData, isAsync: true, progress: { (dataSendBytes, dataTotalBytes) in
+                        LogInfo("\(Float(dataSendBytes)/Float(dataTotalBytes))")
+                        SVProgressHUD.showProgress(Float(dataSendBytes)/Float(dataTotalBytes), status: "正在上传图片")
+                    }, complete: { (names, state) in
                         if state == .Success {
                             LogWarn("pictures = \(names.joinWithSeparator(","))")
                             SVToast.showWithSuccess("图片上传完成")
-                            self?.req.picture = names.joinWithSeparator(",")
                             dispatch_group_leave(group)
+                            self.req.picture = names.joinWithSeparator(",")
                         } else {
-                            self?.req.picture = ""
+                            self.req.picture = ""
                             SVToast.dismiss()
                             SVToast.showWithError("上传图片失败")
+                            sender.enabled = true
                             dispatch_group_leave(group)
                         }
                 })
             }
         }
         
-        dispatch_group_notify(group, queue) { [weak self] in
-            if isEmptyString(self!.req.picture) && isEmptyString(self!.req.cover) {
-                SVToast.showWithError("图片或者封面id为空")
+        dispatch_group_notify(group, dispatch_get_main_queue()) { [unowned self] in
+            if isEmptyString(self.req.picture) && isEmptyString(self.req.cover) {
+                SVToast.showWithError("图片或者封面为空")
                 sender.enabled = true
                 return
             }
-            LogInfo("picture = \(self!.req.picture)")
-            Server.releasePicAndVideo(self!.req, handler: { (success, msg, value) in
+            LogInfo("picture = \(self.req.picture)")
+            Server.releasePicAndVideo(self.req, handler: { (success, msg, value) in
                 if success {
                     SVToast.showWithSuccess("发布成功")
                     delay(1.0, task: { 
-                        self?.dismissViewControllerAnimated(true, completion: {
-                            self?.photos.removeAll()
-                            self?.originPhotos.removeAll()
+                        self.dismissViewControllerAnimated(true, completion: {
+                            self.photos.removeAll()
+                            self.originPhotos.removeAll()
                         })
                         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                         appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.thridBtn)
                         let shareModel = YGShareModel()
-                        let shareTitle: String? = self?.shareTitle
+                        let shareTitle: String? = self.shareTitle
                         if let _ = value {
                             shareModel.shareID = "trends.html?aid=" + value!
                         }
-                        shareModel.shareImage = self?.photos[0]
+                        shareModel.shareImage = self.photos[0]
                         shareModel.shareNickName = "我的纯氧作品, 一起来看~"
-                        shareModel.shareInfo = self?.req.text
+                        shareModel.shareInfo = self.req.text
                         delay(1.0, task: {
                             let str = shareTitle ?? ""
                             guard !isEmptyString(shareModel.shareID) else { SVToast.showWithError("同步\(str)失败"); return }
-                            guard let _ = shareTitle else { SVToast.showWithError("同步\(str)失败"); return }
+                            guard let _ = shareTitle else { return }
                             YGShare.shareAction(shareTitle!, shareModel: shareModel)
                         })
                     })

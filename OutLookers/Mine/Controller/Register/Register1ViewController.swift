@@ -109,10 +109,24 @@ class Register1ViewController: YGBaseViewController {
         
         nextButton.rx_tap.subscribeNext { [unowned self] in
             if self.phoneTF.text! =~ kMobileNumberReg {
-                let vc = Register2ViewController()
-                vc.phone = self.phoneTF.text
-                vc.pwd = self.passTF.text
-                self.navigationController?.pushViewController(vc, animated: true)
+                Server.isPhoneExists(self.phoneTF.text!, handler: { (success, msg, value) in
+                    if success {
+                        if let _ = value {
+                            if value!["result"].intValue == 1 {
+                                SVToast.showWithError("手机号已经被注册")
+                            }else {
+                                let vc = Register2ViewController()
+                                vc.phone = self.phoneTF.text
+                                vc.pwd = self.passTF.text
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }
+                    }else {
+                        if let _ = msg {
+                            SVToast.showWithError(msg!)
+                        }
+                    }
+                })
             } else {
                 SVToast.showWithError("手机号码格式错误")
             }

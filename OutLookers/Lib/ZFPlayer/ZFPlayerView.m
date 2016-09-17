@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
 };
 
 @interface ZFPlayerView () <UIGestureRecognizerDelegate,UIAlertViewDelegate>
-
+@property (nonatomic) BOOL alwaysPortrait;
 /** 播放属性 */
 @property (nonatomic, strong) AVPlayer               *player;
 @property (nonatomic, strong) AVPlayerItem           *playerItem;
@@ -401,6 +401,12 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
 - (void)configZFPlayer
 {
     self.urlAsset = [AVURLAsset assetWithURL:self.videoURL];
+    CGSize size = [[[self.urlAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] naturalSize];
+    if (size.width > size.height) {
+        ZFPlayerShared.isAllowLandscape = YES;
+    }else {
+        ZFPlayerShared.isAllowLandscape = NO;
+    }
     // 初始化playerItem
     self.playerItem = [AVPlayerItem playerItemWithAsset:self.urlAsset];
     // 每次都重新创建Player，替换replaceCurrentItemWithPlayerItem:，该方法阻塞线程
@@ -860,7 +866,7 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
         [self interfaceOrientation:UIInterfaceOrientationPortrait];
         return;
     }
-   
+    
     UIDeviceOrientation orientation             = [UIDevice currentDevice].orientation;
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
     switch (interfaceOrientation) {
@@ -907,7 +913,6 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
         }
             break;
     }
-
 }
 
 /**
@@ -1250,8 +1255,12 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
         self.isMaskShowing                = NO;
         // 延迟隐藏controlView
         [self animateShow];
+        if (self.playDidEndBlock) {
+            self.playDidEndBlock();
+        }
     }
 }
+
 
 /**
  *  应用退到后台

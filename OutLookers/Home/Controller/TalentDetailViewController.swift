@@ -25,6 +25,7 @@ class TalentDetailViewController: YGBaseViewController {
         super.viewDidLoad()
         setupSubViews()
         loadData()
+        self.setupShare()
     }
     
     func setupShare() {
@@ -90,7 +91,6 @@ class TalentDetailViewController: YGBaseViewController {
         moreButton = setRightNaviItem()
         moreButton.setImage(UIImage(named: "more1"), forState: .Normal)
         moreButton.rx_tap.subscribeNext { [unowned self] in
-            self.setupShare()
             self.share.returnHomeClick = {
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.customTabbar.tabbarClick(appDelegate.customTabbar.firstBtn)

@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, ZFPlayerLayerGravity) {
 
 @interface ZFPlayerView : UIView
 
+@property (nonatomic, copy) dispatch_block_t playDidEndBlock;
 @property (nonatomic) BOOL isDetail;
 /** 视频URL */
 @property (nonatomic, strong) NSURL                *videoURL;
@@ -120,6 +121,5 @@ typedef NS_ENUM(NSInteger, ZFPlayerLayerGravity) {
       withTableView:(UITableView *)tableView
         AtIndexPath:(NSIndexPath *)indexPath
    withImageViewTag:(NSInteger)tag;
-
 
 @end

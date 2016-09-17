@@ -24,6 +24,7 @@ class YGShareModel {
 
 class YGShare: UIView {
 
+    var reportClick: (() -> ())?
     var deleteClick: (() -> ())?
     var editClick: (() -> ())?
     var returnHomeClick: (() -> ())?
@@ -165,11 +166,13 @@ class YGShare: UIView {
     }
     
     func selectItem(cell: ShareVCell) {
-        guard let _ = shareModel else {
-            SVToast.showWithError("分享数据准备出错")
-            return
-        }
         cell.shareBlock { [unowned self] (sender) in
+            if cell.label.text != kEdit && cell.label.text != kReport && cell.label.text != kHome && cell.label.text != kDelete {
+                guard let _ = self.shareModel else {
+                    SVToast.showWithError("分享数据准备出错")
+                    return
+                }
+            }
             //guard let ws = self else {return}
             var platFormType = [String]()
             switch cell.label.text! {
@@ -204,6 +207,13 @@ class YGShare: UIView {
                 if let _ = self.deleteClick {
                     self.deleteClick!()
                 }
+                return
+            case kReport:
+                self.tapCancel()
+                if let _ = self.reportClick {
+                    self.reportClick!()
+                }
+                return
             default: ""
             }
             

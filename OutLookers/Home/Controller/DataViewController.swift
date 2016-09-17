@@ -28,6 +28,13 @@ class DataViewController: YGBaseViewController {
         title = "个人资料"
         rightButton = setRightNaviItem()
         rightButton.setTitle("编辑", forState: .Normal)
+        if userId != UserSingleton.sharedInstance.userId {
+            rightButton.hidden = true
+        }
+        _ = rightButton.rx_tap.subscribeNext { [unowned self](sender) in
+            let vc = PersonFileViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }.addDisposableTo(disposeBag)
         tableView = UITableView(frame: CGRectZero, style: .Grouped)
         tableView.delegate = self
         tableView.dataSource = self

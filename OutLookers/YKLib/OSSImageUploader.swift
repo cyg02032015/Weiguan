@@ -110,15 +110,15 @@ class OSSImageUploader {
     }
     
     // 调用此方法上传图片
-    class func asyncUploadImageData(object: GetToken, data: NSData, complete: (names: [String], state: UploadImageState) -> Void) {
-        self.uploadImageDatas(object, datas: [data], isAsync: true, complete: complete)
+    class func asyncUploadImageData(object: GetToken, data: NSData, progress: ((dataSendBytes: Int64, dataTotalBytes: Int64) -> Void)?, complete: (names: [String], state: UploadImageState) -> Void) {
+        self.uploadImageDatas(object, datas: [data], isAsync: true, progress: progress, complete: complete)
     }
     
-    class func asyncUploadImageDatas(object:GetToken, datas: [NSData], complete: (names: [String], state: UploadImageState) -> Void) {
-        self.uploadImageDatas(object, datas: datas, isAsync: true, complete: complete)
+    class func asyncUploadImageDatas(object:GetToken, datas: [NSData], progress: ((dataSendBytes: Int64, dataTotalBytes: Int64) -> Void)?, complete: (names: [String], state: UploadImageState) -> Void) {
+        self.uploadImageDatas(object, datas: datas, isAsync: true, progress: progress, complete: complete)
     }
     
-    class func uploadImageDatas(object:GetToken, datas: [NSData], isAsync: Bool, complete: (names: [String], state: UploadImageState) -> Void) {
+    class func uploadImageDatas(object:GetToken, datas: [NSData], isAsync: Bool,progress: ((dataSendBytes: Int64, dataTotalBytes: Int64) -> Void)?, complete: (names: [String], state: UploadImageState) -> Void) {
         let credential = OSSFederationCredentialProvider { () -> OSSFederationToken! in
             return self.getToken(object)
         }
@@ -133,6 +133,7 @@ class OSSImageUploader {
         var names = [String]()
         var dataTotalBytes: Int64 = 0
         var dataSendBytes: Int64 = 0
+        var count: Int = 0
         datas.forEach { (data) in
             dataTotalBytes += data.length
         }
@@ -149,11 +150,10 @@ class OSSImageUploader {
                     "callbackBody": object.callbackBody
                 ]
                 put.uploadProgress = { (bytesSent: Int64, totalByteSent: Int64, totalBytesExpectedToSend: Int64) in
-                    LogError("\(bytesSent)   \(totalByteSent)     \(totalBytesExpectedToSend)")
                     dataSendBytes += bytesSent
-                    SVProgressHUD.showProgress(Float(dataSendBytes)/Float(dataTotalBytes), status: "图片正在上传")
-                    if Float(dataSendBytes)/Float(dataTotalBytes) == 1 {
-                        SVProgressHUD.dismiss()
+//                    LogInfo("\(Float(dataSendBytes))  \(Float(dataTotalBytes))")
+                    if let _ = progress {
+                        progress!(dataSendBytes: dataSendBytes, dataTotalBytes: dataTotalBytes)
                     }
                     //NSNotificationCenter.defaultCenter().postNotificationName(kUploadImageProressNotification, object: ["\(i)" : "\(progress)"])
                 }
@@ -169,7 +169,8 @@ class OSSImageUploader {
                         let result = task.result!
                         let json = JSON.parse(result.serverReturnJsonString)
                         names.append(json["result"].stringValue)
-                        if datas.count == i {
+                        count += 1
+                        if datas.count ==  count{
                             complete(names: names, state: .Success)
                         }
                     }

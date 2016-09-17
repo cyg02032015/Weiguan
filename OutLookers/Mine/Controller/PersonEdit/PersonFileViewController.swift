@@ -73,7 +73,7 @@ class PersonFileViewController: YGBaseViewController {
         
         save = setRightNaviItem()
         save.setTitle("保存", forState: .Normal)
-        save.rx_tap.subscribeNext {
+        save.rx_tap.subscribeNext { [unowned self] in
             SVToast.show()
             Server.personalFiles(self.req, handler: { (success, msg, value) in
                 SVToast.dismiss()
@@ -192,7 +192,7 @@ extension PersonFileViewController {
         } else if indexPath.section == 1 {
             return kHeight(124)
         } else {
-            return kHeight(100)
+            return kHeight(130)
         }
     }
     

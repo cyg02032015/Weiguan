@@ -67,7 +67,7 @@ class MyReleaseCell: UITableViewCell {
         subjectLabel.snp.makeConstraints { (make) in
             make.left.equalTo(imgView.snp.right).offset(kScale(8))
             make.top.equalTo(subjectLabel.superview!).offset(kScale(20))
-            make.height.equalTo(16)
+            //make.height.equalTo(16)
         }
         
         enterCount = UILabel.createLabel(14, textColor: UIColor(hex: 0x666666))

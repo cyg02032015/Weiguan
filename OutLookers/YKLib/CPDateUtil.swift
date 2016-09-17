@@ -20,7 +20,7 @@ class CPDateUtil {
      
      - returns: NSDate
      */
-    static func stringToDate(dateStr:String) -> NSDate{
+    static func stringToDate(dateStr:String) -> NSDate {
         return NSDate(fromString:  dateStr, format: .ISO8601(ISO8601Format.DateTimeMilliSec))
     }
     
@@ -62,10 +62,10 @@ class CPDateUtil {
         let currentDateMonth = components2.month;
         
         // 计算年龄
-        var iAge = currentDateYear - brithDateYear - 1
+        var age = currentDateYear - brithDateYear - 1
         if ((currentDateMonth > brithDateMonth) || (currentDateMonth == brithDateMonth && currentDateDay >= brithDateDay)) {
-            iAge += 1
+            age += 1
         }
-        return iAge
+        return age
     }
 }
