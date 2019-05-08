@@ -8,7 +8,7 @@
 
 import Foundation
 
-let baseURL = "http://api.dev.chunyangapp.com"
+let baseURL = ""
 
 struct API {
     static let report = baseURL + "/api/authentication/v1/report/create"
