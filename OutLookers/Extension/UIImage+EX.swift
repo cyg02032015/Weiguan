@@ -39,7 +39,7 @@ extension UIImage {
         UIGraphicsEndImageContext()
         
         //先判断当前质量是否满足要求，不满足再进行压缩
-        var finallImageData = UIImageJPEGRepresentation(newImage,1.0)
+        var finallImageData = UIImageJPEGRepresentation(newImage!,1.0)
         let sizeOrigin      = Int64((finallImageData?.length)!)
         let sizeOriginKB    = Int(sizeOrigin / 1024)
         if sizeOriginKB <= maxSize {
@@ -65,10 +65,10 @@ extension UIImage {
         //调整大小
         //说明：压缩系数数组compressionQualityArr是从大到小存储。
         //思路：折半计算，如果中间压缩系数仍然降不到目标值maxSize，则从后半部分开始寻找压缩系数；反之从前半部分寻找压缩系数
-        finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(compressionQualityArr[125] as! NSNumber))
-        if Int(Int64((UIImageJPEGRepresentation(newImage, CGFloat(compressionQualityArr[125] as! NSNumber))?.length)!)/1024) > maxSize {
+        finallImageData = UIImageJPEGRepresentation(newImage!, CGFloat(compressionQualityArr[125] as! NSNumber))
+        if Int(Int64((UIImageJPEGRepresentation(newImage!, CGFloat(compressionQualityArr[125] as! NSNumber))?.length)!)/1024) > maxSize {
             //拿到最初的大小
-            finallImageData = UIImageJPEGRepresentation(newImage, 1.0)
+            finallImageData = UIImageJPEGRepresentation(newImage!, 1.0)
             //从后半部分开始
             for idx in 126..<250 {
                 let value = compressionQualityArr[idx]
@@ -77,14 +77,14 @@ extension UIImage {
                 print("当前降到的质量：\(sizeOriginKB)")
                 if sizeOriginKB > maxSize {
                     print("\(idx)----\(value)")
-                    finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(value as! NSNumber))
+                    finallImageData = UIImageJPEGRepresentation(newImage!, CGFloat(value as! NSNumber))
                 } else {
                     break
                 }
             }
         } else {
             //拿到最初的大小
-            finallImageData = UIImageJPEGRepresentation(newImage, 1.0)
+            finallImageData = UIImageJPEGRepresentation(newImage!, 1.0)
             //从前半部分开始
             for idx in 0..<125 {
                 let value = compressionQualityArr[idx]
@@ -93,7 +93,7 @@ extension UIImage {
                 print("当前降到的质量：\(sizeOriginKB)")
                 if sizeOriginKB > maxSize {
                     print("\(idx)----\(value)")
-                    finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(value as! NSNumber))
+                    finallImageData = UIImageJPEGRepresentation(newImage!, CGFloat(value as! NSNumber))
                 } else {
                     break
                 }

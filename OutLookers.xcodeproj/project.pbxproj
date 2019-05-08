@@ -1761,6 +1761,7 @@
 			isa = PBXGroup;
 			children = (
 				E41C22D81D113B9500F58250 /* AppDelegate.swift */,
+				E41C22E41D113B9500F58250 /* Info.plist */,
 				D82417331D75C7B7002138A2 /* Helper */,
 				D870C7341D392B61003B7A09 /* Public */,
 				D8C167411D1D783C00C50EB7 /* OCFile */,
@@ -1777,7 +1778,6 @@
 				E41C6C5F1D113F350013031D /* Lib */,
 				E41C6C631D113F510013031D /* OtherSource */,
 				E41C22DF1D113B9500F58250 /* Assets.xcassets */,
-				E41C22E41D113B9500F58250 /* Info.plist */,
 			);
 			path = OutLookers;
 			sourceTree = "<group>";
@@ -2064,13 +2064,16 @@
 					E41C22D41D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 7R5H7SFDCY;
+						LastSwiftMigration = 0800;
 					};
 					E41C22E81D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = E41C22D41D113B9500F58250;
 					};
 					E41C22F31D113B9500F58250 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = E41C22D41D113B9500F58250;
 					};
 				};
@@ -2840,6 +2843,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OutLookers/OtherSource/OutLookers-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -2930,6 +2934,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OutLookers/OtherSource/OutLookers-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -2943,6 +2948,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngkook.OutLookersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OutLookers.app/OutLookers";
 			};
 			name = Debug;
@@ -2956,6 +2962,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngkook.OutLookersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OutLookers.app/OutLookers";
 			};
 			name = Release;
@@ -2969,6 +2976,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngkook.OutLookersUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = OutLookers;
 			};
 			name = Debug;
@@ -2981,6 +2989,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngkook.OutLookersUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = OutLookers;
 			};
 			name = Release;

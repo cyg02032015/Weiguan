@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ZFPlayer
+//import ZFPlayer
 
 class YGTabbarController: UITabBarController {
 

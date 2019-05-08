@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-import ZFPlayer
+//import ZFPlayer
 import UITableView_FDTemplateLayoutCell
 
 private let dynamicDetailCellId = "dynamicDetailCellId"

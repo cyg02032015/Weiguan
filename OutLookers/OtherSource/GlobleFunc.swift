@@ -63,23 +63,23 @@ func boxBlurImage(image: UIImage, withBlurNumber blur: CGFloat) -> UIImage {
     var pixelBuffer: UnsafeMutablePointer<Void>!
     
     // 从CGImage中获取数据
-    let inProvider = CGImageGetDataProvider(img)
-    let inBitmapData = CGDataProviderCopyData(inProvider)
+    let inProvider = CGImageGetDataProvider(img!)
+    let inBitmapData = CGDataProviderCopyData(inProvider!)
     
     // 设置从CGImage获取对象的属性
-    inBuffer.width = UInt(CGImageGetWidth(img))
-    inBuffer.height = UInt(CGImageGetHeight(img))
-    inBuffer.rowBytes = CGImageGetBytesPerRow(img)
+    inBuffer.width = UInt(CGImageGetWidth(img!))
+    inBuffer.height = UInt(CGImageGetHeight(img!))
+    inBuffer.rowBytes = CGImageGetBytesPerRow(img!)
     inBuffer.data = UnsafeMutablePointer<Void>(CFDataGetBytePtr(inBitmapData))
-    pixelBuffer = malloc(CGImageGetBytesPerRow(img) * CGImageGetHeight(img))
+    pixelBuffer = malloc(CGImageGetBytesPerRow(img!) * CGImageGetHeight(img!))
     if pixelBuffer == nil {
         NSLog("No pixel buffer!")
     }
     
     outBuffer.data = pixelBuffer
-    outBuffer.width = UInt(CGImageGetWidth(img))
-    outBuffer.height = UInt(CGImageGetHeight(img))
-    outBuffer.rowBytes = CGImageGetBytesPerRow(img)
+    outBuffer.width = UInt(CGImageGetWidth(img!))
+    outBuffer.height = UInt(CGImageGetHeight(img!))
+    outBuffer.rowBytes = CGImageGetBytesPerRow(img!)
     
     error = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, nil, 0, 0, UInt32(boxSize), UInt32(boxSize), nil, UInt32(kvImageEdgeExtend))
     if error != nil && error != 0 {
@@ -89,7 +89,7 @@ func boxBlurImage(image: UIImage, withBlurNumber blur: CGFloat) -> UIImage {
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     let ctx = CGBitmapContextCreate(outBuffer.data, Int(outBuffer.width), Int(outBuffer.height), 8, outBuffer.rowBytes, colorSpace, CGImageAlphaInfo.NoneSkipLast.rawValue)
     
-    let imageRef = CGBitmapContextCreateImage(ctx)!
+    let imageRef = CGBitmapContextCreateImage(ctx!)!
     let returnImage = UIImage(CGImage: imageRef)
     
     free(pixelBuffer)

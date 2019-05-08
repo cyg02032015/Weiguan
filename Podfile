@@ -5,8 +5,8 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'OutLookers' do
-	pod 'Alamofire', '~> 3.4.1'
-	pod 'KeychainAccess'
+	pod 'Alamofire', '~> 3.5.0'
+	pod 'KeychainAccess', '~> 2.4.0'
 	pod 'NVActivityIndicatorView', '~> 2.11'
 	pod 'AliyunOSSiOS', '~> 2.5.0'
 	pod 'SwiftyJSON', '~> 2.3.2'

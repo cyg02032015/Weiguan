@@ -17,7 +17,7 @@ class SBQuick {
 
 class LoadXib {
     class func nibName(name: String) -> UIView {
-        return NSBundle.mainBundle().loadNibNamed(name, owner: nil, options: nil).last as! UIView
+        return NSBundle.mainBundle().loadNibNamed(name, owner: nil, options: nil)!.last as! UIView
     }
 }
 

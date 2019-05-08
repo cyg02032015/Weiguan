@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ZFPlayer
+//import ZFPlayer
 
 public protocol VideoPlayerProtocol {
     func player(videoURL: NSURL, tableView: UITableView, indexPath: NSIndexPath, imageView: UIImageView, tag: Int) -> ZFPlayerView

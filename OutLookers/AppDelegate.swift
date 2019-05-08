@@ -12,7 +12,7 @@ import AliyunOSSiOS
 import Alamofire
 import SwiftyJSON
 import YYWebImage
-import KeychainAccess
+import KeychainAccess 
 
 var globleSingle = GlobleDefineSingle.sharedInstance
 @UIApplicationMain

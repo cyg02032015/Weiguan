@@ -42,4 +42,4 @@
 #import "ZFPlayerView.h"
 #import "ZFPlayerControlView.h"
 #import "ZFBrightnessView.h"
-#import <Masonry/Masonry.h>
+#import "Masonry.h"

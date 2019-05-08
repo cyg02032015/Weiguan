@@ -1,0 +1,78 @@
+PODS:
+  - AFDateHelper (3.4.2)
+  - Alamofire (3.5.0)
+  - AliyunOSSiOS (2.5.2)
+  - CocoaLumberjack/Core (2.3.0)
+  - CocoaLumberjack/Default (2.3.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.3.0):
+    - CocoaLumberjack/Default
+  - CocoaLumberjack/Swift (2.3.0):
+    - CocoaLumberjack/Extensions
+  - Device (1.0.3)
+  - FLEX (2.3.0)
+  - IQKeyboardManagerSwift (4.0.5)
+  - KeychainAccess (2.4.0)
+  - NVActivityIndicatorView (2.12)
+  - Proposer (0.9.1)
+  - RxCocoa (2.5.0):
+    - RxSwift (~> 2.5)
+  - RxSwift (2.5.0)
+  - SnapKit (0.30.0.beta1)
+  - SwiftyJSON (2.3.2)
+  - UITableView+FDTemplateLayoutCell (1.5.beta)
+  - UMengSocialCOM (5.2.1)
+  - YYCache (1.0.4)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+  - YYImage/WebP (1.0.4):
+    - YYImage/Core
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
+
+DEPENDENCIES:
+  - AFDateHelper (~> 3.4.2)
+  - Alamofire (~> 3.5.0)
+  - AliyunOSSiOS (~> 2.5.0)
+  - CocoaLumberjack/Swift
+  - Device (~> 1.0.1)
+  - FLEX (~> 2.0)
+  - IQKeyboardManagerSwift (~> 4.0.3)
+  - KeychainAccess (~> 2.4.0)
+  - NVActivityIndicatorView (~> 2.11)
+  - Proposer (~> 0.9.0)
+  - RxCocoa (~> 2.5.0)
+  - RxSwift (~> 2.5.0)
+  - SnapKit (~> 0.30.0.beta1)
+  - SwiftyJSON (~> 2.3.2)
+  - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
+  - UMengSocialCOM (~> 5.2.1)
+  - YYImage/WebP
+  - YYWebImage
+
+SPEC CHECKSUMS:
+  AFDateHelper: aecee6bb264d6531795649f4ebac47783d2bab74
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  AliyunOSSiOS: 146e2766bf73df9c9f645de6f2d8a92ceb7c8be4
+  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  Device: bcf333c7c497edabe6df9560fd64f1e255d45b2b
+  FLEX: ba80ea13d2c784e85e616137fd4eff164781e364
+  IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
+  KeychainAccess: c2a71459af5bddf720a51806046a598500976c04
+  NVActivityIndicatorView: de8be03826726ad99cdfacf7fe09e88cbfeef911
+  Proposer: 8924aebfe6fb6da46fbab47130a973791a467f29
+  RxCocoa: e1b1562e57a554d0fb2aabf9d71b637f177257c7
+  RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
+  SnapKit: 732e8cad7910a1cb812c5c1fb58f231d7a3b49e8
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
+  UMengSocialCOM: 074c135ce349aa4c8848d3fb8458757bcb6ffb67
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
+
+PODFILE CHECKSUM: 7c5af62e019c845e5080f93dbc0388e4d77bf07a
+
+COCOAPODS: 1.0.1
